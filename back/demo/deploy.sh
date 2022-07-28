@@ -10,9 +10,9 @@ if [ -z "$EXIST_BLUE" ]; then
 	sleep 20
 	START_PORT=9090
 	TERMINATE_PORT=9091
-	docker exec ${DOCKER_APP_NAME}-blue_dearme_server_1 sed -i "s/${TERMINATE_PORT}/${START_PORT}/" /etc/nginx/conf.d/service-url.inc
+	docker exec webserver sed -i "s/${TERMINATE_PORT}/${START_PORT}/" /etc/nginx/conf.d/service-url.inc
 	echo "nginx reload..."
-  docker exec ${DOCKER_APP_NAME}-blue_dearme_server_1 service nginx reload
+  docker exec webserver service nginx reload
 	sleep 5
 	docker-compose -p ${DOCKER_APP_NAME}-green -f docker-compose.green.yml down
 else
@@ -21,9 +21,9 @@ else
 	sleep 20
 	START_PORT=9091
 	TERMINATE_PORT=9090
-	docker exec ${DOCKER_APP_NAME}-green_dearme_server_1 sed -i "s/${TREMINATE_PORT}/${START_PORT}/" /etc/nginx/conf.d/service-url.inc
+	docker exec webserver sed -i "s/${TREMINATE_PORT}/${START_PORT}/" /etc/nginx/conf.d/service-url.inc
 	echo "nginx reload..."
-	docker exec ${DOCKER_APP_NAME}-green_dearme_server_1 service nginx reload
+	docker exec webserver service nginx reload
 	sleep 5
 	docker-compose -p ${DOCKER_APP_NAME}-blue -f docker-compose.blue.yml down
 fi
