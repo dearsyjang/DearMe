@@ -10,7 +10,7 @@ if [ -z "$EXIST_BLUE" ]; then
 	sleep 20
 	START_PORT=9090
 	TERMINATE_PORT=9091
-	docker exec webserver sed -i "s/${TERMINATE_PORT}/${START_PORT}/" /etc/nginx/conf.d/service-url.inc
+	docker exec webserver sed -i "s/${TERMINATE_PORT}/${START_PORT}/" /etc/nginx/conf.d/default.conf
 	echo "nginx reload..."
   docker exec webserver service nginx reload
 	sleep 5
@@ -21,7 +21,7 @@ else
 	sleep 20
 	START_PORT=9091
 	TERMINATE_PORT=9090
-	docker exec webserver sed -i "s/${TERMINATE_PORT}/${START_PORT}/" /etc/nginx/conf.d/service-url.inc
+	docker exec webserver sed -i "s/${TERMINATE_PORT}/${START_PORT}/" /etc/nginx/conf.d/default.conf
 	echo "nginx reload..."
 	docker exec webserver service nginx reload
 	sleep 5
