@@ -21,7 +21,7 @@ else
 	sleep 20
 	START_PORT=9091
 	TERMINATE_PORT=9090
-	docker exec webserver sed -i "s/${TREMINATE_PORT}/${START_PORT}/" /etc/nginx/conf.d/service-url.inc
+	docker exec webserver sed -i "s/${TERMINATE_PORT}/${START_PORT}/" /etc/nginx/conf.d/service-url.inc
 	echo "nginx reload..."
 	docker exec webserver service nginx reload
 	sleep 5
