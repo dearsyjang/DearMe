@@ -1,6 +1,8 @@
 <template>
   <div>
-    login이다
+    <h1> Dear Me </h1>
+    <h2>아이디</h2>
+      
   </div>
 </template>
 <script>
