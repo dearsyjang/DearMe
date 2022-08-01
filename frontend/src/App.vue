@@ -5,7 +5,8 @@
     <router-link to="/member/login">login</router-link> |
     <router-link to="/member/logout">Logout</router-link> |
     <router-link to="/member/signup">signup</router-link> |
-    <router-link to="/home/topbar">Home</router-link>
+    <router-link to="/home/topbar">Home</router-link>|
+    <router-link to="/counselor_list">상담사 리스트 페이지</router-link>|
   </nav>
   <router-view/>
 </template>

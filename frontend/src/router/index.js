@@ -4,6 +4,9 @@ import LoginView from '@/views/member/LoginView.vue'
 import LogoutView from '@/views/member/LogoutView.vue'
 import SignupView from '@/views/member/SignupView.vue'
 import TopBarView from '@/views/home/TopBarView.vue'
+import CounselorListView from '@/views/counselor/CounselorListView.vue'
+import CounselorDetailView from '@/views/counselor/CounselorDetailView.vue'
+
 const routes = [
   {
     path: '/',
@@ -38,6 +41,18 @@ const routes = [
     name: 'topbar',
     component: TopBarView
   },
+  {
+    path: '/counselor_list',
+    name: 'counselorList',
+    component: CounselorListView
+  },
+  {
+    path: '/counselors/counselor/:counselorId',
+    name: 'counselor',
+    component: CounselorDetailView
+  },
+
+  
 ]
 
 const router = createRouter({
