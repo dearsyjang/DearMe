@@ -21,5 +21,10 @@ public class BoardApiController {
         PageRequest pageRequest = PageRequest.of(page, size);
         return new ResponseEntity<>(CommonResponse.getSuccessResponse(boardService.getBoards(pageRequest)), HttpStatus.OK);
     }
+    @Operation(summary = "Board View Detail Test", description = "게시판 상세 조회")
+    @GetMapping("/{boardid}")
+    public ResponseEntity<CommonResponse> boardViewDetail(@PathVariable("boardid") Long boardid){
+        return new ResponseEntity<>(CommonResponse.getSuccessResponse(boardService.getBoard(boardid)), HttpStatus.OK);
+    }
 
 }
