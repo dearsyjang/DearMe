@@ -1,0 +1,207 @@
+<template>
+  <div>
+    <h2>상담사 프로필 페이지</h2>
+    <div class="counselor-profile">
+      <div class="card">
+        <div class="card mb-3" style="max-width: 540px;">
+          <div class="row g-0">
+            <div class="col-md-4">
+              <img src="@/assets/사람.png" class="img-fluid rounded-start" alt="...">
+            </div>
+            <div class="col-md-8">
+              <div class="card-body">
+                <button class="createinfo" v-if="isdone==false" @click="isModalViewed=true">자기소개 작성하기</button>
+                <div class="counselor-info">
+                  <info-item-comp v-for="info in infos"
+                  :key="info.Content"
+                  :info="info"></info-item-comp>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- <div class="picture">
+        <img src="@/assets/사람.png" class="img-fluid rounded-start" style="width:100px" alt="...">
+      </div> -->
+
+      <div class="counselor-info-create">
+        <!-- <button class="createinfo" @click="isModalViewed=true">자기소개 작성하기</button> -->
+          <!-- <router-link to="/counselors/counselor/info"> -->
+          <!-- <button>자기소개 작성하기</button> -->
+          <!-- </router-link> -->
+  
+        <div class="black-bg" v-if = "isModalViewed==true">
+        <div class="white-bg">
+          <form @submit.prevent="createInfo" class="info-create-form">
+            <div class="my-3 w-100 d-flex justify-content-start align-items-center ">
+              <label for="review">자기소개 작성 :</label>
+              <input  type="text" id="review"  style="width:85%; height:300px " v-model="infoContent" required>
+            </div>
+            <hr>
+            <button class="changebtn" >작성하기</button>
+          </form>
+          
+          <button class="changebtn" @click="isModalViewed=false">닫기</button>
+        
+        </div>
+        </div>
+      </div>
+
+
+
+
+
+      <!-- <div class="counselor-info">
+        <info-item-comp v-for="info in infos"
+        :key="info.Content"
+        :info="info"></info-item-comp>
+      </div> -->
+
+      <div class="price">
+        <h4>상담 가격</h4>
+        <div class="personal-price" 
+        v-if ="ispersonalpriced==false"
+        @keyup.enter="ispersonalpriced=true">
+          <li>개인상담 : <input type="text">point</li>
+        </div>
+        <div v-else>
+          개인상담가격띄워야됨
+        </div> 
+
+
+        
+        <div class="group-price" 
+        v-if ="isgrouppriced==false"
+        @keyup.enter="isgrouppriced=true">
+          <li>그룹상담 : <input type="text">point</li>
+        </div>
+        <div v-else>
+          그룹상담가격띄워야됨
+        </div> 
+      </div>
+
+
+      
+      <h4>전문분야</h4>
+      <career-list-comp>
+      </career-list-comp>
+      <manage-group-list-comp>
+      </manage-group-list-comp>
+      <review-list-comp>
+      </review-list-comp>
+      
+      <file-list-comp>
+      </file-list-comp>
+
+     
+
+    </div>
+  </div>
+</template>
+<script>
+  import InfoItemComp from '@/views/counselor/components/InfoItemComp.vue'
+  import CareerListComp from '@/views/counselor/components/CareerListComp.vue'
+  import FileListComp from '@/views/counselor/components/FileListComp.vue'
+  import ManageGroupListComp from '@/views/counselor/components/ManageGroupListComp.vue'
+  import ReviewListComp from '@/views/counselor/components/ReviewListComp.vue'
+
+
+  import { mapActions,mapGetters} from 'vuex'
+
+
+  export default {
+    name : 'CounselorDetailView',
+    components: {
+    CareerListComp,
+    FileListComp,
+    ManageGroupListComp,
+    ReviewListComp,
+    InfoItemComp,
+
+},
+    data() {
+      return {
+        counselorId: this.$route.params.counselorId,
+        isModalViewed: false,
+        infoContent:'',
+        isdone : false,
+        ispersonalpriced: false,
+        isgrouppriced: false,
+        ismaked: false
+      }
+    },
+    computed : {
+      ...mapGetters(['counselor']),
+      infos() {
+      return this.$store.state.infos
+    }
+    },
+    methods: {
+      ...mapActions(['fetchCounselor']),
+    
+      created() {
+      this.fetchCounselor(this.counselorId)
+      },
+
+      createInfo(){
+        if (this.isdone === false){
+        
+        const newInfo = {
+          Content: this.infoContent,
+          isdone : this.isdone=true
+        }
+        this.$store.dispatch('createInfo',newInfo)
+        this.infoContent=''
+        alert('작성이 완료되었습니다')
+          }
+        else{
+      
+        alert('자기소개는 1개 작성 가능합니다!!')
+        }
+      },
+    },
+  }
+</script>
+
+
+<style>
+.counselor-profile {
+  margin:auto;
+  text-align: center;
+}
+.price {
+  border : solid black 1px;
+  width : 500px;
+  margin : auto;
+  margin-top : 20px;
+}
+.counselor-info {
+
+  margin: auto;
+
+}
+
+div {
+  box-sizing : border-box;
+
+}
+
+.black-bg {
+  width: 100% ; height : 100%;
+  background : rgba(0,0,0,0.5);
+  position : fixed; padding : 20px;
+
+}
+.white-bg {
+  width: 100% ; 
+  background :white ;
+  border-radius:8px; 
+  padding : 20px;
+
+}
+.card {
+  margin: auto
+}
+</style>
