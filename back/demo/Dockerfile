@@ -5,6 +5,7 @@ RUN mvn -f pom.xml package
 
 FROM openjdk:11-jdk
 COPY --from=builder ./target/*.jar ./boot/app.jar
+COPY --from=builder ./src ./src
 EXPOSE 8080
 
 ENTRYPOINT ["java","-jar", "boot/app.jar" ]
