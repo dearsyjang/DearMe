@@ -1,10 +1,7 @@
 package com.dearme.demo.domain.user.entity;
 
 import com.dearme.demo.domain.base.entitiy.Base;
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -18,29 +15,39 @@ public class User extends Base {
     @Column(name = "USER_ID")
     private Long userId;
 
+    @Column(nullable = false, unique = true)
     private String id;
 
+    @Column(nullable = false)
     private String pw;
 
+    @Column(nullable = false, unique = true)
     private String nickName;
 
+    @Column(nullable = false)
     private Gender gender;
 
+    @Column(nullable = false)
     private Type type;
 
+    @Column(nullable = false)
     private Date birth;
 
+    @Column(nullable = false, unique = true)
     private String email;
 
     @Embedded
+    @Setter
     private Picture picture;
 
+    @Column(nullable = false)
     private Long points;
 
     @OneToOne(mappedBy = "counselor", orphanRemoval = true, cascade = CascadeType.ALL)
     private CounselorProfile counselorProfile;
 
     public void setCounselorProfile(CounselorProfile counselorProfile) {
+        counselorProfile.setCounselor(this);
         this.counselorProfile = counselorProfile;
     }
 

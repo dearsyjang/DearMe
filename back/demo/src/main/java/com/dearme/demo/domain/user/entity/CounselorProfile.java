@@ -1,10 +1,7 @@
 package com.dearme.demo.domain.user.entity;
 
 import com.dearme.demo.domain.base.entitiy.Base;
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -21,24 +18,34 @@ public class CounselorProfile extends Base {
     @MapsId
     @OneToOne
     @JoinColumn(name = "counselor_id")
+    @Setter
     private User counselor;
 
+    @Column(nullable = false)
+    @Setter
     private Long price;
 
+    @Column(nullable = false)
+    @Setter
     private String introduce;
 
+    @Setter
     private Long value;
 
     @OneToMany(mappedBy = "counselorProfile", orphanRemoval = true, cascade = CascadeType.ALL)
+    @Setter
     private List<Document> documents = new ArrayList<>();
 
     @OneToMany(mappedBy = "counselorProfile", orphanRemoval = true, cascade = CascadeType.ALL)
+    @Setter
     private List<Career> careers = new ArrayList<>();
 
     @OneToMany(mappedBy = "counselorProfile", orphanRemoval = true, cascade = CascadeType.ALL)
+    @Setter
     private List<Certificate> certificates = new ArrayList<>();
 
     @OneToMany(mappedBy = "counselorProfile", orphanRemoval = true, cascade = CascadeType.ALL)
+    @Setter
     private List<Category> categories = new ArrayList<>();
 
     @Builder
