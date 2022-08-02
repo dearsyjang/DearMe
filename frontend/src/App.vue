@@ -7,9 +7,14 @@
     <router-link to="/about">About</router-link> |
     <router-link to="/member/login">login</router-link> |
     <router-link to="/member/logout">Logout</router-link> |
-    <router-link to="/member/signup">signup</router-link> |
-    <router-link to="/home/topbar">Home</router-link>|
+<<<<<<< frontend/src/App.vue
+    <router-link to="/member/signupuser">signup(user)</router-link> |
+    <router-link to="/member/signupcounselor">signup(counselor)</router-link> |
     <router-link to="/counselor_list">상담사 리스트 페이지</router-link>|
+    <router-link to="/home/topbar">Home</router-link>
+   
+    
+>>>>>>> frontend/src/App.vue
   </nav>
   <router-view/>
 </template>
