@@ -1,0 +1,13 @@
+package com.dearme.demo.domain.user.dto;
+
+import com.dearme.demo.domain.user.entity.Category;
+import lombok.Data;
+
+@Data
+public class SignUpCategoryRequestDto {
+    private String contents;
+
+    public Category toEntity(){
+        return Category.builder().contents(this.contents).build();
+    }
+}
