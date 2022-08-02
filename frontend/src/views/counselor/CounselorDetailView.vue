@@ -54,18 +54,7 @@
           <li>개인상담 : <input type="text">point</li>
         </div>
         <div v-else>
-          개인상담가격띄워야됨
-        </div> 
-
-
-        
-        <div class="group-price" 
-        v-if ="isgrouppriced==false"
-        @keyup.enter="isgrouppriced=true">
-          <li>그룹상담 : <input type="text">point</li>
-        </div>
-        <div v-else>
-          그룹상담가격띄워야됨
+          <!-- {{counselor.price}} -->
         </div> 
       </div>
 
@@ -94,7 +83,7 @@
         </span> 
       </div>
 
-      <div class="carrer-list row row-cols-2 row-cols-md-5 g-3">
+      <div class="review-list row row-cols-2 row-cols-md-5 g-3">
         <span v-for="review in counselor.reviews" 
         :key="review.key">
         {{review.content}}
@@ -144,7 +133,6 @@
         infoContent:'',
         isdone : false,
         ispersonalpriced: false,
-        isgrouppriced: false,
         ismaked: false,
   
       }
