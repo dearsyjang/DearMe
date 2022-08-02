@@ -2,7 +2,8 @@ import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import LoginView from '@/views/member/LoginView.vue'
 import LogoutView from '@/views/member/LogoutView.vue'
-import SignupView from '@/views/member/SignupView.vue'
+import SignupUserView from '@/views/member/SignupUserView.vue'
+import SignupCounselorView from '@/views/member/SignupCounselorView.vue'
 import TopBarView from '@/views/home/TopBarView.vue'
 import CounselorListView from '@/views/counselor/CounselorListView.vue'
 import CounselorDetailView from '@/views/counselor/CounselorDetailView.vue'
@@ -32,9 +33,14 @@ const routes = [
     component: LogoutView
   },
   {
-    path: '/member/signup',
-    name: 'signup',
-    component: SignupView
+    path: '/member/signupuser',
+    name: 'signupuser',
+    component: SignupUserView
+  },
+  {
+    path: '/member/signupcounselor',
+    name: 'signupcounselor',
+    component: SignupCounselorView
   },
   {
     path: '/home/topbar',
