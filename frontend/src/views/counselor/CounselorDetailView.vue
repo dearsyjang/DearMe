@@ -173,7 +173,6 @@
 }
 .price {
   border : solid black 1px;
-  width : 500px;
   margin : auto;
   margin-top : 20px;
 }
