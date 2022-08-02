@@ -1,6 +1,7 @@
 package com.dearme.demo.domain.board.controller;
 
 import com.dearme.demo.domain.board.dto.BoardSaveRequestDto;
+import com.dearme.demo.domain.board.dto.BoardUpdateRequestDto;
 import com.dearme.demo.domain.board.service.BoardService;
 import com.dearme.demo.global.common.CommonResponse;
 import io.swagger.v3.oas.annotations.Operation;
@@ -32,6 +33,11 @@ public class BoardApiController {
     @GetMapping("/{boardid}")
     public ResponseEntity<CommonResponse> boardViewDetail(@PathVariable("boardid") Long boardid){
         return new ResponseEntity<>(CommonResponse.getSuccessResponse(boardService.getBoard(boardid)), HttpStatus.OK);
+    }
+    @Operation(summary = "Board Update Test", description = "게시판 수정")
+    @PutMapping("/{boardid}")
+    public ResponseEntity<CommonResponse> boardUpdate(@PathVariable("boardid") Long boardid, @RequestBody @Validated BoardUpdateRequestDto dto){
+        return new ResponseEntity<>(CommonResponse.getSuccessResponse(boardService.updateBoard(boardid, dto)), HttpStatus.OK);
     }
 
 }
