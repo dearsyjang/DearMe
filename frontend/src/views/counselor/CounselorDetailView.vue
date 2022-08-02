@@ -7,6 +7,8 @@
           <div class="row g-0">
             <div class="col-md-4">
               <img src="@/assets/사람.png" class="img-fluid rounded-start" alt="...">
+              <!-- <p class="card-title">{{counselor.pic}}</p> -->
+              <!-- <p class="card-title">{{counselor.name}}</p> -->
             </div>
             <div class="col-md-8">
               <div class="card-body">
@@ -22,16 +24,9 @@
         </div>
       </div>
 
-      <!-- <div class="picture">
-        <img src="@/assets/사람.png" class="img-fluid rounded-start" style="width:100px" alt="...">
-      </div> -->
+ 
 
       <div class="counselor-info-create">
-        <!-- <button class="createinfo" @click="isModalViewed=true">자기소개 작성하기</button> -->
-          <!-- <router-link to="/counselors/counselor/info"> -->
-          <!-- <button>자기소개 작성하기</button> -->
-          <!-- </router-link> -->
-  
         <div class="black-bg" v-if = "isModalViewed==true">
         <div class="white-bg">
           <form @submit.prevent="createInfo" class="info-create-form">
@@ -42,9 +37,7 @@
             <hr>
             <button class="changebtn" >작성하기</button>
           </form>
-          
           <button class="changebtn" @click="isModalViewed=false">닫기</button>
-        
         </div>
         </div>
       </div>
@@ -52,12 +45,6 @@
 
 
 
-
-      <!-- <div class="counselor-info">
-        <info-item-comp v-for="info in infos"
-        :key="info.Content"
-        :info="info"></info-item-comp>
-      </div> -->
 
       <div class="price">
         <h4>상담 가격</h4>
@@ -129,7 +116,9 @@
         isdone : false,
         ispersonalpriced: false,
         isgrouppriced: false,
-        ismaked: false
+        ismaked: false,
+        personalprice:'',
+        groupprice:'',
       }
     },
     computed : {
@@ -173,7 +162,6 @@
 }
 .price {
   border : solid black 1px;
-  width : 500px;
   margin : auto;
   margin-top : 20px;
 }

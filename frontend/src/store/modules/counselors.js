@@ -139,7 +139,9 @@ export default {
         .catch(err => console.error(err.response))
     },
 
-    isfavorite({ state, commit, getters}) {
+
+
+    isFavorite({ state, commit, getters}) {
       let favorite = false
       state.counselor.favorite_users.forEach((el) => {
       if (el.username === getters.currentUser.username){
