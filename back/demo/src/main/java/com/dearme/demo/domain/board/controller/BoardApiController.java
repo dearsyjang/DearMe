@@ -2,7 +2,10 @@ package com.dearme.demo.domain.board.controller;
 
 import com.dearme.demo.domain.board.dto.BoardSaveRequestDto;
 import com.dearme.demo.domain.board.dto.BoardUpdateRequestDto;
+import com.dearme.demo.domain.board.dto.CommentSaveRequestDto;
+import com.dearme.demo.domain.board.dto.CommentUpdateRequestDto;
 import com.dearme.demo.domain.board.service.BoardService;
+import com.dearme.demo.domain.board.service.CommentService;
 import com.dearme.demo.global.common.CommonResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
@@ -17,6 +20,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 public class BoardApiController {
     private final BoardService boardService;
+    private final CommentService commentService;
 
     @Operation(summary = "Board Save Test", description = "게시판 글 저장")
     @PostMapping
@@ -39,5 +43,10 @@ public class BoardApiController {
     public ResponseEntity<CommonResponse> boardUpdate(@PathVariable("boardid") Long boardid, @RequestBody @Validated BoardUpdateRequestDto dto){
         return new ResponseEntity<>(CommonResponse.getSuccessResponse(boardService.updateBoard(boardid, dto)), HttpStatus.OK);
     }
-
+    @Operation(summary = "Board Delete Test", description = "게시판 삭제")
+    @DeleteMapping("/{boardid}")
+    public ResponseEntity<CommonResponse> boardDelete(@PathVariable("boardid") Long boardid){
+        boardService.deleteBoard(boardid);
+        return null;
+    }
 }

@@ -7,6 +7,8 @@ import com.dearme.demo.domain.board.entity.Board;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 
+import java.util.List;
+
 public interface BoardService {
 
     Board boardSave(BoardSaveRequestDto dto);

@@ -1,10 +1,12 @@
 package com.dearme.demo.domain.board.dto;
 
+import com.dearme.demo.domain.board.entity.Board;
 import com.dearme.demo.domain.board.entity.Comment;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.Column;
 import java.util.Date;
 
 
@@ -13,11 +15,11 @@ import java.util.Date;
 public class CommentSaveRequestDto {
 
     private Long boardid;
-    private String counselorid;
+    private Long counselorid;
     private Date date;
     private String contents;
 
-    public CommentSaveRequestDto(Long boardid, String counselorid, Date date, String contents) {
+    public CommentSaveRequestDto(Long boardid, Long counselorid, Date date, String contents) {
         this.boardid = boardid;
         this.counselorid = counselorid;
         this.date = date;

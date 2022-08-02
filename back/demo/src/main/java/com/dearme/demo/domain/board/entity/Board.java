@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Getter
 @NoArgsConstructor
@@ -17,7 +18,7 @@ public class Board {
     private Long boardid;
 
     @Column(nullable = false)
-    private String userid;
+    private Long userid;
 
     @Column(nullable = false)
     private String title;
@@ -32,7 +33,7 @@ public class Board {
     private Date date;
 
     @Builder
-    public Board(String userid, String title, String contents, int hitCnt, Date date){
+    public Board(Long userid, String title, String contents, int hitCnt, Date date){
         this.userid=userid;
         this.title=title;
         this.contents=contents;
