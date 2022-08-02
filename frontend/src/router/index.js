@@ -7,6 +7,7 @@ import SignupCounselorView from '@/views/member/SignupCounselorView.vue'
 import TopBarView from '@/views/home/TopBarView.vue'
 import CounselorListView from '@/views/counselor/CounselorListView.vue'
 import CounselorDetailView from '@/views/counselor/CounselorDetailView.vue'
+import MypageUserView from '@/views/mypage/user/MypageUserView.vue'
 
 const routes = [
   {
@@ -57,8 +58,13 @@ const routes = [
     name: 'counselor',
     component: CounselorDetailView
   },
+  {
+    path: '/mypage',
+    name: 'mypage',
+    component: MypageUserView
+  },
 
-  
+
 ]
 
 const router = createRouter({
