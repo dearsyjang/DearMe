@@ -69,9 +69,38 @@
         </div> 
       </div>
 
-
+<!-- 
       
       <h4>전문분야</h4>
+      <div class="category-list row row-cols-2 row-cols-md-5 g-3">
+        <span v-for="category in counselor.categories" 
+        :key="category.key">
+        {{category.name}}
+        </span> 
+      </div>
+     
+      <div class="career-list row row-cols-2 row-cols-md-5 g-3">
+        <span v-for="career in counselor.careers" 
+        :key="career.key">
+        {{career.name}}
+        {{career.date}}
+        </span> 
+      </div>
+
+      <div class="manage-group-list row row-cols-2 row-cols-md-5 g-3">
+        <span v-for="group in counselor.groups" 
+        :key="group.key">
+        {{group.name}}
+        </span> 
+      </div>
+
+      <div class="carrer-list row row-cols-2 row-cols-md-5 g-3">
+        <span v-for="review in counselor.reviews" 
+        :key="review.key">
+        {{review.content}}
+        </span> 
+      </div> -->
+
       <career-list-comp>
       </career-list-comp>
       <manage-group-list-comp>
@@ -117,8 +146,7 @@
         ispersonalpriced: false,
         isgrouppriced: false,
         ismaked: false,
-        personalprice:'',
-        groupprice:'',
+  
       }
     },
     computed : {
