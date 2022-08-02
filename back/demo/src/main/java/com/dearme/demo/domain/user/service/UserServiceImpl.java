@@ -1,16 +1,18 @@
 package com.dearme.demo.domain.user.service;
 
+import com.dearme.demo.domain.user.dto.LoginRequestDto;
+import com.dearme.demo.domain.user.dto.LoginResponseDto;
 import com.dearme.demo.domain.user.dto.SignUpRequestDto;
 import com.dearme.demo.domain.user.dto.SignUpResponseDto;
 import com.dearme.demo.domain.user.entity.*;
+import com.dearme.demo.domain.user.exception.*;
 import com.dearme.demo.domain.user.repository.UserRepository;
 import com.dearme.demo.global.util.jwt.JwtProvider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.util.List;
 import java.util.UUID;
 
@@ -44,15 +46,19 @@ public class UserServiceImpl implements UserService{
         }
         if(dto.getPicture() != null){
             picture = Picture.builder().fileName(dto.getPicture().getOriginalFilename()).realFileName(UUID.randomUUID().toString()).build();
-            File file = new File("C:\\Users\\multicampus\\Desktop\\project\\S07P12D206\\back\\demo\\src\\main\\resources\\static\\" + picture.getRealFileName() + ".jpeg");
-            System.out.println(picture.getRealFileName());
+            File file = new File("/Users/isangmin/Study/project/S07P12D206/back/demo/src/main/resources/static/" + picture.getRealFileName() + ".jpg");
             try {
                 dto.getPicture().transferTo(file);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
-            user.setPicture(picture);
+        }else if(user.getType().equals(Type.COUNSELOR)) {
+            throw new CounselorNotExistPictureException();
+        } else{
+            picture = Picture.builder().fileName("basic").realFileName("basic").build();
         }
+        user.setPicture(picture);
+
         userRepository.save(user);
 
         return SignUpResponseDto
@@ -60,5 +66,13 @@ public class UserServiceImpl implements UserService{
                 .accessToken(jwtProvider.getAccessToken(user.getId()))
                 .refreshToken(jwtProvider.getRefreshToken())
                 .build();
+    }
+
+    @Override
+    public LoginResponseDto login(LoginRequestDto dto) {
+        User user = userRepository.findUserByIdAndPw(dto.getId(), dto.getPw()).orElseThrow(() -> {
+            throw new NoExistUserException();
+        });
+        return new LoginResponseDto(jwtProvider.getAccessToken(user.getId()), jwtProvider.getRefreshToken());
     }
 }
