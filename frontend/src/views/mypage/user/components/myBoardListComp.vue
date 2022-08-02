@@ -30,10 +30,11 @@ export default {
   .BoardList {
     background-color: #F0F5F9;
     border-radius: 20px 40px 60px 80px / 80px 60px 40px 20px;
-
+    text-align: center;
+    width: 98%;
+    display: inline-block;
   }
   .content1 {
     width: 30%;
-    text-align: center;
   }
 </style>

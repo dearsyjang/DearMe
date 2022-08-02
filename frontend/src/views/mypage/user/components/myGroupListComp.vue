@@ -27,10 +27,14 @@ export default {
 }
 </script>
 <style scoped>
-  #MygroupList {
+  .MygroupList {
     background-color: #F0F5F9;
+    border-radius: 20px 40px 60px 80px / 80px 60px 40px 20px;
+    text-align: center;
+    width: 98%;
   }
   div {
     background-color: #F0F5F9;
   }
+
 </style>

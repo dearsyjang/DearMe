@@ -16,18 +16,23 @@
   </div>
 </template>
 <script>
+import { mapActions } from 'vuex'
 export default {
   components: {},
   data() {
     return {
-      sampleData: ''
+      nickname: '',
+      myPoint: '',
+      isCounselor: false
     }
   },
   setup() {},
   created() {},
   mounted() {},
   unmounted() {},
-  methods: {}
+  methods: {
+    ...mapActions(['getMyinfo', 'getMyboard', 'getMygroup', 'getMyfavorite'])
+  }
 }
 </script>
 <style scoped>
@@ -36,5 +41,11 @@ export default {
   }
   p {
     text-align: left;
+  }
+  .Info {
+    background-color: #F0F5F9;
+    border-radius: 20px 40px 60px 80px / 80px 60px 40px 20px;
+    text-align: center;
+    width: 98%;
   }
 </style>
