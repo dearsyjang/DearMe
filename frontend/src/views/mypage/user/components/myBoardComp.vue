@@ -1,6 +1,6 @@
 <template>
   <div class="Board">
-    <p class="title">내가 작성한 게시글 ▼ </p>
+    <p class="title">내가 작성한 게시글 ▼  dsfasdfsdfads </p>
     <my-board-list-comp class="d-flex justify-content-around"></my-board-list-comp>
   </div>
 </template>
