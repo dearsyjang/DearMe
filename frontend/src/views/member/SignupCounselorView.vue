@@ -108,10 +108,10 @@
 
       <div>
         <label for="career">경력</label> <br>
-        <div id="careerlist">
+        <!-- <div id="careerlist">
             <career-list></career-list>
             <career-form></career-form>
-        </div>
+        </div> -->
 
       </div>
 
@@ -125,14 +125,14 @@
 </template>
 <script>
   import { mapActions} from 'vuex'
-  import CareerList from '@/componets/CareerList'
-  import CareerForm from '@/components/CareerForm'
+  // import CareerList from '@/componets/CareerList'
+  // import CareerForm from '@/components/CareerForm'
 
 export default {
   name: 'SignupCounselor',
   components: {
-    CareerList,
-    CareerForm,
+    // CareerList,
+    // CareerForm,
   },
   data() {
     return {
