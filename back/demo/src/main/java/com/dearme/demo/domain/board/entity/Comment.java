@@ -19,7 +19,7 @@ public class Comment {
     private Long boardid;
 
     @Column(nullable = false)
-    private String counselorid;
+    private Long counselorid;
 
     @Column(nullable = false)
     private Date date;
@@ -28,7 +28,7 @@ public class Comment {
     private String contents;
 
     @Builder
-    public Comment(Long boardid, String counselorid, Date date, String contents) {
+    public Comment(Long boardid, Long counselorid, Date date, String contents) {
         this.boardid = boardid;
         this.counselorid = counselorid;
         this.date = date;

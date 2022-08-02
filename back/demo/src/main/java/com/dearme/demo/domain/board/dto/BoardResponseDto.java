@@ -10,7 +10,7 @@ import java.util.List;
 @Getter
 @Setter
 public class BoardResponseDto {
-    private String userid;
+    private Long userid;
     private String title;
     private String contents;
     private int hitCnt;
