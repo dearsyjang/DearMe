@@ -64,4 +64,10 @@ public class UserController {
         userService.checkId(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
+    @GetMapping("/nickname/{nickname}")
+    public ResponseEntity<?> checkNickname(@PathVariable("nickname") String nickname){
+        userService.checkNickname(nickname);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 }

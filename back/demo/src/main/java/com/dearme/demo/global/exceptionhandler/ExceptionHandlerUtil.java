@@ -53,4 +53,9 @@ public class ExceptionHandlerUtil {
     ResponseEntity<CommonResponse> handleDuplicatedIdException(DuplicatedIdException e){
         return new ResponseEntity<>(CommonResponse.getErrorResponse(e.getMessage()), HttpStatus.CONFLICT);
     }
+
+    @ExceptionHandler(DuplicatedNickNameException.class)
+    ResponseEntity<CommonResponse> handleDuplicatedNickNameException(DuplicatedNickNameException e){
+        return new ResponseEntity<>(CommonResponse.getErrorResponse(e.getMessage()), HttpStatus.CONFLICT);
+    }
 }

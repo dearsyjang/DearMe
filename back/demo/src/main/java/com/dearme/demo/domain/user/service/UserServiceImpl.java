@@ -139,8 +139,12 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public String checkId(String id) {
-        if(!userRepository.existsUserById(id)) return null;
-        throw new DuplicatedIdException(id);
+    public void checkId(String id) {
+        if(userRepository.existsUserById(id)) throw new DuplicatedIdException(id);
+    }
+
+    @Override
+    public void checkNickname(String nickname) {
+        if(userRepository.existsUserByNickName(nickname)) throw new DuplicatedNickNameException(nickname);
     }
 }
