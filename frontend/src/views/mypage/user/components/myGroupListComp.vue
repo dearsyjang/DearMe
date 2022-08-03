@@ -1,6 +1,6 @@
 <template>
-  <div class="MygroupList d-flex">
-    <div class="d-flex align-items-center">
+  <div class="MygroupList d-flex ">
+    <div class="d-flex justify-content-center">
       <p class="mx-4">상담사 1</p>
     </div>
     <div class="d-flex align-items-center">
@@ -36,5 +36,4 @@ export default {
   div {
     background-color: #F0F5F9;
   }
-
 </style>

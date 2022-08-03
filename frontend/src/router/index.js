@@ -8,7 +8,7 @@ import TopBarView from '@/views/home/TopBarView.vue'
 import CounselorListView from '@/views/counselor/CounselorListView.vue'
 import CounselorDetailView from '@/views/counselor/CounselorDetailView.vue'
 import MypageUserView from '@/views/mypage/user/MypageUserView.vue'
-
+import MypageCounselorView from '@/views/mypage/counselor/MypageCounselorView.vue'
 const routes = [
   {
     path: '/',
@@ -59,9 +59,14 @@ const routes = [
     component: CounselorDetailView
   },
   {
-    path: '/mypage',
+    path: '/mypage/user',
     name: 'mypage',
     component: MypageUserView
+  },
+  {
+    path: '/mypage/counselor',
+    name: 'mypage',
+    component: MypageCounselorView
   },
 
 

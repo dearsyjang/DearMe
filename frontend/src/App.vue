@@ -12,7 +12,8 @@
     <router-link to="/member/signupcounselor">signup(counselor)</router-link> |
     <router-link to="/counselor_list">상담사 리스트 페이지</router-link> |
     <router-link to="/home/topbar">Home</router-link> |
-    <router-link to="/mypage">mypage</router-link>
+    <router-link to="/mypage/user">mypage</router-link> |
+    <router-link to="/mypage/counselor">mypageC</router-link> |
 
 
 

@@ -2,7 +2,7 @@
   <div class="Info">
     <div class="d-flex justify-content-around">
       <div class="mx-4" id="label">
-        <p for="nickname">{{ $store.myinfo}}</p>
+        <p for="nickname">닉네임</p>
         <p for="point">잔여 포인트</p>
       </div>
       <div id="content">

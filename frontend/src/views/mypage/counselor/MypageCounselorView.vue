@@ -1,22 +1,22 @@
 <template>
   <div class="mypage">
     <info-comp id="info"></info-comp>
-    <my-board-comp id="myboard"></my-board-comp>
+    <my-review-comp id="myboard"></my-review-comp>
     <my-group-comp id="mygroup"></my-group-comp>
-    <my-favorite-comp id="myfavorite"></my-favorite-comp>
+    <today-counseling-comp id="myfavorite"></today-counseling-comp>
   </div>
 </template>
 <script>
 import infoComp from './components/infoComp.vue'
-import myBoardComp from './components/myBoardComp.vue'
-import myGroupComp from './components/myGroupComp.vue'
-import myFavoriteComp from './components/myFavoriteComp.vue'
+import myReviewComp from './components/myReveiwComp.vue'
+import myGroupComp from '@/views/mypage/user/components/myGroupComp.vue'
+import todayCounselingComp from './components/todayCounselingComp.vue'
 export default {
   components: {
     infoComp,
-    myBoardComp,
+    myReviewComp,
     myGroupComp,
-    myFavoriteComp
+    todayCounselingComp
   },
   data() {
     return {
