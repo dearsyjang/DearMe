@@ -3,18 +3,13 @@
     <top-bar></top-bar>
     <bottom-bar></bottom-bar>
   </div>
-  <nav>
-    <router-link to="/member/login">login</router-link> |
-    <router-link to="/member/signupuser">signup(user)</router-link> |
-    <router-link to="/member/signupcounselor">signup(counselor)</router-link> |
-  </nav>
   <router-view/>
 </template>
 
 <script>
 import TopBar from '@/views/home/TopBarView.vue'
 import BottomBar from '@/views/home/BottomBarView.vue'
-
+import "bulma/css/bulma.css";
   export default {
     name: 'App',
     components: { TopBar, BottomBar },

@@ -107,6 +107,7 @@
 </script> -->
 <script>
   import CounselorListItemComp from '@/views/counselor/components/CounselorListItemComp.vue'
+
   import { mapActions, mapGetters } from 'vuex'
   export default {
     name : 'CounselorDetailView',
