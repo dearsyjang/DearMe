@@ -99,6 +99,7 @@
         </span> 
       </div> -->
 
+
       <career-list-comp>
       </career-list-comp>
       <manage-group-list-comp>
@@ -109,6 +110,7 @@
       <file-list-comp>
       </file-list-comp>
 
+     
      
 
     </div>
@@ -122,6 +124,7 @@
   import ReviewListComp from '@/views/counselor/components/ReviewListComp.vue'
 
 
+
   import { mapActions,mapGetters} from 'vuex'
 
 
@@ -133,8 +136,9 @@
     ManageGroupListComp,
     ReviewListComp,
     InfoItemComp,
-
+   
 },
+
     data() {
       return {
         counselorId: this.$route.params.counselorId,

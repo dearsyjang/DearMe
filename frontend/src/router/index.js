@@ -8,7 +8,7 @@ import TopBarView from '@/views/home/TopBarView.vue'
 import CounselorListView from '@/views/counselor/CounselorListView.vue'
 import CounselorDetailView from '@/views/counselor/CounselorDetailView.vue'
 import MypageUserView from '@/views/mypage/user/MypageUserView.vue'
-
+import FileFormComp from '@/views/counselor/components/FileFormComp'
 const routes = [
   {
     path: '/',
@@ -57,6 +57,11 @@ const routes = [
     path: '/counselors/counselor/:counselorId',
     name: 'counselor',
     component: CounselorDetailView
+  },
+  {
+    path: '/counselors/attachFile/',
+    name: 'attachFile',
+    component: FileFormComp
   },
   {
     path: '/mypage',
