@@ -2,7 +2,31 @@
   <div>
     <h1>상담사 리스트 페이지</h1>
 
-
+    <div id="counselorListMain">
+      <div id="counselorListSelectBar">
+        <div class="select-bar">
+          <select v-model="filter" @change="selectFilter" class="form-select rounded-pill"  aria-label="Default select example" style="40px">
+            <option class="select-item" hidden="" disabled="disabled" selected="selected" value="">상담사 필터</option>         
+            <option class="select-item" value=1>별점 높은 순</option>
+            <option class="select-item" value=2>리뷰 많은 순</option>
+            <option class="select-item" value=3>즐겨찾기</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div v-if="!isempty">
+      <div v-if="check(filtering_counselors)">
+      </div>
+      <div v-else>
+        <div class="counselor-list row row-cols-2 row-cols-md-5 g-3">
+          <counselor-list-item-comp
+          v-for="(counselor,idx) in filtering_counselors"
+          :key="idx"
+          :counselor="counselor">
+          </counselor-list-item-comp>
+        </div>
+      </div>
+    </div>
 
     <div class="search-counselor">
       <span>[상담사검색] </span>
@@ -91,10 +115,12 @@
     return {
       isempty:true,
       inputData:'',
+      filter:''
+ 
       }
     },
   computed:{
-    ...mapGetters(['searched_counselor']),
+    ...mapGetters(['searched_counselor', 'filtering_counselors']),
 
     temps() {
       return this.$store.state.temps
@@ -110,7 +136,12 @@
       }
     },
 
-    ...mapActions(['searchCounselor',]),
+    selectFilter: function (){
+    this.$store.dispatch('filterCounselor',this.filter)
+    this.isempty = false
+    },
+
+    ...mapActions(['searchCounselor','filterCounselor']),
     
    
 

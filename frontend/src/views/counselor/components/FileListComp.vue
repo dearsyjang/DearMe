@@ -4,7 +4,13 @@
     <file-list-item-comp
     >
     </file-list-item-comp>
+
+    <router-link to="/counselors/attachFile">
+      <button>파일첨부하기</button>
+    </router-link>
+    
   </div>
+  
 </template>
 
 <script>
