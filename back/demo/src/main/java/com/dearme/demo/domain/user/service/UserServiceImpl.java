@@ -5,7 +5,7 @@ import com.dearme.demo.domain.user.dto.LoginResponseDto;
 import com.dearme.demo.domain.user.dto.SignUpRequestDto;
 import com.dearme.demo.domain.user.dto.SignUpResponseDto;
 import com.dearme.demo.domain.user.entity.*;
-import com.dearme.demo.domain.user.exception.*;
+import com.dearme.demo.domain.user.exception.CounselorNotExistPictureException;
 import com.dearme.demo.domain.user.repository.UserRepository;
 import com.dearme.demo.global.util.jwt.JwtProvider;
 import lombok.RequiredArgsConstructor;
@@ -26,14 +26,11 @@ public class UserServiceImpl implements UserService{
 
     @Override
     @Transactional
-    public SignUpResponseDto signUpUser(SignUpRequestDto dto) {
+    public SignUpResponseDto signUpUser(SignUpRequestDto dto) throws IOException {
         Picture picture = null;
-        User user = null;
-        if(dto.getType().equals(Type.USER)){
-            user = dto.toUserEntity();
-        }
-        else{
-            user = dto.toCounselorEntity();
+        User user = dto.toUserEntity();
+        if(user.getType().equals(Type.COUNSELOR)){
+            if(dto.getPicture() == null) throw new CounselorNotExistPictureException();
             CounselorProfile counselorProfile = dto.toCounselorProfileEntity();
             List<Career> careers = dto.getCounselorProfile().toCareersEntity();
             List<Certificate> certificates = dto.getCounselorProfile().toCertificatesEntity();
@@ -41,30 +38,23 @@ public class UserServiceImpl implements UserService{
             counselorProfile.setCareers(careers);
             counselorProfile.setCategories(categories);
             counselorProfile.setCertificates(certificates);
-            counselorProfile.setValue(0L);
             user.setCounselorProfile(counselorProfile);
         }
         if(dto.getPicture() != null){
             picture = Picture.builder().fileName(dto.getPicture().getOriginalFilename()).realFileName(UUID.randomUUID().toString()).build();
-            File file = new File("/Users/isangmin/Study/project/S07P12D206/back/demo/src/main/resources/static/" + picture.getRealFileName() + ".jpg");
-            try {
-                dto.getPicture().transferTo(file);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        }else if(user.getType().equals(Type.COUNSELOR)) {
-            throw new CounselorNotExistPictureException();
-        } else{
-            picture = Picture.builder().fileName("basic").realFileName("basic").build();
+            File file = new File("C:\\Users\\multicampus\\Desktop\\project\\S07P12D206\\back\\demo\\src\\main\\resources\\static\\" + picture.getRealFileName() + ".jpeg");
+            dto.getPicture().transferTo(file);
+            user.setPicture(picture);
         }
-        user.setPicture(picture);
-
+        String accessToken = jwtProvider.getAccessToken(user.getId());
+        String refreshToken = jwtProvider.getRefreshToken();
+        user.updateRefreshToken(refreshToken);
         userRepository.save(user);
 
         return SignUpResponseDto
                 .builder()
-                .accessToken(jwtProvider.getAccessToken(user.getId()))
-                .refreshToken(jwtProvider.getRefreshToken())
+                .accessToken(accessToken)
+                .refreshToken(refreshToken)
                 .build();
     }
 

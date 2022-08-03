@@ -43,12 +43,19 @@ public class User extends Base {
     @Column(nullable = false)
     private Long points;
 
+    @Column(nullable = false)
+    private String refreshToken;
+
     @OneToOne(mappedBy = "counselor", orphanRemoval = true, cascade = CascadeType.ALL)
     private CounselorProfile counselorProfile;
 
     public void setCounselorProfile(CounselorProfile counselorProfile) {
         counselorProfile.setCounselor(this);
         this.counselorProfile = counselorProfile;
+    }
+
+    public void updateRefreshToken(String refreshToken){
+        this.refreshToken = refreshToken;
     }
 
     @Builder

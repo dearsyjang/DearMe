@@ -41,18 +41,12 @@ public class SignUpRequestDto {
                 .points(0L).type(this.type).build();
     }
 
-    public User toCounselorEntity(){
-        return User.builder()
-                .id(this.id).pw(this.pw).nickName(this.nickName)
-                .email(this.email).birth(this.birth).gender(this.gender)
-                .points(0L).type(this.type).build();
-    }
-
     public CounselorProfile toCounselorProfileEntity(){
         if(counselorProfile == null) throw new CounselorProfileValidationException();
         return CounselorProfile.builder()
                 .introduce(counselorProfile.getIntroduce())
                 .price(counselorProfile.getPrice())
+                .value(0L)
                 .build();
     }
 }
