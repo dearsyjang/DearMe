@@ -21,6 +21,7 @@
                   <info-item-comp v-for="info in infos"
                   :key="info.Content"
                   :info="info"></info-item-comp>
+                <!-- {{counselor.info}} -->
                 </div>
               </div>
             </div>
@@ -29,23 +30,24 @@
       </div>
 
  
-
+      
       <div class="counselor-info-create">
         <div class="black-bg" v-if = "isModalViewed==true">
         <div class="white-bg">
           <form @submit.prevent="createInfo" class="info-create-form">
             <div class="my-3 w-100 d-flex justify-content-start align-items-center ">
-              <label for="review">자기소개 작성 :</label>
+              <label for="review">자기소개 작성</label>
+              
               <input  type="text" id="review"  style="width:85%; height:300px " v-model="infoContent" required>
             </div>
             <hr>
-            <button class="changebtn" >작성하기</button>
+            <button class="changebtn" >작성하기   </button> <button class="changebtn" @click="isModalViewed=false">닫기</button>
           </form>
-          <button class="changebtn" @click="isModalViewed=false">닫기</button>
+          
         </div>
         </div>
       </div>
-
+    
 
 
 
@@ -61,6 +63,7 @@
         </div>
         <div v-else>
           개인상담가격띄워야됨
+          <!-- {{counselor.price}} -->
         </div> 
       </div>
 
@@ -215,4 +218,7 @@ div {
 .card {
   margin: auto
 }
+
+
+
 </style>
