@@ -1,7 +1,7 @@
 <template>
   <div>
-    리뷰리뷰
-    <my-reveiw-list-comp></my-reveiw-list-comp>
+    <p>최근 리뷰 모음 ▼</p>
+    <my-reveiw-list-comp class="d-flex justify-content-around"></my-reveiw-list-comp>
   </div>
 </template>
 <script>
@@ -22,3 +22,9 @@ export default {
   methods: {}
 }
 </script>
+<style scoped>
+  p {
+      text-align: left;
+      color: #1E2022;
+    }
+</style>

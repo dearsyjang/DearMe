@@ -1,7 +1,7 @@
 <template>
   <div>
-    오늘의 상담
-    <today-counseling-list-comp></today-counseling-list-comp>
+    <p>오늘의 상담 ▼</p>
+    <today-counseling-list-comp class="d-flex justify-content-around"></today-counseling-list-comp>
   </div>
 </template>
 <script>
@@ -22,3 +22,9 @@ export default {
   methods: {}
 }
 </script>
+<style scoped>
+  p {
+      text-align: left;
+      color: #1E2022;
+    }
+</style>

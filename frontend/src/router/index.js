@@ -60,12 +60,12 @@ const routes = [
   },
   {
     path: '/mypage/user',
-    name: 'mypage',
+    name: 'mypageUser',
     component: MypageUserView
   },
   {
     path: '/mypage/counselor',
-    name: 'mypage',
+    name: 'mypageCounselor',
     component: MypageCounselorView
   },
 
