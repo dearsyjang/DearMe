@@ -1,6 +1,7 @@
 <template>
     <div>
-      {{ career.title }}
+      <span>{{ career.title }}</span>
+      <button @click="deleteCareer">삭제</button>
     </div>
 </template>
 <script>
@@ -10,6 +11,11 @@ export default {
         career: {
             type: Object,
         }
+    },
+    methods: {
+        deleteCareer: function () {
+            this.$store.dispatch('deleteCareer', this.career)
+        },
     }
 }
 </script>

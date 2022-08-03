@@ -108,11 +108,32 @@
 
       <div>
         <label for="career">경력</label> <br>
-        <!-- <div id="careerlist">
+        <div id="careerlist">
             <career-list></career-list>
             <career-form></career-form>
-        </div> -->
+        </div>
 
+      </div>
+
+      <div>
+        <label for="certificate">자격증</label> <br>
+      </div>
+
+      <div>
+        <label for="category">전문 분야</label> <br>
+        <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
+          <input type="checkbox" class="btn-check" id="btncheck1" autocomplete="off">
+          <label class="btn btn-outline-primary" for="btncheck1">가족</label>
+
+          <input type="checkbox" class="btn-check" id="btncheck2" autocomplete="off">
+          <label class="btn btn-outline-primary" for="btncheck2">직장,진로</label>
+
+          <input type="checkbox" class="btn-check" id="btncheck3" autocomplete="off">
+          <label class="btn btn-outline-primary" for="btncheck3">연애,결혼</label>
+
+          <input type="checkbox" class="btn-check" id="btncheck4" autocomplete="off">
+          <label class="btn btn-outline-primary" for="btncheck4">자기이해</label>
+        </div>
       </div>
 
       <div>
@@ -125,14 +146,14 @@
 </template>
 <script>
   import { mapActions} from 'vuex'
-  // import CareerList from '@/componets/CareerList'
-  // import CareerForm from '@/components/CareerForm'
+  import CareerList from '@/views/member/components/CareerList'
+  import CareerForm from '@/views/member/components/CareerForm'
 
 export default {
   name: 'SignupCounselor',
   components: {
-    // CareerList,
-    // CareerForm,
+    CareerList,
+    CareerForm,
   },
   data() {
     return {
@@ -151,7 +172,7 @@ export default {
   mounted() {},
   unmounted() {},
   methods: {
-    ...mapActions(['signup']),
+    ...mapActions(['signup'])
     
   }
 }

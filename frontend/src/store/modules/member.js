@@ -20,11 +20,19 @@ export default createStore({
   mutations: {
     CREATE_CAREER: function (state, careerItem) {
       state.careers.push(careerItem)
+    },
+    DELETE_CAREER: function (state, careerItem) {
+      const index = state.careers.indexOf(careerItem)
+
+      state.careers.splice(index, 1)
     }
   },
   actions: {
     createCareer: function (context, careerItem) {
       context.commit('CREATE_CAREER', careerItem)
+    },
+    deleteCareer: function ({ commit }, careerItem) {
+      commit('DELETE_CAREEER', careerItem)
     }
   },
   modules: {

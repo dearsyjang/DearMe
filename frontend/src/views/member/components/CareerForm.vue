@@ -1,7 +1,7 @@
 <template>
     <div>
         <input type="text"
-          v-model.trim="careerTitel"
+          v-model.trim="careerTitle"
           @keyup.enter="createCareer"
         />
         <button @click="createCareer">추가</button>

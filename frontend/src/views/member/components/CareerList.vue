@@ -9,7 +9,7 @@
     </div>
 </template>
 <script>
-import CareerListItem from '@/components/CareerListItem'
+import CareerListItem from '@/views/member/components/CareerListItem'
 export default {
     name: 'CareerList',
     components: {
