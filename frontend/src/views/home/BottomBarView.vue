@@ -2,12 +2,12 @@
 <div>
   <div id="bottombar" class="container">
     <div>
-      <router-link to="/home" class="img mx-3"><img id="emotion" src="../../assets/images/emotion.png" alt="emotion"></router-link>
-      <p class="text">감정달력</p>
+      <router-link to="/home" class="img mx-3"><img id="schedule" src="../../assets/images/schedule.png" alt="schedule"></router-link>
+      <p class="text">상담일정</p>
     </div>
     <div>
-      <router-link to="login" class="img mx-3"><img id="calendar" src="../../assets/images/calendar.png" alt="calendar"></router-link>
-      <p class="text">상담일정</p>
+      <router-link to="login" class="img mx-3"><img id="request" src="../../assets/images/request.png" alt="request"></router-link>
+      <p class="text">상담신청</p>
     </div>
     <div>
       <router-link to="/mypage" class="img mx-3"><img id="home" src="../../assets/images/home.png" alt="home"></router-link>
@@ -65,14 +65,14 @@ export default {
     overflow-x: hidden;
 }
 
-.img > #emotion {
+.img > #schedule {
   width: 30px;
   height: 30px;
   object-fit: cover;
   margin-bottom: 0.4em;
 }
 
-.img > #calendar {
+.img > #request {
   width: 30px;
   height: 30px;
   object-fit: cover;
