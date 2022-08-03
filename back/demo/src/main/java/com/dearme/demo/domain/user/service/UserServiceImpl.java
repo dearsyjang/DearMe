@@ -2,13 +2,8 @@ package com.dearme.demo.domain.user.service;
 
 import com.dearme.demo.domain.user.dto.*;
 import com.dearme.demo.domain.user.entity.*;
-<<<<<<< back/demo/src/main/java/com/dearme/demo/domain/user/service/UserServiceImpl.java
 import com.dearme.demo.domain.user.exception.*;
 import com.dearme.demo.domain.user.repository.*;
-=======
-import com.dearme.demo.domain.user.exception.CounselorNotExistPictureException;
-import com.dearme.demo.domain.user.repository.UserRepository;
->>>>>>> back/demo/src/main/java/com/dearme/demo/domain/user/service/UserServiceImpl.java
 import com.dearme.demo.global.util.jwt.JwtProvider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
