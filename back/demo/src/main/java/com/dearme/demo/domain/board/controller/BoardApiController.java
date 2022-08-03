@@ -59,7 +59,7 @@ public class BoardApiController {
     public ResponseEntity<CommonResponse> commentUpdate(String id, @PathVariable("commentid") Long commentid, @RequestBody @Validated CommentUpdateRequestDto dto){
         return new ResponseEntity<>(CommonResponse.getSuccessResponse(commentService.updateComment(id, commentid, dto)), HttpStatus.OK);
     }
-    @Operation(summary = "Comment Delete Test", description = "게시판 댓글 삭제")
+    @Operation(summary = "Comment Delete Test", description = "게시판 댓글 삭제")  //댓글 삭제 id -> request로 변경
     @DeleteMapping("/{boardid}/comments/{commentid}")
     public ResponseEntity<CommonResponse> commentDelete(String id, @PathVariable("commentid") Long commentid){
         commentService.deleteComment(id, commentid);
