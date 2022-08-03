@@ -16,4 +16,5 @@ public interface UserService {
     UpdateCategoryResponseDto updateCategory(String id, UpdateCategoryRequestDto dto);
     void checkId(String id);
     void checkNickname(String nickname);
+    void delete(String id);
 }
