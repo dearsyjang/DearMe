@@ -27,6 +27,10 @@ public class Category extends Base {
         this.counselorProfile = counselorProfile;
     }
 
+    public void updateCategory(String contents){
+        this.contents = contents;
+    }
+
     @Builder
     public Category(String contents){
         this.contents = contents;

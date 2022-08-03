@@ -1,9 +1,6 @@
 package com.dearme.demo.global.util.jwt;
 
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Header;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.*;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
@@ -11,8 +8,8 @@ import java.util.Date;
 @Component
 public class JwtProvider {
     private final String KEY = "KEY";
-    private final Long ACCESS_TOKEN_EXPIRED_TIME = 1000L * 60;
-    private final Long REFREST_TOKEN_EXPIRED_TIME = 1000L * 60 * 24 * 14;
+    private final Long ACCESS_TOKEN_EXPIRED_TIME = 1000L * 60 * 60;
+    private final Long REFREST_TOKEN_EXPIRED_TIME = 1000L * 60 * 60 * 24 * 14;
 
     public String getAccessToken(String id){
         Date now = new Date();
@@ -35,8 +32,18 @@ public class JwtProvider {
                 .compact();
     }
 
-    public Claims parseToken(String token){
-        return Jwts.parser().setSigningKey(KEY).
-                parseClaimsJwt(token).getBody();
+    public String getIdFromAccessToken(String accessToken) throws Exception{
+        String id = (String) Jwts.parser().setSigningKey(KEY.getBytes()).
+                parseClaimsJws(accessToken).getBody().get("id");
+        return  id;
+    }
+
+    public boolean isValidToken(String token){
+        try {
+            Jwts.parser().setSigningKey(KEY.getBytes()).parseClaimsJws(token);
+            return true;
+        }catch (Exception e){
+            return false;
+        }
     }
 }
