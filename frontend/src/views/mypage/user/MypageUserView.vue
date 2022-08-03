@@ -30,5 +30,8 @@ export default {
   methods: {}
 }
 </script>
-<style scoped>
+<style>
+* {
+  border: 1px black solid;
+}
 </style>

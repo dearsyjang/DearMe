@@ -14,6 +14,10 @@ export default createStore({
     myfavorite: ['이상민', '3']
   },
   getters: {
+    myinfo: state => state.myinfo,
+    myboard: state => state.myboard,
+    mygroup: state => state.mygroup,
+    myfavorite: state => state.myfavorite,
   },
   mutations: {
     MYINFO : (state, myinfo) => state.myinfo=myinfo,

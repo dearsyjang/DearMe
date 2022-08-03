@@ -2,7 +2,7 @@
   <div class="Info">
     <div class="d-flex justify-content-around">
       <div class="mx-4" id="label">
-        <p for="nickname">닉네임</p>
+        <p for="nickname">{{ $store.myinfo}}</p>
         <p for="point">잔여 포인트</p>
       </div>
       <div id="content">
@@ -16,7 +16,6 @@
   </div>
 </template>
 <script>
-import { mapActions } from 'vuex'
 export default {
   components: {},
   data() {
@@ -31,14 +30,12 @@ export default {
   mounted() {},
   unmounted() {},
   methods: {
-    ...mapActions(['getMyinfo', 'getMyboard', 'getMygroup', 'getMyfavorite'])
+  },
+  computed: {
   }
 }
 </script>
 <style scoped>
-  div {
-    background-color: #F0F5F9;
-  }
   p {
     text-align: left;
   }
