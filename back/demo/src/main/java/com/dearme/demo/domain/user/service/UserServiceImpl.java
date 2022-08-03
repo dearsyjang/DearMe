@@ -147,4 +147,9 @@ public class UserServiceImpl implements UserService{
     public void checkNickname(String nickname) {
         if(userRepository.existsUserByNickName(nickname)) throw new DuplicatedNickNameException(nickname);
     }
+
+    @Override
+    public void delete(String id) {
+        userRepository.deleteUserById(id);
+    }
 }
