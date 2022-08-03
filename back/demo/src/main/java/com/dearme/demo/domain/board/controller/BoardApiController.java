@@ -1,9 +1,9 @@
 package com.dearme.demo.domain.board.controller;
 
-import com.dearme.demo.domain.board.dto.BoardSaveRequestDto;
-import com.dearme.demo.domain.board.dto.BoardUpdateRequestDto;
-import com.dearme.demo.domain.board.dto.CommentSaveRequestDto;
-import com.dearme.demo.domain.board.dto.CommentUpdateRequestDto;
+import com.dearme.demo.domain.board.dto.board.BoardSaveRequestDto;
+import com.dearme.demo.domain.board.dto.board.BoardUpdateRequestDto;
+import com.dearme.demo.domain.board.dto.comment.CommentSaveRequestDto;
+import com.dearme.demo.domain.board.dto.comment.CommentUpdateRequestDto;
 import com.dearme.demo.domain.board.service.BoardService;
 import com.dearme.demo.domain.board.service.CommentService;
 import com.dearme.demo.global.common.CommonResponse;
@@ -24,8 +24,8 @@ public class BoardApiController {
 
     @Operation(summary = "Board Save Test", description = "게시판 글 저장")
     @PostMapping
-    public ResponseEntity<CommonResponse> boardSave(@RequestBody @Validated BoardSaveRequestDto dto){
-        return new ResponseEntity<>(CommonResponse.getSuccessResponse(boardService.boardSave(dto)), HttpStatus.OK);
+    public ResponseEntity<CommonResponse> boardSave(String id, @RequestBody @Validated BoardSaveRequestDto dto){
+        return new ResponseEntity<>(CommonResponse.getSuccessResponse(boardService.boardSave(id, dto)), HttpStatus.OK);
     }
     @Operation(summary = "Board View Test", description = "게시판 전체 조회")
     @GetMapping
@@ -38,15 +38,31 @@ public class BoardApiController {
     public ResponseEntity<CommonResponse> boardViewDetail(@PathVariable("boardid") Long boardid){
         return new ResponseEntity<>(CommonResponse.getSuccessResponse(boardService.getBoard(boardid)), HttpStatus.OK);
     }
-    @Operation(summary = "Board Update Test", description = "게시판 수정")
+    @Operation(summary = "Board Update Test", description = "게시판 글 수정")
     @PutMapping("/{boardid}")
-    public ResponseEntity<CommonResponse> boardUpdate(@PathVariable("boardid") Long boardid, @RequestBody @Validated BoardUpdateRequestDto dto){
-        return new ResponseEntity<>(CommonResponse.getSuccessResponse(boardService.updateBoard(boardid, dto)), HttpStatus.OK);
+    public ResponseEntity<CommonResponse> boardUpdate(String id, @PathVariable("boardid") Long boardid, @RequestBody @Validated BoardUpdateRequestDto dto){
+        return new ResponseEntity<>(CommonResponse.getSuccessResponse(boardService.updateBoard(id, boardid, dto)), HttpStatus.OK);
     }
-    @Operation(summary = "Board Delete Test", description = "게시판 삭제")
+    @Operation(summary = "Board Delete Test", description = "게시판 글 삭제")
     @DeleteMapping("/{boardid}")
-    public ResponseEntity<CommonResponse> boardDelete(@PathVariable("boardid") Long boardid){
-        boardService.deleteBoard(boardid);
+    public ResponseEntity<CommonResponse> boardDelete(String id, @PathVariable("boardid") Long boardid){
+        boardService.deleteBoard(id, boardid);
+        return null;
+    }
+    @Operation(summary = "Comment Save Test", description = "게시판 댓글 저장")
+    @PostMapping("/{boardid}/comments")
+    public ResponseEntity<CommonResponse> commentSave(String id, @PathVariable("boardid") Long boardid, @RequestBody @Validated CommentSaveRequestDto dto){
+        return new ResponseEntity<>(CommonResponse.getSuccessResponse(commentService.commentSave(id, boardid, dto)), HttpStatus.OK);
+    }
+    @Operation(summary = "Comment Update Test", description = "게시판 댓글 수정")
+    @PutMapping("/{boardid}/comments/{commentid}")
+    public ResponseEntity<CommonResponse> commentUpdate(String id, @PathVariable("commentid") Long commentid, @RequestBody @Validated CommentUpdateRequestDto dto){
+        return new ResponseEntity<>(CommonResponse.getSuccessResponse(commentService.updateComment(id, commentid, dto)), HttpStatus.OK);
+    }
+    @Operation(summary = "Comment Delete Test", description = "게시판 댓글 삭제")
+    @DeleteMapping("/{boardid}/comments/{commentid}")
+    public ResponseEntity<CommonResponse> commentDelete(String id, @PathVariable("commentid") Long commentid){
+        commentService.deleteComment(id, commentid);
         return null;
     }
 }
