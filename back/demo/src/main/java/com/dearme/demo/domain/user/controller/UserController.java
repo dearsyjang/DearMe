@@ -58,4 +58,10 @@ public class UserController {
         String id = (String) request.getAttribute("id");
         return new ResponseEntity<>(CommonResponse.getSuccessResponse(userService.updateCertificate(id, dto)), HttpStatus.OK);
     }
+
+    @GetMapping("/id/{id}")
+    public ResponseEntity<?> checkId(@PathVariable("id") String id){
+        userService.checkId(id);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 }
