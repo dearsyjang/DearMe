@@ -54,12 +54,16 @@ public class BoardApiController {
     public ResponseEntity<CommonResponse> commentSave(String id, @PathVariable("boardid") Long boardid, @RequestBody @Validated CommentSaveRequestDto dto){
         return new ResponseEntity<>(CommonResponse.getSuccessResponse(commentService.commentSave(id, boardid, dto)), HttpStatus.OK);
     }
-    @Operation(summary = "Comment Update Test", description = "게시판 댓글 수정")
+    @Operation(summary = "Comment Update Test", description = "게시판 댓글 수정")  //댓글 수정 id -> request로 변경
     @PutMapping("/{boardid}/comments/{commentid}")
     public ResponseEntity<CommonResponse> commentUpdate(String id, @PathVariable("commentid") Long commentid, @RequestBody @Validated CommentUpdateRequestDto dto){
         return new ResponseEntity<>(CommonResponse.getSuccessResponse(commentService.updateComment(id, commentid, dto)), HttpStatus.OK);
     }
+<<<<<<< back/demo/src/main/java/com/dearme/demo/domain/board/controller/BoardApiController.java
+    @Operation(summary = "Comment Delete Test", description = "게시판 댓글 삭제")  //댓글 삭제 id -> request로 변경
+=======
     @Operation(summary = "Comment Delete Test", description = "게시판 댓글 삭제")
+>>>>>>> back/demo/src/main/java/com/dearme/demo/domain/board/controller/BoardApiController.java
     @DeleteMapping("/{boardid}/comments/{commentid}")
     public ResponseEntity<CommonResponse> commentDelete(String id, @PathVariable("commentid") Long commentid){
         commentService.deleteComment(id, commentid);
