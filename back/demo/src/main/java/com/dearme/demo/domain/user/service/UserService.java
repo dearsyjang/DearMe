@@ -14,6 +14,6 @@ public interface UserService {
     UpdateCertificateResponseDto updateCertificate(String id, UpdateCertificateRequestDto dto);
     UpdateCareerResponseDto updateCareer(String id, UpdateCareerRequestDto dto);
     UpdateCategoryResponseDto updateCategory(String id, UpdateCategoryRequestDto dto);
-
-    String checkId(String id);
+    void checkId(String id);
+    void checkNickname(String nickname);
 }
