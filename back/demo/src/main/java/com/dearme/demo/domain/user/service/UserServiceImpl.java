@@ -137,4 +137,10 @@ public class UserServiceImpl implements UserService{
         categoryRepository.save(category);
         return new UpdateCategoryResponseDto(category.getId(), category.getContents());
     }
+
+    @Override
+    public String checkId(String id) {
+        if(!userRepository.existsUserById(id)) return null;
+        throw new DuplicatedIdException(id);
+    }
 }

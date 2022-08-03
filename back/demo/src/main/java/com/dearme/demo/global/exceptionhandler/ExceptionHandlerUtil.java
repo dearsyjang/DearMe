@@ -48,4 +48,9 @@ public class ExceptionHandlerUtil {
     ResponseEntity<CommonResponse> handleInvalidRefreshTokenException(InvalidRefreshTokenException e){
         return new ResponseEntity<>(CommonResponse.getErrorResponse(e.getMessage()), HttpStatus.UNAUTHORIZED);
     }
+
+    @ExceptionHandler(DuplicatedIdException.class)
+    ResponseEntity<CommonResponse> handleDuplicatedIdException(DuplicatedIdException e){
+        return new ResponseEntity<>(CommonResponse.getErrorResponse(e.getMessage()), HttpStatus.CONFLICT);
+    }
 }
