@@ -1,7 +1,6 @@
 package com.dearme.demo.domain.user.controller;
 
-import com.dearme.demo.domain.user.dto.LoginRequestDto;
-import com.dearme.demo.domain.user.dto.SignUpRequestDto;
+import com.dearme.demo.domain.user.dto.*;
 import com.dearme.demo.domain.user.service.UserService;
 import com.dearme.demo.global.common.CommonResponse;
 import lombok.RequiredArgsConstructor;
@@ -10,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
 @RestController
@@ -27,5 +27,35 @@ public class UserController {
     @GetMapping("/token")
     public ResponseEntity<CommonResponse> login(@Validated LoginRequestDto dto){
         return new ResponseEntity<>(CommonResponse.getSuccessResponse(userService.login(dto)), HttpStatus.OK);
+    }
+
+    @PutMapping
+    public ResponseEntity<CommonResponse> update(HttpServletRequest request,@RequestBody @Validated UpdateUserRequestDto dto){
+        String id = (String) request.getAttribute("id");
+        return new ResponseEntity<>(CommonResponse.getSuccessResponse(userService.update(id, dto)), HttpStatus.OK);
+    }
+
+    @GetMapping("/access-token")
+    public ResponseEntity<CommonResponse> getAccessToken(HttpServletRequest request){
+        String refreshToken = (String) request.getAttribute("refreshToken");
+        return new ResponseEntity<>(CommonResponse.getSuccessResponse(userService.getAccessToken(refreshToken)), HttpStatus.OK);
+    }
+
+    @PutMapping("/careers")
+    public ResponseEntity<CommonResponse> updateCareer(HttpServletRequest request, @RequestBody @Validated UpdateCareerRequestDto dto){
+        String id = (String) request.getAttribute("id");
+        return new ResponseEntity<>(CommonResponse.getSuccessResponse(userService.updateCareer(id, dto)), HttpStatus.OK);
+    }
+
+    @PutMapping("/categories")
+    public ResponseEntity<CommonResponse> updateCategory(HttpServletRequest request,  @RequestBody @Validated UpdateCategoryRequestDto dto){
+        String id = (String) request.getAttribute("id");
+        return new ResponseEntity<>(CommonResponse.getSuccessResponse(userService.updateCategory(id, dto)), HttpStatus.OK);
+    }
+
+    @PutMapping("/certificates")
+    public ResponseEntity<CommonResponse> updateCertificate(HttpServletRequest request, @RequestBody @Validated UpdateCertificateRequestDto dto){
+        String id = (String) request.getAttribute("id");
+        return new ResponseEntity<>(CommonResponse.getSuccessResponse(userService.updateCertificate(id, dto)), HttpStatus.OK);
     }
 }

@@ -24,9 +24,11 @@ public class User extends Base {
     @Column(nullable = false, unique = true)
     private String nickName;
 
+    @Enumerated(value = EnumType.STRING)
     @Column(nullable = false)
     private Gender gender;
 
+    @Enumerated(value = EnumType.STRING)
     @Column(nullable = false)
     private Type type;
 
@@ -54,9 +56,21 @@ public class User extends Base {
         this.counselorProfile = counselorProfile;
     }
 
+    public void updateUser(String pw, String nickName){
+        this.pw = pw;
+        this.nickName = nickName;
+    }
+
+    public void updateCounselor(String pw, String nickName, CounselorProfile counselorProfile){
+        this.pw = pw;
+        this.nickName = nickName;
+        this.counselorProfile = counselorProfile;
+    }
+
     public void updateRefreshToken(String refreshToken){
         this.refreshToken = refreshToken;
     }
+
 
     @Builder
     public User(String id, String pw, String nickName, Gender gender,

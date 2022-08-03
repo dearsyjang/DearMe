@@ -10,6 +10,7 @@ import java.util.List;
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
+@ToString
 public class CounselorProfile extends Base {
     @Id
     @Column(name = "couselor_id")
@@ -47,6 +48,11 @@ public class CounselorProfile extends Base {
     @OneToMany(mappedBy = "counselorProfile", orphanRemoval = true, cascade = CascadeType.ALL)
     @Setter
     private List<Category> categories = new ArrayList<>();
+
+    public void updateCounselorProfile(Long price, String introduce){
+        this.price = price;
+        this.introduce = introduce;
+    }
 
     @Builder
     public CounselorProfile(Long price, String introduce, Long value) {

@@ -27,6 +27,10 @@ public class Certificate extends Base {
         this.counselorProfile = counselorProfile;
     }
 
+    public void updateCertificate(String contents){
+        this.contents = contents;
+    }
+
     @Builder
     public Certificate(String contents){
         this.contents = contents;

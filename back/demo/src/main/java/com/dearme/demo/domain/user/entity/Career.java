@@ -27,6 +27,10 @@ public class Career extends Base {
         this.counselorProfile = counselorProfile;
     }
 
+    public void updateCareer(String contents){
+        this.contents =contents;
+    }
+
     @Builder
     public Career(String contents){
         this.contents = contents;
