@@ -54,7 +54,7 @@ public class BoardApiController {
     public ResponseEntity<CommonResponse> commentSave(String id, @PathVariable("boardid") Long boardid, @RequestBody @Validated CommentSaveRequestDto dto){
         return new ResponseEntity<>(CommonResponse.getSuccessResponse(commentService.commentSave(id, boardid, dto)), HttpStatus.OK);
     }
-    @Operation(summary = "Comment Update Test", description = "게시판 댓글 수정")  //댓글 수정 id -> request로 변경
+    @Operation(summary = "Comment Update Test", description = "게시판 댓글 수정")
     @PutMapping("/{boardid}/comments/{commentid}")
     public ResponseEntity<CommonResponse> commentUpdate(String id, @PathVariable("commentid") Long commentid, @RequestBody @Validated CommentUpdateRequestDto dto){
         return new ResponseEntity<>(CommonResponse.getSuccessResponse(commentService.updateComment(id, commentid, dto)), HttpStatus.OK);
