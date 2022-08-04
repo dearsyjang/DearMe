@@ -1,44 +1,88 @@
 <template>
-  <div class="groupDetail">
-    <header>상담 신청서</header>
-    <div id="RequestInfo" class="d-flex justify-content-around">
-      <div>
-        <div>신청자 : </div>
-        <div>나이 : </div>
-        <div>성별 : </div>
-      </div>
-      <div>
-        <div>상담날짜 : </div>
-        <div>상담시간 : </div>
-      </div>
+  <div>
+    <h1>그룹 참가 신청하기</h1>
+    <div id="groupRequestName" class="d-flex justify-content-center">
+      <div>신청자 : 장수0</div>
     </div>
-    <div>
-      <textarea rows=10 cols=40 placeholder="상담 내용을 입력하시오."></textarea>
-    </div>
-    <div>
-      <button>수락</button>
-      <button>거절</button>
+    <div class="groupRequestContent">
+      <div>
+        <textarea
+          rows="10"
+          cols="40"
+          placeholder="상담 내용을 입력하시오."
+        ></textarea>
+      </div>
+      <!-- user / counselor 구분 -->
+      <!-- <div v-if="isCounselor === true"> -->
+      <div class="d-flex justify-content-end">
+        <button>수락</button>
+        <button class="mx-3">거절</button>
+      </div>
+      <!-- <div v-if="isCounselor === false"> -->
+      <div>
+        <div class="d-flex justify-content-start">
+          <div class="form-check form-switch mx-3">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              role="switch"
+              id="flexSwitchCheckChecked"
+              checked
+            />
+            <label for="flexSwitchCheckChecked">감정달력 공개</label>
+          </div>
+        </div>
+        <div class="d-flex justify-content-end">
+          <router-link to="/counselor_list"
+            ><button class="mx-3">완료</button></router-link
+          >
+        </div>
+      </div>
     </div>
   </div>
 </template>
 <script>
+import { mapActions } from "vuex";
 export default {
   components: {},
   data() {
     return {
-      sampleData: ''
-    }
+      nickname: "",
+      isOpenCalender: true,
+      requestContent: "",
+    };
   },
   setup() {},
   created() {},
   mounted() {},
   unmounted() {},
-  methods: {}
-}
+  methods: {
+    ...mapActions(["createRequest"]),
+    onSubmit() {
+      if (this.action === "create") {
+        this.createRequest(this.GroupReqeustView);
+      }
+    },
+  },
+};
 </script>
 <style scoped>
-  .groupDetail {
-    background-color: #F0F5F9;
-
-  }
+.groupRequestContent {
+  background-color: #f0f5f9;
+  padding-top: 30px;
+}
+#groupRequestName {
+  background-color: #f0f5f9;
+  width: 30%;
+  margin: auto;
+  border: solid #1e2022 1px;
+  margin-bottom: 10px;
+}
+h1 {
+  border: solid #1e2022 1px;
+  width: 90%;
+  margin: auto;
+  background-color: #f0f5f9;
+  margin-bottom: 10px;
+}
 </style>
