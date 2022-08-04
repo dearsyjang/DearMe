@@ -6,8 +6,7 @@ RUN mvn -f pom.xml package
 FROM openjdk:11-jdk
 COPY --from=builder ./target/*.jar ./boot/app.jar
 COPY --from=builder ./src ./src
-VOLUME ["/home/ubuntu/docker-volume/image"]
-VOLUME ["/home/ubuntu/docker-volume/video"]
+VOLUME ["image:/image", "video:/video"]
 EXPOSE 8080
 
 ENTRYPOINT ["java","-jar", "-Dspring.profiles.active=deploy", "boot/app.jar" ]
