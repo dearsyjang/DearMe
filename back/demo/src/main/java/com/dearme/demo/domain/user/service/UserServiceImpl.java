@@ -30,7 +30,7 @@ public class UserServiceImpl implements UserService{
 
     private final CertificateRepository certificateRepository;
 
-    @Value("${path.image}")
+    @Value("${path.image:/image/}")
     private String IMAGE_PATH;
 
     @Override
@@ -106,7 +106,7 @@ public class UserServiceImpl implements UserService{
     @Override
     public GetAccessTokenResponseDto getAccessToken(String refreshToken) {
         User user = userRepository.findUserByRefreshToken(refreshToken).orElseThrow(() -> {
-           throw new NoExistUserException();
+            throw new NoExistUserException();
         });
         return new GetAccessTokenResponseDto(jwtProvider.getAccessToken(user.getId()));
     }

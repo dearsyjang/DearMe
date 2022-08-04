@@ -39,8 +39,8 @@ public class BoardServiceImpl implements BoardService{
 //        if(user.getType().equals("USER")){
 //            board.setUser(user);
 //            board.setNickname(user);
-            boardRepository.save(board);
-            return new BoardSaveResponseDto(board.getBoardid());
+        boardRepository.save(board);
+        return new BoardSaveResponseDto(board.getBoardid());
 //        }else{
 //            throw new NoBoardSavePermissionException();
 //        }
@@ -77,8 +77,8 @@ public class BoardServiceImpl implements BoardService{
 //            throw new NoExistUserException();
 //        });
 //        if(user.getUserId().equals(board.getUser().getUserId())){
-            board.update(dto.getTitle(), dto.getContents(), dto.getDate());
-            return new BoardUpdateResponseDto(board.getBoardid());
+        board.update(dto.getTitle(), dto.getContents(), dto.getDate());
+        return new BoardUpdateResponseDto(board.getBoardid());
 //        }else{
 //            throw new NoBoardUpdatePermissionException();
 //        }
@@ -93,7 +93,7 @@ public class BoardServiceImpl implements BoardService{
 //            throw new NoExistUserException();
 //        });
 //        if(user.getUserId().equals(board.getUser().getUserId())){
-            boardRepository.delete(board);
+        boardRepository.delete(board);
 //        }else{
 //            throw new NoBoardDeletePermissionException();
 //        }
