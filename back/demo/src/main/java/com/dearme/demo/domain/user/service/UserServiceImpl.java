@@ -158,4 +158,13 @@ public class UserServiceImpl implements UserService{
     public void delete(String id) {
         userRepository.deleteUserById(id);
     }
+
+    @Override
+    public Long pointsUpdate(String id, Long price) {
+        User user = userRepository.findUserById(id).orElseThrow(() -> {
+            throw new NoExistUserException();
+        });
+        user.updatePoints(user.getPoints()+price);
+        return user.getPoints();
+    }
 }
