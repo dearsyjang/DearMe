@@ -58,6 +58,8 @@ public class UserServiceImpl implements UserService{
         if(dto.getPicture() != null){
             picture = Picture.builder().fileName(dto.getPicture().getOriginalFilename()).realFileName(UUID.randomUUID().toString()).build();
             File file = new File(IMAGE_PATH + picture.getRealFileName() + ".jpeg");
+            System.out.println(IMAGE_PATH);
+            System.out.println(IMAGE_PATH + picture.getRealFileName() + ".jpeg");
             dto.getPicture().transferTo(file);
             user.setPicture(picture);
         }
