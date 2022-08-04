@@ -167,4 +167,15 @@ public class UserServiceImpl implements UserService{
         user.updatePoints(user.getPoints()+price);
         return user.getPoints();
     }
+
+    @Override
+    public UserInfoResponseDto getUserInfo(String id) {
+        User user = userRepository.findUserById(id).orElseThrow(() -> {
+            throw new NoExistUserException();
+        });
+        if(user.getType().equals(Type.COUNSELOR)){
+            return UserInfoResponseDto.ofCounselor(user);
+        }
+        return UserInfoResponseDto.ofUser(user);
+    }
 }
