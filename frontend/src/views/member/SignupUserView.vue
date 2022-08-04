@@ -1,9 +1,116 @@
 <template>
-  <div>
-    <h1>회원가입</h1>
-    <p>(취업준비생)</p>
+  <div id="a-container">
+    <h1>회원가입(user)</h1>
+    <div id="form-container" class="form-container sign-up-container">
+      <form class="a-form" @submit.prevent="signup(signupCredentials)">
+        <div>
+          <label for="username1">아이디 </label>
+          <input
+            class="a-input"
+            v-model="signupCredentials.username"
+            type="text"
+            id="username1"
+            placeholder="아이디"
+            required
+          />
+        </div>
+        <div>
+          <label for="password1">비밀번호 </label>
+          <input
+            class="a-input"
+            v-model="signupCredentials.password1"
+            type="password"
+            id="password1"
+            placeholder="비밀번호"
+            required
+          />
+        </div>
+        <div>
+          <label for="password2">비밀번호 확인 </label>
+          <input
+            class="a-input"
+            v-model="signupCredentials.password2"
+            type="password"
+            id="password2"
+            placeholder="비밀번호 확인"
+            required
+          />
+        </div>
+        <div>
+          <label for="nickname">닉네임 </label>
+          <input
+            class="a-input"
+            v-model="signupCredentials.nickname"
+            type="text"
+            id="nickname"
+            placeholder="닉네임"
+            required
+          />
+        </div>
+        <div id="birth" class="d-flex justify-content-center">
+          <label for="birth">생년월일</label>
+          <div class="bir_yy">
+            <span>
+              <input
+                v-model="signupCredentials.birth_yy"
+                type="text"
+                class=""
+                id="yy"
+                placeholder="년(4자)"
+              />
+            </span>
+          </div>
+          <div class="bir_mm">
+            <select id="mm" v-model="signupCredentials.birth_mm">
+              <option>월</option>
+              <option>1</option>
+              <option>2</option>
+              <option>3</option>
+              <option>4</option>
+              <option>5</option>
+              <option>6</option>
+              <option>7</option>
+              <option>8</option>
+              <option>9</option>
+              <option>10</option>
+              <option>11</option>
+              <option>12</option>
+            </select>
+          </div>
+          <div class="bir_dd">
+            <span>
+              <input
+                v-model="signupCredentials.birth_dd"
+                type="text"
+                id="dd"
+                placeholder="일"
+              />
+            </span>
+          </div>
+        </div>
+        <div>
+          <label for="gender">성별</label>
+          <select v-model="signupCredentials.gender" id="gender">
+            <option>남자</option>
+            <option>여자</option>
+          </select>
+        </div>
+        <div id="email">
+          <label for="email">이메일</label>
+          <input
+            v-model="signupCredentials.email"
+            placeholder="이메일"
+            type="email"
+            name=""
+            id="email"
+          />
+        </div>
+        <button class="a-button" @click="addPanel">Sign Up</button>
+      </form>
+    </div>
+  </div>
 
-    <account-error-list v-if="authError"></account-error-list>
+  <!-- <account-error-list v-if="authError"></account-error-list>
 
     <form @submit.prevent="signup(credentials)">
       <div>
@@ -110,34 +217,43 @@
         <button>가입하기</button>
       </div>
     </form>
-
-
-  </div>
+  </div> -->
 </template>
 <script>
-  import { mapActions} from 'vuex'
+import { mapActions } from "vuex";
 export default {
-  name: 'SignupUser',
+  name: "SignupUser",
   components: {},
   data() {
     return {
-      credentials: {
-        username: '',
-        password1: '',
-        password2: '',
-        nickname: '',
-      }
-    }
+      signupCredentials: {
+        username: "",
+        password1: "",
+        password2: "",
+        nickname: "",
+        birth_yy: "",
+        birth_mm: "",
+        birth_dd: "",
+        gender: "",
+        email: "",
+      },
+    };
   },
   setup() {},
   created() {
-  
+    this.signup();
+    // this.addPanel();
   },
   mounted() {},
   unmounted() {},
   methods: {
-    ...mapActions(['signup']),
-    
-  }
-}
+    ...mapActions(["signup"]),
+    // addPanel() {
+    //   const container = document.getElementById("a-container");
+    //   console.log(container);
+    // container.classList.add("right-panel-active");
+    // },
+  },
+};
 </script>
+<style scoped></style>
