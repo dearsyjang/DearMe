@@ -3,7 +3,8 @@ services:
   dearme_server:
     image: dearme_server
     volumes:
-      - image:/image
-      - video:/video
+      - /home/ubuntu/docker-volume/image:/image
+      - /home/ubuntu/docker-volume/video:/video
     ports:
       - "9090:8080"
+    container_name: dearme_server_blue
