@@ -1,10 +1,15 @@
 package com.dearme.demo.domain.user.entity;
 
 import com.dearme.demo.domain.base.entitiy.Base;
+import com.dearme.demo.domain.board.entity.Board;
+import com.dearme.demo.domain.board.entity.Comment;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -56,6 +61,16 @@ public class User extends Base {
         this.counselorProfile = counselorProfile;
     }
 
+    @OneToMany(mappedBy = "user", orphanRemoval = true, cascade = CascadeType.ALL)
+    @JsonBackReference // 순환참조 방지
+    @Setter
+    private List<Board> boards = new ArrayList<>();
+
+    @OneToMany(mappedBy = "user", orphanRemoval = true, cascade = CascadeType.ALL)
+    @JsonBackReference // 순환참조 방지
+    @Setter
+    private List<Comment> comments = new ArrayList<>();
+
     public void updateUser(String pw, String nickName){
         this.pw = pw;
         this.nickName = nickName;
@@ -70,6 +85,7 @@ public class User extends Base {
     public void updateRefreshToken(String refreshToken){
         this.refreshToken = refreshToken;
     }
+    public void updatePoints(Long points){this.points=points;}
 
 
     @Builder

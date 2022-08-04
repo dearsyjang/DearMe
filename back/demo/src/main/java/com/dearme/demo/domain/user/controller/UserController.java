@@ -76,4 +76,8 @@ public class UserController {
         String id = (String) request.getAttribute("id");
         userService.delete(id);
     }
+    @PutMapping("/points")
+    public ResponseEntity<CommonResponse> pointsUpdate(String id, Long price){
+        return new ResponseEntity<>(CommonResponse.getSuccessResponse(userService.pointsUpdate(id, price)), HttpStatus.OK);
+    }
 }

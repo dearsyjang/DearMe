@@ -17,4 +17,5 @@ public interface UserService {
     void checkId(String id);
     void checkNickname(String nickname);
     void delete(String id);
+    Long pointsUpdate(String id, Long price);
 }

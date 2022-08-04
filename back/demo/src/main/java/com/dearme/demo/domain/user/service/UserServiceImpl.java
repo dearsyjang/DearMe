@@ -58,6 +58,8 @@ public class UserServiceImpl implements UserService{
         if(dto.getPicture() != null){
             picture = Picture.builder().fileName(dto.getPicture().getOriginalFilename()).realFileName(UUID.randomUUID().toString()).build();
             File file = new File(IMAGE_PATH + picture.getRealFileName() + ".jpeg");
+            System.out.println(IMAGE_PATH);
+            System.out.println(IMAGE_PATH + picture.getRealFileName() + ".jpeg");
             dto.getPicture().transferTo(file);
             user.setPicture(picture);
         }
@@ -104,7 +106,7 @@ public class UserServiceImpl implements UserService{
     @Override
     public GetAccessTokenResponseDto getAccessToken(String refreshToken) {
         User user = userRepository.findUserByRefreshToken(refreshToken).orElseThrow(() -> {
-           throw new NoExistUserException();
+            throw new NoExistUserException();
         });
         return new GetAccessTokenResponseDto(jwtProvider.getAccessToken(user.getId()));
     }
@@ -155,5 +157,14 @@ public class UserServiceImpl implements UserService{
     @Override
     public void delete(String id) {
         userRepository.deleteUserById(id);
+    }
+
+    @Override
+    public Long pointsUpdate(String id, Long price) {
+        User user = userRepository.findUserById(id).orElseThrow(() -> {
+            throw new NoExistUserException();
+        });
+        user.updatePoints(user.getPoints()+price);
+        return user.getPoints();
     }
 }
