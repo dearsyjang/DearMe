@@ -82,38 +82,40 @@
         />
       </div>
       <div class="d-grid gap-2">
-        <button class="btn btn-primary btn-sm">가입하기</button>
+        <button @click="signUp()" class="btn btn-primary btn-sm">가입하기</button>
       </div>
     </form>
   </div>
 </template>
 <script>
-  import { mapActions } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 export default {
   name: 'SignupUser',
   components: {},
   data() {
     return {
       credentials: {
-        username: [],
-        password1: [],
-        password2: [],
-        nickname: [],
-        birth_yy: [],
-        birth_mm: [],
-        birth_dd: []
+        id: '',
+        password1: '',
+        password2: '',
+        nickname: '',
+        birth_yy: '',
+        birth_mm: '',
+        birth_dd: '',
+        gender: '',
+        email: ''
       }
     }
   },
-  setup() {},
-  created() {
-
+  computed: {
+    ...mapGetters(['authError', 'currentUser'])
   },
-  mounted() {},
-  unmounted() {},
   methods: {
-    ...mapActions(['signup']),
-
+    ...mapActions({ signup:'signup' }),
+    signUp () {
+      console.log(this.credentials)
+      this.signup(this.credentials)
+    }
   }
 }
 </script>
