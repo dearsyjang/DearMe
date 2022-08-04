@@ -18,4 +18,6 @@ public interface UserService {
     void checkNickname(String nickname);
     void delete(String id);
     Long pointsUpdate(String id, Long price);
+
+    UserInfoResponseDto getUserInfo(String id);
 }
