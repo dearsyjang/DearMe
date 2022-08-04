@@ -30,7 +30,7 @@ public class UserServiceImpl implements UserService{
 
     private final CertificateRepository certificateRepository;
 
-    @Value("${path.image}")
+    @Value("${path.image:/image/}")
     private String IMAGE_PATH;
 
     @Override
