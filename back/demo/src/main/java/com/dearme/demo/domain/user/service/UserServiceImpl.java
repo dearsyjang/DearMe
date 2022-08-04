@@ -6,6 +6,7 @@ import com.dearme.demo.domain.user.exception.*;
 import com.dearme.demo.domain.user.repository.*;
 import com.dearme.demo.global.util.jwt.JwtProvider;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -28,6 +29,9 @@ public class UserServiceImpl implements UserService{
     private final CategoryRepository categoryRepository;
 
     private final CertificateRepository certificateRepository;
+
+    @Value("${path.image}")
+    private String IMAGE_PATH;
 
     @Override
     @Transactional
@@ -53,7 +57,7 @@ public class UserServiceImpl implements UserService{
         }
         if(dto.getPicture() != null){
             picture = Picture.builder().fileName(dto.getPicture().getOriginalFilename()).realFileName(UUID.randomUUID().toString()).build();
-            File file = new File("C:\\Users\\multicampus\\Desktop\\project\\S07P12D206\\back\\demo\\src\\main\\resources\\static\\" + picture.getRealFileName() + ".jpeg");
+            File file = new File(IMAGE_PATH + picture.getRealFileName() + ".jpeg");
             dto.getPicture().transferTo(file);
             user.setPicture(picture);
         }

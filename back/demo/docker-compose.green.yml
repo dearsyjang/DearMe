@@ -2,5 +2,9 @@ version: '3.0'
 services:
   dearme_server:
     image: dearme_server
+    volumes:
+      - /home/ubuntu/docker-volume/image:/image
+      - /home/ubuntu/docker-volume/video:/video
     ports:
       - "9091:8080"
+    container_name: dearme_server_green

@@ -8,4 +8,4 @@ COPY --from=builder ./target/*.jar ./boot/app.jar
 COPY --from=builder ./src ./src
 EXPOSE 8080
 
-ENTRYPOINT ["java","-jar", "boot/app.jar" ]
+ENTRYPOINT ["java","-jar", "-Dspring.profiles.active=deploy", "boot/app.jar" ]

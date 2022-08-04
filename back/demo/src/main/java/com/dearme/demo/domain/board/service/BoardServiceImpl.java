@@ -1,14 +1,14 @@
 package com.dearme.demo.domain.board.service;
 
-import com.dearme.demo.domain.board.dto.board.*;
+import com.dearme.demo.domain.board.dto.BoardResponseDto;
+import com.dearme.demo.domain.board.dto.BoardSaveRequestDto;
+import com.dearme.demo.domain.board.dto.BoardUpdateRequestDto;
 import com.dearme.demo.domain.board.entity.Board;
 import com.dearme.demo.domain.board.entity.Comment;
-import com.dearme.demo.domain.board.exception.board.NoExistBoardException;
 import com.dearme.demo.domain.board.repository.BoardRepository;
 import com.dearme.demo.domain.board.repository.CommentRepository;
-import com.dearme.demo.domain.user.repository.UserRepository;
-import com.dearme.demo.global.util.jwt.JwtProvider;
 import lombok.RequiredArgsConstructor;
+import org.hibernate.validator.constraints.URL;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -19,80 +19,47 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class BoardServiceImpl implements BoardService{
-    private final JwtProvider jwtProvider;
-    private final UserRepository userRepository;
     private final BoardRepository boardRepository;
     private final CommentRepository commentRepository;
-
     @Override
     @Transactional
-    public BoardSaveResponseDto boardSave(String id, BoardSaveRequestDto dto){
-
+    public Board boardSave(BoardSaveRequestDto dto){
         Board board;
         board = dto.toBoardEntity();
-//        User user = userRepository.findUserById(id).orElseThrow(() -> {
-//            throw new NoExistUserException();
-//        });
-//        if(user.getType().equals("USER")){
-//            board.setUser(user);
-            boardRepository.save(board);
-            return new BoardSaveResponseDto(board.getBoardid());
-//        }else{
-//            throw new NoBoardSavePermissionException();
-//        }
+        boardRepository.save(board);
+        return board;
     }
     @Override
     public Page<Board> getBoards(PageRequest pageRequest){
         return boardRepository.findAll(pageRequest);
     }
     @Transactional
-    public BoardViewResponseDto getBoard(Long boardid){
-        Board board= boardRepository.findBoardByBoardid(boardid).orElseThrow(()->{
-            throw new NoExistBoardException();
-        });
+    public BoardResponseDto getBoard(Long boardid){
+        Board board= boardRepository.findBoardByBoardid(boardid);
         board.updateHitCnt();
+        BoardResponseDto boardResponseDto = new BoardResponseDto();
+        boardResponseDto.setUserid(board.getUserid());
+        boardResponseDto.setTitle(board.getTitle());
+        boardResponseDto.setContents(board.getContents());
+        boardResponseDto.setHitCnt(board.getHitCnt());
+        boardResponseDto.setDate(board.getDate());
 
-        List<Comment> comment = board.getComments();
-        return new BoardViewResponseDto(board.getBoardid(),
-                board.getUser(),
-                board.getTitle(),
-                board.getContents(),
-                board.getHitCnt(),
-                board.getDate(),
-                comment);
+        List<Comment> comment = commentRepository.findCommentByBoardid(boardid);
+        boardResponseDto.setComment(comment);
+        return boardResponseDto;
     }
 
     @Transactional
-    public BoardUpdateResponseDto updateBoard(String id, Long boardid, BoardUpdateRequestDto dto) {
-
-
-        Board board = boardRepository.findBoardByBoardid(boardid).orElseThrow(()->{
-            throw new NoExistBoardException();
-        });
-//        User user = userRepository.findUserById(id).orElseThrow(() -> {
-//            throw new NoExistUserException();
-//        });
-//        if(user.getUserId().equals(board.getUser().getUserId())){
-            board.update(dto.getTitle(), dto.getContents(), dto.getDate());
-            return new BoardUpdateResponseDto(board.getBoardid());
-//        }else{
-//            throw new NoBoardUpdatePermissionException();
-//        }
+    public Long updateBoard(Long boardid, BoardUpdateRequestDto dto) {
+        Board board = boardRepository.findBoardByBoardid(boardid);
+        board.update(dto.getTitle(), dto.getContents(), dto.getDate());
+        return boardid;
     }
 
     @Transactional
-    public void deleteBoard(String id, Long boardid) {
-        Board board = boardRepository.findBoardByBoardid(boardid).orElseThrow(()->{
-            throw new NoExistBoardException();
-        });
-//        User user = userRepository.findUserById(id).orElseThrow(() -> {
-//            throw new NoExistUserException();
-//        });
-//        if(user.getUserId().equals(board.getUser().getUserId())){
-            boardRepository.delete(board);
-//        }else{
-//            throw new NoBoardDeletePermissionException();
-//        }
+    public void deleteBoard(Long boardid) {
+        Board board = boardRepository.findBoardByBoardid(boardid);
+        boardRepository.delete(board);
     }
 
 
