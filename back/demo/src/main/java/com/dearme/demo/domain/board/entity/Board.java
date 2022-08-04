@@ -23,6 +23,8 @@ public class Board extends Base {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long boardid;
 
+    @Column(nullable = false)
+    private String nickname;
     @ManyToOne
     @JsonManagedReference // 순환참조 방지
     @JoinColumn(name="id")
@@ -34,7 +36,7 @@ public class Board extends Base {
     private String contents;
 
     @Column(nullable = false)
-    private int hitCnt=0;
+    private int hitcnt=0;
 
     @Column(nullable = false)
     private Date date;
@@ -48,15 +50,19 @@ public class Board extends Base {
         user.getBoards().add(this);
         this.user=user;
     }
+    public void setNickname(User user){
+        this.nickname=user.getNickName();
+    }
     @Builder
-    public Board(String title, String contents, int hitCnt, Date date){
+    public Board(String nickname, String title, String contents, int hitcnt, Date date){
+        this.nickname=nickname;
         this.title=title;
         this.contents=contents;
-        this.hitCnt=hitCnt;
+        this.hitcnt=hitcnt;
         this.date=date;
     }
     public void updateHitCnt(){
-        this.hitCnt=this.hitCnt+1;
+        this.hitcnt=this.hitcnt+1;
     }
     public void update(String title, String contents, Date date){
         this.title=title;

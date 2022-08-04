@@ -8,7 +8,7 @@ import org.springframework.data.domain.PageRequest;
 public interface BoardService {
 
     BoardSaveResponseDto boardSave(String id, BoardSaveRequestDto dto);
-    Page<Board> getBoards(PageRequest pageRequest);
+    Page<BoardsViewResponseDto> getBoards(PageRequest pageRequest);
     BoardViewResponseDto getBoard(Long boardid);
 
     BoardUpdateResponseDto updateBoard(String id, Long boardid, BoardUpdateRequestDto dto);
