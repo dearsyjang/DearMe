@@ -1,7 +1,6 @@
 package com.dearme.demo.domain.board.service;
 
 import com.dearme.demo.domain.board.dto.board.*;
-import com.dearme.demo.domain.board.entity.Board;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 

@@ -9,14 +9,14 @@ import java.util.Date;
 @Data
 public class CommentSaveRequestDto {
 
-    private Date date;
     private String contents;
+    private Date date;
 
 
     public Comment toCommentEntity(){
         return Comment.builder()
-                .date(this.date)
                 .contents(this.contents)
+                .date(this.date)
                 .build();
     }
 }
