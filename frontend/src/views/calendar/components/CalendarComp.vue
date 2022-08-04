@@ -1,29 +1,30 @@
-
 <template>
-  <section class="section">
+  <section class="section" >
     <div class="container">
       <h2 class="subtitle has-text-centered">
-        <button class="button is-small is-primary is-outlined mr-5"
+        <button class="button is-small is-info is-outlined mr-5"
         @click="calendarData(-1)">&lt;</button>
         {{ year }}년 {{ month }}월
-        <button class="button is-small is-primary is-outlined ml-5"
+        <button class="button is-small is-info is-outlined ml-5"
         @click="calendarData(1)">&gt;</button>
       </h2>
       <table class="table has-text-centered is-fullwidth">
         <thead>
-          <th v-for="day in days" :key="day">{{ day }}</th>
-        </thead>   
+          <th v-for="day in days" :key="day" style="text-align:center">{{ day }}</th>
+        </thead>
         <tbody>
           <tr v-for="(date, idx) in dates" :key="idx">
             <td
-              v-for="(day, secondIdx) in date"
+              v-for="(day, secondIdx) in date" 
               :key="secondIdx"
-              :class="{ 'has-text-info-dark': idx === 0 && day >= lastMonthStart,
-              'has-text-danger': dates.length - 1 === idx && nextMonthStart > day,
-              'has-text-primary': day === today && month === currentMonth && year === currentYear
-              }"
-            >
-              {{ day }} 
+            > 
+              <div class="container" style="height:50px; width:30px">
+              <router-link to="/calendar/DayComp" :class="{ 'has-text-grey-light': idx === 0 && day >= lastMonthStart || dates.length - 1 === idx && nextMonthStart > day,
+              'has-text-primary': day === today && month === currentMonth && year === currentYear && idx <32
+              }">
+              {{ day }}
+              </router-link>
+              </div>
             </td>
           </tr>
         </tbody>
@@ -34,7 +35,6 @@
 
 <script>
 export default {
-  name: 'CalendarView',
   data() {
     return {
       days: [
@@ -100,7 +100,9 @@ export default {
         lastYear -= 1;
       }
       const prevLastDate = new Date(lastYear, lastMonth, 0).getDate(); // 지난 달 마지막 날짜
+      
       return [firstDay, lastDate, prevLastDate];
+      
     },
     getMonthOfDays(
       monthFirstDay,
@@ -136,8 +138,17 @@ export default {
       }
       if (weekOfDays.length > 0) dates.push(weekOfDays); // 남은 날짜 추가
       this.nextMonthStart = weekOfDays[0]; // 이번 달 마지막 주에서 제일 작은 날짜
+      
       return dates;
     },
   },
 };
 </script>
+<style>
+.container a{
+  text-decoration: none;
+  color: black
+}
+</style>
+
+
