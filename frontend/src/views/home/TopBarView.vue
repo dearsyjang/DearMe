@@ -44,6 +44,7 @@ export default {
   display:flex;
   flex-direction:row;
   background-color: #FDFDFD;
+  border-bottom: 1px solid black; 
 }
 
 #topbar > .navbar a{

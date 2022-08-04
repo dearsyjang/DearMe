@@ -4,6 +4,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import member from './member.js'
 import mypage from './mypage.js'
 import counselor from './counselor.js'
+import board from './board.js'
 
 
 const router = createRouter({
@@ -12,6 +13,7 @@ const router = createRouter({
     ...member,
     ...mypage,
     ...counselor,
+    ...board,
   ]
 
 // vue 기본 양식

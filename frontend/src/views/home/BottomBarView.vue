@@ -18,7 +18,7 @@
     <p class="text">상담사조회</p>
     </div>
     <div>
-      <router-link to="login" class="img mx-3"><img id="board" src="../../assets/images/board.png" alt="board"></router-link>
+      <router-link to="/board" class="img mx-3"><img id="board" src="../../assets/images/board.png" alt="board"></router-link>
       <p class="text">상담게시판</p>
     </div>
   </div>
@@ -42,7 +42,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 #bottombar { 
     position: fixed; 
     bottom: 0px; 
