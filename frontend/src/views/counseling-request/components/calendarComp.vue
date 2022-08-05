@@ -18,7 +18,7 @@
               v-for="(day, secondIdx) in date" 
               :key="secondIdx"
             > 
-              <div class="card" style="height:50px; width:30px">
+              <div class="container" style="height:50px; width:30px">
               <router-link to="/calendar/DayComp" :class="{ 'has-text-grey-light': idx === 0 && day >= lastMonthStart || dates.length - 1 === idx && nextMonthStart > day,
               'has-text-primary': day === today && month === currentMonth && year === currentYear && idx <32
               }">
@@ -35,6 +35,7 @@
 
 <script>
 export default {
+  name : 'calendarComp',
   data() {
     return {
       days: [
@@ -150,5 +151,3 @@ export default {
   color: black
 }
 </style>
-
-
