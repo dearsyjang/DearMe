@@ -176,11 +176,7 @@ public class UserServiceImpl implements UserService{
             throw new NoExistUserException();
         });
         Long points=Long.parseLong(price);
-
-        System.out.println(price);
         user.updatePoints(points);
-        System.out.println(user.getPoints());
-
     }
 
     @Override

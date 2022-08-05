@@ -90,7 +90,6 @@ public class User extends Base {
     public void updateRefreshToken(String refreshToken){
         this.refreshToken = refreshToken;
     }
-
     public void updatePoints(Long points){
 
         this.points = points + this.points;
