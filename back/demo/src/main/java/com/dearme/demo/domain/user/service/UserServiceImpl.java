@@ -58,11 +58,13 @@ public class UserServiceImpl implements UserService{
         if(dto.getPicture() != null){
             picture = Picture.builder().fileName(dto.getPicture().getOriginalFilename()).realFileName(UUID.randomUUID().toString()).build();
             File file = new File(IMAGE_PATH + picture.getRealFileName() + ".jpeg");
-            System.out.println(IMAGE_PATH);
-            System.out.println(IMAGE_PATH + picture.getRealFileName() + ".jpeg");
             dto.getPicture().transferTo(file);
-            user.setPicture(picture);
+        }else if(dto.getType().equals(Type.COUNSELOR)){
+            throw new CounselorNotExistPictureException();
+        }else{
+            picture = Picture.builder().fileName("basic").realFileName("basic").build();
         }
+        user.setPicture(picture);
         String accessToken = jwtProvider.getAccessToken(user.getId());
         String refreshToken = jwtProvider.getRefreshToken();
         user.updateRefreshToken(refreshToken);
@@ -99,8 +101,11 @@ public class UserServiceImpl implements UserService{
             targetCounselorProfile.updateCounselorProfile(dto.getCounselorProfile().getPrice(), dto.getCounselorProfile().getIntroduce());
             user.updateCounselor(dto.getPw(), dto.getNickName(), targetCounselorProfile);
         }
+        String accessToken = jwtProvider.getAccessToken(user.getId());
+        String refreshToken = jwtProvider.getRefreshToken();
+        user.updateRefreshToken(refreshToken);
         userRepository.save(user);
-        return new UpdateUserResponseDto(jwtProvider.getAccessToken(user.getId()), jwtProvider.getRefreshToken());
+        return new UpdateUserResponseDto(accessToken, refreshToken);
     }
 
     @Override
