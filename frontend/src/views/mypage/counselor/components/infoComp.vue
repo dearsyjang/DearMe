@@ -1,15 +1,14 @@
 <template>
   <div class="Info container">
     <div class="row">
-      <label id="con1" class="col-sm-6 col-form-label" for="nickname">나는야 고민왕</label>
-      <p id="con1" class="form-control col-sm-6">사용자</p>
+      <label id="con1" class="col-sm-6 col-form-label" for="nickname">정윤해</label>
+      <p id="con1" class="form-control col-sm-6">상담사</p>
     </div>
     <div id="point">
       <label class="form-label" for="myPoint">잔여포인트</label>
     </div>
     <div class="row">
-      <p id="con2" class="form-control col-sm-6">500 pt</p>
-      <button id="con2" class="btn btn-primary col-sm-6">충전하기</button>
+      <button id="con2" class="btn btn-primary col-sm-6">내 프로필</button>
     </div>
   </div>
 </template>
