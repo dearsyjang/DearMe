@@ -3,8 +3,7 @@ package com.dearme.demo.domain.user.service;
 import com.dearme.demo.domain.user.dto.*;
 
 import java.io.IOException;
-
-import java.io.IOException;
+import java.util.List;
 
 public interface UserService {
     SignUpResponseDto signUpUser(SignUpRequestDto dto) throws IOException;
@@ -17,7 +16,10 @@ public interface UserService {
     void checkId(String id);
     void checkNickname(String nickname);
     void delete(String id);
-    Long pointsUpdate(String id, Long price);
+
+    void pointsUpdate(String id, String price);
 
     UserInfoResponseDto getUserInfo(String id);
+
+    List<ReviewViewResponseDto> getReviews(String id);
 }
