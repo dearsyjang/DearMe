@@ -1,29 +1,29 @@
 <template>
   <div class="container">
-    <form>
+    <form @submit.prevent="signUp()">
+      <div>
+        <select for="isCounselor" v-model="credentials.type">사용자 구분
+          <option value="USER">취업 준비생</option>
+          <option value="COUNSELOR">심리 상담사</option>
+        </select>
+      </div>
       <div class="form-group">
         <label for="id" class="form-label mt-2">아이디</label>
         <input type="text" class="form-control" placeholder="아이디" v-model="credentials.id">
       </div>
       <div class="form-group has-success">
-        <label class="form-label mt-2" for="password1">비밀번호</label>
-        <input type="password" class="form-control is-valid" placeholder="비밀번호" v-model="credentials.password1">
-      </div>
-      <div class="form-group has-danger">
-        <label class="form-label mt-2" for="password2">비밀번호 확인</label>
-        <input type="password" class="form-control is-valid" placeholder="비밀번호 확인" v-model="credentials.password2">
-        <div class="invalid-feedback">비밀번호가 일치하지 않습니다.</div>
+        <label class="form-label mt-2" for="password">비밀번호</label>
+        <input type="password" class="form-control is-valid" placeholder="비밀번호" v-model="credentials.pw">
       </div>
       <div class="form-group">
         <label class="form-label mt-2" for="nickname">닉네임</label>
-        <input type="text" class="form-control" placeholder="닉네임" v-model="credentials.nickname">
+        <input type="text" class="form-control" placeholder="닉네임" v-model="credentials.nickName">
       </div>
       <div class="birth_wrap">
         <label class="form-label mt-2" for="birth">생년월일</label>
         <div class="bir_yy">
           <span class="ps_box">
             <input
-              v-model="credentials.birth_yy"
               type="text"
               class="form-control"
               id="yy"
@@ -34,7 +34,7 @@
         </div>
         <div class="bir_mm">
           <span class="ps_box focus">
-            <select class="form-select" id="mm" v-model="credentials.birth_mm">
+            <select class="form-select" id="mm">
               <option>월</option>
               <option>1</option>
               <option>2</option>
@@ -54,7 +54,6 @@
         <div class="bir_dd">
           <span class="ps_box">
             <input
-              v-model="credentials.birth_dd"
               type="text"
               id="dd"
               class="form-control"
@@ -67,8 +66,8 @@
       <div class="form-group">
         <label class="form-label mt-2" for="gender">성별</label>
         <select class="form-select" v-model="credentials.gender" id="gender">
-          <option>남자</option>
-          <option>여자</option>
+          <option value="MALE">남자</option>
+          <option value="FEMAILE">여자</option>
         </select>
       </div>
       <div clss="form-group">
@@ -82,7 +81,7 @@
         />
       </div>
       <div class="d-grid gap-2">
-        <button @click="signUp()" class="btn btn-primary btn-sm">가입하기</button>
+        <button type="submit" class="btn btn-primary btn-sm">가입하기</button>
       </div>
     </form>
   </div>
@@ -96,12 +95,10 @@ export default {
     return {
       credentials: {
         id: '',
-        password1: '',
-        password2: '',
-        nickname: '',
-        birth_yy: '',
-        birth_mm: '',
-        birth_dd: '',
+        pw: '',
+        type: '',
+        nickName: '',
+        birth: '2022/02/02',
         gender: '',
         email: ''
       }
@@ -111,12 +108,35 @@ export default {
     ...mapGetters(['authError', 'currentUser'])
   },
   methods: {
-    ...mapActions({ signup:'signup' }),
-    signUp () {
-      console.log(this.credentials)
-      this.signup(this.credentials)
+    ...mapActions(['signup']),
+    signUp() {
+      let formData = new FormData()
+      formData.append('id', this.credentials.id)
+      formData.append('pw', this.credentials.pw)
+      formData.append('type', this.credentials.type)
+      formData.append('nickName', this.credentials.nickName)
+      formData.append('birth', this.credentials.birth)
+      formData.append('gender', this.credentials.gender)
+      this.signup(formData)
     }
-  }
+
+    // signUp() {
+    //   console.log(this.credentials)
+    //   this.signup(this.credentials)
+    // }
+    // signUp () {
+    //   const newCredentials = {
+    //     id: this.id,
+    //     pw: this.pw,
+    //     type: this.type,
+    //     nickName: this.nickName,
+    //     birth: this.birth,
+    //     gender: this.gender,
+    //     email: this.email,
+    //   }
+    //   console.log(newCredentials)
+    //   this.signup(newCredentials)
+    }
 }
 </script>
 <style scoped>
