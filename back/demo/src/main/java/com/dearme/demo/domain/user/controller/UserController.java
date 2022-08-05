@@ -84,11 +84,11 @@ public class UserController {
         userService.delete(id);
     }
 
-    @PostMapping("/points")
-    public void pointsUpdate(HttpServletRequest request) throws UnsupportedEncodingException {
-        String id = request.getParameter("id");
-        String price = request.getParameter("price");
-        userService.pointsUpdate(id, price);
+    @PutMapping("/points")
+    public void pointsUpdate(HttpServletRequest request, @RequestBody @Validated PointsUpdateRequestDto dto) throws UnsupportedEncodingException {
+        String id = (String) request.getAttribute("id");
+        System.out.println(id + ", " + dto.getPrice());
+        userService.pointsUpdate(id, dto.getPrice());
     }
 
     @GetMapping("/reviews")

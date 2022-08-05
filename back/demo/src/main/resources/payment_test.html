@@ -17,27 +17,8 @@
 <script>
 $(document).ready(function(){
     $("#iamportPayment").click(function (){
-        var form = document.createElement('form');
-        form.setAttribute('method', 'post');
-        form.setAttribute('target', '_blank');
-        form.setAttribute("charset", "UTF-8");
-        form.setAttribute('action', 'http://localhost:8080/users/points');
-        document.charset = "UTF-8";
 
-        var hiddenField = document.createElement('input');
-        hiddenField.setAttribute('type', 'hidden');
-        hiddenField.setAttribute('name', 'id');
-        hiddenField.setAttribute('value', '아이디');
-        form.appendChild(hiddenField);
-        hiddenField = document.createElement('input');
-        hiddenField.setAttribute('type', 'hidden');
-        hiddenField.setAttribute('name', 'price');
-        hiddenField.setAttribute('value', '1235');
-        form.appendChild(hiddenField);
-
-        document.body.appendChild(form);
-        form.submit();
-        //payment(1);
+        payment(100);
     });
 })
 
@@ -54,27 +35,18 @@ function payment(data){
         buyer_tel:"01087624001"
 
     }, function (rsp){
-        var form = document.createElement('form');
-        form.setAttribute('method', 'put');
-        form.setAttribute('target', '_blank');
-        form.setAttribute('action', 'http://localhost:8080/points');
-        document.charset = "UTF-8";
-
-        var hiddenField = document.createElement('input');
-        hiddenField.setAttribute('type', 'hidden');
-        hiddenField.setAttribute('name', 'id');
-        hiddenField.setAttribute('value', '아이디');
-        form.appendChild(hiddenField);
-        var hiddenField1 = document.createElement('input');
-        hiddenField1.setAttribute('type', 'hidden');
-        hiddenField1.setAttribute('name', 'price');
-        hiddenField1.setAttribute('value', 1234);
-        form.appendChild(hiddenField1);
-
-        document.body.appendChild(form);
-        form.submit();
         if(rsp.success){
-            alert("완료 -> imp_uid : " + rsp.imp_uid+" / merchant_uid(orderKey) : " + rsp.merchant_uid);
+            fetch('http://localhost:8080/users/points', {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization' : 'ad eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6ImlkIiwiaXNzIjoiZGVhcm1lIiwiaWF0IjoxNjU5NjgwMzg0LCJleHAiOjE2NTk2ODM5ODR9.izg6xcOPKIdxiU6QjTQ2GoVKFqSsBwBgyP4FCd6uibQ'
+                },
+                body: JSON.stringify({price: "5555"})
+            }).then((response) => response.json()).then((data) => {
+                console.log(data);
+            });
+            alert("충전완료");
         }else{
             alert("실패 : 코드(" + rsp.error_code + ") / 메시지(" + rsp.error_msg + ")");
         }

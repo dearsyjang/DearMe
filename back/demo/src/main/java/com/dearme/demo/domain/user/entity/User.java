@@ -92,7 +92,8 @@ public class User extends Base {
     }
 
     public void updatePoints(Long points){
-        this.points = points;
+
+        this.points = points + this.points;
     }
     @Builder
     public User(String id, String pw, String nickName, Gender gender,
