@@ -7,6 +7,7 @@ import counselor from './counselor.js'
 import board from './board.js'
 import group from './group.js'
 import calendar from './calendar.js'
+import textDiary from './textDiary.js'
 
 
 const router = createRouter({
@@ -18,6 +19,7 @@ const router = createRouter({
     ...board,
     ...group,
     ...calendar,
+    ...textDiary,
   ]
 
 // vue 기본 양식
