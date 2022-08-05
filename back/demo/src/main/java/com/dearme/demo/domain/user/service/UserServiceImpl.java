@@ -170,15 +170,13 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
+    @Transactional
     public void pointsUpdate(String id, String price) {
         User user = userRepository.findUserById(id).orElseThrow(() -> {
             throw new NoExistUserException();
         });
         Long points=Long.parseLong(price);
-
         user.updatePoints(points);
-
-
     }
 
     @Override
