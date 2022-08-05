@@ -1,6 +1,6 @@
 package com.dearme.demo.domain.user.service;
 
-import com.dearme.demo.domain.user.dto.*;
+import com.dearme.demo.domain.user.dto.user.*;
 
 import java.io.IOException;
 import java.util.List;
@@ -17,7 +17,7 @@ public interface UserService {
     void checkNickname(String nickname);
     void delete(String id);
 
-    void pointsUpdate(String id, String price);
+    PointsUpdateResponseDto pointsUpdate(String id, String price);
 
     UserInfoResponseDto getUserInfo(String id);
 

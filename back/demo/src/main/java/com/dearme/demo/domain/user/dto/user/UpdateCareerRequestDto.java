@@ -1,4 +1,4 @@
-package com.dearme.demo.domain.user.dto;
+package com.dearme.demo.domain.user.dto.user;
 
 import lombok.Data;
 

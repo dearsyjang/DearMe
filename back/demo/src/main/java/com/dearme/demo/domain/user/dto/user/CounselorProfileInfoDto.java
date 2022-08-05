@@ -1,4 +1,4 @@
-package com.dearme.demo.domain.user.dto;
+package com.dearme.demo.domain.user.dto.user;
 
 import com.dearme.demo.domain.user.entity.Career;
 import com.dearme.demo.domain.user.entity.Category;
@@ -13,7 +13,7 @@ import java.util.List;
 @Data
 @Builder
 public class CounselorProfileInfoDto {
-    private Long value;
+    private double value;
     private Long price;
     private String introduce;
 
@@ -22,10 +22,12 @@ public class CounselorProfileInfoDto {
     List<CertificateInfoDto> certificates;
 
     public static CounselorProfileInfoDto of(CounselorProfile entity){
+        double value=0f;
+        if(entity.getReviewcnt()>=1f) value=Math.round((entity.getReviewvalue()/ entity.getReviewcnt())*100)/100.0;
         return CounselorProfileInfoDto.builder()
                 .introduce(entity.getIntroduce())
                 .price(entity.getPrice())
-                .value(entity.getValue())
+                .value(value)
                 .careers(toCareersInfoDto(entity.getCareers()))
                 .certificates(toCertificateInfoDto(entity.getCertificates()))
                 .categories(toCategoryInfoDto(entity.getCategories()))
