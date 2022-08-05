@@ -34,7 +34,6 @@ public class Comment extends Base {
     @Column(nullable = false)
     private String contents;
 
-
     public void setBoard(Board board){
         board.getComments().add(this);
         this.board=board;
@@ -49,8 +48,8 @@ public class Comment extends Base {
         this.contents = contents;
     }
 
-    public void update(String contents, Date date){
-        this.contents=contents;
+    public void update(Date date, String contents){
         this.date=date;
+        this.contents=contents;
     }
 }

@@ -7,9 +7,15 @@ import com.dearme.demo.domain.board.dto.comment.CommentUpdateResponseDto;
 import com.dearme.demo.domain.board.entity.Board;
 import com.dearme.demo.domain.board.entity.Comment;
 import com.dearme.demo.domain.board.exception.board.NoExistBoardException;
+import com.dearme.demo.domain.board.exception.comment.NoCommentDeletePermissionException;
+import com.dearme.demo.domain.board.exception.comment.NoCommentSavePermissionException;
+import com.dearme.demo.domain.board.exception.comment.NoCommentUpdatePermissionException;
 import com.dearme.demo.domain.board.exception.comment.NoExistCommentException;
 import com.dearme.demo.domain.board.repository.BoardRepository;
 import com.dearme.demo.domain.board.repository.CommentRepository;
+import com.dearme.demo.domain.user.entity.Type;
+import com.dearme.demo.domain.user.entity.User;
+import com.dearme.demo.domain.user.exception.NoExistUserException;
 import com.dearme.demo.domain.user.repository.UserRepository;
 import com.dearme.demo.global.util.jwt.JwtProvider;
 import lombok.RequiredArgsConstructor;
@@ -33,19 +39,17 @@ public class CommentServiceImpl implements CommentService{
         Board board = boardRepository.findBoardByBoardid(boardid).orElseThrow(()->{
             throw new NoExistBoardException();
         });
-        System.out.println(board);
-        System.out.println(comment);
-//        User user = userRepository.findUserById(id).orElseThrow(() -> {
-//            throw new NoExistUserException();
-//        });
-//        if(user.getType().equals("COUNSELOR")){
+        User user = userRepository.findUserById(id).orElseThrow(() -> {
+            throw new NoExistUserException();
+        });
+        if(user.getType().equals(Type.COUNSELOR)){
         comment.setBoard(board);
-//           comment.setUser(user);
+           comment.setUser(user);
             commentRepository.save(comment);
             return new CommentSaveResponseDto(comment.getCommentid());
-//        }else{
-//            throw new NoCommentSavePermissionException();
-//        }
+        }else{
+            throw new NoCommentSavePermissionException();
+        }
 
     }
 
@@ -54,15 +58,15 @@ public class CommentServiceImpl implements CommentService{
         Comment comment = commentRepository.findCommentByCommentid(commentid).orElseThrow(()->{
             throw new NoExistCommentException();
         });
-//        User user = userRepository.findUserById(id).orElseThrow(() -> {
-//            throw new NoExistUserException();
-//        });
-//        if(user.getUserId().equals(comment.getUser().getUserId())){
-            comment.update(dto.getContents(), dto.getDate());
+        User user = userRepository.findUserById(id).orElseThrow(() -> {
+            throw new NoExistUserException();
+        });
+        if(user.getUserId().equals(comment.getUser().getUserId())){
+            comment.update(dto.getDate(), dto.getContents());
             return new CommentUpdateResponseDto(comment.getCommentid());
-//        }else{
-//            throw new NoCommentUpdatePermissionException();
-//        }
+        }else{
+            throw new NoCommentUpdatePermissionException();
+        }
     }
 
     @Transactional
@@ -70,14 +74,14 @@ public class CommentServiceImpl implements CommentService{
         Comment comment = commentRepository.findCommentByCommentid(commentid).orElseThrow(()->{
             throw new NoExistCommentException();
         });
-//        User user = userRepository.findUserById(id).orElseThrow(() -> {
-//            throw new NoExistUserException();
-//        });
-//        if(user.getUserId().equals(comment.getUser().getUserId())){
+        User user = userRepository.findUserById(id).orElseThrow(() -> {
+            throw new NoExistUserException();
+        });
+        if(user.getUserId().equals(comment.getUser().getUserId())){
             commentRepository.delete(comment);
-//        }else{
-//            throw new NoCommentDeletePermissionException();
-//        }
+        }else{
+            throw new NoCommentDeletePermissionException();
+        }
     }
 
 }

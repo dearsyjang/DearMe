@@ -22,9 +22,6 @@ public class Board extends Base {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long boardid;
-
-    @Column(nullable = false)
-    private String nickname;
     @ManyToOne
     @JsonManagedReference // 순환참조 방지
     @JoinColumn(name="id")
@@ -50,12 +47,8 @@ public class Board extends Base {
         user.getBoards().add(this);
         this.user=user;
     }
-    public void setNickname(User user){
-        this.nickname=user.getNickName();
-    }
     @Builder
-    public Board(String nickname, String title, String contents, int hitcnt, Date date){
-        this.nickname=nickname;
+    public Board(String title, String contents, int hitcnt, Date date){
         this.title=title;
         this.contents=contents;
         this.hitcnt=hitcnt;
