@@ -3,11 +3,11 @@
     <top-bar></top-bar>
     <bottom-bar></bottom-bar>
   </div>
-  <!-- <nav>
+  <nav>
     <router-link to="/member/login">login</router-link> |
     <router-link to="/member/signupuser">signup(user)</router-link> |
     <router-link to="/member/signupcounselor">signup(counselor)</router-link> |
-  </nav> -->
+  </nav>
   <router-view/>
 </template>
 

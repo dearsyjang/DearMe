@@ -21,25 +21,27 @@
         </router-link>
     </div>
 
-    <!-- <div id="article-view-bottom">
-        <comment-list></comment-list>
+    <div id="article-view-bottom">
+        <!-- <comment-list></comment-list> -->
         <br>
         <comment-create-form></comment-create-form>
-    </div> -->
+    </div>
     
   </div>
 
 </template>
 
 <script>
-// import CommentCreateForm from './components/CommentCreateForm.vue'
+import CommentCreateForm from './components/CommentCreateForm.vue'
 // import CommentList from './components/CommentList.vue'
-// export default {
-//   components: { 
-//     CommentList, 
-//     CommentCreateForm 
-//     },
-// }
+
+export default {
+  components: { 
+    // CommentList, 
+    CommentCreateForm 
+    },
+}
+
 </script>
 
 <style>

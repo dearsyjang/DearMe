@@ -11,7 +11,7 @@
             <br>
             <br>
             <h4 id="article-form-content-text">내용</h4>
-            <textarea id="article-form-content" rows="6" max-rows="'6" v-model="contents" placeholder="내용을 입력해주세요."></textarea>
+            <textarea id="article-form-content" rows="10" max-rows="10" v-model="contents" placeholder="내용을 입력해주세요."></textarea>
             <br>
             <div>
                 <button type="button" class="btn" id="article-form-submit-button" v-on:click="fnSave">저장</button>
