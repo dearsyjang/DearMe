@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 
 @RestController
 @RequestMapping("/users")
@@ -82,8 +83,17 @@ public class UserController {
         String id = (String) request.getAttribute("id");
         userService.delete(id);
     }
-    @PutMapping("/points")
-    public ResponseEntity<CommonResponse> pointsUpdate(String id, Long price){
-        return new ResponseEntity<>(CommonResponse.getSuccessResponse(userService.pointsUpdate(id, price)), HttpStatus.OK);
+
+    @PostMapping("/points")
+    public void pointsUpdate(HttpServletRequest request) throws UnsupportedEncodingException {
+        String id = request.getParameter("id");
+        String price = request.getParameter("price");
+        userService.pointsUpdate(id, price);
+    }
+
+    @GetMapping("/reviews")
+    public ResponseEntity<CommonResponse> getReviews(HttpServletRequest request){
+        String id = (String) request.getAttribute("id");
+        return new ResponseEntity<>(CommonResponse.getSuccessResponse(userService.getReviews(id)), HttpStatus.OK);
     }
 }
