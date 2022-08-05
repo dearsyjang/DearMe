@@ -2,15 +2,15 @@
 <div>
   <div id="bottombar" class="container">
     <div>
-      <router-link to="/home" class="img mx-3"><img id="emotion" src="../../assets/images/emotion.png" alt="emotion"></router-link>
+      <router-link to="/calendar" class="img mx-3"><img id="emotion" src="../../assets/images/emotion.png" alt="emotion"></router-link>
       <p class="text">감정달력</p>
     </div>
     <div>
-      <router-link to="login" class="img mx-3"><img id="calendar" src="../../assets/images/calendar.png" alt="calendar"></router-link>
+      <router-link to="/mypage/counselor" class="img mx-3"><img id="calendar" src="../../assets/images/calendar.png" alt="calendar"></router-link>
       <p class="text">상담일정</p>
     </div>
     <div>
-      <router-link to="/mypage" class="img mx-3"><img id="home" src="../../assets/images/home.png" alt="home"></router-link>
+      <router-link to="/mypage/user" class="img mx-3"><img id="home" src="../../assets/images/home.png" alt="home"></router-link>
       <p class="text">마이페이지</p>
     </div>
     <div>
