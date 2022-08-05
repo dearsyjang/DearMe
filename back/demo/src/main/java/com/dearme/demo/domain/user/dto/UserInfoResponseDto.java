@@ -18,6 +18,7 @@ public class UserInfoResponseDto {
     private Gender gender;
     private Type type;
     private String pictureUrl;
+    private Long points;
     private CounselorProfileInfoDto counselorProfileInfoDto;
 
     public static UserInfoResponseDto ofUser(User user){
@@ -29,6 +30,7 @@ public class UserInfoResponseDto {
                 .gender(user.getGender())
                 .type(user.getType())
                 .pictureUrl(user.getPicture().getRealFileName())
+                .points(user.getPoints())
                 .build();
     }
 
@@ -41,6 +43,7 @@ public class UserInfoResponseDto {
                 .gender(counselor.getGender())
                 .type(counselor.getType())
                 .pictureUrl(counselor.getPicture().getRealFileName())
+                .points(counselor.getPoints())
                 .counselorProfileInfoDto(CounselorProfileInfoDto.of(counselor.getCounselorProfile()))
                 .build();
     }
