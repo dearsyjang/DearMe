@@ -1,6 +1,9 @@
 import CounselorListView from '@/views/counselor/CounselorListView.vue'
 import CounselorDetailView from '@/views/counselor/CounselorDetailView.vue'
 import FileFormComp from '@/views/counselor/components/FileFormComp'
+
+
+
 import CounselingRequestView from '@/views/counseling-request/CounselingRequestView.vue'
 export default [
     {
@@ -18,10 +21,7 @@ export default [
         name: 'attachfile',
         component: FileFormComp
       },
-      {
-        path: '/counselors/request',
-        name: 'request',
-        component: CounselingRequestView
-      }
+      
+
     
   ]
