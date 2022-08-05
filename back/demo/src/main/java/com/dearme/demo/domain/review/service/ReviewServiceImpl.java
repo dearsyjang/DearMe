@@ -31,6 +31,10 @@ public class ReviewServiceImpl implements ReviewService {
             throw new NoExistUserException();
         });
         review.setUser(user);
+        User counselor = userRepository.findUserById(dto.getCounselorid()).orElseThrow(() -> {
+            throw new NoExistUserException();
+        });
+        counselor.getCounselorProfile().updateReviewValue(review.getValue(), 1);
         reviewRepository.save(review);
         return new ReviewSaveResponseDto(review.getReviewid());
     }
@@ -44,6 +48,11 @@ public class ReviewServiceImpl implements ReviewService {
             throw new NoExistUserException();
         });
         if(user.getUserId().equals(review.getUser().getUserId())){
+
+            User counselor = userRepository.findUserById(review.getCounselorid()).orElseThrow(() -> {
+                throw new NoExistUserException();
+            });
+            counselor.getCounselorProfile().updateReviewValue(-1 * review.getValue(), -1);
             reviewRepository.delete(review);
         }else{
             throw new NoReviewDeletePermissionException();
