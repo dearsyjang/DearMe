@@ -43,6 +43,7 @@ export default {
         data: credentials
       })
         .then(res => {
+          console.log('성공')
           const token = res.data.key
           dispatch('saveToken', token)
           dispatch('fetchCurrentUser')
@@ -54,19 +55,20 @@ export default {
           commit('SET_AUTH_ERROR', err.response.data)
         })
     },
-    signup({ commit, dispatch }, credentials) {
+    signup({ commit, dispatch }, formData) {
       axios({
         url: drf.member.signup(),
         method: 'post',
-        data: credentials
+        data: formData
       })
-        .then(res => {
+      .then(res => {
+          console.log('axios 성공')
           const token = res.data.key
           dispatch('saveToken', token)
+          alert('save token성공')
           dispatch('fetchCurrentUser')
-          alert('성공')
-          router.push({ name: 'home' })
-
+          alert('fetch user 성공')
+          router.push({ name: 'login' })
         })
         .catch(err => {
           console.error(err.response.data)
@@ -107,31 +109,5 @@ export default {
           })
       }
     },
-    fetchProfile({ commit, getters }, { username }) {
-      axios({
-        url: drf.member.profile(username),
-        method: 'get',
-        headers: getters.authHeader,
-      })
-        .then(res => {
-          commit('SET_PROFILE', res.data)
-        })
-        .catch(err => {
-          console.error(err.response)
-        })
-    },
-    fetchIsAdmin({ commit, getters }, { username }) {
-      axios({
-        url: drf.accounts.isAdmin(username),
-        method: 'get',
-        headers: getters.authHeader,
-      })
-        .then(res => {
-          commit('SET_IS_ADMIN', res.data.is_supersuser)
-        })
-        .catch(err => {
-          console.error(err.response)
-        })
-    }
   },
 }
