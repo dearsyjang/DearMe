@@ -1,7 +1,7 @@
 package com.dearme.demo.domain.user.service;
 
 import com.dearme.demo.domain.review.entity.Review;
-import com.dearme.demo.domain.user.dto.*;
+import com.dearme.demo.domain.user.dto.user.*;
 import com.dearme.demo.domain.user.entity.*;
 import com.dearme.demo.domain.user.exception.CounselorNotExistPictureException;
 import com.dearme.demo.domain.user.exception.DuplicatedIdException;
@@ -171,12 +171,14 @@ public class UserServiceImpl implements UserService{
 
     @Override
     @Transactional
-    public void pointsUpdate(String id, String price) {
+    public PointsUpdateResponseDto pointsUpdate(String id, String price) {
         User user = userRepository.findUserById(id).orElseThrow(() -> {
             throw new NoExistUserException();
         });
         Long points=Long.parseLong(price);
+
         user.updatePoints(points);
+        return new PointsUpdateResponseDto(user.getPoints());
     }
 
     @Override

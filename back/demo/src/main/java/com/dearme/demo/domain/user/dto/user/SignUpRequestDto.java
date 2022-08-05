@@ -1,4 +1,4 @@
-package com.dearme.demo.domain.user.dto;
+package com.dearme.demo.domain.user.dto.user;
 
 import com.dearme.demo.domain.user.entity.*;
 import com.dearme.demo.domain.user.exception.CounselorProfileValidationException;
@@ -47,6 +47,7 @@ public class SignUpRequestDto {
                 .introduce(counselorProfile.getIntroduce())
                 .price(counselorProfile.getPrice())
                 .value(0L)
+                .reviewcnt(0L)
                 .build();
     }
 }

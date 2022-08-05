@@ -1,6 +1,6 @@
 package com.dearme.demo.domain.user.controller;
 
-import com.dearme.demo.domain.user.dto.*;
+import com.dearme.demo.domain.user.dto.user.*;
 import com.dearme.demo.domain.user.service.UserService;
 import com.dearme.demo.global.common.CommonResponse;
 import lombok.RequiredArgsConstructor;
@@ -85,15 +85,15 @@ public class UserController {
     }
 
     @PutMapping("/points")
-    public void pointsUpdate(HttpServletRequest request, @RequestBody @Validated PointsUpdateRequestDto dto) throws UnsupportedEncodingException {
+    public ResponseEntity<CommonResponse> pointsUpdate(HttpServletRequest request, @RequestBody @Validated PointsUpdateRequestDto dto) throws UnsupportedEncodingException {
         String id = (String) request.getAttribute("id");
-        System.out.println(id + ", " + dto.getPrice());
-        userService.pointsUpdate(id, dto.getPrice());
-    }
+        return new ResponseEntity<>(CommonResponse.getSuccessResponse(userService.pointsUpdate(id, dto.getPrice())), HttpStatus.OK);
 
     @GetMapping("/reviews")
     public ResponseEntity<CommonResponse> getReviews(HttpServletRequest request){
         String id = (String) request.getAttribute("id");
         return new ResponseEntity<>(CommonResponse.getSuccessResponse(userService.getReviews(id)), HttpStatus.OK);
     }
+
+
 }

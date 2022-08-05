@@ -1,15 +1,11 @@
 package com.dearme.demo.global.converter;
 
-import com.dearme.demo.domain.user.dto.CounselorProfileRequestDto;
-import com.dearme.demo.domain.user.dto.SignUpCareerRequestDto;
-import com.dearme.demo.domain.user.dto.SignUpCategoryRequestDto;
-import com.dearme.demo.domain.user.dto.SignUpCertificateDto;
-import com.dearme.demo.domain.user.exception.CounselorProfileValidationException;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonMappingException;
+import com.dearme.demo.domain.user.dto.user.CounselorProfileRequestDto;
+import com.dearme.demo.domain.user.dto.user.SignUpCareerRequestDto;
+import com.dearme.demo.domain.user.dto.user.SignUpCategoryRequestDto;
+import com.dearme.demo.domain.user.dto.user.SignUpCertificateDto;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.springframework.core.convert.ConversionFailedException;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 
