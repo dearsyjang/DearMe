@@ -1,5 +1,6 @@
 package com.dearme.demo.global.exceptionhandler;
 
+import com.dearme.demo.domain.textdiary.exception.NoPermissionTextDiaryException;
 import com.dearme.demo.domain.user.exception.*;
 import com.dearme.demo.global.common.CommonResponse;
 import com.dearme.demo.global.util.jwt.InvalidAccessTokenException;
@@ -57,5 +58,10 @@ public class ExceptionHandlerUtil {
     @ExceptionHandler(DuplicatedNickNameException.class)
     ResponseEntity<CommonResponse> handleDuplicatedNickNameException(DuplicatedNickNameException e){
         return new ResponseEntity<>(CommonResponse.getErrorResponse(e.getMessage()), HttpStatus.CONFLICT);
+    }
+
+    @ExceptionHandler(NoPermissionTextDiaryException.class)
+    ResponseEntity<CommonResponse> handleNoPermissionTextDiaryException(NoPermissionTextDiaryException e){
+        return new ResponseEntity<>(CommonResponse.getErrorResponse(e.getMessage()), HttpStatus.UNAUTHORIZED);
     }
 }
