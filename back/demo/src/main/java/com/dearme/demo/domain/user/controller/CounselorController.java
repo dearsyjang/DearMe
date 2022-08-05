@@ -17,7 +17,6 @@ import javax.servlet.http.HttpServletRequest;
 @RequiredArgsConstructor
 public class CounselorController {
     private final CounselorService counselorService;
-
     @GetMapping
     public ResponseEntity<CommonResponse> getCounselors(HttpServletRequest request){
         String id = (String) request.getAttribute("id");
