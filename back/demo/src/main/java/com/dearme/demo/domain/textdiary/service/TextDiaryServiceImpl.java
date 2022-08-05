@@ -12,8 +12,6 @@ import com.dearme.demo.domain.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import javax.naming.NoPermissionException;
-
 @Service
 @RequiredArgsConstructor
 public class TextDiaryServiceImpl implements TextDiaryService{
