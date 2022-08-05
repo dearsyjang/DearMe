@@ -15,6 +15,7 @@
 <script>
 import TopBar from '@/views/home/TopBarView.vue'
 import BottomBar from '@/views/home/BottomBarView.vue'
+import "bulma/css/bulma.css"
 
   export default {
     name: 'App',

@@ -2,7 +2,9 @@
   <div>
     <h2>상담사 프로필 페이지</h2>
     
-
+    <router-link to="/counselors/request">
+      <button>상담 신청</button>
+    </router-link>
     <div class="counselor-profile">
       <div class="card">
         <div class="card mb-3" style="max-width: 540px;">
