@@ -1,9 +1,9 @@
 <template>
 <div class="container BoardList">
   <div class="form-group row">
-    <p class="col-sm-4">힘들어요</p>
-    <p class="col-sm-4">2022.08.05</p>
-    <button class="col-sm-4 btn btn-primary">게시글</button>
+    <p class="col-sm-4">나는야 고민왕</p>
+    <p class="col-sm-4">10:00 ~ 11:00</p>
+    <button class="col-sm-4 btn btn-primary">상담방</button>
   </div>
 </div>
 </template>

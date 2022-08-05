@@ -1,15 +1,11 @@
 <template>
-  <div class="MygroupList d-flex">
-    <div class="d-flex align-items-center">
-      <p class="mx-4">상담사 1</p>
-    </div>
-    <div class="d-flex align-items-center">
-      <p>그룹명 1</p>
-    </div>
-    <div class="d-flex align-items-center">
-      <button class="mx-5 btn btn-primary btn-sm">그룹 페이지</button>
-    </div>
+<div class="container MygroupList">
+  <div class="form-group row">
+    <p class="col-sm-4">정윤해</p>
+    <p class="col-sm-4">가정 상담방</p>
+    <button class="col-sm-4 btn btn-primary">그룹 페이지</button>
   </div>
+</div>
 </template>
 <script>
 export default {
@@ -27,10 +23,11 @@ export default {
 }
 </script>
 <style scoped>
-  #MygroupList {
+  .MygroupList {
     background-color: #F0F5F9;
   }
-  div {
-    background-color: #F0F5F9;
+  p, button {
+    width: 160px;
+    display: table-cell;
   }
 </style>
