@@ -1,15 +1,11 @@
 <template>
-  <div class="Favorite">
-    <div>
-      <p class="mx-4">상담사 1</p>
-    </div>
-    <div>
-      <p> 상담 받은 횟수 : 1회</p>
-    </div>
-    <div>
-      <button class="mx-5 btn btn-primary btn-sm">상세 페이지</button>
-    </div>
+<div class="container Favorite">
+  <div class="form-group row">
+    <p class="col-sm-4" >정윤해</p>
+    <p class="col-sm-4" >상담 횟수 : 1회</p>
+    <button class="col-sm-4 btn btn-primary">상담사 프로필</button>
   </div>
+</div>
 </template>
 <script>
 export default {
@@ -28,8 +24,10 @@ export default {
 </script>
 <style scoped>
   .Favorite {
-    width: 98%;
     background-color: #F0F5F9;
-    border-radius: 20px 40px 60px 80px / 80px 60px 40px 20px;
+  }
+  p, button {
+    width: 160px;
+    display: table-cell;
   }
 </style>
