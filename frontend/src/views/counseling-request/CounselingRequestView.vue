@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="requestform">
     <div class="card">
       <div class="card-body">
         <h1>상담 신청하기</h1>
@@ -19,19 +19,22 @@
     </div>
 
   
-  <div>
-    <!-- 달력자리~ -->
+    <div>
+      <calendar-comp></calendar-comp>
 
-    <!-- 시간자리~ -->
-  </div>
-  <button @click="test">신청</button>
+      <!-- 시간자리~ -->
+    </div>
+    <div>
+      <button @click="test">신청</button>
+    </div>
   </div>
 </template>
 
 <script>
+import calendarComp from '@/views/counseling-request/components/calendarComp.vue'
   export default {
   name : 'CounselingRequestView',
-  components: {},
+  components: {calendarComp},
   data() {
     return {
       message: '이거는 넘겨줘야해',
@@ -50,5 +53,8 @@
 }
 </script>
 
-<style>
+<style scoped>
+.requestform {
+  width : auto
+}
 </style>
