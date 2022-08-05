@@ -4,7 +4,7 @@ import FileFormComp from '@/views/counselor/components/FileFormComp'
 
 
 
-import CounselingRequestView from '@/views/counseling-request/CounselingRequestView.vue'
+
 export default [
     {
         path: '/counselor_list',
@@ -21,7 +21,7 @@ export default [
         name: 'attachfile',
         component: FileFormComp
       },
-      
 
-    
+
+
   ]
