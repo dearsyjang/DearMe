@@ -9,6 +9,7 @@ import group from './group.js'
 import calendar from './calendar.js'
 import textDiary from './textDiary.js'
 
+import counselingRequest from './counselingRequest.js'
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
@@ -20,6 +21,9 @@ const router = createRouter({
     ...group,
     ...calendar,
     ...textDiary,
+
+    ...counselingRequest,
+
   ]
 
 // vue 기본 양식
