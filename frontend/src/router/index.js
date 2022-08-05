@@ -4,9 +4,9 @@ import { createRouter, createWebHistory } from 'vue-router'
 import member from './member.js'
 import mypage from './mypage.js'
 import counselor from './counselor.js'
+import board from './board.js'
 import group from './group.js'
 import calendar from './calendar.js'
-
 
 
 const router = createRouter({
@@ -15,6 +15,7 @@ const router = createRouter({
     ...member,
     ...mypage,
     ...counselor,
+    ...board,
     ...group,
     ...calendar,
   ]
