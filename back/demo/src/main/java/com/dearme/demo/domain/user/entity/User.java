@@ -3,7 +3,7 @@ package com.dearme.demo.domain.user.entity;
 import com.dearme.demo.domain.base.entitiy.Base;
 import com.dearme.demo.domain.board.entity.Board;
 import com.dearme.demo.domain.board.entity.Comment;
-import com.dearme.demo.domain.review.entity.Favorite;
+import com.dearme.demo.domain.favorite.entity.Favorite;
 import com.dearme.demo.domain.review.entity.Review;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.*;
