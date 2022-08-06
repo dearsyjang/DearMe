@@ -5,6 +5,8 @@ import com.dearme.demo.domain.textdiary.dto.PostTextDiaryResponseDto;
 import com.dearme.demo.domain.textdiary.dto.TextDiaryDetailsResponseDto;
 import com.dearme.demo.domain.textdiary.dto.TextDiaryListResponseDto;
 
+import com.dearme.demo.domain.textdiary.dto.TextDiaryListResponseDto;
+
 public interface TextDiaryService {
     PostTextDiaryResponseDto postTextDiary(String id, PostTextDiaryRequestDto dto);
 
@@ -14,3 +16,4 @@ public interface TextDiaryService {
 
     void delete(String id, Long textDiaryId);
 }
+
