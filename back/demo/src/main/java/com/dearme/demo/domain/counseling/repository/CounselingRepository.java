@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface CounselingRepository extends JpaRepository<Counseling, Long> {
     List<Counseling> findAllByCounselor_Id(String counselorId);
+    List<Counseling> findAllByUser_Id(String userId);
 }
