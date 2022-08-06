@@ -78,7 +78,6 @@ public class UserController {
         userService.checkNickname(nickname);
         return new ResponseEntity<>(HttpStatus.OK);
     }
-
     @DeleteMapping
     public void delete(HttpServletRequest request){
         String id = (String) request.getAttribute("id");
