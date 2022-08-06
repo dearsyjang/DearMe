@@ -33,4 +33,10 @@ public class TextDiaryController {
         String id = (String) request.getAttribute("id");
         return new ResponseEntity<>(CommonResponse.getSuccessResponse(textDiaryService.getList(id, year, month)), HttpStatus.OK);
     }
+
+    @DeleteMapping("/{textDiaryId}")
+    public void delete(HttpServletRequest request, @PathVariable Long textDiaryId){
+        String id = (String) request.getAttribute("id");
+        textDiaryService.delete(id, textDiaryId);
+    }
 }
