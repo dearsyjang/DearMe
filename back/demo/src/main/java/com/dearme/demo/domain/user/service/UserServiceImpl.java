@@ -1,8 +1,12 @@
 package com.dearme.demo.domain.user.service;
 
-import com.dearme.demo.domain.user.dto.*;
+import com.dearme.demo.domain.review.entity.Review;
+import com.dearme.demo.domain.user.dto.user.*;
 import com.dearme.demo.domain.user.entity.*;
-import com.dearme.demo.domain.user.exception.*;
+import com.dearme.demo.domain.user.exception.CounselorNotExistPictureException;
+import com.dearme.demo.domain.user.exception.DuplicatedIdException;
+import com.dearme.demo.domain.user.exception.DuplicatedNickNameException;
+import com.dearme.demo.domain.user.exception.NoExistUserException;
 import com.dearme.demo.domain.user.repository.*;
 import com.dearme.demo.global.util.jwt.JwtProvider;
 import lombok.RequiredArgsConstructor;
@@ -10,7 +14,9 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -75,6 +81,8 @@ public class UserServiceImpl implements UserService{
                 .accessToken(accessToken)
                 .refreshToken(refreshToken)
                 .build();
+
+
     }
 
 
@@ -101,11 +109,8 @@ public class UserServiceImpl implements UserService{
             targetCounselorProfile.updateCounselorProfile(dto.getCounselorProfile().getPrice(), dto.getCounselorProfile().getIntroduce());
             user.updateCounselor(dto.getPw(), dto.getNickName(), targetCounselorProfile);
         }
-        String accessToken = jwtProvider.getAccessToken(user.getId());
-        String refreshToken = jwtProvider.getRefreshToken();
-        user.updateRefreshToken(refreshToken);
         userRepository.save(user);
-        return new UpdateUserResponseDto(accessToken, refreshToken);
+        return new UpdateUserResponseDto(jwtProvider.getAccessToken(user.getId()), jwtProvider.getRefreshToken());
     }
 
     @Override
@@ -165,12 +170,15 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public Long pointsUpdate(String id, Long price) {
+    @Transactional
+    public PointsUpdateResponseDto pointsUpdate(String id, String price) {
         User user = userRepository.findUserById(id).orElseThrow(() -> {
             throw new NoExistUserException();
         });
-        user.updatePoints(user.getPoints()+price);
-        return user.getPoints();
+        Long points=Long.parseLong(price);
+
+        user.updatePoints(points);
+        return new PointsUpdateResponseDto(user.getPoints());
     }
 
     @Override
@@ -182,5 +190,24 @@ public class UserServiceImpl implements UserService{
             return UserInfoResponseDto.ofCounselor(user);
         }
         return UserInfoResponseDto.ofUser(user);
+    }
+
+    @Override
+    public List<ReviewViewResponseDto> getReviews(String id) {
+        User user = userRepository.findUserById(id).orElseThrow(() -> {
+            throw new NoExistUserException();
+        });
+
+        List<Review> tempList=user.getReviews();
+        List<ReviewViewResponseDto> reviewList = new ArrayList<>();
+        for(Review r : tempList){
+            User counselor = userRepository.findUserById(r.getCounselorid()).orElseThrow(() -> {
+                throw new NoExistUserException();
+            });
+            reviewList.add(new ReviewViewResponseDto(counselor.getNickName(),
+                    r.getValue(),
+                    r.getContents()));
+        }
+        return reviewList;
     }
 }
