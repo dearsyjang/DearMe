@@ -12,6 +12,7 @@ import lombok.Data;
 public class CounselingInfoResponseDto {
     private Long id;
     private Long userId;
+    private Long counselorId;
     private Integer year;
     private Integer month;
     private Integer day;
@@ -23,6 +24,7 @@ public class CounselingInfoResponseDto {
             return CounselingInfoResponseDto.builder()
                     .id(entity.getId())
                     .userId(entity.getUser().getUserId())
+                    .counselorId(entity.getCounselor().getUserId())
                     .year(entity.getYear())
                     .month(entity.getMonth())
                     .day(entity.getDay())
@@ -32,6 +34,7 @@ public class CounselingInfoResponseDto {
         return CounselingInfoResponseDto.builder()
                 .id(entity.getId())
                 .userId(entity.getUser().getUserId())
+                .counselorId(entity.getCounselor().getUserId())
                 .year(entity.getYear())
                 .month(entity.getMonth())
                 .day(entity.getDay())

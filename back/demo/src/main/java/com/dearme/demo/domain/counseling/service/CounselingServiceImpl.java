@@ -5,6 +5,10 @@ import com.dearme.demo.domain.counseling.dto.CounselingInfoResponseDto;
 import com.dearme.demo.domain.counseling.entity.Counseling;
 import com.dearme.demo.domain.counseling.repository.CounselingRepository;
 import com.dearme.demo.domain.counselingdocument.entity.CounselingDocument;
+import com.dearme.demo.domain.user.entity.Type;
+import com.dearme.demo.domain.user.entity.User;
+import com.dearme.demo.domain.user.exception.NoExistUserException;
+import com.dearme.demo.domain.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +20,8 @@ import java.util.List;
 public class CounselingServiceImpl implements CounselingService{
     private final CounselingRepository counselingRepository;
 
+    private final UserRepository userRepository;
+
     @Override
     public void createCounseling(CounselingDocument counselingDocument) {
         Counseling counseling = counselingDocument.toCounselingEntity();
@@ -24,7 +30,14 @@ public class CounselingServiceImpl implements CounselingService{
     }
 
     public CounselingInfoListResponseDto getCounselings(String id) {
-        List<Counseling> counselings = counselingRepository.findAllByCounselor_Id(id);
+        User user = userRepository.findUserById(id).orElseThrow(() -> {
+            throw new NoExistUserException();
+        });
+        List<Counseling> counselings = null;
+        if(user.getType().equals(Type.USER))
+            counselings = counselingRepository.findAllByUser_Id(id);
+        else
+            counselings = counselingRepository.findAllByCounselor_Id(id);
         List<CounselingInfoResponseDto> counselingInfoResponseDtos = new ArrayList<>();
         for(Counseling counseling : counselings){
             counselingInfoResponseDtos.add(CounselingInfoResponseDto.of(counseling));
