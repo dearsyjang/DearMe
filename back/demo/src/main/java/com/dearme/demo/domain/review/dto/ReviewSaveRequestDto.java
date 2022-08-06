@@ -10,7 +10,6 @@ public class ReviewSaveRequestDto {
     private String contents;
     public Review toReviewEntity(){
         return Review.builder()
-                .counselorid(this.counselorid)
                 .value(this.value)
                 .contents(this.contents)
                 .build();

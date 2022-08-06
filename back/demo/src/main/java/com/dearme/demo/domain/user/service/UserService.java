@@ -1,5 +1,7 @@
 package com.dearme.demo.domain.user.service;
 
+import com.dearme.demo.domain.user.dto.PointsUpdateResponseDto;
+import com.dearme.demo.domain.user.dto.ReviewViewResponseDto;
 import com.dearme.demo.domain.user.dto.user.*;
 
 import java.io.IOException;
