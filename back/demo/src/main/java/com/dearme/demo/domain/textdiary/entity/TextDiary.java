@@ -24,11 +24,6 @@ public class TextDiary extends Base {
     private String title;
 
     private String contents;
-    private Integer year;
-
-    private Integer month;
-
-    private Integer day;
 
     private Integer year;
 
