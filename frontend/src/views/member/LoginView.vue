@@ -3,16 +3,12 @@
     <div>
       <h1>LOGIN</h1>
     </div>
-    <div class="form-group mt-4">
-      <label class="form-label mt-4 mx-2" for="id">아이디</label>
-      <input clss="form-control" type="text" v-model="credentials.id" placeholder="아이디">
-    </div>
-    <div class="form-group">
-      <label class="form-label mt-4 mx-2" for="password">비밀번호</label>
-      <input clss="form-control" type="text" v-model="credentials.password" placeholder="비밀번호">
+    <div id="login-form" class="form-group">
+      <input id="id-input" class="form-control" type="text" v-model="credentials.id" placeholder="아이디">
+      <input id="pw-input" class="form-control" type="text" v-model="credentials.password" placeholder="비밀번호">
     </div>
     <div class="form-group mt-4">
-      <button class="btn btn-success btn-lg">Login</button>
+      <button id="login-button" class="btn btn-lg">Login</button>
     </div>
     <div class="mt-4">
       <router-link to="/member/findId">아이디 찾기</router-link> |
@@ -21,6 +17,7 @@
 
   </div>
 </template>
+
 <script>
 import { mapActions, mapGetters } from 'vuex'
 export default {
@@ -44,3 +41,21 @@ export default {
   unmounted() {},
 }
 </script>
+
+<style scoped>
+#id-input {
+  width: 100%;
+  height: auto;
+  margin-top: 30px;
+  margin-bottom: 20px;
+}
+#pw-input {
+  width: 100%;
+  height: auto;
+}
+#login-button {
+  width: 100%;
+  background-color: #E8E8E8;
+  color: #495464;
+}
+</style>

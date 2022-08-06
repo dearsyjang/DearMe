@@ -40,6 +40,7 @@ export default {
 
 <style>
 #topbar > .navbar {
+  top: 0;
   position: sticky;
   display:flex;
   flex-direction:row;
