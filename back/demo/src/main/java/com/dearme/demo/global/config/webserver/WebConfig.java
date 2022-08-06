@@ -5,6 +5,7 @@ import com.dearme.demo.global.util.jwt.AccessTokenInterceptor;
 import com.dearme.demo.global.util.jwt.RefreshTokenInterceptor;
 import io.openvidu.java.client.OpenVidu;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.format.FormatterRegistry;
@@ -23,8 +24,10 @@ public class WebConfig implements WebMvcConfigurer {
 
     private final RefreshTokenInterceptor refreshTokenInterceptor;
 
-    private final String OPENVIDU_URL = "https://i7d206.p.ssafy.io:4443/";
-    private final String SECRET = "dearme";
+    @Value("${openvidu.openvidu_url}")
+    private String OPENVIDU_URL;
+    @Value("${openvidu.password}")
+    private String SECRET;
 
     @Override
     public void addFormatters(FormatterRegistry registry) {
@@ -39,8 +42,6 @@ public class WebConfig implements WebMvcConfigurer {
 
     @Bean
     public OpenVidu getOpenVidu(){
-        System.out.println(OPENVIDU_URL);
-        System.out.println(SECRET);
-        return new OpenVidu(SECRET, OPENVIDU_URL);
+        return new OpenVidu(OPENVIDU_URL, SECRET);
     }
 }
