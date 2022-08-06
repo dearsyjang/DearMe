@@ -1,5 +1,7 @@
 package com.dearme.demo.domain.counselingdocument.entity;
 
+import com.dearme.demo.domain.counseling.entity.Counseling;
+import com.dearme.demo.domain.counseling.entity.Type;
 import com.dearme.demo.domain.user.entity.User;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -49,5 +51,16 @@ public class CounselingDocument {
         this.day = day;
         this.contents = contents;
         this.isOpen = isOpen;
+    }
+
+    public Counseling toCounselingEntity(){
+        return Counseling.builder()
+                .user(this.user)
+                .counselor(this.counselor)
+                .year(this.year)
+                .month(this.month)
+                .day(this.day)
+                .type(Type.UNACCEPTED)
+                .build();
     }
 }
