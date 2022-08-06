@@ -35,7 +35,6 @@ function payment(data){
         buyer_tel:"01087624001"
 
     }, function (rsp){
-        
         if(rsp.success){
             fetch('http://localhost:8080/users/points', {
                 method: 'PUT',

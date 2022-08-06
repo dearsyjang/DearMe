@@ -1,6 +1,7 @@
 package com.dearme.demo.domain.user.service;
 
 import com.dearme.demo.domain.review.entity.Review;
+import com.dearme.demo.domain.user.dto.*;
 import com.dearme.demo.domain.user.dto.user.*;
 import com.dearme.demo.domain.user.entity.*;
 import com.dearme.demo.domain.user.exception.CounselorNotExistPictureException;
@@ -81,8 +82,6 @@ public class UserServiceImpl implements UserService{
                 .accessToken(accessToken)
                 .refreshToken(refreshToken)
                 .build();
-
-
     }
 
 
@@ -109,6 +108,9 @@ public class UserServiceImpl implements UserService{
             targetCounselorProfile.updateCounselorProfile(dto.getCounselorProfile().getPrice(), dto.getCounselorProfile().getIntroduce());
             user.updateCounselor(dto.getPw(), dto.getNickName(), targetCounselorProfile);
         }
+        String accessToken = jwtProvider.getAccessToken(user.getId());
+        String refreshToken = jwtProvider.getRefreshToken();
+        user.updateRefreshToken(refreshToken);
         userRepository.save(user);
         return new UpdateUserResponseDto(jwtProvider.getAccessToken(user.getId()), jwtProvider.getRefreshToken());
     }
@@ -201,7 +203,7 @@ public class UserServiceImpl implements UserService{
         List<Review> tempList=user.getReviews();
         List<ReviewViewResponseDto> reviewList = new ArrayList<>();
         for(Review r : tempList){
-            User counselor = userRepository.findUserById(r.getCounselorid()).orElseThrow(() -> {
+            User counselor = userRepository.findUserById(r.getCounselor().getId()).orElseThrow(() -> {
                 throw new NoExistUserException();
             });
             reviewList.add(new ReviewViewResponseDto(counselor.getNickName(),

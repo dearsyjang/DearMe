@@ -1,5 +1,6 @@
 package com.dearme.demo.domain.user.controller;
 
+import com.dearme.demo.domain.user.dto.PointsUpdateRequestDto;
 import com.dearme.demo.domain.user.dto.user.*;
 import com.dearme.demo.domain.user.service.UserService;
 import com.dearme.demo.global.common.CommonResponse;
@@ -77,7 +78,6 @@ public class UserController {
         userService.checkNickname(nickname);
         return new ResponseEntity<>(HttpStatus.OK);
     }
-
     @DeleteMapping
     public void delete(HttpServletRequest request){
         String id = (String) request.getAttribute("id");

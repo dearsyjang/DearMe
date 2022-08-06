@@ -7,6 +7,8 @@ import com.dearme.demo.domain.textdiary.dto.TextDiaryListResponseDto;
 
 import com.dearme.demo.domain.textdiary.dto.TextDiaryListResponseDto;
 
+import com.dearme.demo.domain.textdiary.dto.TextDiaryListResponseDto;
+
 public interface TextDiaryService {
     PostTextDiaryResponseDto postTextDiary(String id, PostTextDiaryRequestDto dto);
 
