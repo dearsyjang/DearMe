@@ -1,5 +1,7 @@
 package com.dearme.demo.domain.counselingdocument.service;
 
+import com.dearme.demo.domain.counseling.entity.Counseling;
+import com.dearme.demo.domain.counseling.service.CounselingServiceImpl;
 import com.dearme.demo.domain.counselingdocument.dto.PostCounselingDocumentRequestDto;
 import com.dearme.demo.domain.counselingdocument.dto.PostCounselingDocumentResponseDto;
 import com.dearme.demo.domain.counselingdocument.entity.CounselingDocument;
@@ -10,6 +12,8 @@ import com.dearme.demo.domain.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
+
 @Service
 @RequiredArgsConstructor
 public class CounselingDocumentServiceImpl implements CounselingDocumentService{
@@ -18,7 +22,10 @@ public class CounselingDocumentServiceImpl implements CounselingDocumentService{
 
     private final CounselingDocumentRepository counselingDocumentRepository;
 
+    private final CounselingServiceImpl counselingService;
+
     @Override
+    @Transactional
     public PostCounselingDocumentResponseDto post(String id, PostCounselingDocumentRequestDto dto) {
         CounselingDocument counselingDocument = dto.toEntity();
         User user = userRepository.findUserById(id).orElseThrow(() -> {
@@ -29,6 +36,7 @@ public class CounselingDocumentServiceImpl implements CounselingDocumentService{
         });
         counselingDocument.setUser(user);
         counselingDocument.setCounselor(counselor);
+        counselingService.createCounseling(counselingDocument);
         return new PostCounselingDocumentResponseDto(counselingDocumentRepository.save(counselingDocument).getId());
     }
 }
