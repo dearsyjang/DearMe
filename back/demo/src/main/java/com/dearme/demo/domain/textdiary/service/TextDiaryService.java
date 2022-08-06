@@ -10,5 +10,5 @@ public interface TextDiaryService {
 
     TextDiaryDetailsResponseDto getDetails(String id, Long textDiaryId);
 
-    TextDiaryListResponseDto getList(String id, Integer month);
+    TextDiaryListResponseDto getList(String id, Integer year, Integer month);
 }
