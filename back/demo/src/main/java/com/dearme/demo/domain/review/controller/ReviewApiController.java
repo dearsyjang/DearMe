@@ -39,4 +39,5 @@ public class ReviewApiController {
     public ResponseEntity<CommonResponse> reviewCounselorView(@PathVariable("id") String id){
         return new ResponseEntity<>(CommonResponse.getSuccessResponse(reviewService.reviewCounselorView(id)), HttpStatus.OK);
     }
+
 }

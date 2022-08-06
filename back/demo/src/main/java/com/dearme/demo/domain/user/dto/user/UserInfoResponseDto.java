@@ -1,11 +1,14 @@
 package com.dearme.demo.domain.user.dto.user;
 
+import com.dearme.demo.domain.review.entity.Favorite;
 import com.dearme.demo.domain.user.entity.Gender;
 import com.dearme.demo.domain.user.entity.Type;
 import com.dearme.demo.domain.user.entity.User;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Builder;
 import lombok.Data;
+
+import java.util.List;
 
 @Data
 @JsonInclude(value = JsonInclude.Include.NON_NULL)

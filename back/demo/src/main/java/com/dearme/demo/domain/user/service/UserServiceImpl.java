@@ -201,7 +201,7 @@ public class UserServiceImpl implements UserService{
         List<Review> tempList=user.getReviews();
         List<ReviewViewResponseDto> reviewList = new ArrayList<>();
         for(Review r : tempList){
-            User counselor = userRepository.findUserById(r.getCounselorid()).orElseThrow(() -> {
+            User counselor = userRepository.findUserById(r.getCounselor().getId()).orElseThrow(() -> {
                 throw new NoExistUserException();
             });
             reviewList.add(new ReviewViewResponseDto(counselor.getNickName(),
