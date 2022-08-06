@@ -1,6 +1,13 @@
 package com.dearme.demo.global.exceptionhandler;
 
-import com.dearme.demo.domain.textdiary.exception.NoPermissionTextDiaryException;
+import com.dearme.demo.domain.board.exception.board.NoBoardDeletePermissionException;
+import com.dearme.demo.domain.board.exception.board.NoBoardSavePermissionException;
+import com.dearme.demo.domain.board.exception.board.NoBoardUpdatePermissionException;
+import com.dearme.demo.domain.board.exception.board.NoExistBoardException;
+import com.dearme.demo.domain.board.exception.comment.NoCommentDeletePermissionException;
+import com.dearme.demo.domain.board.exception.comment.NoCommentSavePermissionException;
+import com.dearme.demo.domain.board.exception.comment.NoCommentUpdatePermissionException;
+import com.dearme.demo.domain.board.exception.comment.NoExistCommentException;
 import com.dearme.demo.domain.user.exception.*;
 import com.dearme.demo.global.common.CommonResponse;
 import com.dearme.demo.global.util.jwt.InvalidAccessTokenException;
@@ -59,9 +66,36 @@ public class ExceptionHandlerUtil {
     ResponseEntity<CommonResponse> handleDuplicatedNickNameException(DuplicatedNickNameException e){
         return new ResponseEntity<>(CommonResponse.getErrorResponse(e.getMessage()), HttpStatus.CONFLICT);
     }
-
-    @ExceptionHandler(NoPermissionTextDiaryException.class)
-    ResponseEntity<CommonResponse> handleNoPermissionTextDiaryException(NoPermissionTextDiaryException e){
-        return new ResponseEntity<>(CommonResponse.getErrorResponse(e.getMessage()), HttpStatus.UNAUTHORIZED);
+    @ExceptionHandler(NoBoardDeletePermissionException.class)
+    ResponseEntity<CommonResponse> handleNoBoardDeletePermissionException(NoBoardDeletePermissionException e){
+        return ResponseEntity.badRequest().body(CommonResponse.getErrorResponse(e.getMessage()));
+    }
+    @ExceptionHandler(NoBoardSavePermissionException.class)
+    ResponseEntity<CommonResponse> handleNoBoardSavePermissionException(NoBoardSavePermissionException e){
+        return ResponseEntity.badRequest().body(CommonResponse.getErrorResponse(e.getMessage()));
+    }
+    @ExceptionHandler(NoBoardUpdatePermissionException.class)
+    ResponseEntity<CommonResponse> handleNoBoardUpdatePermissionException(NoBoardUpdatePermissionException e){
+        return ResponseEntity.badRequest().body(CommonResponse.getErrorResponse(e.getMessage()));
+    }
+    @ExceptionHandler(NoExistBoardException.class)
+    ResponseEntity<CommonResponse> handleNoExistBoardException(NoExistBoardException e){
+        return ResponseEntity.badRequest().body(CommonResponse.getErrorResponse(e.getMessage()));
+    }
+    @ExceptionHandler(NoCommentDeletePermissionException.class)
+    ResponseEntity<CommonResponse> handleNoCommentDeletePermissionException(NoCommentDeletePermissionException e){
+        return ResponseEntity.badRequest().body(CommonResponse.getErrorResponse(e.getMessage()));
+    }
+    @ExceptionHandler(NoCommentSavePermissionException.class)
+    ResponseEntity<CommonResponse> handleNoCommentSavePermissionException(NoCommentSavePermissionException e){
+        return ResponseEntity.badRequest().body(CommonResponse.getErrorResponse(e.getMessage()));
+    }
+    @ExceptionHandler(NoCommentUpdatePermissionException.class)
+    ResponseEntity<CommonResponse> handleNoCommentUpdatePermissionException(NoCommentUpdatePermissionException e){
+        return ResponseEntity.badRequest().body(CommonResponse.getErrorResponse(e.getMessage()));
+    }
+    @ExceptionHandler(NoExistCommentException.class)
+    ResponseEntity<CommonResponse> handleNoExistCommentException(NoExistCommentException e){
+        return ResponseEntity.badRequest().body(CommonResponse.getErrorResponse(e.getMessage()));
     }
 }

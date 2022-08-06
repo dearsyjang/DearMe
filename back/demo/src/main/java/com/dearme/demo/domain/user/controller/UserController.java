@@ -1,6 +1,6 @@
 package com.dearme.demo.domain.user.controller;
 
-import com.dearme.demo.domain.user.dto.*;
+import com.dearme.demo.domain.user.dto.user.*;
 import com.dearme.demo.domain.user.service.UserService;
 import com.dearme.demo.global.common.CommonResponse;
 import lombok.RequiredArgsConstructor;
@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 
 @RestController
 @RequestMapping("/users")
@@ -82,8 +83,17 @@ public class UserController {
         String id = (String) request.getAttribute("id");
         userService.delete(id);
     }
+
     @PutMapping("/points")
-    public ResponseEntity<CommonResponse> pointsUpdate(String id, Long price){
-        return new ResponseEntity<>(CommonResponse.getSuccessResponse(userService.pointsUpdate(id, price)), HttpStatus.OK);
+    public ResponseEntity<CommonResponse> pointsUpdate(HttpServletRequest request, @RequestBody @Validated PointsUpdateRequestDto dto) throws UnsupportedEncodingException {
+        String id = (String) request.getAttribute("id");
+        return new ResponseEntity<>(CommonResponse.getSuccessResponse(userService.pointsUpdate(id, dto.getPrice())), HttpStatus.OK);
+
+    @GetMapping("/reviews")
+    public ResponseEntity<CommonResponse> getReviews(HttpServletRequest request){
+        String id = (String) request.getAttribute("id");
+        return new ResponseEntity<>(CommonResponse.getSuccessResponse(userService.getReviews(id)), HttpStatus.OK);
     }
+
+
 }
