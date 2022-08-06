@@ -1,6 +1,8 @@
 package com.dearme.demo.domain.user.service;
 
+import com.dearme.demo.domain.review.entity.Review;
 import com.dearme.demo.domain.user.dto.*;
+import com.dearme.demo.domain.user.dto.user.*;
 import com.dearme.demo.domain.user.entity.*;
 import com.dearme.demo.domain.user.exception.CounselorNotExistPictureException;
 import com.dearme.demo.domain.user.exception.DuplicatedIdException;
