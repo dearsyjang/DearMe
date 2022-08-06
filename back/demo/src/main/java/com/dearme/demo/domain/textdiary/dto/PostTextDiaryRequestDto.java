@@ -4,6 +4,7 @@ import com.dearme.demo.domain.textdiary.entity.TextDiary;
 import lombok.Data;
 
 import java.time.LocalDate;
+import java.util.Date;
 
 @Data
 public class PostTextDiaryRequestDto {

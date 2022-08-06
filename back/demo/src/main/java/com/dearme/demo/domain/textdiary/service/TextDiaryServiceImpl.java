@@ -57,6 +57,4 @@ public class TextDiaryServiceImpl implements TextDiaryService{
     public void delete(String id, Long textDiaryId) {
         textDiaryRepository.deleteByUser_IdAndId(id, textDiaryId);
     }
-
-
 }

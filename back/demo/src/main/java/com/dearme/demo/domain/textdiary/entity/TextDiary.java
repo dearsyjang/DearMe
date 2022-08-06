@@ -30,15 +30,20 @@ public class TextDiary extends Base {
 
     private Integer day;
 
+    private Integer year;
+
+    private Integer month;
+
+    private Integer day;
+
     @Builder
     public TextDiary(String title, String contents, Integer year, Integer month, Integer day){
-            this.title = title;
-            this.contents = contents;
-            this.year = year;
-            this.month = month;
-            this.day = day;
-        }
-
+        this.title = title;
+        this.contents = contents;
+        this.year = year;
+        this.month = month;
+        this.day = day;
+    }
 
     public void setUser(User user){
         this.user = user;

@@ -14,7 +14,6 @@ public class TextDiaryDetailsResponseDto {
     private Integer month;
     private Integer day;
 
-
     public static TextDiaryDetailsResponseDto of(TextDiary entity){
         return TextDiaryDetailsResponseDto.builder()
                 .id(entity.getId())
@@ -23,7 +22,6 @@ public class TextDiaryDetailsResponseDto {
                 .year(entity.getYear())
                 .month(entity.getMonth())
                 .day(entity.getDay())
-
                 .build();
     }
 }
