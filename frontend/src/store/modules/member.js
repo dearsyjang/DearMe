@@ -36,19 +36,17 @@ export default {
       commit('SET_TOKEN', '')
       localStorage.setItem('token', '')
     },
-    login({ commit, dispatch }, credentials) {
+    login({ commit, getters, dispatch }) {
       axios({
         url: drf.member.login(),
-        method: 'post',
-        data: credentials
+        method: 'get',
+        headers: getters.authHeader,
       })
         .then(res => {
           console.log('성공')
-          const token = res.data.key
-          dispatch('saveToken', token)
-          dispatch('fetchCurrentUser')
-          dispatch('fetchIsAdmin', credentials)
-          router.push({ name: 'home' })
+          const token = res.data.accessToken
+          dispatch('fetchCurrentUser', token)
+          router.push({ name: 'mypageUser' })
         })
         .catch(err => {
           console.error(err.response.data)
@@ -61,16 +59,18 @@ export default {
         method: 'post',
         data: formData
       })
-      .then(res => {
-          console.log('axios 성공')
-          const token = res.data.key
+      .then((res) => {
+          // console.log(res)
+          // console.log(res.data)
+          const token = res.data.accessToken
           dispatch('saveToken', token)
           alert('save token성공')
           dispatch('fetchCurrentUser')
           alert('fetch user 성공')
           router.push({ name: 'login' })
         })
-        .catch(err => {
+        .catch((err) =>
+        { console.error(err)
           console.error(err.response.data)
           commit('SET_AUTH_ERROR', err.response.data)
         })
