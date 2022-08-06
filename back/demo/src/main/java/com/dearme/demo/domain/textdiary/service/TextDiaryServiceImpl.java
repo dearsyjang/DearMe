@@ -3,6 +3,7 @@ package com.dearme.demo.domain.textdiary.service;
 import com.dearme.demo.domain.textdiary.dto.PostTextDiaryRequestDto;
 import com.dearme.demo.domain.textdiary.dto.PostTextDiaryResponseDto;
 import com.dearme.demo.domain.textdiary.dto.TextDiaryDetailsResponseDto;
+import com.dearme.demo.domain.textdiary.dto.TextDiaryListResponseDto;
 import com.dearme.demo.domain.textdiary.entity.TextDiary;
 import com.dearme.demo.domain.textdiary.exception.NoPermissionTextDiaryException;
 import com.dearme.demo.domain.textdiary.repository.TextDiaryRepository;
@@ -11,6 +12,10 @@ import com.dearme.demo.domain.user.exception.NoExistUserException;
 import com.dearme.demo.domain.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import javax.naming.NoPermissionException;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -33,5 +38,17 @@ public class TextDiaryServiceImpl implements TextDiaryService{
         TextDiary textDiary = textDiaryRepository.findById(textDiaryId).get();
         if(!textDiary.getUser().getId().equals(id)) throw new NoPermissionTextDiaryException();
         return TextDiaryDetailsResponseDto.of(textDiary);
+    }
+
+    @Override
+    public TextDiaryListResponseDto getList(String id, Integer month) {
+        List<TextDiary> textDiaries = textDiaryRepository.findAllByUser_IdAndMonth(id, month);
+        List<TextDiaryDetailsResponseDto> textDiaryDetailsResponseDtos = new ArrayList<>();
+        for(TextDiary textDiary : textDiaries){
+            textDiaryDetailsResponseDtos.add(TextDiaryDetailsResponseDto.of(textDiary));
+        }
+        TextDiaryListResponseDto dto = new TextDiaryListResponseDto();
+        dto.setTextDiaries(textDiaryDetailsResponseDtos);
+        return dto;
     }
 }
