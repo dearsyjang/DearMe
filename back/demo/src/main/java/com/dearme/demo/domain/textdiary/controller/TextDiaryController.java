@@ -28,9 +28,9 @@ public class TextDiaryController {
         return new ResponseEntity<>(CommonResponse.getSuccessResponse(textDiaryService.getDetails(id, textDiaryId)), HttpStatus.OK);
     }
 
-    @GetMapping("/month/{month}")
-    public ResponseEntity<CommonResponse> getList(HttpServletRequest request, @PathVariable("month") Integer month){
+    @GetMapping("/year/{year}/month/{month}")
+    public ResponseEntity<CommonResponse> getList(HttpServletRequest request, @PathVariable("year") Integer year, @PathVariable("month") Integer month){
         String id = (String) request.getAttribute("id");
-        return new ResponseEntity<>(CommonResponse.getSuccessResponse(textDiaryService.getList(id, month)), HttpStatus.OK);
+        return new ResponseEntity<>(CommonResponse.getSuccessResponse(textDiaryService.getList(id, year, month)), HttpStatus.OK);
     }
 }

@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface TextDiaryRepository extends JpaRepository<TextDiary, Long> {
-    List<TextDiary> findAllByUser_IdAndMonth(String id, Integer month);
+    List<TextDiary> findAllByUser_IdAndYearAndMonth(String id, Integer year, Integer month);
 }
