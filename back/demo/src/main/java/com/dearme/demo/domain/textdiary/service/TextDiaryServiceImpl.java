@@ -13,7 +13,7 @@ import com.dearme.demo.domain.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import javax.naming.NoPermissionException;
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -50,5 +50,11 @@ public class TextDiaryServiceImpl implements TextDiaryService{
         TextDiaryListResponseDto dto = new TextDiaryListResponseDto();
         dto.setTextDiaries(textDiaryDetailsResponseDtos);
         return dto;
+    }
+
+    @Override
+    @Transactional
+    public void delete(String id, Long textDiaryId) {
+        textDiaryRepository.deleteByUser_IdAndId(id, textDiaryId);
     }
 }
