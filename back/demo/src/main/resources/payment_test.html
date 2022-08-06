@@ -46,7 +46,7 @@ function payment(data){
             }).then((response) => response.json()).then((data) => {
                 console.log(data);
             });
-            alert("충전완료");
+            alert("완료 -> imp_uid : " + rsp.imp_uid+" / merchant_uid(orderKey) : " + rsp.merchant_uid);
         }else{
             alert("실패 : 코드(" + rsp.error_code + ") / 메시지(" + rsp.error_msg + ")");
         }

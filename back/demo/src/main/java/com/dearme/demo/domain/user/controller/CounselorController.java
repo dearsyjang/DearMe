@@ -1,7 +1,6 @@
 package com.dearme.demo.domain.user.controller;
 
 import com.dearme.demo.domain.user.service.CounselorService;
-import com.dearme.demo.domain.user.service.UserService;
 import com.dearme.demo.global.common.CommonResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

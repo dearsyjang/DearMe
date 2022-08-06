@@ -1,7 +1,6 @@
 package com.dearme.demo.domain.user.service;
 
-import com.dearme.demo.domain.review.entity.Review;
-import com.dearme.demo.domain.user.dto.user.*;
+import com.dearme.demo.domain.user.dto.*;
 import com.dearme.demo.domain.user.entity.*;
 import com.dearme.demo.domain.user.exception.CounselorNotExistPictureException;
 import com.dearme.demo.domain.user.exception.DuplicatedIdException;
@@ -81,8 +80,6 @@ public class UserServiceImpl implements UserService{
                 .accessToken(accessToken)
                 .refreshToken(refreshToken)
                 .build();
-
-
     }
 
 
@@ -109,6 +106,9 @@ public class UserServiceImpl implements UserService{
             targetCounselorProfile.updateCounselorProfile(dto.getCounselorProfile().getPrice(), dto.getCounselorProfile().getIntroduce());
             user.updateCounselor(dto.getPw(), dto.getNickName(), targetCounselorProfile);
         }
+        String accessToken = jwtProvider.getAccessToken(user.getId());
+        String refreshToken = jwtProvider.getRefreshToken();
+        user.updateRefreshToken(refreshToken);
         userRepository.save(user);
         return new UpdateUserResponseDto(jwtProvider.getAccessToken(user.getId()), jwtProvider.getRefreshToken());
     }

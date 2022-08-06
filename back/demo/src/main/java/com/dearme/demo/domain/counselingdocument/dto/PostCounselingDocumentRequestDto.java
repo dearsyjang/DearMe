@@ -21,4 +21,8 @@ public class PostCounselingDocumentRequestDto {
                 .isOpen(this.isOpen)
                 .build();
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 27c3c25be63c4235f234d0ad52c735638833d48f
