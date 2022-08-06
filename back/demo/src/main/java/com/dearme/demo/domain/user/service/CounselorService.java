@@ -7,5 +7,4 @@ import java.util.List;
 
 public interface CounselorService {
     List<CounselorsViewResponseDto> getCounselors(String id);
-    Counsel
 }
