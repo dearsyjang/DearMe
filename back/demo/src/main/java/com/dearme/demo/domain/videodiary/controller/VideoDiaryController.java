@@ -14,11 +14,12 @@ import javax.servlet.http.HttpServletRequest;
 @RestController
 @RequestMapping("/video-diaries")
 @RequiredArgsConstructor
+@CrossOrigin(origins = "*", allowedHeaders = "*", methods = {RequestMethod.GET, RequestMethod.POST})
 public class VideoDiaryController {
 
     private final VideoDiaryServiceImpl videoDiaryService;
 
-    @GetMapping
+    @GetMapping("/token")
     public ResponseEntity<CommonResponse> getOpenViduToken(HttpServletRequest request){
         String id = (String) request.getAttribute("id");
         return new ResponseEntity<>(CommonResponse.getSuccessResponse(videoDiaryService.getToken(id)), HttpStatus.OK);

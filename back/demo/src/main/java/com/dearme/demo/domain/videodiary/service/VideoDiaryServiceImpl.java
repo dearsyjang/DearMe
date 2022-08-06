@@ -63,8 +63,9 @@ public class VideoDiaryServiceImpl implements VideoDiaryService{
         RecordingProperties properties = new RecordingProperties.Builder()
                 .name(UUID.randomUUID().toString())
                 .build();
+        Session session = mapSessions.get(id);
         try{
-            Recording recording = openVidu.startRecording(id, properties);
+            Recording recording = openVidu.startRecording(session.getSessionId(), properties);
             VideoDiaryPostResponseDto responseDto = new VideoDiaryPostResponseDto();
             responseDto.setRecording(recording);
             return responseDto;
