@@ -1,6 +1,5 @@
-package com.dearme.demo.domain.textdiary.entity;
+package com.dearme.demo.domain.counselingdocument.entity;
 
-import com.dearme.demo.domain.base.entitiy.Base;
 import com.dearme.demo.domain.user.entity.User;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -12,7 +11,7 @@ import javax.persistence.*;
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
-public class TextDiary extends Base {
+public class CounselingDocument {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -21,9 +20,9 @@ public class TextDiary extends Base {
     @JoinColumn(name = "user_id")
     private User user;
 
-    private String title;
-
-    private String contents;
+    @ManyToOne
+    @JoinColumn(name = "counselor_id")
+    private User counselor;
 
     private Integer year;
 
@@ -31,16 +30,24 @@ public class TextDiary extends Base {
 
     private Integer day;
 
-    @Builder
-    public TextDiary(String title, String contents, Integer year, Integer month, Integer day){
-        this.title = title;
-        this.contents = contents;
-        this.year = year;
-        this.month = month;
-        this.day = day;
-    }
+    private String contents;
+
+    private Boolean isOpen;
 
     public void setUser(User user){
         this.user = user;
+    }
+
+    public void setCounselor(User counselor){
+        this.counselor = counselor;
+    }
+
+    @Builder
+    public CounselingDocument(Integer year, Integer month, Integer day, String contents, Boolean isOpen){
+        this.year = year;
+        this.month = month;
+        this.day = day;
+        this.contents = contents;
+        this.isOpen = isOpen;
     }
 }
