@@ -22,4 +22,10 @@ public class CounselorController {
         String id = (String) request.getAttribute("id");
         return new ResponseEntity<>(CommonResponse.getSuccessResponse(counselorService.getCounselors(id)), HttpStatus.OK);
     }
+
+    @GetMapping("/detail/{id}")
+    public ResponseEntity<CommonResponse> getCounselor(HttpServletRequest request, @PathVariable("id") String id){
+        //String id = (String) request.getAttribute("id");
+        return new ResponseEntity<>(CommonResponse.getSuccessResponse(counselorService.getCounselor(id)), HttpStatus.OK);
+    }
 }

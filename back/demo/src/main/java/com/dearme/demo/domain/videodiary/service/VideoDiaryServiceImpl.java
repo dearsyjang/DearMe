@@ -19,12 +19,12 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.List;
+//import java.io.FileInputStream;
+//import java.io.IOException;
+//import java.nio.file.Files;
+//import java.nio.file.Path;
+//import java.nio.file.Paths;
+//import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -33,7 +33,7 @@ public class VideoDiaryServiceImpl implements VideoDiaryService {
     @Override
     @Transactional
     public VideoSaveResponseDto videoSave() {
-//        String filePath = "src/main/resources/KOR_F_RM0769FLJH0325.pcm";
+//        String filePath = "src/main/resources/mp4_test1.mp4";
 //        String text="";
 //        try {
 //            CredentialsProvider credentialsProvider = FixedCredentialsProvider.create(ServiceAccountCredentials.fromStream(new FileInputStream("src/main/resources/my-project-0801-358104-1615eb198267.json")));
@@ -42,8 +42,8 @@ public class VideoDiaryServiceImpl implements VideoDiaryService {
 //            SpeechClient speech=SpeechClient.create(settings);
 //            // 오디오 파일에 대한 설정부분
 //            RecognitionConfig config = RecognitionConfig.newBuilder()
-//                    .setEncoding(RecognitionConfig.AudioEncoding.LINEAR16)
-//                    .setSampleRateHertz(16000)
+//                    .setEncoding(RecognitionConfig.AudioEncoding.)
+//                    .setSampleRateHertz(40000)
 //                    .setLanguageCode("ko-KR")
 //                    .build();
 //            RecognitionAudio audio = getRecognitionAudio(filePath); // Audio 파일에 대한 RecognitionAudio 인스턴스 생성
@@ -92,7 +92,7 @@ public class VideoDiaryServiceImpl implements VideoDiaryService {
 //        } catch (Exception e){
 //            System.err.println(e.toString());
 //        }
-//
+
 //        return new VideoSaveResponseDto(text);
         return null;
     }

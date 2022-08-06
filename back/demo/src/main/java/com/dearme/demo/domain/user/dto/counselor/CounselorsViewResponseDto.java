@@ -28,6 +28,6 @@ public class CounselorsViewResponseDto {
 
     private double value;
     private Long reviewcnt;
-
+    private List<Category> categories;
 
 }
