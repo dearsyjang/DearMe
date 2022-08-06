@@ -1,13 +1,17 @@
 package com.dearme.demo.domain.counseling.entity;
 
+import com.dearme.demo.domain.counselingdocument.entity.CounselingDocument;
 import com.dearme.demo.domain.user.entity.User;
+import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
 @Entity
 @Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Counseling {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,6 +33,15 @@ public class Counseling {
     private Integer month;
 
     private Integer day;
+
+    @OneToOne(mappedBy = "counseling")
+    @JoinColumn(name = "counseling_document_id")
+    private CounselingDocument counselingDocument;
+
+    public void setCounselingDocument(CounselingDocument counselingDocument) {
+        counselingDocument.setCounseling(this);
+        this.counselingDocument = counselingDocument;
+    }
 
     @Builder
     public Counseling(User user, User counselor, Integer year, Integer month, Integer day, Type type){

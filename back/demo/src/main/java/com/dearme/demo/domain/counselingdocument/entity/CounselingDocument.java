@@ -36,6 +36,14 @@ public class CounselingDocument {
 
     private Boolean isOpen;
 
+    @OneToOne
+    @JoinColumn(name = "counseling_id")
+    private Counseling counseling;
+
+    public void setCounseling(Counseling counseling){
+        this.counseling = counseling;
+    }
+
     public void setUser(User user){
         this.user = user;
     }
