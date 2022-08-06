@@ -16,9 +16,9 @@ import org.springframework.web.bind.annotation.RestController;
 public class VideoDiaryApiController {
     private final VideoDiaryService counselService;
 
-    @Operation(summary = "Video Diary Test", description = "영상 일기 저장")
-    @PostMapping
-    public ResponseEntity<CommonResponse> videoDiarySave(){     //영상 일기 기능 완성 시 파라미터 추가 필요
-        return new ResponseEntity<>(CommonResponse.getSuccessResponse(counselService.videoSave()), HttpStatus.OK);
-    }
+//    @Operation(summary = "Video Diary Test", description = "영상 일기 저장")
+//    @PostMapping
+//    public ResponseEntity<CommonResponse> videoDiarySave(){     //영상 일기 기능 완성 시 파라미터 추가 필요
+//        return new ResponseEntity<>(CommonResponse.getSuccessResponse(counselService.videoSave()), HttpStatus.OK);
+//    }
 }

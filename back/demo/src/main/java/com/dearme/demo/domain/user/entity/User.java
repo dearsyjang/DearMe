@@ -55,6 +55,7 @@ public class User extends Base {
     private String refreshToken;
 
     @OneToOne(mappedBy = "counselor", orphanRemoval = true, cascade = CascadeType.ALL)
+    @JsonBackReference // 순환참조 방지
     private CounselorProfile counselorProfile;
 
     public void setCounselorProfile(CounselorProfile counselorProfile) {
