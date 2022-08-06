@@ -41,8 +41,8 @@ public class TextDiaryServiceImpl implements TextDiaryService{
     }
 
     @Override
-    public TextDiaryListResponseDto getList(String id, Integer month) {
-        List<TextDiary> textDiaries = textDiaryRepository.findAllByUser_IdAndMonth(id, month);
+    public TextDiaryListResponseDto getList(String id, Integer year, Integer month) {
+        List<TextDiary> textDiaries = textDiaryRepository.findAllByUser_IdAndYearAndMonth(id, year, month);
         List<TextDiaryDetailsResponseDto> textDiaryDetailsResponseDtos = new ArrayList<>();
         for(TextDiary textDiary : textDiaries){
             textDiaryDetailsResponseDtos.add(TextDiaryDetailsResponseDto.of(textDiary));
