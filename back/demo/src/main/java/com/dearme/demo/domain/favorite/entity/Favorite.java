@@ -12,11 +12,11 @@ import javax.persistence.*;
 @Getter
 @NoArgsConstructor
 @Entity
-public class Review extends Base {
+public class Favorite extends Base {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long reviewid;
+    private Long favoriteid;
 
     @ManyToOne
     @JsonManagedReference // 순환참조 방지
@@ -26,22 +26,11 @@ public class Review extends Base {
     @OneToOne
     private User counselor;
 
-    @Column(nullable = false)
-    private Long value;
-
-    @Column(nullable = false)
-    private String contents;
-
     public void setUser(User user){
-        user.getReviews().add(this);
+        user.getFavorites().add(this);
         this.user=user;
     }
     public void setCounselor(User user){
         this.counselor=user;
-    }
-    @Builder
-    public Review(Long value, String contents) {
-        this.value = value;
-        this.contents = contents;
     }
 }

@@ -1,8 +1,10 @@
 package com.dearme.demo.domain.review.service;
 
+import com.dearme.demo.domain.favorite.dto.FavoriteSaveResponseDto;
 import com.dearme.demo.domain.review.dto.ReviewCounselorViewResponseDto;
 import com.dearme.demo.domain.review.dto.ReviewSaveRequestDto;
 import com.dearme.demo.domain.review.dto.ReviewSaveResponseDto;
+import com.dearme.demo.domain.review.entity.Favorite;
 import com.dearme.demo.domain.review.entity.Review;
 import com.dearme.demo.domain.review.exception.NoExistReviewException;
 import com.dearme.demo.domain.review.exception.NoReviewDeletePermissionException;
@@ -25,6 +27,7 @@ public class ReviewServiceImpl implements ReviewService {
     @Override
     @Transactional
     public ReviewSaveResponseDto reviewSave(String id, ReviewSaveRequestDto dto) {
+
         Review review;
         review=dto.toReviewEntity();
         User user = userRepository.findUserById(id).orElseThrow(() -> {
@@ -35,10 +38,11 @@ public class ReviewServiceImpl implements ReviewService {
             throw new NoExistUserException();
         });
         counselor.getCounselorProfile().updateReviewValue(review.getValue(), 1);
+        review.setCounselor(counselor);
         reviewRepository.save(review);
         return new ReviewSaveResponseDto(review.getReviewid());
     }
-
+    @Override
     @Transactional
     public void reviewDelete(String id, Long reviewid) {
         Review review = reviewRepository.findReviewByReviewid(reviewid).orElseThrow(()->{
@@ -49,7 +53,7 @@ public class ReviewServiceImpl implements ReviewService {
         });
         if(user.getUserId().equals(review.getUser().getUserId())){
 
-            User counselor = userRepository.findUserById(review.getCounselorid()).orElseThrow(() -> {
+            User counselor = userRepository.findUserById(review.getCounselor().getId()).orElseThrow(() -> {
                 throw new NoExistUserException();
             });
             counselor.getCounselorProfile().updateReviewValue(-1 * review.getValue(), -1);
@@ -61,12 +65,11 @@ public class ReviewServiceImpl implements ReviewService {
 
     @Override
     public List<ReviewCounselorViewResponseDto> reviewCounselorView(String id) {
-        List<Review> tempList = reviewRepository.findReviewByCounselorid(id);
-        System.out.println(tempList.toArray());
-        System.out.println(tempList.toString());
+        List<Review> tempList = reviewRepository.findReviewByCounselor_Id(id);
         List<ReviewCounselorViewResponseDto> reviewList = new ArrayList<>();
         for(Review r : tempList){
-            reviewList.add(new ReviewCounselorViewResponseDto(r.getUser().getNickName(),
+            reviewList.add(new ReviewCounselorViewResponseDto(r.getReviewid(),
+                    r.getUser().getNickName(),
                     r.getValue(),
                     r.getContents()));
         }

@@ -3,6 +3,7 @@ package com.dearme.demo.domain.user.entity;
 import com.dearme.demo.domain.base.entitiy.Base;
 import com.dearme.demo.domain.board.entity.Board;
 import com.dearme.demo.domain.board.entity.Comment;
+import com.dearme.demo.domain.review.entity.Favorite;
 import com.dearme.demo.domain.review.entity.Review;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.*;
@@ -77,6 +78,12 @@ public class User extends Base {
     @JsonBackReference // 순환참조 방지
     @Setter
     private List<Review> reviews = new ArrayList<>();
+
+    @OneToMany(mappedBy = "user", orphanRemoval = true, cascade = CascadeType.ALL)
+    @JsonBackReference // 순환참조 방지
+    @Setter
+    private List<Favorite> favorites = new ArrayList<>();
+
     public void updateUser(String pw, String nickName){
         this.pw = pw;
         this.nickName = nickName;
