@@ -1,7 +1,6 @@
 package com.dearme.demo.domain.board.dto.board;
 
-import com.dearme.demo.domain.board.entity.Comment;
-import com.dearme.demo.domain.user.entity.User;
+import com.dearme.demo.domain.board.dto.comment.CommentResponseDto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -22,6 +21,6 @@ public class BoardViewResponseDto {
 
     private Date date;
 
-    private List<Comment> comments;
+    private List<CommentResponseDto> comments;
 
 }

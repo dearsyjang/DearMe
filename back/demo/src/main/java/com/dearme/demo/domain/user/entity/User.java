@@ -3,6 +3,8 @@ package com.dearme.demo.domain.user.entity;
 import com.dearme.demo.domain.base.entitiy.Base;
 import com.dearme.demo.domain.board.entity.Board;
 import com.dearme.demo.domain.board.entity.Comment;
+import com.dearme.demo.domain.favorite.entity.Favorite;
+import com.dearme.demo.domain.review.entity.Review;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.*;
 
@@ -54,6 +56,7 @@ public class User extends Base {
     private String refreshToken;
 
     @OneToOne(mappedBy = "counselor", orphanRemoval = true, cascade = CascadeType.ALL)
+    @JsonBackReference // 순환참조 방지
     private CounselorProfile counselorProfile;
 
     public void setCounselorProfile(CounselorProfile counselorProfile) {
@@ -71,6 +74,16 @@ public class User extends Base {
     @Setter
     private List<Comment> comments = new ArrayList<>();
 
+    @OneToMany(mappedBy = "user", orphanRemoval = true, cascade = CascadeType.ALL)
+    @JsonBackReference // 순환참조 방지
+    @Setter
+    private List<Review> reviews = new ArrayList<>();
+
+    @OneToMany(mappedBy = "user", orphanRemoval = true, cascade = CascadeType.ALL)
+    @JsonBackReference // 순환참조 방지
+    @Setter
+    private List<Favorite> favorites = new ArrayList<>();
+
     public void updateUser(String pw, String nickName){
         this.pw = pw;
         this.nickName = nickName;
@@ -85,9 +98,11 @@ public class User extends Base {
     public void updateRefreshToken(String refreshToken){
         this.refreshToken = refreshToken;
     }
-    public void updatePoints(Long points){this.points=points;}
 
+    public void updatePoints(Long points){
 
+        this.points = points + this.points;
+    }
     @Builder
     public User(String id, String pw, String nickName, Gender gender,
                 Date birth, String email, Type type, Picture picture, Long points){

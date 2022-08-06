@@ -1,6 +1,7 @@
 package com.dearme.demo.domain.user.controller;
 
-import com.dearme.demo.domain.user.dto.*;
+import com.dearme.demo.domain.user.dto.PointsUpdateRequestDto;
+import com.dearme.demo.domain.user.dto.user.*;
 import com.dearme.demo.domain.user.service.UserService;
 import com.dearme.demo.global.common.CommonResponse;
 import lombok.RequiredArgsConstructor;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 
 @RestController
 @RequestMapping("/users")
@@ -18,6 +20,12 @@ import java.io.IOException;
 public class UserController {
 
     private final UserService userService;
+
+    @GetMapping
+    public ResponseEntity<CommonResponse> getUserInfo(HttpServletRequest request){
+        String id = (String) request.getAttribute("id");
+        return new ResponseEntity<>(CommonResponse.getSuccessResponse(userService.getUserInfo(id)), HttpStatus.OK);
+    }
 
     @PostMapping
     public ResponseEntity<CommonResponse> signUpUser(@ModelAttribute @Validated SignUpRequestDto dto) throws IOException {
@@ -70,14 +78,23 @@ public class UserController {
         userService.checkNickname(nickname);
         return new ResponseEntity<>(HttpStatus.OK);
     }
-
     @DeleteMapping
     public void delete(HttpServletRequest request){
         String id = (String) request.getAttribute("id");
         userService.delete(id);
     }
+
     @PutMapping("/points")
-    public ResponseEntity<CommonResponse> pointsUpdate(String id, Long price){
-        return new ResponseEntity<>(CommonResponse.getSuccessResponse(userService.pointsUpdate(id, price)), HttpStatus.OK);
+    public ResponseEntity<CommonResponse> pointsUpdate(HttpServletRequest request, @RequestBody @Validated PointsUpdateRequestDto dto) throws UnsupportedEncodingException {
+        String id = (String) request.getAttribute("id");
+        return new ResponseEntity<>(CommonResponse.getSuccessResponse(userService.pointsUpdate(id, dto.getPrice())), HttpStatus.OK);
     }
+
+    @GetMapping("/reviews")
+    public ResponseEntity<CommonResponse> getReviews(HttpServletRequest request){
+        String id = (String) request.getAttribute("id");
+        return new ResponseEntity<>(CommonResponse.getSuccessResponse(userService.getReviews(id)), HttpStatus.OK);
+    }
+
+
 }

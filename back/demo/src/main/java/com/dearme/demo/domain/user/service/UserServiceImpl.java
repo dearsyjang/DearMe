@@ -1,8 +1,13 @@
 package com.dearme.demo.domain.user.service;
 
+import com.dearme.demo.domain.review.entity.Review;
 import com.dearme.demo.domain.user.dto.*;
+import com.dearme.demo.domain.user.dto.user.*;
 import com.dearme.demo.domain.user.entity.*;
-import com.dearme.demo.domain.user.exception.*;
+import com.dearme.demo.domain.user.exception.CounselorNotExistPictureException;
+import com.dearme.demo.domain.user.exception.DuplicatedIdException;
+import com.dearme.demo.domain.user.exception.DuplicatedNickNameException;
+import com.dearme.demo.domain.user.exception.NoExistUserException;
 import com.dearme.demo.domain.user.repository.*;
 import com.dearme.demo.global.util.jwt.JwtProvider;
 import lombok.RequiredArgsConstructor;
@@ -10,7 +15,9 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -58,11 +65,13 @@ public class UserServiceImpl implements UserService{
         if(dto.getPicture() != null){
             picture = Picture.builder().fileName(dto.getPicture().getOriginalFilename()).realFileName(UUID.randomUUID().toString()).build();
             File file = new File(IMAGE_PATH + picture.getRealFileName() + ".jpeg");
-            System.out.println(IMAGE_PATH);
-            System.out.println(IMAGE_PATH + picture.getRealFileName() + ".jpeg");
             dto.getPicture().transferTo(file);
-            user.setPicture(picture);
+        }else if(dto.getType().equals(Type.COUNSELOR)){
+            throw new CounselorNotExistPictureException();
+        }else{
+            picture = Picture.builder().fileName("basic").realFileName("basic").build();
         }
+        user.setPicture(picture);
         String accessToken = jwtProvider.getAccessToken(user.getId());
         String refreshToken = jwtProvider.getRefreshToken();
         user.updateRefreshToken(refreshToken);
@@ -99,6 +108,9 @@ public class UserServiceImpl implements UserService{
             targetCounselorProfile.updateCounselorProfile(dto.getCounselorProfile().getPrice(), dto.getCounselorProfile().getIntroduce());
             user.updateCounselor(dto.getPw(), dto.getNickName(), targetCounselorProfile);
         }
+        String accessToken = jwtProvider.getAccessToken(user.getId());
+        String refreshToken = jwtProvider.getRefreshToken();
+        user.updateRefreshToken(refreshToken);
         userRepository.save(user);
         return new UpdateUserResponseDto(jwtProvider.getAccessToken(user.getId()), jwtProvider.getRefreshToken());
     }
@@ -160,11 +172,44 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public Long pointsUpdate(String id, Long price) {
+    @Transactional
+    public PointsUpdateResponseDto pointsUpdate(String id, String price) {
         User user = userRepository.findUserById(id).orElseThrow(() -> {
             throw new NoExistUserException();
         });
-        user.updatePoints(user.getPoints()+price);
-        return user.getPoints();
+        Long points=Long.parseLong(price);
+
+        user.updatePoints(points);
+        return new PointsUpdateResponseDto(user.getPoints());
+    }
+
+    @Override
+    public UserInfoResponseDto getUserInfo(String id) {
+        User user = userRepository.findUserById(id).orElseThrow(() -> {
+            throw new NoExistUserException();
+        });
+        if(user.getType().equals(Type.COUNSELOR)){
+            return UserInfoResponseDto.ofCounselor(user);
+        }
+        return UserInfoResponseDto.ofUser(user);
+    }
+
+    @Override
+    public List<ReviewViewResponseDto> getReviews(String id) {
+        User user = userRepository.findUserById(id).orElseThrow(() -> {
+            throw new NoExistUserException();
+        });
+
+        List<Review> tempList=user.getReviews();
+        List<ReviewViewResponseDto> reviewList = new ArrayList<>();
+        for(Review r : tempList){
+            User counselor = userRepository.findUserById(r.getCounselor().getId()).orElseThrow(() -> {
+                throw new NoExistUserException();
+            });
+            reviewList.add(new ReviewViewResponseDto(counselor.getNickName(),
+                    r.getValue(),
+                    r.getContents()));
+        }
+        return reviewList;
     }
 }
