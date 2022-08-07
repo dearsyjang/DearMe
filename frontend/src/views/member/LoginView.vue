@@ -38,15 +38,18 @@ export default {
   },
   methods: {
     ...mapActions([ 'login' ]),
-    LogIn() {
-      // const newCredentials = ''
-      // {id: this.id},{pw: this.pw}
-
-    }
-
+    // LogIn(){
+    //   const url = drf.member.login()
+    //   const par = {params: {
+    //       id: this.credentials.id,
+    //       pw: this.credentials.pw
+    //   }}
+    //   const newUrl = url + par
+    //   this.login(newUrl)
+    // }
   },
   created() {
-    this.login()
+    // this.login()
   },
   mounted() {},
   unmounted() {},
