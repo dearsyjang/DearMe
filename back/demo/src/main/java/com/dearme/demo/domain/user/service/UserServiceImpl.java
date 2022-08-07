@@ -1,5 +1,6 @@
 package com.dearme.demo.domain.user.service;
 
+import com.dearme.demo.domain.group.entity.Group;
 import com.dearme.demo.domain.review.entity.Review;
 import com.dearme.demo.domain.user.dto.*;
 import com.dearme.demo.domain.user.dto.user.*;
@@ -36,6 +37,8 @@ public class UserServiceImpl implements UserService{
     private final CategoryRepository categoryRepository;
 
     private final CertificateRepository certificateRepository;
+
+    private final GroupUserRepository groupUserRepository;
 
     @Value("${path.image:/image/}")
     private String IMAGE_PATH;
@@ -212,5 +215,15 @@ public class UserServiceImpl implements UserService{
                     r.getContents()));
         }
         return reviewList;
+    }
+
+    @Override
+    public UserGroupListResponseDto getGroups(String id) {
+        List<UserGroupResponseDto> userGroupResponseDtos = new ArrayList<>();
+        List<GroupUser> groupUsers = groupUserRepository.findAllByUser_Id(id);
+        for(GroupUser groupUser : groupUsers){
+            userGroupResponseDtos.add(UserGroupResponseDto.of(groupUser.getGroup()));
+        }
+        return new UserGroupListResponseDto(userGroupResponseDtos);
     }
 }
