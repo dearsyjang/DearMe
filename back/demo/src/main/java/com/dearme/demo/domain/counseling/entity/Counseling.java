@@ -43,6 +43,10 @@ public class Counseling {
     @JoinColumn(name = "group_id")
     private Group group;
 
+    public void updateCounseling(Type type){
+        this.type = type;
+    }
+
     public void setCounselingDocument(CounselingDocument counselingDocument) {
         counselingDocument.setCounseling(this);
         this.counselingDocument = counselingDocument;

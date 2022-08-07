@@ -2,7 +2,10 @@ package com.dearme.demo.domain.counseling.service;
 
 import com.dearme.demo.domain.counseling.dto.CounselingInfoListResponseDto;
 import com.dearme.demo.domain.counseling.dto.CounselingInfoResponseDto;
+import com.dearme.demo.domain.counseling.dto.UpdateCounselingRequestDto;
+import com.dearme.demo.domain.counseling.dto.UpdateCounselingResponseDto;
 import com.dearme.demo.domain.counseling.entity.Counseling;
+import com.dearme.demo.domain.counseling.exception.NoExistCounselingException;
 import com.dearme.demo.domain.counseling.repository.CounselingRepository;
 import com.dearme.demo.domain.counselingdocument.entity.CounselingDocument;
 import com.dearme.demo.domain.user.entity.Type;
@@ -51,5 +54,14 @@ public class CounselingServiceImpl implements CounselingService{
         Counseling counseling = counselingDocument.toGroupCounselingEntity();
         counseling.setCounselingDocument(counselingDocument);
         counselingRepository.save(counseling);
+    }
+
+    @Override
+    public UpdateCounselingResponseDto updateCounseling(String id, UpdateCounselingRequestDto dto) {
+        Counseling target = counselingRepository.findById(dto.getId()).orElseThrow(() -> {
+            throw new NoExistCounselingException();
+        });
+        return null;
+
     }
 }
