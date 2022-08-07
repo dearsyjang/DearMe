@@ -13,6 +13,9 @@ export default {
   },
   board : {
     create: () => HOST + BOARD,
-
+    boardsList: () => HOST + BOARD,
+    boardDetail: () => HOST + BOARD,
+    boardUpdate: () => HOST + BOARD,
+    boardDelete: () => HOST + BOARD,
   }
 }

@@ -4,141 +4,137 @@ import router from '@/router'
 
 import _ from 'lodash'
 
-
 export default {
   state: {
-    articles: [],
-    article: {},
+    boards: [],
+    board: {},
   },
   getters: {
-    articles: state => state.articles,
-    article: state => state.article,
+    boards: state => state.boards,
+    board: state => state.board,
     isAuthor: (state, getters) => {
-      return state.article.user?.username === getters.currentUser.username
+      return state.board.user?.username === getters.currentUser.username
     },
-    isLike: (state, getters) => {
-      if (_.findIndex(state.article.like_users, ['username', getters.currentUser.username]) === -1) {
-        return false
-      }
-      return true
-    },
-    isArticle: state => !_.isEmpty(state.article),
+    isBoard: state => !_.isEmpty(state.article),
+
   },
   mutations: {
-    SET_ARTICLES: (state, articles) => state.articles = articles,
-    SET_ARTICLE: (state, article) => state.article = article,
-    SET_ARTICLE_COMMENTS: (state, comments) => state.article.comments = comments,
+    SET_BOARDS: (state, boards) => state.boards = boards,
+    SET_BOARD: (state, board) => state.board = board,
+    SET_BOARD_COMMENTS: (state, comments) => state.board.comments = comments,
   },
   actions: {
-    fetchArticles({ commit, getters }) {
+    // 전체 게시글 조회
+    fetchBoards({ commit, getters }) {
       axios({
-        url: drf.articles.articles(),
+        url: drf.board.boardsList(),
         method: 'get',
         headers: getters.authHeader,
       })
-        .then(res => commit('SET_ARTICLES', res.data))
+        .then(res => commit('SET_BOARDS', res.data))
         .catch(err => console.error(err.response))
     },
-    fetchArticle({ commit, getters }, articlePk) {
+
+    // 게시글 상세 페이지
+    fetchBoard({ commit, getters }, pk) {
       axios({
-        url: drf.articles.article(articlePk),
+        url: drf.board+`/${pk}`,
         method: 'get',
         headers: getters.authHeader,
       })
-        .then(res => commit('SET_ARTICLE', res.data))
+        .then(res => commit('SET_BOARD', res.data))
         .catch(err => {
           console.error(err.response)
           if (err.response.status === 404) {
             router.push({ name: 'NotFound404' })
           }
         })
-    },
-    createArticle({ commit, getters }, article) {
+      },
+
+    // 게시글 작성
+    createBoard({ commit, getters }, board) {
+      // console.log(board)
+      // console.log(getters.authHeader)
       axios({
-        url: drf.articles.articles(),
+        url: drf.board.create(),
         method: 'post',
-        data: article,
+        data: board,
         headers: getters.authHeader
       })
         .then(res => {
-          commit('SET_ARTICLE', res.data)
+          commit('SET_BOARD', res.data)
           router.push({
             name: 'board'
           })
         })
     },
-    updateArticle({ commit, getters }, { pk, title, content}) {
+    // 게시글 수정
+    updateBoard({ commit, getters }, { pk, title, content}) {
       axios({
-        url: drf.articles.article(pk),
+        url: drf.board.update+`${pk}`,
         method: 'put',
         data: { title, content },
         headers: getters.authHeader
       })
         .then(res => {
-          commit('SET_ARTICLE', res.data)
+          commit('SET_BOARD', res.data)
           router.push({
-            name: 'article',
-            params: { articlePk: getters.article.pk }
+            name: 'boardDetail',
+            // params: { boardPk: getters.board.pk }
           })
         })
     },
-    deleteArticle({ commit, getters }, articlePk) {
+    // 게시글 삭제
+    deleteBoard({ commit, getters }, pk) {
       if (confirm('정말 삭제하시겠습니까?')) {
         axios({
-          url: drf.articles.article(articlePk),
+          url: drf.board.delete+`${pk}`,
           method: 'delete',
           headers: getters.authHeader
         })
           .then(() => {
-            commit('SET_ARTICLE', {})
-            router.push({ name: 'articles' })
+            commit('SET_BOARD', {})
+            router.push({ name: 'board' })
           })
           .catch(err => console.error(err.response))
       }
     },
-    likeArticle({ commit, getters }, articlePk) {
-      axios({
-        url: drf.articles.likeArticle(articlePk),
-        method: 'post',
-        headers: getters.authHeader
-      })
-        .then(res => commit('SET_ARTICLE', res.data))
-        .catch(err => console.error(err.response))
-    },
-    createComment({ commit, getters }, { articlePk, content }) {
-      const comment = { content }
-      axios({
-        url: drf.articles.comments(articlePk),
-        method: 'post',
-        data: comment,
-        headers: getters.authHeader
-      })
-        .then(res => commit('SET_ARTICLE_COMMENTS', res.data))
-        .catch(err => console.error(err.response))
-    },
-    updateComment({ commit, getters }, { articlePk, commentPk, content }) {
-      const comment = { content }
-      axios({
-        url: drf.articles.comment(articlePk, commentPk),
-        method: 'put',
-        data: comment,
-        headers: getters.authHeader,
-      })
-        .then(res => {
-          commit('SET_ARTICLE_COMMENTS', res.data)
-        })
-        .catch(err => console.error(err.response))
-    },
-    deleteComment({ commit, getters }, { articlePk, commentPk }) {
-      if (confirm('정말 삭제하시겠습니까?')) {
-        axios({
-          url: drf.articles.comment(articlePk, commentPk),
-          method: 'delete',
-          headers: getters.authHeader
-        })
-          .then(res => commit('SET_ARTICLE_COMMENTS', res.data))
-          .catch(err => console.error(err.response))
-      }
-    }
+
+    // 댓글 부분은 아직 안함
+    // createComment({ commit, getters }, { articlePk, content }) {
+    //   const comment = { content }
+    //   axios({
+    //     url: drf.articles.comments(articlePk),
+    //     method: 'post',
+    //     data: comment,
+    //     headers: getters.authHeader
+    //   })
+    //     .then(res => commit('SET_ARTICLE_COMMENTS', res.data))
+    //     .catch(err => console.error(err.response))
+    // },
+    // updateComment({ commit, getters }, { articlePk, commentPk, content }) {
+    //   const comment = { content }
+    //   axios({
+    //     url: drf.articles.comment(articlePk, commentPk),
+    //     method: 'put',
+    //     data: comment,
+    //     headers: getters.authHeader,
+    //   })
+    //     .then(res => {
+    //       commit('SET_ARTICLE_COMMENTS', res.data)
+    //     })
+    //     .catch(err => console.error(err.response))
+    // },
+    // deleteComment({ commit, getters }, { articlePk, commentPk }) {
+    //   if (confirm('정말 삭제하시겠습니까?')) {
+    //     axios({
+    //       url: drf.articles.comment(articlePk, commentPk),
+    //       method: 'delete',
+    //       headers: getters.authHeader
+    //     })
+    //       .then(res => commit('SET_ARTICLE_COMMENTS', res.data))
+    //       .catch(err => console.error(err.response))
+    //   }
+    // }
   },
 }

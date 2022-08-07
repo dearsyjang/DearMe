@@ -6,47 +6,53 @@ import router from '@/router'
 
 export default {
   state: {
+    // 회원가입때 생성된 토큰을 로컬스토리지에서 조회
     token: localStorage.getItem('token') || '',
+    // 로그인된 사용자
     currentUser: {},
-    profile: {},
     authError: null,
-    isAdmin: false,
   },
   getters: {
-    isLoggedIn: state => !!state.token,
+    // 로그인, 로그아웃 경우에 현재 사용자 업데이트
     currentUser: state => state.currentUser,
-    profile: state => state.profile,
+    // 현재 사용자의 토큰을 나타냄 (요청 보낼 때, header에서 사용)
+    authHeader: state => ({ Authorization: `Token ${state.currentUser}`}),
     authError: state => state.authError,
-    authHeader: state => ({ Authorization: `Token ${state.token}`}),
-    isAdmin: state => state.isAdmin,
   },
   mutations: {
     SET_TOKEN: (state, token) => state.token = token,
     SET_CURRENT_USER: (state, user) => state.currentUser = user,
-    SET_PROFILE: (state, profile) => state.profile = profile,
     SET_AUTH_ERROR: (state, error) => state.authError = error,
-    SET_IS_ADMIN: (state, admin) => state.isAdmin = admin,
   },
   actions: {
+    // 회원가입
     saveToken({ commit }, token) {
       commit('SET_TOKEN', token)
+      // 회원가입시 받은 토큰을 로컬스토리지에 추가
       localStorage.setItem('token', token)
     },
+    // 로그아웃
     removeToken({ commit }) {
-      commit('SET_TOKEN', '')
-      localStorage.setItem('token', '')
+      // 현재 사용자 비움
+      commit('SET_CURRENT_USER', '')
+      // localStorage.setItem('token', '')
     },
-    login({ commit, dispatch }, data) {
-      // console.log(data.id, data.pw, data)
+    // 받아오는 데이터가 한개일 경우 입력, 여러개일 경우 {}안에 담아와야함
+    login({ commit }, data) {
       axios({
         // url: 'https://i7d206.p.ssafy.io/users/token?id=id1&pw=pw1',
         url: drf.member.login()+`?id=${data.id}&pw=${data.pw}`,
         method: 'get'
       })
         .then(res => {
-          console.log('성공')
-          const token = res.data.accessToken
-          dispatch('fetchCurrentUser', token)
+          const token = res.data
+          // token에 accessToken, refreshToken 둘 다 들어감 (이 부분 수정 필요)
+          // console.log(token)
+          // 현재 사용자 업데이트
+          commit('SET_CURRENT_USER', token)
+          // dispatch('fetchCurrentUser', token)
+          // console.log(getters.currentUser)
+          // console.log(getters.authHeader)
           router.push({ name: 'mypageUser' })
         })
         .catch(err => {
@@ -55,6 +61,7 @@ export default {
           commit('SET_AUTH_ERROR', err.response.data)
         })
     },
+    // POST 요청일 경우 FormData로 보내야함 (SignupUserView 참고)
     signup({ commit, dispatch }, formData) {
       axios({
         url: drf.member.signup(),
@@ -65,14 +72,13 @@ export default {
         }
       })
       .then(res => {
-          console.log(res)
-          console.log(res.data)
-          const token = res.data.accessToken
-          console.log(token)
+          // console.log(res)
+          // console.log(res.data)
+          const token = res.data
+          // console.log(token)
+          // 로컬스토리지에 토큰 저장
           dispatch('saveToken', token)
           alert('save token성공')
-          dispatch('fetchCurrentUser')
-          alert('fetch user 성공')
           router.push({ name: 'login' })
         })
         .catch((err) => {
@@ -81,40 +87,11 @@ export default {
           commit('SET_AUTH_ERROR', err.response.data)
         })
     },
-
-    logout({ getters, dispatch, commit }) {
-      axios({
-        url: drf.member.logout(),
-        method: 'post',
-        // data: {},
-        headers: getters.authHeader,
-      })
-        .then(() => {
-          dispatch('removeToken')
-          commit('SET_IS_ADMIN', false)
-          router.push({ name: 'login' })
-        })
-        .error(err => {
-          console.error(err.response)
-        })
-    },
-    fetchCurrentUser({ commit, getters, dispatch }) {
-      if (getters.isLoggedIn) {
-        axios({
-          url: drf.member.currentUserInfo(),
-          method: 'get',
-          headers: getters.authHeader,
-        })
-          .then(res => {
-            commit('SET_CURRENT_USER', res.data)
-          })
-          .catch(err => {
-            if (err.response.status == 401) {
-              dispatch('removeToken')
-              router.push({ name: 'login' })
-            }
-          })
-      }
+    // 로그아웃은 별도 요청 없이 현재 사용자 리셋
+    logout({ dispatch, getters}) {
+      dispatch('removeToken')
+      console.log(getters.currentUser)
+      router.push({ name: 'login' })
     },
   },
 }
