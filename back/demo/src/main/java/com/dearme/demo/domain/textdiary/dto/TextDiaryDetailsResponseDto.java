@@ -10,6 +10,8 @@ public class TextDiaryDetailsResponseDto {
     private Long id;
     private String title;
     private String contents;
+    private String sentiment;
+    private Long percentage;
     private Integer year;
     private Integer month;
     private Integer day;
@@ -19,6 +21,8 @@ public class TextDiaryDetailsResponseDto {
                 .id(entity.getId())
                 .title(entity.getTitle())
                 .contents(entity.getContents())
+                .sentiment(entity.getSentiment())
+                .percentage(entity.getPercentage())
                 .year(entity.getYear())
                 .month(entity.getMonth())
                 .day(entity.getDay())
