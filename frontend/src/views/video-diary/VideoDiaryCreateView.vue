@@ -56,6 +56,7 @@
 import axios from 'axios';
 import { OpenVidu } from 'openvidu-browser';
 import UserVideo from './components/UserVideo';
+import {mapActions} from 'vuex'
 axios.defaults.headers.post['Content-Type'] = 'application/json';
 const OPENVIDU_SERVER_URL = 'https://i7d206.p.ssafy.io:4443';
 const OPENVIDU_SERVER_SECRET = 'dearme';
@@ -71,11 +72,14 @@ export default {
       mainStreamManager: undefined,
       publisher: undefined,
       subscribers: [],
-      mySessionId: 'SessionA',
+      accessToken: '',
       myUserName: 'Participant' + Math.floor(Math.random() * 100),
     };
   },
   methods: {
+    getToken() {
+      ...mapActions(['accessToken'])
+      },
     joinSession() {
       // --- Get an OpenVidu object ---
       this.OV = new OpenVidu();
@@ -101,9 +105,9 @@ export default {
       // --- Connect to the session with a valid user token ---
       // 'getToken' method is simulating what your server-side should do.
       // 'token' parameter should be retrieved and returned by your own backend
-      this.getToken(this.mySessionId).then((token) => {
+      this.getToken(this.accessToken).then((RTCtoken) => {
         this.session
-          .connect(token, { clientData: this.myUserName })
+          .connect(RTCtoken, { clientData: this.myUserName })
           .then(() => {
             // --- Get your own camera stream with the desired properties ---
             let publisher = this.OV.initPublisher(undefined, {
@@ -152,71 +156,71 @@ export default {
      *   2) Create a Connection in OpenVidu Server (POST /openvidu/api/sessions/<SESSION_ID>/connection)
      *   3) The Connection.token must be consumed in Session.connect() method
      */
-    getToken(mySessionId) {
-      return this.createSession(mySessionId).then((sessionId) => this.createToken(sessionId));
-    },
+    // getToken(mySessionId) {
+      // return this.createSession(mySessionId).then((sessionId) => this.createToken(sessionId));
+    // },
     // See https://docs.openvidu.io/en/stable/reference-docs/REST-API/#post-openviduapisessions
-    createSession(sessionId) {
-      return new Promise((resolve, reject) => {
-        axios
-          .post(
-            `${OPENVIDU_SERVER_URL}/openvidu/api/sessions`,
-            JSON.stringify({
-              customSessionId: sessionId,
-            }),
-            {
-              auth: {
-                username: 'OPENVIDUAPP',
-                password: OPENVIDU_SERVER_SECRET,
-              },
-            }
-          )
-          .then((response) => response.data)
-          .then((data) => resolve(data.id))
-          .catch((error) => {
-            if (error.response.status === 409) {
-              resolve(sessionId);
-            } else {
-              console.warn(
-                `No connection to OpenVidu Server. This may be a certificate error at ${OPENVIDU_SERVER_URL}`
-              );
-              if (
-                window.confirm(
-                  `No connection to OpenVidu Server. This may be a certificate error at ${OPENVIDU_SERVER_URL}\n\nClick OK to navigate and accept it. If no certificate warning is shown, then check that your OpenVidu Server is up and running at "${OPENVIDU_SERVER_URL}"`
-                )
-              ) {
-                location.assign(`${OPENVIDU_SERVER_URL}/accept-certificate`);
-              }
-              reject(error.response);
-            }
-          });
-      });
-    },
-    // See https://docs.openvidu.io/en/stable/reference-docs/REST-API/#post-openviduapisessionsltsession_idgtconnection
-    createToken(sessionId) {
-      return new Promise((resolve, reject) => {
-        axios
-          .post(
-            `${OPENVIDU_SERVER_URL}/openvidu/api/sessions/${sessionId}/connection`,
-            {},
-            {
-              auth: {
-                username: 'OPENVIDUAPP',
-                password: OPENVIDU_SERVER_SECRET,
-              },
-            }
-          )
-          .then((response) => response.data)
-          .then((data) => resolve(data.token))
-          .catch((error) => reject(error.response));
-      });
-    },
+    // createSession(sessionId) {
+    //   return new Promise((resolve, reject) => {
+    //     axios
+    //       .post(
+    //         `${OPENVIDU_SERVER_URL}/openvidu/api/sessions`,
+    //         JSON.stringify({
+    //           customSessionId: sessionId,
+    //         }),
+    //         {
+    //           auth: {
+    //             username: 'OPENVIDUAPP',
+    //             password: OPENVIDU_SERVER_SECRET,
+    //           },
+    //         }
+    //       )
+    //       .then((response) => response.data)
+    //       .then((data) => resolve(data.id))
+    //       .catch((error) => {
+    //         if (error.response.status === 409) {
+    //           resolve(sessionId);
+    //         } else {
+    //           console.warn(
+    //             `No connection to OpenVidu Server. This may be a certificate error at ${OPENVIDU_SERVER_URL}`
+    //           );
+    //           if (
+    //             window.confirm(
+    //               `No connection to OpenVidu Server. This may be a certificate error at ${OPENVIDU_SERVER_URL}\n\nClick OK to navigate and accept it. If no certificate warning is shown, then check that your OpenVidu Server is up and running at "${OPENVIDU_SERVER_URL}"`
+    //             )
+    //           ) {
+    //             location.assign(`${OPENVIDU_SERVER_URL}/accept-certificate`);
+    //           }
+    //           reject(error.response);
+    //         }
+    //       });
+    //   });
+    // },
+    // // See https://docs.openvidu.io/en/stable/reference-docs/REST-API/#post-openviduapisessionsltsession_idgtconnection
+    // createToken(sessionId) {
+    //   return new Promise((resolve, reject) => {
+    //     axios
+    //       .post(
+    //         `${OPENVIDU_SERVER_URL}/openvidu/api/sessions/${sessionId}/connection`,
+    //         {},
+    //         {
+    //           auth: {
+    //             username: 'OPENVIDUAPP',
+    //             password: OPENVIDU_SERVER_SECRET,
+    //           },
+    //         }
+    //       )
+    //       .then((response) => response.data)
+    //       .then((data) => resolve(data.token))
+    //       .catch((error) => reject(error.response));
+    //   });
+    // },
 
     
     
 
 
   },
-  
-};
+}
+
 </script>
