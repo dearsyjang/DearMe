@@ -82,6 +82,9 @@ public class User extends Base {
     @OneToMany(mappedBy = "counselor", orphanRemoval = true, cascade = CascadeType.ALL)
     private List<Group> groups = new ArrayList<>();
 
+    @OneToMany(mappedBy = "user", orphanRemoval = true, cascade = CascadeType.ALL)
+    private List<GroupUser> groupUsers = new ArrayList<>();
+
     public void updateUser(String pw, String nickName){
         this.pw = pw;
         this.nickName = nickName;
