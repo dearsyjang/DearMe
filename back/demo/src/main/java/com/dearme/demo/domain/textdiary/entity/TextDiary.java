@@ -2,10 +2,7 @@ package com.dearme.demo.domain.textdiary.entity;
 
 import com.dearme.demo.domain.base.entitiy.Base;
 import com.dearme.demo.domain.user.entity.User;
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 
@@ -24,6 +21,12 @@ public class TextDiary extends Base {
     private String title;
 
     private String contents;
+
+    @Setter
+    private String sentiment;
+    @Setter
+    private Long percentage;
+
 
     private Integer year;
 

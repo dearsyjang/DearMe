@@ -51,8 +51,9 @@ public class VideoDiaryServiceImpl implements VideoDiaryService {
         String[] text = videoSTT(videoDiary.getRealfilename());
         videoDiary.setContents(text[0]);
         videoDiary.setSentiment(text[1]);
+        videoDiary.setPercentage(Long.parseLong(text[2]));
         videoDiaryRepository.save(videoDiary);
-        return new PostVideoDiaryResponseDto(videoDiary.getId(), videoDiary.getTitle(), videoDiary.getContents(), videoDiary.getSentiment());
+        return new PostVideoDiaryResponseDto(videoDiary.getId(), videoDiary.getTitle(), videoDiary.getContents(), videoDiary.getSentiment(), videoDiary.getPercentage());
     }
 
     @Override
@@ -64,11 +65,19 @@ public class VideoDiaryServiceImpl implements VideoDiaryService {
         if(user.getUserId().equals(videoDiary.getUser().getUserId())){
             videoDiary.updateTitle(dto.getTitle());
             videoDiary.updateContents(dto.getContents());
-            videoDiary.updateSentiment(dto.getSentiment());
+            if(dto.getSentiment().equals(videoDiary.getSentiment())){
+                String result[] = new String[2];
+                result = getSentiment(videoDiary.getContents());
+                videoDiary.updateSentiment(result[0]);
+                videoDiary.updatePercentage(Long.parseLong(result[1]));
+            }else{
+                videoDiary.updateSentiment(dto.getSentiment());
+                videoDiary.updatePercentage(100L);
+            }
         }else{
             throw new NoPermissionVideoDiaryException();
         }
-        return new PostVideoDiaryResponseDto(videoDiary.getId(), videoDiary.getTitle(), videoDiary.getContents(), videoDiary.getSentiment());
+        return new PostVideoDiaryResponseDto(videoDiary.getId(), videoDiary.getTitle(), videoDiary.getContents(), videoDiary.getSentiment(), videoDiary.getPercentage());
     }
 
     @Override
@@ -122,7 +131,7 @@ public class VideoDiaryServiceImpl implements VideoDiaryService {
         //테스트용
         String filePath="src/main/resources/convert_test1.mp3";
 
-        String[] text= new String[2];
+        String[] text= new String[3];
         try {
             CredentialsProvider credentialsProvider = FixedCredentialsProvider.create(ServiceAccountCredentials.fromStream(new FileInputStream("src/main/resources/my-project-0801-358104-1615eb198267.json")));
             SpeechSettings settings = SpeechSettings.newBuilder().setCredentialsProvider(credentialsProvider).build();
@@ -148,8 +157,16 @@ public class VideoDiaryServiceImpl implements VideoDiaryService {
         catch (Exception e) {
             e.printStackTrace();
         }
+        String result[] = new String[2];
+        result = getSentiment(text[0]);
+        text[1]=result[0];
+        text[2]=result[1];
 
+        return text;
+    }
 
+    public static String[] getSentiment(String text){
+        String []result = new String[2];
         try {
 
             HttpClient httpClient = HttpClientBuilder.create().build(); //Use this instead
@@ -159,7 +176,7 @@ public class VideoDiaryServiceImpl implements VideoDiaryService {
             postRequest.addHeader("X-NCP-APIGW-API-KEY", "fDUi38NcCgGHvIVgivrb7EbVuX7IxXMnYr9sxXjD");
             postRequest.addHeader("Content-Type", "application/json; charset=UTF-8");
             JSONObject obj = new JSONObject();
-            obj.put("content", text[0]);
+            obj.put("content", text);
 
             StringEntity se = new StringEntity(obj.toString(),"UTF-8");
             se.setContentEncoding("UTF-8");
@@ -174,16 +191,16 @@ public class VideoDiaryServiceImpl implements VideoDiaryService {
                 String body = handler.handleResponse(response);
                 String []tempBody = body.split(",");
                 String []tempBody2 = tempBody[0].split(":");
-                text[1]=tempBody2[2].substring(1, tempBody2[2].length()-1);
-                System.out.println(body);
+                result[0]=tempBody2[2].substring(1, tempBody2[2].length()-1);
+
+                result[1] = body.split(result[0])[2].substring(2, 4);
             } else {
                 System.out.println("response is error : " + response.getStatusLine().getStatusCode());
             }
         } catch (Exception e){
             System.err.println(e.toString());
         }
-
-        return text;
+        return result;
     }
      //Local 이나 Remote이거나 구분해서 RecognitionAudio 만들어 주는 부분
     public static RecognitionAudio getRecognitionAudio(String filePath) throws IOException {

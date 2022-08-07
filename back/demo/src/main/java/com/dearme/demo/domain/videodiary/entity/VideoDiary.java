@@ -27,6 +27,8 @@ public class VideoDiary extends Base {
     private String contents;
     @Setter
     private String sentiment;
+    @Setter
+    private Long percentage;
 
     private Integer year;
 
@@ -35,10 +37,11 @@ public class VideoDiary extends Base {
     private Integer day;
 
     @Builder
-    public VideoDiary(String title, String contents, String sentiment, String realfilename, String filename, Integer year, Integer month, Integer day){
+    public VideoDiary(String title, String contents, String sentiment, Long percentage, String realfilename, String filename, Integer year, Integer month, Integer day){
         this.title = title;
         this.contents = contents;
         this.sentiment=sentiment;
+        this.percentage=percentage;
         this.realfilename=realfilename;
         this.filename=filename;
         this.year = year;
@@ -54,6 +57,7 @@ public class VideoDiary extends Base {
     public void updateSentiment(String sentiment){
         this.sentiment = sentiment;
     }
+    public void updatePercentage(Long percentage){this.percentage=percentage;}
     public void setUser(User user){
         this.user = user;
     }

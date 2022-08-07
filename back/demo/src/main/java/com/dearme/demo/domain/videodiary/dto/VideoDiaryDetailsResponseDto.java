@@ -12,9 +12,11 @@ public class VideoDiaryDetailsResponseDto {
     private String title;
     private String contents;
     private String sentiment;
+    private Long percentage;
     private Integer year;
     private Integer month;
     private Integer day;
+
 
     public static VideoDiaryDetailsResponseDto of(VideoDiary entity){
         return VideoDiaryDetailsResponseDto.builder()
@@ -22,6 +24,7 @@ public class VideoDiaryDetailsResponseDto {
                 .title(entity.getTitle())
                 .contents(entity.getContents())
                 .sentiment(entity.getSentiment())
+                .percentage(entity.getPercentage())
                 .year(entity.getYear())
                 .month(entity.getMonth())
                 .day(entity.getDay())

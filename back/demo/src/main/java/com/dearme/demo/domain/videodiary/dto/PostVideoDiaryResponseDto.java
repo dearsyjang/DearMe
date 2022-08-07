@@ -10,4 +10,5 @@ public class PostVideoDiaryResponseDto {
     private String title;
     private String contents;
     private String sentiment;
+    private Long percentage;
 }

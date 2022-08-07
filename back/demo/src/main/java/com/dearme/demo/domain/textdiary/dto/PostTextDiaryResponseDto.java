@@ -7,4 +7,6 @@ import lombok.Data;
 @AllArgsConstructor
 public class PostTextDiaryResponseDto {
     private Long id;
+    private String sentiment;
+    private Long percentage;
 }
