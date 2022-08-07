@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 
 @RequiredArgsConstructor
-@RequestMapping("/videodiaries")
+//@RequestMapping("/videodiaries")
 @RestController
 public class CounselApiController {
     private final CounselService counselService;

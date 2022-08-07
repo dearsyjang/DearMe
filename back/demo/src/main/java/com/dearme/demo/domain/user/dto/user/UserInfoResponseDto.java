@@ -1,5 +1,6 @@
 package com.dearme.demo.domain.user.dto.user;
 
+import com.dearme.demo.domain.review.entity.Favorite;
 import com.dearme.demo.domain.user.entity.Gender;
 import com.dearme.demo.domain.user.entity.Type;
 import com.dearme.demo.domain.user.entity.User;

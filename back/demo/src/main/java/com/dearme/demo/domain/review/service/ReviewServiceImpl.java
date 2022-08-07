@@ -1,8 +1,10 @@
 package com.dearme.demo.domain.review.service;
 
+import com.dearme.demo.domain.favorite.dto.FavoriteSaveResponseDto;
 import com.dearme.demo.domain.review.dto.ReviewCounselorViewResponseDto;
 import com.dearme.demo.domain.review.dto.ReviewSaveRequestDto;
 import com.dearme.demo.domain.review.dto.ReviewSaveResponseDto;
+import com.dearme.demo.domain.review.entity.Favorite;
 import com.dearme.demo.domain.review.entity.Review;
 import com.dearme.demo.domain.review.exception.NoExistReviewException;
 import com.dearme.demo.domain.review.exception.NoReviewDeletePermissionException;
