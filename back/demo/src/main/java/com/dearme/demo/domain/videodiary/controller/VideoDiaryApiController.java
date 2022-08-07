@@ -42,16 +42,10 @@ public class VideoDiaryApiController {
         String id = (String) request.getAttribute("id");
         return new ResponseEntity<>(CommonResponse.getSuccessResponse(videoDiaryService.getList(id, year, month)), HttpStatus.OK);
     }
-//    @DeleteMapping("/{textDiaryId}")
-//    public void delete(HttpServletRequest request, @PathVariable Long textDiaryId){
-//        String id = (String) request.getAttribute("id");
-//        textDiaryService.delete(id, textDiaryId);
-//    }
-//
-//
-//    @Operation(summary = "Video Diary Test", description = "영상 일기 저장")
-//    @PostMapping
-//    public ResponseEntity<CommonResponse> videoDiarySave() throws IOException {     //영상 일기 기능 완성 시 파라미터 추가 필요
-//        return new ResponseEntity<>(CommonResponse.getSuccessResponse(counselService.videoSave()), HttpStatus.OK);
-//    }
+    @DeleteMapping("/{videoDiaryId}")
+    public void delete(HttpServletRequest request, @PathVariable Long videoDiaryId){
+        String id = (String) request.getAttribute("id");
+        videoDiaryService.delete(id, videoDiaryId);
+    }
+
 }

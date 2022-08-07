@@ -14,8 +14,6 @@ public interface VideoDiaryService {
     VideoDiaryDetailsResponseDto getDetails(String id, Long videoDiaryId);
 
     VideoDiaryListResponseDto getList(String id, Integer year, Integer month);
-//
-//    void delete(String id, Long textDiaryId);
-//
-//    VideoSaveResponseDto videoSave() throws IOException;
+
+    void delete(String id, Long videoDiaryId);
 }

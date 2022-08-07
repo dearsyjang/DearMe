@@ -28,6 +28,7 @@ import org.apache.http.impl.client.HttpClientBuilder;
 import org.json.JSONObject;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -88,6 +89,13 @@ public class VideoDiaryServiceImpl implements VideoDiaryService {
         dto.setVideoDiaries(videoDiaryDetailsResponseDtos);
         return dto;
     }
+
+    @Override
+    @Transactional
+    public void delete(String id, Long videoDiaryId) {
+        videoDiaryRepository.deleteByUser_IdAndId(id, videoDiaryId);
+    }
+
 
     public String[] videoSTT(String path) throws IOException {
         //서버에서 실행시킬 때
