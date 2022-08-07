@@ -2,7 +2,6 @@ package com.dearme.demo.domain.videodiary.service;
 
 
 import com.dearme.demo.domain.textdiary.dto.TextDiaryDetailsResponseDto;
-import com.dearme.demo.domain.textdiary.dto.TextDiaryListResponseDto;
 import com.dearme.demo.domain.textdiary.entity.TextDiary;
 import com.dearme.demo.domain.textdiary.exception.NoPermissionTextDiaryException;
 import com.dearme.demo.domain.user.entity.User;
