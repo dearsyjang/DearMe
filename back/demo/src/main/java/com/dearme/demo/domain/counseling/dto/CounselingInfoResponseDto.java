@@ -17,14 +17,15 @@ public class CounselingInfoResponseDto {
     private Integer month;
     private Integer day;
     private Long counselingDocumentId;
+    private Long groupId;
     private Type type;
 
     public static CounselingInfoResponseDto of(Counseling entity){
-        if(entity.getCounselingDocument() == null)
+        if(entity.getCounselor() == null)
             return CounselingInfoResponseDto.builder()
                     .id(entity.getId())
                     .userId(entity.getUser().getUserId())
-                    .counselorId(entity.getCounselor().getUserId())
+                    .groupId(entity.getGroup().getId())
                     .year(entity.getYear())
                     .month(entity.getMonth())
                     .day(entity.getDay())
