@@ -106,7 +106,7 @@ export default {
 </script>
 
 
-<style>
+<style scoped>
 .table{
     width: auto;
     color: #112D4E;
