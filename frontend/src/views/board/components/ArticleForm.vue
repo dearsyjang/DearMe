@@ -37,12 +37,14 @@ export default {
   computed: {
   },
   methods: {
-    ...mapActions(['createArticle']),
+    ...mapActions(['createBoard']),
     onSubmit() {
+      // 토큰문제로 axios 에러 발생하는 듯
       const formData = new FormData()
       formData.append('title', this.data.title)
       formData.append('contents', this.data.contents)
-      this.createArticle(this.formData)
+      console.log(formData.getAll('title'))
+      this.createBoard(this.formData)
       }
   },
   created() {},
