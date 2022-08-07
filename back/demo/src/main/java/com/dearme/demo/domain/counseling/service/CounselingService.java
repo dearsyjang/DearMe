@@ -6,4 +6,6 @@ import com.dearme.demo.domain.counselingdocument.entity.CounselingDocument;
 public interface CounselingService {
     void createCounseling(CounselingDocument counselingDocument);
     CounselingInfoListResponseDto getCounselings(String id);
+
+    void createGroupCounseling(CounselingDocument counselingDocument);
 }
