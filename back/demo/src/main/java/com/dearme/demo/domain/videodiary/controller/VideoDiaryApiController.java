@@ -37,11 +37,11 @@ public class VideoDiaryApiController {
         String id = (String) request.getAttribute("id");
         return new ResponseEntity<>(CommonResponse.getSuccessResponse(videoDiaryService.getDetails(id, videoDiaryId)), HttpStatus.OK);
     }
-//    @GetMapping("/year/{year}/month/{month}")
-//    public ResponseEntity<CommonResponse> getList(HttpServletRequest request, @PathVariable("year") Integer year, @PathVariable("month") Integer month){
-//        String id = (String) request.getAttribute("id");
-//        return new ResponseEntity<>(CommonResponse.getSuccessResponse(textDiaryService.getList(id, year, month)), HttpStatus.OK);
-//    }
+    @GetMapping("/year/{year}/month/{month}")
+    public ResponseEntity<CommonResponse> getList(HttpServletRequest request, @PathVariable("year") Integer year, @PathVariable("month") Integer month){
+        String id = (String) request.getAttribute("id");
+        return new ResponseEntity<>(CommonResponse.getSuccessResponse(videoDiaryService.getList(id, year, month)), HttpStatus.OK);
+    }
 //    @DeleteMapping("/{textDiaryId}")
 //    public void delete(HttpServletRequest request, @PathVariable Long textDiaryId){
 //        String id = (String) request.getAttribute("id");
