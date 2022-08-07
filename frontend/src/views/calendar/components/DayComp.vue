@@ -1,7 +1,8 @@
 <template>
   <div>
-      
+      <router-link to="/videodiary">
       <button>카메라 아이콘</button>
+      </router-link>
       <button>일기 아이콘</button>
 
   </div>

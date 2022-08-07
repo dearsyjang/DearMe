@@ -5,7 +5,7 @@ import member from './member.js'
 import mypage from './mypage.js'
 import counselor from './counselor.js'
 import calendar from './calendar.js'
-
+import videoDiary from './video-diary.js'
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
@@ -14,6 +14,7 @@ const router = createRouter({
     ...mypage,
     ...counselor,
     ...calendar,
+    ...videoDiary,
   ]
 
 // vue 기본 양식
