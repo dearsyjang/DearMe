@@ -8,6 +8,7 @@ import com.dearme.demo.domain.board.exception.comment.NoCommentDeletePermissionE
 import com.dearme.demo.domain.board.exception.comment.NoCommentSavePermissionException;
 import com.dearme.demo.domain.board.exception.comment.NoCommentUpdatePermissionException;
 import com.dearme.demo.domain.board.exception.comment.NoExistCommentException;
+import com.dearme.demo.domain.counseling.exception.NoExistCounselingException;
 import com.dearme.demo.domain.user.exception.*;
 import com.dearme.demo.global.common.CommonResponse;
 import com.dearme.demo.global.util.jwt.InvalidAccessTokenException;
@@ -96,6 +97,10 @@ public class ExceptionHandlerUtil {
     }
     @ExceptionHandler(NoExistCommentException.class)
     ResponseEntity<CommonResponse> handleNoExistCommentException(NoExistCommentException e){
+        return ResponseEntity.badRequest().body(CommonResponse.getErrorResponse(e.getMessage()));
+    }
+    @ExceptionHandler(NoExistCounselingException.class)
+    ResponseEntity<CommonResponse> handleNoExistCounselingException(NoExistCounselingException e){
         return ResponseEntity.badRequest().body(CommonResponse.getErrorResponse(e.getMessage()));
     }
 }
