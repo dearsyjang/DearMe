@@ -9,10 +9,16 @@
         </button>
 
         <!-- 라우터 링크 연결하기 -->
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div v-if="this.currentUser" class="collapse navbar-collapse" id="navbarSupportedContent">
           <div class="navbar-nav">
             <li><router-link to="signup" class="mx-3">회원정보수정</router-link></li>
-            <li><router-link to="logout" class="mx-4">로그아웃</router-link></li>
+            <button @click="logOUT()">로그아웃</button>
+            <!-- <li><router-link to="logout" class="mx-4">로그아웃</router-link></li> -->
+          </div>
+        </div>
+        <div v-else class="collapse navbar-collapse" id="navbarSupportedContent">
+          <div class="navbar-nav">
+            <li><router-link to="login" class="mx-4">로그인</router-link></li>
           </div>
         </div>
 
@@ -22,19 +28,30 @@
 </template>
 
 <script>
+import { mapActions, mapGetters } from 'vuex'
 export default {
   name: 'TopBar',
   components: {},
   data() {
     return {
-      sampleData: ''
     }
   },
   setup() {},
-  created() {},
+  created() {
+  },
   mounted() {},
   unmounted() {},
-  methods: {}
+  methods: {
+    ...mapActions(['logout']),
+    // 로그아웃 버튼 누르면 로그아웃 실행
+    logOUT() {
+      this.logout()
+    }
+  },
+  computed: {
+    // 로그인 여부 확인
+    ...mapGetters(['currentUser'])
+  }
 }
 </script>
 
@@ -44,7 +61,7 @@ export default {
   display:flex;
   flex-direction:row;
   background-color: #FDFDFD;
-  border-bottom: 1px solid black; 
+  border-bottom: 1px solid black;
 }
 
 #topbar > .navbar a{
