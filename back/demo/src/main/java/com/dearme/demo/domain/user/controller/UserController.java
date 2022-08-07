@@ -96,5 +96,11 @@ public class UserController {
         return new ResponseEntity<>(CommonResponse.getSuccessResponse(userService.getReviews(id)), HttpStatus.OK);
     }
 
+    @GetMapping("/groups")
+    public ResponseEntity<CommonResponse> getGroups(HttpServletRequest request){
+        String id = (String) request.getAttribute("id");
+        return new ResponseEntity<>(CommonResponse.getSuccessResponse(userService.getGroups(id)), HttpStatus.OK);
+    }
+
 
 }
