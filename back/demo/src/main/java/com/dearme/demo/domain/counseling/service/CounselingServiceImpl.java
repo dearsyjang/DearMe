@@ -29,6 +29,7 @@ public class CounselingServiceImpl implements CounselingService{
         counselingRepository.save(counseling);
     }
 
+    @Override
     public CounselingInfoListResponseDto getCounselings(String id) {
         User user = userRepository.findUserById(id).orElseThrow(() -> {
             throw new NoExistUserException();
@@ -43,5 +44,12 @@ public class CounselingServiceImpl implements CounselingService{
             counselingInfoResponseDtos.add(CounselingInfoResponseDto.of(counseling));
         }
         return new CounselingInfoListResponseDto(counselingInfoResponseDtos);
+    }
+
+    @Override
+    public void createGroupCounseling(CounselingDocument counselingDocument) {
+        Counseling counseling = counselingDocument.toGroupCounselingEntity();
+        counseling.setCounselingDocument(counselingDocument);
+        counselingRepository.save(counseling);
     }
 }
