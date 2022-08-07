@@ -43,8 +43,8 @@ public class CommentServiceImpl implements CommentService{
             throw new NoExistUserException();
         });
         if(user.getType().equals(Type.COUNSELOR)){
-        comment.setBoard(board);
-           comment.setUser(user);
+            comment.setBoard(board);
+            comment.setUser(user);
             commentRepository.save(comment);
             return new CommentSaveResponseDto(comment.getCommentid());
         }else{

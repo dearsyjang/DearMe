@@ -27,7 +27,7 @@ public class BoardApiController {
     @Operation(summary = "Board Save Test", description = "게시판 글 저장")
     @PostMapping
     public ResponseEntity<CommonResponse> boardSave(HttpServletRequest request, @RequestBody @Validated BoardSaveRequestDto dto){
-            String id = (String) request.getAttribute("id");
+        String id = (String) request.getAttribute("id");
         return new ResponseEntity<>(CommonResponse.getSuccessResponse(boardService.boardSave(id, dto)), HttpStatus.OK);
     }
     @Operation(summary = "Board View Test", description = "게시판 전체 조회")
