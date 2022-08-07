@@ -63,7 +63,7 @@
           <label class="form-label mt-2" for="gender">성별</label>
           <select class="form-select" v-model="credentials.gender" id="gender">
             <option value="MALE">남자</option>
-            <option value="FEMAILE">여자</option>
+            <option value="FEMALE">여자</option>
           </select>
         </div>
         <div class="form-group col-md-6">
@@ -116,7 +116,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['authError', 'currentUser'])
+    ...mapGetters(['authError'])
   },
   methods: {
     ...mapActions(['signup']),
@@ -129,13 +129,13 @@ export default {
       formData.append('birth', this.credentials.birth)
       formData.append('gender', this.credentials.gender)
       formData.append('email', this.credentials.email)
-      // formData.append('picture', this.credentials.email)
       this.signup(formData)
+      // console.log(formData.getAll('id'))
     },
-    inputImg() {
-      this.credentials.picture = this.$refs.serveryImg.files
-      console.log(this.credentials.picture)
-    }
+    // inputImg() {
+    //   this.credentials.picture = this.$refs.serveryImg.files
+    //   console.log(this.credentials.picture)
+    // }
 
   }
 }

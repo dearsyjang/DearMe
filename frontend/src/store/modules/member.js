@@ -36,11 +36,11 @@ export default {
       commit('SET_TOKEN', '')
       localStorage.setItem('token', '')
     },
-    login({ commit, getters, dispatch }) {
+    login({ commit, dispatch }) {
       axios({
-        url: drf.member.login(),
-        method: 'get',
-        headers: getters.authHeader,
+        url: 'https://i7d206.p.ssafy.io/users/token?id=id1&pw=pw1',
+        // url: drf.member.login()+`?id=${id}&pw=${pw}`,
+        method: 'get'
       })
         .then(res => {
           console.log('성공')
@@ -49,6 +49,7 @@ export default {
           router.push({ name: 'mypageUser' })
         })
         .catch(err => {
+          console.error(err)
           console.error(err.response.data)
           commit('SET_AUTH_ERROR', err.response.data)
         })
@@ -57,20 +58,24 @@ export default {
       axios({
         url: drf.member.signup(),
         method: 'post',
-        data: formData
+        data: formData,
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
       })
-      .then((res) => {
-          // console.log(res)
-          // console.log(res.data)
+      .then(res => {
+          console.log(res)
+          console.log(res.data)
           const token = res.data.accessToken
+          console.log(token)
           dispatch('saveToken', token)
           alert('save token성공')
           dispatch('fetchCurrentUser')
           alert('fetch user 성공')
           router.push({ name: 'login' })
         })
-        .catch((err) =>
-        { console.error(err)
+        .catch((err) => {
+          console.error(err)
           console.error(err.response.data)
           commit('SET_AUTH_ERROR', err.response.data)
         })

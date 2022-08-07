@@ -12,7 +12,7 @@
       <input clss="form-control" type="text" v-model="credentials.pw" placeholder="비밀번호">
     </div>
     <div class="form-group mt-4">
-      <button @click="login()" class="btn btn-success btn-lg">Login</button>
+      <button @click="LogIn()" class="btn btn-success btn-lg">Login</button>
     </div>
     <div class="mt-4">
       <router-link to="/member/findId">아이디 찾기</router-link> |
@@ -38,15 +38,12 @@ export default {
   },
   methods: {
     ...mapActions([ 'login' ]),
-    // LogIn(){
-    //   const url = drf.member.login()
-    //   const par = {params: {
-    //       id: this.credentials.id,
-    //       pw: this.credentials.pw
-    //   }}
-    //   const newUrl = url + par
-    //   this.login(newUrl)
-    // }
+    LogIn() {
+      const id = this.credentials.id
+      const pw = this.credentials.pw
+      // console.log(id, pw)
+      this.login(id, pw)
+    }
   },
   created() {
     // this.login()
