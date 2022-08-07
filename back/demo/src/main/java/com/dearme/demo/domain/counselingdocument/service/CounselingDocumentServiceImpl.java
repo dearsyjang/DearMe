@@ -1,11 +1,14 @@
 package com.dearme.demo.domain.counselingdocument.service;
 
-import com.dearme.demo.domain.counseling.entity.Counseling;
 import com.dearme.demo.domain.counseling.service.CounselingServiceImpl;
 import com.dearme.demo.domain.counselingdocument.dto.PostCounselingDocumentRequestDto;
 import com.dearme.demo.domain.counselingdocument.dto.PostCounselingDocumentResponseDto;
+import com.dearme.demo.domain.counselingdocument.dto.PostGroupCounselingDocumentDto;
 import com.dearme.demo.domain.counselingdocument.entity.CounselingDocument;
 import com.dearme.demo.domain.counselingdocument.repository.CounselingDocumentRepository;
+import com.dearme.demo.domain.group.entity.Group;
+import com.dearme.demo.domain.group.exception.GroupNotFoundExcetion;
+import com.dearme.demo.domain.group.repository.GroupRepository;
 import com.dearme.demo.domain.user.entity.User;
 import com.dearme.demo.domain.user.exception.NoExistUserException;
 import com.dearme.demo.domain.user.repository.UserRepository;
@@ -24,6 +27,8 @@ public class CounselingDocumentServiceImpl implements CounselingDocumentService{
 
     private final CounselingServiceImpl counselingService;
 
+    private final GroupRepository groupRepository;
+
     @Override
     @Transactional
     public PostCounselingDocumentResponseDto post(String id, PostCounselingDocumentRequestDto dto) {
@@ -38,5 +43,21 @@ public class CounselingDocumentServiceImpl implements CounselingDocumentService{
         counselingDocument.setCounselor(counselor);
         counselingService.createCounseling(counselingDocument);
         return new PostCounselingDocumentResponseDto(counselingDocumentRepository.save(counselingDocument).getId());
+    }
+
+    @Override
+    @Transactional
+    public void postGroup(String id, PostGroupCounselingDocumentDto dto) {
+        CounselingDocument counselingDocument = dto.toEntity();
+        Group group = groupRepository.findById(dto.getGroupId()).orElseThrow(() -> {
+            throw new GroupNotFoundExcetion();
+        });
+        User user = userRepository.findUserById(id).orElseThrow(() -> {
+            throw new NoExistUserException();
+        });
+        counselingDocument.setUser(user);
+        counselingDocument.setGroup(group);
+        counselingService.createGroupCounseling(counselingDocument);
+        counselingDocumentRepository.save(counselingDocument);
     }
 }

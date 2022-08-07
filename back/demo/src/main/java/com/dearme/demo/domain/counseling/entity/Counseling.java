@@ -1,6 +1,7 @@
 package com.dearme.demo.domain.counseling.entity;
 
 import com.dearme.demo.domain.counselingdocument.entity.CounselingDocument;
+import com.dearme.demo.domain.group.entity.Group;
 import com.dearme.demo.domain.user.entity.User;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -38,15 +39,20 @@ public class Counseling {
     @JoinColumn(name = "counseling_document_id")
     private CounselingDocument counselingDocument;
 
+    @ManyToOne
+    @JoinColumn(name = "group_id")
+    private Group group;
+
     public void setCounselingDocument(CounselingDocument counselingDocument) {
         counselingDocument.setCounseling(this);
         this.counselingDocument = counselingDocument;
     }
 
     @Builder
-    public Counseling(User user, User counselor, Integer year, Integer month, Integer day, Type type){
+    public Counseling(User user, Group group, User counselor, Integer year, Integer month, Integer day, Type type){
         this.user = user;
         this.counselor = counselor;
+        this.group = group;
         this.year = year;
         this.month = month;
         this.day = day;
