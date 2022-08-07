@@ -115,7 +115,7 @@ public class UserServiceImpl implements UserService{
         String refreshToken = jwtProvider.getRefreshToken();
         user.updateRefreshToken(refreshToken);
         userRepository.save(user);
-        return new UpdateUserResponseDto(jwtProvider.getAccessToken(user.getId()), jwtProvider.getRefreshToken());
+        return new UpdateUserResponseDto(accessToken, refreshToken);
     }
 
     @Override
