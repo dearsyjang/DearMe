@@ -36,10 +36,11 @@ export default {
       commit('SET_TOKEN', '')
       localStorage.setItem('token', '')
     },
-    login({ commit, dispatch }) {
+    login({ commit, dispatch }, data) {
+      // console.log(data.id, data.pw, data)
       axios({
-        url: 'https://i7d206.p.ssafy.io/users/token?id=id1&pw=pw1',
-        // url: drf.member.login()+`?id=${id}&pw=${pw}`,
+        // url: 'https://i7d206.p.ssafy.io/users/token?id=id1&pw=pw1',
+        url: drf.member.login()+`?id=${data.id}&pw=${data.pw}`,
         method: 'get'
       })
         .then(res => {
@@ -80,6 +81,7 @@ export default {
           commit('SET_AUTH_ERROR', err.response.data)
         })
     },
+
     logout({ getters, dispatch, commit }) {
       axios({
         url: drf.member.logout(),

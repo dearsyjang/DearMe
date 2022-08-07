@@ -63,7 +63,7 @@ export default {
         .then(res => {
           commit('SET_ARTICLE', res.data)
           router.push({
-            name: 'articles'
+            name: 'board'
           })
         })
     },
