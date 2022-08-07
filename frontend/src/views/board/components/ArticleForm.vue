@@ -5,7 +5,7 @@
     <!--v-if="action"==""으로 작성, 수정 구분해주기-->
     <hr>
     <div class="container">
-        <h4 id="article-form-title-text">제목</h4> 
+        <h4 id="article-form-title-text">제목</h4>
         <form class="article-form">
             <input id="article-form-title" type="text" v-model="title" placeholder="제목을 입력해주세요.">
             <br>
@@ -17,14 +17,32 @@
                 <button type="button" class="btn" id="article-form-submit-button" v-on:click="fnSave">저장</button>
                 <router-link :to="{ name: 'board' }"><button button type="button" class="btn" id="article-form-cancel-button">취소</button></router-link>
             </div>
-        </form> 
+        </form>
     </div>
   </div>
 </template>
 
 <script>
+import { mapActions, mapGetters } from 'vuex'
 export default {
-
+  components: {},
+  data() {
+    return {
+      data: {
+        title: this.title,
+        contents: this.contents
+      }
+    }
+  },
+  computed: {
+    ...mapGetters(['authError'])
+  },
+  methods: {
+    ...mapActions({ login:'login' }),
+  },
+  created() {},
+  mounted() {},
+  unmounted() {},
 }
 </script>
 

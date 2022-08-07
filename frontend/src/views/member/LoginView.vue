@@ -9,10 +9,10 @@
     </div>
     <div class="form-group">
       <label class="form-label mt-4 mx-2" for="password">비밀번호</label>
-      <input clss="form-control" type="text" v-model="credentials.password" placeholder="비밀번호">
+      <input clss="form-control" type="text" v-model="credentials.pw" placeholder="비밀번호">
     </div>
     <div class="form-group mt-4">
-      <button class="btn btn-success btn-lg">Login</button>
+      <button @click="LogIn()" class="btn btn-success btn-lg">Login</button>
     </div>
     <div class="mt-4">
       <router-link to="/member/findId">아이디 찾기</router-link> |
@@ -29,7 +29,7 @@ export default {
     return {
       credentials: {
         id: '',
-        password: '',
+        pw: '',
       }
     }
   },
@@ -37,9 +37,17 @@ export default {
     ...mapGetters(['authError'])
   },
   methods: {
-    ...mapActions({ login:'login' }),
+    ...mapActions([ 'login' ]),
+    LogIn() {
+      const id = this.credentials.id
+      const pw = this.credentials.pw
+      // console.log(id, pw)
+      this.login(id, pw)
+    }
   },
-  created() {},
+  created() {
+    // this.login()
+  },
   mounted() {},
   unmounted() {},
 }
