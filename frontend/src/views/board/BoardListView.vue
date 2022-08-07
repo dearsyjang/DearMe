@@ -2,7 +2,7 @@
     <div class="board-list container">
         <br>
         <h1>상담 게시판</h1>
-        <router-link :to="{ name:'boardCreate' }"><button type="button" id="create-button" class="btn mb-3">새 글 작성</button></router-link>
+        <router-link to="/board/create"><button type="button" id="create-button" class="btn mb-3">새 글 작성</button></router-link>
         <div>
         <table class="table table-hover">
             <thead>
@@ -14,11 +14,11 @@
             </tr>
             </thead>
             <tbody>
-            <tr v-for="article in articles" :key="article.boardid">
-                <td>{{ article.boardid }}</td>
-                <td>{{ article.title }}</td>
-                <td>{{ article.nickname }}</td>
-                <td>{{ article.date }}</td>
+            <tr v-for="board in boards" :key="board.boardid">
+                <td>{{ board.boardid }}</td>
+                <td>{{ board.title }}</td>
+                <td>{{ board.nickname }}</td>
+                <td>{{ board.date }}</td>
             </tr>
             </tbody>
         </table>
@@ -32,10 +32,10 @@ import { mapActions, mapGetters } from 'vuex'
 export default {
 // 임시 게시글 데이터
   computed: {
-    ...mapGetters(['articles'])
+    ...mapGetters(['boards'])
   },
   methods: {
-    ...mapActions(['fetchArticles'])
+    ...mapActions(['fetchBoards'])
   },
   created() {
     // this.fetchArticles()

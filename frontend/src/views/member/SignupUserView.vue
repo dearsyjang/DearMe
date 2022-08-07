@@ -14,7 +14,10 @@
       </div>
       <div class="form-group">
         <label class="form-label mt-2" for="nickname">닉네임</label>
-        <input type="text" class="form-control" placeholder="닉네임" v-model="credentials.nickName">
+        <div class="row">
+          <input type="text" class="form-control col-sm-6 mx-3" placeholder="닉네임" id="inputId" v-model="credentials.nickName">
+          <button @click="idCheck()" class="btn btn-primary col-sm-3" id="sameId">중복검사</button>
+        </div>
       </div>
       <div class="birth_wrap ">
         <label class="form-label mt-2" for="birth">생년월일</label>
@@ -59,19 +62,26 @@
         />
       </div>
       <div class="row">
-        <div class="form-group col-md-6">
+        <div class="form-group col-md-4">
           <label class="form-label mt-2" for="gender">성별</label>
           <select class="form-select" v-model="credentials.gender" id="gender">
             <option value="MALE">남자</option>
             <option value="FEMALE">여자</option>
           </select>
         </div>
-        <div class="form-group col-md-6">
-          <label class="form-label mt-2" for="gender">사용자 구분</label>
-          <select @change="changeUser()" class="form-select" v-model="credentials.type" id="gender">
-            <option value="USER">사용자</option>
-            <option  value="COUNSELOR">상담사</option>
-          </select>
+        <div class="form-group col-md-4">
+          <label class="form-label mt-2" for="type">사용자 구분</label>
+          <div class="row">
+            <div class="form-group col-md-6">
+              <input @click="imCounselor()" value="COUNSELOR" type="radio" class="btn-check" name="options-outlined" id="success-outlined" autocomplete="off" checked>
+              <label class="btn btn-outline-success" for="success-outlined">상담사</label>
+            </div>
+            <div class="form-group col-md-6">
+              <input @click="imUser()" value="USER" type="radio" class="btn-check" name="options-outlined" id="danger-outlined" autocomplete="off">
+              <label class="btn btn-outline-success" for="danger-outlined">사용자</label>
+            </div>
+
+          </div>
         </div>
       </div>
       <div v-if="this.isCounselor">
@@ -135,7 +145,7 @@ export default {
       this.signup(formData)
       // console.log(formData.getAll('id'))
     },
-    // 아이디 중복 확인
+    // 아이디 중복 확인 (response 수정해야함)
     idCheck(){
       axios({
         url: drf.member.idCheck()+`/${this.credentials.id}`,
@@ -150,9 +160,15 @@ export default {
         }
       })
     },
-    changeUser() {
-      this.isCounselor = !this.isCounselor;
-      console.log(this.isCounselor)
+    imCounselor() {
+      this.isCounselor = true
+      this.credentials.type = 'COUNSELOR'
+      // console.log(this.isCounselor)
+      // console.log(this.credentials.type)
+    },
+    imUser() {
+      this.isCounselor = false
+      this.credentials.type = 'USER'
     }
     // inputImg() {
     //   this.credentials.picture = this.$refs.serveryImg.files

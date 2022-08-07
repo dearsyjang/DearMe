@@ -79,6 +79,7 @@ export default {
           // 로컬스토리지에 토큰 저장
           dispatch('saveToken', token)
           alert('save token성공')
+          // 여기서 바로 마이페이지로 넘어갈지 고민중..
           router.push({ name: 'login' })
         })
         .catch((err) => {

@@ -36,9 +36,9 @@ export default {
     },
 
     // 게시글 상세 페이지
-    fetchBoard({ commit, getters }, pk) {
+    fetchBoard({ commit, getters }, boardPk) {
       axios({
-        url: drf.board+`/${pk}`,
+        url: drf.board.boardDetail(boardPk),
         method: 'get',
         headers: getters.authHeader,
       })
@@ -69,9 +69,9 @@ export default {
         })
     },
     // 게시글 수정
-    updateBoard({ commit, getters }, { pk, title, content}) {
+    updateBoard({ commit, getters }, { boardPk, title, content}) {
       axios({
-        url: drf.board.update+`${pk}`,
+        url: drf.board.update.boardEdit(boardPk),
         method: 'put',
         data: { title, content },
         headers: getters.authHeader
@@ -85,10 +85,10 @@ export default {
         })
     },
     // 게시글 삭제
-    deleteBoard({ commit, getters }, pk) {
+    deleteBoard({ commit, getters }, boardPk) {
       if (confirm('정말 삭제하시겠습니까?')) {
         axios({
-          url: drf.board.delete+`${pk}`,
+          url: drf.board.boardEdit(boardPk),
           method: 'delete',
           headers: getters.authHeader
         })
@@ -100,41 +100,43 @@ export default {
       }
     },
 
-    // 댓글 부분은 아직 안함
-    // createComment({ commit, getters }, { articlePk, content }) {
-    //   const comment = { content }
-    //   axios({
-    //     url: drf.articles.comments(articlePk),
-    //     method: 'post',
-    //     data: comment,
-    //     headers: getters.authHeader
-    //   })
-    //     .then(res => commit('SET_ARTICLE_COMMENTS', res.data))
-    //     .catch(err => console.error(err.response))
-    // },
-    // updateComment({ commit, getters }, { articlePk, commentPk, content }) {
-    //   const comment = { content }
-    //   axios({
-    //     url: drf.articles.comment(articlePk, commentPk),
-    //     method: 'put',
-    //     data: comment,
-    //     headers: getters.authHeader,
-    //   })
-    //     .then(res => {
-    //       commit('SET_ARTICLE_COMMENTS', res.data)
-    //     })
-    //     .catch(err => console.error(err.response))
-    // },
-    // deleteComment({ commit, getters }, { articlePk, commentPk }) {
-    //   if (confirm('정말 삭제하시겠습니까?')) {
-    //     axios({
-    //       url: drf.articles.comment(articlePk, commentPk),
-    //       method: 'delete',
-    //       headers: getters.authHeader
-    //     })
-    //       .then(res => commit('SET_ARTICLE_COMMENTS', res.data))
-    //       .catch(err => console.error(err.response))
-    //   }
-    // }
+    // 댓글 작성
+    createComment({ commit, getters }, { boardPk, content }) {
+      const contents = { content }
+      axios({
+        url: drf.board.commentCreate(boardPk),
+        method: 'post',
+        data: contents,
+        headers: getters.authHeader
+      })
+        .then(res => commit('SET_BOARD_COMMENTS', res.data))
+        .catch(err => console.error(err.response))
+    },
+    // 댓글 수정
+    updateComment({ commit, getters }, { boardPk, commentPk, content }) {
+      const contents = { content }
+      axios({
+        url: drf.board.commentEdit(boardPk, commentPk),
+        method: 'put',
+        data: contents,
+        headers: getters.authHeader,
+      })
+        .then(res => {
+          commit('SET_BOARD_COMMENTS', res.data)
+        })
+        .catch(err => console.error(err.response))
+    },
+    // 댓글 삭제
+    deleteComment({ commit, getters }, { boardPk, commentPk }) {
+      if (confirm('정말 삭제하시겠습니까?')) {
+        axios({
+          url: drf.board.commentEdit(boardPk, commentPk),
+          method: 'delete',
+          headers: getters.authHeader
+        })
+          .then(res => commit('SET_BOARD_COMMENTS', res.data))
+          .catch(err => console.error(err.response))
+      }
+    }
   },
 }
