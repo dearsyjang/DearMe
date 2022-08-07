@@ -2,15 +2,13 @@ package com.dearme.demo.domain.videodiary.service;
 
 
 import com.dearme.demo.domain.textdiary.dto.TextDiaryDetailsResponseDto;
+import com.dearme.demo.domain.textdiary.dto.TextDiaryListResponseDto;
 import com.dearme.demo.domain.textdiary.entity.TextDiary;
 import com.dearme.demo.domain.textdiary.exception.NoPermissionTextDiaryException;
 import com.dearme.demo.domain.user.entity.User;
 import com.dearme.demo.domain.user.exception.NoExistUserException;
 import com.dearme.demo.domain.user.repository.UserRepository;
-import com.dearme.demo.domain.videodiary.dto.PostUpdateVideoDiaryRequestDto;
-import com.dearme.demo.domain.videodiary.dto.PostVideoDiaryRequestDto;
-import com.dearme.demo.domain.videodiary.dto.PostVideoDiaryResponseDto;
-import com.dearme.demo.domain.videodiary.dto.VideoDiaryDetailsResponseDto;
+import com.dearme.demo.domain.videodiary.dto.*;
 import com.dearme.demo.domain.videodiary.entity.VideoDiary;
 import com.dearme.demo.domain.videodiary.exception.NoPermissionVideoDiaryException;
 import com.dearme.demo.domain.videodiary.repository.VideoDiaryRepository;
@@ -34,6 +32,7 @@ import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -77,16 +76,18 @@ public class VideoDiaryServiceImpl implements VideoDiaryService {
         if(!videoDiary.getUser().getId().equals(id)) throw new NoPermissionVideoDiaryException();
         return VideoDiaryDetailsResponseDto.of(videoDiary);
     }
-//
-//    @Override
-//    public TextDiaryListResponseDto getList(String id, Integer year, Integer month) {
-//        return null;
-//    }
-//
-//    @Override
-//    public void delete(String id, Long textDiaryId) {
-//
-//    }
+
+    @Override
+    public VideoDiaryListResponseDto getList(String id, Integer year, Integer month) {
+        List<VideoDiary> videoDiaries = videoDiaryRepository.findAllByUser_IdAndYearAndMonth(id, year, month);
+        List<VideoDiaryDetailsResponseDto> videoDiaryDetailsResponseDtos = new ArrayList<>();
+        for(VideoDiary videoDiary : videoDiaries){
+            videoDiaryDetailsResponseDtos.add(VideoDiaryDetailsResponseDto.of(videoDiary));
+        }
+        VideoDiaryListResponseDto dto = new VideoDiaryListResponseDto();
+        dto.setVideoDiaries(videoDiaryDetailsResponseDtos);
+        return dto;
+    }
 
     public String[] videoSTT(String path) throws IOException {
         //서버에서 실행시킬 때
