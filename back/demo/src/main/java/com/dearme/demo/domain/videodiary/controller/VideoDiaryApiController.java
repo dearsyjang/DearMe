@@ -32,11 +32,11 @@ public class VideoDiaryApiController {
         return new ResponseEntity<>(CommonResponse.getSuccessResponse(videoDiaryService.postUpdateVideoDiary(id, videoDiaryId, dto)), HttpStatus.OK);
     }
 
-//    @GetMapping("/{textDiaryId}")
-//    public ResponseEntity<CommonResponse> getDetails(HttpServletRequest request, @PathVariable Long textDiaryId){
-//        String id = (String) request.getAttribute("id");
-//        return new ResponseEntity<>(CommonResponse.getSuccessResponse(textDiaryService.getDetails(id, textDiaryId)), HttpStatus.OK);
-//    }
+    @GetMapping("/{videoDiaryId}")
+    public ResponseEntity<CommonResponse> getDetails(HttpServletRequest request, @PathVariable Long videoDiaryId){
+        String id = (String) request.getAttribute("id");
+        return new ResponseEntity<>(CommonResponse.getSuccessResponse(videoDiaryService.getDetails(id, videoDiaryId)), HttpStatus.OK);
+    }
 //    @GetMapping("/year/{year}/month/{month}")
 //    public ResponseEntity<CommonResponse> getList(HttpServletRequest request, @PathVariable("year") Integer year, @PathVariable("month") Integer month){
 //        String id = (String) request.getAttribute("id");

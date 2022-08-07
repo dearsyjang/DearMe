@@ -1,12 +1,16 @@
 package com.dearme.demo.domain.videodiary.service;
 
 
+import com.dearme.demo.domain.textdiary.dto.TextDiaryDetailsResponseDto;
+import com.dearme.demo.domain.textdiary.entity.TextDiary;
+import com.dearme.demo.domain.textdiary.exception.NoPermissionTextDiaryException;
 import com.dearme.demo.domain.user.entity.User;
 import com.dearme.demo.domain.user.exception.NoExistUserException;
 import com.dearme.demo.domain.user.repository.UserRepository;
 import com.dearme.demo.domain.videodiary.dto.PostUpdateVideoDiaryRequestDto;
 import com.dearme.demo.domain.videodiary.dto.PostVideoDiaryRequestDto;
 import com.dearme.demo.domain.videodiary.dto.PostVideoDiaryResponseDto;
+import com.dearme.demo.domain.videodiary.dto.VideoDiaryDetailsResponseDto;
 import com.dearme.demo.domain.videodiary.entity.VideoDiary;
 import com.dearme.demo.domain.videodiary.exception.NoPermissionVideoDiaryException;
 import com.dearme.demo.domain.videodiary.repository.VideoDiaryRepository;
@@ -67,10 +71,12 @@ public class VideoDiaryServiceImpl implements VideoDiaryService {
         return new PostVideoDiaryResponseDto(videoDiary.getId(), videoDiary.getTitle(), videoDiary.getContents(), videoDiary.getSentiment());
     }
 
-//    @Override
-//    public TextDiaryDetailsResponseDto getDetails(String id, Long textDiaryId) {
-//        return null;
-//    }
+    @Override
+    public VideoDiaryDetailsResponseDto getDetails(String id, Long videoDiaryId) {
+        VideoDiary videoDiary = videoDiaryRepository.findById(videoDiaryId).get();
+        if(!videoDiary.getUser().getId().equals(id)) throw new NoPermissionVideoDiaryException();
+        return VideoDiaryDetailsResponseDto.of(videoDiary);
+    }
 //
 //    @Override
 //    public TextDiaryListResponseDto getList(String id, Integer year, Integer month) {
@@ -106,6 +112,7 @@ public class VideoDiaryServiceImpl implements VideoDiaryService {
 
         //테스트용
         String filePath="src/main/resources/convert_test1.mp3";
+
         String[] text= new String[2];
         try {
             CredentialsProvider credentialsProvider = FixedCredentialsProvider.create(ServiceAccountCredentials.fromStream(new FileInputStream("src/main/resources/my-project-0801-358104-1615eb198267.json")));
