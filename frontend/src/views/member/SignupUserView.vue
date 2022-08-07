@@ -5,7 +5,7 @@
         <label for="id" class="form-label mt-2">아이디</label>
         <div class="row">
           <input id="inputId" type="text" class="form-control col-sm-6 mx-3" placeholder="아이디" v-model="credentials.id">
-          <button class="btn btn-primary col-sm-3" id="sameId">중복검사</button>
+          <button @click="idCheck()" class="btn btn-primary col-sm-3" id="sameId">중복검사</button>
         </div>
       </div>
       <div class="form-group has-success">
@@ -68,19 +68,18 @@
         </div>
         <div class="form-group col-md-6">
           <label class="form-label mt-2" for="gender">사용자 구분</label>
-          <select class="form-select" v-model="credentials.type" id="gender">
+          <select @change="changeUser()" class="form-select" v-model="credentials.type" id="gender">
             <option value="USER">사용자</option>
-            <option value="COUNSELOR">상담사</option>
+            <option  value="COUNSELOR">상담사</option>
           </select>
         </div>
       </div>
-      <!-- <div v-if="credentials.type===COUNSELOR">
+      <div v-if="this.isCounselor">
+        <label class="form-label mt-2" for="inputGroupFile01">자격증명서 (상담사 해당)</label>
         <div class="input-group mb-3">
-          <label class="input-group-text" for="inputGroupFile01">파일선택</label>
           <input @change="inputImg()" ref="serveryImg" type="file" class="form-control" id="inputGroupFile01">
         </div>
-      </div> -->
-
+      </div>
       <div class="d-grid gap-2">
         <button type="submit" class="btn btn-primary btn-sm">가입하기</button>
       </div>
@@ -89,11 +88,14 @@
 </template>
 <script>
 import { mapActions, mapGetters } from 'vuex'
+import axios from 'axios'
+import drf from '@/api/drf'
 export default {
   name: 'SignupUser',
   components: {},
   data() {
     return {
+      isCounselor: false,
       credentials: {
         id: '',
         pw: '',
@@ -102,7 +104,7 @@ export default {
         birth: '2022/02/02',
         gender: '',
         email: '',
-        // picture: '',
+        picture: '',
       },
       months: [
         1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12
@@ -120,6 +122,7 @@ export default {
   },
   methods: {
     ...mapActions(['signup']),
+    // 회원가입 폼 제출
     signUp() {
       let formData = new FormData()
       formData.append('id', this.credentials.id)
@@ -132,12 +135,31 @@ export default {
       this.signup(formData)
       // console.log(formData.getAll('id'))
     },
+    // 아이디 중복 확인
+    idCheck(){
+      axios({
+        url: drf.member.idCheck()+`/${this.credentials.id}`,
+        method: 'get'
+      })
+      .then(res => {
+        if (res.status === 'success'){
+          alert('사용 가능한 아이디 입니다.')
+        }
+        else{
+          alert('중복된 아이디가 존재합니다.')
+        }
+      })
+    },
+    changeUser() {
+      this.isCounselor = !this.isCounselor;
+      console.log(this.isCounselor)
+    }
     // inputImg() {
     //   this.credentials.picture = this.$refs.serveryImg.files
     //   console.log(this.credentials.picture)
     // }
+    }
 
-  }
 }
 </script>
 <style scoped>

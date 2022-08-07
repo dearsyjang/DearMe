@@ -39,10 +39,14 @@ export default {
   methods: {
     ...mapActions([ 'login' ]),
     LogIn() {
-      const id = this.credentials.id
-      const pw = this.credentials.pw
-      // console.log(id, pw)
-      this.login(id, pw)
+      let data = {
+        id: this.credentials.id,
+        pw: this.credentials.pw
+      }
+      // const id = this.credentials.id
+      // const pw = this.credentials.pw
+      console.log(data)
+      this.login(data)
     }
   },
   created() {
