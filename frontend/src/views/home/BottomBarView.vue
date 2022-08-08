@@ -6,7 +6,7 @@
       <p class="text">감정달력</p>
     </div>
     <div>
-      <router-link to="/mypage/counselor" class="img mx-3"><img id="calendar" src="../../assets/images/calendar.png" alt="calendar"></router-link>
+      <router-link to="/schedule" class="img mx-3"><img id="calendar" src="../../assets/images/calendar.png" alt="calendar"></router-link>
       <p class="text">상담일정</p>
     </div>
     <div>
@@ -43,11 +43,11 @@ export default {
 </script>
 
 <style scoped>
-#bottombar { 
-    position: fixed; 
-    bottom: 0px; 
-    left: 0px; 
-    border-top: 1px solid black; 
+#bottombar {
+    position: fixed;
+    bottom: 0px;
+    left: 0px;
+    border-top: 1px solid black;
     background-color: #FDFDFD;
     display: flex;
     margin: 0;
@@ -56,11 +56,11 @@ export default {
     overflow-x: hidden;
 }
 
-#bottombar > div { 
-    float: left; 
-    width: 20%; 
-    height: 100%; 
-    text-align: center; 
+#bottombar > div {
+    float: left;
+    width: 20%;
+    height: 100%;
+    text-align: center;
     padding-top: 13px;
     overflow-x: hidden;
 }

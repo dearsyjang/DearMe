@@ -11,17 +11,17 @@ export default [
   },
   {
     path: '/board/create',
-    name: 'articleCreate',
+    name: 'boardCreate',
     component: ArticleCreateView
   },
   {
     path: '/board/1', // :articlePK
-    name: 'articleView',
+    name: 'boardDetail',
     component: ArticleView
   },
   {
     path: '/board/:articlePk/update',
-    name: 'articleUpdate',
+    name: 'boardUpdate',
     component: ArticleUpdateView
   }
 ]

@@ -2,7 +2,7 @@
     <div class="board-list container">
         <br>
         <h1>상담 게시판</h1>
-        <router-link :to="{ name:'articleCreate' }"><button type="button" id="create-button" class="btn mb-3">새 글 작성</button></router-link> 
+        <router-link to="/board/create"><button type="button" id="create-button" class="btn mb-3">새 글 작성</button></router-link>
         <div>
         <table class="table table-hover">
             <thead>
@@ -14,11 +14,11 @@
             </tr>
             </thead>
             <tbody>
-            <tr v-for="(row, idx) in list" :key="idx" v-on:click="onRowClicked">
-                <td>{{ row.idx }}</td>
-                <td>{{ row.title }}</td>
-                <td>{{ row.author }}</td>
-                <td>{{ row.created_at }}</td>
+            <tr v-for="board in boards" :key="board.boardid">
+                <td>{{ board.boardid }}</td>
+                <td>{{ board.title }}</td>
+                <td>{{ board.nickname }}</td>
+                <td>{{ board.date }}</td>
             </tr>
             </tbody>
         </table>
@@ -27,81 +27,20 @@
 </template>
 
 <script>
+import { mapActions, mapGetters } from 'vuex'
+
 export default {
 // 임시 게시글 데이터
-  data() {
-    return {
-      list: {},
-    }
-  },
-  mounted() {
-    this.fnGetList()
+  computed: {
+    ...mapGetters(['boards'])
   },
   methods: {
-    onRowClicked(){
-        // this.$router.push({ name: 'article', params: { articlePk: item.pk } })
-        this.$router.push('/board/1')
-    },
+    ...mapActions(['fetchBoards'])
+  },
+  created() {
+    // this.fetchArticles()
+  }
 
-    fnGetList() {
-      this.list = [
-        {
-            "idx":1,
-            "title": "제목1",
-            "author": "장수영",
-            "created_at": "2022-08-04"
-        },
-        {
-            "idx":2,
-            "title": "제목2",
-            "author": "장수영",
-            "created_at": "2022-08-04"
-        },
-        {
-            "idx":3,
-            "title": "제목3",
-            "author": "장수영",
-            "created_at": "2022-08-04"
-        },
-        {
-            "idx":4,
-            "title": "제목4",
-            "author": "장수영",
-            "created_at": "2022-08-04"
-        },
-        {
-            "idx":5,
-            "title": "제목5",
-            "author": "장수영",
-            "created_at": "2022-08-04"
-        },
-        {
-            "idx":6,
-            "title": "제목6",
-            "author": "장수영",
-            "created_at": "2022-08-04"
-        },
-        {
-            "idx":7,
-            "title": "제목7",
-            "author": "장수영",
-            "created_at": "2022-08-04"
-        },
-        {
-            "idx":8,
-            "title": "제목8",
-            "author": "장수영",
-            "created_at": "2022-08-04"
-        },
-        {
-            "idx":9,
-            "title": "제목9",
-            "author": "장수영",
-            "created_at": "2022-08-04"
-        },
-      ]
-    }
-    }
 }
 </script>
 
