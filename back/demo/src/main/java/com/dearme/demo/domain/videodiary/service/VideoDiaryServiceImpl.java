@@ -58,9 +58,12 @@ public class VideoDiaryServiceImpl implements VideoDiaryService {
         String[] text = videoSTT(videoDiary.getRealFileName());
         videoDiary.setContents(text[0]);
         videoDiary.setSentiment(text[1]);
-        videoDiary.setPercentage(Long.parseLong(text[2]));
+        videoDiary.setPercentage(Double.parseDouble(text[2]));
+        videoDiary.setPositive(Double.parseDouble(text[3]));
+        videoDiary.setNegative(Double.parseDouble(text[4]));
+        videoDiary.setNeutral(Double.parseDouble(text[5]));
         videoDiaryRepository.save(videoDiary);
-        return new PostVideoDiaryResponseDto(videoDiary.getId(), videoDiary.getTitle(), videoDiary.getContents(), videoDiary.getSentiment(), videoDiary.getPercentage());
+        return new PostVideoDiaryResponseDto(videoDiary.getId(), videoDiary.getTitle(), videoDiary.getContents(), videoDiary.getSentiment(), videoDiary.getPercentage(), videoDiary.getPositive(), videoDiary.getNegative(), videoDiary.getNeutral());
     }
 
     @Override
@@ -73,18 +76,31 @@ public class VideoDiaryServiceImpl implements VideoDiaryService {
             videoDiary.updateTitle(dto.getTitle());
             videoDiary.updateContents(dto.getContents());
             if(dto.getSentiment().equals(videoDiary.getSentiment())){
-                String result[] = new String[2];
+                String result[] = new String[5];
                 result = getSentiment(videoDiary.getContents());
                 videoDiary.updateSentiment(result[0]);
-                videoDiary.updatePercentage(Long.parseLong(result[1]));
+                videoDiary.updatePercentage(Double.parseDouble(result[1]));
+                videoDiary.updatePositive(Double.parseDouble(result[2]));
+                videoDiary.updateNegative(Double.parseDouble(result[3]));
+                videoDiary.updateNeutral(Double.parseDouble(result[4]));
             }else{
                 videoDiary.updateSentiment(dto.getSentiment());
-                videoDiary.updatePercentage(100L);
+                videoDiary.updatePercentage(100);
+
+                double posi=0, nega=0,neu=0;
+
+                if(dto.getSentiment().equals("positive")) posi=100;
+                else if(dto.getSentiment().equals("negative")) nega=100;
+                else neu=100;
+
+                videoDiary.updatePositive(posi);
+                videoDiary.updateNegative(nega);
+                videoDiary.updateNeutral(neu);
             }
         }else{
             throw new NoPermissionVideoDiaryException();
         }
-        return new PostVideoDiaryResponseDto(videoDiary.getId(), videoDiary.getTitle(), videoDiary.getContents(), videoDiary.getSentiment(), videoDiary.getPercentage());
+        return new PostVideoDiaryResponseDto(videoDiary.getId(), videoDiary.getTitle(), videoDiary.getContents(), videoDiary.getSentiment(), videoDiary.getPercentage(),videoDiary.getPositive(), videoDiary.getNegative(), videoDiary.getNeutral());
     }
 
     @Override
@@ -143,11 +159,11 @@ public class VideoDiaryServiceImpl implements VideoDiaryService {
         */
 
         //테스트용
-        String filePath="C:\\Users\\multicampus\\S07P12D206\\back\\demo\\src\\main\\resources\\convert_test1.mp3";
+        String filePath="C:\\Users\\leekijong\\S07P12D206\\back\\demo\\src\\main\\resources\\convert_test1.mp3";
 
-        String[] text= new String[3];
+        String[] text= new String[6];
         try {
-            CredentialsProvider credentialsProvider = FixedCredentialsProvider.create(ServiceAccountCredentials.fromStream(new FileInputStream("C:\\Users\\multicampus\\S07P12D206\\back\\demo\\src\\main\\resources\\my-project-0801-358104-1615eb198267.json")));
+            CredentialsProvider credentialsProvider = FixedCredentialsProvider.create(ServiceAccountCredentials.fromStream(new FileInputStream("C:\\Users\\leekijong\\S07P12D206\\back\\demo\\src\\main\\resources\\my-project-0801-358104-1615eb198267.json")));
             SpeechSettings settings = SpeechSettings.newBuilder().setCredentialsProvider(credentialsProvider).build();
             // Instantiates a client
             SpeechClient speech=SpeechClient.create(settings);
@@ -174,16 +190,17 @@ public class VideoDiaryServiceImpl implements VideoDiaryService {
         catch (Exception e) {
             e.printStackTrace();
         }
-        String result[] = new String[2];
+        String result[] = new String[5];
         result = getSentiment(text[0]);
-        text[1]=result[0];
-        text[2]=result[1];
+        for(int i=1;i<=5;i++){
+            text[i]=result[i-1];
+        }
 
         return text;
     }
 
     public String[] getSentiment(String text){
-        String []result = new String[2];
+        String []result = new String[5];
         try {
 
             HttpClient httpClient = HttpClientBuilder.create().build(); //Use this instead
@@ -202,15 +219,25 @@ public class VideoDiaryServiceImpl implements VideoDiaryService {
 
 
             HttpResponse response = httpClient.execute(postRequest);		//Response 출력
-
             if (response.getStatusLine().getStatusCode() == 200) {
+
                 ResponseHandler<String> handler = new BasicResponseHandler();
                 String body = handler.handleResponse(response);
                 String []tempBody = body.split(",");
                 String []tempBody2 = tempBody[0].split(":");
                 result[0]=tempBody2[2].substring(1, tempBody2[2].length()-1);
+                double max=0;
 
-                result[1] = body.split(result[0])[2].substring(2, 4);
+                double negative= Math.round(Float.parseFloat(tempBody[1].split(":")[2])*100)/100.0;
+                max=Math.max(max, negative);
+                double positive= Math.round(Float.parseFloat(tempBody[2].split(":")[1])*100)/100.0;
+                max=Math.max(max, positive);
+                double neutral= Math.round(Float.parseFloat(tempBody[3].split(":")[1].split("}")[0])*100)/100.0;
+                max=Math.max(max, neutral);
+                result[1]=max+"";
+                result[2]=positive+"";
+                result[3]=negative+"";
+                result[4]=neutral+"";
             } else {
                 System.out.println("response is error : " + response.getStatusLine().getStatusCode());
             }

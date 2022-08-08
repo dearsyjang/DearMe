@@ -25,7 +25,7 @@ public class SentimentCalendarServiceImpl implements SentimentCalendarService {
         List<TextDiary> textDiaries = textDiaryRepository.findAllByUser_IdAndYearAndMonth(id, year, month);
         List<SentimentCalendarResponseDto> sentimentCalendarResponseDtos = new ArrayList<>();
         for(int i=0;i<=31;i++)
-            sentimentCalendarResponseDtos.add(new SentimentCalendarResponseDto(year, month, i, null, null, null, null, null, null));
+            sentimentCalendarResponseDtos.add(new SentimentCalendarResponseDto(year, month, i, null, null, 0, null, null, 0));
 
         for(VideoDiary videoDiary : videoDiaries){
             sentimentCalendarResponseDtos.get(videoDiary.getDay()).setVideodiaryid(videoDiary.getId());

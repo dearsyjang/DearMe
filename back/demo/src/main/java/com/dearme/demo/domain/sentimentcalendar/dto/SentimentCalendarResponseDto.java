@@ -11,8 +11,8 @@ public class SentimentCalendarResponseDto {
     private Integer day;
     private Long textdiaryid;
     private String textdiarysentiment;
-    private Long textdiarypercentage;
+    private double textdiarypercentage;
     private Long videodiaryid;
     private String videodiarysentiment;
-    private Long videodiarypercentage;
+    private double videodiarypercentage;
 }

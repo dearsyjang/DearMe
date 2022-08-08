@@ -11,7 +11,10 @@ public class VideoDiaryDetailsResponseDto {
     private String title;
     private String contents;
     private String sentiment;
-    private Long percentage;
+    private double percentage;
+    private double positive;
+    private double negative;
+    private double neutral;
     private Integer year;
     private Integer month;
     private Integer day;
@@ -24,6 +27,9 @@ public class VideoDiaryDetailsResponseDto {
                 .contents(entity.getContents())
                 .sentiment(entity.getSentiment())
                 .percentage(entity.getPercentage())
+                .positive(entity.getPositive())
+                .negative(entity.getNegative())
+                .neutral(entity.getNeutral())
                 .year(entity.getYear())
                 .month(entity.getMonth())
                 .day(entity.getDay())
