@@ -113,4 +113,9 @@ public class ExceptionHandlerUtil {
     ResponseEntity<CommonResponse> handleNoExistCertificateException(NoExistCertificateException e){
         return ResponseEntity.badRequest().body(CommonResponse.getErrorResponse(e.getMessage()));
     }
+
+    @ExceptionHandler(NoExistCategoryException.class)
+    ResponseEntity<CommonResponse> handleNoExistCategoryException(NoExistCategoryException e){
+        return ResponseEntity.badRequest().body(CommonResponse.getErrorResponse(e.getMessage()));
+    }
 }
