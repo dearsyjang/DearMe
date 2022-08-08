@@ -46,14 +46,8 @@ export default {
       })
         .then(res => {
           const token = res.data.data.accessToken
-          // const access = token.accessToken
-          console.log(token)
-          // console.log(access)
-          // console.log(res.data)
-          // console.log(res.data.accessToken)
-          // console.log('token', token)
           // token에 accessToken, refreshToken 둘 다 들어감 (이 부분 수정 필요)
-          // console.log(token)
+          console.log(token)
           // 현재 사용자 업데이트
           commit('SET_CURRENT_USER', token)
           // dispatch('fetchCurrentUser', token)
@@ -80,8 +74,8 @@ export default {
       .then(res => {
           // console.log(res)
           // console.log(res.data)
-          const token = res.data
-          // console.log(token)
+          const token = res.data.data.accessToken
+          console.log(token)
           // 로컬스토리지에 토큰 저장
           dispatch('saveToken', token)
           alert('save token성공')

@@ -53,15 +53,15 @@ export default {
 
     // 게시글 작성
     createBoard({ commit, getters }, board) {
-      // console.log(board)
-      // console.log(getters.authHeader)
+      console.log(getters.authHeader)
       axios({
-        url: drf.board.create(),
+        url: drf.board.boardCreate(),
         method: 'post',
         data: board,
         headers: getters.authHeader
       })
         .then(res => {
+          console.log(res.data)
           commit('SET_BOARD', res.data)
           router.push({
             name: 'board'
