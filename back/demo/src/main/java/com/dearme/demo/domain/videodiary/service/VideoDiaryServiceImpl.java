@@ -23,6 +23,7 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.BasicResponseHandler;
 import org.apache.http.impl.client.HttpClientBuilder;
+import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -223,17 +224,22 @@ public class VideoDiaryServiceImpl implements VideoDiaryService {
 
                 ResponseHandler<String> handler = new BasicResponseHandler();
                 String body = handler.handleResponse(response);
-                String []tempBody = body.split(",");
-                String []tempBody2 = tempBody[0].split(":");
-                result[0]=tempBody2[2].substring(1, tempBody2[2].length()-1);
+
+                JSONObject jObj = new JSONObject(body.toString());
+                JSONObject jObj2 = jObj.getJSONObject("document");
+                JSONObject jObj3 = jObj2.getJSONObject("confidence");
+
+                result[0]=jObj2.getString("sentiment");
                 double max=0;
 
-                double negative= Math.round(Float.parseFloat(tempBody[1].split(":")[2])*100)/100.0;
+                double negative= Math.round(Float.parseFloat(jObj3.get("negative").toString())*100)/100.0;
                 max=Math.max(max, negative);
-                double positive= Math.round(Float.parseFloat(tempBody[2].split(":")[1])*100)/100.0;
+                double positive= Math.round(Float.parseFloat(jObj3.get("positive").toString())*100)/100.0;
                 max=Math.max(max, positive);
-                double neutral= Math.round(Float.parseFloat(tempBody[3].split(":")[1].split("}")[0])*100)/100.0;
+                double neutral= Math.round(Float.parseFloat(jObj3.get("neutral").toString())*100)/100.0;
                 max=Math.max(max, neutral);
+
+                result[0]=jObj2.getString("sentiment");
                 result[1]=max+"";
                 result[2]=positive+"";
                 result[3]=negative+"";
