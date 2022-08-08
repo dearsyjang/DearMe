@@ -15,6 +15,7 @@ import com.dearme.demo.domain.board.repository.BoardRepository;
 import com.dearme.demo.domain.board.repository.CommentRepository;
 import com.dearme.demo.domain.user.entity.Type;
 import com.dearme.demo.domain.user.entity.User;
+import com.dearme.demo.domain.user.exception.NoExistCounselorException;
 import com.dearme.demo.domain.user.exception.NoExistUserException;
 import com.dearme.demo.domain.user.repository.UserRepository;
 import com.dearme.demo.global.util.jwt.JwtProvider;
@@ -40,7 +41,7 @@ public class CommentServiceImpl implements CommentService{
             throw new NoExistBoardException();
         });
         User user = userRepository.findUserById(id).orElseThrow(() -> {
-            throw new NoExistUserException();
+            throw new NoExistCounselorException();
         });
         if(user.getType().equals(Type.COUNSELOR)){
             comment.setBoard(board);
@@ -59,7 +60,7 @@ public class CommentServiceImpl implements CommentService{
             throw new NoExistCommentException();
         });
         User user = userRepository.findUserById(id).orElseThrow(() -> {
-            throw new NoExistUserException();
+            throw new NoExistCounselorException();
         });
         if(user.getUserId().equals(comment.getUser().getUserId())){
             comment.update(dto.getDate(), dto.getContents());
@@ -75,7 +76,7 @@ public class CommentServiceImpl implements CommentService{
             throw new NoExistCommentException();
         });
         User user = userRepository.findUserById(id).orElseThrow(() -> {
-            throw new NoExistUserException();
+            throw new NoExistCounselorException();
         });
         if(user.getUserId().equals(comment.getUser().getUserId())){
             commentRepository.delete(comment);

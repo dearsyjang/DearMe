@@ -8,8 +8,11 @@ import com.dearme.demo.domain.review.entity.Favorite;
 import com.dearme.demo.domain.review.entity.Review;
 import com.dearme.demo.domain.review.exception.NoExistReviewException;
 import com.dearme.demo.domain.review.exception.NoReviewDeletePermissionException;
+import com.dearme.demo.domain.review.exception.NoReviewSavePermissionException;
 import com.dearme.demo.domain.review.repository.ReviewRepository;
+import com.dearme.demo.domain.user.entity.Type;
 import com.dearme.demo.domain.user.entity.User;
+import com.dearme.demo.domain.user.exception.NoExistCounselorException;
 import com.dearme.demo.domain.user.exception.NoExistUserException;
 import com.dearme.demo.domain.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -33,9 +36,12 @@ public class ReviewServiceImpl implements ReviewService {
         User user = userRepository.findUserById(id).orElseThrow(() -> {
             throw new NoExistUserException();
         });
+        if(user.getType().equals(Type.COUNSELOR)){
+            throw new NoReviewSavePermissionException();
+        }
         review.setUser(user);
         User counselor = userRepository.findUserById(dto.getCounselorid()).orElseThrow(() -> {
-            throw new NoExistUserException();
+            throw new NoExistCounselorException();
         });
         counselor.getCounselorProfile().updateReviewValue(review.getValue(), 1);
         review.setCounselor(counselor);
@@ -66,6 +72,8 @@ public class ReviewServiceImpl implements ReviewService {
     @Override
     public List<ReviewCounselorViewResponseDto> reviewCounselorView(String id) {
         List<Review> tempList = reviewRepository.findReviewByCounselor_Id(id);
+        if(tempList.isEmpty()) throw new NoExistReviewException();
+
         List<ReviewCounselorViewResponseDto> reviewList = new ArrayList<>();
         for(Review r : tempList){
             reviewList.add(new ReviewCounselorViewResponseDto(r.getReviewid(),

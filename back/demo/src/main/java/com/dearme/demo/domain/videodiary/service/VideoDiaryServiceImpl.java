@@ -5,11 +5,13 @@ import com.dearme.demo.domain.textdiary.dto.TextDiaryDetailsResponseDto;
 import com.dearme.demo.domain.textdiary.dto.TextDiaryListResponseDto;
 import com.dearme.demo.domain.textdiary.entity.TextDiary;
 import com.dearme.demo.domain.textdiary.exception.NoPermissionTextDiaryException;
+import com.dearme.demo.domain.user.entity.Type;
 import com.dearme.demo.domain.user.entity.User;
 import com.dearme.demo.domain.user.exception.NoExistUserException;
 import com.dearme.demo.domain.user.repository.UserRepository;
 import com.dearme.demo.domain.videodiary.dto.*;
 import com.dearme.demo.domain.videodiary.entity.VideoDiary;
+import com.dearme.demo.domain.videodiary.exception.CounselorPostVideoDiaryException;
 import com.dearme.demo.domain.videodiary.exception.NoPermissionVideoDiaryException;
 import com.dearme.demo.domain.videodiary.repository.VideoDiaryRepository;
 import com.google.api.gax.core.CredentialsProvider;
@@ -46,6 +48,8 @@ public class VideoDiaryServiceImpl implements VideoDiaryService {
         User user = userRepository.findUserById(id).orElseThrow(() -> {
             throw new NoExistUserException();
         });
+        if(user.getType().equals(Type.COUNSELOR))
+            throw new CounselorPostVideoDiaryException();
         VideoDiary videoDiary = dto.toEntity();
         videoDiary.setUser(user);
         String[] text = videoSTT(videoDiary.getRealfilename());
@@ -102,7 +106,14 @@ public class VideoDiaryServiceImpl implements VideoDiaryService {
     @Override
     @Transactional
     public void delete(String id, Long videoDiaryId) {
-        videoDiaryRepository.deleteByUser_IdAndId(id, videoDiaryId);
+        User user = userRepository.findUserById(id).orElseThrow(() -> {
+            throw new NoExistUserException();
+        });
+        VideoDiary videoDiary = videoDiaryRepository.findById(videoDiaryId).get();
+        if(user.getUserId().equals(videoDiary.getId()))
+            videoDiaryRepository.deleteByUser_IdAndId(id, videoDiaryId);
+        else throw new NoPermissionVideoDiaryException();
+
     }
 
 

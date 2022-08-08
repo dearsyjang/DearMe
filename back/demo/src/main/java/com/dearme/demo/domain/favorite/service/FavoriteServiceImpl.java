@@ -5,6 +5,7 @@ import com.dearme.demo.domain.favorite.dto.FavoriteSaveResponseDto;
 import com.dearme.demo.domain.favorite.dto.FavoriteViewResponseDto;
 import com.dearme.demo.domain.favorite.exception.NoExistFavoriteException;
 import com.dearme.demo.domain.favorite.exception.NoFavoriteDeletePermissionException;
+import com.dearme.demo.domain.favorite.exception.NoFavoriteSavePermissionException;
 import com.dearme.demo.domain.favorite.repository.FavoriteRepository;
 import com.dearme.demo.domain.review.dto.ReviewCounselorViewResponseDto;
 import com.dearme.demo.domain.review.dto.ReviewSaveRequestDto;
@@ -14,7 +15,9 @@ import com.dearme.demo.domain.review.entity.Review;
 import com.dearme.demo.domain.review.exception.NoExistReviewException;
 import com.dearme.demo.domain.review.exception.NoReviewDeletePermissionException;
 import com.dearme.demo.domain.review.repository.ReviewRepository;
+import com.dearme.demo.domain.user.entity.Type;
 import com.dearme.demo.domain.user.entity.User;
+import com.dearme.demo.domain.user.exception.NoExistCounselorException;
 import com.dearme.demo.domain.user.exception.NoExistUserException;
 import com.dearme.demo.domain.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -40,9 +43,12 @@ public class FavoriteServiceImpl implements FavoriteService {
         User user = userRepository.findUserById(id).orElseThrow(() -> {
             throw new NoExistUserException();
         });
+        if(user.getType().equals(Type.COUNSELOR)){
+            throw new NoFavoriteSavePermissionException();
+        }
         favorite.setUser(user);
         User counselor = userRepository.findUserById(dto.getCounselorid()).orElseThrow(() -> {
-            throw new NoExistUserException();
+            throw new NoExistCounselorException();
         });
         favorite.setCounselor(counselor);
 
