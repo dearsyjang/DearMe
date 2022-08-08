@@ -3,9 +3,6 @@ package com.dearme.demo.domain.favorite.controller;
 
 import com.dearme.demo.domain.favorite.dto.FavoriteSaveRequestDto;
 import com.dearme.demo.domain.favorite.service.FavoriteService;
-import com.dearme.demo.domain.review.dto.ReviewSaveRequestDto;
-import com.dearme.demo.domain.review.entity.Favorite;
-import com.dearme.demo.domain.review.service.ReviewService;
 import com.dearme.demo.global.common.CommonResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;

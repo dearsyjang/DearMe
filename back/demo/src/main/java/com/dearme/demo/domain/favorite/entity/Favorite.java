@@ -3,7 +3,6 @@ package com.dearme.demo.domain.review.entity;
 import com.dearme.demo.domain.base.entitiy.Base;
 import com.dearme.demo.domain.user.entity.User;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 

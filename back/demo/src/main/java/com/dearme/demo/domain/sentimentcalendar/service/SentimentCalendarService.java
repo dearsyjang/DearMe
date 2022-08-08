@@ -1,6 +1,6 @@
 package com.dearme.demo.domain.sentimentcalendar.service;
 
-import com.dearme.demo.domain.sentimentcalendar.dto.*;
+import com.dearme.demo.domain.sentimentcalendar.dto.SentimentCalendarResponseDto;
 
 import java.util.List;
 

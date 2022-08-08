@@ -9,7 +9,6 @@ import com.dearme.demo.domain.board.exception.board.NoBoardSavePermissionExcepti
 import com.dearme.demo.domain.board.exception.board.NoBoardUpdatePermissionException;
 import com.dearme.demo.domain.board.exception.board.NoExistBoardException;
 import com.dearme.demo.domain.board.repository.BoardRepository;
-import com.dearme.demo.domain.board.repository.CommentRepository;
 import com.dearme.demo.domain.user.entity.Type;
 import com.dearme.demo.domain.user.entity.User;
 import com.dearme.demo.domain.user.exception.NoExistUserException;
@@ -28,7 +27,6 @@ import java.util.List;
 public class BoardServiceImpl implements BoardService{
     private final UserRepository userRepository;
     private final BoardRepository boardRepository;
-    private final CommentRepository commentRepository;
     @Override
     @Transactional
     public BoardSaveResponseDto boardSave(String id, BoardSaveRequestDto dto){

@@ -1,6 +1,5 @@
 package com.dearme.demo.domain.videodiary.dto;
 
-import com.dearme.demo.domain.textdiary.entity.TextDiary;
 import com.dearme.demo.domain.videodiary.entity.VideoDiary;
 import lombok.Data;
 
@@ -17,8 +16,8 @@ public class PostVideoDiaryRequestDto {
         LocalDate now = LocalDate.now();
         return VideoDiary.builder()
                 .title(this.title)
-                .realfilename(this.realFileName)
-                .filename(this.fileName)
+                .realFileName(this.realFileName)
+                .fileName(this.fileName)
                 .year(now.getYear())
                 .month(now.getMonthValue())
                 .day(now.getDayOfMonth())

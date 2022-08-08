@@ -1,12 +1,9 @@
 package com.dearme.demo.domain.videodiary.controller;
 
-import com.dearme.demo.domain.textdiary.dto.PostTextDiaryRequestDto;
-import com.dearme.demo.domain.textdiary.service.TextDiaryService;
 import com.dearme.demo.domain.videodiary.dto.PostUpdateVideoDiaryRequestDto;
 import com.dearme.demo.domain.videodiary.dto.PostVideoDiaryRequestDto;
 import com.dearme.demo.domain.videodiary.service.VideoDiaryService;
 import com.dearme.demo.global.common.CommonResponse;
-import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

@@ -1,7 +1,10 @@
 package com.dearme.demo.domain.user.service;
 
 import com.dearme.demo.domain.review.entity.Review;
-import com.dearme.demo.domain.user.dto.*;
+import com.dearme.demo.domain.user.dto.PointsUpdateResponseDto;
+import com.dearme.demo.domain.user.dto.ReviewViewResponseDto;
+import com.dearme.demo.domain.user.dto.UserGroupListResponseDto;
+import com.dearme.demo.domain.user.dto.UserGroupResponseDto;
 import com.dearme.demo.domain.user.dto.user.*;
 import com.dearme.demo.domain.user.entity.*;
 import com.dearme.demo.domain.user.exception.*;

@@ -1,6 +1,5 @@
 package com.dearme.demo.domain.videodiary.dto;
 
-import com.dearme.demo.domain.textdiary.entity.TextDiary;
 import com.dearme.demo.domain.videodiary.entity.VideoDiary;
 import lombok.Builder;
 import lombok.Data;

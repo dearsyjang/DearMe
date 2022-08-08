@@ -1,7 +1,6 @@
 package com.dearme.demo.domain.favorite.repository;
 
 import com.dearme.demo.domain.review.entity.Favorite;
-import com.dearme.demo.domain.review.entity.Review;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

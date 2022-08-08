@@ -16,7 +16,6 @@ import com.dearme.demo.domain.board.repository.CommentRepository;
 import com.dearme.demo.domain.user.entity.Type;
 import com.dearme.demo.domain.user.entity.User;
 import com.dearme.demo.domain.user.exception.NoExistCounselorException;
-import com.dearme.demo.domain.user.exception.NoExistUserException;
 import com.dearme.demo.domain.user.repository.UserRepository;
 import com.dearme.demo.global.util.jwt.JwtProvider;
 import lombok.RequiredArgsConstructor;

@@ -7,14 +7,7 @@ import com.dearme.demo.domain.favorite.exception.NoExistFavoriteException;
 import com.dearme.demo.domain.favorite.exception.NoFavoriteDeletePermissionException;
 import com.dearme.demo.domain.favorite.exception.NoFavoriteSavePermissionException;
 import com.dearme.demo.domain.favorite.repository.FavoriteRepository;
-import com.dearme.demo.domain.review.dto.ReviewCounselorViewResponseDto;
-import com.dearme.demo.domain.review.dto.ReviewSaveRequestDto;
-import com.dearme.demo.domain.review.dto.ReviewSaveResponseDto;
 import com.dearme.demo.domain.review.entity.Favorite;
-import com.dearme.demo.domain.review.entity.Review;
-import com.dearme.demo.domain.review.exception.NoExistReviewException;
-import com.dearme.demo.domain.review.exception.NoReviewDeletePermissionException;
-import com.dearme.demo.domain.review.repository.ReviewRepository;
 import com.dearme.demo.domain.user.entity.Type;
 import com.dearme.demo.domain.user.entity.User;
 import com.dearme.demo.domain.user.exception.NoExistCounselorException;
@@ -31,7 +24,6 @@ import java.util.List;
 @RequiredArgsConstructor
 public class FavoriteServiceImpl implements FavoriteService {
     private final UserRepository userRepository;
-    private final ReviewRepository reviewRepository;
 
     private final FavoriteRepository favoriteRepository;
 
