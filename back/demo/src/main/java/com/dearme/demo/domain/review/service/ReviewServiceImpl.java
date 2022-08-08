@@ -57,7 +57,7 @@ public class ReviewServiceImpl implements ReviewService {
         User user = userRepository.findUserById(id).orElseThrow(() -> {
             throw new NoExistUserException();
         });
-        if(user.getUserId().equals(review.getUser().getUserId())){
+        if(user.getId().equals(review.getUser().getId())){
 
             User counselor = userRepository.findUserById(review.getCounselor().getId()).orElseThrow(() -> {
                 throw new NoExistUserException();

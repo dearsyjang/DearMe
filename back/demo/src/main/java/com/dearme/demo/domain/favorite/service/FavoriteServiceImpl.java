@@ -79,7 +79,7 @@ public class FavoriteServiceImpl implements FavoriteService {
         User user = userRepository.findUserById(id).orElseThrow(() -> {
             throw new NoExistUserException();
         });
-        if(user.getUserId().equals(favorite.getUser().getUserId())){
+        if(user.getId().equals(favorite.getUser().getId())){
             favoriteRepository.delete(favorite);
         }else{
             throw new NoFavoriteDeletePermissionException();

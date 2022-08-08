@@ -68,7 +68,7 @@ public class VideoDiaryServiceImpl implements VideoDiaryService {
             throw new NoExistUserException();
         });
         VideoDiary videoDiary = videoDiaryRepository.findVideoDiaryById(videoDiaryId);
-        if(user.getUserId().equals(videoDiary.getUser().getUserId())){
+        if(user.getId().equals(videoDiary.getUser().getId())){
             videoDiary.updateTitle(dto.getTitle());
             videoDiary.updateContents(dto.getContents());
             if(dto.getSentiment().equals(videoDiary.getSentiment())){
@@ -112,7 +112,7 @@ public class VideoDiaryServiceImpl implements VideoDiaryService {
             throw new NoExistUserException();
         });
         VideoDiary videoDiary = videoDiaryRepository.findById(videoDiaryId).get();
-        if(user.getUserId().equals(videoDiary.getId()))
+        if(user.getId().equals(videoDiary.getUser().getId()))
             videoDiaryRepository.deleteByUser_IdAndId(id, videoDiaryId);
         else throw new NoPermissionVideoDiaryException();
 

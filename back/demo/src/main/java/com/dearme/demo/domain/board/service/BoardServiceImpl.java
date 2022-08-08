@@ -92,7 +92,7 @@ public class BoardServiceImpl implements BoardService{
         User user = userRepository.findUserById(id).orElseThrow(() -> {
             throw new NoExistUserException();
         });
-        if(user.getUserId().equals(board.getUser().getUserId())){
+        if(user.getId().equals(board.getUser().getId())){
             board.update(dto.getTitle(), dto.getContents(), dto.getDate());
             return new BoardUpdateResponseDto(board.getId());
         }else{
@@ -108,7 +108,7 @@ public class BoardServiceImpl implements BoardService{
         User user = userRepository.findUserById(id).orElseThrow(() -> {
             throw new NoExistUserException();
         });
-        if(user.getUserId().equals(board.getUser().getUserId())){
+        if(user.getId().equals(board.getUser().getId())){
             boardRepository.delete(board);
         }else{
             throw new NoBoardDeletePermissionException();

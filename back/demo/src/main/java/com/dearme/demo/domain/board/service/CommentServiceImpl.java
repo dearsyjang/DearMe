@@ -62,7 +62,7 @@ public class CommentServiceImpl implements CommentService{
         User user = userRepository.findUserById(id).orElseThrow(() -> {
             throw new NoExistCounselorException();
         });
-        if(user.getUserId().equals(comment.getUser().getUserId())){
+        if(user.getId().equals(comment.getUser().getId())){
             comment.update(dto.getDate(), dto.getContents());
             return new CommentUpdateResponseDto(comment.getId());
         }else{
@@ -78,7 +78,7 @@ public class CommentServiceImpl implements CommentService{
         User user = userRepository.findUserById(id).orElseThrow(() -> {
             throw new NoExistCounselorException();
         });
-        if(user.getUserId().equals(comment.getUser().getUserId())){
+        if(user.getId().equals(comment.getUser().getId())){
             commentRepository.delete(comment);
         }else{
             throw new NoCommentDeletePermissionException();
