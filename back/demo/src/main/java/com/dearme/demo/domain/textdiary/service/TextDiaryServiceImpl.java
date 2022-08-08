@@ -19,6 +19,7 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.BasicResponseHandler;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -31,6 +32,11 @@ public class TextDiaryServiceImpl implements TextDiaryService{
     private final TextDiaryRepository textDiaryRepository;
     private final UserRepository userRepository;
 
+    @Value("${sentiment.id:0}")
+    private String SENTIMENT_ID;
+    @Value("${sentiment.key:0}")
+    private String SENTIMENT_KEY;
+
     @Override
     public PostTextDiaryResponseDto postTextDiary(String id, PostTextDiaryRequestDto dto) {
         User user = userRepository.findUserById(id).orElseThrow(() -> {
@@ -40,8 +46,12 @@ public class TextDiaryServiceImpl implements TextDiaryService{
         textDiary.setUser(user);
         String[] text = getSentiment(dto.getContents());
         textDiary.setSentiment(text[0]);
-        textDiary.setPercentage(Long.parseLong(text[1]));
-        return new PostTextDiaryResponseDto(textDiaryRepository.save(textDiary).getId(), textDiary.getSentiment(), textDiary.getPercentage());
+        textDiary.setPercentage(Double.parseDouble(text[1]));
+        textDiary.setPositive(Double.parseDouble(text[2]));
+        textDiary.setNegative(Double.parseDouble(text[3]));
+        textDiary.setNeutral(Double.parseDouble(text[4]));
+
+        return new PostTextDiaryResponseDto(textDiaryRepository.save(textDiary).getId(), textDiary.getSentiment(), textDiary.getPercentage(), textDiary.getPositive(), textDiary.getNegative(), textDiary.getNeutral());
     }
 
     @Override
@@ -69,15 +79,15 @@ public class TextDiaryServiceImpl implements TextDiaryService{
         textDiaryRepository.deleteByUser_IdAndId(id, textDiaryId);
     }
 
-    public static String[] getSentiment(String text){
-        String []result = new String[2];
+    public String[] getSentiment(String text){
+        String []result = new String[5];
         try {
 
             HttpClient httpClient = HttpClientBuilder.create().build(); //Use this instead
             HttpPost postRequest = new HttpPost("https://naveropenapi.apigw.ntruss.com/sentiment-analysis/v1/analyze"); //POST 메소드 URL 새성
 
-            postRequest.addHeader("X-NCP-APIGW-API-KEY-ID", "w9jazjzk55");
-            postRequest.addHeader("X-NCP-APIGW-API-KEY", "fDUi38NcCgGHvIVgivrb7EbVuX7IxXMnYr9sxXjD");
+            postRequest.addHeader("X-NCP-APIGW-API-KEY-ID", SENTIMENT_ID);
+            postRequest.addHeader("X-NCP-APIGW-API-KEY", SENTIMENT_KEY);
             postRequest.addHeader("Content-Type", "application/json; charset=UTF-8");
             JSONObject obj = new JSONObject();
             obj.put("content", text);
@@ -89,15 +99,25 @@ public class TextDiaryServiceImpl implements TextDiaryService{
 
 
             HttpResponse response = httpClient.execute(postRequest);		//Response 출력
-
             if (response.getStatusLine().getStatusCode() == 200) {
+
                 ResponseHandler<String> handler = new BasicResponseHandler();
                 String body = handler.handleResponse(response);
                 String []tempBody = body.split(",");
                 String []tempBody2 = tempBody[0].split(":");
                 result[0]=tempBody2[2].substring(1, tempBody2[2].length()-1);
+                double max=0;
 
-                result[1] = body.split(result[0])[2].substring(2, 4);
+                double negative= Math.round(Float.parseFloat(tempBody[1].split(":")[2])*100)/100.0;
+                max=Math.max(max, negative);
+                double positive= Math.round(Float.parseFloat(tempBody[2].split(":")[1])*100)/100.0;
+                max=Math.max(max, positive);
+                double neutral= Math.round(Float.parseFloat(tempBody[3].split(":")[1].split("}")[0])*100)/100.0;
+                max=Math.max(max, neutral);
+                result[1]=max+"";
+                result[2]=positive+"";
+                result[3]=negative+"";
+                result[4]=neutral+"";
             } else {
                 System.out.println("response is error : " + response.getStatusLine().getStatusCode());
             }
