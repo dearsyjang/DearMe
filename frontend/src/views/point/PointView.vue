@@ -1,20 +1,21 @@
 <template>
-
-  <section class="test">
-    <select v-model="selected">
-      <option disabled value="">충전할 포인트를 선택해 주세요.  </option>
-      <option>1000</option>
-      <option>2000</option>
-      <option>3000</option>
-    </select>
-    <br>
-    <span>선택함 : {{ selected }}  point</span>
-      
-    <button @click="onPayment">
-      결제하기
-    </button>
-  </section>
-
+  <div>
+    <p2>포인트 충전 페이지</p2>
+    <section class="test">
+      <select v-model="selected">
+        <option disabled value="">충전할 포인트를 선택해 주세요.  </option>
+        <option>1000</option>
+        <option>2000</option>
+        <option>3000</option>
+      </select>
+      <br>
+      <span>선택함 : {{ selected }}  point</span>
+        
+      <button @click="onPayment">
+        결제하기
+      </button>
+    </section>
+  </div>
 </template>
 
 
