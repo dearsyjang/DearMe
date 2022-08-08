@@ -1,14 +1,10 @@
 package com.dearme.demo.domain.user.service;
 
-import com.dearme.demo.domain.group.entity.Group;
 import com.dearme.demo.domain.review.entity.Review;
 import com.dearme.demo.domain.user.dto.*;
 import com.dearme.demo.domain.user.dto.user.*;
 import com.dearme.demo.domain.user.entity.*;
-import com.dearme.demo.domain.user.exception.CounselorNotExistPictureException;
-import com.dearme.demo.domain.user.exception.DuplicatedIdException;
-import com.dearme.demo.domain.user.exception.DuplicatedNickNameException;
-import com.dearme.demo.domain.user.exception.NoExistUserException;
+import com.dearme.demo.domain.user.exception.*;
 import com.dearme.demo.domain.user.repository.*;
 import com.dearme.demo.global.util.jwt.JwtProvider;
 import lombok.RequiredArgsConstructor;
@@ -140,10 +136,11 @@ public class UserServiceImpl implements UserService{
     @Override
     @Transactional
     public UpdateCareerResponseDto updateCareer(String id, UpdateCareerRequestDto dto) {
-        CounselorProfile counselorProfile = counselorProfileRepository.findCounselorProfileByCounselor_Id(id);
-        Career career = careerRepository.findById(dto.getId()).get();
-        if(counselorProfile.equals(career.getCounselorProfile()))
-            career.updateCareer(dto.getContents());
+        Career career = careerRepository.findCareerByCounselorProfile_Counselor_IdAndId(id, dto.getId())
+                .orElseThrow(() -> {
+                    throw new NoExistCareerException();
+                });
+        career.updateCareer(dto.getContents());
         careerRepository.save(career);
         return new UpdateCareerResponseDto(career.getId(), career.getContents());
     }
