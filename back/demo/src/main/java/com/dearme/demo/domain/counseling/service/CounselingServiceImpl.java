@@ -5,6 +5,7 @@ import com.dearme.demo.domain.counseling.dto.CounselingInfoResponseDto;
 import com.dearme.demo.domain.counseling.dto.UpdateCounselingRequestDto;
 import com.dearme.demo.domain.counseling.dto.UpdateCounselingResponseDto;
 import com.dearme.demo.domain.counseling.entity.Counseling;
+import com.dearme.demo.domain.counseling.entity.Status;
 import com.dearme.demo.domain.counseling.exception.NoExistCounselingException;
 import com.dearme.demo.domain.counseling.repository.CounselingRepository;
 import com.dearme.demo.domain.counselingdocument.entity.CounselingDocument;
@@ -58,10 +59,15 @@ public class CounselingServiceImpl implements CounselingService{
 
     @Override
     public UpdateCounselingResponseDto updateCounseling(String id, UpdateCounselingRequestDto dto) {
-        Counseling target = counselingRepository.findById(dto.getId()).orElseThrow(() -> {
+        Counseling target = counselingRepository.findCounselingByCounselor_IdAndId(id, dto.getId()).orElseThrow(() -> {
             throw new NoExistCounselingException();
         });
+        if(dto.getStatus().equals(Status.REJECT)){
+            counselingRepository.delete(target);
+        }else {
+            target.updateCounseling(dto.getStatus());
+            counselingRepository.save(target);
+        }
         return null;
-
     }
 }
