@@ -125,10 +125,11 @@ public class UserServiceImpl implements UserService{
     @Override
     @Transactional
     public UpdateCertificateResponseDto updateCertificate(String id, UpdateCertificateRequestDto dto) {
-        CounselorProfile counselorProfile = counselorProfileRepository.findCounselorProfileByCounselor_Id(id);
-        Certificate certificate = certificateRepository.findById(dto.getId()).get();
-        if(counselorProfile.equals(certificate.getCounselorProfile()))
-            certificate.updateCertificate(dto.getContents());
+        Certificate certificate = certificateRepository.findCertificateByCounselorProfile_Counselor_IdAndId(id, dto.getId())
+                .orElseThrow(() -> {
+                    throw new NoExistCertificateException();
+                });
+        certificate.updateCertificate(dto.getContents());
         certificateRepository.save(certificate);
         return new UpdateCertificateResponseDto(certificate.getId(), certificate.getContents());
     }
