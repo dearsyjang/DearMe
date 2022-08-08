@@ -35,7 +35,7 @@ public class Counseling {
 
     private Integer day;
 
-    @OneToOne(mappedBy = "counseling")
+    @OneToOne(mappedBy = "counseling", cascade = CascadeType.ALL)
     @JoinColumn(name = "counseling_document_id")
     private CounselingDocument counselingDocument;
 
