@@ -1,5 +1,5 @@
 package com.dearme.demo.domain.counseling.entity;
 
-public enum Type {
+public enum Status {
     ACCEPTED, UNACCEPTED, DONE, REJECT
 }

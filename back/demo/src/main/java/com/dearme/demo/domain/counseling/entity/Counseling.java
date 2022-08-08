@@ -27,7 +27,7 @@ public class Counseling {
     private User counselor;
 
     @Enumerated(value = EnumType.STRING)
-    private Type type;
+    private Status status;
 
     private Integer year;
 
@@ -43,8 +43,8 @@ public class Counseling {
     @JoinColumn(name = "group_id")
     private Group group;
 
-    public void updateCounseling(Type type){
-        this.type = type;
+    public void updateCounseling(Status status){
+        this.status = status;
     }
 
     public void setCounselingDocument(CounselingDocument counselingDocument) {
@@ -53,13 +53,13 @@ public class Counseling {
     }
 
     @Builder
-    public Counseling(User user, Group group, User counselor, Integer year, Integer month, Integer day, Type type){
+    public Counseling(User user, Group group, User counselor, Integer year, Integer month, Integer day, Status status){
         this.user = user;
         this.counselor = counselor;
         this.group = group;
         this.year = year;
         this.month = month;
         this.day = day;
-        this.type = type;
+        this.status = status;
     }
 }

@@ -166,22 +166,22 @@ VALUES(now(), now(), 'contents12', 11, 7, 'title12', 2022, 1);
 INSERT INTO TEXT_DIARY(created_at, updated_at, contents, day, month, title, year, user_id)
 VALUES(now(), now(), 'contents13', 12, 7, 'title13', 2022, 1);
 
-INSERT INTO COUNSELING(day, month, type, year, counselor_id, user_id)
+INSERT INTO COUNSELING(day, month, status, year, counselor_id, user_id)
 VALUES(1, 8, 'ACCEPTED', 2022, 6, 1);
 
-INSERT INTO COUNSELING(day, month, type, year, counselor_id, user_id)
+INSERT INTO COUNSELING(day, month, status, year, counselor_id, user_id)
 VALUES(2, 8, 'ACCEPTED', 2022, 6, 1);
 
-INSERT INTO COUNSELING(day, month, type, year, counselor_id, user_id)
+INSERT INTO COUNSELING(day, month, status, year, counselor_id, user_id)
 VALUES(3, 8, 'ACCEPTED', 2022, 6, 1);
 
-INSERT INTO COUNSELING(day, month, type, year, counselor_id, user_id)
+INSERT INTO COUNSELING(day, month, status, year, counselor_id, user_id)
 VALUES(4, 8, 'ACCEPTED', 2022, 6, 1);
 
-INSERT INTO COUNSELING(day, month, type, year, counselor_id, user_id)
+INSERT INTO COUNSELING(day, month, status, year, counselor_id, user_id)
 VALUES(5, 8, 'ACCEPTED', 2022, 6, 1);
 
-INSERT INTO COUNSELING(day, month, type, year, counselor_id, user_id)
+INSERT INTO COUNSELING(day, month, status, year, counselor_id, user_id)
 VALUES(6, 8, 'ACCEPTED', 2022, 6, 1);
 
 INSERT INTO COUNSELING_DOCUMENT(contents, day, is_open, month, year, counseling_id, counselor_id, user_id)
