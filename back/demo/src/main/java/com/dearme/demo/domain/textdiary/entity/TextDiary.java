@@ -26,7 +26,13 @@ public class TextDiary extends Base {
     @Setter
     private String sentiment;
     @Setter
-    private Long percentage;
+    private double percentage;
+    @Setter
+    private double positive;
+    @Setter
+    private double negative;
+    @Setter
+    private double neutral;
 
 
     private Integer year;
@@ -36,7 +42,7 @@ public class TextDiary extends Base {
     private Integer day;
 
     @Builder
-    public TextDiary(String title, String contents, Integer year, Integer month, Integer day){
+    public TextDiary(String title, String contents,Integer year, Integer month, Integer day){
         this.title = title;
         this.contents = contents;
         this.year = year;
