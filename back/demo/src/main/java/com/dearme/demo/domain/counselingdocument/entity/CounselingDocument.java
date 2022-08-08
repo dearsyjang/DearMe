@@ -85,6 +85,7 @@ public class CounselingDocument {
     public Counseling toGroupCounselingEntity(){
         return Counseling.builder()
                 .user(this.user)
+                .counselor(this.counselor)
                 .group(this.group)
                 .status(Status.UNACCEPTED)
                 .build();
