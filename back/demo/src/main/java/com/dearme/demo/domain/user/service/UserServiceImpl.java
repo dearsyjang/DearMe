@@ -149,10 +149,10 @@ public class UserServiceImpl implements UserService{
     @Override
     @Transactional
     public UpdateCategoryResponseDto updateCategory(String id, UpdateCategoryRequestDto dto) {
-        CounselorProfile counselorProfile = counselorProfileRepository.findCounselorProfileByCounselor_Id(id);
-        Category category = categoryRepository.findById(dto.getId()).get();
-        if(counselorProfile.equals(category.getCounselorProfile()))
-            category.updateCategory(dto.getContents());
+        Category category = categoryRepository.findCategoryByCounselorProfile_Counselor_IdAndId(id, dto.getId())
+                .orElseThrow(() -> {
+                    throw new NoExistCategoryException();
+                });
         categoryRepository.save(category);
         return new UpdateCategoryResponseDto(category.getId(), category.getContents());
     }
