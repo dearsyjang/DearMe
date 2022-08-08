@@ -49,7 +49,7 @@ public class ReviewServiceImpl implements ReviewService {
     @Override
     @Transactional
     public void reviewDelete(String id, Long reviewId) {
-        Review review = reviewRepository.findReviewByReviewid(reviewId).orElseThrow(()->{
+        Review review = reviewRepository.findReviewById(reviewId).orElseThrow(()->{
             throw new NoExistReviewException();
         });
         User user = userRepository.findUserById(id).orElseThrow(() -> {

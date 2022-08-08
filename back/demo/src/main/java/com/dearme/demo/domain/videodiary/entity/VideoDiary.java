@@ -1,10 +1,13 @@
 package com.dearme.demo.domain.videodiary.entity;
 
 import com.dearme.demo.domain.base.entitiy.Base;
+import com.dearme.demo.domain.review.entity.Favorite;
 import com.dearme.demo.domain.user.entity.User;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -26,10 +29,18 @@ public class VideoDiary extends Base {
     private String title;
     @Setter
     private String contents;
+
     @Setter
     private String sentiment;
+
     @Setter
-    private Long percentage;
+    private double percentage;
+    @Setter
+    private double positive;
+    @Setter
+    private double negative;
+    @Setter
+    private double neutral;
 
     private Integer year;
 
@@ -38,11 +49,14 @@ public class VideoDiary extends Base {
     private Integer day;
 
     @Builder
-    public VideoDiary(String title, String contents, String sentiment, Long percentage, String realFileName, String fileName, Integer year, Integer month, Integer day){
+    public VideoDiary(String title, String contents, String sentiment, double percentage, double positive, double negative, double neutral, String realFileName, String fileName, Integer year, Integer month, Integer day){
         this.title = title;
         this.contents = contents;
         this.sentiment=sentiment;
         this.percentage=percentage;
+        this.positive=positive;
+        this.negative=negative;
+        this.neutral=neutral;
         this.realFileName=realFileName;
         this.fileName=fileName;
         this.year = year;
@@ -58,7 +72,12 @@ public class VideoDiary extends Base {
     public void updateSentiment(String sentiment){
         this.sentiment = sentiment;
     }
-    public void updatePercentage(Long percentage){this.percentage=percentage;}
+    public void updatePercentage(double percentage){
+        this.percentage = percentage;
+    }
+    public void updatePositive(double percentage){this.positive=percentage;}
+    public void updateNegative(double percentage){this.negative=percentage;}
+    public void updateNeutral(double percentage){this.neutral=percentage;}
     public void setUser(User user){
         this.user = user;
     }

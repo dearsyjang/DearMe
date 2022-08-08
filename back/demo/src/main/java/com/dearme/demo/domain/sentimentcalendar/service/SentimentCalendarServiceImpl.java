@@ -30,7 +30,7 @@ public class SentimentCalendarServiceImpl implements SentimentCalendarService {
         for(VideoDiary videoDiary : videoDiaries){
             sentimentCalendarResponseDtos.get(videoDiary.getDay()).setVideodiaryid(videoDiary.getId());
             sentimentCalendarResponseDtos.get(videoDiary.getDay()).setVideodiarysentiment(videoDiary.getSentiment());
-            sentimentCalendarResponseDtos.get(videoDiary.getDay()).setVideodiarypercentage(videoDiary.getPercentage());
+            //sentimentCalendarResponseDtos.get(videoDiary.getDay()).setVideodiarypercentage(videoDiary.getPercentage());
         }
         for(TextDiary textDiary : textDiaries){
             sentimentCalendarResponseDtos.get(textDiary.getDay()).setTextdiaryid(textDiary.getId());
