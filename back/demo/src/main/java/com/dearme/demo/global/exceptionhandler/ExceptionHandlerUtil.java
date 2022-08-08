@@ -103,4 +103,9 @@ public class ExceptionHandlerUtil {
     ResponseEntity<CommonResponse> handleNoExistCounselingException(NoExistCounselingException e){
         return ResponseEntity.badRequest().body(CommonResponse.getErrorResponse(e.getMessage()));
     }
+
+    @ExceptionHandler(NoExistCareerException.class)
+    ResponseEntity<CommonResponse> handleNoExistCareerException(NoExistCareerException e){
+        return ResponseEntity.badRequest().body(CommonResponse.getErrorResponse(e.getMessage()));
+    }
 }

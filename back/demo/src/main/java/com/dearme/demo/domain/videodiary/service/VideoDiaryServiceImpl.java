@@ -1,10 +1,6 @@
 package com.dearme.demo.domain.videodiary.service;
 
 
-import com.dearme.demo.domain.textdiary.dto.TextDiaryDetailsResponseDto;
-import com.dearme.demo.domain.textdiary.dto.TextDiaryListResponseDto;
-import com.dearme.demo.domain.textdiary.entity.TextDiary;
-import com.dearme.demo.domain.textdiary.exception.NoPermissionTextDiaryException;
 import com.dearme.demo.domain.user.entity.Type;
 import com.dearme.demo.domain.user.entity.User;
 import com.dearme.demo.domain.user.exception.NoExistUserException;
@@ -20,6 +16,7 @@ import com.google.auth.oauth2.ServiceAccountCredentials;
 import com.google.cloud.speech.v1.*;
 import com.google.protobuf.ByteString;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.ResponseHandler;
@@ -43,6 +40,11 @@ import java.util.List;
 public class VideoDiaryServiceImpl implements VideoDiaryService {
     private final UserRepository userRepository;
     private final VideoDiaryRepository videoDiaryRepository;
+    @Value("${sentiment.id:0}")
+    private String SENTIMENT_ID;
+    @Value("${sentiment.key:0}")
+    private String SENTIMENT_KEY;
+
     @Override
     public PostVideoDiaryResponseDto postVideoDiary(String id, PostVideoDiaryRequestDto dto) throws IOException {
         User user = userRepository.findUserById(id).orElseThrow(() -> {
@@ -140,11 +142,11 @@ public class VideoDiaryServiceImpl implements VideoDiaryService {
         */
 
         //테스트용
-        String filePath="src/main/resources/convert_test1.mp3";
+        String filePath="C:\\Users\\multicampus\\S07P12D206\\back\\demo\\src\\main\\resources\\convert_test1.mp3";
 
         String[] text= new String[3];
         try {
-            CredentialsProvider credentialsProvider = FixedCredentialsProvider.create(ServiceAccountCredentials.fromStream(new FileInputStream("src/main/resources/my-project-0801-358104-1615eb198267.json")));
+            CredentialsProvider credentialsProvider = FixedCredentialsProvider.create(ServiceAccountCredentials.fromStream(new FileInputStream("C:\\Users\\multicampus\\S07P12D206\\back\\demo\\src\\main\\resources\\my-project-0801-358104-1615eb198267.json")));
             SpeechSettings settings = SpeechSettings.newBuilder().setCredentialsProvider(credentialsProvider).build();
             // Instantiates a client
             SpeechClient speech=SpeechClient.create(settings);
@@ -157,12 +159,15 @@ public class VideoDiaryServiceImpl implements VideoDiaryService {
 
             RecognitionAudio audio = getRecognitionAudio(filePath); // Audio 파일에 대한 RecognitionAudio 인스턴스 생성
             RecognizeResponse response = speech.recognize(config, audio); // 요청에 대한 응답
+
             List<SpeechRecognitionResult> results = response.getResultsList(); // 응답 결과들
+            StringBuilder sb =new StringBuilder();
             for (SpeechRecognitionResult result: results) {
                 SpeechRecognitionAlternative alternative = result.getAlternativesList().get(0);
+                sb.append(alternative.getTranscript());
                 System.out.printf("Transcription: %s%n", alternative.getTranscript());
-                text[0]=alternative.getTranscript();
             }
+            text[0]=sb.toString();
             speech.close();
         }
         catch (Exception e) {
@@ -176,15 +181,15 @@ public class VideoDiaryServiceImpl implements VideoDiaryService {
         return text;
     }
 
-    public static String[] getSentiment(String text){
+    public String[] getSentiment(String text){
         String []result = new String[2];
         try {
 
             HttpClient httpClient = HttpClientBuilder.create().build(); //Use this instead
             HttpPost postRequest = new HttpPost("https://naveropenapi.apigw.ntruss.com/sentiment-analysis/v1/analyze"); //POST 메소드 URL 새성
 
-            postRequest.addHeader("X-NCP-APIGW-API-KEY-ID", "w9jazjzk55");
-            postRequest.addHeader("X-NCP-APIGW-API-KEY", "fDUi38NcCgGHvIVgivrb7EbVuX7IxXMnYr9sxXjD");
+            postRequest.addHeader("X-NCP-APIGW-API-KEY-ID", SENTIMENT_ID);
+            postRequest.addHeader("X-NCP-APIGW-API-KEY", SENTIMENT_KEY);
             postRequest.addHeader("Content-Type", "application/json; charset=UTF-8");
             JSONObject obj = new JSONObject();
             obj.put("content", text);
