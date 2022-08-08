@@ -41,7 +41,7 @@ public class BoardServiceImpl implements BoardService{
         if(user.getType().equals(Type.USER)){
             board.setUser(user);
             boardRepository.save(board);
-            return new BoardSaveResponseDto(board.getBoardid());
+            return new BoardSaveResponseDto(board.getId());
         }else{
             throw new NoBoardSavePermissionException();
         }
@@ -50,17 +50,17 @@ public class BoardServiceImpl implements BoardService{
     public Page<BoardsViewResponseDto> getBoards(PageRequest pageRequest){
         Page<Board> page = boardRepository.findAll(pageRequest);
 
-        Page<BoardsViewResponseDto> map = page.map(board -> new BoardsViewResponseDto(board.getBoardid(),
+        Page<BoardsViewResponseDto> map = page.map(board -> new BoardsViewResponseDto(board.getId(),
                 board.getUser().getNickName(),
                 board.getTitle(),
-                board.getHitcnt(),
+                board.getHitCnt(),
                 board.getTitle()));
 
         return map;
     }
     @Transactional
-    public BoardViewResponseDto getBoard(Long boardid){
-        Board board= boardRepository.findBoardByBoardid(boardid).orElseThrow(()->{
+    public BoardViewResponseDto getBoard(Long boardId){
+        Board board= boardRepository.findBoardById(boardId).orElseThrow(()->{
             throw new NoExistBoardException();
         });
         List<Comment> temp = board.getComments();
@@ -73,20 +73,20 @@ public class BoardServiceImpl implements BoardService{
                     c.getContents()));
         }
 
-        return new BoardViewResponseDto(board.getBoardid(),
+        return new BoardViewResponseDto(board.getId(),
                 board.getUser().getNickName(),
                 board.getTitle(),
                 board.getContents(),
-                board.getHitcnt(),
+                board.getHitCnt(),
                 board.getDate(),
                 commentResponseDto);
     }
 
     @Transactional
-    public BoardUpdateResponseDto updateBoard(String id, Long boardid, BoardUpdateRequestDto dto) {
+    public BoardUpdateResponseDto updateBoard(String id, Long boardId, BoardUpdateRequestDto dto) {
 
 
-        Board board = boardRepository.findBoardByBoardid(boardid).orElseThrow(()->{
+        Board board = boardRepository.findBoardById(boardId).orElseThrow(()->{
             throw new NoExistBoardException();
         });
         User user = userRepository.findUserById(id).orElseThrow(() -> {
@@ -94,15 +94,15 @@ public class BoardServiceImpl implements BoardService{
         });
         if(user.getUserId().equals(board.getUser().getUserId())){
             board.update(dto.getTitle(), dto.getContents(), dto.getDate());
-            return new BoardUpdateResponseDto(board.getBoardid());
+            return new BoardUpdateResponseDto(board.getId());
         }else{
             throw new NoBoardUpdatePermissionException();
         }
     }
 
     @Transactional
-    public void deleteBoard(String id, Long boardid) {
-        Board board = boardRepository.findBoardByBoardid(boardid).orElseThrow(()->{
+    public void deleteBoard(String id, Long boardId) {
+        Board board = boardRepository.findBoardById(boardId).orElseThrow(()->{
             throw new NoExistBoardException();
         });
         User user = userRepository.findUserById(id).orElseThrow(() -> {

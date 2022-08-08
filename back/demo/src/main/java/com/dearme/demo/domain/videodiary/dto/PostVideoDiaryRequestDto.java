@@ -10,15 +10,15 @@ import java.time.LocalDate;
 public class PostVideoDiaryRequestDto {
 
     private String title;
-    private String realfilename;
-    private String filename;
+    private String realFileName;
+    private String fileName;
 
     public VideoDiary toEntity(){
         LocalDate now = LocalDate.now();
         return VideoDiary.builder()
                 .title(this.title)
-                .realfilename(this.realfilename)
-                .filename(this.filename)
+                .realfilename(this.realFileName)
+                .filename(this.fileName)
                 .year(now.getYear())
                 .month(now.getMonthValue())
                 .day(now.getDayOfMonth())

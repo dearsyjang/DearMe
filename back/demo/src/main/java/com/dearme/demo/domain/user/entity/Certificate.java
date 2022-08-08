@@ -15,6 +15,7 @@ import javax.persistence.*;
 public class Certificate extends Base {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "certificate_id")
     private Long id;
 
     private String contents;

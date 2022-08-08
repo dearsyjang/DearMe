@@ -7,7 +7,7 @@ import java.time.LocalDate;
 
 @Data
 public class PostCounselingDocumentRequestDto {
-    private Long counselorId;
+    private Long id;
     private LocalDate date;
     private String contents;
     private Boolean isOpen;

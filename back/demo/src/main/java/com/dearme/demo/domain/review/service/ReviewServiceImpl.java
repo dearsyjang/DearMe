@@ -40,18 +40,18 @@ public class ReviewServiceImpl implements ReviewService {
             throw new NoReviewSavePermissionException();
         }
         review.setUser(user);
-        User counselor = userRepository.findUserById(dto.getCounselorid()).orElseThrow(() -> {
+        User counselor = userRepository.findUserById(dto.getId()).orElseThrow(() -> {
             throw new NoExistCounselorException();
         });
         counselor.getCounselorProfile().updateReviewValue(review.getValue(), 1);
         review.setCounselor(counselor);
         reviewRepository.save(review);
-        return new ReviewSaveResponseDto(review.getReviewid());
+        return new ReviewSaveResponseDto(review.getId());
     }
     @Override
     @Transactional
-    public void reviewDelete(String id, Long reviewid) {
-        Review review = reviewRepository.findReviewByReviewid(reviewid).orElseThrow(()->{
+    public void reviewDelete(String id, Long reviewId) {
+        Review review = reviewRepository.findReviewByReviewid(reviewId).orElseThrow(()->{
             throw new NoExistReviewException();
         });
         User user = userRepository.findUserById(id).orElseThrow(() -> {
@@ -76,7 +76,7 @@ public class ReviewServiceImpl implements ReviewService {
 
         List<ReviewCounselorViewResponseDto> reviewList = new ArrayList<>();
         for(Review r : tempList){
-            reviewList.add(new ReviewCounselorViewResponseDto(r.getReviewid(),
+            reviewList.add(new ReviewCounselorViewResponseDto(r.getId(),
                     r.getUser().getNickName(),
                     r.getValue(),
                     r.getContents()));

@@ -37,10 +37,10 @@ public class FavoriteApiController {
     }
 
     @Operation(summary = "favorite Delete Test", description = "즐겨찾기 삭제")
-    @DeleteMapping("/{favoriteid}")
-    public ResponseEntity<CommonResponse> favoriteDelete(HttpServletRequest request, @PathVariable("favoriteid") Long favoriteid){
+    @DeleteMapping("/{favoriteId}")
+    public ResponseEntity<CommonResponse> favoriteDelete(HttpServletRequest request, @PathVariable("favoriteId") Long favoriteId){
         String id = (String) request.getAttribute("id");
-        favoriteService.favoriteDelete(id, favoriteid);
+        favoriteService.favoriteDelete(id, favoriteId);
         return null;
     }
 

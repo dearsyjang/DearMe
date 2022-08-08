@@ -27,7 +27,7 @@ public class CounselorsViewResponseDto {
     private String pictureUrl;
 
     private double value;
-    private Long reviewcnt;
+    private Long reviewCnt;
     private List<Category> categories;
 
 }

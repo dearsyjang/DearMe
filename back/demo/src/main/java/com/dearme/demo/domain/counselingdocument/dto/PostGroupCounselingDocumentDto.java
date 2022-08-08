@@ -5,7 +5,7 @@ import lombok.Data;
 
 @Data
 public class PostGroupCounselingDocumentDto {
-    private Long groupId;
+    private Long id;
     private String contents;
     private Boolean isOpen;
 

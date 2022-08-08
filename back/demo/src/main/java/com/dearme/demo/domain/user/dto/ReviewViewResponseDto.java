@@ -6,8 +6,8 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class ReviewViewResponseDto {
-    private Long reviewid;
-    private String nickname;
+    private Long id;
+    private String nickName;
     private Long value;
     private String contents;
 }

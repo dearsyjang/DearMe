@@ -15,6 +15,7 @@ import javax.persistence.*;
 public class Career extends Base {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "career_id")
     private Long id;
 
     private String contents;

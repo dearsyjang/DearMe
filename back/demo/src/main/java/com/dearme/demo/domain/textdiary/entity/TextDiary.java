@@ -12,6 +12,7 @@ import javax.persistence.*;
 public class TextDiary extends Base {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "text_diary_id")
     private Long id;
 
     @ManyToOne

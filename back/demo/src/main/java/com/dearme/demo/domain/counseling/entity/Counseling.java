@@ -16,6 +16,7 @@ import javax.persistence.*;
 public class Counseling {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "counseling_id")
     private Long id;
 
     @ManyToOne

@@ -12,15 +12,16 @@ import javax.persistence.*;
 public class VideoDiary extends Base {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "video_diary_id")
     private Long id;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
 
-    private String realfilename;
+    private String realFileName;
 
-    private String filename;
+    private String fileName;
 
     private String title;
     @Setter
@@ -37,13 +38,13 @@ public class VideoDiary extends Base {
     private Integer day;
 
     @Builder
-    public VideoDiary(String title, String contents, String sentiment, Long percentage, String realfilename, String filename, Integer year, Integer month, Integer day){
+    public VideoDiary(String title, String contents, String sentiment, Long percentage, String realFileName, String fileName, Integer year, Integer month, Integer day){
         this.title = title;
         this.contents = contents;
         this.sentiment=sentiment;
         this.percentage=percentage;
-        this.realfilename=realfilename;
-        this.filename=filename;
+        this.realFileName=realFileName;
+        this.fileName=fileName;
         this.year = year;
         this.month = month;
         this.day = day;

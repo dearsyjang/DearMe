@@ -47,13 +47,13 @@ public class FavoriteServiceImpl implements FavoriteService {
             throw new NoFavoriteSavePermissionException();
         }
         favorite.setUser(user);
-        User counselor = userRepository.findUserById(dto.getCounselorid()).orElseThrow(() -> {
+        User counselor = userRepository.findUserById(dto.getId()).orElseThrow(() -> {
             throw new NoExistCounselorException();
         });
         favorite.setCounselor(counselor);
 
         favoriteRepository.save(favorite);
-        return new FavoriteSaveResponseDto(favorite.getFavoriteid());
+        return new FavoriteSaveResponseDto(favorite.getId());
 
     }
 
@@ -63,7 +63,7 @@ public class FavoriteServiceImpl implements FavoriteService {
         List<Favorite> tempList = favoriteRepository.findFavoriteByUser_Id(id);
         List<FavoriteViewResponseDto> favoriteList = new ArrayList<>();
         for(Favorite f : tempList){
-            favoriteList.add(new FavoriteViewResponseDto(f.getFavoriteid(),
+            favoriteList.add(new FavoriteViewResponseDto(f.getId(),
                     f.getCounselor().getNickName()));
         }
         return favoriteList;
@@ -71,8 +71,8 @@ public class FavoriteServiceImpl implements FavoriteService {
 
     @Override
     @Transactional
-    public void favoriteDelete(String id, Long favoriteid) {
-        Favorite favorite = favoriteRepository.findFavoriteByFavoriteid(favoriteid).orElseThrow(() -> {
+    public void favoriteDelete(String id, Long favoriteId) {
+        Favorite favorite = favoriteRepository.findFavoriteById(favoriteId).orElseThrow(() -> {
             throw new NoExistFavoriteException();
         });
 

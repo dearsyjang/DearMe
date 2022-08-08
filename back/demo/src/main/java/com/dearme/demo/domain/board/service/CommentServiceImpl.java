@@ -34,10 +34,10 @@ public class CommentServiceImpl implements CommentService{
 
     @Override
     @Transactional
-    public CommentSaveResponseDto commentSave(String id, Long boardid, CommentSaveRequestDto dto){
+    public CommentSaveResponseDto commentSave(String id, Long boardId, CommentSaveRequestDto dto){
         Comment comment;
         comment=dto.toCommentEntity();
-        Board board = boardRepository.findBoardByBoardid(boardid).orElseThrow(()->{
+        Board board = boardRepository.findBoardById(boardId).orElseThrow(()->{
             throw new NoExistBoardException();
         });
         User user = userRepository.findUserById(id).orElseThrow(() -> {
@@ -47,7 +47,7 @@ public class CommentServiceImpl implements CommentService{
             comment.setBoard(board);
             comment.setUser(user);
             commentRepository.save(comment);
-            return new CommentSaveResponseDto(comment.getCommentid());
+            return new CommentSaveResponseDto(comment.getId());
         }else{
             throw new NoCommentSavePermissionException();
         }
@@ -55,8 +55,8 @@ public class CommentServiceImpl implements CommentService{
     }
 
     @Transactional
-    public CommentUpdateResponseDto updateComment(String id, Long commentid, CommentUpdateRequestDto dto) {
-        Comment comment = commentRepository.findCommentByCommentid(commentid).orElseThrow(()->{
+    public CommentUpdateResponseDto updateComment(String id, Long commentId, CommentUpdateRequestDto dto) {
+        Comment comment = commentRepository.findCommentById(commentId).orElseThrow(()->{
             throw new NoExistCommentException();
         });
         User user = userRepository.findUserById(id).orElseThrow(() -> {
@@ -64,15 +64,15 @@ public class CommentServiceImpl implements CommentService{
         });
         if(user.getUserId().equals(comment.getUser().getUserId())){
             comment.update(dto.getDate(), dto.getContents());
-            return new CommentUpdateResponseDto(comment.getCommentid());
+            return new CommentUpdateResponseDto(comment.getId());
         }else{
             throw new NoCommentUpdatePermissionException();
         }
     }
 
     @Transactional
-    public void deleteComment(String id, Long commentid) {
-        Comment comment = commentRepository.findCommentByCommentid(commentid).orElseThrow(()->{
+    public void deleteComment(String id, Long commentId) {
+        Comment comment = commentRepository.findCommentById(commentId).orElseThrow(()->{
             throw new NoExistCommentException();
         });
         User user = userRepository.findUserById(id).orElseThrow(() -> {

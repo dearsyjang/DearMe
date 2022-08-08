@@ -10,14 +10,14 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 public class BoardViewResponseDto {
-    private Long boardid;
+    private Long id;
 
-    private String nickname;
+    private String nickName;
     private String title;
 
     private String contents;
 
-    private int hitcnt;
+    private int hitCnt;
 
     private Date date;
 

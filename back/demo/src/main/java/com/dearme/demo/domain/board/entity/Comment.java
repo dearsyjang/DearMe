@@ -16,7 +16,8 @@ import java.util.Date;
 public class Comment extends Base {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long commentid;
+    @Column(name = "comment_id")
+    private Long id;
 
     @ManyToOne
     @JsonManagedReference // 순환참조 방지

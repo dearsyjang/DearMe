@@ -73,9 +73,9 @@ public class UserController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @GetMapping("/nickname/{nickname}")
-    public ResponseEntity<?> checkNickname(@PathVariable("nickname") String nickname){
-        userService.checkNickname(nickname);
+    @GetMapping("/nickname/{nickName}")
+    public ResponseEntity<?> checkNickname(@PathVariable("nickName") String nickName){
+        userService.checkNickname(nickName);
         return new ResponseEntity<>(HttpStatus.OK);
     }
     @DeleteMapping

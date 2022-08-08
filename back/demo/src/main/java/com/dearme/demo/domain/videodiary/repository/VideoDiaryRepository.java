@@ -9,6 +9,6 @@ import java.util.List;
 public interface VideoDiaryRepository extends JpaRepository<VideoDiary, Long> {
     VideoDiary findVideoDiaryById(Long id);
     List<VideoDiary> findAllByUser_IdAndYearAndMonth(String id, Integer year, Integer month);
-    void deleteByUser_IdAndId(String userId, Long id);
+    void deleteByUser_IdAndId(String id, Long videoDiaryId);
 
 }

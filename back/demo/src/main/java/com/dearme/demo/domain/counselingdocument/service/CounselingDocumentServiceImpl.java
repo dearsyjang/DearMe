@@ -36,7 +36,7 @@ public class CounselingDocumentServiceImpl implements CounselingDocumentService{
         User user = userRepository.findUserById(id).orElseThrow(() -> {
             throw new NoExistUserException();
         });
-        User counselor = userRepository.findById(dto.getCounselorId()).orElseThrow(() -> {
+        User counselor = userRepository.findById(dto.getId()).orElseThrow(() -> {
             throw new NoExistUserException();
         });
         counselingDocument.setUser(user);
@@ -49,7 +49,7 @@ public class CounselingDocumentServiceImpl implements CounselingDocumentService{
     @Transactional
     public void postGroup(String id, PostGroupCounselingDocumentDto dto) {
         CounselingDocument counselingDocument = dto.toEntity();
-        Group group = groupRepository.findById(dto.getGroupId()).orElseThrow(() -> {
+        Group group = groupRepository.findById(dto.getId()).orElseThrow(() -> {
             throw new GroupNotFoundExcetion();
         });
         User user = userRepository.findUserById(id).orElseThrow(() -> {

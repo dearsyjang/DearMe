@@ -54,7 +54,7 @@ public class VideoDiaryServiceImpl implements VideoDiaryService {
             throw new CounselorPostVideoDiaryException();
         VideoDiary videoDiary = dto.toEntity();
         videoDiary.setUser(user);
-        String[] text = videoSTT(videoDiary.getRealfilename());
+        String[] text = videoSTT(videoDiary.getRealFileName());
         videoDiary.setContents(text[0]);
         videoDiary.setSentiment(text[1]);
         videoDiary.setPercentage(Long.parseLong(text[2]));

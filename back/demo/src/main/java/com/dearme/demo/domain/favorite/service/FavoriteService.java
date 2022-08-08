@@ -13,6 +13,6 @@ public interface FavoriteService {
     FavoriteSaveResponseDto favoriteSave(String id, FavoriteSaveRequestDto dto);
     List<FavoriteViewResponseDto> favoriteView(String id);
 
-    void favoriteDelete(String id, Long favoriteid);
+    void favoriteDelete(String id, Long favoriteId);
 
 }

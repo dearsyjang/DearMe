@@ -6,14 +6,14 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class BoardsViewResponseDto {
-    private Long boardid;
+    private Long id;
 
     private String nickname;
 
     private String title;
 
 
-    private int hitcnt;
+    private int hitCnt;
 
     private String date;
 

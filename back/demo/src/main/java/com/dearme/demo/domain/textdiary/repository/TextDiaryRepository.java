@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface TextDiaryRepository extends JpaRepository<TextDiary, Long> {
     List<TextDiary> findAllByUser_IdAndYearAndMonth(String id, Integer year, Integer month);
-    void deleteByUser_IdAndId(String userId, Long id);
+    void deleteByUser_IdAndId(String id, Long textDiaryId);
 }
