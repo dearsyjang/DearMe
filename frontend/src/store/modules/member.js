@@ -45,7 +45,13 @@ export default {
         method: 'get'
       })
         .then(res => {
-          const token = res.data
+          const token = res.data.data.accessToken
+          // const access = token.accessToken
+          console.log(token)
+          // console.log(access)
+          // console.log(res.data)
+          // console.log(res.data.accessToken)
+          // console.log('token', token)
           // token에 accessToken, refreshToken 둘 다 들어감 (이 부분 수정 필요)
           // console.log(token)
           // 현재 사용자 업데이트
