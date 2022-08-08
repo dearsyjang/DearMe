@@ -108,4 +108,9 @@ public class ExceptionHandlerUtil {
     ResponseEntity<CommonResponse> handleNoExistCareerException(NoExistCareerException e){
         return ResponseEntity.badRequest().body(CommonResponse.getErrorResponse(e.getMessage()));
     }
+
+    @ExceptionHandler(NoExistCertificateException.class)
+    ResponseEntity<CommonResponse> handleNoExistCertificateException(NoExistCertificateException e){
+        return ResponseEntity.badRequest().body(CommonResponse.getErrorResponse(e.getMessage()));
+    }
 }
