@@ -57,6 +57,7 @@ public class CounselingDocumentServiceImpl implements CounselingDocumentService{
         });
         counselingDocument.setUser(user);
         counselingDocument.setGroup(group);
+        counselingDocument.setCounselor(group.getCounselor());
         counselingService.createGroupCounseling(counselingDocument);
         counselingDocumentRepository.save(counselingDocument);
     }

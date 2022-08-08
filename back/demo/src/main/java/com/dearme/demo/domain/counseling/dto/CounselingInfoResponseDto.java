@@ -1,7 +1,7 @@
 package com.dearme.demo.domain.counseling.dto;
 
 import com.dearme.demo.domain.counseling.entity.Counseling;
-import com.dearme.demo.domain.counseling.entity.Type;
+import com.dearme.demo.domain.counseling.entity.Status;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Builder;
 import lombok.Data;
@@ -18,7 +18,7 @@ public class CounselingInfoResponseDto {
     private Integer day;
     private Long counselingDocumentId;
     private Long groupId;
-    private Type type;
+    private Status status;
 
     public static CounselingInfoResponseDto of(Counseling entity){
         if(entity.getCounselor() == null)
@@ -29,7 +29,7 @@ public class CounselingInfoResponseDto {
                     .year(entity.getYear())
                     .month(entity.getMonth())
                     .day(entity.getDay())
-                    .type(entity.getType())
+                    .status(entity.getStatus())
                     .build();
 
         return CounselingInfoResponseDto.builder()
@@ -40,7 +40,7 @@ public class CounselingInfoResponseDto {
                 .month(entity.getMonth())
                 .day(entity.getDay())
                 .counselingDocumentId(entity.getCounselingDocument().getId())
-                .type(entity.getType())
+                .status(entity.getStatus())
                 .build();
     }
 }
