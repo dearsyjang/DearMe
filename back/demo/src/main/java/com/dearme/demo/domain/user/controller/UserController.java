@@ -140,4 +140,11 @@ public class UserController {
         userService.addCounselorCategory(id, dto);
         return ResponseEntity.accepted().build();
     }
+
+    @DeleteMapping("/users/groups/{groupId}")
+    public ResponseEntity<CommonResponse> withdrawalGroup(HttpServletRequest request, @PathVariable("groupId") Long groupId){
+        String id = (String) request.getAttribute("id");
+        userService.withdrawalUserGroup(id, groupId);
+        return ResponseEntity.ok().build();
+    }
 }
