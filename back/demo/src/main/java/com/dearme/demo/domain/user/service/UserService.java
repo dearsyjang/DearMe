@@ -27,4 +27,6 @@ public interface UserService {
     List<ReviewViewResponseDto> getReviews(String id);
 
     UserGroupListResponseDto getGroups(String id);
+
+    void deleteCareer(String id, Long careerId);
 }
