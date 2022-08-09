@@ -1,6 +1,5 @@
 package com.dearme.demo.domain.review.service;
 
-import com.dearme.demo.domain.review.dto.ReviewCounselorViewResponseDto;
 import com.dearme.demo.domain.review.dto.ReviewSaveRequestDto;
 import com.dearme.demo.domain.review.dto.ReviewSaveResponseDto;
 import com.dearme.demo.domain.review.entity.Review;
@@ -8,6 +7,7 @@ import com.dearme.demo.domain.review.exception.NoExistReviewException;
 import com.dearme.demo.domain.review.exception.NoReviewDeletePermissionException;
 import com.dearme.demo.domain.review.exception.NoReviewSavePermissionException;
 import com.dearme.demo.domain.review.repository.ReviewRepository;
+import com.dearme.demo.domain.user.dto.ReviewCounselorViewResponseDto;
 import com.dearme.demo.domain.user.entity.Type;
 import com.dearme.demo.domain.user.entity.User;
 import com.dearme.demo.domain.user.exception.NoExistCounselorException;
@@ -67,18 +67,4 @@ public class ReviewServiceImpl implements ReviewService {
         }
     }
 
-    @Override
-    public List<ReviewCounselorViewResponseDto> reviewCounselorView(String id) {
-        List<Review> tempList = reviewRepository.findReviewByCounselor_Id(id);
-        if(tempList.isEmpty()) throw new NoExistReviewException();
-
-        List<ReviewCounselorViewResponseDto> reviewList = new ArrayList<>();
-        for(Review r : tempList){
-            reviewList.add(new ReviewCounselorViewResponseDto(r.getId(),
-                    r.getUser().getNickName(),
-                    r.getValue(),
-                    r.getContents()));
-        }
-        return reviewList;
-    }
 }
