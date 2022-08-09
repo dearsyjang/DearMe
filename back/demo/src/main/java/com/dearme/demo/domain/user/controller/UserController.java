@@ -113,4 +113,17 @@ public class UserController {
         String id = (String) request.getAttribute("id");
         userService.deleteCounselorCertificate(id, certificateId);
     }
+
+    @DeleteMapping("/categories/{categoryId}")
+    public void deleteCategory(HttpServletRequest request, @PathVariable(value = "categoryId") Long categoryId){
+        String id = (String) request.getAttribute("id");
+        userService.deleteCounselorCategory(id, categoryId);
+    }
+
+    @PostMapping("/careers")
+    public ResponseEntity<CommonResponse> addCareer(HttpServletRequest request, @RequestBody AddCareerRequestDto dto){
+        String id = (String) request.getAttribute("id");
+        userService.addCounselorCareer(id, dto);
+        return ResponseEntity.accepted().build();
+    }
 }
