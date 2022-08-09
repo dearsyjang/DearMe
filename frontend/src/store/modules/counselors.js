@@ -37,14 +37,32 @@ export default {
       axios({
        url: drf.counselors.counselors(),
        method : 'GET',
-       headers: getters.authHeader,
+       headers: {
+        'Content-Type': 'application/json',
+        'Authorization': getters.authHeader
+        },
       })
       .then(res => {
+        console.log('1')
+        console.log(res)
+        console.log(res.data)
+        console.log(res.data.data)
         commit('SET_COUNSELORS', res.data)
       })       
         
-      .catch(err => console.error(err.response))
+      .catch(err => console.error(err) )
     },
+
+
+
+
+
+
+
+
+
+
+
 
     fetchCounselorList({ commit, getters }) {
       axios({

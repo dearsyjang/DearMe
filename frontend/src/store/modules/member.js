@@ -10,39 +10,43 @@ export default {
     token: localStorage.getItem('token') || '',
     // 로그인된 사용자
     currentUser: {},
-    authError: null,
     profile: {},
+    authError: null,
   },
   getters: {
     // 로그인, 로그아웃 경우에 현재 사용자 업데이트
+    isLoggedIn: state => !!state.token,
     currentUser: state => state.currentUser,
-    // 현재 사용자의 토큰을 나타냄 (요청 보낼 때, header에서 사용)
-    authHeader: state => ({ Authorization: `Token ${state.currentUser}`}),
-    authError: state => state.authError,
     profile: state => state.profile,
+    // 현재 사용자의 토큰을 나타냄 (요청 보낼 때, header에서 사용)
+    authHeader: state => `Token ${state.token}`,
+    // authHeader: state => ({ Authorization: `Token ${state.token}`}),
+    authError: state => state.authError,
   },
   mutations: {
     SET_TOKEN: (state, token) => state.token = token,
     SET_CURRENT_USER: (state, user) => state.currentUser = user,
-    SET_AUTH_ERROR: (state, error) => state.authError = error,
     SET_PROFILE: (state, profile) => state.profile = profile,
+    SET_AUTH_ERROR: (state, error) => state.authError = error,
 
   },
   actions: {
     // 회원가입
-    saveToken({ commit }, token) {  //토큰인자를 commit
-      commit('SET_TOKEN', token)    //토큰을 넘겨주면서 'SET_TOKEN'실행 =>   state에 넣음
+    saveToken({ commit }, token) {
+      commit('SET_TOKEN', token)
       // 회원가입시 받은 토큰을 로컬스토리지에 추가
       localStorage.setItem('token', token)
     },
     // 로그아웃
     removeToken({ commit }) {
       // 현재 사용자 비움
+      commit('SET_TOKEN', '')
+      localStorage.setItem('token', '')
       commit('SET_CURRENT_USER', '')
-      // localStorage.setItem('token', '')
+
     },
     // 받아오는 데이터가 한개일 경우 입력, 여러개일 경우 {}안에 담아와야함
-    login({ commit }, data) {
+    login({ commit, dispatch}, data) {
       axios({
         // url: 'https://i7d206.p.ssafy.io/users/token?id=id1&pw=pw1',
         url: drf.member.login()+`?id=${data.id}&pw=${data.pw}`,
@@ -50,13 +54,8 @@ export default {
       })
         .then(res => {
           const token = res.data.data.accessToken
-          // token에 accessToken, refreshToken 둘 다 들어감 (이 부분 수정 필요)
-          console.log(token)
-          // 현재 사용자 업데이트
-          commit('SET_CURRENT_USER', token)
-          // dispatch('fetchCurrentUser', token)
-          // console.log(getters.currentUser)
-          // console.log(getters.authHeader)
+          dispatch('saveToken', token)
+          dispatch('fetchCurrentUser')
           router.push({ name: 'mypageUser' })
         })
         .catch(err => {
@@ -71,18 +70,21 @@ export default {
         url: drf.member.signup(),
         method: 'post',
         data: formData,
-        headers: {
-          'Content-Type': 'multipart/form-data'
-        }
+        // haeder 이형식이면 axios error 발생
+        // headers: {
+        //   'Content-Type': 'multipart/form-data'
+        // }
       })
-      .then(res => {  // 성공하면 응답이 온다
+      .then(res => {
           // console.log(res)
           // console.log(res.data)
-          const token = res.data.data.accessToken  //res.data 안에 data.accessToken 을 token으로 정의
+          // console.log(res.data.data)
+          // console.log(res.data.data.accessToken)
+          const token = res.data.data.accessToken
           console.log(token)
           // 로컬스토리지에 토큰 저장
-          dispatch('saveToken', token)  // token을 인자로 넘겨주면서 saveToken 함수를 실행
-          alert('save token성공')
+          dispatch('saveToken', token)
+          alert('회원가입 성공')
           // 여기서 바로 마이페이지로 넘어갈지 고민중..
           router.push({ name: 'login' })
         })
@@ -98,41 +100,24 @@ export default {
       console.log(getters.currentUser)
       router.push({ name: 'login' })
     },
-
-
-    changeProfile({ commit, getters }, credentials ) {
-
+  },
+  fetchCurrentUser({ commit, getters, dispatch }) {
+    if (getters.isLoggedIn) {
       axios({
-        url: drf.member.changeProfile(),
-        method: 'put',
-        data: credentials,
-        headers: getters.authHeader,
-      })
-      .then(() => {
-        alert('비밀번호 변경 완료!')
-        router.push({ name: 'myprofile' })
-      })
-      .catch(err => {
-        console.error(err.response.data)
-        commit('SET_AUTH_ERROR', err.response.data)
-      })
-    },
-
-    fetchProfile({ commit, getters }, {id}) {
-      /*
-      GET: profile URL로 요청보내기
-        성공하면
-          state.profile에 저장
-      */
-     // if(username === )
-      axios({
-        url: drf.member.profile(id),
+        url: drf.member.currentUserInfo(),
         method: 'get',
         headers: getters.authHeader,
       })
         .then(res => {
-          commit('SET_PROFILE', res.data)
+          commit('SET_CURRENT_USER', res.data.data.accessToken)
         })
-    },
+        .catch(err => {
+          if (err.response.status == 401) {
+            dispatch('removeToken')
+            router.push({ name: 'login' })
+          }
+        })
+    }
   },
+
 }
