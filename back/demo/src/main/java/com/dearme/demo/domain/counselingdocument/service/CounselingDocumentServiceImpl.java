@@ -10,6 +10,7 @@ import com.dearme.demo.domain.group.entity.Group;
 import com.dearme.demo.domain.group.exception.GroupNotFoundExcetion;
 import com.dearme.demo.domain.group.repository.GroupRepository;
 import com.dearme.demo.domain.user.entity.User;
+import com.dearme.demo.domain.user.exception.NoExistCounselorException;
 import com.dearme.demo.domain.user.exception.NoExistUserException;
 import com.dearme.demo.domain.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -37,7 +38,7 @@ public class CounselingDocumentServiceImpl implements CounselingDocumentService{
             throw new NoExistUserException();
         });
         User counselor = userRepository.findById(dto.getId()).orElseThrow(() -> {
-            throw new NoExistUserException();
+            throw new NoExistCounselorException();
         });
         counselingDocument.setUser(user);
         counselingDocument.setCounselor(counselor);

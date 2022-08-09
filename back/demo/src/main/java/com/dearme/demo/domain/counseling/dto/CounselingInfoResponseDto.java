@@ -16,6 +16,7 @@ public class CounselingInfoResponseDto {
     private Integer year;
     private Integer month;
     private Integer day;
+    private Integer hours;
     private Long counselingDocumentId;
     private Long groupId;
     private Status status;
@@ -29,6 +30,7 @@ public class CounselingInfoResponseDto {
                     .year(entity.getYear())
                     .month(entity.getMonth())
                     .day(entity.getDay())
+                    .hours(entity.getHours())
                     .status(entity.getStatus())
                     .build();
 
@@ -39,6 +41,7 @@ public class CounselingInfoResponseDto {
                 .year(entity.getYear())
                 .month(entity.getMonth())
                 .day(entity.getDay())
+                .hours(entity.getHours())
                 .counselingDocumentId(entity.getCounselingDocument().getId())
                 .status(entity.getStatus())
                 .build();

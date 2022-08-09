@@ -13,11 +13,13 @@ import com.dearme.demo.domain.user.entity.Type;
 import com.dearme.demo.domain.user.entity.User;
 import com.dearme.demo.domain.user.exception.NoExistUserException;
 import com.dearme.demo.domain.user.repository.UserRepository;
+import com.dearme.demo.global.scheduler.MainJob;
 import lombok.RequiredArgsConstructor;
+import org.quartz.*;
+import org.quartz.impl.StdSchedulerFactory;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
@@ -31,6 +33,35 @@ public class CounselingServiceImpl implements CounselingService{
         Counseling counseling = counselingDocument.toCounselingEntity();
         counseling.setCounselingDocument(counselingDocument);
         counselingRepository.save(counseling);
+
+//        try {
+//            // Scheduler 사용을 위한 인스턴스화
+//            SchedulerFactory schedulerFactory = new StdSchedulerFactory();
+//            Scheduler scheduler = schedulerFactory.getScheduler();
+//            // JOB Data 객체
+//            JobDataMap jobDataMap = new JobDataMap();
+//            jobDataMap.put("jobSays", "Say Hello World!");
+//            jobDataMap.put("myFloatValue", 3.1415f);
+//
+//            JobDetail jobDetail = JobBuilder.newJob(MainJob.class)
+//                    .withIdentity("myJob", "group1")
+//                    .setJobData(jobDataMap)
+//                    .build();
+//
+//            @SuppressWarnings("deprecation")
+//            SimpleTrigger simpleTrigger = (SimpleTrigger) TriggerBuilder.newTrigger()
+//                    .withIdentity("simple_trigger", "simple_trigger_group")
+//                    .startAt(new Date(2022 - 1900, 7, 9, 11, 15)) // 2022 : 2022 - 1900, month = 7 -> 8월
+//                    .withSchedule(SimpleScheduleBuilder.repeatSecondlyForTotalCount(5, 10)) // 10초마다 반복하며, 최대 5회 실행
+//                    .forJob(jobDetail)
+//                    .build();
+//            Set<SimpleTrigger> triggerSet = new HashSet<SimpleTrigger>();
+//            triggerSet.add(simpleTrigger);
+//            scheduler.scheduleJob(jobDetail, triggerSet, false);
+//            scheduler.start();
+//        }catch(Exception e) {
+//            e.printStackTrace();
+//        }
     }
 
     @Override

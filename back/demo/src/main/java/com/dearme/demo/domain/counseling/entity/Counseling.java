@@ -36,6 +36,9 @@ public class Counseling {
 
     private Integer day;
 
+    private Integer hours;
+
+
     @OneToOne(mappedBy = "counseling", cascade = CascadeType.ALL)
     @JoinColumn(name = "counseling_document_id")
     private CounselingDocument counselingDocument;
@@ -54,13 +57,14 @@ public class Counseling {
     }
 
     @Builder
-    public Counseling(User user, Group group, User counselor, Integer year, Integer month, Integer day, Status status){
+    public Counseling(User user, Group group, User counselor, Integer year, Integer month, Integer day, Integer hours, Status status){
         this.user = user;
         this.counselor = counselor;
         this.group = group;
         this.year = year;
         this.month = month;
         this.day = day;
+        this.hours=hours;
         this.status = status;
     }
 }

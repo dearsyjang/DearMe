@@ -34,6 +34,8 @@ public class CounselingDocument {
 
     private Integer day;
 
+    private Integer hours;
+
     private String contents;
 
     private Boolean isOpen;
@@ -63,10 +65,11 @@ public class CounselingDocument {
     }
 
     @Builder
-    public CounselingDocument(Integer year, Integer month, Integer day, String contents, Boolean isOpen){
+    public CounselingDocument(Integer year, Integer month, Integer day, Integer hours, String contents, Boolean isOpen){
         this.year = year;
         this.month = month;
         this.day = day;
+        this.hours=hours;
         this.contents = contents;
         this.isOpen = isOpen;
     }
@@ -79,6 +82,7 @@ public class CounselingDocument {
                 .year(this.year)
                 .month(this.month)
                 .day(this.day)
+                .hours(this.hours)
                 .status(Status.UNACCEPTED)
                 .build();
     }
