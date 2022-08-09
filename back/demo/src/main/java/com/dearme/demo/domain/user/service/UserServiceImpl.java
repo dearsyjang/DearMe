@@ -269,4 +269,9 @@ public class UserServiceImpl implements UserService{
         category.setCounselorProfile(counselorProfile);
         categoryRepository.save(category);
     }
+
+    @Override
+    public void withdrawalUserGroup(String id, Long groupId) {
+        groupUserRepository.deleteGroupUserByUser_IdAndGroup_Id(id, groupId);
+    }
 }
