@@ -244,4 +244,12 @@ public class UserServiceImpl implements UserService{
     public void deleteCounselorCategory(String id, Long categoryId) {
         categoryRepository.deleteCategoryByCounselorProfile_Counselor_IdAndId(id, categoryId);
     }
+
+    @Override
+    public void addCounselorCareer(String id, AddCareerRequestDto dto) {
+        CounselorProfile counselorProfile = counselorProfileRepository.findCounselorProfileByCounselor_Id(id);
+        Career career = dto.toEntity();
+        career.setCounselorProfile(counselorProfile);
+        careerRepository.save(career);
+    }
 }
