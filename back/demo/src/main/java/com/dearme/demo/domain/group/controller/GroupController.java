@@ -6,10 +6,7 @@ import com.dearme.demo.global.common.CommonResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -24,5 +21,10 @@ public class GroupController {
     public ResponseEntity<CommonResponse> createGroup(HttpServletRequest request, @RequestBody CreateGroupRequestDto dto){
         String id = (String) request.getAttribute("id");
         return new ResponseEntity<>(CommonResponse.getSuccessResponse(groupService.createGroup(id, dto)), HttpStatus.OK);
+    }
+
+    @GetMapping("/{groupId}")
+    public ResponseEntity<CommonResponse> getGroupInfo(@PathVariable(value = "groupId") Long groupId){
+        return new ResponseEntity<>(CommonResponse.getSuccessResponse(groupService.getGroupInfo(groupId)), HttpStatus.OK);
     }
 }

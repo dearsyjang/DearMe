@@ -2,7 +2,9 @@ package com.dearme.demo.domain.group.service;
 
 import com.dearme.demo.domain.group.dto.CreateGroupRequestDto;
 import com.dearme.demo.domain.group.dto.CreateGroupResponseDto;
+import com.dearme.demo.domain.group.dto.GroupInfoResponseDto;
 import com.dearme.demo.domain.group.entity.Group;
+import com.dearme.demo.domain.group.exception.GroupNotFoundExcetion;
 import com.dearme.demo.domain.group.exception.UserCreateGroupException;
 import com.dearme.demo.domain.group.repository.GroupRepository;
 import com.dearme.demo.domain.user.entity.Type;
@@ -17,6 +19,7 @@ import org.springframework.stereotype.Service;
 public class GroupServiceImpl implements GroupService{
 
     private final UserRepository userRepository;
+
     private final GroupRepository groupRepository;
 
     @Override
@@ -30,5 +33,13 @@ public class GroupServiceImpl implements GroupService{
         Group group = dto.toEntity();
         group.setCounselor(counselor);
         return new CreateGroupResponseDto(groupRepository.save(group).getId());
+    }
+
+    @Override
+    public GroupInfoResponseDto getGroupInfo(Long groupId) {
+        Group group = groupRepository.findById(groupId).orElseThrow(() -> {
+            throw new GroupNotFoundExcetion();
+        });
+        return GroupInfoResponseDto.of(group);
     }
 }

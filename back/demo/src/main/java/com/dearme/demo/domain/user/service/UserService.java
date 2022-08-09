@@ -31,4 +31,12 @@ public interface UserService {
     void deleteCareer(String id, Long careerId);
 
     void deleteCounselorCertificate(String id, Long certificateId);
+
+    void deleteCounselorCategory(String id, Long categoryId);
+
+    void addCounselorCareer(String id, AddCareerRequestDto dto);
+
+    void addCounselorCertificate(String id, AddCertificateDto dto);
+
+    void addCounselorCategory(String id, AddCategoryRequestDto dto);
 }

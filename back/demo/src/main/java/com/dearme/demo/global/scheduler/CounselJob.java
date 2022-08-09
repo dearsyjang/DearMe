@@ -34,18 +34,18 @@ public class CounselJob implements Job {
 
         HttpPost postRequest = new HttpPost("https://fcm.googleapis.com/fcm/send"); //POST 메소드 URL 새성
 
-        postRequest.addHeader("Authorization", "key=AAAAKS2P-dM:APA91bGITP1z00rK_NARUuqMhETEsfcnUoPtAcXpZhVRxhSKo_BIHWSobaH76n1_pNtf7kDqpV4HC2_YiyZkKaM2PfzSzfxKrpDtFny2jM6IDyZOX2NObYW30yyypmFRnHKwIa-3Ix54");
+        postRequest.addHeader("Authorization", "key=AAAAfMMdu8U:APA91bHhV2aDPJHR9sxLLLejjVFSLkv7N6jlBpdxfi6GBBKcR-v9p9ErGexoS-FFFtOKHjD8-Gq9f8ina_k_YorZT1W9QZDnv2M-DlgFqWNUUuR-QMRpBwOj8fNhp9cLpuFXoEPXV8Cg");
         postRequest.addHeader("Content-Type", "application/json");
 
 
         JSONObject json = new JSONObject();
         json.put("title", "💌 " + date);
-        json.put("body", nickName+" 상담사님과 1시간 뒤에 상담이 있어요. 마음을 가라앉히고 준비해주세요.⏳");
-        json.put("image", "https://firebasestorage.googleapis.com/v0/b/dear-me-a0ca1.appspot.com/o/dearme.PNG?alt=media&token=5fdd01eb-f6e7-47e5-9f90-672e4aa67b2b");
+        json.put("body", "1시간 뒤 "+ nickName+ " 상담사님과 상담이 있어요!");
+        json.put("image", "https://firebasestorage.googleapis.com/v0/b/dear-me-fef2a.appspot.com/o/dearme.PNG?alt=media&token=e485b31a-550b-4c37-a42c-c351875e01d0");
         json.put("color", "#ffb0f7");
 
         JSONObject obj = new JSONObject();
-        obj.put("to", "eprRC94iRxKgcWXgNGwOWN:APA91bH5xnP3osGxFGkYdESJw0BkwxdwxaBfVSyHVsZpQllxHk4YDfirNgkyQf152UWYspo-tngRjhoVO6HFtz7xPzksYACahDTMi7OZibD1RIqDSaXuq1YpYsONbfL3bIg3GQi0sDe7");
+        obj.put("to", "d1NeInnkSKSFAU3mAuunGM:APA91bFFGVm24wK0VW3Heg8pyba1FQ1ijTDei5IF9JXJRAPoz6766RsIgDf-BO1CRbLFUtrjeaxZOBBhPpv-lFN_OksQ2Ekt-5d5Vp2fYn23Fla9n3DDqdKesOGr9dWyZpNtChdLmj4B");
         obj.put("priority", "high");
         obj.put("notification", json);
 
