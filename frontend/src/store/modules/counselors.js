@@ -37,10 +37,7 @@ export default {
       axios({
        url: drf.counselors.counselors(),
        method : 'GET',
-       headers: {
-        'Content-Type': 'application/json',
-        'Authorization': getters.authHeader
-        },
+       headers: getters.authHeader
       })
       .then(res => {
         console.log('1')

@@ -128,7 +128,7 @@
   <div v-for="(counselor,idx) in counselors"
     :key="idx"
     :counselor="counselor">
-    {{counselor}}
+    {{counselor}}1
   </div>
     
   </div>
