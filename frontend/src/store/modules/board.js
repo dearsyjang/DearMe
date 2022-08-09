@@ -28,11 +28,17 @@ export default {
     fetchBoards({ commit, getters }) {
       // page, size 가 뭐지
       axios({
-        url: drf.board.boardsList()+`page=0&size=5`,
+        url: drf.board.boardsList()+'?page=0&size=5',
         method: 'get',
         headers: getters.authHeader,
       })
-      .then(res => commit('SET_BOARDS', res.data.data))
+      .then(res => {
+        // console.log(res.data)
+        // console.log(res.data.data)
+        // console.log(res.data.data.content)
+
+        commit('SET_BOARDS', res.data.data.content)
+      })
       .catch(err => console.error(err.response))
     },
 
