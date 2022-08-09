@@ -102,5 +102,10 @@ public class UserController {
         return new ResponseEntity<>(CommonResponse.getSuccessResponse(userService.getGroups(id)), HttpStatus.OK);
     }
 
+    @DeleteMapping("/careers/{careerId}")
+    public void deleteCareer(HttpServletRequest request, @PathVariable(value = "careerId") Long careerId){
+        String id = (String) request.getAttribute("id");
+        userService.deleteCareer(id, careerId);
+    }
 
 }
