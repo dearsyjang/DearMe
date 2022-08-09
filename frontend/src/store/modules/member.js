@@ -47,7 +47,7 @@ export default {
         .then(res => {
           const token = res.data.data.accessToken
           // token에 accessToken, refreshToken 둘 다 들어감 (이 부분 수정 필요)
-          console.log(token)
+          console.log('token', token)
           // 현재 사용자 업데이트
           commit('SET_CURRENT_USER', token)
           // dispatch('fetchCurrentUser', token)

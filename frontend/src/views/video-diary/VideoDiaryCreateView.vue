@@ -47,6 +47,11 @@
         />
       </div>
     </div>
+
+    <div id="recording" v-if="session">
+      <button @click="startRecording">녹화 시작</button>
+      <button @click="stopRecording">녹화 종료</button>
+    </div>
   </div>
 </template>
 
@@ -65,7 +70,6 @@ export default {
   components: {
     UserVideo,
   },
-
   data() {
     return {
       OV: undefined,
@@ -74,26 +78,13 @@ export default {
       publisher: undefined,
       subscribers: [],
       mySessionId: '상담방', // 방 이름
+      myUserName: 'nickName', // 닉네임 가져오기
     };
   },
 
-  // 오픈비두 서버 보내는 과정
+  // 서버 보내는 과정
   // First request performs a POST to /openvidu/api/sessions (we send a customSessionId field to name the session with our mySessionId value retrieved from HTML input)
   // Second request performs a POST to /openvidu/api/sessions/<sessionId>/connection (the path requires the sessionId to assign the token to this same session)
-
-  // 닉네임 가져오기
-  // created() {
-  //   axios({
-  //     method: 'get',
-  //     url: 'https://i7d206.p.ssafy.io/users',
-  //     headers:{
-  //       Authorization: `Token ${state.token}`
-  //     }
-  //   })
-  //   .then((data) => {
-  //     this.myUserName = data.data.nickName
-  //   })
-  // },
 
   methods: {
     joinSession() {
@@ -147,9 +138,9 @@ export default {
           .catch(error => {
               console.log('There was an error connecting to the session:', error.code, error.message);
           });
-      });
+});
       window.addEventListener('beforeunload', this.leaveSession);
-      },
+    },
 
 
     leaveSession() {
@@ -161,8 +152,7 @@ export default {
       this.subscribers = [];
       this.OV = undefined;
       window.removeEventListener('beforeunload', this.leaveSession);
-      },
-
+    },
     updateMainVideoStreamManager(stream) {
       if (this.mainStreamManager === stream) return;
       this.mainStreamManager = stream;
@@ -179,27 +169,21 @@ export default {
      *   1) Initialize a Session in OpenVidu Server	(POST /openvidu/api/sessions)
      *   2) Create a Connection in OpenVidu Server (POST /openvidu/api/sessions/<SESSION_ID>/connection)
      *   3) The Connection.token must be consumed in Session.connect() method
-    */
+     */
 
 
     // 원래 코드
     getToken (mySessionId) {
 			return this.createSession(mySessionId).then(sessionId => this.createToken(sessionId));
 		},
-
-    // --------------- 백이랑 통신할 때, 이 부분 살려주기 --------------------------------------------
-    // 백으로 사용자 accessToken을 보내줘야해
-    // accessToken을 가져오자
+    
     // getToken(usertoken) {
-    //   console.log('accessToken', localStorage.getItem('token'))
+    //   console.log('local storage', localStorage.getItem('token')) // accessToken
     //   usertoken = localStorage.getItem('token')
-
-    //   // usertoken을 sessionId 토큰으로 변환 => createToken
-    //   let idtoken = this.createSession(usertoken).then(sessionId => this.createToken(sessionId));
+    //   const idtoken = this.createSession(usertoken).then(sessionId => this.createToken(sessionId));
     //   console.log('idtoken', idtoken)
-    //   return idtoken
+    //   return usertoken
     // },
-
 
     // See https://docs.openvidu.io/en/stable/reference-docs/REST-API/#post-openviduapisessions
     createSession(sessionId) {
@@ -238,7 +222,6 @@ export default {
           });
       });
     },
-
     // See https://docs.openvidu.io/en/stable/reference-docs/REST-API/#post-openviduapisessionsltsession_idgtconnection
     createToken(sessionId) {
       return new Promise((resolve, reject) => {
@@ -260,6 +243,113 @@ export default {
           .catch((error) => reject(error.response));
 			});
 		},
+
+
+
+
+
+    // 녹화 부분ㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠ
+    startRecording(sessionId) {
+      return new Promise((resolve, reject) => {
+        axios
+          .post(
+            `${OPENVIDU_SERVER_URL}/openvidu/api/recordings/start`,
+            JSON.stringify({
+              customSessionId: sessionId,
+            }),
+            {
+              auth: {
+                username: 'OPENVIDUAPP',
+                password: OPENVIDU_SERVER_SECRET,
+              },
+            }
+          )
+          .then((response) => console.log('start', response.data))
+          .then((data) => resolve(data.id))
+          .catch((error) => {
+            if (error.response.status === 409) {
+              resolve(sessionId);
+            } else {
+              console.warn(
+                `No connection to OpenVidu Server. This may be a certificate error at ${OPENVIDU_SERVER_URL}`
+              );
+              if (
+                window.confirm(
+                  `No connection to OpenVidu Server. This may be a certificate error at ${OPENVIDU_SERVER_URL}\n\nClick OK to navigate and accept it. If no certificate warning is shown, then check that your OpenVidu Server is up and running at "${OPENVIDU_SERVER_URL}"`
+                )
+              ) {
+                location.assign(`${OPENVIDU_SERVER_URL}/accept-certificate`);
+              }
+              reject(error.response);
+            }
+          });
+      });
+    },
+
+    stopRecording(sessionId) {
+      return new Promise((resolve, reject) => {
+        axios
+          .post(
+            `${OPENVIDU_SERVER_URL}/openvidu/api/recordings/stop/${sessionId}`,
+            JSON.stringify({
+              customSessionId: sessionId,
+            }),
+            {
+              auth: {
+                username: 'OPENVIDUAPP',
+                password: OPENVIDU_SERVER_SECRET,
+              },
+            }
+          )
+          .then((response) => console.log('stop', response.data))
+          .then((data) => resolve(data.id))
+          .catch((error) => {
+            if (error.response.status === 409) {
+              resolve(sessionId);
+            } else {
+              console.warn(
+                `No connection to OpenVidu Server. This may be a certificate error at ${OPENVIDU_SERVER_URL}`
+              );
+              if (
+                window.confirm(
+                  `No connection to OpenVidu Server. This may be a certificate error at ${OPENVIDU_SERVER_URL}\n\nClick OK to navigate and accept it. If no certificate warning is shown, then check that your OpenVidu Server is up and running at "${OPENVIDU_SERVER_URL}"`
+                )
+              ) {
+                location.assign(`${OPENVIDU_SERVER_URL}/accept-certificate`);
+              }
+              reject(error.response);
+            }
+          });
+      });
+    },
 	}
-}
+};
+
+
+
+
+// 녹화!!!!!!!!
+// 데이터 형태
+// {
+//     "session":"ses_YnDaGYNcd7",
+//     "name": "MyRecording",
+//     "hasAudio": true,
+//     "hasVideo": true,
+//     "outputMode": "COMPOSED",
+//     "recordingLayout": "CUSTOM",
+//     "customLayout": "mySimpleLayout",
+//     "resolution": "1280x720",
+//     "frameRate": 25,
+//     "shmSize": 536870912,
+//     "ignoreFailedStreams": false,
+//     "mediaNode": {
+//         "id": "media_i-0c58bcdd26l11d0sd"
+//     }
+// }
+
+  
+
+
+
+
 </script>
