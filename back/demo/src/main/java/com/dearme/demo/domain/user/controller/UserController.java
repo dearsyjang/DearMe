@@ -113,4 +113,10 @@ public class UserController {
         String id = (String) request.getAttribute("id");
         userService.deleteCounselorCertificate(id, certificateId);
     }
+
+    @DeleteMapping("/categories/{categoryId}")
+    public void deleteCategory(HttpServletRequest request, @PathVariable(value = "categoryId") Long categoryId){
+        String id = (String) request.getAttribute("id");
+        userService.deleteCounselorCategory(id, categoryId);
+    }
 }
