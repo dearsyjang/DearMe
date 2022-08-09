@@ -1,5 +1,6 @@
 package com.dearme.demo.domain.favorite.repository;
 
+
 import com.dearme.demo.domain.favorite.entity.Favorite;
 import org.springframework.data.jpa.repository.JpaRepository;
 
