@@ -12,7 +12,7 @@
         <div v-if="this.currentUser" class="collapse navbar-collapse" id="navbarSupportedContent">
           <div class="navbar-nav">
             <li><router-link to="signup" class="mx-3">회원정보수정</router-link></li>
-            <button @click="logOUT()">로그아웃</button>
+            <button @click="logout()">로그아웃</button>
             <!-- <li><router-link to="logout" class="mx-4">로그아웃</router-link></li> -->
           </div>
         </div>

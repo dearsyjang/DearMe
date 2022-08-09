@@ -10,6 +10,7 @@
           rows="10"
           cols="40"
           placeholder="상담 내용을 입력하시오."
+          v-model="contents"
         ></textarea>
       </div>
       <!-- user / counselor 구분 -->
@@ -28,6 +29,7 @@
               role="switch"
               id="flexSwitchCheckChecked"
               checked
+              v-model="isOpen"
             />
             <label for="flexSwitchCheckChecked">감정달력 공개</label>
           </div>
@@ -47,9 +49,10 @@ export default {
   components: {},
   data() {
     return {
-      nickname: "",
-      isOpenCalender: true,
-      requestContent: "",
+      // groupId 받아오는거 생각해보기
+      groupId: 1,
+      isOpen: true,
+      contents: "",
     };
   },
   setup() {},
@@ -57,11 +60,14 @@ export default {
   mounted() {},
   unmounted() {},
   methods: {
-    ...mapActions(["createRequest"]),
+    ...mapActions(["groupReqeust"]),
     onSubmit() {
-      if (this.action === "create") {
-        this.createRequest(this.GroupReqeustView);
+      const data = {
+        'groupId': this.groupId,
+        'isOpen': this.isOpen,
+        'contents': this.contents
       }
+      this.groupReqeust(data)
     },
   },
 };
