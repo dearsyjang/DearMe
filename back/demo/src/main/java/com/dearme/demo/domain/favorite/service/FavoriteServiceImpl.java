@@ -8,7 +8,6 @@ import com.dearme.demo.domain.favorite.exception.NoExistFavoriteException;
 import com.dearme.demo.domain.favorite.exception.NoFavoriteDeletePermissionException;
 import com.dearme.demo.domain.favorite.exception.NoFavoriteSavePermissionException;
 import com.dearme.demo.domain.favorite.repository.FavoriteRepository;
-import com.dearme.demo.domain.review.entity.Favorite;
 import com.dearme.demo.domain.user.entity.Type;
 import com.dearme.demo.domain.user.entity.User;
 import com.dearme.demo.domain.user.exception.NoExistCounselorException;
