@@ -4,4 +4,5 @@ import com.dearme.demo.domain.group.entity.Group;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface GroupRepository extends JpaRepository<Group, Long> {
+    void deleteGroupByCounselor_IdAndId(String counselorId, Long id);
 }
