@@ -40,7 +40,7 @@ public class CounselingDocument {
 
     private Boolean isOpen;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "counseling_id")
     private Counseling counseling;
 
@@ -57,10 +57,12 @@ public class CounselingDocument {
     }
 
     public void setUser(User user){
+        user.getUserCounselingDocuments().add(this);
         this.user = user;
     }
 
     public void setCounselor(User counselor){
+        counselor.getUserCounselingDocuments().add(this);
         this.counselor = counselor;
     }
 
