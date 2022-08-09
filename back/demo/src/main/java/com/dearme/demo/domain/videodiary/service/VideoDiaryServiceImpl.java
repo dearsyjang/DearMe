@@ -293,6 +293,7 @@ public class VideoDiaryServiceImpl implements VideoDiaryService {
             scheduler.pauseJob(new JobKey(videoDiary.getId()+"_job_detail", videoDiary.getId()+"_group"));
             // JOB Data 객체
             JobDataMap jobDataMap = new JobDataMap();
+            jobDataMap.put("type", "videoDiary");
             jobDataMap.put("sentiment", videoDiary.getSentiment());
             jobDataMap.put("percentage", videoDiary.getPercentage()+"");
             JobDetail jobDetail = JobBuilder.newJob(MorningJob.class)

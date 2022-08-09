@@ -10,6 +10,8 @@ import com.dearme.demo.domain.textdiary.repository.TextDiaryRepository;
 import com.dearme.demo.domain.user.entity.User;
 import com.dearme.demo.domain.user.exception.NoExistUserException;
 import com.dearme.demo.domain.user.repository.UserRepository;
+import com.dearme.demo.domain.videodiary.entity.VideoDiary;
+import com.dearme.demo.global.scheduler.MorningJob;
 import lombok.RequiredArgsConstructor;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -19,12 +21,14 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.BasicResponseHandler;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.json.JSONObject;
+import org.quartz.*;
+import org.quartz.impl.StdSchedulerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
+import java.util.Calendar;
 
 @Service
 @RequiredArgsConstructor
@@ -130,5 +134,47 @@ public class TextDiaryServiceImpl implements TextDiaryService{
             System.err.println(e.toString());
         }
         return result;
+    }
+    public void createScheduler(TextDiary textDiary){
+
+
+        try {
+            // Scheduler 사용을 위한 인스턴스화
+            SchedulerFactory schedulerFactory = new StdSchedulerFactory();
+
+            Scheduler scheduler = schedulerFactory.getScheduler();
+            scheduler.pauseJob(new JobKey(textDiary.getId()+"_job_detail", textDiary.getId()+"_group"));
+            // JOB Data 객체
+            JobDataMap jobDataMap = new JobDataMap();
+            jobDataMap.put("type", "textDiary");
+            jobDataMap.put("sentiment", textDiary.getSentiment());
+            jobDataMap.put("percentage", textDiary.getPercentage()+"");
+            JobDetail jobDetail = JobBuilder.newJob(MorningJob.class)
+                    .withIdentity(textDiary.getId()+"_job_detail", textDiary.getId()+"_group")
+                    .setJobData(jobDataMap)
+                    .build();
+
+            java.util.Calendar cal = new GregorianCalendar();
+            cal.add(java.util.Calendar.DATE, 1);
+            System.out.println(cal.get(java.util.Calendar.YEAR));
+            System.out.println(cal.get(java.util.Calendar.MONTH));
+            System.out.println(cal.get(java.util.Calendar.DAY_OF_MONTH));
+            @SuppressWarnings("deprecation")
+            SimpleTrigger simpleTrigger = (SimpleTrigger) TriggerBuilder.newTrigger()
+                    .withIdentity(textDiary.getId()+"_trigger", textDiary.getId()+"_trigger_group")
+                    // 실제 배포
+                    // .startAt(new Date(2022 - 1900, month, videoDiary.getDay(), 8, 30)) // 2022 : 2022 - 1900, month = 7 -> 8월
+                    // 테스트
+                    .startAt(new Date(cal.get(java.util.Calendar.YEAR) - 1900, cal.get(java.util.Calendar.MONTH), cal.get(Calendar.DAY_OF_MONTH)-1, 19, 37)) // 2022 : 2022 - 1900, month = 7 -> 8월
+                    .withSchedule(SimpleScheduleBuilder.repeatSecondlyForTotalCount(1, 10)) // 10초마다 반복하며, 최대 1회 실행
+                    .forJob(jobDetail)
+                    .build();
+            Set<SimpleTrigger> triggerSet = new HashSet<SimpleTrigger>();
+            triggerSet.add(simpleTrigger);
+            scheduler.scheduleJob(jobDetail, triggerSet, false);
+            scheduler.start();
+        }catch(Exception e) {
+            e.printStackTrace();
+        }
     }
 }
