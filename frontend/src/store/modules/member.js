@@ -11,6 +11,7 @@ export default {
     // 로그인된 사용자
     currentUser: {},
     authError: null,
+    profile: {},
   },
   getters: {
     // 로그인, 로그아웃 경우에 현재 사용자 업데이트
@@ -18,16 +19,19 @@ export default {
     // 현재 사용자의 토큰을 나타냄 (요청 보낼 때, header에서 사용)
     authHeader: state => ({ Authorization: `Token ${state.currentUser}`}),
     authError: state => state.authError,
+    profile: state => state.profile,
   },
   mutations: {
     SET_TOKEN: (state, token) => state.token = token,
     SET_CURRENT_USER: (state, user) => state.currentUser = user,
     SET_AUTH_ERROR: (state, error) => state.authError = error,
+    SET_PROFILE: (state, profile) => state.profile = profile,
+
   },
   actions: {
     // 회원가입
-    saveToken({ commit }, token) {
-      commit('SET_TOKEN', token)
+    saveToken({ commit }, token) {  //토큰인자를 commit
+      commit('SET_TOKEN', token)    //토큰을 넘겨주면서 'SET_TOKEN'실행 =>   state에 넣음
       // 회원가입시 받은 토큰을 로컬스토리지에 추가
       localStorage.setItem('token', token)
     },
@@ -71,13 +75,13 @@ export default {
           'Content-Type': 'multipart/form-data'
         }
       })
-      .then(res => {
+      .then(res => {  // 성공하면 응답이 온다
           // console.log(res)
           // console.log(res.data)
-          const token = res.data.data.accessToken
+          const token = res.data.data.accessToken  //res.data 안에 data.accessToken 을 token으로 정의
           console.log(token)
           // 로컬스토리지에 토큰 저장
-          dispatch('saveToken', token)
+          dispatch('saveToken', token)  // token을 인자로 넘겨주면서 saveToken 함수를 실행
           alert('save token성공')
           // 여기서 바로 마이페이지로 넘어갈지 고민중..
           router.push({ name: 'login' })
@@ -114,7 +118,7 @@ export default {
       })
     },
 
-    fetchProfile({ commit, getters }, { username }) {
+    fetchProfile({ commit, getters }, {id}) {
       /*
       GET: profile URL로 요청보내기
         성공하면
@@ -122,7 +126,7 @@ export default {
       */
      // if(username === )
       axios({
-        url: drf.accounts.profile(username),
+        url: drf.member.profile(id),
         method: 'get',
         headers: getters.authHeader,
       })

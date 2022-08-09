@@ -5,6 +5,7 @@ import SignupCounselorView from '@/views/member/SignupCounselorView.vue'
 import FindIdView from '@/views/member/FindIdView.vue'
 import FindPasswordView from '@/views/member/FindPasswordView.vue'
 import MyProfileView from '@/views/member/MyProfileView.vue'
+import PasswordChangeView from '@/views/member/PasswordChangeView.vue'
 export default [
   {
     path: '/member/login',
@@ -41,6 +42,12 @@ export default [
     path: '/member/profile/:id',
     name: 'myprofile',
     component: MyProfileView
+  },
+
+  {
+    path: '/passwordchange',  
+    name: 'passwordchange',
+    component: PasswordChangeView,
   },
 
 ]

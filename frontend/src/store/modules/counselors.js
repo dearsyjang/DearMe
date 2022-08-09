@@ -18,6 +18,7 @@ export default {
     searched_counselor: state => state.searched_counselor,
     filtering_counselor: state => state.filtering_counselor,
     favorite: state => state.favorite,
+    
   },
 
   mutations: {
