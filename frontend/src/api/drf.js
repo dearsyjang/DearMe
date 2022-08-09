@@ -10,6 +10,8 @@ export default {
     signup: () => HOST + MEMBER,
     currentUserInfo: () => HOST + MEMBER + '/token',
     idCheck: () => HOST + MEMBER + '/id',
+    profile: () => HOST + MEMBER + '/token',
+    userInfoEdit: () => HOST + MEMBER + '/token',
   },
   board : {
     boardCreate: () => HOST + BOARD,

@@ -94,5 +94,41 @@ export default {
       console.log(getters.currentUser)
       router.push({ name: 'login' })
     },
+
+
+    changeProfile({ commit, getters }, credentials ) {
+
+      axios({
+        url: drf.member.changeProfile(),
+        method: 'put',
+        data: credentials,
+        headers: getters.authHeader,
+      })
+      .then(() => {
+        alert('비밀번호 변경 완료!')
+        router.push({ name: 'myprofile' })
+      })
+      .catch(err => {
+        console.error(err.response.data)
+        commit('SET_AUTH_ERROR', err.response.data)
+      })
+    },
+
+    fetchProfile({ commit, getters }, { username }) {
+      /*
+      GET: profile URL로 요청보내기
+        성공하면
+          state.profile에 저장
+      */
+     // if(username === )
+      axios({
+        url: drf.accounts.profile(username),
+        method: 'get',
+        headers: getters.authHeader,
+      })
+        .then(res => {
+          commit('SET_PROFILE', res.data)
+        })
+    },
   },
 }

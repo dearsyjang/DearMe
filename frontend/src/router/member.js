@@ -2,8 +2,9 @@ import LoginView from '@/views/member/LoginView.vue'
 import LogoutView from '@/views/member/LogoutView.vue'
 import SignupUserView from '@/views/member/SignupUserView.vue'
 import SignupCounselorView from '@/views/member/SignupCounselorView.vue'
-import FindIdView from '@/views/member/FindIdVeiw.vue'
-import FindPasswordView from '@/views/member/FindPasswordVeiw.vue'
+import FindIdView from '@/views/member/FindIdView.vue'
+import FindPasswordView from '@/views/member/FindPasswordView.vue'
+import MyProfileView from '@/views/member/MyProfileView.vue'
 export default [
   {
     path: '/member/login',
@@ -36,4 +37,10 @@ export default [
     name: 'FindPasswordView',
     component: FindPasswordView
   },
+  {
+    path: '/member/profile/:id',
+    name: 'myprofile',
+    component: MyProfileView
+  },
+
 ]
