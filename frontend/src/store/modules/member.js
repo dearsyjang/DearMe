@@ -14,15 +14,19 @@ export default {
   },
   getters: {
     // 로그인, 로그아웃 경우에 현재 사용자 업데이트
+    isLoggedIn: state => !!state.token,
     currentUser: state => state.currentUser,
+    profile: state => state.profile,
     // 현재 사용자의 토큰을 나타냄 (요청 보낼 때, header에서 사용)
-    authHeader: state => ({ Authorization: `Token ${state.currentUser}`}),
+    authHeader2: state => `Token ${state.token}`,
+    authHeader: state => ({ Authorization: `Token ${state.token}`}),
     authError: state => state.authError,
   },
   mutations: {
     SET_TOKEN: (state, token) => state.token = token,
     SET_CURRENT_USER: (state, user) => state.currentUser = user,
     SET_AUTH_ERROR: (state, error) => state.authError = error,
+
   },
   actions: {
     // 회원가입
@@ -34,11 +38,13 @@ export default {
     // 로그아웃
     removeToken({ commit }) {
       // 현재 사용자 비움
+      commit('SET_TOKEN', '')
+      localStorage.setItem('token', '')
       commit('SET_CURRENT_USER', '')
-      // localStorage.setItem('token', '')
+
     },
     // 받아오는 데이터가 한개일 경우 입력, 여러개일 경우 {}안에 담아와야함
-    login({ commit }, data) {
+    login({ commit, dispatch}, data) {
       axios({
         // url: 'https://i7d206.p.ssafy.io/users/token?id=id1&pw=pw1',
         url: drf.member.login()+`?id=${data.id}&pw=${data.pw}`,
@@ -46,13 +52,8 @@ export default {
       })
         .then(res => {
           const token = res.data.data.accessToken
-          // token에 accessToken, refreshToken 둘 다 들어감 (이 부분 수정 필요)
-          console.log(token)
-          // 현재 사용자 업데이트
-          commit('SET_CURRENT_USER', token)
-          // dispatch('fetchCurrentUser', token)
-          // console.log(getters.currentUser)
-          // console.log(getters.authHeader)
+          dispatch('saveToken', token)
+          dispatch('fetchCurrentUser')
           router.push({ name: 'mypageUser' })
         })
         .catch(err => {
@@ -67,9 +68,10 @@ export default {
         url: drf.member.signup(),
         method: 'post',
         data: formData,
-        headers: {
-          'Content-Type': 'multipart/form-data'
-        }
+        // haeder 이형식이면 axios error 발생
+        // headers: {
+        //   'Content-Type': 'multipart/form-data'
+        // }
       })
       .then(res => {
           // console.log(res)
@@ -78,7 +80,7 @@ export default {
           console.log(token)
           // 로컬스토리지에 토큰 저장
           dispatch('saveToken', token)
-          alert('save token성공')
+          alert('회원가입 성공')
           // 여기서 바로 마이페이지로 넘어갈지 고민중..
           router.push({ name: 'login' })
         })
@@ -95,4 +97,23 @@ export default {
       router.push({ name: 'login' })
     },
   },
+  fetchCurrentUser({ commit, getters, dispatch }) {
+    if (getters.isLoggedIn) {
+      axios({
+        url: drf.member.currentUserInfo(),
+        method: 'get',
+        headers: getters.authHeader,
+      })
+        .then(res => {
+          commit('SET_CURRENT_USER', res.data.data.accessToken)
+        })
+        .catch(err => {
+          if (err.response.status == 401) {
+            dispatch('removeToken')
+            router.push({ name: 'login' })
+          }
+        })
+    }
+  },
+
 }

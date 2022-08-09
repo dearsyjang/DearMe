@@ -38,7 +38,7 @@ export default {
     ...mapActions(['fetchBoards'])
   },
   created() {
-    // this.fetchArticles()
+    this.fetchBoards()
   }
 
 }
