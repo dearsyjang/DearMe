@@ -23,8 +23,8 @@ public class CounselorController {
         return new ResponseEntity<>(CommonResponse.getSuccessResponse(counselorService.getCounselors(id)), HttpStatus.OK);
     }
 
-    @GetMapping("/detail/{id}")
-    public ResponseEntity<CommonResponse> getCounselor(HttpServletRequest request, @PathVariable("id") String id){
-        return new ResponseEntity<>(CommonResponse.getSuccessResponse(counselorService.getCounselor(id)), HttpStatus.OK);
+    @GetMapping("/{counselorId}")
+    public ResponseEntity<CommonResponse> getCounselor(HttpServletRequest request, @PathVariable("counselorId") String counselorId){
+        return new ResponseEntity<>(CommonResponse.getSuccessResponse(counselorService.getCounselor(counselorId)), HttpStatus.OK);
     }
 }

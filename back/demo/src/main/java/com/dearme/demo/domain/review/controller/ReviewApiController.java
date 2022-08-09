@@ -34,10 +34,5 @@ public class ReviewApiController {
         return null;
     }
 
-    @Operation(summary = "Counselor Review View Test", description = "해당 상담사한테 달린 리뷰 조회")
-    @GetMapping("/{id}")
-    public ResponseEntity<CommonResponse> reviewCounselorView(@PathVariable("id") String id){
-        return new ResponseEntity<>(CommonResponse.getSuccessResponse(reviewService.reviewCounselorView(id)), HttpStatus.OK);
-    }
 
 }

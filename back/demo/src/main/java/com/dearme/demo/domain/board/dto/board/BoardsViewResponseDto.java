@@ -12,7 +12,7 @@ import java.util.Date;
 public class BoardsViewResponseDto {
     private Long id;
 
-    private String nickname;
+    private String nickName;
 
     private String title;
 

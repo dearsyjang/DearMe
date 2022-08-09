@@ -28,5 +28,9 @@ public class GroupController {
         String id = (String) request.getAttribute("id");
         groupService.deleteCounselorGroup(id, groupId);
         return ResponseEntity.ok().build();
+
+    @GetMapping("/{groupId}")
+    public ResponseEntity<CommonResponse> getGroupInfo(@PathVariable(value = "groupId") Long groupId){
+        return new ResponseEntity<>(CommonResponse.getSuccessResponse(groupService.getGroupInfo(groupId)), HttpStatus.OK);
     }
 }

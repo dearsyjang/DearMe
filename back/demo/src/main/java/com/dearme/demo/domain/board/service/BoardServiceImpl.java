@@ -68,12 +68,13 @@ public class BoardServiceImpl implements BoardService{
         board.updateHitCnt();
         List<CommentResponseDto> commentResponseDto = new ArrayList<>();
         for(Comment c: temp){
-            commentResponseDto.add(new CommentResponseDto(c.getUser().getNickName(),
+            commentResponseDto.add(new CommentResponseDto(board.getUser().getUserId(), c.getUser().getUserId(), c.getUser().getNickName(),
                     c.getDate(),
                     c.getContents()));
         }
 
         return new BoardViewResponseDto(board.getId(),
+                board.getUser().getUserId(),
                 board.getUser().getNickName(),
                 board.getTitle(),
                 board.getContents(),
