@@ -44,9 +44,9 @@ public class CounselingServiceImpl implements CounselingService{
         });
         List<Counseling> counselings = null;
         if(user.getType().equals(Type.USER))
-            counselings = counselingRepository.findAllByUser_Id(id);
+            counselings = user.getUserCounselings();
         else
-            counselings = counselingRepository.findAllByCounselor_Id(id);
+            counselings = user.getCounselorCounselings();
         List<CounselingInfoResponseDto> counselingInfoResponseDtos = new ArrayList<>();
         for(Counseling counseling : counselings){
             counselingInfoResponseDtos.add(CounselingInfoResponseDto.of(counseling));

@@ -9,6 +9,7 @@ import com.dearme.demo.domain.group.entity.Group;
 
 import com.dearme.demo.domain.favorite.entity.Favorite;
 import com.dearme.demo.domain.review.entity.Review;
+import com.dearme.demo.domain.textdiary.entity.TextDiary;
 import lombok.*;
 
 import javax.persistence.*;
@@ -89,7 +90,13 @@ public class User extends Base {
     private List<GroupUser> groupUsers = new ArrayList<>();
 
     @OneToMany(mappedBy = "counselor", orphanRemoval = true, cascade = CascadeType.ALL)
-    private List<Counseling> counselings = new ArrayList<>();
+    private List<Counseling> counselorCounselings = new ArrayList<>();
+
+    @OneToMany(mappedBy = "user", orphanRemoval = true, cascade = CascadeType.ALL)
+    private List<Counseling> userCounselings = new ArrayList<>();
+
+    @OneToMany(mappedBy = "user", orphanRemoval = true, cascade = CascadeType.ALL)
+    private List<TextDiary> textDiaries = new ArrayList<>();
 
     public void updateUser(String pw, String nickName){
         this.pw = pw;
