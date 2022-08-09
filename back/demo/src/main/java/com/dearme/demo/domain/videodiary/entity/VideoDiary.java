@@ -1,13 +1,10 @@
 package com.dearme.demo.domain.videodiary.entity;
 
 import com.dearme.demo.domain.base.entitiy.Base;
-import com.dearme.demo.domain.review.entity.Favorite;
 import com.dearme.demo.domain.user.entity.User;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
