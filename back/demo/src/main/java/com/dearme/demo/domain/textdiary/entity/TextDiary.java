@@ -51,6 +51,7 @@ public class TextDiary extends Base {
     }
 
     public void setUser(User user){
+        user.getTextDiaries().add(this);
         this.user = user;
     }
 }
