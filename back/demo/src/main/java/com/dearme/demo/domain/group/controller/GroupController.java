@@ -23,6 +23,12 @@ public class GroupController {
         return new ResponseEntity<>(CommonResponse.getSuccessResponse(groupService.createGroup(id, dto)), HttpStatus.OK);
     }
 
+    @DeleteMapping("/{groupId}")
+    private ResponseEntity<CommonResponse> deleteGroup(HttpServletRequest request, @PathVariable("groupId") Long groupId){
+        String id = (String) request.getAttribute("id");
+        groupService.deleteCounselorGroup(id, groupId);
+        return ResponseEntity.ok().build();
+
     @GetMapping("/{groupId}")
     public ResponseEntity<CommonResponse> getGroupInfo(@PathVariable(value = "groupId") Long groupId){
         return new ResponseEntity<>(CommonResponse.getSuccessResponse(groupService.getGroupInfo(groupId)), HttpStatus.OK);
