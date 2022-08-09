@@ -133,4 +133,11 @@ public class UserController {
         userService.addCounselorCertificate(id, dto);
         return ResponseEntity.accepted().build();
     }
+
+    @PostMapping("/categories")
+    public ResponseEntity<CommonResponse> addCategory(HttpServletRequest request, @RequestBody AddCategoryRequestDto dto){
+        String id = (String) request.getAttribute("id");
+        userService.addCounselorCategory(id, dto);
+        return ResponseEntity.accepted().build();
+    }
 }
