@@ -64,14 +64,29 @@ public class UserServiceImpl implements UserService{
             }
             user.setCounselorProfile(counselorProfile);
         }
-        if(dto.getPicture() != null){
-            picture = Picture.builder().fileName(dto.getPicture().getOriginalFilename()).realFileName(UUID.randomUUID().toString()).build();
-            File file = new File(IMAGE_PATH + picture.getRealFileName() + ".jpeg");
+        if(dto.getPicture() == null || dto.getPicture().isEmpty()) {
+            if(dto.getType().equals(Type.COUNSELOR)){
+                throw new CounselorNotExistPictureException();
+            }else{
+                picture = Picture.builder().fileName("basic").realFileName("basic.png").build();
+            }
+        }else {
+            String fileName = UUID.randomUUID().toString();
+            String contentType = dto.getPicture().getContentType();
+            File file = null;
+            if(contentType.contains("image/jpeg")){
+                file = new File(IMAGE_PATH + fileName + ".jpg");
+                picture = Picture.builder().fileName(fileName).realFileName(fileName + ".jpg").build();
+            }else if(contentType.contains("image/png")){
+                file = new File(IMAGE_PATH + fileName + ".png");
+                picture = Picture.builder().fileName(fileName).realFileName(fileName + ".png").build();
+            }else if(contentType.contains("image/gif")){
+                file = new File(IMAGE_PATH + fileName + ".gif");
+                picture = Picture.builder().fileName(fileName).realFileName(fileName + ".gif").build();
+            }else{
+                throw new ImageContentTypeException();
+            }
             dto.getPicture().transferTo(file);
-        }else if(dto.getType().equals(Type.COUNSELOR)){
-            throw new CounselorNotExistPictureException();
-        }else{
-            picture = Picture.builder().fileName("basic").realFileName("basic").build();
         }
         user.setPicture(picture);
         String accessToken = jwtProvider.getAccessToken(user.getId());
