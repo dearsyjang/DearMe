@@ -26,13 +26,13 @@ public class TextDiary extends Base {
     @Setter
     private String sentiment;
     @Setter
-    private double percentage;
+    private Double percentage;
     @Setter
-    private double positive;
+    private Double positive;
     @Setter
-    private double negative;
+    private Double negative;
     @Setter
-    private double neutral;
+    private Double neutral;
 
 
     private Integer year;
