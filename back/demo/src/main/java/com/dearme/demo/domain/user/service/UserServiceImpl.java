@@ -227,4 +227,10 @@ public class UserServiceImpl implements UserService{
         }
         return new UserGroupListResponseDto(userGroupResponseDtos);
     }
+
+    @Override
+    @Transactional
+    public void deleteCareer(String id, Long careerId) {
+        careerRepository.deleteCareerByCounselorProfile_Counselor_IdAndId(id, careerId);
+    }
 }
