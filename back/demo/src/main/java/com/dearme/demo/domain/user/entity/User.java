@@ -4,10 +4,10 @@ import com.dearme.demo.domain.base.entitiy.Base;
 import com.dearme.demo.domain.board.entity.Board;
 import com.dearme.demo.domain.board.entity.Comment;
 import com.dearme.demo.domain.counseling.entity.Counseling;
+import com.dearme.demo.domain.counselingdocument.entity.CounselingDocument;
 import com.dearme.demo.domain.favorite.entity.Favorite;
 import com.dearme.demo.domain.group.entity.Group;
 
-import com.dearme.demo.domain.favorite.entity.Favorite;
 import com.dearme.demo.domain.review.entity.Review;
 import com.dearme.demo.domain.textdiary.entity.TextDiary;
 import lombok.*;
@@ -97,6 +97,12 @@ public class User extends Base {
 
     @OneToMany(mappedBy = "user", orphanRemoval = true, cascade = CascadeType.ALL)
     private List<TextDiary> textDiaries = new ArrayList<>();
+
+    @OneToMany(mappedBy = "user", orphanRemoval = true, cascade = CascadeType.ALL)
+    private List<CounselingDocument> userCounselingDocuments = new ArrayList<>();
+
+    @OneToMany(mappedBy = "counselor", orphanRemoval = true, cascade = CascadeType.ALL)
+    private List<CounselingDocument> counselorCounselingDocuments = new ArrayList<>();
 
     public void updateUser(String pw, String nickName){
         this.pw = pw;

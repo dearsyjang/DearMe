@@ -7,10 +7,7 @@ import com.dearme.demo.global.common.CommonResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -34,4 +31,10 @@ public class CounselingDocumentController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    @DeleteMapping("/{counselingDocumentId}")
+    public ResponseEntity<CommonResponse> deleteCounselingDocument(HttpServletRequest request, @PathVariable("counselingDocumentId") Long counselingDocumentId){
+        String id = (String) request.getAttribute("id");
+        counselingDocumentService.deleteUserCounselingDocument(id, counselingDocumentId);
+        return ResponseEntity.ok().build();
+    }
 }
