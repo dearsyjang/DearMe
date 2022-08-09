@@ -1,6 +1,6 @@
 package com.dearme.demo.domain.user.dto.counselor;
 
-import com.dearme.demo.domain.user.dto.ReviewCounselorViewResponseDto;
+import com.dearme.demo.domain.user.dto.ReviewViewResponseDto;
 import com.dearme.demo.domain.user.entity.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -31,6 +31,6 @@ public class CounselorViewResponseDto {
     private List<Certificate> certificates;
 
     private List<Category> categories;
-    private List<ReviewCounselorViewResponseDto> reviews;
+    private List<ReviewViewResponseDto> reviews;
 
 }

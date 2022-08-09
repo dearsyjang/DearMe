@@ -3,7 +3,7 @@ package com.dearme.demo.domain.user.service;
 import com.dearme.demo.domain.review.entity.Review;
 import com.dearme.demo.domain.review.exception.NoExistReviewException;
 import com.dearme.demo.domain.review.repository.ReviewRepository;
-import com.dearme.demo.domain.user.dto.ReviewCounselorViewResponseDto;
+import com.dearme.demo.domain.user.dto.ReviewViewResponseDto;
 import com.dearme.demo.domain.user.dto.counselor.CounselorViewResponseDto;
 import com.dearme.demo.domain.user.dto.counselor.CounselorsViewResponseDto;
 import com.dearme.demo.domain.user.entity.Type;
@@ -50,9 +50,9 @@ public class CounselorServiceImpl implements CounselorService{
         List<Review> tempList = reviewRepository.findReviewByCounselor_Id(id);
         if(tempList.isEmpty()) throw new NoExistReviewException();
 
-        List<ReviewCounselorViewResponseDto> reviewList = new ArrayList<>();
+        List<ReviewViewResponseDto> reviewList = new ArrayList<>();
         for(Review r : tempList){
-            reviewList.add(new ReviewCounselorViewResponseDto(r.getId(),
+            reviewList.add(new ReviewViewResponseDto(r.getId(),
                     r.getUser().getNickName(),
                     r.getValue(),
                     r.getContents()));
