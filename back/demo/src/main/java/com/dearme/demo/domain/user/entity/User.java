@@ -4,8 +4,8 @@ import com.dearme.demo.domain.base.entitiy.Base;
 import com.dearme.demo.domain.board.entity.Board;
 import com.dearme.demo.domain.board.entity.Comment;
 import com.dearme.demo.domain.counseling.entity.Counseling;
+import com.dearme.demo.domain.favorite.entity.Favorite;
 import com.dearme.demo.domain.group.entity.Group;
-import com.dearme.demo.domain.review.entity.Favorite;
 import com.dearme.demo.domain.review.entity.Review;
 import lombok.*;
 
