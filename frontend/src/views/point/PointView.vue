@@ -28,7 +28,9 @@ export default {
       userinfo : {
         name: '',
         email: '',
-      }
+      
+      },
+      usertoken : localStorage.getItem('token')
     }
   },
   computed : {
@@ -38,6 +40,8 @@ export default {
   methods: { 
     
     requestPay : function() {
+      
+      console.log(this.usertoken)
       console.log(this.token)
       console.log(this.authHeader)
       /* 1. 가맹점 식별하기 */
@@ -52,7 +56,7 @@ export default {
           amount : this.selected,
           buyer_email : this.userinfo.email,
           buyer_name : this.userinfo.name,
-          m_redirect_url : 'http://localhost:8080/'
+          // m_redirect_url : 'http://localhost:8080/'
           }, 
           console.log(this.authHeader),
           rsp => { // callback
