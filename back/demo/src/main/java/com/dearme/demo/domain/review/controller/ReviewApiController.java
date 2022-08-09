@@ -27,10 +27,10 @@ public class ReviewApiController {
     }
 
     @Operation(summary = "Review Delete Test", description = "리뷰 삭제")
-    @DeleteMapping("/{reviewid}")
-    public ResponseEntity<CommonResponse> reviewDelete(HttpServletRequest request, @PathVariable("reviewid") Long reviewid){
+    @DeleteMapping("/{reviewId}")
+    public ResponseEntity<CommonResponse> reviewDelete(HttpServletRequest request, @PathVariable("reviewId") Long reviewId){
         String id = (String) request.getAttribute("id");
-        reviewService.reviewDelete(id, reviewid);
+        reviewService.reviewDelete(id, reviewId);
         return null;
     }
 

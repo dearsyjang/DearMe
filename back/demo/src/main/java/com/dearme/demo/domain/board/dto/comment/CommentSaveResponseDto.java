@@ -6,5 +6,5 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class CommentSaveResponseDto {
-    private Long commentid;
+    private Long id;
 }

@@ -6,6 +6,6 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class FavoriteViewResponseDto {
-    private Long favoriteid;
-    private String nickname;
+    private Long id;
+    private String nickName;
 }

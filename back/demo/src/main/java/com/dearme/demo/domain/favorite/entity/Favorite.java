@@ -15,7 +15,8 @@ public class Favorite extends Base {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long favoriteid;
+    @Column(name = "favorite_id")
+    private Long id;
 
     @ManyToOne
     @JsonManagedReference // 순환참조 방지

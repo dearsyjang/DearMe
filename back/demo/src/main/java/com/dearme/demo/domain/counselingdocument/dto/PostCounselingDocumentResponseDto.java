@@ -6,5 +6,5 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class PostCounselingDocumentResponseDto {
-    private Long counselingDocumentId;
+    private Long id;
 }

@@ -8,8 +8,8 @@ public interface BoardService {
 
     BoardSaveResponseDto boardSave(String id, BoardSaveRequestDto dto);
     Page<BoardsViewResponseDto> getBoards(PageRequest pageRequest);
-    BoardViewResponseDto getBoard(Long boardid);
+    BoardViewResponseDto getBoard(Long boardId);
 
-    BoardUpdateResponseDto updateBoard(String id, Long boardid, BoardUpdateRequestDto dto);
-    void deleteBoard(String id, Long boardid);
+    BoardUpdateResponseDto updateBoard(String id, Long boardId, BoardUpdateRequestDto dto);
+    void deleteBoard(String id, Long boardId);
 }

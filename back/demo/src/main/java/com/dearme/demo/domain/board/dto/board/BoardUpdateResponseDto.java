@@ -6,6 +6,6 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class BoardUpdateResponseDto {
-    private Long boardid;
+    private Long id;
 
 }

@@ -6,9 +6,12 @@ import com.dearme.demo.domain.favorite.dto.FavoriteViewResponseDto;
 import com.dearme.demo.domain.favorite.entity.Favorite;
 import com.dearme.demo.domain.favorite.exception.NoExistFavoriteException;
 import com.dearme.demo.domain.favorite.exception.NoFavoriteDeletePermissionException;
+import com.dearme.demo.domain.favorite.exception.NoFavoriteSavePermissionException;
 import com.dearme.demo.domain.favorite.repository.FavoriteRepository;
-import com.dearme.demo.domain.review.repository.ReviewRepository;
+import com.dearme.demo.domain.review.entity.Favorite;
+import com.dearme.demo.domain.user.entity.Type;
 import com.dearme.demo.domain.user.entity.User;
+import com.dearme.demo.domain.user.exception.NoExistCounselorException;
 import com.dearme.demo.domain.user.exception.NoExistUserException;
 import com.dearme.demo.domain.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -22,7 +25,6 @@ import java.util.List;
 @RequiredArgsConstructor
 public class FavoriteServiceImpl implements FavoriteService {
     private final UserRepository userRepository;
-    private final ReviewRepository reviewRepository;
 
     private final FavoriteRepository favoriteRepository;
 
@@ -34,14 +36,17 @@ public class FavoriteServiceImpl implements FavoriteService {
         User user = userRepository.findUserById(id).orElseThrow(() -> {
             throw new NoExistUserException();
         });
+        if(user.getType().equals(Type.COUNSELOR)){
+            throw new NoFavoriteSavePermissionException();
+        }
         favorite.setUser(user);
-        User counselor = userRepository.findUserById(dto.getCounselorid()).orElseThrow(() -> {
-            throw new NoExistUserException();
+        User counselor = userRepository.findUserById(dto.getId()).orElseThrow(() -> {
+            throw new NoExistCounselorException();
         });
         favorite.setCounselor(counselor);
 
         favoriteRepository.save(favorite);
-        return new FavoriteSaveResponseDto(favorite.getFavoriteid());
+        return new FavoriteSaveResponseDto(favorite.getId());
 
     }
 
@@ -51,7 +56,7 @@ public class FavoriteServiceImpl implements FavoriteService {
         List<Favorite> tempList = favoriteRepository.findFavoriteByUser_Id(id);
         List<FavoriteViewResponseDto> favoriteList = new ArrayList<>();
         for(Favorite f : tempList){
-            favoriteList.add(new FavoriteViewResponseDto(f.getFavoriteid(),
+            favoriteList.add(new FavoriteViewResponseDto(f.getId(),
                     f.getCounselor().getNickName()));
         }
         return favoriteList;
@@ -59,15 +64,15 @@ public class FavoriteServiceImpl implements FavoriteService {
 
     @Override
     @Transactional
-    public void favoriteDelete(String id, Long favoriteid) {
-        Favorite favorite = favoriteRepository.findFavoriteByFavoriteid(favoriteid).orElseThrow(() -> {
+    public void favoriteDelete(String id, Long favoriteId) {
+        Favorite favorite = favoriteRepository.findFavoriteById(favoriteId).orElseThrow(() -> {
             throw new NoExistFavoriteException();
         });
 
         User user = userRepository.findUserById(id).orElseThrow(() -> {
             throw new NoExistUserException();
         });
-        if(user.getUserId().equals(favorite.getUser().getUserId())){
+        if(user.getId().equals(favorite.getUser().getId())){
             favoriteRepository.delete(favorite);
         }else{
             throw new NoFavoriteDeletePermissionException();

@@ -1,6 +1,7 @@
 package com.dearme.demo.domain.counselingdocument.controller;
 
 import com.dearme.demo.domain.counselingdocument.dto.PostCounselingDocumentRequestDto;
+import com.dearme.demo.domain.counselingdocument.dto.PostGroupCounselingDocumentDto;
 import com.dearme.demo.domain.counselingdocument.service.CounselingDocumentServiceImpl;
 import com.dearme.demo.global.common.CommonResponse;
 import lombok.RequiredArgsConstructor;
@@ -25,4 +26,12 @@ public class CounselingDocumentController {
         String id = (String) request.getAttribute("id");
         return new ResponseEntity<>(CommonResponse.getSuccessResponse(counselingDocumentService.post(id, dto)), HttpStatus.OK);
     }
+
+    @PostMapping("/groups")
+    public ResponseEntity<CommonResponse> postGroupCounselingDocuments(HttpServletRequest request, @RequestBody PostGroupCounselingDocumentDto dto){
+        String id = (String) request.getAttribute("id");
+        counselingDocumentService.postGroup(id, dto);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
 }

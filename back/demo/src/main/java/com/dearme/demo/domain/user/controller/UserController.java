@@ -73,9 +73,9 @@ public class UserController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @GetMapping("/nickname/{nickname}")
-    public ResponseEntity<?> checkNickname(@PathVariable("nickname") String nickname){
-        userService.checkNickname(nickname);
+    @GetMapping("/nickname/{nickName}")
+    public ResponseEntity<?> checkNickname(@PathVariable("nickName") String nickName){
+        userService.checkNickname(nickName);
         return new ResponseEntity<>(HttpStatus.OK);
     }
     @DeleteMapping
@@ -96,5 +96,27 @@ public class UserController {
         return new ResponseEntity<>(CommonResponse.getSuccessResponse(userService.getReviews(id)), HttpStatus.OK);
     }
 
+    @GetMapping("/groups")
+    public ResponseEntity<CommonResponse> getGroups(HttpServletRequest request){
+        String id = (String) request.getAttribute("id");
+        return new ResponseEntity<>(CommonResponse.getSuccessResponse(userService.getGroups(id)), HttpStatus.OK);
+    }
 
+    @DeleteMapping("/careers/{careerId}")
+    public void deleteCareer(HttpServletRequest request, @PathVariable(value = "careerId") Long careerId){
+        String id = (String) request.getAttribute("id");
+        userService.deleteCareer(id, careerId);
+    }
+
+    @DeleteMapping("/certificate/{certificateId}")
+    public void deleteCertificate(HttpServletRequest request, @PathVariable(value = "certificateId") Long certificateId){
+        String id = (String) request.getAttribute("id");
+        userService.deleteCounselorCertificate(id, certificateId);
+    }
+
+    @DeleteMapping("/categories/{categoryId}")
+    public void deleteCategory(HttpServletRequest request, @PathVariable(value = "categoryId") Long categoryId){
+        String id = (String) request.getAttribute("id");
+        userService.deleteCounselorCategory(id, categoryId);
+    }
 }

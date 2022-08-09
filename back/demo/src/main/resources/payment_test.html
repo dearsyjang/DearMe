@@ -42,7 +42,7 @@ function payment(data){
                     'Content-Type': 'application/json',
                     'Authorization' : 'ad eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6ImlkIiwiaXNzIjoiZGVhcm1lIiwiaWF0IjoxNjU5NjgwMzg0LCJleHAiOjE2NTk2ODM5ODR9.izg6xcOPKIdxiU6QjTQ2GoVKFqSsBwBgyP4FCd6uibQ'
                 },
-                body: JSON.stringify({price: "5555"})
+                body: JSON.stringify({price: data})
             }).then((response) => response.json()).then((data) => {
                 console.log(data);
             });

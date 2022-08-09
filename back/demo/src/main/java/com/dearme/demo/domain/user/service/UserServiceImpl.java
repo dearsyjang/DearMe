@@ -1,13 +1,13 @@
 package com.dearme.demo.domain.user.service;
 
 import com.dearme.demo.domain.review.entity.Review;
-import com.dearme.demo.domain.user.dto.*;
+import com.dearme.demo.domain.user.dto.PointsUpdateResponseDto;
+import com.dearme.demo.domain.user.dto.ReviewViewResponseDto;
+import com.dearme.demo.domain.user.dto.UserGroupListResponseDto;
+import com.dearme.demo.domain.user.dto.UserGroupResponseDto;
 import com.dearme.demo.domain.user.dto.user.*;
 import com.dearme.demo.domain.user.entity.*;
-import com.dearme.demo.domain.user.exception.CounselorNotExistPictureException;
-import com.dearme.demo.domain.user.exception.DuplicatedIdException;
-import com.dearme.demo.domain.user.exception.DuplicatedNickNameException;
-import com.dearme.demo.domain.user.exception.NoExistUserException;
+import com.dearme.demo.domain.user.exception.*;
 import com.dearme.demo.domain.user.repository.*;
 import com.dearme.demo.global.util.jwt.JwtProvider;
 import lombok.RequiredArgsConstructor;
@@ -36,6 +36,8 @@ public class UserServiceImpl implements UserService{
     private final CategoryRepository categoryRepository;
 
     private final CertificateRepository certificateRepository;
+
+    private final GroupUserRepository groupUserRepository;
 
     @Value("${path.image:/image/}")
     private String IMAGE_PATH;
@@ -112,7 +114,7 @@ public class UserServiceImpl implements UserService{
         String refreshToken = jwtProvider.getRefreshToken();
         user.updateRefreshToken(refreshToken);
         userRepository.save(user);
-        return new UpdateUserResponseDto(jwtProvider.getAccessToken(user.getId()), jwtProvider.getRefreshToken());
+        return new UpdateUserResponseDto(accessToken, refreshToken);
     }
 
     @Override
@@ -126,10 +128,11 @@ public class UserServiceImpl implements UserService{
     @Override
     @Transactional
     public UpdateCertificateResponseDto updateCertificate(String id, UpdateCertificateRequestDto dto) {
-        CounselorProfile counselorProfile = counselorProfileRepository.findCounselorProfileByCounselor_Id(id);
-        Certificate certificate = certificateRepository.findById(dto.getId()).get();
-        if(counselorProfile.equals(certificate.getCounselorProfile()))
-            certificate.updateCertificate(dto.getContents());
+        Certificate certificate = certificateRepository.findCertificateByCounselorProfile_Counselor_IdAndId(id, dto.getId())
+                .orElseThrow(() -> {
+                    throw new NoExistCertificateException();
+                });
+        certificate.updateCertificate(dto.getContents());
         certificateRepository.save(certificate);
         return new UpdateCertificateResponseDto(certificate.getId(), certificate.getContents());
     }
@@ -137,10 +140,11 @@ public class UserServiceImpl implements UserService{
     @Override
     @Transactional
     public UpdateCareerResponseDto updateCareer(String id, UpdateCareerRequestDto dto) {
-        CounselorProfile counselorProfile = counselorProfileRepository.findCounselorProfileByCounselor_Id(id);
-        Career career = careerRepository.findById(dto.getId()).get();
-        if(counselorProfile.equals(career.getCounselorProfile()))
-            career.updateCareer(dto.getContents());
+        Career career = careerRepository.findCareerByCounselorProfile_Counselor_IdAndId(id, dto.getId())
+                .orElseThrow(() -> {
+                    throw new NoExistCareerException();
+                });
+        career.updateCareer(dto.getContents());
         careerRepository.save(career);
         return new UpdateCareerResponseDto(career.getId(), career.getContents());
     }
@@ -148,10 +152,10 @@ public class UserServiceImpl implements UserService{
     @Override
     @Transactional
     public UpdateCategoryResponseDto updateCategory(String id, UpdateCategoryRequestDto dto) {
-        CounselorProfile counselorProfile = counselorProfileRepository.findCounselorProfileByCounselor_Id(id);
-        Category category = categoryRepository.findById(dto.getId()).get();
-        if(counselorProfile.equals(category.getCounselorProfile()))
-            category.updateCategory(dto.getContents());
+        Category category = categoryRepository.findCategoryByCounselorProfile_Counselor_IdAndId(id, dto.getId())
+                .orElseThrow(() -> {
+                    throw new NoExistCategoryException();
+                });
         categoryRepository.save(category);
         return new UpdateCategoryResponseDto(category.getId(), category.getContents());
     }
@@ -206,10 +210,38 @@ public class UserServiceImpl implements UserService{
             User counselor = userRepository.findUserById(r.getCounselor().getId()).orElseThrow(() -> {
                 throw new NoExistUserException();
             });
-            reviewList.add(new ReviewViewResponseDto(counselor.getNickName(),
+            reviewList.add(new ReviewViewResponseDto(r.getId(),
+                    counselor.getNickName(),
                     r.getValue(),
                     r.getContents()));
         }
         return reviewList;
+    }
+
+    @Override
+    public UserGroupListResponseDto getGroups(String id) {
+        List<UserGroupResponseDto> userGroupResponseDtos = new ArrayList<>();
+        List<GroupUser> groupUsers = groupUserRepository.findAllByUser_Id(id);
+        for(GroupUser groupUser : groupUsers){
+            userGroupResponseDtos.add(UserGroupResponseDto.of(groupUser.getGroup()));
+        }
+        return new UserGroupListResponseDto(userGroupResponseDtos);
+    }
+
+    @Override
+    @Transactional
+    public void deleteCareer(String id, Long careerId) {
+        careerRepository.deleteCareerByCounselorProfile_Counselor_IdAndId(id, careerId);
+    }
+
+    @Override
+    public void deleteCounselorCertificate(String id, Long certificateId) {
+        certificateRepository.deleteCertificateByCounselorProfile_Counselor_IdAndId(id, certificateId);
+    }
+
+    @Override
+    @Transactional
+    public void deleteCounselorCategory(String id, Long categoryId) {
+        categoryRepository.deleteCategoryByCounselorProfile_Counselor_IdAndId(id, categoryId);
     }
 }

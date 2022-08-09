@@ -5,5 +5,5 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class FavoriteSaveResponseDto {
-    private Long favoriteid;
+    private Long id;
 }

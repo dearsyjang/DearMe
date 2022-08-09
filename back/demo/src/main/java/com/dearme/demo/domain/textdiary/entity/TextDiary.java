@@ -2,10 +2,7 @@ package com.dearme.demo.domain.textdiary.entity;
 
 import com.dearme.demo.domain.base.entitiy.Base;
 import com.dearme.demo.domain.user.entity.User;
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 
@@ -15,6 +12,7 @@ import javax.persistence.*;
 public class TextDiary extends Base {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "text_diary_id")
     private Long id;
 
     @ManyToOne
@@ -25,6 +23,18 @@ public class TextDiary extends Base {
 
     private String contents;
 
+    @Setter
+    private String sentiment;
+    @Setter
+    private Double percentage;
+    @Setter
+    private Double positive;
+    @Setter
+    private Double negative;
+    @Setter
+    private Double neutral;
+
+
     private Integer year;
 
     private Integer month;
@@ -32,7 +42,7 @@ public class TextDiary extends Base {
     private Integer day;
 
     @Builder
-    public TextDiary(String title, String contents, Integer year, Integer month, Integer day){
+    public TextDiary(String title, String contents,Integer year, Integer month, Integer day){
         this.title = title;
         this.contents = contents;
         this.year = year;

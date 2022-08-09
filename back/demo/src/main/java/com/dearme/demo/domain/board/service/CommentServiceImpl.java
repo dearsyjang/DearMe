@@ -15,13 +15,14 @@ import com.dearme.demo.domain.board.repository.BoardRepository;
 import com.dearme.demo.domain.board.repository.CommentRepository;
 import com.dearme.demo.domain.user.entity.Type;
 import com.dearme.demo.domain.user.entity.User;
-import com.dearme.demo.domain.user.exception.NoExistUserException;
+import com.dearme.demo.domain.user.exception.NoExistCounselorException;
 import com.dearme.demo.domain.user.repository.UserRepository;
 import com.dearme.demo.global.util.jwt.JwtProvider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.time.LocalDateTime;
 
 @Service
 @RequiredArgsConstructor
@@ -33,20 +34,20 @@ public class CommentServiceImpl implements CommentService{
 
     @Override
     @Transactional
-    public CommentSaveResponseDto commentSave(String id, Long boardid, CommentSaveRequestDto dto){
+    public CommentSaveResponseDto commentSave(String id, Long boardId, CommentSaveRequestDto dto){
         Comment comment;
         comment=dto.toCommentEntity();
-        Board board = boardRepository.findBoardByBoardid(boardid).orElseThrow(()->{
+        Board board = boardRepository.findBoardById(boardId).orElseThrow(()->{
             throw new NoExistBoardException();
         });
         User user = userRepository.findUserById(id).orElseThrow(() -> {
-            throw new NoExistUserException();
+            throw new NoExistCounselorException();
         });
         if(user.getType().equals(Type.COUNSELOR)){
             comment.setBoard(board);
             comment.setUser(user);
             commentRepository.save(comment);
-            return new CommentSaveResponseDto(comment.getCommentid());
+            return new CommentSaveResponseDto(comment.getId());
         }else{
             throw new NoCommentSavePermissionException();
         }
@@ -54,30 +55,30 @@ public class CommentServiceImpl implements CommentService{
     }
 
     @Transactional
-    public CommentUpdateResponseDto updateComment(String id, Long commentid, CommentUpdateRequestDto dto) {
-        Comment comment = commentRepository.findCommentByCommentid(commentid).orElseThrow(()->{
+    public CommentUpdateResponseDto updateComment(String id, Long commentId, CommentUpdateRequestDto dto) {
+        Comment comment = commentRepository.findCommentById(commentId).orElseThrow(()->{
             throw new NoExistCommentException();
         });
         User user = userRepository.findUserById(id).orElseThrow(() -> {
-            throw new NoExistUserException();
+            throw new NoExistCounselorException();
         });
-        if(user.getUserId().equals(comment.getUser().getUserId())){
-            comment.update(dto.getDate(), dto.getContents());
-            return new CommentUpdateResponseDto(comment.getCommentid());
+        if(user.getId().equals(comment.getUser().getId())){
+            comment.update(LocalDateTime.now(), dto.getContents());
+            return new CommentUpdateResponseDto(comment.getId());
         }else{
             throw new NoCommentUpdatePermissionException();
         }
     }
 
     @Transactional
-    public void deleteComment(String id, Long commentid) {
-        Comment comment = commentRepository.findCommentByCommentid(commentid).orElseThrow(()->{
+    public void deleteComment(String id, Long commentId) {
+        Comment comment = commentRepository.findCommentById(commentId).orElseThrow(()->{
             throw new NoExistCommentException();
         });
         User user = userRepository.findUserById(id).orElseThrow(() -> {
-            throw new NoExistUserException();
+            throw new NoExistCounselorException();
         });
-        if(user.getUserId().equals(comment.getUser().getUserId())){
+        if(user.getId().equals(comment.getUser().getId())){
             commentRepository.delete(comment);
         }else{
             throw new NoCommentDeletePermissionException();

@@ -15,12 +15,12 @@ import javax.persistence.*;
 public class Certificate extends Base {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "certificate_id")
     private Long id;
 
     private String contents;
 
     @ManyToOne
-    @JsonManagedReference // 순환참조 방지
     @JoinColumn(name = "counselor_id")
     private CounselorProfile counselorProfile;
 

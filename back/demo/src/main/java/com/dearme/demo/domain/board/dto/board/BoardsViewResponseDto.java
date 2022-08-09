@@ -3,19 +3,23 @@ package com.dearme.demo.domain.board.dto.board;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.Date;
+
 @Data
 @AllArgsConstructor
 public class BoardsViewResponseDto {
-    private Long boardid;
+    private Long id;
 
     private String nickname;
 
     private String title;
 
 
-    private int hitcnt;
+    private int hitCnt;
 
-    private String date;
+    private LocalDateTime date;
 
 
 }

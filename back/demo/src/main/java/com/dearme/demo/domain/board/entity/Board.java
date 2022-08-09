@@ -10,6 +10,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -21,7 +23,8 @@ public class Board extends Base {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long boardid;
+    @Column(name = "board_id")
+    private Long id;
     @ManyToOne
     @JsonManagedReference // 순환참조 방지
     @JoinColumn(name="id")
@@ -33,10 +36,10 @@ public class Board extends Base {
     private String contents;
 
     @Column(nullable = false)
-    private int hitcnt=0;
+    private int hitCnt=0;
 
     @Column(nullable = false)
-    private Date date;
+    private LocalDateTime date;
 
     @OneToMany(mappedBy = "board", orphanRemoval = true, cascade = CascadeType.ALL)
     @JsonBackReference
@@ -48,16 +51,16 @@ public class Board extends Base {
         this.user=user;
     }
     @Builder
-    public Board(String title, String contents, int hitcnt, Date date){
+    public Board(String title, String contents, int hitCnt, LocalDateTime date){
         this.title=title;
         this.contents=contents;
-        this.hitcnt=hitcnt;
+        this.hitCnt=hitCnt;
         this.date=date;
     }
     public void updateHitCnt(){
-        this.hitcnt=this.hitcnt+1;
+        this.hitCnt=this.hitCnt+1;
     }
-    public void update(String title, String contents, Date date){
+    public void update(String title, String contents, LocalDateTime date){
         this.title=title;
         this.contents=contents;
         this.date=date;

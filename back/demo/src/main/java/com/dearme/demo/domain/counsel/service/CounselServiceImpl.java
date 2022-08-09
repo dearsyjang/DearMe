@@ -1,7 +1,7 @@
 package com.dearme.demo.domain.counsel.service;
 
 
-import com.dearme.demo.domain.counsel.dto.VideoSaveResponseDto;
+import com.dearme.demo.domain.counsel.dto.CounselResponseDto;
 //import com.google.api.gax.core.CredentialsProvider;
 //import com.google.api.gax.core.FixedCredentialsProvider;
 //import com.google.auth.oauth2.ServiceAccountCredentials;
@@ -19,12 +19,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -32,7 +26,7 @@ public class CounselServiceImpl implements CounselService{
 
     @Override
     @Transactional
-    public VideoSaveResponseDto videoSave() {
+    public CounselResponseDto videoSave() {
 //        String filePath = "src/main/resources/KOR_F_RM0769FLJH0325.pcm";
 //        String text="";
 //        try {

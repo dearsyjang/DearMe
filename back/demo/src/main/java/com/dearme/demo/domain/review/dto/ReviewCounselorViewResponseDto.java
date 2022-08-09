@@ -6,7 +6,7 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class ReviewCounselorViewResponseDto {
-    private Long reviewid;
+    private Long id;
     private String nickname;
     private Long value;
     private String contents;

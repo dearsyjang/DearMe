@@ -3,6 +3,10 @@ package com.dearme.demo.domain.board.dto.board;
 import com.dearme.demo.domain.board.entity.Board;
 import lombok.Data;
 
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.Date;
 
 
@@ -10,12 +14,13 @@ import java.util.Date;
 public class BoardSaveRequestDto {
     private String title;
     private String contents;
-    private Date date;
+
     public Board toBoardEntity(){
+        Date date = new Date();
         return Board.builder()
                 .title(this.title)
                 .contents(this.contents)
-                .date(this.date)
+                .date(LocalDateTime.now())
                 .build();
     }
 }
