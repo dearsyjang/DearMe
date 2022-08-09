@@ -25,7 +25,7 @@ public class MorningJob implements Job {
         JobDataMap dataMap = ctx.getJobDetail().getJobDataMap();
 
         String sentiment = dataMap.getString("sentiment");
-        int percentage = Integer.parseInt(dataMap.getString("percentage"));
+        double percentage = dataMap.getDouble("percentage");
 
         HttpClient httpClient = HttpClientBuilder.create().build(); //Use this instead
 
@@ -35,9 +35,10 @@ public class MorningJob implements Job {
         postRequest.addHeader("Content-Type", "application/json");
 
         String s = getYesterday(sentiment, percentage);
+        String []split=s.split(",");
         JSONObject json = new JSONObject();
-        json.put("title", "💌  오늘의 편지");
-        json.put("body", s);
+        json.put("title", "💌  오늘의 편지" + " : " + split[0]);
+        json.put("body", split[1]);
         json.put("image", "https://firebasestorage.googleapis.com/v0/b/dear-me-fef2a.appspot.com/o/dearme.PNG?alt=media&token=e485b31a-550b-4c37-a42c-c351875e01d0");
         json.put("color", "#ffb0f7");
 
@@ -65,39 +66,39 @@ public class MorningJob implements Job {
             System.out.println("response is error : " + response.getStatusLine().getStatusCode());
         }
     }
-    public String getYesterday(String sentiment, int percentage){
+    public String getYesterday(String sentiment, double percentage){
         StringBuilder sb= new StringBuilder();
 
         if(sentiment.equals("positive")){
             if(percentage>=99){
-                sb.append("어제는 정말 완벽한 하루였어요! 오늘도 어제처럼 완벽하게!");
+                sb.append("어제는 정말 완벽한 하루였어요!,🎉오늘도 어제처럼 완벽하게!");
             }else if(percentage>=95){
-                sb.append("어제는 좋은 일이 많으셨군요! 이대로 좋은 일만 계속되기를!");
+                sb.append("어제는 좋은 일이 많으셨군요!,✨이대로 좋은 일만 계속되기를!");
             }else if(percentage>=90){
-                sb.append("어제는 좋은 일이 가득했어요! 오늘도 좋은 일이 많을거에요!");
+                sb.append("어제는 좋은 일이 가득했어요!,🎈오늘도 좋은 일이 많을거에요!");
             }else if(percentage>=80){
-                sb.append("오늘도 어제처럼 행복한 하루를 보내시길 바래요!");
+                sb.append("오늘도 어제처럼,😁행복한 하루를 보내시길 바래요!");
             }else if(percentage>=70){
-                sb.append("안 좋은 일이 있어도 괜찮아요.. 오늘은 행복한 일이 더 많이 있을거에요!");
+                sb.append("안 좋은 일이 있어도 괜찮아요..,😊오늘은 행복한 일이 더 많이 있을거에요!");
             }else if(percentage>=55){
-                sb.append("어제는 기분이 좋아졌다가 안좋아졌다가 하셨죠? 오늘은 기분 좋은 일만 가득할거에요!");
+                sb.append("어제는 기분이 좋아졌다가 안좋아졌다가 하셨죠?,🩹오늘은 기분 좋은 일만 가득할거에요!");
             }
         }else if(sentiment.equals("negative")){
             if(percentage>=99){
-                sb.append("어제는 기분이 안 좋은 날이였어요 ㅠㅠ... 하지만 오늘은 좋은 날이 될 거에요!");
+                sb.append("어제는 기분이 안 좋은 날이였어요 ㅠㅠ...,🌈하지만 오늘은 좋은 날이 될 거에요!");
             }else if(percentage>=95){
-                sb.append("어제는 안 좋은 일이 많으셨죠? ㅠㅠ... 하지만 오늘은 좋은 일이 많을거에요! 화이팅!");
+                sb.append("어제는 안 좋은 일이 많으셨죠? ㅠㅠ...,🌟하지만 오늘은 좋은 일이 많을거에요! 화이팅!");
             }else if(percentage>=90) {
-                sb.append("어제는 속상한 일이 많으셨군요... 오늘 훌훌 털고 행복한 하루를 보내봐요!");
+                sb.append("어제는 속상한 일이 많으셨군요...,💨오늘 훌훌 털고 행복한 하루를 보내봐요!");
             }else if(percentage>=80){
-                sb.append("어제는 안 좋은 일이 있으셨군요.. 오늘은 행복한 일이 더 많이 일어나도록 기원할게요!");
+                sb.append("어제는 안 좋은 일이 있으셨군요..,🙏오늘은 행복한 일이 더 많이 일어나도록 기원할게요!");
             }else if(percentage>=70){
-                sb.append("안 좋은 일이 있어도 괜찮아요.. 오늘은 행복한 일이 더 많이 있을거에요!");
+                sb.append("안 좋은 일이 있어도 괜찮아요..,📈오늘은 행복한 일이 더 많이 있을거에요!");
             }else if(percentage>=55){
-                sb.append("어제는 기분이 좋아졌다가 안좋아졌다가 하셨죠? 오늘은 기분 좋은 일만 가득할거에요!");
+                sb.append("어제는 기분이 좋아졌다가 안좋아졌다가 하셨죠?,🩹오늘은 기분 좋은 일만 가득할거에요!");
             }
         }else{
-            sb.append("어제는 평범한 날이였어요.. 하지만 오늘은 뭔가 특별한 일이 생길지도...?");
+            sb.append("어제는 평범한 날이였어요!,💞하지만 오늘은 뭔가 특별한 일이 생길지도...?");
         }
         return sb.toString();
 
