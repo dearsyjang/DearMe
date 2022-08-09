@@ -260,4 +260,12 @@ public class UserServiceImpl implements UserService{
         certificate.setCounselorProfile(counselorProfile);
         certificateRepository.save(certificate);
     }
+
+    @Override
+    public void addCounselorCategory(String id, AddCategoryRequestDto dto) {
+        CounselorProfile counselorProfile = counselorProfileRepository.findCounselorProfileByCounselor_Id(id);
+        Category category = dto.toEntity();
+        category.setCounselorProfile(counselorProfile);
+        categoryRepository.save(category);
+    }
 }
