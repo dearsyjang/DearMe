@@ -22,7 +22,7 @@ public class CounselorViewResponseDto {
 
     private double value;
 
-    private Long reviewcnt;
+    private Long reviewCnt;
 
     private Long price;
 

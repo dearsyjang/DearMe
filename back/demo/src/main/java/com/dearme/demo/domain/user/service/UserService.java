@@ -2,6 +2,7 @@ package com.dearme.demo.domain.user.service;
 
 import com.dearme.demo.domain.user.dto.PointsUpdateResponseDto;
 import com.dearme.demo.domain.user.dto.ReviewViewResponseDto;
+import com.dearme.demo.domain.user.dto.UserGroupListResponseDto;
 import com.dearme.demo.domain.user.dto.user.*;
 
 import java.io.IOException;
@@ -24,4 +25,12 @@ public interface UserService {
     UserInfoResponseDto getUserInfo(String id);
 
     List<ReviewViewResponseDto> getReviews(String id);
+
+    UserGroupListResponseDto getGroups(String id);
+
+    void deleteCareer(String id, Long careerId);
+
+    void deleteCounselorCertificate(String id, Long certificateId);
+
+    void deleteCounselorCategory(String id, Long categoryId);
 }

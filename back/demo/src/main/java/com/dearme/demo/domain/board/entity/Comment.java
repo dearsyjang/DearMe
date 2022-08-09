@@ -8,6 +8,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Getter
@@ -16,7 +17,8 @@ import java.util.Date;
 public class Comment extends Base {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long commentid;
+    @Column(name = "comment_id")
+    private Long id;
 
     @ManyToOne
     @JsonManagedReference // 순환참조 방지
@@ -29,7 +31,7 @@ public class Comment extends Base {
     private User user;
 
     @Column(nullable = false)
-    private Date date;
+    private LocalDateTime date;
 
     @Column(nullable = false)
     private String contents;
@@ -43,12 +45,12 @@ public class Comment extends Base {
         this.user=user;
     }
     @Builder
-    public Comment(Date date, String contents) {
+    public Comment(LocalDateTime date, String contents) {
         this.date = date;
         this.contents = contents;
     }
 
-    public void update(Date date, String contents){
+    public void update(LocalDateTime date, String contents){
         this.date=date;
         this.contents=contents;
     }

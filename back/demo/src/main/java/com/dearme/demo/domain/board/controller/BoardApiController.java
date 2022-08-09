@@ -37,40 +37,40 @@ public class BoardApiController {
         return new ResponseEntity<>(CommonResponse.getSuccessResponse(boardService.getBoards(pageRequest)), HttpStatus.OK);
     }
     @Operation(summary = "Board View Detail Test", description = "게시판 상세 조회")
-    @GetMapping("/{boardid}")
-    public ResponseEntity<CommonResponse> boardViewDetail(@PathVariable("boardid") Long boardid){
-        return new ResponseEntity<>(CommonResponse.getSuccessResponse(boardService.getBoard(boardid)), HttpStatus.OK);
+    @GetMapping("/{boardId}")
+    public ResponseEntity<CommonResponse> boardViewDetail(@PathVariable("boardId") Long boardId){
+        return new ResponseEntity<>(CommonResponse.getSuccessResponse(boardService.getBoard(boardId)), HttpStatus.OK);
     }
     @Operation(summary = "Board Update Test", description = "게시판 글 수정")
-    @PutMapping("/{boardid}")
-    public ResponseEntity<CommonResponse> boardUpdate(HttpServletRequest request, @PathVariable("boardid") Long boardid, @RequestBody @Validated BoardUpdateRequestDto dto){
+    @PutMapping("/{boardId}")
+    public ResponseEntity<CommonResponse> boardUpdate(HttpServletRequest request, @PathVariable("boardId") Long boardId, @RequestBody @Validated BoardUpdateRequestDto dto){
         String id = (String) request.getAttribute("id");
-        return new ResponseEntity<>(CommonResponse.getSuccessResponse(boardService.updateBoard(id, boardid, dto)), HttpStatus.OK);
+        return new ResponseEntity<>(CommonResponse.getSuccessResponse(boardService.updateBoard(id, boardId, dto)), HttpStatus.OK);
     }
     @Operation(summary = "Board Delete Test", description = "게시판 글 삭제")
-    @DeleteMapping("/{boardid}")
-    public ResponseEntity<CommonResponse> boardDelete(HttpServletRequest request, @PathVariable("boardid") Long boardid){
+    @DeleteMapping("/{boardId}")
+    public ResponseEntity<CommonResponse> boardDelete(HttpServletRequest request, @PathVariable("boardId") Long boardId){
         String id = (String) request.getAttribute("id");
-        boardService.deleteBoard(id, boardid);
+        boardService.deleteBoard(id, boardId);
         return null;
     }
     @Operation(summary = "Comment Save Test", description = "게시판 댓글 저장")
-    @PostMapping("/{boardid}/comments")
-    public ResponseEntity<CommonResponse> commentSave(HttpServletRequest request, @PathVariable("boardid") Long boardid, @RequestBody @Validated CommentSaveRequestDto dto){
+    @PostMapping("/{boardId}/comments")
+    public ResponseEntity<CommonResponse> commentSave(HttpServletRequest request, @PathVariable("boardId") Long boardId, @RequestBody @Validated CommentSaveRequestDto dto){
         String id = (String) request.getAttribute("id");
-        return new ResponseEntity<>(CommonResponse.getSuccessResponse(commentService.commentSave(id, boardid, dto)), HttpStatus.OK);
+        return new ResponseEntity<>(CommonResponse.getSuccessResponse(commentService.commentSave(id, boardId, dto)), HttpStatus.OK);
     }
     @Operation(summary = "Comment Update Test", description = "게시판 댓글 수정")  //댓글 수정 id -> request로 변경
-    @PutMapping("/{boardid}/comments/{commentid}")
-    public ResponseEntity<CommonResponse> commentUpdate(HttpServletRequest request, @PathVariable("commentid") Long commentid, @RequestBody @Validated CommentUpdateRequestDto dto){
+    @PutMapping("/{boardId}/comments/{commentId}")
+    public ResponseEntity<CommonResponse> commentUpdate(HttpServletRequest request, @PathVariable("commentId") Long commentId, @RequestBody @Validated CommentUpdateRequestDto dto){
         String id = (String) request.getAttribute("id");
-        return new ResponseEntity<>(CommonResponse.getSuccessResponse(commentService.updateComment(id, commentid, dto)), HttpStatus.OK);
+        return new ResponseEntity<>(CommonResponse.getSuccessResponse(commentService.updateComment(id, commentId, dto)), HttpStatus.OK);
     }
     @Operation(summary = "Comment Delete Test", description = "게시판 댓글 삭제")
-    @DeleteMapping("/{boardid}/comments/{commentid}")
-    public ResponseEntity<CommonResponse> commentDelete(HttpServletRequest request, @PathVariable("commentid") Long commentid){
+    @DeleteMapping("/{boardId}/comments/{commentId}")
+    public ResponseEntity<CommonResponse> commentDelete(HttpServletRequest request, @PathVariable("commentId") Long commentId){
         String id = (String) request.getAttribute("id");
-        commentService.deleteComment(id, commentid);
+        commentService.deleteComment(id, commentId);
         return null;
     }
 }

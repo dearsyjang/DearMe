@@ -1,12 +1,7 @@
 package com.dearme.demo.domain.user.service;
 
-import com.dearme.demo.domain.board.dto.board.BoardViewResponseDto;
-import com.dearme.demo.domain.board.dto.comment.CommentResponseDto;
-import com.dearme.demo.domain.board.entity.Comment;
 import com.dearme.demo.domain.user.dto.counselor.CounselorViewResponseDto;
 import com.dearme.demo.domain.user.dto.counselor.CounselorsViewResponseDto;
-import com.dearme.demo.domain.user.dto.user.UpdateCertificateResponseDto;
-import com.dearme.demo.domain.user.dto.user.UserInfoResponseDto;
 import com.dearme.demo.domain.user.entity.Type;
 import com.dearme.demo.domain.user.entity.User;
 import com.dearme.demo.domain.user.exception.NoExistUserException;

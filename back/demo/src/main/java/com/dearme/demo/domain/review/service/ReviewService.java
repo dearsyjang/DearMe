@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface ReviewService {
     ReviewSaveResponseDto reviewSave(String id, ReviewSaveRequestDto dto);
-    void reviewDelete(String id, Long reviewid);
+    void reviewDelete(String id, Long reviewId);
 
     List<ReviewCounselorViewResponseDto> reviewCounselorView(String id);
 

@@ -1,7 +1,8 @@
 package com.dearme.demo.domain.counselingdocument.entity;
 
 import com.dearme.demo.domain.counseling.entity.Counseling;
-import com.dearme.demo.domain.counseling.entity.Type;
+import com.dearme.demo.domain.counseling.entity.Status;
+import com.dearme.demo.domain.group.entity.Group;
 import com.dearme.demo.domain.user.entity.User;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -16,6 +17,7 @@ import javax.persistence.*;
 public class CounselingDocument {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "counseling_document_id")
     private Long id;
 
     @ManyToOne
@@ -32,6 +34,8 @@ public class CounselingDocument {
 
     private Integer day;
 
+    private Integer hours;
+
     private String contents;
 
     private Boolean isOpen;
@@ -39,6 +43,14 @@ public class CounselingDocument {
     @OneToOne
     @JoinColumn(name = "counseling_id")
     private Counseling counseling;
+
+    @ManyToOne
+    @JoinColumn(name = "group_id")
+    private Group group;
+
+    public void setGroup(Group group){
+        this.group = group;
+    }
 
     public void setCounseling(Counseling counseling){
         this.counseling = counseling;
@@ -53,10 +65,11 @@ public class CounselingDocument {
     }
 
     @Builder
-    public CounselingDocument(Integer year, Integer month, Integer day, String contents, Boolean isOpen){
+    public CounselingDocument(Integer year, Integer month, Integer day, Integer hours, String contents, Boolean isOpen){
         this.year = year;
         this.month = month;
         this.day = day;
+        this.hours=hours;
         this.contents = contents;
         this.isOpen = isOpen;
     }
@@ -64,11 +77,22 @@ public class CounselingDocument {
     public Counseling toCounselingEntity(){
         return Counseling.builder()
                 .user(this.user)
+                .group(null)
                 .counselor(this.counselor)
                 .year(this.year)
                 .month(this.month)
                 .day(this.day)
-                .type(Type.UNACCEPTED)
+                .hours(this.hours)
+                .status(Status.UNACCEPTED)
+                .build();
+    }
+
+    public Counseling toGroupCounselingEntity(){
+        return Counseling.builder()
+                .user(this.user)
+                .counselor(this.counselor)
+                .group(this.group)
+                .status(Status.UNACCEPTED)
                 .build();
     }
 }

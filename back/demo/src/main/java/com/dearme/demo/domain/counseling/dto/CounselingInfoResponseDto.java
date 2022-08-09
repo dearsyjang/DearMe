@@ -1,7 +1,7 @@
 package com.dearme.demo.domain.counseling.dto;
 
 import com.dearme.demo.domain.counseling.entity.Counseling;
-import com.dearme.demo.domain.counseling.entity.Type;
+import com.dearme.demo.domain.counseling.entity.Status;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Builder;
 import lombok.Data;
@@ -16,19 +16,22 @@ public class CounselingInfoResponseDto {
     private Integer year;
     private Integer month;
     private Integer day;
+    private Integer hours;
     private Long counselingDocumentId;
-    private Type type;
+    private Long groupId;
+    private Status status;
 
     public static CounselingInfoResponseDto of(Counseling entity){
-        if(entity.getCounselingDocument() == null)
+        if(entity.getCounselor() == null)
             return CounselingInfoResponseDto.builder()
                     .id(entity.getId())
                     .userId(entity.getUser().getUserId())
-                    .counselorId(entity.getCounselor().getUserId())
+                    .groupId(entity.getGroup().getId())
                     .year(entity.getYear())
                     .month(entity.getMonth())
                     .day(entity.getDay())
-                    .type(entity.getType())
+                    .hours(entity.getHours())
+                    .status(entity.getStatus())
                     .build();
 
         return CounselingInfoResponseDto.builder()
@@ -38,8 +41,9 @@ public class CounselingInfoResponseDto {
                 .year(entity.getYear())
                 .month(entity.getMonth())
                 .day(entity.getDay())
+                .hours(entity.getHours())
                 .counselingDocumentId(entity.getCounselingDocument().getId())
-                .type(entity.getType())
+                .status(entity.getStatus())
                 .build();
     }
 }

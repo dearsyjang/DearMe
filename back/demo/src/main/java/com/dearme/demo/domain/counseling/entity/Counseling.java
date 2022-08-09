@@ -1,6 +1,7 @@
 package com.dearme.demo.domain.counseling.entity;
 
 import com.dearme.demo.domain.counselingdocument.entity.CounselingDocument;
+import com.dearme.demo.domain.group.entity.Group;
 import com.dearme.demo.domain.user.entity.User;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -15,6 +16,7 @@ import javax.persistence.*;
 public class Counseling {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "counseling_id")
     private Long id;
 
     @ManyToOne
@@ -26,7 +28,7 @@ public class Counseling {
     private User counselor;
 
     @Enumerated(value = EnumType.STRING)
-    private Type type;
+    private Status status;
 
     private Integer year;
 
@@ -34,9 +36,20 @@ public class Counseling {
 
     private Integer day;
 
-    @OneToOne(mappedBy = "counseling")
+    private Integer hours;
+
+
+    @OneToOne(mappedBy = "counseling", cascade = CascadeType.ALL)
     @JoinColumn(name = "counseling_document_id")
     private CounselingDocument counselingDocument;
+
+    @ManyToOne
+    @JoinColumn(name = "group_id")
+    private Group group;
+
+    public void updateCounseling(Status status){
+        this.status = status;
+    }
 
     public void setCounselingDocument(CounselingDocument counselingDocument) {
         counselingDocument.setCounseling(this);
@@ -44,12 +57,14 @@ public class Counseling {
     }
 
     @Builder
-    public Counseling(User user, User counselor, Integer year, Integer month, Integer day, Type type){
+    public Counseling(User user, Group group, User counselor, Integer year, Integer month, Integer day, Integer hours, Status status){
         this.user = user;
         this.counselor = counselor;
+        this.group = group;
         this.year = year;
         this.month = month;
         this.day = day;
-        this.type = type;
+        this.hours=hours;
+        this.status = status;
     }
 }

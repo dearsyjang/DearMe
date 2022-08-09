@@ -6,6 +6,6 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class VideoSaveResponseDto {
+public class CounselResponseDto {
     private String videotext;
 }

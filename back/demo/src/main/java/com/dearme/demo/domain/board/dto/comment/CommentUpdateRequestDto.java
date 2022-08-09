@@ -7,7 +7,6 @@ import java.util.Date;
 @Data
 public class CommentUpdateRequestDto {
     private String contents;
-    private Date date;
 
 
 }
