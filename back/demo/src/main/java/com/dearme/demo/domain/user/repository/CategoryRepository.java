@@ -7,4 +7,5 @@ import java.util.Optional;
 
 public interface CategoryRepository extends JpaRepository<Category, Long> {
     Optional<Category> findCategoryByCounselorProfile_Counselor_IdAndId(String id, Long categoryId);
+    void deleteCategoryByCounselorProfile_Counselor_IdAndId(String counselorId, Long categoryId);
 }
