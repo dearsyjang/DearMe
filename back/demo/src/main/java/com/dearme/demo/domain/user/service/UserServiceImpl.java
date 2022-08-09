@@ -188,6 +188,14 @@ public class UserServiceImpl implements UserService{
     @Override
     @Transactional
     public void delete(String id) {
+        User target = userRepository.findUserById(id).orElseThrow(() -> {
+            throw new NoExistUserException();
+        });
+        String pictureName = target.getPicture().getRealFileName();
+        if(!pictureName.equals("basic.png")) {
+            File file = new File(IMAGE_PATH + pictureName);
+            file.delete();
+        }
         userRepository.deleteUserById(id);
     }
 
