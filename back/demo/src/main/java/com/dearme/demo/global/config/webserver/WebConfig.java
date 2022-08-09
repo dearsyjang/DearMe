@@ -28,7 +28,7 @@ public class WebConfig implements WebMvcConfigurer {
                 .allowedOrigins("*")
                 .allowedOrigins("http://localhost:8080")
                 .allowedOrigins("http://localhost:8081")
-                .allowedMethods("GET","POST","PUT","DELETE");
+                .allowedMethods("GET","POST","PUT","DELETE", "OPTIONS");
     }
 
     @Override
