@@ -35,4 +35,6 @@ public interface UserService {
     void deleteCounselorCategory(String id, Long categoryId);
 
     void addCounselorCareer(String id, AddCareerRequestDto dto);
+
+    void addCounselorCertificate(String id, AddCertificateDto dto);
 }
