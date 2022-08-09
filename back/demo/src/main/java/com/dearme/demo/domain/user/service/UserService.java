@@ -39,4 +39,6 @@ public interface UserService {
     void addCounselorCertificate(String id, AddCertificateDto dto);
 
     void addCounselorCategory(String id, AddCategoryRequestDto dto);
+
+    void withdrawalUserGroup(String id, Long groupId);
 }
