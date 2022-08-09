@@ -233,4 +233,9 @@ public class UserServiceImpl implements UserService{
     public void deleteCareer(String id, Long careerId) {
         careerRepository.deleteCareerByCounselorProfile_Counselor_IdAndId(id, careerId);
     }
+
+    @Override
+    public void deleteCounselorCertificate(String id, Long certificateId) {
+        certificateRepository.deleteCertificateByCounselorProfile_Counselor_IdAndId(id, certificateId);
+    }
 }

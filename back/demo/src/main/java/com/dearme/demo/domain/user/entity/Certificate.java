@@ -21,7 +21,6 @@ public class Certificate extends Base {
     private String contents;
 
     @ManyToOne
-    @JsonManagedReference // 순환참조 방지
     @JoinColumn(name = "counselor_id")
     private CounselorProfile counselorProfile;
 

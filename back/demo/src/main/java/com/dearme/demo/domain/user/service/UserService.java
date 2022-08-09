@@ -29,4 +29,6 @@ public interface UserService {
     UserGroupListResponseDto getGroups(String id);
 
     void deleteCareer(String id, Long careerId);
+
+    void deleteCounselorCertificate(String id, Long certificateId);
 }
