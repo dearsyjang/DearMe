@@ -40,6 +40,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
+import java.util.Calendar;
 
 @Service
 @RequiredArgsConstructor
@@ -68,6 +69,7 @@ public class VideoDiaryServiceImpl implements VideoDiaryService {
         videoDiary.setNegative(Double.parseDouble(text[4]));
         videoDiary.setNeutral(Double.parseDouble(text[5]));
         videoDiaryRepository.save(videoDiary);
+        createScheduler(videoDiary);
         return new PostVideoDiaryResponseDto(videoDiary.getId(), videoDiary.getTitle(), videoDiary.getContents(), videoDiary.getSentiment(), videoDiary.getPercentage(), videoDiary.getPositive(), videoDiary.getNegative(), videoDiary.getNeutral());
     }
 
@@ -105,6 +107,7 @@ public class VideoDiaryServiceImpl implements VideoDiaryService {
         }else{
             throw new NoPermissionVideoDiaryException();
         }
+        createScheduler(videoDiary);
         return new PostVideoDiaryResponseDto(videoDiary.getId(), videoDiary.getTitle(), videoDiary.getContents(), videoDiary.getSentiment(), videoDiary.getPercentage(),videoDiary.getPositive(), videoDiary.getNegative(), videoDiary.getNeutral());
     }
 
@@ -280,25 +283,36 @@ public class VideoDiaryServiceImpl implements VideoDiaryService {
         return recognitionAudio;
     }
     public void createScheduler(VideoDiary videoDiary){
+
+
         try {
             // Scheduler 사용을 위한 인스턴스화
             SchedulerFactory schedulerFactory = new StdSchedulerFactory();
+
             Scheduler scheduler = schedulerFactory.getScheduler();
+            scheduler.pauseJob(new JobKey(videoDiary.getId()+"_job_detail", videoDiary.getId()+"_group"));
             // JOB Data 객체
             JobDataMap jobDataMap = new JobDataMap();
+            jobDataMap.put("type", "videoDiary");
             jobDataMap.put("sentiment", videoDiary.getSentiment());
-            jobDataMap.put("percentage", videoDiary.getPercentage());
+            jobDataMap.put("percentage", videoDiary.getPercentage()+"");
             JobDetail jobDetail = JobBuilder.newJob(MorningJob.class)
-                    .withIdentity(videoDiary.getId()+"", "group1")
+                    .withIdentity(videoDiary.getId()+"_job_detail", videoDiary.getId()+"_group")
                     .setJobData(jobDataMap)
                     .build();
-            Integer month=videoDiary.getMonth();
-            if(month==1) month=12;
-            else month-=1;
+
+            Calendar cal = new GregorianCalendar();
+            cal.add(Calendar.DATE, 1);
+            System.out.println(cal.get(Calendar.YEAR));
+            System.out.println(cal.get(Calendar.MONTH));
+            System.out.println(cal.get(Calendar.DAY_OF_MONTH));
             @SuppressWarnings("deprecation")
             SimpleTrigger simpleTrigger = (SimpleTrigger) TriggerBuilder.newTrigger()
-                    .withIdentity("simple_trigger", "simple_trigger_group")
-                    .startAt(new Date(2022 - 1900, month, videoDiary.getDay(), 8, 30)) // 2022 : 2022 - 1900, month = 7 -> 8월
+                    .withIdentity(videoDiary.getId()+"_trigger", videoDiary.getId()+"_trigger_group")
+                    // 실제 배포
+                    // .startAt(new Date(2022 - 1900, month, videoDiary.getDay(), 8, 30)) // 2022 : 2022 - 1900, month = 7 -> 8월
+                    // 테스트
+                    .startAt(new Date(cal.get(Calendar.YEAR) - 1900, cal.get(Calendar.MONTH), cal.get(Calendar.DAY_OF_MONTH)-1, 19, 37)) // 2022 : 2022 - 1900, month = 7 -> 8월
                     .withSchedule(SimpleScheduleBuilder.repeatSecondlyForTotalCount(1, 10)) // 10초마다 반복하며, 최대 1회 실행
                     .forJob(jobDetail)
                     .build();

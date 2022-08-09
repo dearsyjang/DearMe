@@ -83,7 +83,7 @@ public class CounselingServiceImpl implements CounselingService{
             // JOB Data 객체
             JobDataMap jobDataMap = new JobDataMap();
             jobDataMap.put("nickName", counseling.getCounselor().getNickName());
-            jobDataMap.put("date", counseling.getYear()+"." + counseling.getMonth()+"."+counseling.getDay()+"  " + counseling.getHours()+"시");
+            jobDataMap.put("date", counseling.getYear()+"." + counseling.getMonth()+"."+counseling.getDay()+" " + counseling.getHours()+"시");
             JobDetail jobDetail = JobBuilder.newJob(CounselJob.class)
                     .withIdentity(counseling.getUser().getNickName(), "group1")
                     .setJobData(jobDataMap)
@@ -94,7 +94,10 @@ public class CounselingServiceImpl implements CounselingService{
             @SuppressWarnings("deprecation")
             SimpleTrigger simpleTrigger = (SimpleTrigger) TriggerBuilder.newTrigger()
                     .withIdentity("simple_trigger", "simple_trigger_group")
+                    //실제 배포
                     .startAt(new Date(2022 - 1900, month, counseling.getDay(), counseling.getHours(), 0)) // 2022 : 2022 - 1900, month = 7 -> 8월
+                    //테스트용
+                    //.startAt(new Date(2022 - 1900, month, counseling.getDay(), counseling.getHours(), 12)) // 2022 : 2022 - 1900, month = 7 -> 8월
                     .withSchedule(SimpleScheduleBuilder.repeatSecondlyForTotalCount(1, 10)) // 10초마다 반복하며, 최대 1회 실행
                     .forJob(jobDetail)
                     .build();
