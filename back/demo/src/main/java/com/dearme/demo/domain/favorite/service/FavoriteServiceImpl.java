@@ -3,6 +3,7 @@ package com.dearme.demo.domain.favorite.service;
 import com.dearme.demo.domain.favorite.dto.FavoriteSaveRequestDto;
 import com.dearme.demo.domain.favorite.dto.FavoriteSaveResponseDto;
 import com.dearme.demo.domain.favorite.dto.FavoriteViewResponseDto;
+import com.dearme.demo.domain.favorite.entity.Favorite;
 import com.dearme.demo.domain.favorite.exception.NoExistFavoriteException;
 import com.dearme.demo.domain.favorite.exception.NoFavoriteDeletePermissionException;
 import com.dearme.demo.domain.favorite.exception.NoFavoriteSavePermissionException;
