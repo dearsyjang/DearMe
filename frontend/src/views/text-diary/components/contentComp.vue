@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="textDiary-form">
     <p>일기 제목을 입력하시오. (50자 이내)</p>
           <input v-model="textdiarytitle" type="text" placeholder="제목을 입력하시오">
         <p>일기 내용을 입력하시오.</p>
