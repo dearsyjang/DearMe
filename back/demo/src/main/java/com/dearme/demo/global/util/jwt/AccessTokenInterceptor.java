@@ -1,7 +1,8 @@
 package com.dearme.demo.global.util.jwt;
 
-import com.dearme.demo.domain.user.exception.NoExistUserException;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -13,10 +14,14 @@ import javax.servlet.http.HttpServletResponse;
 @RequiredArgsConstructor
 public class AccessTokenInterceptor implements HandlerInterceptor {
 
+    private final Logger log = LoggerFactory.getLogger(AccessTokenInterceptor.class);
+
     private final JwtProvider jwtProvider;
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler){
+        log.debug("request URI : {} ", request.getRequestURI());
+        log.debug("request Method : {} " , request.getMethod());
         if(request.getMethod().equals("POST") && request.getRequestURI().equals("/users")) return true;
         try {
             String accessToken = getAccessToken(request.getHeader(HttpHeaders.AUTHORIZATION));
