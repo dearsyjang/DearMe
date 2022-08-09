@@ -1,6 +1,7 @@
 package com.dearme.demo.domain.videodiary.service;
 
 
+import com.dearme.demo.domain.counseling.entity.Counseling;
 import com.dearme.demo.domain.user.entity.Type;
 import com.dearme.demo.domain.user.entity.User;
 import com.dearme.demo.domain.user.exception.NoExistUserException;
@@ -10,6 +11,8 @@ import com.dearme.demo.domain.videodiary.entity.VideoDiary;
 import com.dearme.demo.domain.videodiary.exception.CounselorPostVideoDiaryException;
 import com.dearme.demo.domain.videodiary.exception.NoPermissionVideoDiaryException;
 import com.dearme.demo.domain.videodiary.repository.VideoDiaryRepository;
+import com.dearme.demo.global.scheduler.CounselJob;
+import com.dearme.demo.global.scheduler.MorningJob;
 import com.google.api.gax.core.CredentialsProvider;
 import com.google.api.gax.core.FixedCredentialsProvider;
 import com.google.auth.oauth2.ServiceAccountCredentials;
@@ -25,6 +28,8 @@ import org.apache.http.impl.client.BasicResponseHandler;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.quartz.*;
+import org.quartz.impl.StdSchedulerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -34,8 +39,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
@@ -274,5 +278,36 @@ public class VideoDiaryServiceImpl implements VideoDiaryService {
         }
 
         return recognitionAudio;
+    }
+    public void createScheduler(VideoDiary videoDiary){
+        try {
+            // Scheduler 사용을 위한 인스턴스화
+            SchedulerFactory schedulerFactory = new StdSchedulerFactory();
+            Scheduler scheduler = schedulerFactory.getScheduler();
+            // JOB Data 객체
+            JobDataMap jobDataMap = new JobDataMap();
+            jobDataMap.put("sentiment", videoDiary.getSentiment());
+            jobDataMap.put("percentage", videoDiary.getPercentage());
+            JobDetail jobDetail = JobBuilder.newJob(MorningJob.class)
+                    .withIdentity(videoDiary.getId()+"", "group1")
+                    .setJobData(jobDataMap)
+                    .build();
+            Integer month=videoDiary.getMonth();
+            if(month==1) month=12;
+            else month-=1;
+            @SuppressWarnings("deprecation")
+            SimpleTrigger simpleTrigger = (SimpleTrigger) TriggerBuilder.newTrigger()
+                    .withIdentity("simple_trigger", "simple_trigger_group")
+                    .startAt(new Date(2022 - 1900, month, videoDiary.getDay(), 8, 30)) // 2022 : 2022 - 1900, month = 7 -> 8월
+                    .withSchedule(SimpleScheduleBuilder.repeatSecondlyForTotalCount(1, 10)) // 10초마다 반복하며, 최대 1회 실행
+                    .forJob(jobDetail)
+                    .build();
+            Set<SimpleTrigger> triggerSet = new HashSet<SimpleTrigger>();
+            triggerSet.add(simpleTrigger);
+            scheduler.scheduleJob(jobDetail, triggerSet, false);
+            scheduler.start();
+        }catch(Exception e) {
+            e.printStackTrace();
+        }
     }
 }

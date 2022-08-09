@@ -22,6 +22,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.time.LocalDateTime;
 
 @Service
 @RequiredArgsConstructor
@@ -62,7 +63,7 @@ public class CommentServiceImpl implements CommentService{
             throw new NoExistCounselorException();
         });
         if(user.getId().equals(comment.getUser().getId())){
-            comment.update(dto.getDate(), dto.getContents());
+            comment.update(LocalDateTime.now(), dto.getContents());
             return new CommentUpdateResponseDto(comment.getId());
         }else{
             throw new NoCommentUpdatePermissionException();

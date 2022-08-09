@@ -4,6 +4,8 @@ import com.dearme.demo.domain.board.dto.comment.CommentResponseDto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -19,7 +21,7 @@ public class BoardViewResponseDto {
 
     private int hitCnt;
 
-    private Date date;
+    private LocalDateTime date;
 
     private List<CommentResponseDto> comments;
 

@@ -19,6 +19,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -52,7 +54,7 @@ public class BoardServiceImpl implements BoardService{
                 board.getUser().getNickName(),
                 board.getTitle(),
                 board.getHitCnt(),
-                board.getTitle()));
+                board.getDate()));
 
         return map;
     }
@@ -91,7 +93,7 @@ public class BoardServiceImpl implements BoardService{
             throw new NoExistUserException();
         });
         if(user.getId().equals(board.getUser().getId())){
-            board.update(dto.getTitle(), dto.getContents(), dto.getDate());
+            board.update(dto.getTitle(), dto.getContents(), LocalDateTime.now());
             return new BoardUpdateResponseDto(board.getId());
         }else{
             throw new NoBoardUpdatePermissionException();

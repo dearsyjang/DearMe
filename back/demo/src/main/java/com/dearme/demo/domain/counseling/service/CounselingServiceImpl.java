@@ -13,7 +13,7 @@ import com.dearme.demo.domain.user.entity.Type;
 import com.dearme.demo.domain.user.entity.User;
 import com.dearme.demo.domain.user.exception.NoExistUserException;
 import com.dearme.demo.domain.user.repository.UserRepository;
-import com.dearme.demo.global.scheduler.MainJob;
+import com.dearme.demo.global.scheduler.CounselJob;
 import lombok.RequiredArgsConstructor;
 import org.quartz.*;
 import org.quartz.impl.StdSchedulerFactory;
@@ -83,8 +83,8 @@ public class CounselingServiceImpl implements CounselingService{
             // JOB Data 객체
             JobDataMap jobDataMap = new JobDataMap();
             jobDataMap.put("nickName", counseling.getCounselor().getNickName());
-
-            JobDetail jobDetail = JobBuilder.newJob(MainJob.class)
+            jobDataMap.put("date", counseling.getYear()+"." + counseling.getMonth()+"."+counseling.getDay()+"  " + counseling.getHours()+"시");
+            JobDetail jobDetail = JobBuilder.newJob(CounselJob.class)
                     .withIdentity(counseling.getUser().getNickName(), "group1")
                     .setJobData(jobDataMap)
                     .build();

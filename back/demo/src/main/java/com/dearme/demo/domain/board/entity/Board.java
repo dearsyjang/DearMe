@@ -10,6 +10,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -37,7 +39,7 @@ public class Board extends Base {
     private int hitCnt=0;
 
     @Column(nullable = false)
-    private Date date;
+    private LocalDateTime date;
 
     @OneToMany(mappedBy = "board", orphanRemoval = true, cascade = CascadeType.ALL)
     @JsonBackReference
@@ -49,7 +51,7 @@ public class Board extends Base {
         this.user=user;
     }
     @Builder
-    public Board(String title, String contents, int hitCnt, Date date){
+    public Board(String title, String contents, int hitCnt, LocalDateTime date){
         this.title=title;
         this.contents=contents;
         this.hitCnt=hitCnt;
@@ -58,7 +60,7 @@ public class Board extends Base {
     public void updateHitCnt(){
         this.hitCnt=this.hitCnt+1;
     }
-    public void update(String title, String contents, Date date){
+    public void update(String title, String contents, LocalDateTime date){
         this.title=title;
         this.contents=contents;
         this.date=date;

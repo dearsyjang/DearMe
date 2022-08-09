@@ -3,6 +3,10 @@ package com.dearme.demo.domain.board.dto.board;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.Date;
+
 @Data
 @AllArgsConstructor
 public class BoardsViewResponseDto {
@@ -15,7 +19,7 @@ public class BoardsViewResponseDto {
 
     private int hitCnt;
 
-    private String date;
+    private LocalDateTime date;
 
 
 }

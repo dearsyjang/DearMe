@@ -5,7 +5,6 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.HttpClientBuilder;
-import org.json.JSONArray;
 import org.json.JSONObject;
 import org.quartz.Job;
 import org.quartz.JobDataMap;
@@ -16,7 +15,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class MainJob implements Job {
+public class CounselJob implements Job {
 
     private static final SimpleDateFormat TIMESTAMP_FMT = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.SSSS");
 
@@ -26,7 +25,7 @@ public class MainJob implements Job {
         JobDataMap dataMap = ctx.getJobDetail().getJobDataMap();
 
         String nickName = dataMap.getString("nickName");
-
+        String date = dataMap.getString("date");
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
         Date now = new Date();
         String strDate = sdf.format(now);
@@ -40,8 +39,8 @@ public class MainJob implements Job {
 
 
         JSONObject json = new JSONObject();
-        json.put("title", "💌 상담사님과 1시간 뒤에 상담이 있어요.");
-        json.put("body", "⏳마음을 가라앉히고 준비해주세요.");
+        json.put("title", "💌 " + date);
+        json.put("body", nickName+" 상담사님과 1시간 뒤에 상담이 있어요. 마음을 가라앉히고 준비해주세요.⏳");
         json.put("image", "https://firebasestorage.googleapis.com/v0/b/dear-me-a0ca1.appspot.com/o/dearme.PNG?alt=media&token=5fdd01eb-f6e7-47e5-9f90-672e4aa67b2b");
         json.put("color", "#ffb0f7");
 

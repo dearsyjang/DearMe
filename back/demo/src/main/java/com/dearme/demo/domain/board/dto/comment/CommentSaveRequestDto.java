@@ -3,6 +3,7 @@ package com.dearme.demo.domain.board.dto.comment;
 import com.dearme.demo.domain.board.entity.Comment;
 import lombok.Data;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 
@@ -10,13 +11,12 @@ import java.util.Date;
 public class CommentSaveRequestDto {
 
     private String contents;
-    private Date date;
 
 
     public Comment toCommentEntity(){
         return Comment.builder()
                 .contents(this.contents)
-                .date(this.date)
+                .date(LocalDateTime.now())
                 .build();
     }
 }
