@@ -12,6 +12,8 @@ import com.dearme.demo.domain.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
+
 @Service
 @RequiredArgsConstructor
 public class GroupServiceImpl implements GroupService{
@@ -30,5 +32,11 @@ public class GroupServiceImpl implements GroupService{
         Group group = dto.toEntity();
         group.setCounselor(counselor);
         return new CreateGroupResponseDto(groupRepository.save(group).getId());
+    }
+
+    @Override
+    @Transactional
+    public void deleteCounselorGroup(String id, Long groupId) {
+        groupRepository.deleteGroupByCounselor_IdAndId(id, groupId);
     }
 }

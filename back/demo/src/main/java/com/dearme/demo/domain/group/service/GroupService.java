@@ -5,4 +5,6 @@ import com.dearme.demo.domain.group.dto.CreateGroupResponseDto;
 
 public interface GroupService {
     CreateGroupResponseDto createGroup(String id, CreateGroupRequestDto dto);
+
+    void deleteCounselorGroup(String id, Long groupId);
 }
