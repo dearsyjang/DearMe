@@ -49,7 +49,7 @@ public class CounselorProfile extends Base {
     @Setter
     private List<Career> careers = new ArrayList<>();
 
-    @OneToMany(mappedBy = "counselorProfile", orphanRemoval = true, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "counselorProfile", orphanRemoval = true, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonBackReference // 순환참조 방지
     @Setter
     private List<Certificate> certificates = new ArrayList<>();

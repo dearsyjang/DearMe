@@ -108,4 +108,9 @@ public class UserController {
         userService.deleteCareer(id, careerId);
     }
 
+    @DeleteMapping("/certificate/{certificateId}")
+    public void deleteCertificate(HttpServletRequest request, @PathVariable(value = "certificateId") Long certificateId){
+        String id = (String) request.getAttribute("id");
+        userService.deleteCounselorCertificate(id, certificateId);
+    }
 }
