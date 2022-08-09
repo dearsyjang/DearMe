@@ -24,6 +24,7 @@ public class MorningJob implements Job {
 
         JobDataMap dataMap = ctx.getJobDetail().getJobDataMap();
 
+        String type = dataMap.getString("type");
         String sentiment = dataMap.getString("sentiment");
         double percentage = dataMap.getDouble("percentage");
 
@@ -37,7 +38,9 @@ public class MorningJob implements Job {
         String s = getYesterday(sentiment, percentage);
         String []split=s.split(",");
         JSONObject json = new JSONObject();
-        json.put("title", "💌  오늘의 편지" + " : " + split[0]);
+        if(type.equals("textDairy")) type="글 일기";
+        else type="영상 일기";
+        json.put("title", "💌  "+type + " 오늘의 편지" + " : " + split[0]);
         json.put("body", split[1]);
         json.put("image", "https://firebasestorage.googleapis.com/v0/b/dear-me-fef2a.appspot.com/o/dearme.PNG?alt=media&token=e485b31a-550b-4c37-a42c-c351875e01d0");
         json.put("color", "#ffb0f7");
