@@ -4,6 +4,7 @@ const HOST = "https://i7d206.p.ssafy.io"
 const MEMBER = '/users'
 const BOARD ='/boards'
 const COMMENT ='/comments'
+const TEXTDIARY = '/text-diaries'
 
 
 export default {
@@ -25,6 +26,12 @@ export default {
   group : {
     groupRequest: () => HOST + '/counseling-doucments/groups'
 
-  }
+  },
+  textDiary : {
+    textDiaryCreate: () => HOST + TEXTDIARY,
+    textDiaryList: () => HOST + TEXTDIARY,
+    textDiaryDetail: textDiaryPk => HOST + TEXTDIARY + `/${textDiaryPk}`,
+    textDiaryEdit: textDiaryPk => HOST + TEXTDIARY + `/${textDiaryPk}`,
+  },
 
 }
