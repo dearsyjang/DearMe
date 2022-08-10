@@ -4,8 +4,8 @@ import com.dearme.demo.domain.user.dto.PointsUpdateResponseDto;
 import com.dearme.demo.domain.user.dto.ReviewViewResponseDto;
 import com.dearme.demo.domain.user.dto.UserGroupListResponseDto;
 import com.dearme.demo.domain.user.dto.user.*;
+import org.springframework.web.multipart.MultipartFile;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
 
@@ -44,4 +44,6 @@ public interface UserService {
     void withdrawalUserGroup(String id, Long groupId);
 
     byte[] getUserProfileImage(String id) throws IOException;
+
+    void updateUserProfileImage(String id, MultipartFile picture) throws IOException;
 }
