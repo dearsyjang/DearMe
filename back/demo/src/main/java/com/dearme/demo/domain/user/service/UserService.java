@@ -5,6 +5,7 @@ import com.dearme.demo.domain.user.dto.ReviewViewResponseDto;
 import com.dearme.demo.domain.user.dto.UserGroupListResponseDto;
 import com.dearme.demo.domain.user.dto.user.*;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
 
@@ -41,4 +42,6 @@ public interface UserService {
     void addCounselorCategory(String id, AddCategoryRequestDto dto);
 
     void withdrawalUserGroup(String id, Long groupId);
+
+    byte[] getUserProfileImage(String id) throws IOException;
 }
