@@ -11,12 +11,12 @@ import com.dearme.demo.domain.user.exception.*;
 import com.dearme.demo.domain.user.repository.*;
 import com.dearme.demo.global.util.jwt.JwtProvider;
 import lombok.RequiredArgsConstructor;
+import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -296,5 +296,15 @@ public class UserServiceImpl implements UserService{
     @Override
     public void withdrawalUserGroup(String id, Long groupId) {
         groupUserRepository.deleteGroupUserByUser_IdAndGroup_Id(id, groupId);
+    }
+
+    @Override
+    public byte[] getUserProfileImage(String id) throws IOException {
+        User user = userRepository.findUserById(id).orElseThrow(() -> {
+            throw new NoExistUserException();
+        });
+        InputStream inputStream = new FileInputStream(IMAGE_PATH + user.getPicture().getRealFileName());
+        System.out.println(IMAGE_PATH + user.getPicture().getRealFileName());
+        return IOUtils.toByteArray(inputStream);
     }
 }

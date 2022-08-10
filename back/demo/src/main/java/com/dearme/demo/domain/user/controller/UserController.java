@@ -6,6 +6,7 @@ import com.dearme.demo.domain.user.service.UserService;
 import com.dearme.demo.global.common.CommonResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -146,5 +147,11 @@ public class UserController {
         String id = (String) request.getAttribute("id");
         userService.withdrawalUserGroup(id, groupId);
         return ResponseEntity.ok().build();
+    }
+
+    @GetMapping(value = "/image", produces = {MediaType.IMAGE_JPEG_VALUE, MediaType.IMAGE_PNG_VALUE, MediaType.IMAGE_PNG_VALUE})
+    public byte[] userProfileImage(HttpServletRequest request) throws IOException {
+        String id = (String) request.getAttribute ("id");
+        return userService.getUserProfileImage(id);
     }
 }
