@@ -1,14 +1,10 @@
 package com.dearme.demo.domain.user.dto.counselor;
 
+import com.dearme.demo.domain.user.dto.ReviewViewResponseDto;
 import com.dearme.demo.domain.user.entity.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.Setter;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.OneToMany;
-import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -35,5 +31,6 @@ public class CounselorViewResponseDto {
     private List<Certificate> certificates;
 
     private List<Category> categories;
+    private List<ReviewViewResponseDto> reviews;
 
 }

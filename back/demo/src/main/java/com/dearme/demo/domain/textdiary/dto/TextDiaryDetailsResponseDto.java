@@ -12,10 +12,10 @@ public class TextDiaryDetailsResponseDto {
     private String title;
     private String contents;
     private String sentiment;
-    private double percentage;
-    private double positive;
-    private double negative;
-    private double neutral;
+    private Double percentage;
+    private Double positive;
+    private Double negative;
+    private Double neutral;
     private Integer year;
     private Integer month;
     private Integer day;

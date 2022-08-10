@@ -22,7 +22,7 @@ public class CounselingInfoResponseDto {
     private Status status;
 
     public static CounselingInfoResponseDto of(Counseling entity){
-        if(entity.getCounselor() == null)
+        if(entity.getGroup() != null)
             return CounselingInfoResponseDto.builder()
                     .id(entity.getId())
                     .userId(entity.getUser().getUserId())

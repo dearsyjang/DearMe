@@ -62,4 +62,10 @@ public class CounselingDocumentServiceImpl implements CounselingDocumentService{
         counselingService.createGroupCounseling(counselingDocument);
         counselingDocumentRepository.save(counselingDocument);
     }
+
+    @Override
+    @Transactional
+    public void deleteUserCounselingDocument(String id, Long counselingDocumentId) {
+        counselingDocumentRepository.deleteCounselingDocumentByUser_IdAndId(id, counselingDocumentId);
+    }
 }

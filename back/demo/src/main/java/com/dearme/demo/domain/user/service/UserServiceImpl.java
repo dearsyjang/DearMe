@@ -1,6 +1,7 @@
 package com.dearme.demo.domain.user.service;
 
 import com.dearme.demo.domain.review.entity.Review;
+import com.dearme.demo.domain.review.repository.ReviewRepository;
 import com.dearme.demo.domain.user.dto.PointsUpdateResponseDto;
 import com.dearme.demo.domain.user.dto.ReviewViewResponseDto;
 import com.dearme.demo.domain.user.dto.UserGroupListResponseDto;
@@ -11,12 +12,13 @@ import com.dearme.demo.domain.user.exception.*;
 import com.dearme.demo.domain.user.repository.*;
 import com.dearme.demo.global.util.jwt.JwtProvider;
 import lombok.RequiredArgsConstructor;
+import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.transaction.Transactional;
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -39,6 +41,7 @@ public class UserServiceImpl implements UserService{
 
     private final GroupUserRepository groupUserRepository;
 
+    private final ReviewRepository reviewRepository;
     @Value("${path.image:/image/}")
     private String IMAGE_PATH;
 
@@ -64,14 +67,29 @@ public class UserServiceImpl implements UserService{
             }
             user.setCounselorProfile(counselorProfile);
         }
-        if(dto.getPicture() != null){
-            picture = Picture.builder().fileName(dto.getPicture().getOriginalFilename()).realFileName(UUID.randomUUID().toString()).build();
-            File file = new File(IMAGE_PATH + picture.getRealFileName() + ".jpeg");
+        if(dto.getPicture() == null || dto.getPicture().isEmpty()) {
+            if(dto.getType().equals(Type.COUNSELOR)){
+                throw new CounselorNotExistPictureException();
+            }else{
+                picture = Picture.builder().fileName("basic").realFileName("basic.png").build();
+            }
+        }else {
+            String fileName = UUID.randomUUID().toString();
+            String contentType = dto.getPicture().getContentType();
+            File file = null;
+            if(contentType.contains("image/jpeg")){
+                file = new File(IMAGE_PATH + fileName + ".jpg");
+                picture = Picture.builder().fileName(fileName).realFileName(fileName + ".jpg").build();
+            }else if(contentType.contains("image/png")){
+                file = new File(IMAGE_PATH + fileName + ".png");
+                picture = Picture.builder().fileName(fileName).realFileName(fileName + ".png").build();
+            }else if(contentType.contains("image/gif")){
+                file = new File(IMAGE_PATH + fileName + ".gif");
+                picture = Picture.builder().fileName(fileName).realFileName(fileName + ".gif").build();
+            }else{
+                throw new ImageContentTypeException();
+            }
             dto.getPicture().transferTo(file);
-        }else if(dto.getType().equals(Type.COUNSELOR)){
-            throw new CounselorNotExistPictureException();
-        }else{
-            picture = Picture.builder().fileName("basic").realFileName("basic").build();
         }
         user.setPicture(picture);
         String accessToken = jwtProvider.getAccessToken(user.getId());
@@ -171,7 +189,19 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
+    @Transactional
     public void delete(String id) {
+        User target = userRepository.findUserById(id).orElseThrow(() -> {
+            throw new NoExistUserException();
+        });
+        String pictureName = target.getPicture().getRealFileName();
+        if(!pictureName.equals("basic.png")) {
+            File file = new File(IMAGE_PATH + pictureName);
+            file.delete();
+        }
+        if(target.getType().equals(Type.COUNSELOR)){
+            reviewRepository.deleteReviewByCounselorId(id);
+        }
         userRepository.deleteUserById(id);
     }
 
@@ -217,6 +247,7 @@ public class UserServiceImpl implements UserService{
         }
         return reviewList;
     }
+
 
     @Override
     public UserGroupListResponseDto getGroups(String id) {
@@ -267,5 +298,60 @@ public class UserServiceImpl implements UserService{
         Category category = dto.toEntity();
         category.setCounselorProfile(counselorProfile);
         categoryRepository.save(category);
+    }
+
+    @Override
+    public void withdrawalUserGroup(String id, Long groupId) {
+        groupUserRepository.deleteGroupUserByUser_IdAndGroup_Id(id, groupId);
+    }
+
+    @Override
+    public byte[] getUserProfileImage(String id) throws IOException {
+        User user = userRepository.findUserById(id).orElseThrow(() -> {
+            throw new NoExistUserException();
+        });
+        InputStream inputStream = new FileInputStream(IMAGE_PATH + user.getPicture().getRealFileName());
+        System.out.println(IMAGE_PATH + user.getPicture().getRealFileName());
+        return IOUtils.toByteArray(inputStream);
+    }
+
+    @Override
+    public void updateUserProfileImage(String id, MultipartFile updatePicture) throws IOException {
+        User user = userRepository.findUserById(id).orElseThrow(() -> {
+            throw new NoExistUserException();
+        });
+        Picture picture = null;
+
+        if(!user.getPicture().getRealFileName().equals("basic.png")) {
+            File oldFile = new File(IMAGE_PATH + user.getPicture().getRealFileName());
+            oldFile.delete();
+        }
+
+        if(updatePicture == null || updatePicture.isEmpty()) {
+            if(user.getType().equals(Type.COUNSELOR)){
+                throw new CounselorNotExistPictureException();
+            }else{
+                picture = Picture.builder().fileName("basic").realFileName("basic.png").build();
+            }
+        }else {
+            String fileName = UUID.randomUUID().toString();
+            String contentType = updatePicture.getContentType();
+            File newFile = null;
+            if(contentType.contains("image/jpeg")){
+                newFile = new File(IMAGE_PATH + fileName + ".jpg");
+                picture = Picture.builder().fileName(fileName).realFileName(fileName + ".jpg").build();
+            }else if(contentType.contains("image/png")){
+                newFile = new File(IMAGE_PATH + fileName + ".png");
+                picture = Picture.builder().fileName(fileName).realFileName(fileName + ".png").build();
+            }else if(contentType.contains("image/gif")){
+                newFile = new File(IMAGE_PATH + fileName + ".gif");
+                picture = Picture.builder().fileName(fileName).realFileName(fileName + ".gif").build();
+            }else{
+                throw new ImageContentTypeException();
+            }
+            updatePicture.transferTo(newFile);
+        }
+        user.updateImage(picture);
+        userRepository.save(user);
     }
 }

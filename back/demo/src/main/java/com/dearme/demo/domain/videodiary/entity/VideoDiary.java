@@ -19,9 +19,9 @@ public class VideoDiary extends Base {
     @JoinColumn(name = "user_id")
     private User user;
 
+
     private String realFileName;
 
-    private String fileName;
 
     private String title;
     @Setter
@@ -46,7 +46,7 @@ public class VideoDiary extends Base {
     private Integer day;
 
     @Builder
-    public VideoDiary(String title, String contents, String sentiment, double percentage, double positive, double negative, double neutral, String realFileName, String fileName, Integer year, Integer month, Integer day){
+    public VideoDiary(String title, String contents, String sentiment, double percentage, double positive, double negative, double neutral, String realFileName, Integer year, Integer month, Integer day){
         this.title = title;
         this.contents = contents;
         this.sentiment=sentiment;
@@ -55,7 +55,6 @@ public class VideoDiary extends Base {
         this.negative=negative;
         this.neutral=neutral;
         this.realFileName=realFileName;
-        this.fileName=fileName;
         this.year = year;
         this.month = month;
         this.day = day;
@@ -76,6 +75,7 @@ public class VideoDiary extends Base {
     public void updateNegative(double percentage){this.negative=percentage;}
     public void updateNeutral(double percentage){this.neutral=percentage;}
     public void setUser(User user){
+        user.getVideoDiaries().add(this);
         this.user = user;
     }
 }

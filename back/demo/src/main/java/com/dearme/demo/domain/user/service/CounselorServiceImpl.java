@@ -1,5 +1,9 @@
 package com.dearme.demo.domain.user.service;
 
+import com.dearme.demo.domain.review.entity.Review;
+import com.dearme.demo.domain.review.exception.NoExistReviewException;
+import com.dearme.demo.domain.review.repository.ReviewRepository;
+import com.dearme.demo.domain.user.dto.ReviewViewResponseDto;
 import com.dearme.demo.domain.user.dto.counselor.CounselorViewResponseDto;
 import com.dearme.demo.domain.user.dto.counselor.CounselorsViewResponseDto;
 import com.dearme.demo.domain.user.entity.Type;
@@ -16,6 +20,8 @@ import java.util.List;
 @RequiredArgsConstructor
 public class CounselorServiceImpl implements CounselorService{
     private final UserRepository userRepository;
+
+    private  final ReviewRepository reviewRepository;
     @Override
     public List<CounselorsViewResponseDto> getCounselors(String id) {
         List<User> userList = userRepository.findUserByTypeEquals(Type.COUNSELOR);
@@ -40,6 +46,16 @@ public class CounselorServiceImpl implements CounselorService{
             throw new NoExistUserException();
         });
         double value=ReviewCalc(user);
+
+        List<Review> tempList = reviewRepository.findReviewByCounselor_Id(id);
+        List<ReviewViewResponseDto> reviewList = new ArrayList<>();
+        for(Review r : tempList){
+            reviewList.add(new ReviewViewResponseDto(r.getId(),
+                    r.getUser().getNickName(),
+                    r.getValue(),
+                    r.getContents()));
+        }
+
         return new CounselorViewResponseDto(user.getUserId(),
                 user.getNickName(),
                 user.getPicture().getRealFileName(),
@@ -50,8 +66,10 @@ public class CounselorServiceImpl implements CounselorService{
                 user.getCounselorProfile().getDocuments(),
                 user.getCounselorProfile().getCareers(),
                 user.getCounselorProfile().getCertificates(),
-                user.getCounselorProfile().getCategories());
+                user.getCounselorProfile().getCategories(),
+                reviewList);
     }
+
     public double ReviewCalc(User user){
         double value=0f;
         if(user.getCounselorProfile().getReviewcnt()>=1f) value=Math.round((user.getCounselorProfile().getReviewvalue()/ user.getCounselorProfile().getReviewcnt())*100)/100.0;

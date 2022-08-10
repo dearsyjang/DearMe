@@ -118,4 +118,9 @@ public class ExceptionHandlerUtil {
     ResponseEntity<CommonResponse> handleNoExistCategoryException(NoExistCategoryException e){
         return ResponseEntity.badRequest().body(CommonResponse.getErrorResponse(e.getMessage()));
     }
+
+    @ExceptionHandler(ImageContentTypeException.class)
+    ResponseEntity<CommonResponse> handleImageContentTypeException(ImageContentTypeException e){
+        return ResponseEntity.badRequest().body(CommonResponse.getErrorResponse(e.getMessage()));
+    }
 }

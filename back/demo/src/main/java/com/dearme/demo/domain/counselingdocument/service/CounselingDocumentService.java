@@ -8,4 +8,6 @@ public interface CounselingDocumentService {
     PostCounselingDocumentResponseDto post(String id, PostCounselingDocumentRequestDto dto);
 
     void postGroup(String id, PostGroupCounselingDocumentDto dto);
+
+    void deleteUserCounselingDocument(String id, Long counselingDocumentId);
 }

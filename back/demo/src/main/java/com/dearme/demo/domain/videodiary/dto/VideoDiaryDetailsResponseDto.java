@@ -11,6 +11,7 @@ public class VideoDiaryDetailsResponseDto {
     private String title;
     private String contents;
     private String sentiment;
+    private String realFileName;
     private double percentage;
     private double positive;
     private double negative;
@@ -26,6 +27,7 @@ public class VideoDiaryDetailsResponseDto {
                 .title(entity.getTitle())
                 .contents(entity.getContents())
                 .sentiment(entity.getSentiment())
+                .realFileName(entity.getRealFileName())
                 .percentage(entity.getPercentage())
                 .positive(entity.getPositive())
                 .negative(entity.getNegative())

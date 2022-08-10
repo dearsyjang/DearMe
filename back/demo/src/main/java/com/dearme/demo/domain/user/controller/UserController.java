@@ -6,9 +6,11 @@ import com.dearme.demo.domain.user.service.UserService;
 import com.dearme.demo.global.common.CommonResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
@@ -138,6 +140,26 @@ public class UserController {
     public ResponseEntity<CommonResponse> addCategory(HttpServletRequest request, @RequestBody AddCategoryRequestDto dto){
         String id = (String) request.getAttribute("id");
         userService.addCounselorCategory(id, dto);
+        return ResponseEntity.accepted().build();
+    }
+
+    @DeleteMapping("/users/groups/{groupId}")
+    public ResponseEntity<CommonResponse> withdrawalGroup(HttpServletRequest request, @PathVariable("groupId") Long groupId){
+        String id = (String) request.getAttribute("id");
+        userService.withdrawalUserGroup(id, groupId);
+        return ResponseEntity.ok().build();
+    }
+
+    @GetMapping(value = "/image", produces = {MediaType.IMAGE_JPEG_VALUE, MediaType.IMAGE_PNG_VALUE, MediaType.IMAGE_PNG_VALUE})
+    public byte[] userProfileImage(HttpServletRequest request) throws IOException {
+        String id = (String) request.getAttribute ("id");
+        return userService.getUserProfileImage(id);
+    }
+
+    @PutMapping("/image")
+    public ResponseEntity<CommonResponse> updateProfileImage(HttpServletRequest request,@RequestParam MultipartFile picture) throws IOException {
+        String id = (String) request.getAttribute("id");
+        userService.updateUserProfileImage(id, picture);
         return ResponseEntity.accepted().build();
     }
 }
