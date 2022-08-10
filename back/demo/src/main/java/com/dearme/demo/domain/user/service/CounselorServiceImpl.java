@@ -26,18 +26,11 @@ public class CounselorServiceImpl implements CounselorService{
     public List<CounselorsViewResponseDto> getCounselors(String id) {
         List<User> userList = userRepository.findUserByTypeEquals(Type.COUNSELOR);
 
-        List<CounselorsViewResponseDto> counselorsViewResponseDto = new ArrayList<>();
+        List<CounselorsViewResponseDto> counselorsViewResponseDtos = new ArrayList<>();
         for(User u: userList){
-            double value=ReviewCalc(u);
-            counselorsViewResponseDto.add(new CounselorsViewResponseDto(u.getUserId(),
-                    u.getNickName(),
-                    u.getPicture().getRealFileName(),
-                    value,
-                    u.getCounselorProfile().getReviewcnt(),
-                    u.getCounselorProfile().getCategories()));
+            counselorsViewResponseDtos.add(CounselorsViewResponseDto.of(u, ReviewCalc(u)));
         }
-
-        return counselorsViewResponseDto;
+        return counselorsViewResponseDtos;
     }
 
     @Override
