@@ -88,7 +88,7 @@ public class UserController {
 
     @PutMapping("/points")
     public ResponseEntity<CommonResponse> pointsUpdate(HttpServletRequest request, @RequestBody @Validated PointsUpdateRequestDto dto) throws UnsupportedEncodingException {
-        String id = (String) request.getAttribute("id");
+         String id = (String) request.getAttribute("id");
         return new ResponseEntity<>(CommonResponse.getSuccessResponse(userService.pointsUpdate(id, dto.getPrice())), HttpStatus.OK);
     }
 
