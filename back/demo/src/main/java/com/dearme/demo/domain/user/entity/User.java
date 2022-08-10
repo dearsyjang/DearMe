@@ -7,7 +7,6 @@ import com.dearme.demo.domain.counseling.entity.Counseling;
 import com.dearme.demo.domain.counselingdocument.entity.CounselingDocument;
 import com.dearme.demo.domain.favorite.entity.Favorite;
 import com.dearme.demo.domain.group.entity.Group;
-
 import com.dearme.demo.domain.review.entity.Review;
 import com.dearme.demo.domain.textdiary.entity.TextDiary;
 import com.dearme.demo.domain.videodiary.entity.VideoDiary;
