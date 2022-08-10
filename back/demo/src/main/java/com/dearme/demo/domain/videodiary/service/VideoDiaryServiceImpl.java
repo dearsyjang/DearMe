@@ -9,6 +9,7 @@ import com.dearme.demo.domain.videodiary.dto.*;
 import com.dearme.demo.domain.videodiary.entity.VideoDiary;
 import com.dearme.demo.domain.videodiary.exception.CounselorPostVideoDiaryException;
 import com.dearme.demo.domain.videodiary.exception.NoPermissionVideoDiaryException;
+import com.dearme.demo.domain.videodiary.exception.NoVideoDiaryException;
 import com.dearme.demo.domain.videodiary.repository.VideoDiaryRepository;
 import com.dearme.demo.global.scheduler.MorningJob;
 import com.google.api.gax.core.CredentialsProvider;
@@ -63,6 +64,7 @@ public class VideoDiaryServiceImpl implements VideoDiaryService {
         String[] text = videoSTT(videoDiary.getRealFileName());
         videoDiary.setContents(text[0]);
         videoDiary.setSentiment(text[1]);
+        if(text[2].equals(null))    throw new NoVideoDiaryException();
         videoDiary.setPercentage(Double.parseDouble(text[2]));
         videoDiary.setPositive(Double.parseDouble(text[3]));
         videoDiary.setNegative(Double.parseDouble(text[4]));
@@ -300,16 +302,13 @@ public class VideoDiaryServiceImpl implements VideoDiaryService {
 
             Calendar cal = new GregorianCalendar();
             cal.add(Calendar.DATE, 1);
-            System.out.println(cal.get(Calendar.YEAR));
-            System.out.println(cal.get(Calendar.MONTH));
-            System.out.println(cal.get(Calendar.DAY_OF_MONTH));
             @SuppressWarnings("deprecation")
             SimpleTrigger simpleTrigger = (SimpleTrigger) TriggerBuilder.newTrigger()
                     .withIdentity(videoDiary.getId()+"_video_time_trigger", videoDiary.getId()+"_video_time_group")
                     // 실제 배포
                     // .startAt(new Date(2022 - 1900, month, videoDiary.getDay(), 8, 30)) // 2022 : 2022 - 1900, month = 7 -> 8월
                     // 테스트
-                    .startAt(new Date(cal.get(Calendar.YEAR) - 1900, cal.get(Calendar.MONTH), cal.get(Calendar.DAY_OF_MONTH)-1, 19, 37)) // 2022 : 2022 - 1900, month = 7 -> 8월
+                    .startAt(new Date(cal.get(Calendar.YEAR) - 1900, cal.get(Calendar.MONTH), cal.get(Calendar.DAY_OF_MONTH), 8, 30)) // 2022 : 2022 - 1900, month = 7 -> 8월
                     .withSchedule(SimpleScheduleBuilder.repeatSecondlyForTotalCount(1, 10)) // 10초마다 반복하며, 최대 1회 실행
                     .forJob(jobDetail)
                     .build();

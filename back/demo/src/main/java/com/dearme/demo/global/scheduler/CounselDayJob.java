@@ -39,8 +39,8 @@ public class CounselDayJob implements Job {
 
 
         JSONObject json = new JSONObject();
-        json.put("title", "💌 " + date);
-        json.put("body", "1시간 뒤 "+ nickName+ " 상담사님과 상담이 있어요!");
+        json.put("title", "💌 오늘 " + date);
+        json.put("body", nickName+ " 상담사님과 상담이 있어요!");
         json.put("image", "https://firebasestorage.googleapis.com/v0/b/dear-me-fef2a.appspot.com/o/dearme.PNG?alt=media&token=e485b31a-550b-4c37-a42c-c351875e01d0");
         json.put("color", "#ffb0f7");
 
