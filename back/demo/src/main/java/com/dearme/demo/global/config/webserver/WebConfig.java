@@ -26,10 +26,10 @@ public class WebConfig implements WebMvcConfigurer {
     private final RefreshTokenInterceptor refreshTokenInterceptor;
 
     @Value("${openvidu.openvidu_url}")
-    private final String OPENVIDU_URL;
+    private String OPENVIDU_URL;
 
     @Value("${openvidu.password}")
-    private final String PASSWORD;
+    private String PASSWORD;
 
     @Override
     public void addCorsMappings(CorsRegistry registry) {
