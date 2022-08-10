@@ -10,6 +10,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
@@ -153,5 +154,12 @@ public class UserController {
     public byte[] userProfileImage(HttpServletRequest request) throws IOException {
         String id = (String) request.getAttribute ("id");
         return userService.getUserProfileImage(id);
+    }
+
+    @PutMapping("/image")
+    public ResponseEntity<CommonResponse> updateProfileImage(HttpServletRequest request,@RequestParam MultipartFile picture) throws IOException {
+        String id = (String) request.getAttribute("id");
+        userService.updateUserProfileImage(id, picture);
+        return ResponseEntity.accepted().build();
     }
 }

@@ -120,9 +120,13 @@ public class User extends Base {
     }
 
     public void updatePoints(Long points){
-
         this.points = points + this.points;
     }
+
+    public void updateImage(Picture picture){
+        this.picture = picture;
+    }
+
     @Builder
     public User(String id, String pw, String nickName, Gender gender,
                 Date birth, String email, Type type, Picture picture, Long points){
