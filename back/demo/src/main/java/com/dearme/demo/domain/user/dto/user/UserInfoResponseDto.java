@@ -1,16 +1,17 @@
 package com.dearme.demo.domain.user.dto.user;
 
-import com.dearme.demo.domain.favorite.entity.Favorite;
 import com.dearme.demo.domain.user.entity.Gender;
 import com.dearme.demo.domain.user.entity.Type;
 import com.dearme.demo.domain.user.entity.User;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-
-import java.util.List;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 @JsonInclude(value = JsonInclude.Include.NON_NULL)
 @Builder
 public class UserInfoResponseDto {
