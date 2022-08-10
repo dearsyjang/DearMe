@@ -18,6 +18,7 @@ export default {
     searched_counselor: state => state.searched_counselor,
     filtering_counselor: state => state.filtering_counselor,
     favorite: state => state.favorite,
+    
   },
 
   mutations: {
@@ -36,24 +37,17 @@ export default {
       axios({
        url: drf.counselors.counselors(),
        method : 'GET',
-       headers: getters.authHeader,
+       headers: getters.authHeader
       })
       .then(res => {
+        console.log('1')
+        console.log(res)
+        console.log(res.data)
+        console.log(res.data.data)
         commit('SET_COUNSELORS', res.data)
       })       
         
-      .catch(err => console.error(err.response))
-    },
-
-    fetchCounselorList({ commit, getters }) {
-      axios({
-       url: drf.counselors.counselorList(),
-       method : 'GET',
-       headers: getters.authHeader,
-      })
-      .then(res => commit('SET_COUNSLORS', res.data))       
-        
-      .catch(err => console.error(err.response))
+      .catch(err => console.error(err) )
     },
 
 
@@ -71,6 +65,28 @@ export default {
         }
       })
     },
+
+    
+
+
+
+
+
+
+
+
+    fetchCounselorList({ commit, getters }) {
+      axios({
+       url: drf.counselors.counselorList(),
+       method : 'GET',
+       headers: getters.authHeader,
+      })
+      .then(res => commit('SET_COUNSLORS', res.data))       
+        
+      .catch(err => console.error(err.response))
+    },
+
+
 
     
     searchCounselor({ commit, getters }, keywords ) { 

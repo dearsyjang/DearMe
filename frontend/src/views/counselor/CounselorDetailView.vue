@@ -10,20 +10,23 @@
         <div class="card mb-3" style="max-width: 540px;">
           <div class="row g-0">
             <div class="col-md-4">
-              <img src="@/assets/사람.png" class="img-fluid rounded-start" alt="...">
-              <!-- <p class="card-title">{{counselor.pic}}</p> -->
-              <!-- <p class="card-title">{{counselor.name}}</p> -->
+
+               <p class="card-title">{{counselor.pic}}</p> 
+               <p class="card-title">{{counselor.nickName}}</p> 
             </div>
             <div class="col-md-8">
               <div class="card-body">
-                <!-- <span v-if="currentUser.username === profile.user.username && !isEditing"> -->
+                <!-- <span v-if="currentUser.id === profile.user.id >   -->
                 <button class="createinfo" v-if="isdone==false" @click="isModalViewed=true">자기소개 작성하기</button>
-                <!-- </span> -->
+                <!-- </span>  -->
                 <div class="counselor-info">
                   <info-item-comp v-for="info in infos"
                   :key="info.Content"
                   :info="info"></info-item-comp>
-                <!-- {{counselor.info}} -->
+                 <!-- {{counselor.info}}  -->
+                 {{counselor.careers}}
+                 {{counselor.categories}}
+                 {{counselor.certificates}}
                 </div>
               </div>
             </div>
@@ -31,7 +34,12 @@
         </div>
       </div>
 
- 
+      <div v-if="!favorite">
+        <button class="btn btn-link" @click="favoriteCounselor(counselorId)"><i class="fa-solid fa-heart" style="color:black"></i></button>
+      </div>
+      <div v-else>
+        <button class="btn btn-link" @click="favoriteCounselor(counselorId)"><i class="fa-solid fa-heart" style="color:red"></i></button>
+      </div>
       
       <div class="counselor-info-create">
         <div class="black-bg" v-if = "isModalViewed==true">
@@ -143,7 +151,7 @@
 
     data() {
       return {
-        counselorId: this.$route.params.counselorId,
+        counselorId: this.$route.params.id,
         isModalViewed: false,
         infoContent:'',
         isdone : false,
@@ -154,17 +162,15 @@
       }
     },
     computed : {
-      ...mapGetters(['counselor']),
+      ...mapGetters(['counselor','currentUser', 'favorite']),
       infos() {
       return this.$store.state.infos
     }
     },
     methods: {
-      ...mapActions(['fetchCounselor']),
+      ...mapActions(['fetchCounselor','favoriteCounselor','isfavorite']),
     
-      created() {
-      this.fetchCounselor(this.counselorId)
-      },
+      
 
       createInfo(){
         if (this.isdone === false){
@@ -183,6 +189,10 @@
         }
       },
     },
+    created() {
+      this.fetchCounselor(this.counselorId)
+      this.favorite =''
+      },
   }
 </script>
 

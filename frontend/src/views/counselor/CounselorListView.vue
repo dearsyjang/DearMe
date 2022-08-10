@@ -1,4 +1,4 @@
-<template>
+<!-- <template>
   <div>
     <h1>상담사 리스트 페이지</h1>
 
@@ -61,50 +61,7 @@
 
   </div>
 </template>
-<!-- <script>
-  import CounselorListItemComp from '@/views/counselor/components/CounselorListItemComp.vue'
-  import { mapActions, mapGetters } from 'vuex'
-  export default {
-    name : 'CounselorDetailView',
-    components: {CounselorListItemComp},
-    setup () {
-      const state = ({
-        inputData: '',
-      })
-      const search = () =>{
-        if (this.inputData) {
-        this.$store.dispatch('searchCounselor', this.inputData)
-        this.isempty = false
-        }
-        else{
-          alert('내용을 입력해주세요!!')
-    }
-      }
-      
-      return {
-        search,
-        state
-      }
-    },
-  computed:{
-    ...mapGetters(['searched_counselor'])
 
-  },
-  methods:{
-     ...mapActions([
-    'searchCounselor',]),
-   
-
-  check : function(arr)  {
-  if(Array.isArray(arr) && arr.length === 0)  {
-    return true;
-  }
-  return false;
-  }
-
-  },
-  }
-</script> -->
 <script>
   import CounselorListItemComp from '@/views/counselor/components/CounselorListItemComp.vue'
   import { mapActions, mapGetters } from 'vuex'
@@ -161,4 +118,48 @@
   width : 500px;
   margin: auto;
 }
+</style> -->
+
+
+
+<template>
+  <div>
+
+  <div v-for="(counselor,idx) in counselors"
+    :key="idx"
+    :counselor="counselor">
+    {{counselor}}1
+  </div>
+    
+  </div>
+</template>
+
+<script>
+
+  import {  mapActions, mapGetters} from 'vuex'
+
+  export default {
+    name: 'CounselorListView',
+
+
+    computed : {
+    ...mapGetters(['counselors']),
+    },
+    methods: {
+    ...mapActions(['fetchCounselors']),
+
+    },
+    
+  created() {
+    this.fetchCounselors()
+  },
+}
+</script>
+
+
+
+<style>
+
+
+
 </style>
