@@ -61,7 +61,6 @@ public class User extends Base {
     private String refreshToken;
 
     @OneToOne(mappedBy = "counselor", orphanRemoval = true, cascade = CascadeType.ALL)
-    @JsonBackReference
     private CounselorProfile counselorProfile;
 
     public void setCounselorProfile(CounselorProfile counselorProfile) {
@@ -87,6 +86,7 @@ public class User extends Base {
     private List<Favorite> favorites = new ArrayList<>();
 
     @OneToMany(mappedBy = "counselor", orphanRemoval = true, cascade = CascadeType.ALL)
+    @JsonBackReference
     private List<Group> groups = new ArrayList<>();
 
     @OneToMany(mappedBy = "user", orphanRemoval = true, cascade = CascadeType.ALL)

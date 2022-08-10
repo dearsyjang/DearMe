@@ -1,7 +1,6 @@
 package com.dearme.demo.domain.videodiary.service;
 
 
-import com.dearme.demo.domain.counseling.entity.Counseling;
 import com.dearme.demo.domain.user.entity.Type;
 import com.dearme.demo.domain.user.entity.User;
 import com.dearme.demo.domain.user.exception.NoExistUserException;
@@ -10,8 +9,8 @@ import com.dearme.demo.domain.videodiary.dto.*;
 import com.dearme.demo.domain.videodiary.entity.VideoDiary;
 import com.dearme.demo.domain.videodiary.exception.CounselorPostVideoDiaryException;
 import com.dearme.demo.domain.videodiary.exception.NoPermissionVideoDiaryException;
+import com.dearme.demo.domain.videodiary.exception.NoVideoDiaryException;
 import com.dearme.demo.domain.videodiary.repository.VideoDiaryRepository;
-import com.dearme.demo.global.scheduler.CounselJob;
 import com.dearme.demo.global.scheduler.MorningJob;
 import com.google.api.gax.core.CredentialsProvider;
 import com.google.api.gax.core.FixedCredentialsProvider;
@@ -26,7 +25,6 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.BasicResponseHandler;
 import org.apache.http.impl.client.HttpClientBuilder;
-import org.json.JSONArray;
 import org.json.JSONObject;
 import org.quartz.*;
 import org.quartz.impl.StdSchedulerFactory;
@@ -34,8 +32,10 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -64,12 +64,13 @@ public class VideoDiaryServiceImpl implements VideoDiaryService {
         String[] text = videoSTT(videoDiary.getRealFileName());
         videoDiary.setContents(text[0]);
         videoDiary.setSentiment(text[1]);
+        if(text[2].equals(null))    throw new NoVideoDiaryException();
         videoDiary.setPercentage(Double.parseDouble(text[2]));
         videoDiary.setPositive(Double.parseDouble(text[3]));
         videoDiary.setNegative(Double.parseDouble(text[4]));
         videoDiary.setNeutral(Double.parseDouble(text[5]));
         videoDiaryRepository.save(videoDiary);
-        createScheduler(videoDiary);
+        createTimeScheduler(videoDiary);
         return new PostVideoDiaryResponseDto(videoDiary.getId(), videoDiary.getTitle(), videoDiary.getContents(), videoDiary.getSentiment(), videoDiary.getPercentage(), videoDiary.getPositive(), videoDiary.getNegative(), videoDiary.getNeutral());
     }
 
@@ -107,7 +108,7 @@ public class VideoDiaryServiceImpl implements VideoDiaryService {
         }else{
             throw new NoPermissionVideoDiaryException();
         }
-        createScheduler(videoDiary);
+        createTimeScheduler(videoDiary);
         return new PostVideoDiaryResponseDto(videoDiary.getId(), videoDiary.getTitle(), videoDiary.getContents(), videoDiary.getSentiment(), videoDiary.getPercentage(),videoDiary.getPositive(), videoDiary.getNegative(), videoDiary.getNeutral());
     }
 
@@ -146,8 +147,8 @@ public class VideoDiaryServiceImpl implements VideoDiaryService {
 
     public String[] videoSTT(String path) throws IOException {
         //서버에서 실행시킬 때
-        /*
-        String filePath = path;
+
+        String filePath = "/home/ubuntu/docker-volume/video/" + path + "/" + path;
         filePath = filePath.substring(0, filePath.length()-4);
         String s;
         Process p;
@@ -158,16 +159,15 @@ public class VideoDiaryServiceImpl implements VideoDiaryService {
             while ((s = br.readLine()) != null)
                 System.out.println(s);
             p.waitFor();
-            System.out.println("exit: " + p.exitValue());
             p.destroy();
         }catch (Exception e){
             e.printStackTrace();
         }
         filePath = filePath+".mp3";
-        */
+
 
         //테스트용
-        String filePath="C:\\Users\\leekijong\\S07P12D206\\back\\demo\\src\\main\\resources\\videodiary_test.mp3";
+        //String filePath="C:\\Users\\leekijong\\S07P12D206\\back\\demo\\src\\main\\resources\\videodiary_test.mp3";
 
         String[] text= new String[6];
         try {
@@ -282,37 +282,33 @@ public class VideoDiaryServiceImpl implements VideoDiaryService {
 
         return recognitionAudio;
     }
-    public void createScheduler(VideoDiary videoDiary){
-
+    public void createTimeScheduler(VideoDiary videoDiary){
 
         try {
             // Scheduler 사용을 위한 인스턴스화
             SchedulerFactory schedulerFactory = new StdSchedulerFactory();
 
             Scheduler scheduler = schedulerFactory.getScheduler();
-            scheduler.pauseJob(new JobKey(videoDiary.getId()+"_job_detail", videoDiary.getId()+"_group"));
+            scheduler.pauseJob(new JobKey(videoDiary.getId()+"_video_time_detail", videoDiary.getId()+"_video_time_group"));
             // JOB Data 객체
             JobDataMap jobDataMap = new JobDataMap();
             jobDataMap.put("type", "videoDiary");
             jobDataMap.put("sentiment", videoDiary.getSentiment());
             jobDataMap.put("percentage", videoDiary.getPercentage()+"");
             JobDetail jobDetail = JobBuilder.newJob(MorningJob.class)
-                    .withIdentity(videoDiary.getId()+"_job_detail", videoDiary.getId()+"_group")
+                    .withIdentity(videoDiary.getId()+"_video_time_detail", videoDiary.getId()+"_video_time_group")
                     .setJobData(jobDataMap)
                     .build();
 
             Calendar cal = new GregorianCalendar();
             cal.add(Calendar.DATE, 1);
-            System.out.println(cal.get(Calendar.YEAR));
-            System.out.println(cal.get(Calendar.MONTH));
-            System.out.println(cal.get(Calendar.DAY_OF_MONTH));
             @SuppressWarnings("deprecation")
             SimpleTrigger simpleTrigger = (SimpleTrigger) TriggerBuilder.newTrigger()
-                    .withIdentity(videoDiary.getId()+"_trigger", videoDiary.getId()+"_trigger_group")
+                    .withIdentity(videoDiary.getId()+"_video_time_trigger", videoDiary.getId()+"_video_time_group")
                     // 실제 배포
                     // .startAt(new Date(2022 - 1900, month, videoDiary.getDay(), 8, 30)) // 2022 : 2022 - 1900, month = 7 -> 8월
                     // 테스트
-                    .startAt(new Date(cal.get(Calendar.YEAR) - 1900, cal.get(Calendar.MONTH), cal.get(Calendar.DAY_OF_MONTH)-1, 19, 37)) // 2022 : 2022 - 1900, month = 7 -> 8월
+                    .startAt(new Date(cal.get(Calendar.YEAR) - 1900, cal.get(Calendar.MONTH), cal.get(Calendar.DAY_OF_MONTH), 8, 30)) // 2022 : 2022 - 1900, month = 7 -> 8월
                     .withSchedule(SimpleScheduleBuilder.repeatSecondlyForTotalCount(1, 10)) // 10초마다 반복하며, 최대 1회 실행
                     .forJob(jobDetail)
                     .build();
