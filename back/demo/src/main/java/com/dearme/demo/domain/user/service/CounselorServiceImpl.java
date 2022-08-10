@@ -1,6 +1,7 @@
 package com.dearme.demo.domain.user.service;
 
 import com.dearme.demo.domain.review.entity.Review;
+import com.dearme.demo.domain.review.exception.NoExistReviewException;
 import com.dearme.demo.domain.review.repository.ReviewRepository;
 import com.dearme.demo.domain.user.dto.ReviewViewResponseDto;
 import com.dearme.demo.domain.user.dto.counselor.CounselorViewResponseDto;
