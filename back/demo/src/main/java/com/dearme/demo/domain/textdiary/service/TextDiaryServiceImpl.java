@@ -54,7 +54,7 @@ public class TextDiaryServiceImpl implements TextDiaryService{
         textDiary.setPositive(Double.parseDouble(text[2]));
         textDiary.setNegative(Double.parseDouble(text[3]));
         textDiary.setNeutral(Double.parseDouble(text[4]));
-
+        createScheduler(textDiary);
         return new PostTextDiaryResponseDto(textDiaryRepository.save(textDiary).getId(), textDiary.getSentiment(), textDiary.getPercentage(), textDiary.getPositive(), textDiary.getNegative(), textDiary.getNeutral());
     }
 
@@ -156,16 +156,15 @@ public class TextDiaryServiceImpl implements TextDiaryService{
 
             java.util.Calendar cal = new GregorianCalendar();
             cal.add(java.util.Calendar.DATE, 1);
-            System.out.println(cal.get(java.util.Calendar.YEAR));
-            System.out.println(cal.get(java.util.Calendar.MONTH));
-            System.out.println(cal.get(java.util.Calendar.DAY_OF_MONTH));
-            @SuppressWarnings("deprecation")
+            System.out.println(cal.get(Calendar.YEAR));
+            System.out.println(cal.get(Calendar.MONTH));
+            System.out.println(cal.get(Calendar.DAY_OF_MONTH));
             SimpleTrigger simpleTrigger = (SimpleTrigger) TriggerBuilder.newTrigger()
-                    .withIdentity(textDiary.getId()+"_trigger", textDiary.getId()+"_trigger_group")
+                    .withIdentity(textDiary.getId()+"_text_trigger", textDiary.getId()+"_text_trigger_group")
                     // 실제 배포
                     // .startAt(new Date(2022 - 1900, month, videoDiary.getDay(), 8, 30)) // 2022 : 2022 - 1900, month = 7 -> 8월
                     // 테스트
-                    .startAt(new Date(cal.get(java.util.Calendar.YEAR) - 1900, cal.get(java.util.Calendar.MONTH), cal.get(Calendar.DAY_OF_MONTH)-1, 19, 37)) // 2022 : 2022 - 1900, month = 7 -> 8월
+                    .startAt(new Date(cal.get(Calendar.YEAR) - 1900, cal.get(Calendar.MONTH), cal.get(Calendar.DAY_OF_MONTH), 8, 30)) // 2022 : 2022 - 1900, month = 7 -> 8월
                     .withSchedule(SimpleScheduleBuilder.repeatSecondlyForTotalCount(1, 10)) // 10초마다 반복하며, 최대 1회 실행
                     .forJob(jobDetail)
                     .build();
