@@ -37,8 +37,10 @@ public class CounselingRoom {
     }
 
     @Builder
-    public CounselingRoom(String sessionName, String counselorToken){
+    public CounselingRoom(String sessionName, User counselor, Group group, String counselorToken){
         this.sessionName = sessionName;
         this.counselorToken = counselorToken;
+        this.counselor = counselor;
+        this.group = group;
     }
 }
