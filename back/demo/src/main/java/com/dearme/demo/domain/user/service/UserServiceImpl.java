@@ -14,6 +14,7 @@ import lombok.RequiredArgsConstructor;
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.transaction.Transactional;
 import java.io.*;
@@ -306,5 +307,45 @@ public class UserServiceImpl implements UserService{
         InputStream inputStream = new FileInputStream(IMAGE_PATH + user.getPicture().getRealFileName());
         System.out.println(IMAGE_PATH + user.getPicture().getRealFileName());
         return IOUtils.toByteArray(inputStream);
+    }
+
+    @Override
+    public void updateUserProfileImage(String id, MultipartFile updatePicture) throws IOException {
+        User user = userRepository.findUserById(id).orElseThrow(() -> {
+            throw new NoExistUserException();
+        });
+        Picture picture = null;
+
+        if(!user.getPicture().getRealFileName().equals("basic.png")) {
+            File oldFile = new File(IMAGE_PATH + user.getPicture().getRealFileName());
+            oldFile.delete();
+        }
+
+        if(updatePicture == null || updatePicture.isEmpty()) {
+            if(user.getType().equals(Type.COUNSELOR)){
+                throw new CounselorNotExistPictureException();
+            }else{
+                picture = Picture.builder().fileName("basic").realFileName("basic.png").build();
+            }
+        }else {
+            String fileName = UUID.randomUUID().toString();
+            String contentType = updatePicture.getContentType();
+            File newFile = null;
+            if(contentType.contains("image/jpeg")){
+                newFile = new File(IMAGE_PATH + fileName + ".jpg");
+                picture = Picture.builder().fileName(fileName).realFileName(fileName + ".jpg").build();
+            }else if(contentType.contains("image/png")){
+                newFile = new File(IMAGE_PATH + fileName + ".png");
+                picture = Picture.builder().fileName(fileName).realFileName(fileName + ".png").build();
+            }else if(contentType.contains("image/gif")){
+                newFile = new File(IMAGE_PATH + fileName + ".gif");
+                picture = Picture.builder().fileName(fileName).realFileName(fileName + ".gif").build();
+            }else{
+                throw new ImageContentTypeException();
+            }
+            updatePicture.transferTo(newFile);
+        }
+        user.updateImage(picture);
+        userRepository.save(user);
     }
 }
