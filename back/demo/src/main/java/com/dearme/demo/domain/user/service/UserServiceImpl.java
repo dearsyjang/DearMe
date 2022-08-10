@@ -1,6 +1,7 @@
 package com.dearme.demo.domain.user.service;
 
 import com.dearme.demo.domain.review.entity.Review;
+import com.dearme.demo.domain.review.repository.ReviewRepository;
 import com.dearme.demo.domain.user.dto.PointsUpdateResponseDto;
 import com.dearme.demo.domain.user.dto.ReviewViewResponseDto;
 import com.dearme.demo.domain.user.dto.UserGroupListResponseDto;
@@ -39,6 +40,7 @@ public class UserServiceImpl implements UserService{
 
     private final GroupUserRepository groupUserRepository;
 
+    private final ReviewRepository reviewRepository;
     @Value("${path.image:/image/}")
     private String IMAGE_PATH;
 
@@ -196,6 +198,9 @@ public class UserServiceImpl implements UserService{
             File file = new File(IMAGE_PATH + pictureName);
             file.delete();
         }
+        if(target.getType().equals(Type.COUNSELOR)){
+            reviewRepository.deleteReviewByCounselorId(id);
+        }
         userRepository.deleteUserById(id);
     }
 
@@ -241,6 +246,7 @@ public class UserServiceImpl implements UserService{
         }
         return reviewList;
     }
+
 
     @Override
     public UserGroupListResponseDto getGroups(String id) {

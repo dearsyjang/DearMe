@@ -48,8 +48,6 @@ public class CounselorServiceImpl implements CounselorService{
         double value=ReviewCalc(user);
 
         List<Review> tempList = reviewRepository.findReviewByCounselor_Id(id);
-        if(tempList.isEmpty()) throw new NoExistReviewException();
-
         List<ReviewViewResponseDto> reviewList = new ArrayList<>();
         for(Review r : tempList){
             reviewList.add(new ReviewViewResponseDto(r.getId(),
@@ -71,6 +69,7 @@ public class CounselorServiceImpl implements CounselorService{
                 user.getCounselorProfile().getCategories(),
                 reviewList);
     }
+
     public double ReviewCalc(User user){
         double value=0f;
         if(user.getCounselorProfile().getReviewcnt()>=1f) value=Math.round((user.getCounselorProfile().getReviewvalue()/ user.getCounselorProfile().getReviewcnt())*100)/100.0;

@@ -167,7 +167,7 @@ public class VideoDiaryServiceImpl implements VideoDiaryService {
         */
 
         //테스트용
-        String filePath="C:\\Users\\leekijong\\S07P12D206\\back\\demo\\src\\main\\resources\\convert_test1.mp3";
+        String filePath="C:\\Users\\leekijong\\S07P12D206\\back\\demo\\src\\main\\resources\\videodiary_test.mp3";
 
         String[] text= new String[6];
         try {
@@ -239,11 +239,11 @@ public class VideoDiaryServiceImpl implements VideoDiaryService {
                 result[0]=jObj2.getString("sentiment");
                 double max=0;
 
-                double negative= Math.round(Float.parseFloat(jObj3.get("negative").toString())*100)/100.0;
+                double negative= Math.round(Double.parseDouble(jObj3.get("negative").toString())*1000)/1000.0;
                 max=Math.max(max, negative);
-                double positive= Math.round(Float.parseFloat(jObj3.get("positive").toString())*100)/100.0;
+                double positive= Math.round(Double.parseDouble(jObj3.get("positive").toString())*1000)/1000.0;
                 max=Math.max(max, positive);
-                double neutral= Math.round(Float.parseFloat(jObj3.get("neutral").toString())*100)/100.0;
+                double neutral= Math.round(Double.parseDouble(jObj3.get("neutral").toString())*1000)/1000.0;
                 max=Math.max(max, neutral);
 
                 result[0]=jObj2.getString("sentiment");

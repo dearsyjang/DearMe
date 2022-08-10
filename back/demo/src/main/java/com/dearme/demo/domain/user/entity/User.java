@@ -10,6 +10,8 @@ import com.dearme.demo.domain.group.entity.Group;
 
 import com.dearme.demo.domain.review.entity.Review;
 import com.dearme.demo.domain.textdiary.entity.TextDiary;
+import com.dearme.demo.domain.videodiary.entity.VideoDiary;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.*;
 
 import javax.persistence.*;
@@ -60,6 +62,7 @@ public class User extends Base {
     private String refreshToken;
 
     @OneToOne(mappedBy = "counselor", orphanRemoval = true, cascade = CascadeType.ALL)
+    @JsonBackReference
     private CounselorProfile counselorProfile;
 
     public void setCounselorProfile(CounselorProfile counselorProfile) {
@@ -79,6 +82,7 @@ public class User extends Base {
     @Setter
     private List<Review> reviews = new ArrayList<>();
 
+
     @OneToMany(mappedBy = "user", orphanRemoval = true, cascade = CascadeType.ALL)
     @Setter
     private List<Favorite> favorites = new ArrayList<>();
@@ -97,6 +101,9 @@ public class User extends Base {
 
     @OneToMany(mappedBy = "user", orphanRemoval = true, cascade = CascadeType.ALL)
     private List<TextDiary> textDiaries = new ArrayList<>();
+
+    @OneToMany(mappedBy = "user", orphanRemoval = true, cascade = CascadeType.ALL)
+    private List<VideoDiary> videoDiaries = new ArrayList<>();
 
     @OneToMany(mappedBy = "user", orphanRemoval = true, cascade = CascadeType.ALL)
     private List<CounselingDocument> userCounselingDocuments = new ArrayList<>();

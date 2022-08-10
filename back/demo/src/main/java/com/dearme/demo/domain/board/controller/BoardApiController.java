@@ -33,7 +33,7 @@ public class BoardApiController {
     @Operation(summary = "Board View Test", description = "게시판 전체 조회")
     @GetMapping
     public ResponseEntity<CommonResponse> boardView(@RequestParam("page") Integer page, @RequestParam("size") Integer size){
-        PageRequest pageRequest = PageRequest.of(page, size);
+        PageRequest pageRequest = PageRequest.of(0, 5);
         return new ResponseEntity<>(CommonResponse.getSuccessResponse(boardService.getBoards(pageRequest)), HttpStatus.OK);
     }
     @Operation(summary = "Board View Detail Test", description = "게시판 상세 조회")
