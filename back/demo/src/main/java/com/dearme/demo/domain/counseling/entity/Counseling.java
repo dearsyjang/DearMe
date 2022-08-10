@@ -47,7 +47,7 @@ public class Counseling {
     @JoinColumn(name = "group_id")
     private Group group;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "counseling_room_id")
     private CounselingRoom counselingRoom;
 
