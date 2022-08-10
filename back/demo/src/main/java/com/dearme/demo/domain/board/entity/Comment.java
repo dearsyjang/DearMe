@@ -21,7 +21,6 @@ public class Comment extends Base {
     private Long id;
 
     @ManyToOne
-    @JsonManagedReference // 순환참조 방지
     @JoinColumn(name="boardid")
     private Board board;
 

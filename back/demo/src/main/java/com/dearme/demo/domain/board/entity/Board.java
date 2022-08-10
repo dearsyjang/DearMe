@@ -42,7 +42,6 @@ public class Board extends Base {
     private LocalDateTime date;
 
     @OneToMany(mappedBy = "board", orphanRemoval = true, cascade = CascadeType.ALL)
-    @JsonBackReference
     @Setter
     private List<Comment> comments=new ArrayList<>();
 

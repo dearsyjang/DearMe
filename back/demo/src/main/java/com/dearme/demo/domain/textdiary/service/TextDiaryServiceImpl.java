@@ -143,14 +143,14 @@ public class TextDiaryServiceImpl implements TextDiaryService{
             SchedulerFactory schedulerFactory = new StdSchedulerFactory();
 
             Scheduler scheduler = schedulerFactory.getScheduler();
-            scheduler.pauseJob(new JobKey(textDiary.getId()+"_job_detail", textDiary.getId()+"_group"));
+            scheduler.pauseJob(new JobKey(textDiary.getId()+"_text_time_detail", textDiary.getId()+"_text_group"));
             // JOB Data 객체
             JobDataMap jobDataMap = new JobDataMap();
             jobDataMap.put("type", "textDiary");
             jobDataMap.put("sentiment", textDiary.getSentiment());
             jobDataMap.put("percentage", textDiary.getPercentage()+"");
             JobDetail jobDetail = JobBuilder.newJob(MorningJob.class)
-                    .withIdentity(textDiary.getId()+"_job_detail", textDiary.getId()+"_group")
+                    .withIdentity(textDiary.getId()+"_text_job_detail", textDiary.getId()+"_text_group")
                     .setJobData(jobDataMap)
                     .build();
 

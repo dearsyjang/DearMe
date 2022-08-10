@@ -2,6 +2,7 @@ package com.dearme.demo.domain.group.entity;
 
 import com.dearme.demo.domain.user.entity.GroupUser;
 import com.dearme.demo.domain.user.entity.User;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;

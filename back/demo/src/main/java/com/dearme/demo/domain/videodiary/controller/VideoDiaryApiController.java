@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
-
 @RequiredArgsConstructor
 @RequestMapping("/video-diaries")
 @RestController
@@ -20,9 +19,12 @@ public class VideoDiaryApiController {
 
     @PostMapping
     public ResponseEntity<CommonResponse> postDiary(HttpServletRequest request, @RequestBody PostVideoDiaryRequestDto dto) throws IOException {
+
         String id = (String) request.getAttribute("id");
         return new ResponseEntity<>(CommonResponse.getSuccessResponse(videoDiaryService.postVideoDiary(id, dto)), HttpStatus.OK);
+
     }
+
     @PutMapping("/{videoDiaryId}")
     public ResponseEntity<CommonResponse> postUpdateDiary(HttpServletRequest request, @PathVariable Long videoDiaryId, @RequestBody PostUpdateVideoDiaryRequestDto dto) throws IOException {
         String id = (String) request.getAttribute("id");
@@ -44,5 +46,6 @@ public class VideoDiaryApiController {
         String id = (String) request.getAttribute("id");
         videoDiaryService.delete(id, videoDiaryId);
     }
+
 
 }
