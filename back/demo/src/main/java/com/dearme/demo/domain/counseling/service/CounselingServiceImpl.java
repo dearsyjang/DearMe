@@ -13,7 +13,8 @@ import com.dearme.demo.domain.user.entity.Type;
 import com.dearme.demo.domain.user.entity.User;
 import com.dearme.demo.domain.user.exception.NoExistUserException;
 import com.dearme.demo.domain.user.repository.UserRepository;
-import com.dearme.demo.global.scheduler.CounselJob;
+import com.dearme.demo.global.scheduler.CounselDayJob;
+import com.dearme.demo.global.scheduler.CounselTimeJob;
 import lombok.RequiredArgsConstructor;
 import org.quartz.*;
 import org.quartz.impl.StdSchedulerFactory;
@@ -34,7 +35,8 @@ public class CounselingServiceImpl implements CounselingService{
         counseling.setCounselingDocument(counselingDocument);
         counselingRepository.save(counseling);
 
-        createScheduler(counseling);
+        createTimeScheduler(counseling);
+        createDayScheduler(counseling);
     }
 
     @Override
@@ -75,7 +77,7 @@ public class CounselingServiceImpl implements CounselingService{
         return null;
     }
 
-    public void createScheduler(Counseling counseling){
+    public void createTimeScheduler(Counseling counseling){
         try {
             // Scheduler 사용을 위한 인스턴스화
             SchedulerFactory schedulerFactory = new StdSchedulerFactory();
@@ -84,8 +86,8 @@ public class CounselingServiceImpl implements CounselingService{
             JobDataMap jobDataMap = new JobDataMap();
             jobDataMap.put("nickName", counseling.getCounselor().getNickName());
             jobDataMap.put("date", counseling.getYear()+"." + counseling.getMonth()+"."+counseling.getDay()+" " + counseling.getHours()+"시");
-            JobDetail jobDetail = JobBuilder.newJob(CounselJob.class)
-                    .withIdentity(counseling.getUser().getNickName(), "group1")
+            JobDetail jobDetail = JobBuilder.newJob(CounselTimeJob.class)
+                    .withIdentity(counseling.getId()+"_time_counseling", counseling.getId()+"_time_counseling_group")
                     .setJobData(jobDataMap)
                     .build();
             Integer month=counseling.getMonth();
@@ -93,9 +95,43 @@ public class CounselingServiceImpl implements CounselingService{
             else month-=1;
             @SuppressWarnings("deprecation")
             SimpleTrigger simpleTrigger = (SimpleTrigger) TriggerBuilder.newTrigger()
-                    .withIdentity("simple_trigger", "simple_trigger_group")
+                    .withIdentity(counseling.getId()+"_time_counseling_trigger", counseling.getId()+"_time_counseling_trigger_group")
                     //실제 배포
-                    .startAt(new Date(2022 - 1900, month, counseling.getDay(), counseling.getHours(), 0)) // 2022 : 2022 - 1900, month = 7 -> 8월
+                    .startAt(new Date(counseling.getYear() - 1900, month, counseling.getDay(), counseling.getHours()-1, 0)) // 2022 : 2022 - 1900, month = 7 -> 8월
+                    //테스트용
+                    //.startAt(new Date(2022 - 1900, month, counseling.getDay(), counseling.getHours(), 12)) // 2022 : 2022 - 1900, month = 7 -> 8월
+                    .withSchedule(SimpleScheduleBuilder.repeatSecondlyForTotalCount(1, 10)) // 10초마다 반복하며, 최대 1회 실행
+                    .forJob(jobDetail)
+                    .build();
+            Set<SimpleTrigger> triggerSet = new HashSet<SimpleTrigger>();
+            triggerSet.add(simpleTrigger);
+            scheduler.scheduleJob(jobDetail, triggerSet, false);
+            scheduler.start();
+        }catch(Exception e) {
+            e.printStackTrace();
+        }
+    }
+    public void createDayScheduler(Counseling counseling){
+        try {
+            // Scheduler 사용을 위한 인스턴스화
+            SchedulerFactory schedulerFactory = new StdSchedulerFactory();
+            Scheduler scheduler = schedulerFactory.getScheduler();
+            // JOB Data 객체
+            JobDataMap jobDataMap = new JobDataMap();
+            jobDataMap.put("nickName", counseling.getCounselor().getNickName());
+            jobDataMap.put("date", counseling.getHours()+"시");
+            JobDetail jobDetail = JobBuilder.newJob(CounselDayJob.class)
+                    .withIdentity(counseling.getId()+"_day_counseling", counseling.getId()+"_day_counseling_group")
+                    .setJobData(jobDataMap)
+                    .build();
+            Integer month=counseling.getMonth();
+            if(month==1) month=12;
+            else month-=1;
+            @SuppressWarnings("deprecation")
+            SimpleTrigger simpleTrigger = (SimpleTrigger) TriggerBuilder.newTrigger()
+                    .withIdentity(counseling.getId()+"_day_counseling_trigger", counseling.getId()+"_day_counseling_trigger_group")
+                    //실제 배포
+                    .startAt(new Date(counseling.getYear() - 1900, month, counseling.getDay(), 8, 30)) // 2022 : 2022 - 1900, month = 7 -> 8월
                     //테스트용
                     //.startAt(new Date(2022 - 1900, month, counseling.getDay(), counseling.getHours(), 12)) // 2022 : 2022 - 1900, month = 7 -> 8월
                     .withSchedule(SimpleScheduleBuilder.repeatSecondlyForTotalCount(1, 10)) // 10초마다 반복하며, 최대 1회 실행
