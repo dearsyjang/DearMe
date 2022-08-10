@@ -1,6 +1,7 @@
 package com.dearme.demo.domain.counseling.entity;
 
 import com.dearme.demo.domain.counselingdocument.entity.CounselingDocument;
+import com.dearme.demo.domain.counselingroom.entity.CounselingRoom;
 import com.dearme.demo.domain.group.entity.Group;
 import com.dearme.demo.domain.user.entity.User;
 import lombok.AccessLevel;
@@ -38,7 +39,6 @@ public class Counseling {
 
     private Integer hours;
 
-
     @OneToOne(mappedBy = "counseling", cascade = CascadeType.ALL)
     @JoinColumn(name = "counseling_document_id")
     private CounselingDocument counselingDocument;
@@ -46,6 +46,18 @@ public class Counseling {
     @ManyToOne
     @JoinColumn(name = "group_id")
     private Group group;
+
+    @ManyToOne
+    @JoinColumn(name = "counseling_room_id")
+    private CounselingRoom counselingRoom;
+
+    private String token;
+
+    public void updateCounselingRoom(CounselingRoom counselingRoom, String token){
+        counselingRoom.getCounselings().add(this);
+        this.counselingRoom = counselingRoom;
+        this.token = token;
+    }
 
     public void updateCounseling(Status status){
         this.status = status;
