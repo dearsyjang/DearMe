@@ -165,7 +165,7 @@ public class VideoDiaryServiceImpl implements VideoDiaryService {
         }
 
         List cmdList2 = new ArrayList();
-        cmdList2.add("cd /home");
+        cmdList2.add("cd home");
 
         Process process2 = null;
         String str2 = null;
