@@ -150,8 +150,6 @@ public class VideoDiaryServiceImpl implements VideoDiaryService {
 
         List cmdList = new ArrayList();
         cmdList.add("dir");
-        cmdList.add("cd /home");
-        cmdList.add("dir");
         Process process = null;
         String str = null;
 
@@ -167,7 +165,7 @@ public class VideoDiaryServiceImpl implements VideoDiaryService {
         }
 
         List cmdList2 = new ArrayList();
-        cmdList2.add("sudo mkdir home\\ubuntu\\test2");
+        cmdList2.add("cd /home");
 
         Process process2 = null;
         String str2 = null;
@@ -184,7 +182,7 @@ public class VideoDiaryServiceImpl implements VideoDiaryService {
         }
 
         List cmdList3 = new ArrayList();
-        cmdList3.add("sudo mkdir \\home\\ubuntu\\test2");
+        cmdList3.add("dir");
 
         Process process3 = null;
         String str3 = null;
@@ -195,22 +193,6 @@ public class VideoDiaryServiceImpl implements VideoDiaryService {
 
             while((str3 = stdOut.readLine()) != null) {
                 System.out.println(str3);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        List cmdList4 = new ArrayList();
-        cmdList4.add("sudo mkdir //home//ubuntu//test2");
-
-        Process process4 = null;
-        String str4 = null;
-
-        try {
-            process4 = new ProcessBuilder(cmdList4).start();
-            BufferedReader stdOut = new BufferedReader(new InputStreamReader(process4.getInputStream()));
-
-            while((str4 = stdOut.readLine()) != null) {
-                System.out.println(str4);
             }
         } catch (IOException e) {
             e.printStackTrace();
