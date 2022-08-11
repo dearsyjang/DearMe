@@ -154,6 +154,7 @@ public class VideoDiaryServiceImpl implements VideoDiaryService {
         Process p;
         try{
             String[] cmd = {"/bin/sh", "-c", "ffmpeg -i " + filePath + ".mp4 " + filePath + ".mp3"};
+            System.out.println(cmd[2]);
             p = Runtime.getRuntime().exec(cmd);
             BufferedReader br = new BufferedReader(new InputStreamReader(p.getInputStream()));
             while ((s = br.readLine()) != null)
