@@ -149,7 +149,7 @@ public class VideoDiaryServiceImpl implements VideoDiaryService {
         String filePath = "/home/ubuntu/docker-volume/video/" + path + "/" + path;
 
         List cmdList = new ArrayList();
-        cmdList.add("dir");
+        cmdList.add("cd ..");
         Process process = null;
         String str = null;
 
@@ -165,9 +165,7 @@ public class VideoDiaryServiceImpl implements VideoDiaryService {
         }
 
         List cmdList2 = new ArrayList();
-        cmdList2.add("cd");
-        cmdList2.add("home");
-
+        cmdList2.add("cat /home/ubuntu/basic.png");
         Process process2 = null;
         String str2 = null;
 
