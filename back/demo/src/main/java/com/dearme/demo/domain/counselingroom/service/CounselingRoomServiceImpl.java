@@ -36,7 +36,7 @@ public class CounselingRoomServiceImpl implements CounselingRoomService{
         User counselor = userRepository.findUserByIdAndTypeEquals(id, Type.COUNSELOR).orElseThrow(() -> {
             throw new NoExistUserException();
         });
-        Counseling counseling = counselingRepository.findById(dto.getCounselingId()).orElseThrow(() -> {
+        Counseling counseling = counselingRepository.findCounselingByCounselor_IdAndId(id, dto.getCounselingId()).orElseThrow(() -> {
             throw new NoExistCounselorException();
         });
         String sessionName = UUID.randomUUID().toString();
