@@ -11,4 +11,6 @@ public interface CounselingRepository extends JpaRepository<Counseling, Long> {
     List<Counseling> findAllByUser_Id(String userId);
 
     Optional<Counseling> findCounselingByCounselor_IdAndId(String counselorId, Long id);
+
+    Optional<Counseling> findCounselingByUser_IdAndId(String userId, Long id);
 }
