@@ -148,6 +148,14 @@ public class VideoDiaryServiceImpl implements VideoDiaryService {
 
         String filePath = "/home/ubuntu/docker-volume/video/" + path + "/" + path;
 
+        String osName = System.getProperty("os.name");
+
+        //윈도우일 경우
+        if (osName.indexOf("Windows") > -1) {
+            System.out.println("window!!!!!!!");
+        }else{
+            System.out.println("linux!!!!!!!");
+        }
         List<String> cmd = new ArrayList<String>();
         cmd.add("dir");
         cmd.add("/home");
