@@ -5952,38 +5952,38 @@ VALUES('contents1', 30, 'FALSE', 8, 2022, 797, 34, 19);
 INSERT INTO COUNSELING_DOCUMENT(contents, day, is_open, month, year, counseling_id, counselor_id, user_id)
 VALUES('contents1', 31, 'FALSE', 8, 2022, 798, 34, 19);
 
-INSERT INTO COUNSELING(day, month, status, year, counselor_id, user_id)
-VALUES(10, 9, 'ACCEPTED', 2022, 31, 11);
-INSERT INTO COUNSELING(day, month, status, year, counselor_id, user_id)
-VALUES(11, 9, 'ACCEPTED', 2022, 31, 11);
-INSERT INTO COUNSELING(day, month, status, year, counselor_id, user_id)
-VALUES(12, 9, 'ACCEPTED', 2022, 31, 11);
-INSERT INTO COUNSELING(day, month, status, year, counselor_id, user_id)
-VALUES(13, 9, 'ACCEPTED', 2022, 31, 11);
-INSERT INTO COUNSELING(day, month, status, year, counselor_id, user_id)
-VALUES(10, 9, 'ACCEPTED', 2022, 31, 12);
-INSERT INTO COUNSELING(day, month, status, year, counselor_id, user_id)
-VALUES(11, 9, 'ACCEPTED', 2022, 31, 12);
-INSERT INTO COUNSELING(day, month, status, year, counselor_id, user_id)
-VALUES(12, 9, 'ACCEPTED', 2022, 31, 12);
-INSERT INTO COUNSELING(day, month, status, year, counselor_id, user_id)
-VALUES(13, 9, 'ACCEPTED', 2022, 31, 12);
-INSERT INTO COUNSELING(day, month, status, year, counselor_id, user_id)
-VALUES(10, 9, 'ACCEPTED', 2022, 32, 11);
-INSERT INTO COUNSELING(day, month, status, year, counselor_id, user_id)
-VALUES(11, 9, 'ACCEPTED', 2022, 32, 11);
-INSERT INTO COUNSELING(day, month, status, year, counselor_id, user_id)
-VALUES(12, 9, 'ACCEPTED', 2022, 32, 11);
-INSERT INTO COUNSELING(day, month, status, year, counselor_id, user_id)
-VALUES(13, 9, 'ACCEPTED', 2022, 32, 11);
-INSERT INTO COUNSELING(day, month, status, year, counselor_id, user_id)
-VALUES(10, 9, 'ACCEPTED', 2022, 32, 12);
-INSERT INTO COUNSELING(day, month, status, year, counselor_id, user_id)
-VALUES(11, 9, 'ACCEPTED', 2022, 32, 12);
-INSERT INTO COUNSELING(day, month, status, year, counselor_id, user_id)
-VALUES(12, 9, 'ACCEPTED', 2022, 32, 12);
-INSERT INTO COUNSELING(day, month, status, year, counselor_id, user_id)
-VALUES(13, 9, 'ACCEPTED', 2022, 32, 12);
+INSERT INTO COUNSELING(day, month, status, year, counselor_id, user_id, group_id)
+VALUES(10, 9, 'ACCEPTED', 2022, 31, 11, 8);
+INSERT INTO COUNSELING(day, month, status, year, counselor_id, user_id, group_id )
+VALUES(11, 9, 'ACCEPTED', 2022, 31, 11, 8);
+INSERT INTO COUNSELING(day, month, status, year, counselor_id, user_id, group_id)
+VALUES(12, 9, 'ACCEPTED', 2022, 31, 11, 8);
+INSERT INTO COUNSELING(day, month, status, year, counselor_id, user_id, group_id)
+VALUES(13, 9, 'ACCEPTED', 2022, 31, 11, 8);
+INSERT INTO COUNSELING(day, month, status, year, counselor_id, user_id, group_id)
+VALUES(10, 9, 'ACCEPTED', 2022, 31, 12, 8);
+INSERT INTO COUNSELING(day, month, status, year, counselor_id, user_id, group_id)
+VALUES(11, 9, 'ACCEPTED', 2022, 31, 12, 8);
+INSERT INTO COUNSELING(day, month, status, year, counselor_id, user_id, group_id)
+VALUES(12, 9, 'ACCEPTED', 2022, 31, 12, 8);
+INSERT INTO COUNSELING(day, month, status, year, counselor_id, user_id, group_id)
+VALUES(13, 9, 'ACCEPTED', 2022, 31, 12, 8);
+INSERT INTO COUNSELING(day, month, status, year, counselor_id, user_id, group_id)
+VALUES(10, 9, 'ACCEPTED', 2022, 32, 11, 10);
+INSERT INTO COUNSELING(day, month, status, year, counselor_id, user_id, group_id)
+VALUES(11, 9, 'ACCEPTED', 2022, 32, 11, 10);
+INSERT INTO COUNSELING(day, month, status, year, counselor_id, user_id, group_id)
+VALUES(12, 9, 'ACCEPTED', 2022, 32, 11, 10);
+INSERT INTO COUNSELING(day, month, status, year, counselor_id, user_id, group_id)
+VALUES(13, 9, 'ACCEPTED', 2022, 32, 11, 10);
+INSERT INTO COUNSELING(day, month, status, year, counselor_id, user_id, group_id)
+VALUES(10, 9, 'ACCEPTED', 2022, 32, 12, 10);
+INSERT INTO COUNSELING(day, month, status, year, counselor_id, user_id, group_id)
+VALUES(11, 9, 'ACCEPTED', 2022, 32, 12, 10);
+INSERT INTO COUNSELING(day, month, status, year, counselor_id, user_id, group_id)
+VALUES(12, 9, 'ACCEPTED', 2022, 32, 12, 10);
+INSERT INTO COUNSELING(day, month, status, year, counselor_id, user_id, group_id)
+VALUES(13, 9, 'ACCEPTED', 2022, 32, 12, 10);
 
 INSERT INTO COUNSELING_DOCUMENT(contents, day, is_open, month, year, counseling_id, counselor_id, user_id, group_id)
 VALUES('contents1', 10, 'FALSE', 9, 2022, 799, 31, 11, 8);
