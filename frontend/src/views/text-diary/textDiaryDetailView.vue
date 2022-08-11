@@ -1,16 +1,21 @@
 <template>
-  <div>
-    <div> 2022.08.05 ({{ textDiary.title }})</div>
-    <div class="card">
+  <div id="textDiaryDetail">
+    <div id="textDiaryTitle">
+      {{ textDiary.data.year}}.
+      {{ textDiary.data.month}}.
+      {{ textDiary.data.day}}
+      {{ textDiary.data.title }}
+      </div>
+    <div id="textDiaryContents" class="card">
         <div class="card-body">
-            {{ textDiary.contents }}
+            {{ textDiary.data.contents }}
         </div>
     </div>
     <div id="textDiaryList-button">
         <button>목록</button>
     </div>
     <div id="textDiaryDelete-button">
-        <button>삭제</button>
+        <button @click="deleteTextDiary(textDiaryId)">삭제</button>
     </div>
   </div>
         
@@ -22,21 +27,35 @@ export default {
   components: {},
   data() {
     return {
+      textDiaryId: this.$route.params.textDiaryId,
+      
       
     }
   },
   computed: {
-    ...mapGetters(['textDiaries'])
+    ...mapGetters(['textDiary'])
+    
   },
   setup() {},
   
   mounted() {},
   unmounted() {},
   methods: {
-    ...mapActions(['fetchTextDiaries'])
+    ...mapActions(['fetchTextDiary']),
+    ...mapActions(['deleteTextDiary']),
+    
+
+    // getTextDiary() {
+    //   const subData = {
+    //     title: this.data.title,
+    //     contents: this.data.contents,
+    //   }
+    //   this.fetchTextDiary(subData)
+    // }
   },
   created() {
-    this.fetchTextDiaries
+    this.fetchTextDiary(this.textDiaryId)
   },
+  
 }
 </script>

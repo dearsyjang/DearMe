@@ -26,7 +26,7 @@ export default {
     // 전체 텍스트 일기장 조회
     fetchTextDiaries({ commit, getters }) {
       axios({
-        url: drf.textDiary.textDiariesList(),
+        url: drf.textDiary.textDiaryList(),
         method: 'get',
         headers: getters.authHeader,
       })
@@ -42,6 +42,7 @@ export default {
         headers: getters.authHeader,
       })
         .then(res => commit('SET_TEXTDIARY', res.data))
+        
         .catch(err => {
           console.error(err.response)
           if (err.response.status === 404) {
@@ -74,17 +75,19 @@ export default {
           console.log('1')
           console.log(res.data.data)
           commit('SET_TEXTDIARY', res.data.data)
-        //   router.push({
-        //     name: 'textDiaryDetail',
-        //     params: { textDiaryId: getters.textDiary.id
-        //     }
-        //   })
+          console.log(getters.textDiary.id)
+          router.push({
+            name: 'textDiaryDetail',
+            params: { textDiaryId: getters.textDiary.id
+            }
+          })
         })
         .catch(err => console.log(err))
     },
      // 텍스트 일기 삭제
      deleteTextDiary({ commit, getters }, textDiaryPk) {
         if (confirm('정말 삭제하시겠습니까?')) {
+            
           axios({
             url: drf.textDiary.textDiaryEdit(textDiaryPk),
             method: 'delete',
@@ -92,9 +95,12 @@ export default {
           })
             .then(() => {
               commit('SET_TEXTDIARY', {})
-              router.push({ name: 'textDiary' })
+              
+              router.push({ name: 'textDiaryList' })
             })
+            
             .catch(err => console.error(err.response))
+            
         }
       }
    },

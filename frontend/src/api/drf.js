@@ -30,8 +30,8 @@ export default {
   textDiary : {
     textDiaryCreate: () => HOST + TEXTDIARY,
     textDiaryList: () => HOST + TEXTDIARY,
-    textDiaryDetail: textDiaryPk => HOST + TEXTDIARY + `/${textDiaryPk}`,
-    textDiaryEdit: textDiaryPk => HOST + TEXTDIARY + `/${textDiaryPk}`,
+    textDiaryDetail: textDiaryId => HOST + TEXTDIARY + `/${textDiaryId}`,
+    textDiaryEdit: textDiaryId => HOST + TEXTDIARY + `/${textDiaryId}`,
   },
 
 }
