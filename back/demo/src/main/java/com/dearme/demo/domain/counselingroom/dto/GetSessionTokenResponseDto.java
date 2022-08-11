@@ -7,9 +7,15 @@ import lombok.Data;
 @Data
 @Builder
 public class GetSessionTokenResponseDto {
+
+    private String sessionName;
+
     private String token;
 
     public static GetSessionTokenResponseDto of(Counseling entity){
-        return GetSessionTokenResponseDto.builder().token(entity.getToken()).build();
+        return GetSessionTokenResponseDto.builder()
+                .sessionName(entity.getCounselingRoom().getSessionName())
+                .token(entity.getToken())
+                .build();
     }
 }

@@ -9,4 +9,5 @@ import java.util.List;
 @AllArgsConstructor
 public class CounselingInfoListResponseDto {
     List<CounselingInfoResponseDto> counselings;
+    List<CounselorGroupCounselingsResponseDto> groupCounselings;
 }
