@@ -78,7 +78,8 @@ export default {
                 console.log(rsp)
 
             });
-            alert("완료 -> imp_uid : " + rsp.imp_uid+" / merchant_uid(orderKey) : " + rsp.merchant_uid);
+            // alert("완료 -> imp_uid : " + rsp.imp_uid+" / merchant_uid(orderKey) : " + rsp.merchant_uid);
+            alert( point + "포인트가 성공적으로 충전되었습니다.");
         
       } else {
         alert("실패 : 코드(" + rsp.error_code + ") / 메시지(" + rsp.error_msg + ")");
