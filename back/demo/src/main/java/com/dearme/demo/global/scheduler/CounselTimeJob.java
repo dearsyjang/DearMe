@@ -3,8 +3,10 @@ package com.dearme.demo.global.scheduler;
 import com.google.api.client.repackaged.org.apache.commons.codec.binary.Base64;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
+import org.apache.http.client.ResponseHandler;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.BasicResponseHandler;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.json.JSONObject;
 import org.quartz.Job;
@@ -19,7 +21,9 @@ import java.io.UnsupportedEncodingException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class CounselTimeJob implements Job {
 
@@ -36,42 +40,47 @@ public class CounselTimeJob implements Job {
         Date now = new Date();
         String strDate = sdf.format(now);
         System.out.println("Java cron job expression:: " + strDate);
-        HttpClient httpClient = HttpClientBuilder.create().build(); //Use this instead
-
-        HttpPost postRequest = new HttpPost("https://fcm.googleapis.com/fcm/send"); //POST 메소드 URL 새성
-
-        postRequest.addHeader("Authorization", "key=AAAAfMMdu8U:APA91bHhV2aDPJHR9sxLLLejjVFSLkv7N6jlBpdxfi6GBBKcR-v9p9ErGexoS-FFFtOKHjD8-Gq9f8ina_k_YorZT1W9QZDnv2M-DlgFqWNUUuR-QMRpBwOj8fNhp9cLpuFXoEPXV8Cg");
-        postRequest.addHeader("Content-Type", "application/json");
-
-
-        JSONObject json = new JSONObject();
-        json.put("title", "💌 " + date);
-        json.put("body", "1시간 뒤 "+ nickName+ " 상담사님과 상담이 있어요!");
-        json.put("image", "https://firebasestorage.googleapis.com/v0/b/dear-me-fef2a.appspot.com/o/dearme.PNG?alt=media&token=e485b31a-550b-4c37-a42c-c351875e01d0");
-        json.put("color", "#ffb0f7");
-
-        JSONObject obj = new JSONObject();
-        obj.put("to", "d1NeInnkSKSFAU3mAuunGM:APA91bFFGVm24wK0VW3Heg8pyba1FQ1ijTDei5IF9JXJRAPoz6766RsIgDf-BO1CRbLFUtrjeaxZOBBhPpv-lFN_OksQ2Ekt-5d5Vp2fYn23Fla9n3DDqdKesOGr9dWyZpNtChdLmj4B");
-        obj.put("priority", "high");
-        obj.put("notification", json);
-
-        System.out.println(obj);
-
-        StringEntity se = new StringEntity(obj.toString(),"UTF-8");
-        se.setContentEncoding("UTF-8");
-        se.setContentType("application/json");
-        postRequest.setEntity(se);
-
-        HttpResponse response = null;		//Response 출력
         try {
-            response = httpClient.execute(postRequest);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        if (response.getStatusLine().getStatusCode() == 200) {
-            System.out.println("푸시 알림 전송");
-        } else {
-            System.out.println("response is error : " + response.getStatusLine().getStatusCode());
+
+            HttpClient httpClient = HttpClientBuilder.create().build(); //Use this instead
+            HttpPost postRequest = new HttpPost("https://sens.apigw.ntruss.com/sms/v2/services/ncp:sms:kr:257491845770:deame/messages"); //POST 메소드 URL 새성
+            String time = Long.toString(System.currentTimeMillis());
+            postRequest.addHeader("x-ncp-apigw-timestamp", time);
+            postRequest.addHeader("x-ncp-iam-access-key", "TMT1IsuM3qkEm2yQn6XI");
+            postRequest.addHeader("x-ncp-apigw-signature-v2",makeSignature(time) );
+            postRequest.addHeader("Content-Type", "application/json; charset=UTF-8");
+
+
+            JSONObject obj = new JSONObject();
+
+            obj.put("type", "sms");
+            obj.put("from", "01087624001");
+            obj.put("content", "1");
+            JSONObject obj2 = new JSONObject();
+            obj2.put("to", "01087624001");
+            obj2.put("content", date + "\n1시간 뒤 "+ nickName+ " 상담사님과 상담이 있어요!");
+            ;
+            List<JSONObject> jsonArray = new ArrayList<>();
+            jsonArray.add(obj2);
+
+            obj.put("messages", jsonArray);
+            StringEntity se = new StringEntity(obj.toString(),"UTF-8");
+            se.setContentEncoding("UTF-8");
+            se.setContentType("application/json");
+            postRequest.setEntity(se);
+
+
+            HttpResponse response = httpClient.execute(postRequest);		//Response 출력
+            if (response.getStatusLine().getStatusCode() == 200) {
+
+                ResponseHandler<String> handler = new BasicResponseHandler();
+                String body = handler.handleResponse(response);
+
+            } else {
+                System.out.println("response is error : " + response.getStatusLine().getStatusCode());
+            }
+        } catch (Exception e){
+            System.err.println(e.toString());
         }
     }
     public static String makeSignature(String time) throws NoSuchAlgorithmException, UnsupportedEncodingException, InvalidKeyException {
