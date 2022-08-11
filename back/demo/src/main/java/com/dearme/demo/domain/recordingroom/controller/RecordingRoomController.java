@@ -38,6 +38,10 @@ public class RecordingRoomController {
         return ResponseEntity.ok().body(CommonResponse.getSuccessResponse(recordingRoomService.getStartRecording(sessionId, hasAudio, hasVideo, outputMode)));
     }
 
-
+    @RequestMapping(value = "/recording/stop", method = RequestMethod.POST)
+    public ResponseEntity<CommonResponse> stopRecording(@RequestBody Map<String, Object> params) {
+        String recordingId = (String) params.get("recording");
+        return ResponseEntity.ok().body(CommonResponse.getSuccessResponse(recordingRoomService.getStopRecording(recordingId)));
+    }
 
 }
