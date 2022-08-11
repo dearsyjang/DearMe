@@ -148,54 +148,10 @@ public class VideoDiaryServiceImpl implements VideoDiaryService {
 
         String filePath = "/home/ubuntu/docker-volume/video/" + path + "/" + path;
 
-        List cmdList = new ArrayList();
-        cmdList.add("cd ..");
-        Process process = null;
-        String str = null;
+        String [] cmd = new String[] {"/bin/bash", "-c", "sudo mkdir asdf"};
+        Runtime rt = Runtime.getRuntime();
+        Process proc = rt.exec(cmd);
 
-        try {
-            process = new ProcessBuilder(cmdList).start();
-            BufferedReader stdOut = new BufferedReader(new InputStreamReader(process.getInputStream()));
-
-            while((str = stdOut.readLine()) != null) {
-                System.out.println(str);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        List cmdList2 = new ArrayList();
-        cmdList2.add("cat /home/ubuntu/basic.png");
-        Process process2 = null;
-        String str2 = null;
-
-        try {
-            process2 = new ProcessBuilder(cmdList2).start();
-            BufferedReader stdOut = new BufferedReader(new InputStreamReader(process2.getInputStream()));
-
-            while((str2 = stdOut.readLine()) != null) {
-                System.out.println(str2);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        List cmdList3 = new ArrayList();
-        cmdList3.add("dir");
-
-        Process process3 = null;
-        String str3 = null;
-
-        try {
-            process3 = new ProcessBuilder(cmdList3).start();
-            BufferedReader stdOut = new BufferedReader(new InputStreamReader(process3.getInputStream()));
-
-            while((str3 = stdOut.readLine()) != null) {
-                System.out.println(str3);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
 
 
 //        String osName = System.getProperty("os.name");
