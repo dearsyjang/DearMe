@@ -124,30 +124,55 @@
 
 <template>
   <div>
-
-  <div v-for="(counselor,idx) in counselors"
-    :key="idx"
-    :counselor="counselor">
-    {{counselor}}1
-  </div>
+     카운슬러 목록 나와야됨
+    {{counselors}}
+    <counselor-list-item
+      v-for="(counselor,idx) in counselors"
+      :key="idx"
+      :counselor="counselor">
+    </counselor-list-item>
     
+  
   </div>
 </template>
 
 <script>
-
-  import {  mapActions, mapGetters} from 'vuex'
+  import CounselorListItem from '@/views/counselor/components/CounselorListItemComp.vue'
+  import {mapActions, mapGetters} from 'vuex'
 
   export default {
     name: 'CounselorListView',
-
+    components: {CounselorListItem},
 
     computed : {
     ...mapGetters(['counselors']),
+    ...mapGetters(['searched_counselors']),
+    ...mapGetters(['filtering_counselors'])
     },
     methods: {
     ...mapActions(['fetchCounselors']),
+    ...mapActions(['filterCounselors']),
+    ...mapActions(['searchCounselors']),
 
+    // search :function() {
+    //     if (this.inputData) {
+    //     this.$store.dispatch('searchCounselor', this.inputData)
+    //     this.isempty = false
+    //     }
+    //     else{ alert('내용을 입력해주세요!!')
+    //   }
+    // }, 
+  //   selectFilter: function (){
+  //   this.$store.dispatch('filterMovie',this.filter)
+  //   this.isempty = false
+  //  },
+
+  //   check : function(arr)  {
+  //   if(Array.isArray(arr) && arr.length === 0)  {
+  //     return true;
+  //   }
+  //   return false;
+  //   }
     },
     
   created() {

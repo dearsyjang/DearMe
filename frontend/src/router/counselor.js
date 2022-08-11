@@ -7,7 +7,7 @@ import FileFormComp from '@/views/counselor/components/FileFormComp'
 
 export default [
     {
-        path: '/counselor_list',
+        path: '/counselors/counselorList',
         name: 'counselorList',
         component: CounselorListView
       },

@@ -12,7 +12,7 @@
             <div class="col-md-4">
 
                <p class="card-title">{{counselor.pic}}</p> 
-               <p class="card-title">{{counselor.nickName}}</p> 
+               <p class="card-title">{{counselor.nickname}}</p> 
             </div>
             <div class="col-md-8">
               <div class="card-body">

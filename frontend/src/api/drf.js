@@ -4,15 +4,17 @@ const MEMBER = '/users'
 const BOARD ='/boards'
 const COMMENT ='/comments'
 const COUNSELOR = '/counselors'
+
 export default {
   member : {
     login: () => HOST + MEMBER + '/token',
     logout: () => HOST + MEMBER + '/token',
     signup: () => HOST + MEMBER,
-    currentUserInfo: () => HOST + MEMBER + '/token',
+    // currentUserInfo: () => HOST + MEMBER + '/token',
+    currentUser: () => HOST + MEMBER,// 정보수정
     idCheck: () => HOST + MEMBER + '/id',
     // profile: username => HOST + MEMBER + 'profile/' + username,
-    profile: () => HOST + MEMBER 
+    // profile: () => HOST + MEMBER 
   },
   board : {
     boardCreate: () => HOST + BOARD,
@@ -23,7 +25,11 @@ export default {
     commentEdit: (boardPk, commentPk) => HOST + BOARD + `/${boardPk}` + COMMENT + `/${commentPk}`
   },
   counselors: {
-    counselors : () => HOST + COUNSELOR 
+     counselors : () => HOST + COUNSELOR,
+    // counselor : (userId) => HOST + MEMBER  + '/detail' + `/${userId}`,
+    // filter : (categoryId) => HOST + MEMBER + '/filter' +  `/${categoryId}`,
+    // search : (keyword) => HOST + MEMBER + '/search' +  `/${keyword}`,
   }
+
 
 }

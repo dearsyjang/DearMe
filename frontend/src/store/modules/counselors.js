@@ -37,17 +37,21 @@ export default {
       axios({
        url: drf.counselors.counselors(),
        method : 'GET',
-       headers: getters.authHeader
+       headers: {
+        'Content-Type': 'application/json',
+        'Authorization': getters.authHeader2
+        }
       })
       .then(res => {
-        console.log('1')
-        console.log(res)
-        console.log(res.data)
-        console.log(res.data.data)
+       
         commit('SET_COUNSELORS', res.data)
+        console.log(res)
       })       
         
-      .catch(err => console.error(err) )
+      .catch(err => {
+        console.log(1)
+        console.error(err)
+      })
     },
 
 
@@ -89,12 +93,15 @@ export default {
 
 
     
-    searchCounselor({ commit, getters }, keywords ) { 
+    searchCounselors({ commit, getters }, keywords ) { 
       
       axios({
         url: drf.counselors.search(keywords),
         method : 'GET',
-        headers: getters.authHeader,
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': getters.authHeader2
+          }
        })
        .then(res => {
           commit('SEARCH_COUNSELORS', res.data)
@@ -111,12 +118,15 @@ export default {
       
     },
 
-    filterCounselor({ commit, getters }, expertId ) { 
+    filterCounselors({ commit, getters }, categoryId ) { 
       
       axios({
-        url: drf.counselors.filter(expertId),
+        url: drf.counselors.filter(categoryId),
         method : 'GET',
-        headers: getters.authHeader,
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': getters.authHeader2
+          }
        })
        .then(res => {
           commit('FILTER_COUNSELORS', res.data)
