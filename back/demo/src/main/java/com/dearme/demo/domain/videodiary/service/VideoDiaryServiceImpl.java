@@ -64,7 +64,7 @@ public class VideoDiaryServiceImpl implements VideoDiaryService {
         String[] text = videoSTT(videoDiary.getRealFileName());
         videoDiary.setContents(text[0]);
         videoDiary.setSentiment(text[1]);
-        if(text[2].equals(null))    throw new NoVideoDiaryException();
+        if(text[2].equals(null)) throw new NoVideoDiaryException();
         videoDiary.setPercentage(Double.parseDouble(text[2]));
         videoDiary.setPositive(Double.parseDouble(text[3]));
         videoDiary.setNegative(Double.parseDouble(text[4]));
@@ -148,27 +148,26 @@ public class VideoDiaryServiceImpl implements VideoDiaryService {
     public String[] videoSTT(String path) throws IOException {
         //서버에서 실행시킬 때
 
-        String filePath = "/home/ubuntu/docker-volume/video/" + path + "/" + path;
-        filePath = filePath.substring(0, filePath.length()-4);
-        String s;
-        Process p;
-        try{
-            String[] cmd = {"/bin/sh", "-c", "ffmpeg -i " + filePath + ".mp4 " + filePath + ".mp3"};
-            p = Runtime.getRuntime().exec(cmd);
-            BufferedReader br = new BufferedReader(new InputStreamReader(p.getInputStream()));
-            while ((s = br.readLine()) != null)
-                System.out.println(s);
-            p.waitFor();
-            p.destroy();
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-        filePath = filePath+".mp3";
+//        String filePath = "/home/ubuntu/docker-volume/video/" + path + "/" + path;
+//        filePath = filePath.substring(0, filePath.length()-4);
+//        String s;
+//        Process p;
+//        try{
+//            String[] cmd = {"/bin/sh", "-c", "ffmpeg -i " + filePath + ".mp4 " + filePath + ".mp3"};
+//            p = Runtime.getRuntime().exec(cmd);
+//            BufferedReader br = new BufferedReader(new InputStreamReader(p.getInputStream()));
+//            while ((s = br.readLine()) != null)
+//                System.out.println(s);
+//            p.waitFor();
+//            p.destroy();
+//        }catch (Exception e){
+//            e.printStackTrace();
+//        }
+//        filePath = filePath+".mp3";
 
 
         //테스트용
-        //String filePath="C:\\Users\\leekijong\\S07P12D206\\back\\demo\\src\\main\\resources\\videodiary_test.mp3";
-
+        String filePath="docker-volume/video/ses_QtLHqSPcqs/ses_QtLHqSPcqs.mp3";
         String[] text= new String[6];
         try {
             CredentialsProvider credentialsProvider = FixedCredentialsProvider.create(ServiceAccountCredentials.fromStream(new FileInputStream("C:\\Users\\leekijong\\S07P12D206\\back\\demo\\src\\main\\resources\\my-project-0801-358104-1615eb198267.json")));
@@ -289,14 +288,14 @@ public class VideoDiaryServiceImpl implements VideoDiaryService {
             SchedulerFactory schedulerFactory = new StdSchedulerFactory();
 
             Scheduler scheduler = schedulerFactory.getScheduler();
-            scheduler.pauseJob(new JobKey(videoDiary.getId()+"_video_time_detail", videoDiary.getId()+"_video_time_group"));
+            scheduler.pauseJob(new JobKey(videoDiary.getYear()+""+ videoDiary.getMonth()+""+ videoDiary.getDay()+"_detail", videoDiary.getYear()+""+ videoDiary.getMonth()+""+ videoDiary.getDay()+"_group"));
             // JOB Data 객체
             JobDataMap jobDataMap = new JobDataMap();
             jobDataMap.put("type", "videoDiary");
             jobDataMap.put("sentiment", videoDiary.getSentiment());
             jobDataMap.put("percentage", videoDiary.getPercentage()+"");
             JobDetail jobDetail = JobBuilder.newJob(MorningJob.class)
-                    .withIdentity(videoDiary.getId()+"_video_time_detail", videoDiary.getId()+"_video_time_group")
+                    .withIdentity(videoDiary.getYear()+""+ videoDiary.getMonth()+""+ videoDiary.getDay()+"_job_detail", videoDiary.getYear()+""+ videoDiary.getMonth()+""+ videoDiary.getDay()+"_group")
                     .setJobData(jobDataMap)
                     .build();
 
@@ -304,7 +303,7 @@ public class VideoDiaryServiceImpl implements VideoDiaryService {
             cal.add(Calendar.DATE, 1);
             @SuppressWarnings("deprecation")
             SimpleTrigger simpleTrigger = (SimpleTrigger) TriggerBuilder.newTrigger()
-                    .withIdentity(videoDiary.getId()+"_video_time_trigger", videoDiary.getId()+"_video_time_group")
+                    .withIdentity(videoDiary.getYear()+""+ videoDiary.getMonth()+""+ videoDiary.getDay()+"_trigger", videoDiary.getYear()+""+ videoDiary.getMonth()+""+ videoDiary.getDay()+"_trigger_group")
                     // 실제 배포
                     // .startAt(new Date(2022 - 1900, month, videoDiary.getDay(), 8, 30)) // 2022 : 2022 - 1900, month = 7 -> 8월
                     // 테스트
