@@ -148,47 +148,21 @@ public class VideoDiaryServiceImpl implements VideoDiaryService {
 
         String filePath = "/home/ubuntu/docker-volume/video/" + path + "/" + path;
 
-        // ProcessBuilder에 넣어줄 커맨드 준비
-        List<String> cmd = new ArrayList<String>();
-        cmd.add("/bin/bash");
-        cmd.add("-c");
-        cmd.add("mkdir /home/ubuntu/test");
+        List cmdList = new ArrayList();
+        cmdList.add("pwd");
 
-        StringBuilder sb1 = new StringBuilder(1024);
-        String s = null;
-        ProcessBuilder prsbld = null;
-        Process prs = null;
+        Process process = null;
+        String str = null;
 
         try {
-            prsbld = new ProcessBuilder(cmd);
-            prsbld.directory(new File("/home/ubuntu")); // 디렉토리 이동
-            System.out.println("command: " + prsbld.command()); 	// 커맨드 확인
+            process = new ProcessBuilder(cmdList).start();
+            BufferedReader stdOut = new BufferedReader(new InputStreamReader(process.getInputStream()));
 
-            // 프로세스 수행시작
-            prs = prsbld.start();
-
-            BufferedReader stdError = new BufferedReader(new InputStreamReader(prs.getErrorStream()));
-            while ((s = stdError.readLine()) != null)
-            {
-                sb1.append(s);
+            while((str = stdOut.readLine()) != null) {
+                System.out.println(str);
             }
-            prs.getErrorStream().close();
-            prs.getInputStream().close();
-            prs.getOutputStream().close();
-
-            // 종료까지 대기
-            prs.waitFor();
-
-        }catch (Exception e1) {
-        }
-        finally
-        {
-            if(prs != null)
-                try {
-                    prs.destroy();
-                } catch(Exception e2) {
-                }
-
+        } catch (IOException e) {
+            e.printStackTrace();
         }
 
 //        try{
