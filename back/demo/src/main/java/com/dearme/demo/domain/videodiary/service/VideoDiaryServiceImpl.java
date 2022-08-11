@@ -152,7 +152,7 @@ public class VideoDiaryServiceImpl implements VideoDiaryService {
         List<String> cmd = new ArrayList<String>();
         cmd.add("/bin/bash");
         cmd.add("-c");
-        cmd.add("mkdir qwer");
+        cmd.add("mkdir /home/ubuntu/test");
 
         StringBuilder sb1 = new StringBuilder(1024);
         String s = null;
