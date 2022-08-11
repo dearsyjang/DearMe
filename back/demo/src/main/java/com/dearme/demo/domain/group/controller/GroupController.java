@@ -1,6 +1,7 @@
 package com.dearme.demo.domain.group.controller;
 
 import com.dearme.demo.domain.group.dto.CreateGroupRequestDto;
+import com.dearme.demo.domain.group.dto.UpdateGroupRequestDto;
 import com.dearme.demo.domain.group.service.GroupServiceImpl;
 import com.dearme.demo.global.common.CommonResponse;
 import lombok.RequiredArgsConstructor;
@@ -33,5 +34,12 @@ public class GroupController {
     @GetMapping("/{groupId}")
     public ResponseEntity<CommonResponse> getGroupInfo(@PathVariable("groupId") Long groupId){
         return new ResponseEntity<>(CommonResponse.getSuccessResponse(groupService.getGroupInfo(groupId)), HttpStatus.OK);
+    }
+
+    @PutMapping
+    public ResponseEntity<CommonResponse> updateGroup(HttpServletRequest request, @RequestBody UpdateGroupRequestDto dto){
+        String id = (String) request.getAttribute("id");
+        groupService.updateGroup(id, dto);
+        return ResponseEntity.accepted().build();
     }
 }

@@ -3,6 +3,7 @@ package com.dearme.demo.domain.group.service;
 import com.dearme.demo.domain.group.dto.CreateGroupRequestDto;
 import com.dearme.demo.domain.group.dto.CreateGroupResponseDto;
 import com.dearme.demo.domain.group.dto.GroupInfoResponseDto;
+import com.dearme.demo.domain.group.dto.UpdateGroupRequestDto;
 import com.dearme.demo.domain.group.entity.Group;
 import com.dearme.demo.domain.group.exception.GroupNotFoundExcetion;
 import com.dearme.demo.domain.group.exception.UserCreateGroupException;
@@ -49,5 +50,14 @@ public class GroupServiceImpl implements GroupService{
             throw new GroupNotFoundExcetion();
         });
         return GroupInfoResponseDto.of(group);
+    }
+
+    @Override
+    public void updateGroup(String id, UpdateGroupRequestDto dto) {
+        Group group = groupRepository.findGroupByCounselor_IdAndId(id, dto.getGroupId()).orElseThrow(() -> {
+            throw new GroupNotFoundExcetion();
+        });
+        group.updateGroup(dto.getTitle(), dto.getContents(), dto.getPrice());
+        groupRepository.save(group);
     }
 }

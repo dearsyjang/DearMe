@@ -39,6 +39,12 @@ public class Group {
         this.counselor = counselor;
     }
 
+    public void updateGroup(String title, String contents, Long price){
+        this.title = title;
+        this.contents = contents;
+        this.price = price;
+    }
+
     @Builder
     public Group(String title, String contents, Long price){
         this.title = title;
