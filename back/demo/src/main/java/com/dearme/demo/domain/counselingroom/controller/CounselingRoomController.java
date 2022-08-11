@@ -1,6 +1,7 @@
 package com.dearme.demo.domain.counselingroom.controller;
 
 import com.dearme.demo.domain.counselingroom.dto.CreateCounselingRoomRequestDto;
+import com.dearme.demo.domain.counselingroom.dto.CreateGroupCounselingRoomRequestDto;
 import com.dearme.demo.domain.counselingroom.service.CounselingRoomServiceImpl;
 import com.dearme.demo.global.common.CommonResponse;
 import io.openvidu.java.client.OpenViduHttpException;
@@ -22,6 +23,12 @@ public class CounselingRoomController {
     public ResponseEntity<CommonResponse> createCounselingRoom(HttpServletRequest request, @RequestBody CreateCounselingRoomRequestDto dto) throws OpenViduJavaClientException, OpenViduHttpException {
         String id = (String) request.getAttribute("id");
         return ResponseEntity.accepted().body(CommonResponse.getSuccessResponse(counselingRoomService.createCounselingRoom(id, dto)));
+    }
+
+    @PostMapping("/groups")
+    public ResponseEntity<CommonResponse> createGroupCounselingRoom(HttpServletRequest request, @RequestBody CreateGroupCounselingRoomRequestDto dto) throws OpenViduJavaClientException, OpenViduHttpException {
+        String id = (String) request.getAttribute("id");
+        return ResponseEntity.accepted().body(CommonResponse.getSuccessResponse(counselingRoomService.createGroupCounselingRoom(id, dto)));
     }
 
     @GetMapping("/{counselingId}")
