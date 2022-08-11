@@ -1,4 +1,4 @@
-<template>
+<!-- <template>
   <div>
     <h1>상담사 리스트 페이지</h1>
 
@@ -61,50 +61,7 @@
 
   </div>
 </template>
-<!-- <script>
-  import CounselorListItemComp from '@/views/counselor/components/CounselorListItemComp.vue'
-  import { mapActions, mapGetters } from 'vuex'
-  export default {
-    name : 'CounselorDetailView',
-    components: {CounselorListItemComp},
-    setup () {
-      const state = ({
-        inputData: '',
-      })
-      const search = () =>{
-        if (this.inputData) {
-        this.$store.dispatch('searchCounselor', this.inputData)
-        this.isempty = false
-        }
-        else{
-          alert('내용을 입력해주세요!!')
-    }
-      }
-      
-      return {
-        search,
-        state
-      }
-    },
-  computed:{
-    ...mapGetters(['searched_counselor'])
 
-  },
-  methods:{
-     ...mapActions([
-    'searchCounselor',]),
-   
-
-  check : function(arr)  {
-  if(Array.isArray(arr) && arr.length === 0)  {
-    return true;
-  }
-  return false;
-  }
-
-  },
-  }
-</script> -->
 <script>
   import CounselorListItemComp from '@/views/counselor/components/CounselorListItemComp.vue'
   import { mapActions, mapGetters } from 'vuex'
@@ -161,4 +118,73 @@
   width : 500px;
   margin: auto;
 }
+</style> -->
+
+
+
+<template>
+  <div>
+     카운슬러 목록 기모링~
+
+    <counselor-list-item
+      v-for="(counselor,idx) in counselors.data"
+      :key="idx"
+      :counselor="counselor">
+    </counselor-list-item>
+    
+  
+  </div>
+</template>
+
+<script>
+  import CounselorListItem from '@/views/counselor/components/CounselorListItemComp.vue'
+  import {mapActions, mapGetters} from 'vuex'
+
+  export default {
+    name: 'CounselorListView',
+    components: {CounselorListItem},
+
+    computed : {
+    ...mapGetters(['counselors']),
+    ...mapGetters(['searched_counselors']),
+    ...mapGetters(['filtering_counselors'])
+    },
+    methods: {
+    ...mapActions(['fetchCounselors']),
+    ...mapActions(['filterCounselors']),
+    ...mapActions(['searchCounselors']),
+
+    // search :function() {
+    //     if (this.inputData) {
+    //     this.$store.dispatch('searchCounselor', this.inputData)
+    //     this.isempty = false
+    //     }
+    //     else{ alert('내용을 입력해주세요!!')
+    //   }
+    // }, 
+  //   selectFilter: function (){
+  //   this.$store.dispatch('filterMovie',this.filter)
+  //   this.isempty = false
+  //  },
+
+  //   check : function(arr)  {
+  //   if(Array.isArray(arr) && arr.length === 0)  {
+  //     return true;
+  //   }
+  //   return false;
+  //   }
+    },
+    
+  created() {
+    this.fetchCounselors()
+  },
+}
+</script>
+
+
+
+<style>
+
+
+
 </style>

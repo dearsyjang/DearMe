@@ -1,8 +1,10 @@
 <template>
   <div>
+  <div>
     <h2>상담사 프로필 페이지</h2>
-    
-    <router-link to="/counselors/request">
+
+
+    <router-link to="/counseling-request/document">
       <button>상담 신청</button>
     </router-link>
     <div class="counselor-profile">
@@ -10,20 +12,26 @@
         <div class="card mb-3" style="max-width: 540px;">
           <div class="row g-0">
             <div class="col-md-4">
-              <img src="@/assets/사람.png" class="img-fluid rounded-start" alt="...">
-              <!-- <p class="card-title">{{counselor.pic}}</p> -->
-              <!-- <p class="card-title">{{counselor.name}}</p> -->
+              {{counselor}}
+               <p class="card-title">{{counselor.picUrl}}</p> 
+               <p class="card-title">{{counselor.nickname}}</p> 
             </div>
             <div class="col-md-8">
               <div class="card-body">
-                <!-- <span v-if="currentUser.username === profile.user.username && !isEditing"> -->
-                <button class="createinfo" v-if="isdone==false" @click="isModalViewed=true">자기소개 작성하기</button>
-                <!-- </span> -->
+<!--             
+                <button class="createinfo" v-if="currentUser.id === profile.user.id && isdone==false" @click="isModalViewed=true">작성하기</button>
+                <button v-else>개인상담신청하기</button> -->
+                </div>
+                </div> 
                 <div class="counselor-info">
-                  <info-item-comp v-for="info in infos"
+                  <!-- <info-item-comp v-for="info in infos"
                   :key="info.Content"
-                  :info="info"></info-item-comp>
-                <!-- {{counselor.info}} -->
+                  :info="info"></info-item-comp> -->
+                자기소개 : {{counselor.info}}
+                개인상담가격 : {{counselor.price}} 
+                약력 : {{counselor.careers}}
+                전문분야 :{{counselor.categories}}
+                자격증 : {{counselor.certificates}}
                 </div>
               </div>
             </div>
@@ -31,7 +39,12 @@
         </div>
       </div>
 
- 
+      <div v-if="!favorite">
+        <button class="btn btn-link" @click="favoriteCounselor(counselorId)"><i class="fa-solid fa-heart" style="color:black"></i></button>
+      </div>
+      <div v-else>
+        <button class="btn btn-link" @click="favoriteCounselor(counselorId)"><i class="fa-solid fa-heart" style="color:red"></i></button>
+      </div>
       
       <div class="counselor-info-create">
         <div class="black-bg" v-if = "isModalViewed==true">
@@ -68,29 +81,29 @@
           <!-- {{counselor.price}} -->
         </div> 
       </div>
-
 <!-- 
+
       
       <h4>전문분야</h4>
       <div class="category-list row row-cols-2 row-cols-md-5 g-3">
         <span v-for="category in counselor.categories" 
         :key="category.key">
-        {{category.name}}
+        {{category}}
         </span> 
       </div>
      
       <div class="career-list row row-cols-2 row-cols-md-5 g-3">
         <span v-for="career in counselor.careers" 
         :key="career.key">
-        {{career.name}}
-        {{career.date}}
+        {{career.title}}
+        {{career.contents}}
         </span> 
       </div>
 
       <div class="manage-group-list row row-cols-2 row-cols-md-5 g-3">
         <span v-for="group in counselor.groups" 
         :key="group.key">
-        {{group.name}}
+        {{group}}
         </span> 
       </div>
 
@@ -102,7 +115,7 @@
       </div> -->
 
 
-      <career-list-comp>
+      <!-- <career-list-comp>
       </career-list-comp>
       <manage-group-list-comp>
       </manage-group-list-comp>
@@ -110,20 +123,19 @@
       </review-list-comp>
       
       <file-list-comp>
-      </file-list-comp>
+      </file-list-comp> -->
 
      
      
 
-    </div>
   </div>
 </template>
 <script>
-  import InfoItemComp from '@/views/counselor/components/InfoItemComp.vue'
-  import CareerListComp from '@/views/counselor/components/CareerListComp.vue'
-  import FileListComp from '@/views/counselor/components/FileListComp.vue'
-  import ManageGroupListComp from '@/views/counselor/components/ManageGroupListComp.vue'
-  import ReviewListComp from '@/views/counselor/components/ReviewListComp.vue'
+  // import InfoItemComp from '@/views/counselor/components/InfoItemComp.vue'
+  // import CareerListComp from '@/views/counselor/components/CareerListComp.vue'
+  // import FileListComp from '@/views/counselor/components/FileListComp.vue'
+  // import ManageGroupListComp from '@/views/counselor/components/ManageGroupListComp.vue'
+  // import ReviewListComp from '@/views/counselor/components/ReviewListComp.vue'
 
 
 
@@ -133,14 +145,14 @@
   export default {
     name : 'CounselorDetailView',
     components: {
-    CareerListComp,
-    FileListComp,
-    ManageGroupListComp,
-    ReviewListComp,
-    InfoItemComp,
+    // CareerListComp,
+    // FileListComp,
+    // ManageGroupListComp,
+    // ReviewListComp,
+    // InfoItemComp,
    
-},
-
+},  
+ 
     data() {
       return {
         counselorId: this.$route.params.counselorId,
@@ -154,17 +166,15 @@
       }
     },
     computed : {
-      ...mapGetters(['counselor']),
+      ...mapGetters(['counselor','currentUser', 'favorite']),
       infos() {
       return this.$store.state.infos
     }
     },
     methods: {
-      ...mapActions(['fetchCounselor']),
+      ...mapActions(['fetchCounselor','favoriteCounselor','isfavorite']),
     
-      created() {
-      this.fetchCounselor(this.counselorId)
-      },
+      
 
       createInfo(){
         if (this.isdone === false){
@@ -183,6 +193,11 @@
         }
       },
     },
+    created() {
+      this.fetchCounselor(this.counselorId)
+      console.log(this.counselorId)
+      // this.favorite =''
+      },
   }
 </script>
 

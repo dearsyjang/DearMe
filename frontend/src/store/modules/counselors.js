@@ -18,6 +18,7 @@ export default {
     searched_counselor: state => state.searched_counselor,
     filtering_counselor: state => state.filtering_counselor,
     favorite: state => state.favorite,
+    
   },
 
   mutations: {
@@ -36,14 +37,48 @@ export default {
       axios({
        url: drf.counselors.counselors(),
        method : 'GET',
-       headers: getters.authHeader,
+       headers: {
+        'Content-Type': 'application/json',
+        'Authorization': getters.authHeader2
+        }
       })
       .then(res => {
         commit('SET_COUNSELORS', res.data)
       })       
         
-      .catch(err => console.error(err.response))
+      .catch(err => {
+        console.error(err)
+      })
     },
+
+
+    fetchCounselor({ commit, getters }, counselorId) {
+      axios({
+       url: drf.counselors.counselor(counselorId),
+       method : 'GET',
+       headers: {
+        'Content-Type': 'application/json',
+        'Authorization': getters.authHeader2
+        }
+      })
+      .then(res =>{
+        commit('SET_COUNSELOR', res.data)})       
+      .catch(err => {
+        console.error(err.response)
+        if (err.response.status === 404) {
+          router.push({ name: 'NotFound404' })
+        }
+      })
+    },
+
+    
+
+
+
+
+
+
+
 
     fetchCounselorList({ commit, getters }) {
       axios({
@@ -57,28 +92,17 @@ export default {
     },
 
 
-    fetchCounselor({ commit, getters }, memberId) {
-      axios({
-       url: drf.counselors.counselor(memberId),
-       method : 'GET',
-       headers: getters.authHeader,
-      })
-      .then(res =>commit('SET_COUNSELOR', res.data))       
-      .catch(err => {
-        console.error(err.response)
-        if (err.response.status === 404) {
-          router.push({ name: 'NotFound404' })
-        }
-      })
-    },
 
     
-    searchCounselor({ commit, getters }, keywords ) { 
+    searchCounselors({ commit, getters }, keywords ) { 
       
       axios({
         url: drf.counselors.search(keywords),
         method : 'GET',
-        headers: getters.authHeader,
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': getters.authHeader2
+          }
        })
        .then(res => {
           commit('SEARCH_COUNSELORS', res.data)
@@ -95,12 +119,15 @@ export default {
       
     },
 
-    filterCounselor({ commit, getters }, expertId ) { 
+    filterCounselors({ commit, getters }, categoryId ) { 
       
       axios({
-        url: drf.counselors.filter(expertId),
+        url: drf.counselors.filter(categoryId),
         method : 'GET',
-        headers: getters.authHeader,
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': getters.authHeader2
+          }
        })
        .then(res => {
           commit('FILTER_COUNSELORS', res.data)

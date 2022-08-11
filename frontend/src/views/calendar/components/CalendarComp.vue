@@ -23,6 +23,8 @@
               'has-text-primary': day === today && month === currentMonth && year === currentYear && idx <32
               }">
               {{ day }}
+              <br>
+              
               </router-link>
               </div>
             </td>

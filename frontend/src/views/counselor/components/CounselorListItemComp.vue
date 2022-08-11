@@ -1,5 +1,6 @@
 <template>
   <div>
+
     <!-- <router-link to="/counselors/counselor/:memberId">
       <div class="card mb-3" style="max-width: 540px;">
         <div class="row g-0">
@@ -16,38 +17,39 @@
         </div>
       </div>
     </router-link> -->
-    <div class="counselor-item">
-      <div class="card mb-3">
-        <!-- <div v-if="check(counselor)"> -->
-        <router-link to="/counselors/counselor/:counselorId">
-        <!-- <router-link
-        :to="{ name: 'counselor', params: {counselorId: temp.id} }"> -->
-          <div class="card-max" style="max-width: 100%;">
-            <div class="row g-0">
-              <div class="col-md-4">
-                <img src="@/assets/사람.png" class="img-fluid rounded-start" style="width:100px;height: 100px;" alt="...">
-              </div>
-              <div class="col-md-8">
-                <div class="card-body">
-                  <h5 class="card-title">{{temp.name}}</h5>
-                  <p class="card-text">{{temp.rating}}</p>
-                  <p class="card-text"><small class="text-muted">{{temp.satisfaction}}</small></p>
-                </div>
-              </div>
-            </div>
+    <!-- <router-link to="/counselors/counselor/:counselorId"> -->
+    {{counselor.counselorId}}
+    
+    <!-- <router-link 
+    :to="`/counselors/${counselor.counselorId}`"> -->
+    <router-link 
+    :to="{ name: 'counselorProfile', params: {counselorId: counselor.counselorId}}">
+    <div class="card mb-3" style="max-width: 540px;">
+      <div class="row g-0">
+        <div class="col-md-4">
+          사진:{{counselor.pictureUrl}}
+        </div>
+        <div class="col-md-8">
+          <div class="card-body">
+            <h5 class="card-title">닉네임 : {{counselor.nickName}}</h5>
+            <!-- <p class="card-text">{{counselor}}</p> -->
+            <p class="card-text"><small class="text-muted">평점 / 후기 수 :{{counselor.value}}/{{counselor.reviewCnt}}</small></p>
           </div>
-        </router-link>
-        <!-- </div> -->
+        </div>
       </div>
     </div>
+    </router-link>
+
   </div>
+
+
 </template>
 
 <script>
   export default {
     name : 'CounselorItem',
     props:{
-      temp:Object
+      counselor:Object
     }
     
     
@@ -56,7 +58,5 @@
 </script>
 
 <style>
-.counselor-item {
-  margin: auto;
-}
+
 </style>
