@@ -1414,157 +1414,157 @@ INSERT INTO GROUP_USER(group_id, user_id)
 VALUES(3, 2);
 
 INSERT INTO GROUP_USER(group_id, user_id)
-VALUES(1, 11);
+VALUES(6, 11);
 INSERT INTO GROUP_USER(group_id, user_id)
-VALUES(2, 11);
+VALUES(7, 11);
 INSERT INTO GROUP_USER(group_id, user_id)
-VALUES(3, 11);
+VALUES(8, 11);
 INSERT INTO GROUP_USER(group_id, user_id)
-VALUES(4, 11);
+VALUES(9, 11);
 INSERT INTO GROUP_USER(group_id, user_id)
-VALUES(1, 12);
+VALUES(6, 12);
 INSERT INTO GROUP_USER(group_id, user_id)
-VALUES(2, 12);
+VALUES(7, 12);
 INSERT INTO GROUP_USER(group_id, user_id)
-VALUES(3, 12);
+VALUES(8, 12);
 INSERT INTO GROUP_USER(group_id, user_id)
-VALUES(4, 12);
+VALUES(9, 12);
 INSERT INTO GROUP_USER(group_id, user_id)
-VALUES(1, 13);
+VALUES(6, 13);
 INSERT INTO GROUP_USER(group_id, user_id)
-VALUES(2, 13);
+VALUES(7, 13);
 INSERT INTO GROUP_USER(group_id, user_id)
-VALUES(3, 13);
+VALUES(8, 13);
 INSERT INTO GROUP_USER(group_id, user_id)
-VALUES(4, 13);
+VALUES(9, 13);
 INSERT INTO GROUP_USER(group_id, user_id)
-VALUES(1, 14);
+VALUES(6, 14);
 INSERT INTO GROUP_USER(group_id, user_id)
-VALUES(2, 14);
+VALUES(7, 14);
 INSERT INTO GROUP_USER(group_id, user_id)
-VALUES(3, 14);
+VALUES(8, 14);
 INSERT INTO GROUP_USER(group_id, user_id)
-VALUES(4, 14);
+VALUES(9, 14);
 INSERT INTO GROUP_USER(group_id, user_id)
-VALUES(1, 15);
+VALUES(6, 15);
 INSERT INTO GROUP_USER(group_id, user_id)
-VALUES(2, 15);
+VALUES(7, 15);
 INSERT INTO GROUP_USER(group_id, user_id)
-VALUES(3, 15);
+VALUES(8, 15);
 INSERT INTO GROUP_USER(group_id, user_id)
-VALUES(4, 15);
+VALUES(9, 15);
 INSERT INTO GROUP_USER(group_id, user_id)
-VALUES(1, 16);
+VALUES(6, 16);
 INSERT INTO GROUP_USER(group_id, user_id)
-VALUES(2, 16);
+VALUES(7, 16);
 INSERT INTO GROUP_USER(group_id, user_id)
-VALUES(3, 16);
+VALUES(8, 16);
 INSERT INTO GROUP_USER(group_id, user_id)
-VALUES(4, 16);
+VALUES(9, 16);
 INSERT INTO GROUP_USER(group_id, user_id)
-VALUES(1, 17);
+VALUES(6, 17);
 INSERT INTO GROUP_USER(group_id, user_id)
-VALUES(2, 17);
+VALUES(7, 17);
 INSERT INTO GROUP_USER(group_id, user_id)
-VALUES(3, 17);
+VALUES(8, 17);
 INSERT INTO GROUP_USER(group_id, user_id)
-VALUES(4, 17);
+VALUES(9, 17);
 INSERT INTO GROUP_USER(group_id, user_id)
-VALUES(1, 18);
+VALUES(6, 18);
 INSERT INTO GROUP_USER(group_id, user_id)
-VALUES(2, 18);
+VALUES(7, 18);
 INSERT INTO GROUP_USER(group_id, user_id)
-VALUES(3, 18);
+VALUES(8, 18);
 INSERT INTO GROUP_USER(group_id, user_id)
-VALUES(4, 18);
+VALUES(9, 18);
 INSERT INTO GROUP_USER(group_id, user_id)
-VALUES(1, 19);
+VALUES(6, 19);
 INSERT INTO GROUP_USER(group_id, user_id)
-VALUES(2, 19);
+VALUES(7, 19);
 INSERT INTO GROUP_USER(group_id, user_id)
-VALUES(3, 19);
+VALUES(8, 19);
 INSERT INTO GROUP_USER(group_id, user_id)
-VALUES(4, 19);
+VALUES(9, 19);
 INSERT INTO GROUP_USER(group_id, user_id)
-VALUES(1, 20);
+VALUES(6, 20);
 INSERT INTO GROUP_USER(group_id, user_id)
-VALUES(2, 20);
+VALUES(7, 20);
 INSERT INTO GROUP_USER(group_id, user_id)
-VALUES(3, 20);
+VALUES(8, 20);
 INSERT INTO GROUP_USER(group_id, user_id)
-VALUES(4, 20);
+VALUES(9, 20);
 INSERT INTO GROUP_USER(group_id, user_id)
-VALUES(1, 21);
+VALUES(6, 21);
 INSERT INTO GROUP_USER(group_id, user_id)
-VALUES(2, 21);
+VALUES(7, 21);
 INSERT INTO GROUP_USER(group_id, user_id)
-VALUES(3, 21);
+VALUES(8, 21);
 INSERT INTO GROUP_USER(group_id, user_id)
-VALUES(4, 21);
+VALUES(9, 21);
 INSERT INTO GROUP_USER(group_id, user_id)
-VALUES(1, 22);
+VALUES(6, 22);
 INSERT INTO GROUP_USER(group_id, user_id)
-VALUES(2, 22);
+VALUES(7, 22);
 INSERT INTO GROUP_USER(group_id, user_id)
-VALUES(3, 22);
+VALUES(8, 22);
 INSERT INTO GROUP_USER(group_id, user_id)
-VALUES(4, 22);
+VALUES(9, 22);
 INSERT INTO GROUP_USER(group_id, user_id)
-VALUES(1, 23);
+VALUES(6, 23);
 INSERT INTO GROUP_USER(group_id, user_id)
-VALUES(2, 23);
+VALUES(7, 23);
 INSERT INTO GROUP_USER(group_id, user_id)
-VALUES(3, 23);
+VALUES(8, 23);
 INSERT INTO GROUP_USER(group_id, user_id)
-VALUES(4, 23);
+VALUES(9, 23);
 INSERT INTO GROUP_USER(group_id, user_id)
-VALUES(1, 24);
+VALUES(6, 24);
 INSERT INTO GROUP_USER(group_id, user_id)
-VALUES(2, 24);
+VALUES(7, 24);
 INSERT INTO GROUP_USER(group_id, user_id)
-VALUES(3, 24);
+VALUES(8, 24);
 INSERT INTO GROUP_USER(group_id, user_id)
-VALUES(4, 24);
+VALUES(9, 24);
 INSERT INTO GROUP_USER(group_id, user_id)
-VALUES(1, 25);
+VALUES(6, 25);
 INSERT INTO GROUP_USER(group_id, user_id)
-VALUES(2, 25);
+VALUES(7, 25);
 INSERT INTO GROUP_USER(group_id, user_id)
-VALUES(3, 25);
+VALUES(8, 25);
 INSERT INTO GROUP_USER(group_id, user_id)
-VALUES(4, 25);
+VALUES(9, 25);
 INSERT INTO GROUP_USER(group_id, user_id)
-VALUES(1, 26);
+VALUES(6, 26);
 INSERT INTO GROUP_USER(group_id, user_id)
-VALUES(2, 26);
+VALUES(7, 26);
 INSERT INTO GROUP_USER(group_id, user_id)
-VALUES(3, 26);
+VALUES(8, 26);
 INSERT INTO GROUP_USER(group_id, user_id)
-VALUES(4, 26);
+VALUES(9, 26);
 INSERT INTO GROUP_USER(group_id, user_id)
-VALUES(1, 27);
+VALUES(6, 27);
 INSERT INTO GROUP_USER(group_id, user_id)
-VALUES(2, 27);
+VALUES(7, 27);
 INSERT INTO GROUP_USER(group_id, user_id)
-VALUES(3, 27);
+VALUES(8, 27);
 INSERT INTO GROUP_USER(group_id, user_id)
-VALUES(4, 27);
+VALUES(9, 27);
 INSERT INTO GROUP_USER(group_id, user_id)
-VALUES(1, 28);
+VALUES(6, 28);
 INSERT INTO GROUP_USER(group_id, user_id)
-VALUES(2, 28);
+VALUES(7, 28);
 INSERT INTO GROUP_USER(group_id, user_id)
-VALUES(3, 28);
+VALUES(8, 28);
 INSERT INTO GROUP_USER(group_id, user_id)
-VALUES(4, 28);
+VALUES(9, 28);
 INSERT INTO GROUP_USER(group_id, user_id)
-VALUES(1, 29);
+VALUES(6, 29);
 INSERT INTO GROUP_USER(group_id, user_id)
-VALUES(2, 29);
+VALUES(7, 29);
 INSERT INTO GROUP_USER(group_id, user_id)
-VALUES(3, 29);
+VALUES(8, 29);
 INSERT INTO GROUP_USER(group_id, user_id)
-VALUES(4, 29);
+VALUES(9, 29);
 
 INSERT INTO TEXT_DIARY(created_at, updated_at, contents, day, month, title, year, user_id)
 VALUES(now(), now(), 'contents1', 1, 8, 'title1', 2022, 1);
@@ -5955,65 +5955,85 @@ VALUES('contents1', 31, 'FALSE', 8, 2022, 798, 34, 19);
 INSERT INTO COUNSELING(day, month, status, year, counselor_id, user_id, group_id)
 VALUES(10, 9, 'ACCEPTED', 2022, 31, 11, 8);
 INSERT INTO COUNSELING(day, month, status, year, counselor_id, user_id, group_id )
-VALUES(11, 9, 'ACCEPTED', 2022, 31, 11, 8);
-INSERT INTO COUNSELING(day, month, status, year, counselor_id, user_id, group_id)
-VALUES(12, 9, 'ACCEPTED', 2022, 31, 11, 8);
-INSERT INTO COUNSELING(day, month, status, year, counselor_id, user_id, group_id)
-VALUES(13, 9, 'ACCEPTED', 2022, 31, 11, 8);
-INSERT INTO COUNSELING(day, month, status, year, counselor_id, user_id, group_id)
-VALUES(10, 9, 'ACCEPTED', 2022, 31, 12, 8);
-INSERT INTO COUNSELING(day, month, status, year, counselor_id, user_id, group_id)
 VALUES(11, 9, 'ACCEPTED', 2022, 31, 12, 8);
 INSERT INTO COUNSELING(day, month, status, year, counselor_id, user_id, group_id)
-VALUES(12, 9, 'ACCEPTED', 2022, 31, 12, 8);
+VALUES(12, 9, 'ACCEPTED', 2022, 31, 13, 8);
 INSERT INTO COUNSELING(day, month, status, year, counselor_id, user_id, group_id)
-VALUES(13, 9, 'ACCEPTED', 2022, 31, 12, 8);
+VALUES(13, 9, 'ACCEPTED', 2022, 31, 14, 8);
+INSERT INTO COUNSELING(day, month, status, year, counselor_id, user_id, group_id)
+VALUES(10, 9, 'ACCEPTED', 2022, 31, 15, 8);
+INSERT INTO COUNSELING(day, month, status, year, counselor_id, user_id, group_id)
+VALUES(11, 9, 'ACCEPTED', 2022, 31, 16, 8);
+INSERT INTO COUNSELING(day, month, status, year, counselor_id, user_id, group_id)
+VALUES(12, 9, 'ACCEPTED', 2022, 31, 17, 8);
+INSERT INTO COUNSELING(day, month, status, year, counselor_id, user_id, group_id)
+VALUES(13, 9, 'ACCEPTED', 2022, 31, 18, 8);
+INSERT INTO COUNSELING(day, month, status, year, counselor_id, user_id, group_id)
+VALUES(13, 9, 'ACCEPTED', 2022, 32, 19, 8);
+INSERT INTO COUNSELING(day, month, status, year, counselor_id, user_id, group_id)
+VALUES(13, 9, 'ACCEPTED', 2022, 32, 20, 8);
+INSERT INTO COUNSELING(day, month, status, year, counselor_id, user_id, group_id)
+VALUES(13, 9, 'ACCEPTED', 2022, 32, 21, 8);
+INSERT INTO COUNSELING(day, month, status, year, counselor_id, user_id, group_id)
+VALUES(13, 9, 'ACCEPTED', 2022, 32, 22, 8);
+INSERT INTO COUNSELING(day, month, status, year, counselor_id, user_id, group_id)
+VALUES(13, 9, 'ACCEPTED', 2022, 32, 23, 8);
 INSERT INTO COUNSELING(day, month, status, year, counselor_id, user_id, group_id)
 VALUES(10, 9, 'ACCEPTED', 2022, 32, 11, 10);
 INSERT INTO COUNSELING(day, month, status, year, counselor_id, user_id, group_id)
-VALUES(11, 9, 'ACCEPTED', 2022, 32, 11, 10);
-INSERT INTO COUNSELING(day, month, status, year, counselor_id, user_id, group_id)
-VALUES(12, 9, 'ACCEPTED', 2022, 32, 11, 10);
-INSERT INTO COUNSELING(day, month, status, year, counselor_id, user_id, group_id)
-VALUES(13, 9, 'ACCEPTED', 2022, 32, 11, 10);
-INSERT INTO COUNSELING(day, month, status, year, counselor_id, user_id, group_id)
-VALUES(10, 9, 'ACCEPTED', 2022, 32, 12, 10);
-INSERT INTO COUNSELING(day, month, status, year, counselor_id, user_id, group_id)
 VALUES(11, 9, 'ACCEPTED', 2022, 32, 12, 10);
 INSERT INTO COUNSELING(day, month, status, year, counselor_id, user_id, group_id)
-VALUES(12, 9, 'ACCEPTED', 2022, 32, 12, 10);
+VALUES(12, 9, 'ACCEPTED', 2022, 32, 13, 10);
 INSERT INTO COUNSELING(day, month, status, year, counselor_id, user_id, group_id)
-VALUES(13, 9, 'ACCEPTED', 2022, 32, 12, 10);
+VALUES(13, 9, 'ACCEPTED', 2022, 32, 14, 10);
+INSERT INTO COUNSELING(day, month, status, year, counselor_id, user_id, group_id)
+VALUES(10, 9, 'ACCEPTED', 2022, 32, 15, 10);
+INSERT INTO COUNSELING(day, month, status, year, counselor_id, user_id, group_id)
+VALUES(11, 9, 'ACCEPTED', 2022, 32, 16, 10);
+INSERT INTO COUNSELING(day, month, status, year, counselor_id, user_id, group_id)
+VALUES(12, 9, 'ACCEPTED', 2022, 32, 17, 10);
+INSERT INTO COUNSELING(day, month, status, year, counselor_id, user_id, group_id)
+VALUES(13, 9, 'ACCEPTED', 2022, 32, 18, 10);
 
 INSERT INTO COUNSELING_DOCUMENT(contents, day, is_open, month, year, counseling_id, counselor_id, user_id, group_id)
 VALUES('contents1', 10, 'FALSE', 9, 2022, 799, 31, 11, 8);
 INSERT INTO COUNSELING_DOCUMENT(contents, day, is_open, month, year, counseling_id, counselor_id, user_id, group_id)
-VALUES('contents1', 11, 'FALSE', 9, 2022, 800, 31, 11, 8);
+VALUES('contents1', 11, 'FALSE', 9, 2022, 800, 31, 12, 8);
 INSERT INTO COUNSELING_DOCUMENT(contents, day, is_open, month, year, counseling_id, counselor_id, user_id, group_id)
-VALUES('contents1', 12, 'FALSE', 9, 2022, 801, 31, 11, 8);
+VALUES('contents1', 12, 'FALSE', 9, 2022, 801, 31, 13, 8);
 INSERT INTO COUNSELING_DOCUMENT(contents, day, is_open, month, year, counseling_id, counselor_id, user_id, group_id)
-VALUES('contents1', 13, 'FALSE', 9, 2022, 802, 31, 11, 8);
+VALUES('contents1', 13, 'FALSE', 9, 2022, 802, 31, 14, 8);
 INSERT INTO COUNSELING_DOCUMENT(contents, day, is_open, month, year, counseling_id, counselor_id, user_id, group_id)
-VALUES('contents1', 10, 'FALSE', 9, 2022, 803, 31, 12, 8);
+VALUES('contents1', 10, 'FALSE', 9, 2022, 803, 31, 15, 8);
 INSERT INTO COUNSELING_DOCUMENT(contents, day, is_open, month, year, counseling_id, counselor_id, user_id, group_id)
-VALUES('contents1', 11, 'FALSE', 9, 2022, 804, 31, 12, 8);
+VALUES('contents1', 11, 'FALSE', 9, 2022, 804, 31, 16, 8);
 INSERT INTO COUNSELING_DOCUMENT(contents, day, is_open, month, year, counseling_id, counselor_id, user_id, group_id)
-VALUES('contents1', 12, 'FALSE', 9, 2022, 805, 31, 12, 8);
+VALUES('contents1', 12, 'FALSE', 9, 2022, 805, 31, 17, 8);
 INSERT INTO COUNSELING_DOCUMENT(contents, day, is_open, month, year, counseling_id, counselor_id, user_id, group_id)
-VALUES('contents1', 13, 'FALSE', 9, 2022, 806, 31, 12, 8);
+VALUES('contents1', 13, 'FALSE', 9, 2022, 806, 31, 18, 8);
 INSERT INTO COUNSELING_DOCUMENT(contents, day, is_open, month, year, counseling_id, counselor_id, user_id, group_id)
-VALUES('contents1', 10, 'FALSE', 9, 2022, 807, 32, 11, 10);
+VALUES('contents1', 13, 'FALSE', 9, 2022, 807, 31, 19, 8);
 INSERT INTO COUNSELING_DOCUMENT(contents, day, is_open, month, year, counseling_id, counselor_id, user_id, group_id)
-VALUES('contents1', 11, 'FALSE', 9, 2022, 808, 32, 11, 10);
+VALUES('contents1', 13, 'FALSE', 9, 2022, 808, 31, 20, 8);
 INSERT INTO COUNSELING_DOCUMENT(contents, day, is_open, month, year, counseling_id, counselor_id, user_id, group_id)
-VALUES('contents1', 12, 'FALSE', 9, 2022, 809, 32, 11, 10);
+VALUES('contents1', 13, 'FALSE', 9, 2022, 809, 31, 21, 8);
 INSERT INTO COUNSELING_DOCUMENT(contents, day, is_open, month, year, counseling_id, counselor_id, user_id, group_id)
-VALUES('contents1', 13, 'FALSE', 9, 2022, 810, 32, 11, 10);
+VALUES('contents1', 13, 'FALSE', 9, 2022, 810, 31, 22, 8);
 INSERT INTO COUNSELING_DOCUMENT(contents, day, is_open, month, year, counseling_id, counselor_id, user_id, group_id)
-VALUES('contents1', 10, 'FALSE', 9, 2022, 811, 32, 12, 10);
+VALUES('contents1', 13, 'FALSE', 9, 2022, 811, 31, 23, 8);
 INSERT INTO COUNSELING_DOCUMENT(contents, day, is_open, month, year, counseling_id, counselor_id, user_id, group_id)
-VALUES('contents1', 11, 'FALSE', 9, 2022, 812, 32, 12, 10);
+VALUES('contents1', 10, 'FALSE', 9, 2022, 812, 32, 11, 10);
 INSERT INTO COUNSELING_DOCUMENT(contents, day, is_open, month, year, counseling_id, counselor_id, user_id, group_id)
-VALUES('contents1', 12, 'FALSE', 9, 2022, 813, 32, 12, 10);
+VALUES('contents1', 11, 'FALSE', 9, 2022, 813, 32, 12, 10);
 INSERT INTO COUNSELING_DOCUMENT(contents, day, is_open, month, year, counseling_id, counselor_id, user_id, group_id)
-VALUES('contents1', 13, 'FALSE', 9, 2022, 814, 32, 12, 10);
+VALUES('contents1', 12, 'FALSE', 9, 2022, 814, 32, 13, 10);
+INSERT INTO COUNSELING_DOCUMENT(contents, day, is_open, month, year, counseling_id, counselor_id, user_id, group_id)
+VALUES('contents1', 13, 'FALSE', 9, 2022, 815, 32, 14, 10);
+INSERT INTO COUNSELING_DOCUMENT(contents, day, is_open, month, year, counseling_id, counselor_id, user_id, group_id)
+VALUES('contents1', 10, 'FALSE', 9, 2022, 816, 32, 15, 10);
+INSERT INTO COUNSELING_DOCUMENT(contents, day, is_open, month, year, counseling_id, counselor_id, user_id, group_id)
+VALUES('contents1', 11, 'FALSE', 9, 2022, 817, 32, 16, 10);
+INSERT INTO COUNSELING_DOCUMENT(contents, day, is_open, month, year, counseling_id, counselor_id, user_id, group_id)
+VALUES('contents1', 12, 'FALSE', 9, 2022, 818, 32, 17, 10);
+INSERT INTO COUNSELING_DOCUMENT(contents, day, is_open, month, year, counseling_id, counselor_id, user_id, group_id)
+VALUES('contents1', 13, 'FALSE', 9, 2022, 819, 32, 18, 10);
