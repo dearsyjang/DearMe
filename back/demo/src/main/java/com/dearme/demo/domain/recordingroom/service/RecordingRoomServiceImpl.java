@@ -46,7 +46,6 @@ public class RecordingRoomServiceImpl implements RecordingRoomService {
             e.printStackTrace();
             return null;
         }
-        System.out.println(token);
         return GetSessionTokenResponseDto.of(token);
     }
 
