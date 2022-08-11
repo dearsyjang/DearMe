@@ -32,10 +32,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.io.BufferedReader;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -151,25 +148,68 @@ public class VideoDiaryServiceImpl implements VideoDiaryService {
 
         String filePath = "/home/ubuntu/docker-volume/video/" + path + "/" + path;
 
-        try{
-            //String[] command = new String[] {"sh","-c", "ffmpeg -i " + filePath + ".mp4 " + filePath + ".mp3"};
-            String command = "mkdir shell_test";
-            new ProcessBuilder("/bin/bash", "-c", command).start();
+        // ProcessBuilder에 넣어줄 커맨드 준비
+        List<String> cmd = new ArrayList<String>();
+        cmd.add("/bin/bash");
+        cmd.add("-c");
+        cmd.add("mkdir qwer");
 
-            command = "find my-project-0801-358104-1615eb198267.json";
-            new ProcessBuilder("/bin/bash", "-c", command).start();
-//            BufferedReader reader =
-//                    new BufferedReader(new InputStreamReader(process.getInputStream()));
-//
-//            String line;
-//            while ((line = reader.readLine()) != null) {
-//                System.out.println(line);
-//            }
-//ls
-//            int exitCode = process.waitFor();
-        }catch (Exception e){
-            e.printStackTrace();
+        StringBuilder sb1 = new StringBuilder(1024);
+        String s = null;
+        ProcessBuilder prsbld = null;
+        Process prs = null;
+
+        try {
+            prsbld = new ProcessBuilder(cmd);
+            prsbld.directory(new File("/home/ubuntu")); // 디렉토리 이동
+            System.out.println("command: " + prsbld.command()); 	// 커맨드 확인
+
+            // 프로세스 수행시작
+            prs = prsbld.start();
+
+            BufferedReader stdError = new BufferedReader(new InputStreamReader(prs.getErrorStream()));
+            while ((s = stdError.readLine()) != null)
+            {
+                sb1.append(s);
+            }
+            prs.getErrorStream().close();
+            prs.getInputStream().close();
+            prs.getOutputStream().close();
+
+            // 종료까지 대기
+            prs.waitFor();
+
+        }catch (Exception e1) {
         }
+        finally
+        {
+            if(prs != null)
+                try {
+                    prs.destroy();
+                } catch(Exception e2) {
+                }
+
+        }
+
+//        try{
+//            //String[] command = new String[] {"sh","-c", "ffmpeg -i " + filePath + ".mp4 " + filePath + ".mp3"};
+//            String command = "mkdir shell_test";
+//            new ProcessBuilder("/bin/bash", "-c", command).start();
+//
+//            command = "find my-project-0801-358104-1615eb198267.json";
+//            new ProcessBuilder("sh", "-c", command).start();
+////            BufferedReader reader =
+////                    new BufferedReader(new InputStreamReader(process.getInputStream()));
+////
+////            String line;
+////            while ((line = reader.readLine()) != null) {
+////                System.out.println(line);
+////            }
+////ls
+////            int exitCode = process.waitFor();
+//        }catch (Exception e){
+//            e.printStackTrace();
+//        }
         filePath = filePath+".mp3";
 
         //테스트용
@@ -177,7 +217,7 @@ public class VideoDiaryServiceImpl implements VideoDiaryService {
         //String filePath="C:\\Users\\leekijong\\S07P12D206\\back\\demo\\src\\main\\resources\\ses_QtLHqSPcqs.mp3";
         String[] text= new String[6];
         try {
-            CredentialsProvider credentialsProvider = FixedCredentialsProvider.create(ServiceAccountCredentials.fromStream(new FileInputStream("my-project-0801-358104-1615eb198267.json")));
+            CredentialsProvider credentialsProvider = FixedCredentialsProvider.create(ServiceAccountCredentials.fromStream(new FileInputStream("src/main/resources/my-project-0801-358104-1615eb198267.json")));
             SpeechSettings settings = SpeechSettings.newBuilder().setCredentialsProvider(credentialsProvider).build();
             // Instantiates a client
             SpeechClient speech=SpeechClient.create(settings);
