@@ -148,26 +148,29 @@ public class VideoDiaryServiceImpl implements VideoDiaryService {
     public String[] videoSTT(String path) throws IOException {
         //서버에서 실행시킬 때
 
-//        String filePath = "/home/ubuntu/docker-volume/video/" + path + "/" + path;
-//        filePath = filePath.substring(0, filePath.length()-4);
-//        String s;
-//        Process p;
-//        try{
-//            String[] cmd = {"/bin/sh", "-c", "ffmpeg -i " + filePath + ".mp4 " + filePath + ".mp3"};
-//            p = Runtime.getRuntime().exec(cmd);
-//            BufferedReader br = new BufferedReader(new InputStreamReader(p.getInputStream()));
-//            while ((s = br.readLine()) != null)
-//                System.out.println(s);
-//            p.waitFor();
-//            p.destroy();
-//        }catch (Exception e){
-//            e.printStackTrace();
-//        }
-//        filePath = filePath+".mp3";
-
+        String filePath = "/home/ubuntu/docker-volume/video/" + path + "/" + path;
+        filePath = filePath.substring(0, filePath.length()-4);
+        System.out.println(filePath);
+        String s;
+        Process p;
+        try{
+            String[] cmd = {"/bin/sh", "-c", "ffmpeg -i " + filePath + ".mp4 " + filePath + ".mp3"};
+            System.out.println(cmd[2]);
+            p = Runtime.getRuntime().exec(cmd);
+            BufferedReader br = new BufferedReader(new InputStreamReader(p.getInputStream()));
+            while ((s = br.readLine()) != null)
+                System.out.println(s);
+            p.waitFor();
+            p.destroy();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        filePath = filePath+".mp3";
+        System.out.println(filePath);
 
         //테스트용
-        String filePath="docker-volume/video/ses_QtLHqSPcqs/ses_QtLHqSPcqs.mp3";
+        //String filePath="/home/ubuntu/docker-volume/video/ses_QtLHqSPcqs/ses_QtLHqSPcqs.mp3";
+        //String filePath="C:\\Users\\leekijong\\S07P12D206\\back\\demo\\src\\main\\resources\\ses_QtLHqSPcqs.mp3";
         String[] text= new String[6];
         try {
             CredentialsProvider credentialsProvider = FixedCredentialsProvider.create(ServiceAccountCredentials.fromStream(new FileInputStream("C:\\Users\\leekijong\\S07P12D206\\back\\demo\\src\\main\\resources\\my-project-0801-358104-1615eb198267.json")));
