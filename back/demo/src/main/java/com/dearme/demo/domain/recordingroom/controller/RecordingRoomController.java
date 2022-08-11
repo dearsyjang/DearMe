@@ -35,13 +35,13 @@ public class RecordingRoomController {
         boolean hasAudio = (boolean) params.get("hasAudio");
         boolean hasVideo = (boolean) params.get("hasVideo");
         Recording.OutputMode outputMode = Recording.OutputMode.valueOf((String) params.get("outputMode"));
-        return ResponseEntity.accepted().body(CommonResponse.getSuccessResponse(recordingRoomService.getStartRecording(sessionId, hasAudio, hasVideo, outputMode)));
+        return ResponseEntity.ok().body(CommonResponse.getSuccessResponse(recordingRoomService.getStartRecording(sessionId, hasAudio, hasVideo, outputMode)));
     }
 
     @RequestMapping(value = "/stop", method = RequestMethod.POST)
     public ResponseEntity<CommonResponse> stopRecording(@RequestBody Map<String, Object> params) {
         String recordingId = (String) params.get("recording");
-        return ResponseEntity.accepted().body(CommonResponse.getSuccessResponse(recordingRoomService.getStopRecording(recordingId)));
+        return ResponseEntity.ok().body(CommonResponse.getSuccessResponse(recordingRoomService.getStopRecording(recordingId)));
     }
     @RequestMapping(value = "/delete", method = RequestMethod.DELETE)
     public void deleteRecording(@RequestBody Map<String, Object> params) {
