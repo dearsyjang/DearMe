@@ -1,9 +1,11 @@
 package com.dearme.demo.domain.counselingroom.service;
 
 import com.dearme.demo.domain.counseling.entity.Counseling;
+import com.dearme.demo.domain.counseling.exception.NoExistCounselingException;
 import com.dearme.demo.domain.counseling.repository.CounselingRepository;
 import com.dearme.demo.domain.counselingroom.dto.CreateCounselingRoomRequestDto;
 import com.dearme.demo.domain.counselingroom.dto.CreateCounselingRoomResponseDto;
+import com.dearme.demo.domain.counselingroom.dto.GetSessionTokenResponseDto;
 import com.dearme.demo.domain.counselingroom.entity.CounselingRoom;
 import com.dearme.demo.domain.counselingroom.repository.CounselingRoomRepository;
 import com.dearme.demo.domain.user.entity.Type;
@@ -58,5 +60,13 @@ public class CounselingRoomServiceImpl implements CounselingRoomService{
         counseling.updateCounselingRoom(counselingRoom, userToken);
         counselingRepository.save(counseling);
         return CreateCounselingRoomResponseDto.of(counselingRoom);
+    }
+
+    @Override
+    public GetSessionTokenResponseDto getSessionToken(String id, Long counselingId) {
+        Counseling counseling = counselingRepository.findCounselingByUser_IdAndId(id, counselingId).orElseThrow(() -> {
+            throw new NoExistCounselingException();
+        });
+        return GetSessionTokenResponseDto.of(counseling);
     }
 }
