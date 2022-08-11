@@ -33,60 +33,60 @@ public class MorningJob implements Job {
     @Override
     public void execute(JobExecutionContext ctx) throws JobExecutionException {
 
-        JobDataMap dataMap = ctx.getJobDetail().getJobDataMap();
-
-        String type = dataMap.getString("type");
-        String sentiment = dataMap.getString("sentiment");
-        double percentage = dataMap.getDouble("percentage");
-
-        try {
-
-            HttpClient httpClient = HttpClientBuilder.create().build(); //Use this instead
-            HttpPost postRequest = new HttpPost("https://sens.apigw.ntruss.com/sms/v2/services/ncp:sms:kr:257491845770:deame/messages"); //POST 메소드 URL 새성
-            String time = Long.toString(System.currentTimeMillis());
-            postRequest.addHeader("x-ncp-apigw-timestamp", time);
-            postRequest.addHeader("x-ncp-iam-access-key", "TMT1IsuM3qkEm2yQn6XI");
-            postRequest.addHeader("x-ncp-apigw-signature-v2",makeSignature(time) );
-            postRequest.addHeader("Content-Type", "application/json; charset=UTF-8");
-
-            String s = getYesterday(sentiment, percentage);
-            String []split=s.split(",");
-            JSONObject obj = new JSONObject();
-            if(type.equals("textDiary")) type="글 일기";
-            else type="영상 일기";
-
-            obj.put("type", "sms");
-            obj.put("from", "01087624001");
-            obj.put("content", "1");
-            JSONObject obj2 = new JSONObject();
-            obj2.put("to", "01087624001");
-            if(sentiment.equals("neutral"))
-                obj2.put("content", "오늘의 명언(" +type + ")\n" + split[0]+"\n" + split[1]);
-            else{
-                obj2.put("content", "오늘의 편지(" +type + ")\n" + split[0] + "\n" + split[1]);
-            }
-            List<JSONObject> jsonArray = new ArrayList<>();
-            jsonArray.add(obj2);
-
-            obj.put("messages", jsonArray);
-            StringEntity se = new StringEntity(obj.toString(),"UTF-8");
-            se.setContentEncoding("UTF-8");
-            se.setContentType("application/json");
-            postRequest.setEntity(se);
-
-
-            HttpResponse response = httpClient.execute(postRequest);		//Response 출력
-            if (response.getStatusLine().getStatusCode() == 200) {
-
-                ResponseHandler<String> handler = new BasicResponseHandler();
-                String body = handler.handleResponse(response);
-
-            } else {
-                System.out.println("response is error : " + response.getStatusLine().getStatusCode());
-            }
-        } catch (Exception e){
-            System.err.println(e.toString());
-        }
+//        JobDataMap dataMap = ctx.getJobDetail().getJobDataMap();
+//
+//        String type = dataMap.getString("type");
+//        String sentiment = dataMap.getString("sentiment");
+//        double percentage = dataMap.getDouble("percentage");
+//
+//        try {
+//
+//            HttpClient httpClient = HttpClientBuilder.create().build(); //Use this instead
+//            HttpPost postRequest = new HttpPost("https://sens.apigw.ntruss.com/sms/v2/services/ncp:sms:kr:257491845770:deame/messages"); //POST 메소드 URL 새성
+//            String time = Long.toString(System.currentTimeMillis());
+//            postRequest.addHeader("x-ncp-apigw-timestamp", time);
+//            postRequest.addHeader("x-ncp-iam-access-key", "TMT1IsuM3qkEm2yQn6XI");
+//            postRequest.addHeader("x-ncp-apigw-signature-v2",makeSignature(time) );
+//            postRequest.addHeader("Content-Type", "application/json; charset=UTF-8");
+//
+//            String s = getYesterday(sentiment, percentage);
+//            String []split=s.split(",");
+//            JSONObject obj = new JSONObject();
+//            if(type.equals("textDiary")) type="글 일기";
+//            else type="영상 일기";
+//
+//            obj.put("type", "sms");
+//            obj.put("from", "01087624001");
+//            obj.put("content", "1");
+//            JSONObject obj2 = new JSONObject();
+//            obj2.put("to", "01087624001");
+//            if(sentiment.equals("neutral"))
+//                obj2.put("content", "오늘의 명언\n" + split[0]+"\n" + split[1]);
+//            else{
+//                obj2.put("content", "오늘의 편지(" +type + ")\n" + split[0] + "\n" + split[1]);
+//            }
+//            List<JSONObject> jsonArray = new ArrayList<>();
+//            jsonArray.add(obj2);
+//
+//            obj.put("messages", jsonArray);
+//            StringEntity se = new StringEntity(obj.toString(),"UTF-8");
+//            se.setContentEncoding("UTF-8");
+//            se.setContentType("application/json");
+//            postRequest.setEntity(se);
+//
+//
+//            HttpResponse response = httpClient.execute(postRequest);		//Response 출력
+//            if (response.getStatusLine().getStatusCode() == 200) {
+//
+//                ResponseHandler<String> handler = new BasicResponseHandler();
+//                String body = handler.handleResponse(response);
+//
+//            } else {
+//                System.out.println("response is error : " + response.getStatusLine().getStatusCode());
+//            }
+//        } catch (Exception e){
+//            System.err.println(e.toString());
+//        }
 
     }
     public String getYesterday(String sentiment, double percentage){

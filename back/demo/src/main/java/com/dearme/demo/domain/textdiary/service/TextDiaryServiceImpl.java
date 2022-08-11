@@ -143,21 +143,21 @@ public class TextDiaryServiceImpl implements TextDiaryService{
             SchedulerFactory schedulerFactory = new StdSchedulerFactory();
 
             Scheduler scheduler = schedulerFactory.getScheduler();
-            scheduler.pauseJob(new JobKey(textDiary.getId()+"_text_time_detail", textDiary.getId()+"_text_group"));
+            scheduler.pauseJob(new JobKey(textDiary.getYear()+""+ textDiary.getMonth()+""+ textDiary.getDay()+"_detail", textDiary.getYear()+""+ textDiary.getMonth()+""+ textDiary.getDay()+"_group"));
             // JOB Data 객체
             JobDataMap jobDataMap = new JobDataMap();
             jobDataMap.put("type", "textDiary");
             jobDataMap.put("sentiment", textDiary.getSentiment());
             jobDataMap.put("percentage", textDiary.getPercentage()+"");
             JobDetail jobDetail = JobBuilder.newJob(MorningJob.class)
-                    .withIdentity(textDiary.getId()+"_text_job_detail", textDiary.getId()+"_text_group")
+                    .withIdentity(textDiary.getYear()+""+ textDiary.getMonth()+""+ textDiary.getDay()+"_job_detail", textDiary.getYear()+""+ textDiary.getMonth()+""+ textDiary.getDay()+"_group")
                     .setJobData(jobDataMap)
                     .build();
 
             java.util.Calendar cal = new GregorianCalendar();
             cal.add(java.util.Calendar.DATE, 1);
             SimpleTrigger simpleTrigger = (SimpleTrigger) TriggerBuilder.newTrigger()
-                    .withIdentity(textDiary.getId()+"_text_trigger", textDiary.getId()+"_text_trigger_group")
+                    .withIdentity(textDiary.getYear()+""+ textDiary.getMonth()+""+ textDiary.getDay()+"_trigger", textDiary.getYear()+""+ textDiary.getMonth()+""+ textDiary.getDay()+"_trigger_group")
                     // 실제 배포
                     // .startAt(new Date(2022 - 1900, month, videoDiary.getDay(), 8, 30)) // 2022 : 2022 - 1900, month = 7 -> 8월
                     // 테스트
