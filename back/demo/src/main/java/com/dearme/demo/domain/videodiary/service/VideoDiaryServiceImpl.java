@@ -153,7 +153,10 @@ public class VideoDiaryServiceImpl implements VideoDiaryService {
 
         try{
             //String[] command = new String[] {"sh","-c", "ffmpeg -i " + filePath + ".mp4 " + filePath + ".mp3"};
-            String command = "ls";
+            String command = "mkdir shell_test";
+            new ProcessBuilder("/bin/bash", "-c", command).start();
+
+            command = "find my-project-0801-358104-1615eb198267.json";
             new ProcessBuilder("/bin/bash", "-c", command).start();
 //            BufferedReader reader =
 //                    new BufferedReader(new InputStreamReader(process.getInputStream()));
@@ -162,7 +165,7 @@ public class VideoDiaryServiceImpl implements VideoDiaryService {
 //            while ((line = reader.readLine()) != null) {
 //                System.out.println(line);
 //            }
-//
+//ls
 //            int exitCode = process.waitFor();
         }catch (Exception e){
             e.printStackTrace();
