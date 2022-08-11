@@ -191,6 +191,7 @@ errorOutput.append(msg+System.getProperty("line.separator"));
 process.waitFor();
 
 // shell 실행이 정상 종료되었을 경우
+    System.out.println(process.exitValue());
 if(process.exitValue()==0){
 System.out.println("성공");
 System.out.println(successOutput.toString());
