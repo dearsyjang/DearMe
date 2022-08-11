@@ -1,5 +1,6 @@
 package com.dearme.demo.global.scheduler;
 
+import com.google.api.client.repackaged.org.apache.commons.codec.binary.Base64;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
@@ -11,7 +12,12 @@ import org.quartz.JobDataMap;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 
+import javax.crypto.Mac;
+import javax.crypto.spec.SecretKeySpec;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -67,5 +73,30 @@ public class CounselTimeJob implements Job {
         } else {
             System.out.println("response is error : " + response.getStatusLine().getStatusCode());
         }
+    }
+    public static String makeSignature(String time) throws NoSuchAlgorithmException, UnsupportedEncodingException, InvalidKeyException {
+        String space = " ";                    // one space
+        String newLine = "\n";                    // new line
+        String method = "POST";                    // method
+        String url = "/sms/v2/services/ncp:sms:kr:257491845770:deame/messages";    // url (include query string)
+        String timestamp = time;            // current timestamp (epoch)
+        String accessKey = "TMT1IsuM3qkEm2yQn6XI";            // access key id (from portal or Sub Account)
+        String secretKey = "x6qkoe05cswMJdyhFSv090qcNywkkG1qcTFYiE1r";
+        String message = new StringBuilder()
+                .append(method)
+                .append(space)
+                .append(url)
+                .append(newLine)
+                .append(timestamp)
+                .append(newLine)
+                .append(accessKey)
+                .toString();
+        SecretKeySpec signingKey = new SecretKeySpec(secretKey.getBytes("UTF-8"), "HmacSHA256");
+        Mac mac = Mac.getInstance("HmacSHA256");
+        mac.init(signingKey);
+
+        byte[] rawHmac = mac.doFinal(message.getBytes("UTF-8"));
+        String encodeBase64String = Base64.encodeBase64String(rawHmac);
+        return encodeBase64String;
     }
 }

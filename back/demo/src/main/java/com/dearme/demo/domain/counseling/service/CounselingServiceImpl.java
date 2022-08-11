@@ -131,7 +131,7 @@ public class CounselingServiceImpl implements CounselingService{
             SimpleTrigger simpleTrigger = (SimpleTrigger) TriggerBuilder.newTrigger()
                     .withIdentity(counseling.getId()+"_day_counseling_trigger", counseling.getId()+"_day_counseling_trigger_group")
                     //실제 배포
-                    .startAt(new Date(counseling.getYear() - 1900, month, counseling.getDay(), 8, 30)) // 2022 : 2022 - 1900, month = 7 -> 8월
+                    .startAt(new Date(counseling.getYear() - 1900, month, counseling.getDay()-3, 8, 30)) // 2022 : 2022 - 1900, month = 7 -> 8월
                     //테스트용
                     //.startAt(new Date(2022 - 1900, month, counseling.getDay(), counseling.getHours(), 12)) // 2022 : 2022 - 1900, month = 7 -> 8월
                     .withSchedule(SimpleScheduleBuilder.repeatSecondlyForTotalCount(1, 10)) // 10초마다 반복하며, 최대 1회 실행
