@@ -149,9 +149,8 @@ public class VideoDiaryServiceImpl implements VideoDiaryService {
         String filePath = "/home/ubuntu/docker-volume/video/" + path + "/" + path;
 
         List<String> cmd = new ArrayList<String>();
-        cmd.add("sh");
-        cmd.add("-c");
         cmd.add("dir");
+        cmd.add("/home");
         ProcessBuilder bld = new ProcessBuilder(cmd);
         bld.start();
 
