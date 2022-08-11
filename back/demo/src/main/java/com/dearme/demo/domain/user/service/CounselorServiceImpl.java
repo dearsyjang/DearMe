@@ -36,13 +36,13 @@ public class CounselorServiceImpl implements CounselorService{
     }
 
     @Override
-    public CounselorViewResponseDto getCounselor(String id) {
-        User user = userRepository.findUserById(id).orElseThrow(() -> {
+    public CounselorViewResponseDto getCounselor(Long id) {
+        User user = userRepository.findUserByUserId(id).orElseThrow(() -> {
             throw new NoExistUserException();
         });
         double value=ReviewCalc(user);
 
-        List<Review> tempList = reviewRepository.findReviewByCounselor_Id(id);
+        List<Review> tempList = reviewRepository.findReviewsByCounselor_UserId(id);
         List<ReviewViewResponseDto> reviewList = new ArrayList<>();
         for(Review r : tempList){
             reviewList.add(new ReviewViewResponseDto(r.getId(),

@@ -24,7 +24,7 @@ public class CounselorController {
     }
 
     @GetMapping("/{counselorId}")
-    public ResponseEntity<CommonResponse> getCounselor(HttpServletRequest request, @PathVariable("counselorId") String counselorId){
+    public ResponseEntity<CommonResponse> getCounselor(HttpServletRequest request, @PathVariable("counselorId") Long counselorId){
         return new ResponseEntity<>(CommonResponse.getSuccessResponse(counselorService.getCounselor(counselorId)), HttpStatus.OK);
     }
 }
