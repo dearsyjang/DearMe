@@ -1,14 +1,12 @@
 package com.dearme.demo.domain.counseling.service;
 
-import com.dearme.demo.domain.counseling.dto.CounselingInfoListResponseDto;
-import com.dearme.demo.domain.counseling.dto.CounselingInfoResponseDto;
-import com.dearme.demo.domain.counseling.dto.UpdateCounselingRequestDto;
-import com.dearme.demo.domain.counseling.dto.UpdateCounselingResponseDto;
+import com.dearme.demo.domain.counseling.dto.*;
 import com.dearme.demo.domain.counseling.entity.Counseling;
 import com.dearme.demo.domain.counseling.entity.Status;
 import com.dearme.demo.domain.counseling.exception.NoExistCounselingException;
 import com.dearme.demo.domain.counseling.repository.CounselingRepository;
 import com.dearme.demo.domain.counselingdocument.entity.CounselingDocument;
+import com.dearme.demo.domain.group.entity.Group;
 import com.dearme.demo.domain.user.entity.Type;
 import com.dearme.demo.domain.user.entity.User;
 import com.dearme.demo.domain.user.exception.NoExistUserException;
@@ -45,15 +43,28 @@ public class CounselingServiceImpl implements CounselingService{
             throw new NoExistUserException();
         });
         List<Counseling> counselings = null;
-        if(user.getType().equals(Type.USER))
-            counselings = user.getUserCounselings();
-        else
-            counselings = user.getCounselorCounselings();
         List<CounselingInfoResponseDto> counselingInfoResponseDtos = new ArrayList<>();
-        for(Counseling counseling : counselings){
-            counselingInfoResponseDtos.add(CounselingInfoResponseDto.of(counseling));
+        List<CounselorGroupCounselingsResponseDto> counselorGroupCounselingsResponseDtos = new ArrayList<>();
+        if(user.getType().equals(Type.USER)) {
+            counselings = user.getUserCounselings();
+            for(Counseling counseling : counselings){
+                counselingInfoResponseDtos.add(CounselingInfoResponseDto.of(counseling));
+            }
         }
-        return new CounselingInfoListResponseDto(counselingInfoResponseDtos);
+        else {
+            counselings = user.getCounselorCounselings();
+            for(Counseling counseling : counselings){
+                if(counseling.getGroup() == null)
+                    counselingInfoResponseDtos.add(CounselingInfoResponseDto.of(counseling));
+            }
+            List<Group> groups = user.getGroups();
+            for(Group group : groups){
+                counselorGroupCounselingsResponseDtos.add(CounselorGroupCounselingsResponseDto.of(group));
+            }
+        }
+
+
+        return new CounselingInfoListResponseDto(counselingInfoResponseDtos, counselorGroupCounselingsResponseDtos);
     }
 
     @Override
