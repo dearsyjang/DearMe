@@ -20,6 +20,7 @@ public class CounselingInfoResponseDto {
     private Long counselingDocumentId;
     private Long groupId;
     private Status status;
+    private String token;
 
     public static CounselingInfoResponseDto of(Counseling entity){
         if(entity.getGroup() != null)
@@ -32,6 +33,7 @@ public class CounselingInfoResponseDto {
                     .day(entity.getDay())
                     .hours(entity.getHours())
                     .status(entity.getStatus())
+                    .token(entity.getToken())
                     .build();
 
         return CounselingInfoResponseDto.builder()
@@ -44,6 +46,7 @@ public class CounselingInfoResponseDto {
                 .hours(entity.getHours())
                 .counselingDocumentId(entity.getCounselingDocument().getId())
                 .status(entity.getStatus())
+                .token(entity.getToken())
                 .build();
     }
 }
