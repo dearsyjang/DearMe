@@ -124,10 +124,10 @@
 
 <template>
   <div>
-     카운슬러 목록 나와야됨
-    {{counselors}}
+     카운슬러 목록 기모링~
+
     <counselor-list-item
-      v-for="(counselor,idx) in counselors"
+      v-for="(counselor,idx) in counselors.data"
       :key="idx"
       :counselor="counselor">
     </counselor-list-item>

@@ -1,6 +1,6 @@
 import CounselorListView from '@/views/counselor/CounselorListView.vue'
 import CounselorDetailView from '@/views/counselor/CounselorDetailView.vue'
-import FileFormComp from '@/views/counselor/components/FileFormComp'
+import FileFormComp from '@/views/counselor/components/FileFormComp.vue'
 
 
 
@@ -11,17 +11,17 @@ export default [
         name: 'counselorList',
         component: CounselorListView
       },
-      {
-        path: '/counselors/counselor/:counselorId',
-        name: 'counselor',
-        component: CounselorDetailView
-      },
+   
       {
         path: '/counselors/attachFile',
         name: 'attachfile',
         component: FileFormComp
       },
-
+      {
+        path: '/counselors/:counselorId',
+        name: 'counselorProfile',
+        component: CounselorDetailView
+      },
 
 
   ]

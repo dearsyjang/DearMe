@@ -26,7 +26,7 @@ export default {
   },
   counselors: {
      counselors : () => HOST + COUNSELOR,
-    // counselor : (userId) => HOST + MEMBER  + '/detail' + `/${userId}`,
+     counselor : (counselorId) => HOST + COUNSELOR  + `/${counselorId}`,
     // filter : (categoryId) => HOST + MEMBER + '/filter' +  `/${categoryId}`,
     // search : (keyword) => HOST + MEMBER + '/search' +  `/${keyword}`,
   }

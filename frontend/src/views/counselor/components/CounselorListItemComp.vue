@@ -18,9 +18,12 @@
       </div>
     </router-link> -->
     <!-- <router-link to="/counselors/counselor/:counselorId"> -->
+    {{counselor.counselorId}}
     
-    <!-- <router-link
-        :to="{ name: 'counselor', params: {counselorId: counselor.id} }"> -->
+    <!-- <router-link 
+    :to="`/counselors/${counselor.counselorId}`"> -->
+    <router-link 
+    :to="{ name: 'counselorProfile', params: {counselorId: counselor.counselorId}}">
     <div class="card mb-3" style="max-width: 540px;">
       <div class="row g-0">
         <div class="col-md-4">
@@ -28,14 +31,14 @@
         </div>
         <div class="col-md-8">
           <div class="card-body">
-            <h5 class="card-title">닉네임 : {{counselor.nickname}}</h5>
-            <p class="card-text">{{counselor.counselorProfileInfoDto}}</p>
-            <p class="card-text"><small class="text-muted"></small></p>
+            <h5 class="card-title">닉네임 : {{counselor.nickName}}</h5>
+            <!-- <p class="card-text">{{counselor}}</p> -->
+            <p class="card-text"><small class="text-muted">평점 / 후기 수 :{{counselor.value}}/{{counselor.reviewCnt}}</small></p>
           </div>
         </div>
       </div>
     </div>
-    <!-- </router-link> -->
+    </router-link>
 
   </div>
 

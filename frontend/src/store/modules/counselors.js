@@ -43,25 +43,26 @@ export default {
         }
       })
       .then(res => {
-       
         commit('SET_COUNSELORS', res.data)
-        console.log(res)
       })       
         
       .catch(err => {
-        console.log(1)
         console.error(err)
       })
     },
 
 
-    fetchCounselor({ commit, getters }, memberId) {
+    fetchCounselor({ commit, getters }, counselorId) {
       axios({
-       url: drf.counselors.counselor(memberId),
+       url: drf.counselors.counselor(counselorId),
        method : 'GET',
-       headers: getters.authHeader,
+       headers: {
+        'Content-Type': 'application/json',
+        'Authorization': getters.authHeader2
+        }
       })
-      .then(res =>commit('SET_COUNSELOR', res.data))       
+      .then(res =>{
+        commit('SET_COUNSELOR', res.data)})       
       .catch(err => {
         console.error(err.response)
         if (err.response.status === 404) {
