@@ -148,22 +148,12 @@ public class VideoDiaryServiceImpl implements VideoDiaryService {
 
         String filePath = "/home/ubuntu/docker-volume/video/" + path + "/" + path;
 
-        List cmdList = new ArrayList();
-        cmdList.add("sudo mkdir home/ubuntu/test2");
-
-        Process process = null;
-        String str = null;
-
-        try {
-            process = new ProcessBuilder(cmdList).start();
-            BufferedReader stdOut = new BufferedReader(new InputStreamReader(process.getInputStream()));
-
-            while((str = stdOut.readLine()) != null) {
-                System.out.println(str);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        List<String> cmd = new ArrayList<String>();
+        cmd.add("sh");
+        cmd.add("-c");
+        cmd.add("dir");
+        ProcessBuilder bld = new ProcessBuilder(cmd);
+        bld.start();
 
 //        try{
 //            //String[] command = new String[] {"sh","-c", "ffmpeg -i " + filePath + ".mp4 " + filePath + ".mp3"};
