@@ -148,7 +148,7 @@ public class VideoDiaryServiceImpl implements VideoDiaryService {
 
         String filePath = "/home/ubuntu/docker-volume/video/" + path + "/" + path;
 
-        String [] cmd = new String[] {"/bin/bash", "-c", "sudo mkdir asdf"};
+        String [] cmd = new String[] {"sh", "-c", "sudo mkdir asdf"};
         Runtime rt = Runtime.getRuntime();
         Process proc = rt.exec(cmd);
 
