@@ -150,8 +150,13 @@ public class VideoDiaryServiceImpl implements VideoDiaryService {
 
         List cmdList = new ArrayList();
         cmdList.add("cd home");
+        cmdList.add("ls");
+        cmdList.add("pwd");
         cmdList.add("cd ubuntu");
+        cmdList.add("ls");
+        cmdList.add("pwd");
         cmdList.add("echo asd");
+        cmdList.add("mkdir qxwe");
 
         Process process = null;
         String str = null;
