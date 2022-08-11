@@ -61,6 +61,7 @@ public class VideoDiaryServiceImpl implements VideoDiaryService {
             throw new CounselorPostVideoDiaryException();
         VideoDiary videoDiary = dto.toEntity();
         videoDiary.setUser(user);
+        System.out.println(videoDiary.getRealFileName());
         String[] text = videoSTT(videoDiary.getRealFileName());
         videoDiary.setContents(text[0]);
         videoDiary.setSentiment(text[1]);
@@ -149,13 +150,10 @@ public class VideoDiaryServiceImpl implements VideoDiaryService {
         //서버에서 실행시킬 때
 
         String filePath = "/home/ubuntu/docker-volume/video/" + path + "/" + path;
-        filePath = filePath.substring(0, filePath.length()-4);
-        System.out.println(filePath);
         String s;
         Process p;
         try{
             String[] cmd = {"/bin/sh", "-c", "ffmpeg -i " + filePath + ".mp4 " + filePath + ".mp3"};
-            System.out.println(cmd[2]);
             p = Runtime.getRuntime().exec(cmd);
             BufferedReader br = new BufferedReader(new InputStreamReader(p.getInputStream()));
             while ((s = br.readLine()) != null)
@@ -166,14 +164,13 @@ public class VideoDiaryServiceImpl implements VideoDiaryService {
             e.printStackTrace();
         }
         filePath = filePath+".mp3";
-        System.out.println(filePath);
 
         //테스트용
         //String filePath="/home/ubuntu/docker-volume/video/ses_QtLHqSPcqs/ses_QtLHqSPcqs.mp3";
         //String filePath="C:\\Users\\leekijong\\S07P12D206\\back\\demo\\src\\main\\resources\\ses_QtLHqSPcqs.mp3";
         String[] text= new String[6];
         try {
-            CredentialsProvider credentialsProvider = FixedCredentialsProvider.create(ServiceAccountCredentials.fromStream(new FileInputStream("C:\\Users\\leekijong\\S07P12D206\\back\\demo\\src\\main\\resources\\my-project-0801-358104-1615eb198267.json")));
+            CredentialsProvider credentialsProvider = FixedCredentialsProvider.create(ServiceAccountCredentials.fromStream(new FileInputStream("/home/ubuntu/my-project-0801-358104-1615eb198267.json")));
             SpeechSettings settings = SpeechSettings.newBuilder().setCredentialsProvider(credentialsProvider).build();
             // Instantiates a client
             SpeechClient speech=SpeechClient.create(settings);
