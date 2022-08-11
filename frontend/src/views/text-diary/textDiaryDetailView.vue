@@ -11,9 +11,11 @@
             {{ textDiary.data.contents }}
         </div>
     </div>
-    <div id="textDiaryList-button">
-        <button>목록</button>
-    </div>
+    <router-link :to="{ name:'calendar' }">
+      <div id="textDiaryList-button">
+          <button>목록</button>
+      </div>
+    </router-link>
     <div id="textDiaryDelete-button">
         <button @click="deleteTextDiary(textDiaryId)">삭제</button>
     </div>
