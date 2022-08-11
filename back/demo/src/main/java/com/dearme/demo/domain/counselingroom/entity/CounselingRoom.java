@@ -32,15 +32,20 @@ public class CounselingRoom {
     @JoinColumn(name = "group_id")
     private Group group;
 
+    @OneToOne
+    @JoinColumn(name = "counseling_id")
+    private Counseling counseling;
+
     public void setCounselor(User counselor){
         this.counselor = counselor;
     }
 
     @Builder
-    public CounselingRoom(String sessionName, User counselor, Group group, String counselorToken){
+    public CounselingRoom(String sessionName, User counselor, Group group, String counselorToken, Counseling counseling){
         this.sessionName = sessionName;
         this.counselorToken = counselorToken;
         this.counselor = counselor;
         this.group = group;
+        this.counseling = counseling;
     }
 }

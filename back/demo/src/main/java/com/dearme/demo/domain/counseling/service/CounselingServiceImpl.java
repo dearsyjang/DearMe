@@ -1,14 +1,12 @@
 package com.dearme.demo.domain.counseling.service;
 
-import com.dearme.demo.domain.counseling.dto.CounselingInfoListResponseDto;
-import com.dearme.demo.domain.counseling.dto.CounselingInfoResponseDto;
-import com.dearme.demo.domain.counseling.dto.UpdateCounselingRequestDto;
-import com.dearme.demo.domain.counseling.dto.UpdateCounselingResponseDto;
+import com.dearme.demo.domain.counseling.dto.*;
 import com.dearme.demo.domain.counseling.entity.Counseling;
 import com.dearme.demo.domain.counseling.entity.Status;
 import com.dearme.demo.domain.counseling.exception.NoExistCounselingException;
 import com.dearme.demo.domain.counseling.repository.CounselingRepository;
 import com.dearme.demo.domain.counselingdocument.entity.CounselingDocument;
+import com.dearme.demo.domain.group.entity.Group;
 import com.dearme.demo.domain.user.entity.Type;
 import com.dearme.demo.domain.user.entity.User;
 import com.dearme.demo.domain.user.exception.NoExistUserException;
@@ -45,15 +43,28 @@ public class CounselingServiceImpl implements CounselingService{
             throw new NoExistUserException();
         });
         List<Counseling> counselings = null;
-        if(user.getType().equals(Type.USER))
-            counselings = user.getUserCounselings();
-        else
-            counselings = user.getCounselorCounselings();
         List<CounselingInfoResponseDto> counselingInfoResponseDtos = new ArrayList<>();
-        for(Counseling counseling : counselings){
-            counselingInfoResponseDtos.add(CounselingInfoResponseDto.of(counseling));
+        List<CounselorGroupCounselingsResponseDto> counselorGroupCounselingsResponseDtos = new ArrayList<>();
+        if(user.getType().equals(Type.USER)) {
+            counselings = user.getUserCounselings();
+            for(Counseling counseling : counselings){
+                counselingInfoResponseDtos.add(CounselingInfoResponseDto.of(counseling));
+            }
         }
-        return new CounselingInfoListResponseDto(counselingInfoResponseDtos);
+        else {
+            counselings = user.getCounselorCounselings();
+            for(Counseling counseling : counselings){
+                if(counseling.getGroup() == null)
+                    counselingInfoResponseDtos.add(CounselingInfoResponseDto.of(counseling));
+            }
+            List<Group> groups = user.getGroups();
+            for(Group group : groups){
+                counselorGroupCounselingsResponseDtos.add(CounselorGroupCounselingsResponseDto.of(group));
+            }
+        }
+
+
+        return new CounselingInfoListResponseDto(counselingInfoResponseDtos, counselorGroupCounselingsResponseDtos);
     }
 
     @Override
@@ -131,7 +142,7 @@ public class CounselingServiceImpl implements CounselingService{
             SimpleTrigger simpleTrigger = (SimpleTrigger) TriggerBuilder.newTrigger()
                     .withIdentity(counseling.getId()+"_day_counseling_trigger", counseling.getId()+"_day_counseling_trigger_group")
                     //실제 배포
-                    .startAt(new Date(counseling.getYear() - 1900, month, counseling.getDay(), 8, 30)) // 2022 : 2022 - 1900, month = 7 -> 8월
+                    .startAt(new Date(counseling.getYear() - 1900, month, counseling.getDay()-3, 8, 30)) // 2022 : 2022 - 1900, month = 7 -> 8월
                     //테스트용
                     //.startAt(new Date(2022 - 1900, month, counseling.getDay(), counseling.getHours(), 12)) // 2022 : 2022 - 1900, month = 7 -> 8월
                     .withSchedule(SimpleScheduleBuilder.repeatSecondlyForTotalCount(1, 10)) // 10초마다 반복하며, 최대 1회 실행
