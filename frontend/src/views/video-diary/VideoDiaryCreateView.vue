@@ -95,18 +95,29 @@ var title;
             getToken(mySessionId) {
                 // return this.createSession(mySessionId).then((sessionId) => this.createToken(sessionId));
                 return new Promise((resolve, reject) => {
-                    axios({
-                        method:'post', 
-                        url: "http://localhost:5000/recording-java/api/get-token",
-                        data: {
-                            sessionName: ''
-                        },
-                    })
+                    axios
+                        .get(
+                            `https://i7d206.p.ssafy.io/recording/get-token`,
+                            {
+                               headers: {
+                            Authorization : 'token eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6ImlkMSIsImlzcyI6ImRlYXJtZSIsImlhdCI6MTY2MDIxNjI1NCwiZXhwIjoxNjYwMjE5ODU0fQ.hoOTaTxz1jKyMrcxvzClCADu4cfoK3Dd4j8p5eb9EBg'
+                        }  
+                            }
+                        )
+            //         axios({
+            //             method:'post', 
+            //             url: "https://i7d206.p.ssafy.io/video-diaries/get-token",
+            //             headers: {
+            //     Authorization : 'token eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6ImlkMSIsImlzcyI6ImRlYXJtZSIsImlhdCI6MTY2MDE5NzkzNCwiZXhwIjoxNjYwMjAxNTM0fQ.raL7DW29WHpl4mGhmqXhCq30dXAsHGy2RhHge0-fEX8'
+            //   }
+            //         })
                     .then(response => {
                         console.log("sessionId", mySessionId);
                         console.log('response', response)
+                        console.log('reponse data', response.data)
                         console.log('token', response.data.token);
-                        token = response.data[0];
+                        console.log(response.data.data.token)
+                        token = response.data.data.token
                         resolve(token);
                     })
                     .catch(error => {
@@ -115,27 +126,30 @@ var title;
                     })
                 });
             },
-            removeUser() {
-                axios({
-                    method:'post', 
-                    url: "http://localhost:5000/recording-java/api/remove-user",
-                    data: {session_id: this.sessionId, token: token},  
-                })
-                .then(response => {
-                    console.warn("remove", this.sessionId);
-                    console.log("remove response", response);      
-                })
-                .catch(error => {
-                    console.log('remove 에러', error);
-                })
-            },
+            // removeUser() {
+            //     axios({
+            //         method:'post', 
+            //         url: "http://localhost:5000/recording-java/api/remove-user",
+            //         data: {session_id: this.sessionId, token: token},  
+            //     })
+            //     .then(response => {
+            //         console.warn("remove", this.sessionId);
+            //         console.log("remove response", response);      
+            //     })
+            //     .catch(error => {
+            //         console.log('remove 에러', error);
+            //     })
+            // },
             startRecording() { 
               console.log(session)               
                 axios({
                     method:'post', 
-                    url: "http://localhost:5000/recording-java/api/recording/start",
+                    url: "https://i7d206.p.ssafy.io/recording/start",
                     data: ({
-                      session: session.sessionId
+                      session: session.sessionId,
+                      hasAudio: true,
+                      hasVideo: true,
+                      outputMode: true,
                       }),
                     })
                 .then(response => {
@@ -151,7 +165,7 @@ var title;
             stopRecording(){
                 axios({
                     method:'post', 
-                    url: "http://localhost:5000/recording-java/api/recording/stop",
+                    url: "https://i7d206.p.ssafy.io/recording/stop",
                     data: ({ 
                         recording: this.recordingId
                     }),   
@@ -168,7 +182,7 @@ var title;
           deleteRecording(){
               axios({
                 method: 'delete',
-                url: "http://localhost:5000/recording-java/api/recording/delete",
+                url: "https://i7d206.p.ssafy.io/recording/delete",
                 data: ({
                   recording: this.recordingId
                 }),
