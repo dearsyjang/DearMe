@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+</head>
+<body>
+<!-- 제이쿼리 -->
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script><!-- 아임포트 -->
+<script src ="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js" type="text/javascript"></script>
+<div>
+    <h2>아임포트 결제 데모</h2>
+    <li>
+        <button id="iamportPayment" type="button">결제테스트</button>
+    </li>
+</div>
+
+<script>
+$(document).ready(function(){
+    $("#iamportPayment").click(function (){
+
+        payment(100);
+    });
+})
+
+function payment(data){
+    IMP.init('imp42602260');
+    IMP.request_pay({
+        pg:"kakaopay.TC0ONETIME",
+        pay_method:"card",
+        merchant_uid:"iamport_test_id7",
+        name:"도서",
+        amount:data,
+        buyer_email:"rl00822@naver.com",
+        buyer_name:"이기종",
+        buyer_tel:"01087624001"
+
+    }, function (rsp){
+        if(rsp.success){
+            fetch('http://localhost:8080/users/points', {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization' : 'ad eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6ImlkIiwiaXNzIjoiZGVhcm1lIiwiaWF0IjoxNjU5NjgwMzg0LCJleHAiOjE2NTk2ODM5ODR9.izg6xcOPKIdxiU6QjTQ2GoVKFqSsBwBgyP4FCd6uibQ'
+                },
+                body: JSON.stringify({price: data})
+            }).then((response) => response.json()).then((data) => {
+                console.log(data);
+            });
+            alert("완료 -> imp_uid : " + rsp.imp_uid+" / merchant_uid(orderKey) : " + rsp.merchant_uid);
+        }else{
+            alert("실패 : 코드(" + rsp.error_code + ") / 메시지(" + rsp.error_msg + ")");
+        }
+    });
+}
+</script>
+
+</body>
+</html>
