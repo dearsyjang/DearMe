@@ -5,7 +5,7 @@
         <div class="card-body">
             <h5 class="card-title">상담사: </h5>
             <h5 class="card-title">상담일: </h5>
-            <router-link to="counseling"><button  class="btn btn-primary">임시 버튼</button></router-link>
+            <router-link to="counseling"><button  class="btn" id="enter-button">상담방 입장</button></router-link>
         </div>
     </div>
 </div>
@@ -21,9 +21,12 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .card {
  text-align: left;
- 
+}
+#enter-button{
+  background-color: #3F72AF;
+  float: right;
 }
 </style>

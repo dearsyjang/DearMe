@@ -1,355 +1,206 @@
 <template>
-  <div id="main-container" class="container">
-    <div id="join" v-if="!session">
-      <div id="img-div"><img src="resources/images/openvidu_grey_bg_transp_cropped.png" /></div>
-      <div id="join-dialog" class="jumbotron vertical-center">
-        <h1>Join a video session</h1>
-        <div class="form-group">
-          <p>
-            <label>Participant</label>
-            <input v-model="myUserName" class="form-control" type="text" required />
-          </p>
-          <p>
-            <label>Session</label>
-            <input v-model="mySessionId" class="form-control" type="text" required />
-          </p>
-          <p class="text-center">
-            <button class="btn btn-lg btn-success" @click="joinSession()">Join!</button>
-          </p>
+    <div class="container">
+        <div id="join" v-show="!joined">
+            <h1>화상 일기 시작</h1>
+            <form @submit.prevent="joinSession"> 
+                <p>
+                    <label>Session:</label>
+                    <input type="text" v-model="sessionId">
+                </p>
+                <p>
+                    <input type="submit" value="JOIN">
+                </p>
+            </form>
         </div>
-      </div>
-    </div>
 
-    <div id="session" v-if="session">
-      <div id="session-header">
-        <h1 id="session-title">{{ mySessionId }}</h1>
-        <input
-          class="btn btn-large btn-danger"
-          type="button"
-          id="buttonLeaveSession"
-          @click="leaveSession"
-          value="Leave session"
-        />
-      </div>
-      <div id="main-video" class="col-md-6">
-        <user-video :stream-manager="mainStreamManager" />
-      </div>
-      <div id="video-container" class="col-md-6">
-        <user-video
-          :stream-manager="publisher"
-          @click="updateMainVideoStreamManager(publisher)"
-        />
-        <user-video
-          v-for="sub in subscribers"
-          :key="sub.stream.connection.connectionId"
-          :stream-manager="sub"
-          @click="updateMainVideoStreamManager(sub)"
-        />
-      </div>
-    </div>
+        <div id="session" v-show="joined">
+            <h1 v-text="sessionId"></h1>
+            <input type="text" v-model="title">
+            <button type="button" class="btn btn-primary" @click="leaveSession">나가기</button>
+            <button type="button" class="btn btn-primary" @click="startRecording">녹화 시작</button>
+            <button type="button" class="btn btn-primary" @click="stopRecording">녹화 중지</button>
+            <button type="button" class="btn btn-primary" @click="deleteRecording">녹화 삭제</button>
+            <button type="button" class="btn btn-primary" @click="saveRecording">녹화 저장</button>
+            <div >
+                <div id ="publisher" ><h3></h3></div>
+            </div>
 
-    <div id="recording" v-if="session">
-      <button @click="startRecording">녹화 시작</button>
-      <button @click="stopRecording">녹화 종료</button>
+        </div>
     </div>
-  </div>
+    
 </template>
+
+     
 
 <script>
 import axios from 'axios';
 import { OpenVidu } from 'openvidu-browser';
-import UserVideo from './components/UserVideo';
-// import { mapGetters } from 'vuex';
 
-axios.defaults.headers.post['Content-Type'] = 'application/json';
-const OPENVIDU_SERVER_URL = "https://i7d206.p.ssafy.io:4443";
-const OPENVIDU_SERVER_SECRET = "dearme";
+var OV;
+var session;
+var token;
+var title;
 
-export default {
-  name: 'App',
-  components: {
-    UserVideo,
-  },
-  data() {
-    return {
-      OV: undefined,
-      session: undefined,
-      mainStreamManager: undefined,
-      publisher: undefined,
-      subscribers: [],
-      mySessionId: '상담방', // 방 이름
-      myUserName: 'nickName', // 닉네임 가져오기
-    };
-  },
 
-  // 서버 보내는 과정
-  // First request performs a POST to /openvidu/api/sessions (we send a customSessionId field to name the session with our mySessionId value retrieved from HTML input)
-  // Second request performs a POST to /openvidu/api/sessions/<sessionId>/connection (the path requires the sessionId to assign the token to this same session)
+    export default {
+        data() {
+            return {
+              joined: false,
+              sessionId: "",
+              recordingId: "",
+              record_status: false,
+              video: '',
+              title: '',
+            };
+        },
 
-  methods: {
-    joinSession() {
-      // --- Get an OpenVidu object ---
-      this.OV = new OpenVidu();
+        methods: {
+            joinSession() {
+              this.getToken(this.sessionId).then(token => {
 
-      // --- Init a session --- 세션 초기화
-      this.session = this.OV.initSession();
+              OV = new OpenVidu();
 
-      // --- Specify the actions when events take place in the session ---
-      // On every new Stream received... 참가자 추가
-      this.session.on('streamCreated', ({ stream }) => {
-        const subscriber = this.session.subscribe(stream);
-        this.subscribers.push(subscriber);
-      });
-      // On every Stream destroyed...
-      this.session.on('streamDestroyed', ({ stream }) => {
-        const index = this.subscribers.indexOf(stream.streamManager, 0);
-        if (index >= 0) {
-          this.subscribers.splice(index, 1);
-        }
-      });
+              session = OV.initSession();
 
-      // On every asynchronous exception... 비동기 오류
-      this.session.on('exception', ({ exception }) => {
-        console.warn(exception);
-      });
+              session.on("streamCreated", function (event) {
+                  session.subscribe(event.stream, "subscriber");
 
-      // token을 백에서 받아오자
-      this.getToken().then(token => {
-        this.session.connect(token, { clientData: this.myUserName })
-          .then(() => {
-
-              // 영상 가져오기
-              let publisher = this.OV.initPublisher(undefined, {
-                  audioSource: undefined, // The source of audio. If undefined default microphone
-                  videoSource: undefined, // The source of video. If undefined default webcam
-                  publishAudio: true,     // Whether you want to start publishing with your audio unmuted or not
-                  publishVideo: true,     // Whether you want to start publishing with your video enabled or not
-                  resolution: '640x480',  // The resolution of your video
-                  frameRate: 30,          // The frame rate of your video
-                  insertMode: 'APPEND',   // How the video is inserted in the target element 'video-container'
-                  mirror: false           // Whether to mirror your local video or not
               });
 
-            this.mainStreamManager = publisher;
-						this.publisher = publisher;
+              session.connect(token)
+                .then(() => {
+                    this.joined = true;
+                    var resolution_data = (window.innerWidth * 0.35) + "x" + (window.innerWidth * 0.35 / 4.0 * 3.0);  
+                    var publisher = OV.initPublisher("publisher", { resolution: resolution_data});
+                    session.publish(publisher);
+                })
+                .catch(error => {
+                    console.log("세션 connect 오류", error.code, error.message);
+                    });
+            })
+              .catch(error => {
+                console.warn('세션 connect 오류', error.code, error.message);
+            });
+            },
 
-            this.session.publish(this.publisher)
-          })
-          .catch(error => {
-              console.log('There was an error connecting to the session:', error.code, error.message);
-          });
-});
-      window.addEventListener('beforeunload', this.leaveSession);
-    },
-
-
-    leaveSession() {
-      // --- Leave the session by calling 'disconnect' method over the Session object ---
-      if (this.session) this.session.disconnect();
-      this.session = undefined;
-      this.mainStreamManager = undefined;
-      this.publisher = undefined;
-      this.subscribers = [];
-      this.OV = undefined;
-      window.removeEventListener('beforeunload', this.leaveSession);
-    },
-    updateMainVideoStreamManager(stream) {
-      if (this.mainStreamManager === stream) return;
-      this.mainStreamManager = stream;
-    },
-
-
-    /**
-     * --------------------------
-     * SERVER-SIDE RESPONSIBILITY
-     * --------------------------
-     * These methods retrieve the mandatory user token from OpenVidu Server.
-     * This behavior MUST BE IN YOUR SERVER-SIDE IN PRODUCTION (by using
-     * the API REST, openvidu-java-client or openvidu-node-client):
-     *   1) Initialize a Session in OpenVidu Server	(POST /openvidu/api/sessions)
-     *   2) Create a Connection in OpenVidu Server (POST /openvidu/api/sessions/<SESSION_ID>/connection)
-     *   3) The Connection.token must be consumed in Session.connect() method
-     */
-
-
-    // 원래 코드
-    getToken (mySessionId) {
-			return this.createSession(mySessionId).then(sessionId => this.createToken(sessionId));
-		},
-    
-    // getToken(usertoken) {
-    //   console.log('local storage', localStorage.getItem('token')) // accessToken
-    //   usertoken = localStorage.getItem('token')
-    //   const idtoken = this.createSession(usertoken).then(sessionId => this.createToken(sessionId));
-    //   console.log('idtoken', idtoken)
-    //   return usertoken
-    // },
-
-    // See https://docs.openvidu.io/en/stable/reference-docs/REST-API/#post-openviduapisessions
-    createSession(sessionId) {
-      return new Promise((resolve, reject) => {
-        axios
-          .post(
-            `${OPENVIDU_SERVER_URL}/openvidu/api/sessions`,
-            JSON.stringify({
-              customSessionId: sessionId,
-            }),
-            {
-              auth: {
-                username: 'OPENVIDUAPP',
-                password: OPENVIDU_SERVER_SECRET,
-              },
+            leaveSession() {
+                this.removeUser();
+                session.disconnect();
+                if (this.record_status) {
+                    this.stop_record(); 
+                }
+                this.joined = false;
+            },
+            
+            getToken(mySessionId) {
+                // return this.createSession(mySessionId).then((sessionId) => this.createToken(sessionId));
+                return new Promise((resolve, reject) => {
+                    axios({
+                        method:'post', 
+                        url: "http://localhost:5000/recording-java/api/get-token",
+                        data: {
+                            sessionName: ''
+                        },
+                    })
+                    .then(response => {
+                        console.log("sessionId", mySessionId);
+                        console.log('response', response)
+                        console.log('token', response.data.token);
+                        token = response.data[0];
+                        resolve(token);
+                    })
+                    .catch(error => {
+                        console.log("토큰 에러", error)
+                        reject(error);
+                    })
+                });
+            },
+            removeUser() {
+                axios({
+                    method:'post', 
+                    url: "http://localhost:5000/recording-java/api/remove-user",
+                    data: {session_id: this.sessionId, token: token},  
+                })
+                .then(response => {
+                    console.warn("remove", this.sessionId);
+                    console.log("remove response", response);      
+                })
+                .catch(error => {
+                    console.log('remove 에러', error);
+                })
+            },
+            startRecording() { 
+              console.log(session)               
+                axios({
+                    method:'post', 
+                    url: "http://localhost:5000/recording-java/api/recording/start",
+                    data: ({
+                      session: session.sessionId
+                      }),
+                    })
+                .then(response => {
+                    console.log('start_record', response);
+                    this.recordingId = response.data.id;
+                    this.record_status = true;
+                    console.log('이게 아마 recordingId', this.recordingId);
+                })
+                .catch(error => {
+                    console.error('start_record error', error)
+                });
+            },
+            stopRecording(){
+                axios({
+                    method:'post', 
+                    url: "http://localhost:5000/recording-java/api/recording/stop",
+                    data: ({ 
+                        recording: this.recordingId
+                    }),   
+                  })
+                .then(response => {
+                    this.record_status = false;
+                    console.log(response);
+                    console.log("stop record", response.data.id);
+                })
+                .catch(error => {
+                    console.error(error)
+                });
+            },
+          deleteRecording(){
+              axios({
+                method: 'delete',
+                url: "http://localhost:5000/recording-java/api/recording/delete",
+                data: ({
+                  recording: this.recordingId
+                }),
+              })
+              .then(response => {
+                console.log('delete 성공!!')
+                console.log(response)
+              })
+            },
+            saveRecording(){
+                axios({
+                    method: 'post',
+                    url: "http://localhost:5000/recording-java/api/recording", // url 주소가 뭘까요?!
+                    data: ({
+                        recording: this.recordingId,
+                        title: title,                        
+                    }),
+                })
+                .then (response => {
+                    console.log('저장요청', response)
+                })
             }
-          )
-          .then((response) => response.data)
-          .then((data) => resolve(data.id))
-          .catch((error) => {
-            if (error.response.status === 409) {
-              resolve(sessionId);
-            } else {
-              console.warn(
-                `No connection to OpenVidu Server. This may be a certificate error at ${OPENVIDU_SERVER_URL}`
-              );
-              if (
-                window.confirm(
-                  `No connection to OpenVidu Server. This may be a certificate error at ${OPENVIDU_SERVER_URL}\n\nClick OK to navigate and accept it. If no certificate warning is shown, then check that your OpenVidu Server is up and running at "${OPENVIDU_SERVER_URL}"`
-                )
-              ) {
-                location.assign(`${OPENVIDU_SERVER_URL}/accept-certificate`);
-              }
-              reject(error.response);
-            }
-          });
-      });
-    },
-    // See https://docs.openvidu.io/en/stable/reference-docs/REST-API/#post-openviduapisessionsltsession_idgtconnection
-    createToken(sessionId) {
-      return new Promise((resolve, reject) => {
-        axios
-          .post(
-            `${OPENVIDU_SERVER_URL}/openvidu/api/sessions/${sessionId}/connection`,
-            {},
-            {
-              auth: {
-                username: 'OPENVIDUAPP',
-                password: OPENVIDU_SERVER_SECRET,
-              },
-            }
-          )
-          .then((response) => response.data)
-          .then((data) => {
-            console.log('data', data)
-            resolve(data.token)})
-          .catch((error) => reject(error.response));
-			});
-		},
 
-
-
-
-
-    // 녹화 부분ㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠ
-    startRecording(sessionId) {
-      return new Promise((resolve, reject) => {
-        axios
-          .post(
-            `${OPENVIDU_SERVER_URL}/openvidu/api/recordings/start`,
-            JSON.stringify({
-              customSessionId: sessionId,
-            }),
-            {
-              auth: {
-                username: 'OPENVIDUAPP',
-                password: OPENVIDU_SERVER_SECRET,
-              },
-            }
-          )
-          .then((response) => console.log('start', response.data))
-          .then((data) => resolve(data.id))
-          .catch((error) => {
-            if (error.response.status === 409) {
-              resolve(sessionId);
-            } else {
-              console.warn(
-                `No connection to OpenVidu Server. This may be a certificate error at ${OPENVIDU_SERVER_URL}`
-              );
-              if (
-                window.confirm(
-                  `No connection to OpenVidu Server. This may be a certificate error at ${OPENVIDU_SERVER_URL}\n\nClick OK to navigate and accept it. If no certificate warning is shown, then check that your OpenVidu Server is up and running at "${OPENVIDU_SERVER_URL}"`
-                )
-              ) {
-                location.assign(`${OPENVIDU_SERVER_URL}/accept-certificate`);
-              }
-              reject(error.response);
-            }
-          });
-      });
-    },
-
-    stopRecording(sessionId) {
-      return new Promise((resolve, reject) => {
-        axios
-          .post(
-            `${OPENVIDU_SERVER_URL}/openvidu/api/recordings/stop/${sessionId}`,
-            JSON.stringify({
-              customSessionId: sessionId,
-            }),
-            {
-              auth: {
-                username: 'OPENVIDUAPP',
-                password: OPENVIDU_SERVER_SECRET,
-              },
-            }
-          )
-          .then((response) => console.log('stop', response.data))
-          .then((data) => resolve(data.id))
-          .catch((error) => {
-            if (error.response.status === 409) {
-              resolve(sessionId);
-            } else {
-              console.warn(
-                `No connection to OpenVidu Server. This may be a certificate error at ${OPENVIDU_SERVER_URL}`
-              );
-              if (
-                window.confirm(
-                  `No connection to OpenVidu Server. This may be a certificate error at ${OPENVIDU_SERVER_URL}\n\nClick OK to navigate and accept it. If no certificate warning is shown, then check that your OpenVidu Server is up and running at "${OPENVIDU_SERVER_URL}"`
-                )
-              ) {
-                location.assign(`${OPENVIDU_SERVER_URL}/accept-certificate`);
-              }
-              reject(error.response);
-            }
-          });
-      });
-    },
-	}
-};
-
-
-
-
-// 녹화!!!!!!!!
-// 데이터 형태
-// {
-//     "session":"ses_YnDaGYNcd7",
-//     "name": "MyRecording",
-//     "hasAudio": true,
-//     "hasVideo": true,
-//     "outputMode": "COMPOSED",
-//     "recordingLayout": "CUSTOM",
-//     "customLayout": "mySimpleLayout",
-//     "resolution": "1280x720",
-//     "frameRate": 25,
-//     "shmSize": 536870912,
-//     "ignoreFailedStreams": false,
-//     "mediaNode": {
-//         "id": "media_i-0c58bcdd26l11d0sd"
-//     }
-// }
-
-  
-
-
-
-
+        
+        }
+    }
 </script>
+
+<style scoped>
+#publisher {    
+    float: left;
+    width: auto;
+}
+</style>
+

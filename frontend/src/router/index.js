@@ -17,7 +17,7 @@ import counseling from './counseling.js'
 import schedule from './schedule.js'
 
 import counselingRequest from './counselingRequest.js'
-import videodiary from './videodiary.js'
+import videodiary from './videoDiary.js'
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),

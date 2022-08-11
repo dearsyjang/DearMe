@@ -9,7 +9,7 @@
     </div>
     <div class="form-group">
       <label class="form-label mt-4 mx-2" for="password">비밀번호</label>
-      <input clss="form-control" type="text" v-model="credentials.pw" placeholder="비밀번호">
+      <input class="form-control" type="text" v-model="credentials.pw" placeholder="비밀번호">
     </div>
     <div class="form-group mt-4">
       <button @click="LogIn()" class="btn btn-success btn-lg">Login</button>

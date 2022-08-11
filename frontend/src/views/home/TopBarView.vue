@@ -2,7 +2,7 @@
   <div id="topbar">
     <nav class="navbar navbar-expand-lg">
       <div class="container-fluid">
-        <img id="logoimg" src="../../assets/images/logo.png" class="m-3 d-inline-block" alt="logo">
+        <img id="logoimg" src="../../assets/images/logo.png" class="d-inline-block" alt="logo">
 
         <button class="navbar-toggler mx-3 float-right" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -61,7 +61,7 @@ export default {
   display:flex;
   flex-direction:row;
   background-color: #FDFDFD;
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid #C9D6DF;
 }
 
 #topbar > .navbar a{
@@ -84,9 +84,9 @@ export default {
   justify-content: end;
 }
 
-#img > .logoimg {
+#logoimg {
+  width: 40%;
   max-width: 100%;
-  width: auto;
   height: auto;
   align-content: center;
   justify-content: center;

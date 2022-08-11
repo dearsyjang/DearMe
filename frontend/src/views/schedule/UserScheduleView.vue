@@ -1,11 +1,19 @@
 <template>
   <div id="UserSchedule">
-    <br>
-    <h1>1:1 상담</h1>
-    <schedule-card-personal></schedule-card-personal>
+    <h1 id="userschedule-title">상담 일정</h1>
     <hr>
-    <h1>그룹 상담</h1>
-    <schedule-card-group></schedule-card-group>
+    <br>
+    <div>
+      <h2 id="userschedule-personal">1:1 상담</h2>
+      <schedule-card-personal></schedule-card-personal>
+    </div>
+    <br>
+    <hr>
+    <br>
+    <div>
+      <h2 id="userschedule-group">그룹 상담</h2>
+      <schedule-card-group></schedule-card-group>
+    </div>
   </div>
 </template>
 
@@ -13,6 +21,7 @@
 
 import ScheduleCardGroup from './components/ScheduleCardGroup.vue'
 import ScheduleCardPersonal from './components/ScheduleCardPersonal.vue'
+
 
 export default {
   components: { ScheduleCardPersonal, ScheduleCardGroup },
@@ -22,6 +31,19 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+@import url('https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap');
+
+* {
+  font-family: 'Gowun Dodum', sans-serif;
+}
+
+hr {
+  width: 100%;
+}
+
+#userschedule-personal, #userschedule-group {
+  text-align: left;  
+}
 
 </style>

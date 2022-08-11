@@ -25,7 +25,7 @@
   width: auto;
   height: 280px;
   margin-bottom: 25px;
-  background-color: #EEEEEE;
+  background-color: #F9F7F7;
   border-style: none;
 }
 
@@ -40,7 +40,7 @@
 }
 
 #signup2-button {
-  background-color: #A7BBC7;
+  background-color: #F1D00A;
   width: 100%;
   height: auto;
   color: white;
@@ -50,7 +50,7 @@
 }
 
 #login-button {
-  background-color: #DA7F8F;
+  background-color: #3F72AF;
   width: 100%;
   height: auto;
   color: white;

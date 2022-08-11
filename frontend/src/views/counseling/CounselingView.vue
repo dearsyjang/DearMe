@@ -1,20 +1,19 @@
 <template>
   <div id="main-container" class="container">
     <div id="join" v-if="!session">
-      <div id="img-div"><img src="resources/images/openvidu_grey_bg_transp_cropped.png" /></div>
       <div id="join-dialog" class="jumbotron vertical-center">
-        <h1>Join a video session</h1>
         <div class="form-group">
-          <p>
+          <!-- <p>
             <label>Participant</label>
             <input v-model="myUserName" class="form-control" type="text" required />
           </p>
           <p>
             <label>Session</label>
             <input v-model="mySessionId" class="form-control" type="text" required />
-          </p>
+          </p> -->
           <p class="text-center">
             <button class="btn btn-lg btn-success" @click="joinSession()">Join!</button>
+            <button class="btn btn-lg btn-success" @click="createToken()">token!</button>
           </p>
         </div>
       </div>
@@ -73,7 +72,8 @@ export default {
       mainStreamManager: undefined,
       publisher: undefined,
       subscribers: [],
-      mySessionId: '상담방', // 방 이름
+      mySessionId: '', // 방 이름
+      myUserName: '', // 유저 닉네임
     };
   },
 
@@ -81,7 +81,26 @@ export default {
   // First request performs a POST to /openvidu/api/sessions (we send a customSessionId field to name the session with our mySessionId value retrieved from HTML input)
   // Second request performs a POST to /openvidu/api/sessions/<sessionId>/connection (the path requires the sessionId to assign the token to this same session)
 
+
   // 닉네임 가져오기
+  create() {
+    let access_token = localStorage.getItem('token')
+    let config = {
+      headers: {
+        Authorization: access_token
+      }
+    }
+
+    axios
+      .get('https://i7d206.p.ssafy.io/users', config)
+      .then(response => {
+        console.log(response)
+        let myUserName = response.data.data.nickName
+        this.myUserName = myUserName
+      })
+  },
+
+
   // created() {
   //   axios({
   //     method: 'get',
@@ -124,6 +143,7 @@ export default {
 
       // token을 백에서 받아오자
       this.getToken().then(token => {
+        console.log(token)
         this.session.connect(token, { clientData: this.myUserName })
           .then(() => {
 
@@ -183,22 +203,24 @@ export default {
 
 
     // 원래 코드
-    getToken (mySessionId) {
-			return this.createSession(mySessionId).then(sessionId => this.createToken(sessionId));
-		},
+    // getToken (mySessionId) {
+		// 	return this.createSession(mySessionId).then(sessionId => this.createToken(sessionId));
+		// },
+
 
     // --------------- 백이랑 통신할 때, 이 부분 살려주기 --------------------------------------------
     // 백으로 사용자 accessToken을 보내줘야해
     // accessToken을 가져오자
-    // getToken(usertoken) {
-    //   console.log('accessToken', localStorage.getItem('token'))
-    //   usertoken = localStorage.getItem('token')
+    getToken(usertoken) {
+      // console.log(usertoken)
+      usertoken = localStorage.getItem('token')
+      usertoken = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6InRlc3QzMSIsImlzcyI6ImRlYXJtZSIsImlhdCI6MTY2MDE4MTQ2MywiZXhwIjoxNjYwMTg1MDYzfQ.-HHWFWV0Qu4nbcXtNVzQL_pCnAMPZopPY45i_3iOp5Q'
 
-    //   // usertoken을 sessionId 토큰으로 변환 => createToken
-    //   let idtoken = this.createSession(usertoken).then(sessionId => this.createToken(sessionId));
-    //   console.log('idtoken', idtoken)
-    //   return idtoken
-    // },
+      // usertoken을 sessionId 토큰으로 변환 => createToken
+      // let idtoken = this.createSession(usertoken).then(sessionId => this.createToken(sessionId));
+      // console.log('idtoken', idtoken)
+      return usertoken
+    },
 
 
     // See https://docs.openvidu.io/en/stable/reference-docs/REST-API/#post-openviduapisessions
@@ -240,26 +262,100 @@ export default {
     },
 
     // See https://docs.openvidu.io/en/stable/reference-docs/REST-API/#post-openviduapisessionsltsession_idgtconnection
-    createToken(sessionId) {
+    createToken() {
+this.OV = new OpenVidu();
+
+      // --- Init a session --- 세션 초기화
+      this.session = this.OV.initSession();
+
+      // --- Specify the actions when events take place in the session ---
+      // On every new Stream received... 참가자 추가
+      this.session.on('streamCreated', ({ stream }) => {
+        const subscriber = this.session.subscribe(stream);
+        this.subscribers.push(subscriber);
+      });
+      // On every Stream destroyed...
+      this.session.on('streamDestroyed', ({ stream }) => {
+        const index = this.subscribers.indexOf(stream.streamManager, 0);
+        if (index >= 0) {
+          this.subscribers.splice(index, 1);
+        }
+      });
+
+      // On every asynchronous exception... 비동기 오류
+      this.session.on('exception', ({ exception }) => {
+        console.warn(exception);
+      });
+
+
+
       return new Promise((resolve, reject) => {
         axios
           .post(
-            `${OPENVIDU_SERVER_URL}/openvidu/api/sessions/${sessionId}/connection`,
-            {},
+            `https://i7d206.p.ssafy.io/counseling-room`,
             {
-              auth: {
-                username: 'OPENVIDUAPP',
-                password: OPENVIDU_SERVER_SECRET,
-              },
+              counselingId : 7,
+            },           
+             {
+              headers: {
+                Authorization : 'token eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6InRlc3QzMSIsImlzcyI6ImRlYXJtZSIsImlhdCI6MTY2MDE4MTQ2MywiZXhwIjoxNjYwMTg1MDYzfQ.-HHWFWV0Qu4nbcXtNVzQL_pCnAMPZopPY45i_3iOp5Q'
+              }
             }
           )
           .then((response) => response.data)
           .then((data) => {
             console.log('data', data)
-            resolve(data.token)})
+            resolve(data.token)
+            console.log(data.data.counselorToken)
+            return data.data.counselorToken
+          })
+          .then((token) => {
+            console.log(token)
+            
+              this.session.connect(token, { clientData: this.myUserName })
+          .then(() => {
+
+              // 영상 가져오기
+              let publisher = this.OV.initPublisher(undefined, {
+                  audioSource: undefined, // The source of audio. If undefined default microphone
+                  videoSource: undefined, // The source of video. If undefined default webcam
+                  publishAudio: true,     // Whether you want to start publishing with your audio unmuted or not
+                  publishVideo: true,     // Whether you want to start publishing with your video enabled or not
+                  resolution: '640x480',  // The resolution of your video
+                  frameRate: 30,          // The frame rate of your video
+                  insertMode: 'APPEND',   // How the video is inserted in the target element 'video-container'
+                  mirror: false           // Whether to mirror your local video or not
+              });
+
+            this.mainStreamManager = publisher;
+						this.publisher = publisher;
+
+            this.session.publish(this.publisher)
+          })
+          .catch(error => {
+              console.log('There was an error connecting to the session:', error.code, error.message);
+          });
+
+
+
+
+
+
+          })
           .catch((error) => reject(error.response));
 			});
 		},
 	}
 }
 </script>
+
+<style scoped>
+.card {
+  justify-content: center;
+  width: auto;
+  height: 280px;
+  margin-bottom: 25px;
+  background-color: #DBE2EF;
+  border-style: none;
+}
+</style>
