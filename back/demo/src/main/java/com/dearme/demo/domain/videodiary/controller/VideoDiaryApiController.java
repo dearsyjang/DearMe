@@ -16,7 +16,6 @@ import java.io.IOException;
 @RequiredArgsConstructor
 @RequestMapping("/video-diaries")
 @RestController
-@CrossOrigin(origins = "*", allowedHeaders = "*", methods = {RequestMethod.OPTIONS, RequestMethod.POST, RequestMethod.GET, RequestMethod.DELETE, RequestMethod.PUT})
 public class VideoDiaryApiController {
     private final VideoDiaryService videoDiaryService;
 
