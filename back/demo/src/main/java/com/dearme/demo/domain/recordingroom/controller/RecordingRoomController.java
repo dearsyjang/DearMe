@@ -29,7 +29,7 @@ public class RecordingRoomController {
         //String id = (String) request.getAttribute("id");
         return ResponseEntity.ok().body(CommonResponse.getSuccessResponse(recordingRoomService.getSessionToken()));
     }
-    @RequestMapping(value = "/recording/start", method = RequestMethod.POST)
+    @RequestMapping(value = "/start", method = RequestMethod.POST)
     public ResponseEntity<CommonResponse> startRecording(@RequestBody Map<String, Object> params) {
         String sessionId = (String) params.get("session");
         boolean hasAudio = (boolean) params.get("hasAudio");
@@ -38,12 +38,12 @@ public class RecordingRoomController {
         return ResponseEntity.ok().body(CommonResponse.getSuccessResponse(recordingRoomService.getStartRecording(sessionId, hasAudio, hasVideo, outputMode)));
     }
 
-    @RequestMapping(value = "/recording/stop", method = RequestMethod.POST)
+    @RequestMapping(value = "/stop", method = RequestMethod.POST)
     public ResponseEntity<CommonResponse> stopRecording(@RequestBody Map<String, Object> params) {
         String recordingId = (String) params.get("recording");
         return ResponseEntity.ok().body(CommonResponse.getSuccessResponse(recordingRoomService.getStopRecording(recordingId)));
     }
-    @RequestMapping(value = "/recording/delete", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/delete", method = RequestMethod.DELETE)
     public void deleteRecording(@RequestBody Map<String, Object> params) {
         String recordingId = (String) params.get("recording");
         recordingRoomService.deleteRecording(recordingId);
