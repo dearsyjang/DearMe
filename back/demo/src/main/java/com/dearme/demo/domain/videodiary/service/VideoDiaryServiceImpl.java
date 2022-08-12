@@ -11,7 +11,6 @@ import com.dearme.demo.domain.videodiary.exception.CounselorPostVideoDiaryExcept
 import com.dearme.demo.domain.videodiary.exception.NoPermissionVideoDiaryException;
 import com.dearme.demo.domain.videodiary.exception.NoVideoDiaryException;
 import com.dearme.demo.domain.videodiary.repository.VideoDiaryRepository;
-import com.dearme.demo.global.scheduler.MorningJob;
 import com.google.api.gax.core.CredentialsProvider;
 import com.google.api.gax.core.FixedCredentialsProvider;
 import com.google.auth.oauth2.ServiceAccountCredentials;
@@ -58,7 +57,6 @@ public class VideoDiaryServiceImpl implements VideoDiaryService {
             throw new CounselorPostVideoDiaryException();
         VideoDiary videoDiary = dto.toEntity();
         videoDiary.setUser(user);
-        System.out.println(videoDiary.getRealFileName());
         String[] text = videoSTT(videoDiary.getRealFileName());
         videoDiary.setContents(text[0]);
         videoDiary.setSentiment(text[1]);
@@ -68,7 +66,6 @@ public class VideoDiaryServiceImpl implements VideoDiaryService {
         videoDiary.setNegative(Double.parseDouble(text[4]));
         videoDiary.setNeutral(Double.parseDouble(text[5]));
         videoDiaryRepository.save(videoDiary);
-        createTimeScheduler(videoDiary);
         return new PostVideoDiaryResponseDto(videoDiary.getId(), videoDiary.getTitle(), videoDiary.getContents(), videoDiary.getSentiment(), videoDiary.getPercentage(), videoDiary.getPositive(), videoDiary.getNegative(), videoDiary.getNeutral());
     }
 
@@ -106,7 +103,6 @@ public class VideoDiaryServiceImpl implements VideoDiaryService {
         }else{
             throw new NoPermissionVideoDiaryException();
         }
-        createTimeScheduler(videoDiary);
         return new PostVideoDiaryResponseDto(videoDiary.getId(), videoDiary.getTitle(), videoDiary.getContents(), videoDiary.getSentiment(), videoDiary.getPercentage(),videoDiary.getPositive(), videoDiary.getNegative(), videoDiary.getNeutral());
     }
 
@@ -143,79 +139,26 @@ public class VideoDiaryServiceImpl implements VideoDiaryService {
     }
 
 
-    public String[] videoSTT(String path) throws IOException {
+    public String[] videoSTT(String path){
         //서버에서 실행시킬 때
 
-        String filePath = "/home/ubuntu/docker-volume/video/" + path + "/" + path;
+        String filePath = "/video/" + path + "/" + path;
 
-        // ProcessBuilder에 넣어줄 커맨드 준비
-        List<String> cmd = new ArrayList<String>();
-        cmd.add("/bin/bash");
-        cmd.add("-c");
-        cmd.add("mkdir /home/ubuntu/test");
+        try{
+            Process p = Runtime.getRuntime().exec("ffmpeg -i " + filePath + ".mp4 " + filePath + ".mp3");
+            BufferedReader br = new BufferedReader(new InputStreamReader(p.getInputStream()));
+            String line = null;
 
-        StringBuilder sb1 = new StringBuilder(1024);
-        String s = null;
-        ProcessBuilder prsbld = null;
-        Process prs = null;
-
-        try {
-            prsbld = new ProcessBuilder(cmd);
-            prsbld.directory(new File("/home/ubuntu")); // 디렉토리 이동
-            System.out.println("command: " + prsbld.command()); 	// 커맨드 확인
-
-            // 프로세스 수행시작
-            prs = prsbld.start();
-
-            BufferedReader stdError = new BufferedReader(new InputStreamReader(prs.getErrorStream()));
-            while ((s = stdError.readLine()) != null)
-            {
-                sb1.append(s);
+            while((line = br.readLine()) != null){
+                System.out.println(line);
             }
-            prs.getErrorStream().close();
-            prs.getInputStream().close();
-            prs.getOutputStream().close();
-
-            // 종료까지 대기
-            prs.waitFor();
-
-        }catch (Exception e1) {
-        }
-        finally
-        {
-            if(prs != null)
-                try {
-                    prs.destroy();
-                } catch(Exception e2) {
-                }
-
+        }catch(Exception e){
+            System.out.println(e);
         }
 
-//        try{
-//            //String[] command = new String[] {"sh","-c", "ffmpeg -i " + filePath + ".mp4 " + filePath + ".mp3"};
-//            String command = "mkdir shell_test";
-//            new ProcessBuilder("/bin/bash", "-c", command).start();
-//
-//            command = "find my-project-0801-358104-1615eb198267.json";
-//            new ProcessBuilder("sh", "-c", command).start();
-////            BufferedReader reader =
-////                    new BufferedReader(new InputStreamReader(process.getInputStream()));
-////
-////            String line;
-////            while ((line = reader.readLine()) != null) {
-////                System.out.println(line);
-////            }
-////ls
-////            int exitCode = process.waitFor();
-//        }catch (Exception e){
-//            e.printStackTrace();
-//        }
         filePath = filePath+".mp3";
 
-        //테스트용
-        //String filePath="/home/ubuntu/docker-volume/video/ses_QtLHqSPcqs/ses_QtLHqSPcqs.mp3";
-        //String filePath="C:\\Users\\leekijong\\S07P12D206\\back\\demo\\src\\main\\resources\\ses_QtLHqSPcqs.mp3";
-        String[] text= new String[6];
+         String[] text= new String[6];
         try {
             CredentialsProvider credentialsProvider = FixedCredentialsProvider.create(ServiceAccountCredentials.fromStream(new FileInputStream("src/main/resources/my-project-0801-358104-1615eb198267.json")));
             SpeechSettings settings = SpeechSettings.newBuilder().setCredentialsProvider(credentialsProvider).build();
@@ -327,43 +270,5 @@ public class VideoDiaryServiceImpl implements VideoDiaryService {
         }
 
         return recognitionAudio;
-    }
-    public void createTimeScheduler(VideoDiary videoDiary){
-
-        try {
-            // Scheduler 사용을 위한 인스턴스화
-            SchedulerFactory schedulerFactory = new StdSchedulerFactory();
-
-            Scheduler scheduler = schedulerFactory.getScheduler();
-            scheduler.pauseJob(new JobKey(videoDiary.getYear()+""+ videoDiary.getMonth()+""+ videoDiary.getDay()+"_detail", videoDiary.getYear()+""+ videoDiary.getMonth()+""+ videoDiary.getDay()+"_group"));
-            // JOB Data 객체
-            JobDataMap jobDataMap = new JobDataMap();
-            jobDataMap.put("type", "videoDiary");
-            jobDataMap.put("sentiment", videoDiary.getSentiment());
-            jobDataMap.put("percentage", videoDiary.getPercentage()+"");
-            JobDetail jobDetail = JobBuilder.newJob(MorningJob.class)
-                    .withIdentity(videoDiary.getYear()+""+ videoDiary.getMonth()+""+ videoDiary.getDay()+"_job_detail", videoDiary.getYear()+""+ videoDiary.getMonth()+""+ videoDiary.getDay()+"_group")
-                    .setJobData(jobDataMap)
-                    .build();
-
-            Calendar cal = new GregorianCalendar();
-            cal.add(Calendar.DATE, 1);
-            @SuppressWarnings("deprecation")
-            SimpleTrigger simpleTrigger = (SimpleTrigger) TriggerBuilder.newTrigger()
-                    .withIdentity(videoDiary.getYear()+""+ videoDiary.getMonth()+""+ videoDiary.getDay()+"_trigger", videoDiary.getYear()+""+ videoDiary.getMonth()+""+ videoDiary.getDay()+"_trigger_group")
-                    // 실제 배포
-                    // .startAt(new Date(2022 - 1900, month, videoDiary.getDay(), 8, 30)) // 2022 : 2022 - 1900, month = 7 -> 8월
-                    // 테스트
-                    .startAt(new Date(cal.get(Calendar.YEAR) - 1900, cal.get(Calendar.MONTH), cal.get(Calendar.DAY_OF_MONTH), 8, 30)) // 2022 : 2022 - 1900, month = 7 -> 8월
-                    .withSchedule(SimpleScheduleBuilder.repeatSecondlyForTotalCount(1, 10)) // 10초마다 반복하며, 최대 1회 실행
-                    .forJob(jobDetail)
-                    .build();
-            Set<SimpleTrigger> triggerSet = new HashSet<SimpleTrigger>();
-            triggerSet.add(simpleTrigger);
-            scheduler.scheduleJob(jobDetail, triggerSet, false);
-            scheduler.start();
-        }catch(Exception e) {
-            e.printStackTrace();
-        }
     }
 }
