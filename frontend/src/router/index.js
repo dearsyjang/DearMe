@@ -1,47 +1,38 @@
 import { createRouter, createWebHistory } from 'vue-router'
-// import HomeView from '../views/HomeView.vue'
 
+import home from './home.js'
 import member from './member.js'
 import mypage from './mypage.js'
 import counselor from './counselor.js'
 import board from './board.js'
 import group from './group.js'
-
 import point from './point.js'
-
 import calendar from './calendar.js'
 import textDiary from './textDiary.js'
-
-
+import counseling from './counseling.js'
+import schedule from './schedule.js'
 import counselingRequest from './counselingRequest.js'
-import counselingSchedule from './counselingSchedule.js'
+import videodiary from './videoDiary.js'
+
+
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes: [
+    ...home,
     ...member,
     ...mypage,
     ...counselor,
     ...board,
     ...group,
-
     ...point,
-
     ...calendar,
     ...textDiary,
-
     ...counselingRequest,
-    ...counselingSchedule
+    ...counseling,
+    ...schedule,
+    ...videodiary,    
 
   ]
-
-// vue 기본 양식
-// const routes = [
-//   // {
-//   //   path: '/',
-//   //   name: 'home',
-//   //   component: HomeView
-//   // },
-
 })
 
 export default router
