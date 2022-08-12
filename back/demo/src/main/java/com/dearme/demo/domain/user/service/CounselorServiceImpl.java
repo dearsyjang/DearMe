@@ -12,6 +12,7 @@ import com.dearme.demo.domain.user.entity.Type;
 import com.dearme.demo.domain.user.entity.User;
 import com.dearme.demo.domain.user.exception.NoExistUserException;
 import com.dearme.demo.domain.user.repository.UserRepository;
+import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,7 @@ import org.springframework.stereotype.Service;
 import javax.persistence.EntityManager;
 import java.util.ArrayList;
 import java.util.List;
+
 
 @Service
 @RequiredArgsConstructor
@@ -45,11 +47,14 @@ public class CounselorServiceImpl implements CounselorService{
 
         JPAQueryFactory queryFactory = new JPAQueryFactory(entityManager);
         List<User> userList = queryFactory.selectFrom(user)
-                .where(user.counselorProfile.price.between(dto.getDownPrice(), dto.getUpPrice()))
+                .where(user.type.eq(Type.COUNSELOR)
+                .and(user.counselorProfile.price.between(dto.getDownPrice(), dto.getUpPrice())))
+                .orderBy(dto.getReviewCntUp() ? user.counselorProfile.reviewcnt.asc(): user.nickName.asc())
+                .orderBy(dto.getReviewCntDown() ? user.counselorProfile.reviewcnt.desc(): user.nickName.asc())
                 .fetch();
 
         for(User user : userList){
-            System.out.println(user.getCounselorProfile().getPrice());
+            System.out.println(user.getNickName());
         }
         return null;
 
@@ -79,3 +84,4 @@ public class CounselorServiceImpl implements CounselorService{
         return value;
     }
 }
+
