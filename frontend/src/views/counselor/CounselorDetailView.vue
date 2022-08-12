@@ -4,7 +4,7 @@
     <h2>상담사 프로필 페이지</h2>
 
 
-    <router-link to="/counseling-request/document">
+    <router-link to="/counseling-request">
       <button>상담 신청</button>
     </router-link>
     <div class="counselor-profile">
@@ -12,9 +12,9 @@
         <div class="card mb-3" style="max-width: 540px;">
           <div class="row g-0">
             <div class="col-md-4">
-              {{counselor}}
-               <p class="card-title">{{counselor.picUrl}}</p> 
-               <p class="card-title">{{counselor.nickname}}</p> 
+               
+               <p class="card-title">상담사 사진 : {{counselor.data.picUrl}}</p> 
+               <p class="card-title">상담사 이름 : {{counselor.data.nickName}}</p> 
             </div>
             <div class="col-md-8">
               <div class="card-body">
@@ -27,11 +27,14 @@
                   <!-- <info-item-comp v-for="info in infos"
                   :key="info.Content"
                   :info="info"></info-item-comp> -->
-                자기소개 : {{counselor.info}}
-                개인상담가격 : {{counselor.price}} 
-                약력 : {{counselor.careers}}
-                전문분야 :{{counselor.categories}}
-                자격증 : {{counselor.certificates}}
+                <div>자기소개 : {{counselor.data.introduce}}</div>
+                <div>개인상담가격 : {{counselor.data.price}} </div>
+
+                <div>약력 : {{counselor.data.careers}} </div>
+                
+                <div>자격증 : {{counselor.data.certificates}} </div>
+                <div>전문분야 : {{counselor.data.categories}} </div>
+                <div> 리뷰 :{{counselor.data.reviews}} </div>
                 </div>
               </div>
             </div>

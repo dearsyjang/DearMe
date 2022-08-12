@@ -1,16 +1,18 @@
+
+
 // const HOST = 'http://localhost:8080/api/'
 const HOST = "https://i7d206.p.ssafy.io"
 const MEMBER = '/users'
 const BOARD ='/boards'
 const COMMENT ='/comments'
 const COUNSELOR = '/counselors'
-
+const COUNSELING = '/counseling-documents'
 export default {
   member : {
     login: () => HOST + MEMBER + '/token',
     logout: () => HOST + MEMBER + '/token',
     signup: () => HOST + MEMBER,
-    // currentUserInfo: () => HOST + MEMBER + '/token',
+    currentUserInfo: () => HOST + MEMBER + '/token',
     currentUser: () => HOST + MEMBER,// 정보수정
     idCheck: () => HOST + MEMBER + '/id',
     // profile: username => HOST + MEMBER + 'profile/' + username,
@@ -29,7 +31,12 @@ export default {
      counselor : (counselorId) => HOST + COUNSELOR  + `/${counselorId}`,
     // filter : (categoryId) => HOST + MEMBER + '/filter' +  `/${categoryId}`,
     // search : (keyword) => HOST + MEMBER + '/search' +  `/${keyword}`,
+  },
+  counselingRequest : {
+    requestList: () => HOST + COUNSELING,
+    requestDetail: (counselingDocumentId) => HOST + COUNSELING  + `/${counselingDocumentId}`,
+    requestCreate: () => HOST + COUNSELING,
+    
   }
-
 
 }
