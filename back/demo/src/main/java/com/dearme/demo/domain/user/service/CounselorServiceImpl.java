@@ -7,13 +7,17 @@ import com.dearme.demo.domain.user.dto.ReviewViewResponseDto;
 import com.dearme.demo.domain.user.dto.counselor.CounselorSearchRequestDto;
 import com.dearme.demo.domain.user.dto.counselor.CounselorViewResponseDto;
 import com.dearme.demo.domain.user.dto.counselor.CounselorsViewResponseDto;
+import com.dearme.demo.domain.user.entity.QUser;
 import com.dearme.demo.domain.user.entity.Type;
 import com.dearme.demo.domain.user.entity.User;
 import com.dearme.demo.domain.user.exception.NoExistUserException;
 import com.dearme.demo.domain.user.repository.UserRepository;
+import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityManager;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,16 +28,30 @@ public class CounselorServiceImpl implements CounselorService{
 
     private  final ReviewRepository reviewRepository;
 
+    QUser user = QUser.user;
+    @Autowired
+    EntityManager entityManager;
+
     @Override
     public List<CounselorsViewResponseDto> getCounselors(String id, CounselorSearchRequestDto dto) {
 
-        List<User> userList = userRepository.findUserByTypeEquals(Type.COUNSELOR);
+//        List<User> userList = userRepository.findUserByTypeEquals(Type.COUNSELOR);
+//
+//        List<CounselorsViewResponseDto> counselorsViewResponseDtos = new ArrayList<>();
+//        for(User u: userList){
+//            counselorsViewResponseDtos.add(CounselorsViewResponseDto.of(u, ReviewCalc(u)));
+//        }
+//        return counselorsViewResponseDtos;
 
-        List<CounselorsViewResponseDto> counselorsViewResponseDtos = new ArrayList<>();
-        for(User u: userList){
-            counselorsViewResponseDtos.add(CounselorsViewResponseDto.of(u, ReviewCalc(u)));
+        JPAQueryFactory queryFactory = new JPAQueryFactory(entityManager);
+        List<User> userList = queryFactory.selectFrom(user)
+                .where(user.counselorProfile.price.between(dto.getDownPrice(), dto.getUpPrice()))
+                .fetch();
+
+        for(User user : userList){
+            System.out.println(user.getCounselorProfile().getPrice());
         }
-        return counselorsViewResponseDtos;
+        return null;
 
     }
 
