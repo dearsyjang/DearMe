@@ -52,6 +52,8 @@ public class User extends Base {
     @Column(nullable = false, unique = true)
     private String email;
 
+    @Column(nullable = false, unique = true)
+    private String phone;
     @Embedded
     @Setter
     private Picture picture;
@@ -137,13 +139,14 @@ public class User extends Base {
 
     @Builder
     public User(String id, String pw, String nickName, Gender gender,
-                Date birth, String email, Type type, Picture picture, Long points){
+                Date birth, String email, String phone, Type type, Picture picture, Long points){
         this.id = id;
         this.pw = pw;
         this.nickName = nickName;
         this.gender = gender;
         this.birth = birth;
         this.email = email;
+        this.phone=phone;
         this.type = type;
         this.picture = picture;
         this.points = points;
@@ -151,7 +154,7 @@ public class User extends Base {
 
     @Builder
     public User(String id, String pw, String nickName, Gender gender,
-                Date birth, String email, Type type, Picture picture,
+                Date birth, String email, String phone, Type type, Picture picture,
                 Long points, CounselorProfile counselorProfile){
         this.id = id;
         this.pw = pw;
@@ -159,6 +162,7 @@ public class User extends Base {
         this.gender = gender;
         this.birth = birth;
         this.email = email;
+        this.phone=phone;
         this.type = type;
         this.picture = picture;
         this.points = points;
