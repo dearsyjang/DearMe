@@ -129,4 +129,5 @@ public class ExceptionHandlerUtil {
     ResponseEntity<CommonResponse> handleCounselingRoomNotCreatedYet(CounselingRoomNotCreatedYet e){
         return ResponseEntity.badRequest().body(CommonResponse.getErrorResponse(e.getMessage()));
     }
+
 }

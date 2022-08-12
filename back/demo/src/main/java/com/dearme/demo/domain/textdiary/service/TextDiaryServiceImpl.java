@@ -7,9 +7,13 @@ import com.dearme.demo.domain.textdiary.dto.TextDiaryListResponseDto;
 import com.dearme.demo.domain.textdiary.entity.TextDiary;
 import com.dearme.demo.domain.textdiary.exception.NoPermissionTextDiaryException;
 import com.dearme.demo.domain.textdiary.repository.TextDiaryRepository;
+import com.dearme.demo.domain.user.entity.Type;
 import com.dearme.demo.domain.user.entity.User;
 import com.dearme.demo.domain.user.exception.NoExistUserException;
 import com.dearme.demo.domain.user.repository.UserRepository;
+import com.dearme.demo.domain.videodiary.entity.VideoDiary;
+import com.dearme.demo.domain.videodiary.exception.CounselorPostVideoDiaryException;
+import com.dearme.demo.domain.videodiary.exception.NoPermissionVideoDiaryException;
 import lombok.RequiredArgsConstructor;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -44,6 +48,8 @@ public class TextDiaryServiceImpl implements TextDiaryService{
         User user = userRepository.findUserById(id).orElseThrow(() -> {
             throw new NoExistUserException();
         });
+        if(user.getType().equals(Type.COUNSELOR))
+            throw new CounselorPostVideoDiaryException();
         TextDiary textDiary = dto.toEntity();
         textDiary.setUser(user);
         String[] text = getSentiment(dto.getContents());
@@ -58,7 +64,8 @@ public class TextDiaryServiceImpl implements TextDiaryService{
     @Override
     public TextDiaryDetailsResponseDto getDetails(String id, Long textDiaryId) {
         TextDiary textDiary = textDiaryRepository.findById(textDiaryId).get();
-        if(!textDiary.getUser().getId().equals(id)) throw new NoPermissionTextDiaryException();
+        if(!textDiary.getUser().getId().equals(id))
+            throw new NoPermissionTextDiaryException();
         return TextDiaryDetailsResponseDto.of(textDiary);
     }
 
@@ -77,7 +84,15 @@ public class TextDiaryServiceImpl implements TextDiaryService{
     @Override
     @Transactional
     public void delete(String id, Long textDiaryId) {
-        textDiaryRepository.deleteByUser_IdAndId(id, textDiaryId);
+        User user = userRepository.findUserById(id).orElseThrow(() -> {
+            throw new NoExistUserException();
+        });
+        TextDiary textDiary = textDiaryRepository.findById(textDiaryId).get();
+        if(user.getId().equals(textDiary.getUser().getId()))
+            textDiaryRepository.deleteByUser_IdAndId(id, textDiaryId);
+        else
+            throw new NoPermissionTextDiaryException();
+
     }
 
     public String[] getSentiment(String text){

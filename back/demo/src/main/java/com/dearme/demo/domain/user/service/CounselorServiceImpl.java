@@ -8,6 +8,7 @@ import com.dearme.demo.domain.user.dto.counselor.CounselorSearchRequestDto;
 import com.dearme.demo.domain.user.dto.counselor.CounselorViewResponseDto;
 import com.dearme.demo.domain.user.dto.counselor.CounselorsViewResponseDto;
 import com.dearme.demo.domain.user.entity.Category;
+import com.dearme.demo.domain.user.exception.NoExistCounselorException;
 import com.dearme.demo.global.qtype.QUser;
 import com.dearme.demo.domain.user.entity.Type;
 import com.dearme.demo.domain.user.entity.User;
@@ -82,7 +83,7 @@ public class CounselorServiceImpl implements CounselorService{
     @Override
     public CounselorViewResponseDto getCounselor(Long id) {
         User user = userRepository.findUserByUserId(id).orElseThrow(() -> {
-            throw new NoExistUserException();
+            throw new NoExistCounselorException();
         });
         double value=ReviewCalc(user);
 

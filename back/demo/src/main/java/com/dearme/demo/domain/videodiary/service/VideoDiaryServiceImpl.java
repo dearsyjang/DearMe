@@ -60,7 +60,8 @@ public class VideoDiaryServiceImpl implements VideoDiaryService {
         String[] text = videoSTT(videoDiary.getRealFileName());
         videoDiary.setContents(text[0]);
         videoDiary.setSentiment(text[1]);
-        if(text[2].equals(null)) throw new NoVideoDiaryException();
+        if(text[2].equals(null))
+            throw new NoVideoDiaryException();
         videoDiary.setPercentage(Double.parseDouble(text[2]));
         videoDiary.setPositive(Double.parseDouble(text[3]));
         videoDiary.setNegative(Double.parseDouble(text[4]));
@@ -74,6 +75,8 @@ public class VideoDiaryServiceImpl implements VideoDiaryService {
         User user = userRepository.findUserById(id).orElseThrow(() -> {
             throw new NoExistUserException();
         });
+        if(user.getType().equals(Type.COUNSELOR))
+            throw new CounselorPostVideoDiaryException();
         VideoDiary videoDiary = videoDiaryRepository.findVideoDiaryById(videoDiaryId);
         if(user.getId().equals(videoDiary.getUser().getId())){
             videoDiary.updateTitle(dto.getTitle());
@@ -81,6 +84,8 @@ public class VideoDiaryServiceImpl implements VideoDiaryService {
             if(dto.getSentiment().equals(videoDiary.getSentiment())){
                 String result[] = new String[5];
                 result = getSentiment(videoDiary.getContents());
+                if(result[0].equals(null))
+                    throw new NoVideoDiaryException();
                 videoDiary.updateSentiment(result[0]);
                 videoDiary.updatePercentage(Double.parseDouble(result[1]));
                 videoDiary.updatePositive(Double.parseDouble(result[2]));
@@ -109,7 +114,8 @@ public class VideoDiaryServiceImpl implements VideoDiaryService {
     @Override
     public VideoDiaryDetailsResponseDto getDetails(String id, Long videoDiaryId) {
         VideoDiary videoDiary = videoDiaryRepository.findById(videoDiaryId).get();
-        if(!videoDiary.getUser().getId().equals(id)) throw new NoPermissionVideoDiaryException();
+        if(!videoDiary.getUser().getId().equals(id))
+            throw new NoPermissionVideoDiaryException();
         return VideoDiaryDetailsResponseDto.of(videoDiary);
     }
 
@@ -134,7 +140,8 @@ public class VideoDiaryServiceImpl implements VideoDiaryService {
         VideoDiary videoDiary = videoDiaryRepository.findById(videoDiaryId).get();
         if(user.getId().equals(videoDiary.getUser().getId()))
             videoDiaryRepository.deleteByUser_IdAndId(id, videoDiaryId);
-        else throw new NoPermissionVideoDiaryException();
+        else
+            throw new NoPermissionVideoDiaryException();
 
     }
 

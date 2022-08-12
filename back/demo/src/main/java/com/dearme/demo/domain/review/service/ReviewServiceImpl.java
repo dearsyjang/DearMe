@@ -55,7 +55,7 @@ public class ReviewServiceImpl implements ReviewService {
         if(user.getId().equals(review.getUser().getId())){
 
             User counselor = userRepository.findUserById(review.getCounselor().getId()).orElseThrow(() -> {
-                throw new NoExistUserException();
+                throw new NoExistCounselorException();
             });
             counselor.getCounselorProfile().updateReviewValue(-1 * review.getValue(), -1);
             reviewRepository.delete(review);
