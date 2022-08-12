@@ -148,6 +148,22 @@ public class VideoDiaryServiceImpl implements VideoDiaryService {
 
         String filePath = "/home/ubuntu/docker-volume/video/" + path + "/" + path;
 
+        try {
+            String[] cmd = new String[] { "sudo"
+                    ,"apt-get",
+                    "install",
+                    "lib32z1"
+            };
+
+            ProcessBuilder bld = new ProcessBuilder(cmd);
+
+            Process process3 = bld.start();
+            int exitCode =  process3.waitFor();
+            System.out.println(exitCode);
+        } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
+        }
+
         List cmdList = new ArrayList();
         cmdList.add("dir");
         Process process = null;
