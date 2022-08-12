@@ -1,5 +1,6 @@
 package com.dearme.demo.domain.user.controller;
 
+import com.dearme.demo.domain.user.dto.counselor.CounselorSearchRequestDto;
 import com.dearme.demo.domain.user.service.CounselorService;
 import com.dearme.demo.global.common.CommonResponse;
 import lombok.RequiredArgsConstructor;
@@ -18,9 +19,9 @@ import javax.servlet.http.HttpServletRequest;
 public class CounselorController {
     private final CounselorService counselorService;
     @GetMapping
-    public ResponseEntity<CommonResponse> getCounselors(HttpServletRequest request){
+    public ResponseEntity<CommonResponse> getCounselors(HttpServletRequest request, CounselorSearchRequestDto dto){
         String id = (String) request.getAttribute("id");
-        return new ResponseEntity<>(CommonResponse.getSuccessResponse(counselorService.getCounselors(id)), HttpStatus.OK);
+        return new ResponseEntity<>(CommonResponse.getSuccessResponse(counselorService.getCounselors(id, dto)), HttpStatus.OK);
     }
 
     @GetMapping("/{counselorId}")
