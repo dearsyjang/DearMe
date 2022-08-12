@@ -33,8 +33,7 @@ public class CounselingServiceImpl implements CounselingService{
         counseling.setCounselingDocument(counselingDocument);
         counselingRepository.save(counseling);
 
-        createTimeScheduler(counseling);
-        createDayScheduler(counseling);
+
     }
 
     @Override
@@ -81,7 +80,10 @@ public class CounselingServiceImpl implements CounselingService{
         });
         if(dto.getStatus().equals(Status.REJECT)){
             counselingRepository.delete(target);
-        }else {
+        }else if (dto.getStatus().equals(Status.ACCEPTED)){
+            createTimeScheduler(target);
+            createDayScheduler(target);
+        }else{
             target.updateCounseling(dto.getStatus());
             counselingRepository.save(target);
         }

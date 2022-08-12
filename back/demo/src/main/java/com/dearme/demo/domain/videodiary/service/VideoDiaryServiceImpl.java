@@ -149,19 +149,6 @@ public class VideoDiaryServiceImpl implements VideoDiaryService {
         String filePath = "/video/" + path + "/" + path;
 
         try{
-            Process p = Runtime.getRuntime().exec("mkdir test3");
-            BufferedReader br = new BufferedReader(new InputStreamReader(p.getInputStream()));
-            String line = null;
-
-            while((line = br.readLine()) != null){
-                System.out.println(line);
-            }
-
-        }catch(Exception e){
-            System.out.println(e);
-        }
-
-        try{
             Process p = Runtime.getRuntime().exec("ffmpeg -i " + filePath + ".mp4 " + filePath + ".mp3");
             BufferedReader br = new BufferedReader(new InputStreamReader(p.getInputStream()));
             String line = null;
@@ -173,45 +160,9 @@ public class VideoDiaryServiceImpl implements VideoDiaryService {
             System.out.println(e);
         }
 
-//        String osName = System.getProperty("os.name");
-//
-//        //윈도우일 경우
-//        if (osName.indexOf("Windows") > -1) {
-//            System.out.println("window!!!!!!!");
-//        }else{
-//            System.out.println("linux!!!!!!!");
-//        }
-//        List<String> cmd = new ArrayList<String>();
-//        cmd.add("dir");
-//        cmd.add("/home");
-//        ProcessBuilder bld = new ProcessBuilder(cmd);
-//        bld.start();
-
-//        try{
-//            //String[] command = new String[] {"sh","-c", "ffmpeg -i " + filePath + ".mp4 " + filePath + ".mp3"};
-//            String command = "mkdir shell_test";
-//            new ProcessBuilder("/bin/bash", "-c", command).start();
-//
-//            command = "find my-project-0801-358104-1615eb198267.json";
-//            new ProcessBuilder("sh", "-c", command).start();
-////            BufferedReader reader =
-////                    new BufferedReader(new InputStreamReader(process.getInputStream()));
-////
-////            String line;
-////            while ((line = reader.readLine()) != null) {
-////                System.out.println(line);
-////            }
-////ls
-////            int exitCode = process.waitFor();
-//        }catch (Exception e){
-//            e.printStackTrace();
-//        }
         filePath = filePath+".mp3";
 
-        //테스트용
-        //String filePath="/home/ubuntu/docker-volume/video/ses_QtLHqSPcqs/ses_QtLHqSPcqs.mp3";
-        //String filePath="C:\\Users\\leekijong\\S07P12D206\\back\\demo\\src\\main\\resources\\ses_QtLHqSPcqs.mp3";
-        String[] text= new String[6];
+         String[] text= new String[6];
         try {
             CredentialsProvider credentialsProvider = FixedCredentialsProvider.create(ServiceAccountCredentials.fromStream(new FileInputStream("src/main/resources/my-project-0801-358104-1615eb198267.json")));
             SpeechSettings settings = SpeechSettings.newBuilder().setCredentialsProvider(credentialsProvider).build();
