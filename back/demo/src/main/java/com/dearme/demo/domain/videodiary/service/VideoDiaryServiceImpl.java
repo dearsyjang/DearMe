@@ -146,26 +146,7 @@ public class VideoDiaryServiceImpl implements VideoDiaryService {
     public String[] videoSTT(String path){
         //서버에서 실행시킬 때
 
-        String filePath = "/home/ubuntu/docker-volume/video/" + path + "/" + path;
-
-
-        try {
-            List cmdList = new ArrayList();
-            cmdList.add("mkdir");
-            Process process = null;
-            String str = null;
-            process = new ProcessBuilder(cmdList).directory(new File("test2")).start();
-            BufferedReader stdOut = new BufferedReader(new InputStreamReader(process.getInputStream()));
-
-            while((str = stdOut.readLine()) != null) {
-                System.out.println(str);
-            }
-            int exitCode = process.waitFor();
-            System.out.println("\nExited with error code : " + exitCode);
-        } catch (IOException | InterruptedException e) {
-            e.printStackTrace();
-        }
-
+        String filePath = "/video/" + path + "/" + path;
 
         try{
             Process p = Runtime.getRuntime().exec("mkdir test3");
