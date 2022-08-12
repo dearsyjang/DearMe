@@ -41,7 +41,8 @@ public class CounselDayJob implements Job {
         String ACCESS = dataMap.getString("ACCESS");
         String SECRET = dataMap.getString("SECRET");
         String ID_URL = dataMap.getString("ID_URL");
-
+        String phone1 = dataMap.getString("phone1");
+        String phone2 = dataMap.getString("phone2");
         String nickName = dataMap.getString("nickName");
         String date = dataMap.getString("date");
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
@@ -64,7 +65,7 @@ public class CounselDayJob implements Job {
             obj.put("from", "01087624001");
             obj.put("content", "1");
             JSONObject obj2 = new JSONObject();
-            obj2.put("to", "01087624001");
+            obj2.put("to", phone1);
             obj2.put("content", "오늘 " + date + "\n" + nickName+" 상담사님과 상담이 있어요!\n" + "준비해주세요~");
 
             List<JSONObject> jsonArray = new ArrayList<>();
@@ -76,8 +77,51 @@ public class CounselDayJob implements Job {
             se.setContentType("application/json");
             postRequest.setEntity(se);
 
+            HttpResponse response = httpClient.execute(postRequest);		//Response 출력
+
+            if (response.getStatusLine().getStatusCode() == 200) {
+
+                ResponseHandler<String> handler = new BasicResponseHandler();
+                String body = handler.handleResponse(response);
+
+            } else {
+                System.out.println("response is error : " + response.getStatusLine().getStatusCode());
+            }
+        } catch (Exception e){
+            System.err.println(e.toString());
+        }
+
+        try {
+
+            HttpClient httpClient = HttpClientBuilder.create().build(); //Use this instead
+            HttpPost postRequest = new HttpPost("https://sens.apigw.ntruss.com" + ID_URL); //POST 메소드 URL 새성
+            String time = Long.toString(System.currentTimeMillis());
+            postRequest.addHeader("x-ncp-apigw-timestamp", time);
+            postRequest.addHeader("x-ncp-iam-access-key", ACCESS);
+            postRequest.addHeader("x-ncp-apigw-signature-v2",makeSignature(time, ACCESS, SECRET, ID_URL) );
+            postRequest.addHeader("Content-Type", "application/json; charset=UTF-8");
+
+
+            JSONObject obj = new JSONObject();
+
+            obj.put("type", "sms");
+            obj.put("from", "01087624001");
+            obj.put("content", "1");
+            JSONObject obj2 = new JSONObject();
+            obj2.put("to", phone2);
+            obj2.put("content", "오늘 " + date +  " 상담이 있어요!\n" + "준비해주세요~");
+
+            List<JSONObject> jsonArray = new ArrayList<>();
+            jsonArray.add(obj2);
+
+            obj.put("messages", jsonArray);
+            StringEntity se = new StringEntity(obj.toString(),"UTF-8");
+            se.setContentEncoding("UTF-8");
+            se.setContentType("application/json");
+            postRequest.setEntity(se);
 
             HttpResponse response = httpClient.execute(postRequest);		//Response 출력
+
             if (response.getStatusLine().getStatusCode() == 200) {
 
                 ResponseHandler<String> handler = new BasicResponseHandler();

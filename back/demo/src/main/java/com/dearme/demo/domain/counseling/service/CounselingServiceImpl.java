@@ -101,6 +101,14 @@ public class CounselingServiceImpl implements CounselingService{
     }
 
     public void createTimeScheduler(Counseling counseling){
+        User user = userRepository.findUserById(counseling.getUser().getId()).orElseThrow(() -> {
+            throw new NoExistUserException();
+        });
+
+        User counselor = userRepository.findUserById(counseling.getCounselor().getId()).orElseThrow(() -> {
+            throw new NoExistUserException();
+        });
+
         try {
             // Scheduler 사용을 위한 인스턴스화
             SchedulerFactory schedulerFactory = new StdSchedulerFactory();
@@ -110,6 +118,8 @@ public class CounselingServiceImpl implements CounselingService{
             jobDataMap.put("ACCESS", ACCESS);
             jobDataMap.put("SECRET", SECRET);
             jobDataMap.put("ID_URL", ID_URL);
+            jobDataMap.put("phone1", user.getPhone());
+            jobDataMap.put("phone2", counselor.getPhone());
             jobDataMap.put("nickName", counseling.getCounselor().getNickName());
             jobDataMap.put("date", counseling.getYear()+"." + counseling.getMonth()+"."+counseling.getDay()+" " + counseling.getHours()+"시");
             JobDetail jobDetail = JobBuilder.newJob(CounselTimeJob.class)
@@ -138,6 +148,12 @@ public class CounselingServiceImpl implements CounselingService{
         }
     }
     public void createDayScheduler(Counseling counseling){
+        User user = userRepository.findUserById(counseling.getUser().getId()).orElseThrow(() -> {
+            throw new NoExistUserException();
+        });
+        User counselor = userRepository.findUserById(counseling.getCounselor().getId()).orElseThrow(() -> {
+            throw new NoExistUserException();
+        });
         try {
             // Scheduler 사용을 위한 인스턴스화
             SchedulerFactory schedulerFactory = new StdSchedulerFactory();
@@ -147,6 +163,8 @@ public class CounselingServiceImpl implements CounselingService{
             jobDataMap.put("ACCESS", ACCESS);
             jobDataMap.put("SECRET", SECRET);
             jobDataMap.put("ID_URL", ID_URL);
+            jobDataMap.put("phone1", user.getPhone());
+            jobDataMap.put("phone2", counselor.getPhone());
             jobDataMap.put("nickName", counseling.getCounselor().getNickName());
             jobDataMap.put("date", counseling.getHours()+"시");
             JobDetail jobDetail = JobBuilder.newJob(CounselDayJob.class)
