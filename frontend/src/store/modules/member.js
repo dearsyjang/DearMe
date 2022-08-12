@@ -41,7 +41,7 @@ export default {
     removeToken({ commit }) {
       // 현재 사용자 비움
       commit('SET_TOKEN', '')
-      localStorage.setItem('token', '')
+      localStorage.removeItem('token', '')
       commit('SET_CURRENT_USER', '')
 
     },
