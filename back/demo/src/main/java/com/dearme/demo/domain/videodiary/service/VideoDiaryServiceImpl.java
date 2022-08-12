@@ -143,7 +143,7 @@ public class VideoDiaryServiceImpl implements VideoDiaryService {
     }
 
 
-    public String[] videoSTT(String path) throws IOException, InterruptedException {
+    public String[] videoSTT(String path){
         //서버에서 실행시킬 때
 
         String filePath = "/home/ubuntu/docker-volume/video/" + path + "/" + path;
@@ -202,17 +202,19 @@ public class VideoDiaryServiceImpl implements VideoDiaryService {
             e.printStackTrace();
         }
 
-        String[] cmd = new String[] { "dir"
-                ,"home"
-        };
+        try {
+            String[] cmd = new String[] { "dir"
+                    ,"home"
+            };
 
-        ProcessBuilder bld = new ProcessBuilder(cmd);
+            ProcessBuilder bld = new ProcessBuilder(cmd);
 
-        Process process3 = bld.start();
-        int exitCode =  process3.waitFor();
-        System.out.println(exitCode);
-
-
+            Process process3 = bld.start();
+            int exitCode =  process3.waitFor();
+            System.out.println(exitCode);
+        } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
+        }
 
 
 
