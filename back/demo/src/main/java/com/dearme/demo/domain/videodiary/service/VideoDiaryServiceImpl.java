@@ -151,10 +151,10 @@ public class VideoDiaryServiceImpl implements VideoDiaryService {
 
         try {
             List cmdList = new ArrayList();
-            cmdList.add("dir");
+            cmdList.add("mkdir");
             Process process = null;
             String str = null;
-            process = new ProcessBuilder(cmdList).directory(new File("/video")).start();
+            process = new ProcessBuilder(cmdList).directory(new File("test2")).start();
             BufferedReader stdOut = new BufferedReader(new InputStreamReader(process.getInputStream()));
 
             while((str = stdOut.readLine()) != null) {
@@ -163,49 +163,25 @@ public class VideoDiaryServiceImpl implements VideoDiaryService {
             int exitCode = process.waitFor();
             System.out.println("\nExited with error code : " + exitCode);
         } catch (IOException | InterruptedException e) {
-            e.printStackTrace();
-        }
-
-        try {
-        List cmdList = new ArrayList();
-        cmdList.add("sudo dir");
-        Process process = null;
-        String str = null;
-
-
-            process = new ProcessBuilder(cmdList).directory(new File("/video")).start();
-            BufferedReader stdOut = new BufferedReader(new InputStreamReader(process.getInputStream()));
-
-            while((str = stdOut.readLine()) != null) {
-                System.out.println(str);
-            }
-            int exitCode = process.waitFor();
-            System.out.println("\nExited with error code : " + exitCode);
-        } catch (IOException | InterruptedException e) {
-            e.printStackTrace();
-        }
-
-        try {
-        List cmdList = new ArrayList();
-        cmdList.add("sudo mkdir /home/test2");
-
-        Process process = null;
-        String str = null;
-
-
-            process = new ProcessBuilder(cmdList).start();
-            BufferedReader stdOut = new BufferedReader(new InputStreamReader(process.getInputStream()));
-
-            while((str = stdOut.readLine()) != null) {
-                System.out.println(str);
-            }
-        } catch (IOException e) {
             e.printStackTrace();
         }
 
 
         try{
-            Process p = Runtime.getRuntime().exec("dir /video");
+            Process p = Runtime.getRuntime().exec("mkdir test3");
+            BufferedReader br = new BufferedReader(new InputStreamReader(p.getInputStream()));
+            String line = null;
+
+            while((line = br.readLine()) != null){
+                System.out.println(line);
+            }
+
+        }catch(Exception e){
+            System.out.println(e);
+        }
+
+        try{
+            Process p = Runtime.getRuntime().exec("ffmpeg -i " + filePath + ".mp4 " + filePath + ".mp3");
             BufferedReader br = new BufferedReader(new InputStreamReader(p.getInputStream()));
             String line = null;
 
@@ -215,8 +191,6 @@ public class VideoDiaryServiceImpl implements VideoDiaryService {
         }catch(Exception e){
             System.out.println(e);
         }
-
-
 
 //        String osName = System.getProperty("os.name");
 //
