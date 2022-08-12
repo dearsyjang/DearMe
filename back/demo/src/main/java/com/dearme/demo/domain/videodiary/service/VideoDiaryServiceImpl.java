@@ -148,79 +148,10 @@ public class VideoDiaryServiceImpl implements VideoDiaryService {
 
         String filePath = "/home/ubuntu/docker-volume/video/" + path + "/" + path;
 
-        try {
-            String[] cmd = new String[] { "sudo"
-                    ,"apt-get",
-                    "install",
-                    "lib32z1"
-            };
-
-            ProcessBuilder bld = new ProcessBuilder(cmd);
-
-            Process process3 = bld.start();
-            int exitCode =  process3.waitFor();
-            System.out.println(exitCode);
-        } catch (IOException | InterruptedException e) {
-            e.printStackTrace();
-        }
-
-        List cmdList = new ArrayList();
-        cmdList.add("dir");
-        Process process = null;
-        String str = null;
 
         try {
-            process = new ProcessBuilder(cmdList).directory(new File("home/ubuntu")).start();
-            BufferedReader stdOut = new BufferedReader(new InputStreamReader(process.getInputStream()));
-
-            while((str = stdOut.readLine()) != null) {
-                System.out.println(str);
-            }
-            int exitCode = process.waitFor();
-            System.out.println("\nExited with error code : " + exitCode);
-        } catch (IOException | InterruptedException e) {
-            e.printStackTrace();
-        }
-
-        List cmdList2 = new ArrayList();
-        cmdList2.add("dir");
-        Process process2 = null;
-        String str2 = null;
-
-        try {
-            process2 = new ProcessBuilder(cmdList2).directory(new File("/home/ubuntu")).start();
-            BufferedReader stdOut = new BufferedReader(new InputStreamReader(process2.getInputStream()));
-
-            while((str2 = stdOut.readLine()) != null) {
-                System.out.println(str2);
-            }
-            int exitCode = process2.waitFor();
-            System.out.println("\nExited with error code : " + exitCode);
-        } catch (IOException | InterruptedException e) {
-            e.printStackTrace();
-        }
-
-        List<String> cmdList4 = new ArrayList<String>();
-        cmdList4.add("dir");
-        cmdList4.add("home");
-        Process process4 = null;
-        String str4 = null;
-
-        try {
-            process4 = new ProcessBuilder(cmdList4).start();
-            BufferedReader stdOut = new BufferedReader(new InputStreamReader(process4.getInputStream()));
-
-            while((str4 = stdOut.readLine()) != null) {
-                System.out.println(str4);
-            }
-            int exitCode = process4.waitFor();
-        } catch (IOException | InterruptedException e) {
-            e.printStackTrace();
-        }
-
-        try {
-            String[] cmd = new String[] { "dir"
-                    ,"home"
+            String[] cmd = new String[] { "mkdir"
+                    ,"test2"
             };
 
             ProcessBuilder bld = new ProcessBuilder(cmd);
