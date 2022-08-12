@@ -3,9 +3,9 @@
   <div>
     <h2>상담사 프로필 페이지</h2>
 
-
-    <router-link to="/counseling-request">
-      <button>상담 신청</button>
+    
+    <router-link to="/counseling-request"  >
+      <button v-if="`{{currentUser.data.type}}`!=COUNSELOR">상담 신청</button>
     </router-link>
     <div class="counselor-profile">
       <div class="card">
@@ -21,20 +21,114 @@
 <!--             
                 <button class="createinfo" v-if="currentUser.id === profile.user.id && isdone==false" @click="isModalViewed=true">작성하기</button>
                 <button v-else>개인상담신청하기</button> -->
-                </div>
-                </div> 
+                <div>자기소개 : {{counselor.data.introduce}}</div>
+              </div>
+              </div> 
                 <div class="counselor-info">
                   <!-- <info-item-comp v-for="info in infos"
                   :key="info.Content"
                   :info="info"></info-item-comp> -->
-                <div>자기소개 : {{counselor.data.introduce}}</div>
-                <div>개인상담가격 : {{counselor.data.price}} </div>
-
-                <div>약력 : {{counselor.data.careers}} </div>
                 
-                <div>자격증 : {{counselor.data.certificates}} </div>
-                <div>전문분야 : {{counselor.data.categories}} </div>
-                <div> 리뷰 :{{counselor.data.reviews}} </div>
+                
+
+                <hr>
+                <div>개인상담가격 : {{counselor.data.price}} </div>
+                {{counselor.data.nickName}}
+                {{currentUser.data.nickname}}
+                <br>
+                <br>
+                <div class="card" id="carrer-card" style="width: 18rem;">
+                  <div class="card-header">
+                    약력
+                    <!-- <button class="add-button" v-if="usercheck()==true">+</button> -->
+
+                    <button class="add-button" >+</button>
+                    <div class="example-modal-window">
+                      <p>버튼을 누르면 모달 대화 상자가 열립니다.</p>
+                      <button @click="openModal">열기</button>
+
+                      <!-- 컴포넌트 MyModal -->
+                      <MyModal @close="closeModal" v-if="modal">
+                        <!-- default 슬롯 콘텐츠 -->
+                        <p>Vue.js Modal Window!</p>
+                        <div><input v-model="message"></div>
+                        <!-- /default -->
+                        <!-- footer 슬롯 콘텐츠 -->
+                        
+                          <button @click="doSend">제출</button>
+                        
+                        <!-- /footer -->
+                      </MyModal>
+                    </div>
+
+                  </div>
+                  <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                      <div v-for="(c,idx) in counselor.data.careers"
+                        :key="idx"
+                        :c="c">
+                        {{c.contents}}
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              
+                <br>
+
+                <div class="card" id="certificate-card" style="width: 18rem;">
+                  <div class="card-header">
+                    자격증<button class="add-button">+</button>
+                  </div>
+                  <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                      <div v-for="(c,idx) in counselor.data.certificates"
+                      :key="idx"
+                      :c="c">
+                      {{c.contents}}
+                      </div> 
+                    </li>
+                  </ul>
+                </div>
+
+                <br>
+
+                <div class="card" id="certificate-card" style="width: 18rem;">
+                  <div class="card-header">
+                    전문분야 <button class="add-button">+</button>
+                  </div>
+                  <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                      <div v-for="(c,idx) in counselor.data.categories"
+                        :key="idx"
+                        :c="c">
+                        {{c.contents}}
+                        </div> 
+                    </li>
+                  </ul>
+                </div>
+
+                <br>
+
+                <div class="card" id="review-card" style="width: 18rem;">
+                  <div class="card-header">
+                    리뷰
+                  </div>
+                  <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                      <div v-for="(c,idx) in counselor.data.reviews"
+                      :key="idx"
+                      :c="c">
+                      {{c.contents}}
+                      </div> 
+                    </li>
+                  </ul>
+                </div>
+
+             
+             
+            
+
+ 
                 </div>
               </div>
             </div>
@@ -42,12 +136,12 @@
         </div>
       </div>
 
-      <div v-if="!favorite">
+      <!-- <div v-if="!favorite">
         <button class="btn btn-link" @click="favoriteCounselor(counselorId)"><i class="fa-solid fa-heart" style="color:black"></i></button>
       </div>
       <div v-else>
         <button class="btn btn-link" @click="favoriteCounselor(counselorId)"><i class="fa-solid fa-heart" style="color:red"></i></button>
-      </div>
+      </div> -->
       
       <div class="counselor-info-create">
         <div class="black-bg" v-if = "isModalViewed==true">
@@ -128,7 +222,7 @@
       <file-list-comp>
       </file-list-comp> -->
 
-     
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
      
 
   </div>
@@ -143,7 +237,7 @@
 
 
   import { mapActions,mapGetters} from 'vuex'
-
+  import MyModal from '@/views/counselor/components/ModalComp.vue'
 
   export default {
     name : 'CounselorDetailView',
@@ -153,9 +247,9 @@
     // ManageGroupListComp,
     // ReviewListComp,
     // InfoItemComp,
-   
+    MyModal 
 },  
- 
+
     data() {
       return {
         counselorId: this.$route.params.counselorId,
@@ -165,6 +259,8 @@
         ispersonalpriced: false,
         isgrouppriced: false,
         ismaked: false,
+        modal: false,
+        message: ''
   
       }
     },
@@ -175,10 +271,24 @@
     }
     },
     methods: {
-      ...mapActions(['fetchCounselor','favoriteCounselor','isfavorite']),
-    
-      
+      ...mapActions(['fetchCounselor','favoriteCounselor','isfavorite' ,'fetchCurrentUser']),
 
+      openModal() {
+      this.modal = true
+    },
+    closeModal() {
+      this.modal = false
+    },
+    doSend() {
+      if (this.message.length > 0) {
+        alert(this.message)
+        this.message = ''
+        this.closeModal()
+      } else {
+        alert('메시지를 입력해주세요.')
+      }
+    },
+     
       createInfo(){
         if (this.isdone === false){
         
@@ -197,8 +307,9 @@
       },
     },
     created() {
+      this.fetchCurrentUser()
       this.fetchCounselor(this.counselorId)
-      console.log(this.counselorId)
+    
       // this.favorite =''
       },
   }
@@ -244,5 +355,13 @@ div {
 }
 
 
+.card-header{
+  display: flex;
+  justify-content: space-between;
 
+}
+.add-button{
+  border:none;
+  background-color: transparent
+}
 </style>

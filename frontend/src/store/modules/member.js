@@ -54,7 +54,7 @@ export default {
       })
         .then(res => {
           const token = res.data.data.accessToken
-          console.log(res.data)
+         
           dispatch('saveToken', token)
           dispatch('fetchCurrentUser')
           router.push({ name: 'mypageUser' })
@@ -130,7 +130,7 @@ export default {
       }
     })
     .then(res => {
-      console.log(res)
+    
       commit('SET_CURRENT_USER', res.data)
     })       
       

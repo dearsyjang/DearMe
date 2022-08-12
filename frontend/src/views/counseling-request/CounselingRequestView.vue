@@ -1,5 +1,6 @@
 <template>
   <div>
+ 
   <div class="requestform">
     <div class="card">
       <div class="card-body">
@@ -14,27 +15,10 @@
 
 
     <form @submit.prevent="onSubmit" class="article-form">
-    <br><br><br><br><br><br><br><br>
-    <textarea style="width:90%; height:90%" v-model="req.contents" placeholder="내용을 작성하시오..."></textarea>
-    <br><br><br><br><br><br><br><br>
+    <br><br><br><br>
+    <textarea style="width:90%; height:90%" v-model="contents" placeholder="내용을 작성하시오..."></textarea>
+    <br><br><br><br>
 
-
-    <div id="app">
-    <p v-if="req.isOpen">
-      state가 true상태 입니다.
-    </p>
-    <p v-else>
-      state가 false상태 입니다.
-    </p>
-    
-    <div class="form-switch" @click="req.isOpen= !req.isOpen">
-        <input class="form-check-input"  type="checkbox" role="switch" id="flexSwitchCheckChecked" checked>
-        <label class="form-check-label"  for="flexSwitchCheckChecked">감정달력 공개여부</label>
-    </div>
-    </div>
-
-
-      
 
     <section class="section" >
       <div class="container">
@@ -45,7 +29,7 @@
           <button class="button is-small is-info is-outlined ml-5"
           @click="calendarData(1)">&gt;</button>
         </h2>
-        <table class="table has-text-centered is-fullwidth">
+        <table class="table has-text-centered is-fullwidth" @click="year2=year">
           <thead>
             <th v-for="day in days" :key="day" style="text-align:center">{{ day }}</th>
           </thead>
@@ -56,13 +40,13 @@
                 :key="secondIdx"
               > 
               <!-- "{ name: 'CounselingTimeSelect', params: {counselingDay:selectDay}}" -->
-                <div class="calendar-day" style="height:50px; width:30px">
-                <router-link to="/counseling-request/timeSelect" :class="{ 'has-text-grey-light': idx === 0 && day >= lastMonthStart || dates.length - 1 === idx && nextMonthStart > day,
-                'has-text-primary': day === today && month === currentMonth && year === currentYear && idx <32
-                }">
-                {{ day }}
-              
-                </router-link>
+                <div class="calendar-day" @click="day2=day" style="height:50px; width:30px">
+                  <div @click="month2=month" :class="{ 'has-text-grey-light': idx === 0 && day >= lastMonthStart || dates.length - 1 === idx && nextMonthStart > day,
+                  'has-text-primary': day === today && month === currentMonth && year === currentYear && idx <32 
+                  }">
+                  {{ day }}
+                
+                  </div>
                 </div>
               </td>
             </tr>
@@ -71,37 +55,43 @@
       </div>
     </section>
   
-    <br><br><br><br><br><br><br><br>
-    <select v-model="req.hour" class="form-select" style="width:35%; display:inline-block; text-align: center ; " multiple aria-label="multiple select example">
+    <br><br><br><br>
+    <select v-model="selectHour" class="form-select" style="width:50%; height:240px; display:inline-block; text-align: center ; " multiple aria-label="multiple select example">
       <option disabled value="">상담가능시간</option>
-      <option >09:00</option>
-      <option >10:00</option>
-      <option >11:00</option>
-      <option >13:00</option>
-      <option >14:00</option>
-      <option >15:00</option>
-      <option >16:00</option>
-      <option >17:00</option>
+      <hr>
+      <option >09:00 ~ 10:00</option>
+      <option >10:00 ~ 11:00</option>
+      <option >11:00 ~ 12:00</option>
+      <option >13:00 ~ 14:00</option>
+      <option >14:00 ~ 15:00</option>
+      <option >15:00 ~ 16:00</option>
+      <option >16:00 ~ 17:00</option>
+      <option >17:00 ~ 18:00</option>
     </select>
     <br>
  
 
-    <br><br><br><br><br><br><br><br>
-    <br><br><br><br><br><br><br><br>
-   
+    <br><br><br>
+    <br><br><br>
+    <div id="app">  
+    <div class="form-switch" @click="isOpen= !isOpen">
+        <input class="form-check-input"  type="checkbox" role="switch" id="flexSwitchCheckChecked" checked>
+        <label class="form-check-label"  for="flexSwitchCheckChecked">감정달력 공개여부</label>
+    </div>
+    </div>
 
   
     <button type="submit" class="btn" id="article-form-submit-button">신청하기</button>
     </form>
-
+    <br><br><br>
   </div>
-  <br><br><br><br><br><br><br><br>
-
-  <counseling-time-comp
+  <br><br><br> <br><br><br>
+ 
+  <!-- <counseling-time-comp
       v-for="(request,idx) in requests.data"
       :key="idx"
       :request="request">
-     </counseling-time-comp>
+     </counseling-time-comp> -->
   </div>
 </template>
 
@@ -109,22 +99,26 @@
 
 import { mapGetters,mapActions } from 'vuex'
 
-import CounselingTimeComp from '@/views/counseling-request/components/counselingTimeComp.vue'
+// import CounselingTimeComp from '@/views/counseling-request/components/counselingTimeComp.vue'
   export default {
   name : 'CounselingRequestView',
-  components: {
-    CounselingTimeComp
-  },
+  // components: {
+  //   CounselingTimeComp
+  // },
   data() {
     return {
-      selectDay:'',
-      req:{
+      isSelected:false,
+      month2:0,
+      day2:0,
+      year2:0,
+      selectHour:0,
       contents: '',
-      hour:'',
+      date2 : '',
+      id:1,
       isOpen:true,
-      
+    
 
-    },
+    
     days: [
         '일',
         '월',
@@ -148,19 +142,35 @@ import CounselingTimeComp from '@/views/counseling-request/components/counseling
   computed : {
     ...mapGetters(['currentUser','request']),
     ...mapGetters(['requests']),
+    ...mapGetters(['currentUser']),
     },
     methods: {
-    ...mapActions(['fetchCurrentUser','createRequest',]),
+    ...mapActions(['fetchCurrentUser','createRequest']),
     ...mapActions(['fetchRequests',]),
 
+   
+
     onSubmit() {
-      const formData = new FormData()
-      formData.append('contents', this.data.req.contents)
-      formData.append('isOpen', this.data.req.isOpen)
-      formData.append('date', this.data.req.date)
+      let formData = new FormData()
+      this.date2 = `${this.year2}-${this.month2}-${this.day2}${Object.values(this.selectHour)}`
+      formData.append('contents', this.contents)
+      formData.append('isOpen', this.isOpen)
+      formData.append('id', this.id)
+      formData.append('date', this.date2)
       this.createRequest(this.formData)
-     
+  
+
+      console.log(this.day2)
+      console.log(this.year2)
+      console.log(this.month2)
+      console.log(Object.values(this.selectHour))
+      console.log(this.contents)
+      console.log(this.isOpen)
+      console.log(this.date2)
+      console.log(this.id)
       },
+
+    
 
     //////////////////////////////////이 밑으로는 달력/////////////////////////////
 
@@ -245,13 +255,13 @@ import CounselingTimeComp from '@/views/counseling-request/components/counseling
   created() {
     this.fetchCurrentUser()
     this.fetchRequests()
-
-    const date = new Date();
-    this.currentYear = date.getFullYear(); // 이하 현재 년, 월 가지고 있기
-    this.currentMonth = date.getMonth() + 1;
+    
+    const dates = new Date();
+    this.currentYear = dates.getFullYear(); // 이하 현재 년, 월 가지고 있기
+    this.currentMonth = dates.getMonth() + 1;
     this.year = this.currentYear;
     this.month = this.currentMonth;
-    this.today = date.getDate(); // 오늘 날짜
+    this.today = dates.getDate(); // 오늘 날짜
     this.calendarData();
     
     

@@ -7,8 +7,12 @@
     <div class="card mb-3" style="max-width: 540px;">
       <div class="row g-0">
         <div class="col-md-4">
-          {{re.userId}}
-          {{re.counselorId}}
+          상담번호: {{re.id}}
+          <br>
+          유저 번호: {{re.userId}}
+          <br>
+          상담사번호:{{re.counselorId}}
+          <br>
           {{re.year}}/{{re.month}}/{{re.day}}
         </div>
         <div class="col-md-8">

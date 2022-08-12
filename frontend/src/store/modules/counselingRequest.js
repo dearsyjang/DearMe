@@ -58,13 +58,13 @@ export default {
       },
 
     // 상담 요청 작성
-    createRequest({ commit, getters }, request) {
+    createRequest({ commit, getters }, formData) {
       // console.log(request)
       // console.log(getters.authHeader)
       axios({
         url: drf.counselingRequest.requestCreate(),
         method: 'post',
-        data: request,
+        data: formData,
         headers: {
           'Content-Type': 'application/json',
           'Authorization': getters.authHeader2
@@ -75,6 +75,11 @@ export default {
           router.push({
             name: 'request'
           })
+        })
+        .catch((err) => {
+          console.error(err)
+          console.error(err.response.data)
+         
         })
     },
 
