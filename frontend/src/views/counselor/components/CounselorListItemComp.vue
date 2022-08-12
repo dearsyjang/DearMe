@@ -18,7 +18,6 @@
       </div>
     </router-link> -->
     <!-- <router-link to="/counselors/counselor/:counselorId"> -->
-    {{counselor.counselorId}}
     
     <!-- <router-link 
     :to="`/counselors/${counselor.counselorId}`"> -->

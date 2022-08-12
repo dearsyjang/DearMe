@@ -13,7 +13,7 @@
     </div>
 
 
-
+    <form @submit.prevent="onSubmit" class="article-form">
     <br><br><br><br><br><br><br><br>
     <textarea style="width:90%; height:90%" v-model="req.contents" placeholder="내용을 작성하시오..."></textarea>
     <br><br><br><br><br><br><br><br>
@@ -61,7 +61,6 @@
                 'has-text-primary': day === today && month === currentMonth && year === currentYear && idx <32
                 }">
                 {{ day }}
-                <br>
               
                 </router-link>
                 </div>
@@ -72,36 +71,56 @@
       </div>
     </section>
   
-  <br><br><br><br><br><br><br><br>
-  <time-select-comp></time-select-comp>
-  <br><br><br><br><br><br><br><br>
-  <br><br><br><br><br><br><br><br>
+    <br><br><br><br><br><br><br><br>
+    <select v-model="req.hour" class="form-select" style="width:35%; display:inline-block; text-align: center ; " multiple aria-label="multiple select example">
+      <option disabled value="">상담가능시간</option>
+      <option >09:00</option>
+      <option >10:00</option>
+      <option >11:00</option>
+      <option >13:00</option>
+      <option >14:00</option>
+      <option >15:00</option>
+      <option >16:00</option>
+      <option >17:00</option>
+    </select>
+    <br>
+ 
+
+    <br><br><br><br><br><br><br><br>
+    <br><br><br><br><br><br><br><br>
    
 
   
-    <button @click="submit">상담 신청하기</button>
+    <button type="submit" class="btn" id="article-form-submit-button">신청하기</button>
+    </form>
+
   </div>
   <br><br><br><br><br><br><br><br>
 
-
+  <counseling-time-comp
+      v-for="(request,idx) in requests.data"
+      :key="idx"
+      :request="request">
+     </counseling-time-comp>
   </div>
 </template>
 
 <script>
 
 import { mapGetters,mapActions } from 'vuex'
-import timeSelectComp from '@/views/counseling-request/components/timeSelectComp.vue';
+
+import CounselingTimeComp from '@/views/counseling-request/components/counselingTimeComp.vue'
   export default {
   name : 'CounselingRequestView',
   components: {
-    timeSelectComp
+    CounselingTimeComp
   },
   data() {
     return {
       selectDay:'',
       req:{
       contents: '',
-      date:'',
+      hour:'',
       isOpen:true,
       
 
@@ -128,9 +147,24 @@ import timeSelectComp from '@/views/counseling-request/components/timeSelectComp
 
   computed : {
     ...mapGetters(['currentUser','request']),
+    ...mapGetters(['requests']),
     },
     methods: {
     ...mapActions(['fetchCurrentUser','createRequest',]),
+    ...mapActions(['fetchRequests',]),
+
+    onSubmit() {
+      const formData = new FormData()
+      formData.append('contents', this.data.req.contents)
+      formData.append('isOpen', this.data.req.isOpen)
+      formData.append('date', this.data.req.date)
+      this.createRequest(this.formData)
+     
+      },
+
+    //////////////////////////////////이 밑으로는 달력/////////////////////////////
+
+
     calendarData(arg) { // 인자를 추가
       if (arg < 0) { // -1이 들어오면 지난 달 달력으로 이동
         this.month -= 1;
@@ -210,7 +244,7 @@ import timeSelectComp from '@/views/counseling-request/components/timeSelectComp
     
   created() {
     this.fetchCurrentUser()
-    this.createRequest(this.req)
+    this.fetchRequests()
 
     const date = new Date();
     this.currentYear = date.getFullYear(); // 이하 현재 년, 월 가지고 있기

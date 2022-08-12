@@ -6,7 +6,7 @@ const MEMBER = '/users'
 const BOARD ='/boards'
 const COMMENT ='/comments'
 const COUNSELOR = '/counselors'
-const COUNSELING = '/counseling-documents'
+const COUNSELING = '/counselings'
 export default {
   member : {
     login: () => HOST + MEMBER + '/token',
@@ -35,7 +35,7 @@ export default {
   counselingRequest : {
     requestList: () => HOST + COUNSELING,
     requestDetail: (counselingDocumentId) => HOST + COUNSELING  + `/${counselingDocumentId}`,
-    requestCreate: () => HOST + COUNSELING,
+    requestCreate: () => HOST + '/counseling-documents',
     
   }
 
