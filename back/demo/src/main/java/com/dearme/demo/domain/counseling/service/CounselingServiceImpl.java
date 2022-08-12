@@ -16,6 +16,7 @@ import com.dearme.demo.global.scheduler.CounselTimeJob;
 import lombok.RequiredArgsConstructor;
 import org.quartz.*;
 import org.quartz.impl.StdSchedulerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -26,6 +27,15 @@ public class CounselingServiceImpl implements CounselingService{
     private final CounselingRepository counselingRepository;
 
     private final UserRepository userRepository;
+
+    @Value("${message.access:0}")
+    private String ACCESS;
+
+    @Value("${message.secret:0}")
+    private String SECRET;
+
+    @Value("${message.url:}")
+    private String ID_URL;
 
     @Override
     public void createCounseling(CounselingDocument counselingDocument) {
@@ -81,8 +91,8 @@ public class CounselingServiceImpl implements CounselingService{
         if(dto.getStatus().equals(Status.REJECT)){
             counselingRepository.delete(target);
         }else if (dto.getStatus().equals(Status.ACCEPTED)){
-            createTimeScheduler(target);
-            createDayScheduler(target);
+            //createTimeScheduler(target);
+            //createDayScheduler(target);
         }else{
             target.updateCounseling(dto.getStatus());
             counselingRepository.save(target);
@@ -97,6 +107,9 @@ public class CounselingServiceImpl implements CounselingService{
             Scheduler scheduler = schedulerFactory.getScheduler();
             // JOB Data 객체
             JobDataMap jobDataMap = new JobDataMap();
+            jobDataMap.put("ACCESS", ACCESS);
+            jobDataMap.put("SECRET", SECRET);
+            jobDataMap.put("ID_URL", ID_URL);
             jobDataMap.put("nickName", counseling.getCounselor().getNickName());
             jobDataMap.put("date", counseling.getYear()+"." + counseling.getMonth()+"."+counseling.getDay()+" " + counseling.getHours()+"시");
             JobDetail jobDetail = JobBuilder.newJob(CounselTimeJob.class)
@@ -131,6 +144,9 @@ public class CounselingServiceImpl implements CounselingService{
             Scheduler scheduler = schedulerFactory.getScheduler();
             // JOB Data 객체
             JobDataMap jobDataMap = new JobDataMap();
+            jobDataMap.put("ACCESS", ACCESS);
+            jobDataMap.put("SECRET", SECRET);
+            jobDataMap.put("ID_URL", ID_URL);
             jobDataMap.put("nickName", counseling.getCounselor().getNickName());
             jobDataMap.put("date", counseling.getHours()+"시");
             JobDetail jobDetail = JobBuilder.newJob(CounselDayJob.class)
