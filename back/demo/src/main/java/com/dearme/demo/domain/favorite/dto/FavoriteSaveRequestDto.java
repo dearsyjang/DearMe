@@ -7,6 +7,6 @@ import javax.validation.constraints.NotBlank;
 @Data
 public class FavoriteSaveRequestDto {
     @NotBlank
-    private String id;
+    private Long id;
 
 }

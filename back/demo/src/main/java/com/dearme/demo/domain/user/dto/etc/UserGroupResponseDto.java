@@ -1,4 +1,4 @@
-package com.dearme.demo.domain.user.dto;
+package com.dearme.demo.domain.user.dto.etc;
 
 import com.dearme.demo.domain.group.entity.Group;
 import lombok.Builder;

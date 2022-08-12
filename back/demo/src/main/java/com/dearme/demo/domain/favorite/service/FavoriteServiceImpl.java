@@ -40,7 +40,7 @@ public class FavoriteServiceImpl implements FavoriteService {
             throw new NoFavoriteSavePermissionException();
         }
         favorite.setUser(user);
-        User counselor = userRepository.findUserById(dto.getId()).orElseThrow(() -> {
+        User counselor = userRepository.findById(dto.getId()).orElseThrow(() -> {
             throw new NoExistCounselorException();
         });
         favorite.setCounselor(counselor);

@@ -13,7 +13,7 @@ import java.util.List;
 @AllArgsConstructor
 public class BoardViewResponseDto {
     private Long id;
-    private Long user_id;
+    private Long userId;
     private String nickName;
     private String title;
 

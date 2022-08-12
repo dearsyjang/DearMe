@@ -1,6 +1,6 @@
 package com.dearme.demo.domain.user.controller;
 
-import com.dearme.demo.domain.user.dto.PointsUpdateRequestDto;
+import com.dearme.demo.domain.user.dto.etc.PointsUpdateRequestDto;
 import com.dearme.demo.domain.user.dto.user.*;
 import com.dearme.demo.domain.user.service.UserService;
 import com.dearme.demo.global.common.CommonResponse;

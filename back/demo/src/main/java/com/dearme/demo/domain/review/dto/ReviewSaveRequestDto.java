@@ -5,7 +5,7 @@ import lombok.Data;
 
 @Data
 public class ReviewSaveRequestDto {
-    private String id;
+    private Long id;
     private Long value;
     private String contents;
     public Review toReviewEntity(){

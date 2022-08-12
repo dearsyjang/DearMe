@@ -10,7 +10,7 @@ import java.util.Date;
 @AllArgsConstructor
 public class CommentResponseDto {
     private Long id;
-    private Long user_id;
+    private Long userId;
     private String nickName;
     private LocalDateTime date;
     private String contents;

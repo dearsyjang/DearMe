@@ -3,7 +3,7 @@ package com.dearme.demo.domain.user.service;
 import com.dearme.demo.domain.favorite.entity.Favorite;
 import com.dearme.demo.domain.review.entity.Review;
 import com.dearme.demo.domain.review.repository.ReviewRepository;
-import com.dearme.demo.domain.user.dto.ReviewViewResponseDto;
+import com.dearme.demo.domain.user.dto.etc.ReviewViewResponseDto;
 import com.dearme.demo.domain.user.dto.counselor.CounselorSearchRequestDto;
 import com.dearme.demo.domain.user.dto.counselor.CounselorViewResponseDto;
 import com.dearme.demo.domain.user.dto.counselor.CounselorsViewResponseDto;

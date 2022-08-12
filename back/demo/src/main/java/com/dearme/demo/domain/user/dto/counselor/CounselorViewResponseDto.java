@@ -1,6 +1,6 @@
 package com.dearme.demo.domain.user.dto.counselor;
 
-import com.dearme.demo.domain.user.dto.ReviewViewResponseDto;
+import com.dearme.demo.domain.user.dto.etc.ReviewViewResponseDto;
 import com.dearme.demo.domain.user.dto.user.CareerInfoDto;
 import com.dearme.demo.domain.user.dto.user.CategoryInfoDto;
 import com.dearme.demo.domain.user.dto.user.CertificateInfoDto;
@@ -15,7 +15,7 @@ import java.util.List;
 @Data
 @Builder
 public class CounselorViewResponseDto {
-    private Long userid;
+    private Long userId;
 
     private String nickName;
 
@@ -40,7 +40,7 @@ public class CounselorViewResponseDto {
 
     public static CounselorViewResponseDto of(User entity, Double value, List<ReviewViewResponseDto> reviews){
         return CounselorViewResponseDto.builder()
-                .userid(entity.getUserId())
+                .userId(entity.getUserId())
                 .nickName(entity.getNickName())
                 .pictureUrl(entity.getPicture().getRealFileName())
                 .value(value)
