@@ -4,6 +4,7 @@ import com.dearme.demo.domain.review.entity.Review;
 import com.dearme.demo.domain.review.exception.NoExistReviewException;
 import com.dearme.demo.domain.review.repository.ReviewRepository;
 import com.dearme.demo.domain.user.dto.ReviewViewResponseDto;
+import com.dearme.demo.domain.user.dto.counselor.CounselorSearchRequestDto;
 import com.dearme.demo.domain.user.dto.counselor.CounselorViewResponseDto;
 import com.dearme.demo.domain.user.dto.counselor.CounselorsViewResponseDto;
 import com.dearme.demo.domain.user.entity.Type;
@@ -22,8 +23,9 @@ public class CounselorServiceImpl implements CounselorService{
     private final UserRepository userRepository;
 
     private  final ReviewRepository reviewRepository;
+
     @Override
-    public List<CounselorsViewResponseDto> getCounselors(String id) {
+    public List<CounselorsViewResponseDto> getCounselors(String id, CounselorSearchRequestDto dto) {
 
         List<User> userList = userRepository.findUserByTypeEquals(Type.COUNSELOR);
 
