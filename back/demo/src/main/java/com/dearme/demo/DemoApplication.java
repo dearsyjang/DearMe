@@ -1,7 +1,6 @@
 package com.dearme.demo;
 
 
-import com.dearme.demo.domain.user.entity.QUser;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
