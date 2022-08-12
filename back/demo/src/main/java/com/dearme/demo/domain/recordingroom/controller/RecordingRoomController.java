@@ -49,4 +49,9 @@ public class RecordingRoomController {
         recordingRoomService.deleteRecording(recordingId);
 
     }
+
+    @RequestMapping(value = "/get/{recordingId}", method = RequestMethod.GET)
+    public ResponseEntity<CommonResponse> getRecording(@PathVariable("recordingId") String recordingId) {
+        return ResponseEntity.ok().body(CommonResponse.getSuccessResponse(recordingRoomService.getRecording(recordingId)));
+    }
 }
