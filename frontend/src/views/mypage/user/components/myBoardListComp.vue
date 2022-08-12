@@ -8,6 +8,8 @@
 </div>
 </template>
 <script>
+import { mapActions, mapGetters } from 'vuex'
+
 export default {
   components: {},
   data() {
@@ -19,7 +21,20 @@ export default {
   created() {},
   mounted() {},
   unmounted() {},
-  methods: {}
+  methods: {
+    // 나의 게시글 패치
+    ...mapActions(['fetchBoards', 'fetchMyid']),
+    mygroup() {
+      // this.fetchBoards()
+      // const boardAuthId = board.userid
+      // const userId = this.myId
+      // this.boards.filter()
+    }
+
+  },
+  computed: {
+    ...mapGetters(['boards', 'myId'])
+  },
 }
 </script>
 <style scoped>

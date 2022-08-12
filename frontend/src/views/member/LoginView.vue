@@ -1,5 +1,24 @@
 <template>
-  <div>
+    <!-- <div class="popup popup-login">
+      <div class="content-block">
+        <h4>LOGIN</h4>
+        <div class="loginform">
+          <form id="LoginForm" method="post">
+            <input type="text" name="Username" class="form_input required" placeholder="id" />
+            <input type="password" name="Password" class="form_input required" placeholder="password" />
+            <div class="forgot_pass"><a href="#" data-popup=".popup-forgot" class="open-popup">Forgot Password?</a></div>
+            <input type="submit" name="submit" class="form_submit" id="submit" value="SIGN IN" />
+          </form>
+          <div class="signup_bottom">
+            <p>Don't have an account?</p>
+            <a href="#" class="open-popup">SIGN UP</a>
+          </div>
+        </div>
+        <div class="close_popup_button">
+            <a href="#" class="close-popup"><img src="images/icons/black/menu_close.png" alt="" title="" /></a>
+        </div>
+      </div>
+    </div> -->
     <div class="login">
     <div class="login__content">
       <div class="login__forms">
@@ -20,7 +39,6 @@
       </div>
     </div>
    </div>
-  </div>
 </template>
 <script>
 import { mapActions, mapGetters } from 'vuex'
@@ -264,5 +282,121 @@ img{
       bottom:-5.5rem;
     }
   }
+}
+.content-block {
+  margin: 35px 0;
+  padding: 0 15px;
+  color: #6d6d72;
+  box-sizing: border-box;
+}
+.loginform{
+width:90%;
+padding:0 0 15px 5%;
+}
+.loginform label.error{
+padding:0 0 20px 0;
+margin:0px;
+line-height:10px;
+width:100%;
+text-align:left;
+font-size:14px;
+color:#f65821;
+font-weight:400;
+clear:both;
+float:left;
+}
+.loginform input.form_input{
+padding:10px 3%;
+width:93%;
+margin:0 0 15px 0;
+border-bottom:1px solid #d5d5d5;
+border-left:none;
+border-right:none;
+border-top:none;
+background-color:#ffffff;
+color:#000000;
+-webkit-appearance: none;
+}
+.loginform input.form_input:focus{
+ background-color:#f5f5f5;
+}
+.loginform .form_select{
+padding:2% 3%;
+width:100%;
+margin:20px 0 10px 0;
+border-bottom:1px solid #d5d5d5;
+border-left:none;
+border-right:none;
+border-top:none;
+-webkit-appearance: none;
+color:#000000;
+}
+.loginform .form_select option{
+padding:3px;
+}
+.loginform input.form_submit{
+width:100%;
+padding:12px 0;
+margin:10px 0 0 0;
+text-align:center;
+cursor:pointer;
+font-size:18px;
+font-weight:300;
+color:#222222;
+border: none;
+cursor:pointer;
+-webkit-appearance: none;
+ background-color:#0be0af;
+}
+.forgot_pass{
+width:100%;
+text-align:right;
+font-size:12px;
+}
+.forgot_pass a{
+font-weight:700;
+color:#7cbe55;
+}
+.signup_bottom{
+width:100%;
+text-align:center;
+padding:30px 0 0 0;
+}
+.signup_bottom p{
+opacity: 1;
+padding:0px 0 10px 0;
+font-size:16px;
+}
+.signup_bottom a{
+background-color:#7cbe55;
+color:#fff;
+font-weight:300;
+font-size:16px;
+padding:5px 10px;
+border-radius:15px;
+}
+.signup_social{
+width:100%;
+text-align:center;
+padding:20px 0 0 0;
+}
+a.signup_facebook{
+background-color:#38579a;
+width:47%;
+display:inline-block;
+padding:12px 0;
+margin:0 4% 0 0;
+color:#FFFFFF;
+font-size:12px;
+font-weight:700;
+}
+a.signup_twitter{
+background-color:#0cacea;
+width:47%;
+padding:12px 0;
+display:inline-block;
+color:#FFFFFF;
+font-size:12px;
+font-weight:700;
 }
 </style>

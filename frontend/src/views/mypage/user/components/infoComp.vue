@@ -25,7 +25,9 @@ export default {
   created() {},
   mounted() {},
   unmounted() {},
-  methods: {}
+  methods: {
+    // 회원 정보 수정 매서드 받아와서 패치하고 출력
+  }
 }
 </script>
 <style scoped>

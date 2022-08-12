@@ -1,8 +1,8 @@
 <template>
   <div>
-    <h1>그룹 참가 신청하기</h1>
+    <h1>{{ $route.params.title }}그룹 참가 신청하기</h1>
     <div id="groupRequestName" class="d-flex justify-content-center">
-      <div>신청자 : 장수0</div>
+      <div>신청자 : </div>
     </div>
     <div class="groupRequestContent">
       <div>
@@ -30,22 +30,24 @@
               id="flexSwitchCheckChecked"
               checked
               v-model="isOpen"
+              @click="switchOpen()"
             />
             <label for="flexSwitchCheckChecked">감정달력 공개</label>
           </div>
         </div>
         <div class="d-flex justify-content-end">
-          <router-link to="/counselor_list"
-            ><button class="mx-3">완료</button></router-link
-          >
+          <button @click="onSubmit()" class="mx-3">완료</button>
         </div>
       </div>
     </div>
   </div>
 </template>
 <script>
-import { mapActions } from "vuex";
+import { mapActions, mapGetters } from "vuex";
 export default {
+  props: {
+    group:Object
+  },
   components: {},
   data() {
     return {
@@ -60,16 +62,22 @@ export default {
   mounted() {},
   unmounted() {},
   methods: {
-    ...mapActions(["groupReqeust"]),
+    ...mapActions(["groupRequest"]),
     onSubmit() {
       const data = {
-        'groupId': this.groupId,
+        'id': this.groupId,
         'isOpen': this.isOpen,
         'contents': this.contents
       }
-      this.groupReqeust(data)
+      this.groupRequest(data)
     },
+    switchOpen() {
+      this.isOpen = !this.isOpen
+    }
   },
+  computed: {
+    ...mapGetters(['currentUser'])
+  }
 };
 </script>
 <style scoped>

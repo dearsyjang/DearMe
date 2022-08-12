@@ -4,6 +4,7 @@ const HOST = "https://i7d206.p.ssafy.io"
 const MEMBER = '/users'
 const BOARD ='/boards'
 const COMMENT ='/comments'
+const GROUP = '/groups'
 
 
 export default {
@@ -23,7 +24,8 @@ export default {
     commentEdit: (boardPk, commentPk) => HOST + BOARD + `/${boardPk}` + COMMENT + `/${commentPk}`
   },
   group : {
-    groupRequest: () => HOST + '/counseling-doucments/groups'
+    groupRequest: () => HOST + '/counseling-doucments/groups',
+    groupDetail: groupId => HOST + GROUP +`/${groupId}`,
 
   }
 

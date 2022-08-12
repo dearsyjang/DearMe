@@ -7,30 +7,47 @@
     <div class="container">
       <h4 id="article-form-title-text">제목</h4>
       <form class="article-form">
-        <input id="article-form-title" type="text" v-model="data.title" placeholder="제목을 입력해주세요.">
+        <p>{{ board.title }}</p>
         <br>
         <br>
         <h4 id="article-form-content-text">내용</h4>
-        <textarea id="article-form-content" rows="10" max-rows="10" v-model="data.contents" placeholder="내용을 입력해주세요."></textarea>
+        <p id="article-form-content" rows="10" max-rows="10">{{ board.contents }}</p>
         <br>
         <div>
-            <button type="submit" class="btn" id="article-form-submit-button">저장</button>
-            <router-link :to="{ name: 'board' }"><button button type="button" class="btn" id="article-form-cancel-button">취소</button></router-link>
+          <router-link :to="{name: 'boardUpdate'}"><button>수정</button></router-link>
+          <router-link :to="{ name: 'board' }"><button button type="button" class="btn" id="article-form-cancel-button">목록</button></router-link>
+        </div>
+        <div>
         </div>
       </form>
     </div>
+    <!-- <p>{{ board.comments }}</p> -->
+    <!-- <div v-for="comment in board.comments" :key="comment">
+      <comment-list-comp :comment="comment.contents" ></comment-list-comp>
+    </div> -->
+    <!-- counselor 경우 -->
+    <comment-list-form></comment-list-form>
+    <comment-list-comp :comments="board.comments"></comment-list-comp>
+
   </div>
 </template>
 
 <script>
 import { mapActions, mapGetters } from 'vuex'
+
+import commentListForm from './components/commentListForm.vue'
+import commentListComp from './components/commentListComp.vue'
 export default {
-  components: {},
+  components: {
+    commentListForm,
+    commentListComp,
+
+  },
   data() {
     return {
       data: {
-        title: this.board.title,
-        contents: this.board.contents
+        title: '',
+        contents: ''
       }
     }
   },
@@ -39,10 +56,10 @@ export default {
 
   },
   methods: {
-    ...mapActions(['fetchBoard']),
+    ...mapActions(['fetchBoard', 'deleteBoard']),
   },
   created() {
-    this.fetchBoard(1)},
+    this.fetchBoard(2)},
   mounted() {},
   unmounted() {},
 }

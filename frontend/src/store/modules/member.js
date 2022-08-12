@@ -46,7 +46,7 @@ export default {
 
     },
     // 받아오는 데이터가 한개일 경우 입력, 여러개일 경우 {}안에 담아와야함
-    login({ commit, dispatch}, data) {
+    login({ commit, dispatch, getters}, data) {
       axios({
         // url: 'https://i7d206.p.ssafy.io/users/token?id=id1&pw=pw1',
         url: drf.member.login()+`?id=${data.id}&pw=${data.pw}`,
@@ -56,6 +56,8 @@ export default {
           const token = res.data.data.accessToken
           dispatch('saveToken', token)
           dispatch('fetchCurrentUser')
+          console.log(getters.authHeader2)
+          console.log(getters.currentUser)
           router.push({ name: 'mypageUser' })
         })
         .catch(err => {
@@ -66,14 +68,21 @@ export default {
     },
     // POST 요청일 경우 FormData로 보내야함 (SignupUserView 참고)
     signup({ commit, dispatch }, formData) {
+      // console.log(formData.getAll('id'))
+      // console.log(formData.getAll('pw'))
+      // console.log(formData.getAll('nickName'))
+      // console.log(formData.getAll('gender'))
+      // console.log(formData.getAll('email'))
+      // console.log(formData.getAll('type'))
+      // console.log(formData.getAll('birth'))
       axios({
         url: drf.member.signup(),
-        method: 'post',
+        method: 'POST',
         data: formData,
         // haeder 이형식이면 axios error 발생
-        // headers: {
-        //   'Content-Type': 'multipart/form-data'
-        // }
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
       })
       .then(res => {
           // console.log(res)
@@ -90,7 +99,7 @@ export default {
         })
         .catch((err) => {
           console.error(err)
-          console.error(err.response.data)
+          // console.err(err.code.response.data)
           commit('SET_AUTH_ERROR', err.response.data)
         })
     },

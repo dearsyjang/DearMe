@@ -12,10 +12,10 @@ export default {
   getters: {
     boards: state => state.boards,
     board: state => state.board,
-    isAuthor: (state, getters) => {
-      return state.board.user?.username === getters.currentUser.username
-    },
-    isBoard: state => !_.isEmpty(state.article),
+    // isAuthor: (state, getters) => {
+    //   return state.board.user?.username === getters.currentUser.username
+    // },
+    isBoard: state => !_.isEmpty(state.board),
 
   },
   mutations: {
@@ -43,18 +43,20 @@ export default {
     },
 
     // 게시글 상세 페이지
-    fetchBoard({ commit, getters }, boardPk) {
+    fetchBoard({ commit, getters }, pk) {
       axios({
-        url: drf.board.boardDetail(boardPk),
+        url: drf.board.boardDetail(pk),
         method: 'get',
         headers: getters.authHeader,
       })
         .then(res => {
           console.log(res.data)
+          console.log(res.data.data)
           commit('SET_BOARD', res.data.data)
+          console.log(getters.board)
         })
         .catch(err => {
-          console.error(err.response)
+          console.error(err)
           if (err.response.status === 404) {
             router.push({ name: 'NotFound404' })
           }
@@ -71,11 +73,11 @@ export default {
           'title': board.title,
           'contents': board.contents
         },
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': getters.authHeader2
-          }
-        // headers: getters.authHeader
+        // headers: {
+        //   'Content-Type': 'application/json',
+        //   'Authorization': getters.authHeader2
+        //   }
+        headers: getters.authHeader
     })
         .then(res => {
           console.log(res.data)
@@ -120,16 +122,24 @@ export default {
     },
 
     // 댓글 작성
-    createComment({ commit, getters }, { boardPk, content }) {
-      const contents = { content }
+    createComment({ commit, getters }, content ) {
+      // const contents = { content }
       axios({
-        url: drf.board.commentCreate(boardPk),
+        url: drf.board.commentCreate(1),
         method: 'post',
-        data: contents,
+        data: content,
         headers: getters.authHeader
       })
-        .then(res => commit('SET_BOARD_COMMENTS', res.data))
-        .catch(err => console.error(err.response))
+
+        .then(res => {
+          console.log(res.data)
+          console.log(res.data.data)
+          commit('SET_BOARD_COMMENTS', res.data)
+          console.log('댓글 성공')
+          console.log(getters.board)
+          console.log(getters.board.comments)
+        })
+        .catch(err => console.error(err))
     },
     // 댓글 수정
     updateComment({ commit, getters }, { boardPk, commentPk, content }) {
