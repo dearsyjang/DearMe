@@ -1,111 +1,111 @@
-INSERT INTO USER(created_at, updated_at, id, pw, nick_name, gender, type, birth, email, real_file_name, file_name, points, refresh_token)
-VALUES (now(), now(), 'test1', 'test1', 'test1', 'FEMALE' ,'USER', '2021-01-01', 'test1@test', 'basic.png', 'basic', 0, 'refreshToken');
+INSERT INTO USER(created_at, updated_at, id, pw, nick_name, gender, type, birth, email, phone, real_file_name, file_name, points, refresh_token)
+VALUES (now(), now(), 'test1', 'test1', 'test1', 'FEMALE' ,'USER', '2021-01-01', 'test1@test', '010-0000-1111', 'basic.png', 'basic', 0, 'refreshToken');
 
-INSERT INTO USER(created_at, updated_at, id, pw, nick_name, gender, type, birth, email, real_file_name, file_name, points, refresh_token)
-VALUES (now(), now(), 'test2', 'test2', 'test2', 'MALE' ,'USER', '2021-01-01', 'test2@test', 'basic.png', 'basic', 0, 'refreshToken');
+INSERT INTO USER(created_at, updated_at, id, pw, nick_name, gender, type, birth, email, phone, real_file_name, file_name, points, refresh_token)
+VALUES (now(), now(), 'test2', 'test2', 'test2', 'MALE' ,'USER', '2021-01-01', 'test2@test', '010-0001-1111','basic.png', 'basic', 0, 'refreshToken');
 
-INSERT INTO USER(created_at, updated_at, id, pw, nick_name, gender, type, birth, email, real_file_name, file_name, points, refresh_token)
-VALUES (now(), now(), 'test3', 'test3', 'test3', 'FEMALE' ,'USER', '2021-01-01', 'test3@test', 'basic.png', 'basic', 0, 'refreshToken');
+INSERT INTO USER(created_at, updated_at, id, pw, nick_name, gender, type, birth, email, phone, real_file_name, file_name, points, refresh_token)
+VALUES (now(), now(), 'test3', 'test3', 'test3', 'FEMALE' ,'USER', '2021-01-01', 'test3@test', '010-0002-1111','basic.png', 'basic', 0, 'refreshToken');
 
-INSERT INTO USER(created_at, updated_at, id, pw, nick_name, gender, type, birth, email, real_file_name, file_name, points, refresh_token)
-VALUES (now(), now(), 'test4', 'test4', 'test4', 'MALE' ,'USER', '2021-01-01', 'test4@test', 'basic.png', 'basic', 0, 'refreshToken');
+INSERT INTO USER(created_at, updated_at, id, pw, nick_name, gender, type, birth, email, phone, real_file_name, file_name, points, refresh_token)
+VALUES (now(), now(), 'test4', 'test4', 'test4', 'MALE' ,'USER', '2021-01-01', 'test4@test', '010-0003-1111','basic.png', 'basic', 0, 'refreshToken');
 
-INSERT INTO USER(created_at, updated_at, id, pw, nick_name, gender, type, birth, email, real_file_name, file_name, points, refresh_token)
-VALUES (now(), now(), 'test5', 'test5', 'test5', 'MALE' ,'USER', '2021-01-01', 'test5@test', 'basic.png', 'basic', 0, 'refreshToken');
+INSERT INTO USER(created_at, updated_at, id, pw, nick_name, gender, type, birth, email, phone, real_file_name, file_name, points, refresh_token)
+VALUES (now(), now(), 'test5', 'test5', 'test5', 'MALE' ,'USER', '2021-01-01', 'test5@test', '010-0004-1111','basic.png', 'basic', 0, 'refreshToken');
 
-INSERT INTO USER(created_at, updated_at, id, pw, nick_name, gender, type, birth, email, real_file_name, file_name, points, refresh_token)
-VALUES (now(), now(), 'test6', 'test6', 'test6', 'MALE' ,'COUNSELOR', '2021-01-01', 'test6@test', 'basic.png', 'basic', 0, 'refreshToken');
+INSERT INTO USER(created_at, updated_at, id, pw, nick_name, gender, type, birth, email, phone, real_file_name, file_name, points, refresh_token)
+VALUES (now(), now(), 'test6', 'test6', 'test6', 'MALE' ,'COUNSELOR', '2021-01-01', 'test6@test', '010-0005-1111','basic.png', 'basic', 0, 'refreshToken');
 
-INSERT INTO USER(created_at, updated_at, id, pw, nick_name, gender, type, birth, email, real_file_name, file_name, points, refresh_token)
-VALUES (now(), now(), 'test7', 'test7', 'test7', 'MALE' ,'COUNSELOR', '2021-01-01', 'test7@test', 'basic.png', 'basic', 0, 'refreshToken');
+INSERT INTO USER(created_at, updated_at, id, pw, nick_name, gender, type, birth, email, phone, real_file_name, file_name, points, refresh_token)
+VALUES (now(), now(), 'test7', 'test7', 'test7', 'MALE' ,'COUNSELOR', '2021-01-01', 'test7@test', '010-0006-1111','basic.png', 'basic', 0, 'refreshToken');
 
-INSERT INTO USER(created_at, updated_at, id, pw, nick_name, gender, type, birth, email, real_file_name, file_name, points, refresh_token)
-VALUES (now(), now(), 'test8', 'test8', 'test8', 'MALE' ,'COUNSELOR', '2021-01-01', 'test8@test', 'basic.png', 'basic', 0, 'refreshToken');
+INSERT INTO USER(created_at, updated_at, id, pw, nick_name, gender, type, birth, email, phone, real_file_name, file_name, points, refresh_token)
+VALUES (now(), now(), 'test8', 'test8', 'test8', 'MALE' ,'COUNSELOR', '2021-01-01', 'test8@test', '010-0007-1111','basic.png', 'basic', 0, 'refreshToken');
 
-INSERT INTO USER(created_at, updated_at, id, pw, nick_name, gender, type, birth, email, real_file_name, file_name, points, refresh_token)
-VALUES (now(), now(), 'test9', 'test9', 'test9', 'MALE' ,'COUNSELOR', '2021-01-01', 'test9@test', 'basic.png', 'basic', 0, 'refreshToken');
+INSERT INTO USER(created_at, updated_at, id, pw, nick_name, gender, type, birth, email, phone, real_file_name, file_name, points, refresh_token)
+VALUES (now(), now(), 'test9', 'test9', 'test9', 'MALE' ,'COUNSELOR', '2021-01-01', 'test9@test', '010-0008-1111','basic.png', 'basic', 0, 'refreshToken');
 
-INSERT INTO USER(created_at, updated_at, id, pw, nick_name, gender, type, birth, email, real_file_name, file_name, points, refresh_token)
-VALUES (now(), now(), 'test10', 'test10', 'test10', 'MALE' ,'COUNSELOR', '2021-01-01', 'test10@test', 'basic.png', 'basic', 0, 'refreshToken');
+INSERT INTO USER(created_at, updated_at, id, pw, nick_name, gender, type, birth, email, phone, real_file_name, file_name, points, refresh_token)
+VALUES (now(), now(), 'test10', 'test10', 'test10', 'MALE' ,'COUNSELOR', '2021-01-01', 'test10@test', '010-0009-1111','basic.png', 'basic', 0, 'refreshToken');
 
-INSERT INTO USER(created_at, updated_at, id, pw, nick_name, gender, type, birth, email, real_file_name, file_name, points, refresh_token)
-VALUES (now(), now(), 'test11', 'test11', 'test11', 'FEMALE' ,'USER', '2021-01-01', 'test11@test', 'basic.png', 'basic', 0, 'refreshToken');
-INSERT INTO USER(created_at, updated_at, id, pw, nick_name, gender, type, birth, email, real_file_name, file_name, points, refresh_token)
-VALUES (now(), now(), 'test12', 'test12', 'test12', 'FEMALE' ,'USER', '2021-01-01', 'test12@test', 'basic.png', 'basic', 0, 'refreshToken');
-INSERT INTO USER(created_at, updated_at, id, pw, nick_name, gender, type, birth, email, real_file_name, file_name, points, refresh_token)
-VALUES (now(), now(), 'test13', 'test13', 'test13', 'FEMALE' ,'USER', '2021-01-01', 'test13@test', 'basic.png', 'basic', 0, 'refreshToken');
-INSERT INTO USER(created_at, updated_at, id, pw, nick_name, gender, type, birth, email, real_file_name, file_name, points, refresh_token)
-VALUES (now(), now(), 'test14', 'test14', 'test14', 'FEMALE' ,'USER', '2021-01-01', 'test14@test', 'basic.png', 'basic', 0, 'refreshToken');
-INSERT INTO USER(created_at, updated_at, id, pw, nick_name, gender, type, birth, email, real_file_name, file_name, points, refresh_token)
-VALUES (now(), now(), 'test15', 'test15', 'test15', 'FEMALE' ,'USER', '2021-01-01', 'test15@test', 'basic.png', 'basic', 0, 'refreshToken');
-INSERT INTO USER(created_at, updated_at, id, pw, nick_name, gender, type, birth, email, real_file_name, file_name, points, refresh_token)
-VALUES (now(), now(), 'test16', 'test16', 'test16', 'FEMALE' ,'USER', '2021-01-01', 'test16@test', 'basic.png', 'basic', 0, 'refreshToken');
-INSERT INTO USER(created_at, updated_at, id, pw, nick_name, gender, type, birth, email, real_file_name, file_name, points, refresh_token)
-VALUES (now(), now(), 'test17', 'test17', 'test17', 'FEMALE' ,'USER', '2021-01-01', 'test17@test', 'basic.png', 'basic', 0, 'refreshToken');
-INSERT INTO USER(created_at, updated_at, id, pw, nick_name, gender, type, birth, email, real_file_name, file_name, points, refresh_token)
-VALUES (now(), now(), 'test18', 'test18', 'test18', 'FEMALE' ,'USER', '2021-01-01', 'test18@test', 'basic.png', 'basic', 0, 'refreshToken');
-INSERT INTO USER(created_at, updated_at, id, pw, nick_name, gender, type, birth, email, real_file_name, file_name, points, refresh_token)
-VALUES (now(), now(), 'test19', 'test19', 'test19', 'FEMALE' ,'USER', '2021-01-01', 'test19@test', 'basic.png', 'basic', 0, 'refreshToken');
-INSERT INTO USER(created_at, updated_at, id, pw, nick_name, gender, type, birth, email, real_file_name, file_name, points, refresh_token)
-VALUES (now(), now(), 'test20', 'test20', 'test20', 'FEMALE' ,'USER', '2021-01-01', 'test20@test', 'basic.png', 'basic', 0, 'refreshToken');
-INSERT INTO USER(created_at, updated_at, id, pw, nick_name, gender, type, birth, email, real_file_name, file_name, points, refresh_token)
-VALUES (now(), now(), 'test21', 'test21', 'test21', 'FEMALE' ,'USER', '2021-01-01', 'test21@test', 'basic.png', 'basic', 0, 'refreshToken');
-INSERT INTO USER(created_at, updated_at, id, pw, nick_name, gender, type, birth, email, real_file_name, file_name, points, refresh_token)
-VALUES (now(), now(), 'test22', 'test22', 'test22', 'FEMALE' ,'USER', '2021-01-01', 'test22@test', 'basic.png', 'basic', 0, 'refreshToken');
-INSERT INTO USER(created_at, updated_at, id, pw, nick_name, gender, type, birth, email, real_file_name, file_name, points, refresh_token)
-VALUES (now(), now(), 'test23', 'test23', 'test23', 'FEMALE' ,'USER', '2021-01-01', 'test23@test', 'basic.png', 'basic', 0, 'refreshToken');
-INSERT INTO USER(created_at, updated_at, id, pw, nick_name, gender, type, birth, email, real_file_name, file_name, points, refresh_token)
-VALUES (now(), now(), 'test24', 'test24', 'test24', 'FEMALE' ,'USER', '2021-01-01', 'test24@test', 'basic.png', 'basic', 0, 'refreshToken');
-INSERT INTO USER(created_at, updated_at, id, pw, nick_name, gender, type, birth, email, real_file_name, file_name, points, refresh_token)
-VALUES (now(), now(), 'test25', 'test25', 'test25', 'FEMALE' ,'USER', '2021-01-01', 'test25@test', 'basic.png', 'basic', 0, 'refreshToken');
-INSERT INTO USER(created_at, updated_at, id, pw, nick_name, gender, type, birth, email, real_file_name, file_name, points, refresh_token)
-VALUES (now(), now(), 'test26', 'test26', 'test26', 'FEMALE' ,'USER', '2021-01-01', 'test26@test', 'basic.png', 'basic', 0, 'refreshToken');
-INSERT INTO USER(created_at, updated_at, id, pw, nick_name, gender, type, birth, email, real_file_name, file_name, points, refresh_token)
-VALUES (now(), now(), 'test27', 'test27', 'test27', 'FEMALE' ,'USER', '2021-01-01', 'test27@test', 'basic.png', 'basic', 0, 'refreshToken');
-INSERT INTO USER(created_at, updated_at, id, pw, nick_name, gender, type, birth, email, real_file_name, file_name, points, refresh_token)
-VALUES (now(), now(), 'test28', 'test28', 'test28', 'FEMALE' ,'USER', '2021-01-01', 'test28@test', 'basic.png', 'basic', 0, 'refreshToken');
-INSERT INTO USER(created_at, updated_at, id, pw, nick_name, gender, type, birth, email, real_file_name, file_name, points, refresh_token)
-VALUES (now(), now(), 'test29', 'test29', 'test29', 'FEMALE' ,'USER', '2021-01-01', 'test29@test', 'basic.png', 'basic', 0, 'refreshToken');
-INSERT INTO USER(created_at, updated_at, id, pw, nick_name, gender, type, birth, email, real_file_name, file_name, points, refresh_token)
-VALUES (now(), now(), 'test30', 'test30', 'test30', 'FEMALE' ,'COUNSELOR', '2021-01-01', 'test30@test', 'basic.png', 'basic', 0, 'refreshToken');
-INSERT INTO USER(created_at, updated_at, id, pw, nick_name, gender, type, birth, email, real_file_name, file_name, points, refresh_token)
-VALUES (now(), now(), 'test31', 'test31', 'test31', 'FEMALE' ,'COUNSELOR', '2021-01-01', 'test31@test', 'basic.png', 'basic', 0, 'refreshToken');
-INSERT INTO USER(created_at, updated_at, id, pw, nick_name, gender, type, birth, email, real_file_name, file_name, points, refresh_token)
-VALUES (now(), now(), 'test32', 'test32', 'test32', 'FEMALE' ,'COUNSELOR', '2021-01-01', 'test32@test', 'basic.png', 'basic', 0, 'refreshToken');
-INSERT INTO USER(created_at, updated_at, id, pw, nick_name, gender, type, birth, email, real_file_name, file_name, points, refresh_token)
-VALUES (now(), now(), 'test33', 'test33', 'test33', 'FEMALE' ,'COUNSELOR', '2021-01-01', 'test33@test', 'basic.png', 'basic', 0, 'refreshToken');
-INSERT INTO USER(created_at, updated_at, id, pw, nick_name, gender, type, birth, email, real_file_name, file_name, points, refresh_token)
-VALUES (now(), now(), 'test34', 'test34', 'test34', 'FEMALE' ,'COUNSELOR', '2021-01-01', 'test34@test', 'basic.png', 'basic', 0, 'refreshToken');
-INSERT INTO USER(created_at, updated_at, id, pw, nick_name, gender, type, birth, email, real_file_name, file_name, points, refresh_token)
-VALUES (now(), now(), 'test35', 'test35', 'test35', 'FEMALE' ,'COUNSELOR', '2021-01-01', 'test35@test', 'basic.png', 'basic', 0, 'refreshToken');
-INSERT INTO USER(created_at, updated_at, id, pw, nick_name, gender, type, birth, email, real_file_name, file_name, points, refresh_token)
-VALUES (now(), now(), 'test36', 'test36', 'test36', 'FEMALE' ,'COUNSELOR', '2021-01-01', 'test36@test', 'basic.png', 'basic', 0, 'refreshToken');
-INSERT INTO USER(created_at, updated_at, id, pw, nick_name, gender, type, birth, email, real_file_name, file_name, points, refresh_token)
-VALUES (now(), now(), 'test37', 'test37', 'test37', 'FEMALE' ,'COUNSELOR', '2021-01-01', 'test37@test', 'basic.png', 'basic', 0, 'refreshToken');
-INSERT INTO USER(created_at, updated_at, id, pw, nick_name, gender, type, birth, email, real_file_name, file_name, points, refresh_token)
-VALUES (now(), now(), 'test38', 'test38', 'test38', 'FEMALE' ,'COUNSELOR', '2021-01-01', 'test38@test', 'basic.png', 'basic', 0, 'refreshToken');
-INSERT INTO USER(created_at, updated_at, id, pw, nick_name, gender, type, birth, email, real_file_name, file_name, points, refresh_token)
-VALUES (now(), now(), 'test39', 'test39', 'test39', 'FEMALE' ,'COUNSELOR', '2021-01-01', 'test39@test', 'basic.png', 'basic', 0, 'refreshToken');
-INSERT INTO USER(created_at, updated_at, id, pw, nick_name, gender, type, birth, email, real_file_name, file_name, points, refresh_token)
-VALUES (now(), now(), 'test40', 'test40', 'test40', 'FEMALE' ,'COUNSELOR', '2021-01-01', 'test40@test', 'basic.png', 'basic', 0, 'refreshToken');
-INSERT INTO USER(created_at, updated_at, id, pw, nick_name, gender, type, birth, email, real_file_name, file_name, points, refresh_token)
-VALUES (now(), now(), 'test41', 'test41', 'test41', 'FEMALE' ,'COUNSELOR', '2021-01-01', 'test41@test', 'basic.png', 'basic', 0, 'refreshToken');
-INSERT INTO USER(created_at, updated_at, id, pw, nick_name, gender, type, birth, email, real_file_name, file_name, points, refresh_token)
-VALUES (now(), now(), 'test42', 'test42', 'test42', 'FEMALE' ,'COUNSELOR', '2021-01-01', 'test42@test', 'basic.png', 'basic', 0, 'refreshToken');
-INSERT INTO USER(created_at, updated_at, id, pw, nick_name, gender, type, birth, email, real_file_name, file_name, points, refresh_token)
-VALUES (now(), now(), 'test43', 'test43', 'test43', 'FEMALE' ,'COUNSELOR', '2021-01-01', 'test43@test', 'basic.png', 'basic', 0, 'refreshToken');
-INSERT INTO USER(created_at, updated_at, id, pw, nick_name, gender, type, birth, email, real_file_name, file_name, points, refresh_token)
-VALUES (now(), now(), 'test44', 'test44', 'test44', 'FEMALE' ,'COUNSELOR', '2021-01-01', 'test44@test', 'basic.png', 'basic', 0, 'refreshToken');
-INSERT INTO USER(created_at, updated_at, id, pw, nick_name, gender, type, birth, email, real_file_name, file_name, points, refresh_token)
-VALUES (now(), now(), 'test45', 'test45', 'test45', 'FEMALE' ,'COUNSELOR', '2021-01-01', 'test45@test', 'basic.png', 'basic', 0, 'refreshToken');
-INSERT INTO USER(created_at, updated_at, id, pw, nick_name, gender, type, birth, email, real_file_name, file_name, points, refresh_token)
-VALUES (now(), now(), 'test46', 'test46', 'test46', 'FEMALE' ,'COUNSELOR', '2021-01-01', 'test46@test', 'basic.png', 'basic', 0, 'refreshToken');
-INSERT INTO USER(created_at, updated_at, id, pw, nick_name, gender, type, birth, email, real_file_name, file_name, points, refresh_token)
-VALUES (now(), now(), 'test47', 'test47', 'test47', 'FEMALE' ,'COUNSELOR', '2021-01-01', 'test47@test', 'basic.png', 'basic', 0, 'refreshToken');
-INSERT INTO USER(created_at, updated_at, id, pw, nick_name, gender, type, birth, email, real_file_name, file_name, points, refresh_token)
-VALUES (now(), now(), 'test48', 'test48', 'test48', 'FEMALE' ,'COUNSELOR', '2021-01-01', 'test48@test', 'basic.png', 'basic', 0, 'refreshToken');
-INSERT INTO USER(created_at, updated_at, id, pw, nick_name, gender, type, birth, email, real_file_name, file_name, points, refresh_token)
-VALUES (now(), now(), 'test49', 'test49', 'test49', 'FEMALE' ,'COUNSELOR', '2021-01-01', 'test49@test', 'basic.png', 'basic', 0, 'refreshToken');
+INSERT INTO USER(created_at, updated_at, id, pw, nick_name, gender, type, birth, email, phone, real_file_name, file_name, points, refresh_token)
+VALUES (now(), now(), 'test11', 'test11', 'test11', 'FEMALE' ,'USER', '2021-01-01', 'test11@test', '010-0010-1111','basic.png', 'basic', 0, 'refreshToken');
+INSERT INTO USER(created_at, updated_at, id, pw, nick_name, gender, type, birth, email, phone, real_file_name, file_name, points, refresh_token)
+VALUES (now(), now(), 'test12', 'test12', 'test12', 'FEMALE' ,'USER', '2021-01-01', 'test12@test', '010-0011-1111','basic.png', 'basic', 0, 'refreshToken');
+INSERT INTO USER(created_at, updated_at, id, pw, nick_name, gender, type, birth, email, phone, real_file_name, file_name, points, refresh_token)
+VALUES (now(), now(), 'test13', 'test13', 'test13', 'FEMALE' ,'USER', '2021-01-01', 'test13@test', '010-0012-1111','basic.png', 'basic', 0, 'refreshToken');
+INSERT INTO USER(created_at, updated_at, id, pw, nick_name, gender, type, birth, email, phone, real_file_name, file_name, points, refresh_token)
+VALUES (now(), now(), 'test14', 'test14', 'test14', 'FEMALE' ,'USER', '2021-01-01', 'test14@test', '010-0013-1111','basic.png', 'basic', 0, 'refreshToken');
+INSERT INTO USER(created_at, updated_at, id, pw, nick_name, gender, type, birth, email, phone, real_file_name, file_name, points, refresh_token)
+VALUES (now(), now(), 'test15', 'test15', 'test15', 'FEMALE' ,'USER', '2021-01-01', 'test15@test', '010-0014-1111','basic.png', 'basic', 0, 'refreshToken');
+INSERT INTO USER(created_at, updated_at, id, pw, nick_name, gender, type, birth, email, phone, real_file_name, file_name, points, refresh_token)
+VALUES (now(), now(), 'test16', 'test16', 'test16', 'FEMALE' ,'USER', '2021-01-01', 'test16@test', '010-0015-1111','basic.png', 'basic', 0, 'refreshToken');
+INSERT INTO USER(created_at, updated_at, id, pw, nick_name, gender, type, birth, email, phone, real_file_name, file_name, points, refresh_token)
+VALUES (now(), now(), 'test17', 'test17', 'test17', 'FEMALE' ,'USER', '2021-01-01', 'test17@test', '010-0016-1111','basic.png', 'basic', 0, 'refreshToken');
+INSERT INTO USER(created_at, updated_at, id, pw, nick_name, gender, type, birth, email, phone, real_file_name, file_name, points, refresh_token)
+VALUES (now(), now(), 'test18', 'test18', 'test18', 'FEMALE' ,'USER', '2021-01-01', 'test18@test', '010-0017-1111','basic.png', 'basic', 0, 'refreshToken');
+INSERT INTO USER(created_at, updated_at, id, pw, nick_name, gender, type, birth, email, phone, real_file_name, file_name, points, refresh_token)
+VALUES (now(), now(), 'test19', 'test19', 'test19', 'FEMALE' ,'USER', '2021-01-01', 'test19@test', '010-0018-1111','basic.png', 'basic', 0, 'refreshToken');
+INSERT INTO USER(created_at, updated_at, id, pw, nick_name, gender, type, birth, email, phone, real_file_name, file_name, points, refresh_token)
+VALUES (now(), now(), 'test20', 'test20', 'test20', 'FEMALE' ,'USER', '2021-01-01', 'test20@test', '010-0019-1111','basic.png', 'basic', 0, 'refreshToken');
+INSERT INTO USER(created_at, updated_at, id, pw, nick_name, gender, type, birth, email, phone, real_file_name, file_name, points, refresh_token)
+VALUES (now(), now(), 'test21', 'test21', 'test21', 'FEMALE' ,'USER', '2021-01-01', 'test21@test', '010-0020-1111','basic.png', 'basic', 0, 'refreshToken');
+INSERT INTO USER(created_at, updated_at, id, pw, nick_name, gender, type, birth, email, phone, real_file_name, file_name, points, refresh_token)
+VALUES (now(), now(), 'test22', 'test22', 'test22', 'FEMALE' ,'USER', '2021-01-01', 'test22@test', '010-0021-1111','basic.png', 'basic', 0, 'refreshToken');
+INSERT INTO USER(created_at, updated_at, id, pw, nick_name, gender, type, birth, email, phone, real_file_name, file_name, points, refresh_token)
+VALUES (now(), now(), 'test23', 'test23', 'test23', 'FEMALE' ,'USER', '2021-01-01', 'test23@test', '010-0022-1111','basic.png', 'basic', 0, 'refreshToken');
+INSERT INTO USER(created_at, updated_at, id, pw, nick_name, gender, type, birth, email, phone, real_file_name, file_name, points, refresh_token)
+VALUES (now(), now(), 'test24', 'test24', 'test24', 'FEMALE' ,'USER', '2021-01-01', 'test24@test', '010-0023-1111','basic.png', 'basic', 0, 'refreshToken');
+INSERT INTO USER(created_at, updated_at, id, pw, nick_name, gender, type, birth, email, phone, real_file_name, file_name, points, refresh_token)
+VALUES (now(), now(), 'test25', 'test25', 'test25', 'FEMALE' ,'USER', '2021-01-01', 'test25@test', '010-0024-1111','basic.png', 'basic', 0, 'refreshToken');
+INSERT INTO USER(created_at, updated_at, id, pw, nick_name, gender, type, birth, email, phone, real_file_name, file_name, points, refresh_token)
+VALUES (now(), now(), 'test26', 'test26', 'test26', 'FEMALE' ,'USER', '2021-01-01', 'test26@test','010-0050-1111', 'basic.png', 'basic', 0, 'refreshToken');
+INSERT INTO USER(created_at, updated_at, id, pw, nick_name, gender, type, birth, email, phone, real_file_name, file_name, points, refresh_token)
+VALUES (now(), now(), 'test27', 'test27', 'test27', 'FEMALE' ,'USER', '2021-01-01', 'test27@test', '010-0025-1111','basic.png', 'basic', 0, 'refreshToken');
+INSERT INTO USER(created_at, updated_at, id, pw, nick_name, gender, type, birth, email, phone, real_file_name, file_name, points, refresh_token)
+VALUES (now(), now(), 'test28', 'test28', 'test28', 'FEMALE' ,'USER', '2021-01-01', 'test28@test', '010-0026-1111','basic.png', 'basic', 0, 'refreshToken');
+INSERT INTO USER(created_at, updated_at, id, pw, nick_name, gender, type, birth, email, phone, real_file_name, file_name, points, refresh_token)
+VALUES (now(), now(), 'test29', 'test29', 'test29', 'FEMALE' ,'USER', '2021-01-01', 'test29@test', '010-0027-1111','basic.png', 'basic', 0, 'refreshToken');
+INSERT INTO USER(created_at, updated_at, id, pw, nick_name, gender, type, birth, email, phone, real_file_name, file_name, points, refresh_token)
+VALUES (now(), now(), 'test30', 'test30', 'test30', 'FEMALE' ,'COUNSELOR', '2021-01-01', 'test30@test','010-0028-1111', 'basic.png', 'basic', 0, 'refreshToken');
+INSERT INTO USER(created_at, updated_at, id, pw, nick_name, gender, type, birth, email, phone, real_file_name, file_name, points, refresh_token)
+VALUES (now(), now(), 'test31', 'test31', 'test31', 'FEMALE' ,'COUNSELOR', '2021-01-01', 'test31@test', '010-0029-1111','basic.png', 'basic', 0, 'refreshToken');
+INSERT INTO USER(created_at, updated_at, id, pw, nick_name, gender, type, birth, email, phone, real_file_name, file_name, points, refresh_token)
+VALUES (now(), now(), 'test32', 'test32', 'test32', 'FEMALE' ,'COUNSELOR', '2021-01-01', 'test32@test', '010-0030-1111','basic.png', 'basic', 0, 'refreshToken');
+INSERT INTO USER(created_at, updated_at, id, pw, nick_name, gender, type, birth, email, phone, real_file_name, file_name, points, refresh_token)
+VALUES (now(), now(), 'test33', 'test33', 'test33', 'FEMALE' ,'COUNSELOR', '2021-01-01', 'test33@test','010-0031-1111', 'basic.png', 'basic', 0, 'refreshToken');
+INSERT INTO USER(created_at, updated_at, id, pw, nick_name, gender, type, birth, email, phone, real_file_name, file_name, points, refresh_token)
+VALUES (now(), now(), 'test34', 'test34', 'test34', 'FEMALE' ,'COUNSELOR', '2021-01-01', 'test34@test', '010-0032-1111','basic.png', 'basic', 0, 'refreshToken');
+INSERT INTO USER(created_at, updated_at, id, pw, nick_name, gender, type, birth, email, phone, real_file_name, file_name, points, refresh_token)
+VALUES (now(), now(), 'test35', 'test35', 'test35', 'FEMALE' ,'COUNSELOR', '2021-01-01', 'test35@test', '010-0033-1111','basic.png', 'basic', 0, 'refreshToken');
+INSERT INTO USER(created_at, updated_at, id, pw, nick_name, gender, type, birth, email, phone, real_file_name, file_name, points, refresh_token)
+VALUES (now(), now(), 'test36', 'test36', 'test36', 'FEMALE' ,'COUNSELOR', '2021-01-01', 'test36@test', '010-0034-1111','basic.png', 'basic', 0, 'refreshToken');
+INSERT INTO USER(created_at, updated_at, id, pw, nick_name, gender, type, birth, email, phone, real_file_name, file_name, points, refresh_token)
+VALUES (now(), now(), 'test37', 'test37', 'test37', 'FEMALE' ,'COUNSELOR', '2021-01-01', 'test37@test', '010-0035-1111','basic.png', 'basic', 0, 'refreshToken');
+INSERT INTO USER(created_at, updated_at, id, pw, nick_name, gender, type, birth, email, phone, real_file_name, file_name, points, refresh_token)
+VALUES (now(), now(), 'test38', 'test38', 'test38', 'FEMALE' ,'COUNSELOR', '2021-01-01', 'test38@test','010-0036-1111', 'basic.png', 'basic', 0, 'refreshToken');
+INSERT INTO USER(created_at, updated_at, id, pw, nick_name, gender, type, birth, email, phone, real_file_name, file_name, points, refresh_token)
+VALUES (now(), now(), 'test39', 'test39', 'test39', 'FEMALE' ,'COUNSELOR', '2021-01-01', 'test39@test', '010-0037-1111','basic.png', 'basic', 0, 'refreshToken');
+INSERT INTO USER(created_at, updated_at, id, pw, nick_name, gender, type, birth, email, phone, real_file_name, file_name, points, refresh_token)
+VALUES (now(), now(), 'test40', 'test40', 'test40', 'FEMALE' ,'COUNSELOR', '2021-01-01', 'test40@test', '010-0038-1111','basic.png', 'basic', 0, 'refreshToken');
+INSERT INTO USER(created_at, updated_at, id, pw, nick_name, gender, type, birth, email, phone, real_file_name, file_name, points, refresh_token)
+VALUES (now(), now(), 'test41', 'test41', 'test41', 'FEMALE' ,'COUNSELOR', '2021-01-01', 'test41@test', '010-0039-1111','basic.png', 'basic', 0, 'refreshToken');
+INSERT INTO USER(created_at, updated_at, id, pw, nick_name, gender, type, birth, email, phone, real_file_name, file_name, points, refresh_token)
+VALUES (now(), now(), 'test42', 'test42', 'test42', 'FEMALE' ,'COUNSELOR', '2021-01-01', 'test42@test', '010-0040-1111','basic.png', 'basic', 0, 'refreshToken');
+INSERT INTO USER(created_at, updated_at, id, pw, nick_name, gender, type, birth, email, phone, real_file_name, file_name, points, refresh_token)
+VALUES (now(), now(), 'test43', 'test43', 'test43', 'FEMALE' ,'COUNSELOR', '2021-01-01', 'test43@test', '010-0041-1111','basic.png', 'basic', 0, 'refreshToken');
+INSERT INTO USER(created_at, updated_at, id, pw, nick_name, gender, type, birth, email, phone, real_file_name, file_name, points, refresh_token)
+VALUES (now(), now(), 'test44', 'test44', 'test44', 'FEMALE' ,'COUNSELOR', '2021-01-01', 'test44@test', '010-0042-1111','basic.png', 'basic', 0, 'refreshToken');
+INSERT INTO USER(created_at, updated_at, id, pw, nick_name, gender, type, birth, email, phone, real_file_name, file_name, points, refresh_token)
+VALUES (now(), now(), 'test45', 'test45', 'test45', 'FEMALE' ,'COUNSELOR', '2021-01-01', 'test45@test', '010-0043-1111','basic.png', 'basic', 0, 'refreshToken');
+INSERT INTO USER(created_at, updated_at, id, pw, nick_name, gender, type, birth, email, phone, real_file_name, file_name, points, refresh_token)
+VALUES (now(), now(), 'test46', 'test46', 'test46', 'FEMALE' ,'COUNSELOR', '2021-01-01', 'test46@test', '010-0044-1111','basic.png', 'basic', 0, 'refreshToken');
+INSERT INTO USER(created_at, updated_at, id, pw, nick_name, gender, type, birth, email, phone, real_file_name, file_name, points, refresh_token)
+VALUES (now(), now(), 'test47', 'test47', 'test47', 'FEMALE' ,'COUNSELOR', '2021-01-01', 'test47@test', '010-0045-1111','basic.png', 'basic', 0, 'refreshToken');
+INSERT INTO USER(created_at, updated_at, id, pw, nick_name, gender, type, birth, email, phone, real_file_name, file_name, points, refresh_token)
+VALUES (now(), now(), 'test48', 'test48', 'test48', 'FEMALE' ,'COUNSELOR', '2021-01-01', 'test48@test','010-0046-1111', 'basic.png', 'basic', 0, 'refreshToken');
+INSERT INTO USER(created_at, updated_at, id, pw, nick_name, gender, type, birth, email, phone, real_file_name, file_name, points, refresh_token)
+VALUES (now(), now(), 'test49', 'test49', 'test49', 'FEMALE' ,'COUNSELOR', '2021-01-01', 'test49@test', '010-0047-1111','basic.png', 'basic', 0, 'refreshToken');
 
 
 INSERT INTO COUNSELOR_PROFILE(counselor_id, created_at, updated_at, introduce, price, reviewcnt, reviewvalue)
