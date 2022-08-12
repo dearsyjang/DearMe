@@ -16,6 +16,7 @@ import com.dearme.demo.global.scheduler.CounselTimeJob;
 import lombok.RequiredArgsConstructor;
 import org.quartz.*;
 import org.quartz.impl.StdSchedulerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -27,14 +28,22 @@ public class CounselingServiceImpl implements CounselingService{
 
     private final UserRepository userRepository;
 
+    @Value("${message.access:0}")
+    private String ACCESS;
+
+    @Value("${message.secret:0}")
+    private String SECRET;
+
+    @Value("${message.url:}")
+    private String ID_URL;
+
     @Override
     public void createCounseling(CounselingDocument counselingDocument) {
         Counseling counseling = counselingDocument.toCounselingEntity();
         counseling.setCounselingDocument(counselingDocument);
         counselingRepository.save(counseling);
 
-        createTimeScheduler(counseling);
-        createDayScheduler(counseling);
+
     }
 
     @Override
@@ -81,7 +90,10 @@ public class CounselingServiceImpl implements CounselingService{
         });
         if(dto.getStatus().equals(Status.REJECT)){
             counselingRepository.delete(target);
-        }else {
+        }else if (dto.getStatus().equals(Status.ACCEPTED)){
+            //createTimeScheduler(target);
+            //createDayScheduler(target);
+        }else{
             target.updateCounseling(dto.getStatus());
             counselingRepository.save(target);
         }
@@ -89,12 +101,25 @@ public class CounselingServiceImpl implements CounselingService{
     }
 
     public void createTimeScheduler(Counseling counseling){
+        User user = userRepository.findUserById(counseling.getUser().getId()).orElseThrow(() -> {
+            throw new NoExistUserException();
+        });
+
+        User counselor = userRepository.findUserById(counseling.getCounselor().getId()).orElseThrow(() -> {
+            throw new NoExistUserException();
+        });
+
         try {
             // Scheduler 사용을 위한 인스턴스화
             SchedulerFactory schedulerFactory = new StdSchedulerFactory();
             Scheduler scheduler = schedulerFactory.getScheduler();
             // JOB Data 객체
             JobDataMap jobDataMap = new JobDataMap();
+            jobDataMap.put("ACCESS", ACCESS);
+            jobDataMap.put("SECRET", SECRET);
+            jobDataMap.put("ID_URL", ID_URL);
+            jobDataMap.put("phone1", user.getPhone());
+            jobDataMap.put("phone2", counselor.getPhone());
             jobDataMap.put("nickName", counseling.getCounselor().getNickName());
             jobDataMap.put("date", counseling.getYear()+"." + counseling.getMonth()+"."+counseling.getDay()+" " + counseling.getHours()+"시");
             JobDetail jobDetail = JobBuilder.newJob(CounselTimeJob.class)
@@ -123,12 +148,23 @@ public class CounselingServiceImpl implements CounselingService{
         }
     }
     public void createDayScheduler(Counseling counseling){
+        User user = userRepository.findUserById(counseling.getUser().getId()).orElseThrow(() -> {
+            throw new NoExistUserException();
+        });
+        User counselor = userRepository.findUserById(counseling.getCounselor().getId()).orElseThrow(() -> {
+            throw new NoExistUserException();
+        });
         try {
             // Scheduler 사용을 위한 인스턴스화
             SchedulerFactory schedulerFactory = new StdSchedulerFactory();
             Scheduler scheduler = schedulerFactory.getScheduler();
             // JOB Data 객체
             JobDataMap jobDataMap = new JobDataMap();
+            jobDataMap.put("ACCESS", ACCESS);
+            jobDataMap.put("SECRET", SECRET);
+            jobDataMap.put("ID_URL", ID_URL);
+            jobDataMap.put("phone1", user.getPhone());
+            jobDataMap.put("phone2", counselor.getPhone());
             jobDataMap.put("nickName", counseling.getCounselor().getNickName());
             jobDataMap.put("date", counseling.getHours()+"시");
             JobDetail jobDetail = JobBuilder.newJob(CounselDayJob.class)

@@ -20,6 +20,7 @@ public class UserInfoResponseDto {
     private String pw;
     private String nickname;
     private String email;
+    private String phone;
     private Gender gender;
     private Type type;
     private String pictureUrl;
@@ -32,6 +33,7 @@ public class UserInfoResponseDto {
                 .pw(user.getPw())
                 .nickname(user.getNickName())
                 .email(user.getEmail())
+                .phone(user.getPhone())
                 .gender(user.getGender())
                 .type(user.getType())
                 .pictureUrl(user.getPicture().getRealFileName())
@@ -45,6 +47,7 @@ public class UserInfoResponseDto {
                 .pw(counselor.getPw())
                 .nickname(counselor.getNickName())
                 .email(counselor.getEmail())
+                .phone(counselor.getPhone())
                 .gender(counselor.getGender())
                 .type(counselor.getType())
                 .pictureUrl(counselor.getPicture().getRealFileName())

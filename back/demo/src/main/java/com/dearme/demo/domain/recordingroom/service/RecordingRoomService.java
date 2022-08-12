@@ -11,4 +11,6 @@ public interface RecordingRoomService {
 
     void deleteRecording(String recordingId);
 
+
+    RecordingResponseDto getRecording(String recordingId);
 }
