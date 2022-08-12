@@ -136,5 +136,21 @@ export default {
       
     .catch(err => console.error(err) )
   },
+  // 회원 정보(비밀번호, 닉네임) 수정
+  updateProfile({ commit, getters }, { pw, nickname}) {
+    axios({
+      url: drf.member.profileEdit(currentUser),
+      method: 'put',
+      data: { pw, nickname },
+      headers: getters.authHeader
+    })
+      .then(res => {
+        commit('SET_PROFILE', res.data)
+        router.push({
+          name: 'mypageUser',
+          
+        })
+      })
+  },
 }
 }

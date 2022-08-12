@@ -15,6 +15,7 @@ export default {
     idCheck: () => HOST + MEMBER + '/id',
     // profile: username => HOST + MEMBER + 'profile/' + username,
     // profile: () => HOST + MEMBER 
+    profileEdit: () => HOST + MEMBER + `/$`
   },
   board : {
     boardCreate: () => HOST + BOARD,
