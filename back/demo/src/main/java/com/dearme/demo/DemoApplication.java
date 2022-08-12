@@ -1,30 +1,12 @@
 package com.dearme.demo;
 
 
-import com.google.api.client.repackaged.org.apache.commons.codec.binary.Base64;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.ResponseHandler;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.entity.StringEntity;
-import org.apache.http.impl.client.BasicResponseHandler;
-import org.apache.http.impl.client.HttpClientBuilder;
-import org.json.JSONObject;
+import com.dearme.demo.domain.user.entity.QUser;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-
-import javax.crypto.Mac;
-import javax.crypto.spec.SecretKeySpec;
-import java.io.UnsupportedEncodingException;
-import java.security.InvalidKeyException;
-import java.security.NoSuchAlgorithmException;
-import java.util.ArrayList;
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Value;
 @SpringBootApplication
 @EnableWebMvc
 @EnableJpaAuditing
@@ -32,79 +14,5 @@ import org.springframework.beans.factory.annotation.Value;
 public class DemoApplication {
     public static void main(String[] args) {
         SpringApplication.run(DemoApplication.class, args);
-        /*
-        try {
-
-            HttpClient httpClient = HttpClientBuilder.create().build(); //Use this instead
-            HttpPost postRequest = new HttpPost("https://sens.apigw.ntruss.com" + id_url); //POST 메소드 URL 새성
-            String time = Long.toString(System.currentTimeMillis());
-            postRequest.addHeader("x-ncp-apigw-timestamp", time);
-            postRequest.addHeader("x-ncp-iam-access-key", access);
-            postRequest.addHeader("x-ncp-apigw-signature-v2",makeSignature(time) );
-            postRequest.addHeader("Content-Type", "application/json; charset=UTF-8");
-
-
-            JSONObject obj = new JSONObject();
-
-            obj.put("type", "sms");
-            obj.put("from", "01087624001");
-            obj.put("content", "1");
-            JSONObject obj2 = new JSONObject();
-            obj2.put("to", "01087624001");
-            obj2.put("content", "오늘상담사님과 상담이 있어요");
-
-            List<JSONObject> jsonArray = new ArrayList<>();
-            jsonArray.add(obj2);
-
-            obj.put("messages", jsonArray);
-            StringEntity se = new StringEntity(obj.toString(),"UTF-8");
-            se.setContentEncoding("UTF-8");
-            se.setContentType("application/json");
-            postRequest.setEntity(se);
-
-
-            HttpResponse response = httpClient.execute(postRequest);		//Response 출력
-            if (response.getStatusLine().getStatusCode() == 200) {
-
-                ResponseHandler<String> handler = new BasicResponseHandler();
-                String body = handler.handleResponse(response);
-
-            } else {
-                System.out.println("response is error : " + response.getStatusLine().getStatusCode());
-            }
-        } catch (Exception e){
-            System.err.println(e.toString());
-        }
-
-         */
-
-    }
-    public static String makeSignature(String time) throws NoSuchAlgorithmException, UnsupportedEncodingException, InvalidKeyException {
-        /*
-        String space = " ";                    // one space
-        String newLine = "\n";                    // new line
-        String method = "POST";                    // method
-        String url = id_url;    // url (include query string)
-        String timestamp = time;            // current timestamp (epoch)
-        String accessKey = access;            // access key id (from portal or Sub Account)
-        String secretKey = secret;
-        String message = new StringBuilder()
-                .append(method)
-                .append(space)
-                .append(url)
-                .append(newLine)
-                .append(timestamp)
-                .append(newLine)
-                .append(accessKey)
-                .toString();
-        SecretKeySpec signingKey = new SecretKeySpec(secretKey.getBytes("UTF-8"), "HmacSHA256");
-        Mac mac = Mac.getInstance("HmacSHA256");
-        mac.init(signingKey);
-
-        byte[] rawHmac = mac.doFinal(message.getBytes("UTF-8"));
-        String encodeBase64String = Base64.encodeBase64String(rawHmac);
-        return encodeBase64String;
-        */
-        return null;
     }
 }
