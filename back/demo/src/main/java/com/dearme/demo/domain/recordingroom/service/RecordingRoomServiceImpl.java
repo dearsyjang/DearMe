@@ -84,4 +84,15 @@ public class RecordingRoomServiceImpl implements RecordingRoomService {
             e.printStackTrace();
         }
     }
+
+    @Override
+    public RecordingResponseDto getRecording(String recordingId) {
+        Recording recording = null;
+        try {
+            recording = openvidu.getRecording(recordingId);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return RecordingResponseDto.of(recording);
+    }
 }
