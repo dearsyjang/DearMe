@@ -35,8 +35,7 @@ public class CommentServiceImpl implements CommentService{
     @Override
     @Transactional
     public CommentSaveResponseDto commentSave(String id, Long boardId, CommentSaveRequestDto dto){
-        Comment comment;
-        comment=dto.toCommentEntity();
+        Comment comment=dto.toCommentEntity();
         Board board = boardRepository.findBoardById(boardId).orElseThrow(()->{
             throw new NoExistBoardException();
         });

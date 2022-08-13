@@ -43,10 +43,10 @@ public class CounselingRoomServiceImpl implements CounselingRoomService{
     @Override
     public CreateCounselingRoomResponseDto createCounselingRoom(String id, CreateCounselingRoomRequestDto dto) throws OpenViduJavaClientException, OpenViduHttpException {
         User counselor = userRepository.findUserByIdAndTypeEquals(id, Type.COUNSELOR).orElseThrow(() -> {
-            throw new NoExistUserException();
+            throw new NoExistCounselorException();
         });
         Counseling counseling = counselingRepository.findCounselingByCounselor_IdAndId(id, dto.getCounselingId()).orElseThrow(() -> {
-            throw new NoExistCounselorException();
+            throw new NoExistCounselingException();
         });
         String sessionName = UUID.randomUUID().toString();
 
@@ -87,7 +87,7 @@ public class CounselingRoomServiceImpl implements CounselingRoomService{
     @Override
     public CreateCounselingRoomResponseDto createGroupCounselingRoom(String id, CreateGroupCounselingRoomRequestDto dto) throws OpenViduJavaClientException, OpenViduHttpException {
         User counselor = userRepository.findUserByIdAndTypeEquals(id, Type.COUNSELOR).orElseThrow(() -> {
-            throw new NoExistUserException();
+            throw new NoExistCounselorException();
         });
         Group group = groupRepository.findById(dto.getGroupId()).orElseThrow(() -> {
             throw new GroupNotFoundExcetion();
