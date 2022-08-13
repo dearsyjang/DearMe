@@ -2,7 +2,7 @@ import userSchedule from '@/views/counseling-schedule/UserScheduleView.vue'
 
 export default [
   {
-    path: '/counseling-schedule/user-schedule',
+    path: '/userschedule',
     name: 'userSchedule',
     component: userSchedule
     },     
