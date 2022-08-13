@@ -12,9 +12,13 @@ public class PostCounselingDocumentRequestDto {
     @NotBlank(message = "id는 비워둘 수 없습니다.")
     private Long id;
 
+    @NotBlank(message = "year는 비워둘 수 없습니다.")
     private Integer year;
+    @NotBlank(message = "month는 비워둘 수 없습니다.")
     private Integer month;
+    @NotBlank(message = "day는 비워둘 수 없습니다.")
     private Integer day;
+    @NotBlank(message = "hours는 비워둘 수 없습니다.")
     private Integer hours;
     @NotBlank(message = "contents는 비워둘 수 없습니다.")
     private String contents;
