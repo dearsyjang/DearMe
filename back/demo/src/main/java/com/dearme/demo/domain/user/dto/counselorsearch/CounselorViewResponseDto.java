@@ -1,10 +1,10 @@
-package com.dearme.demo.domain.user.dto.counselor;
+package com.dearme.demo.domain.user.dto.counselorsearch;
 
 import com.dearme.demo.domain.user.dto.etc.ReviewViewResponseDto;
-import com.dearme.demo.domain.user.dto.user.CareerInfoDto;
-import com.dearme.demo.domain.user.dto.user.CategoryInfoDto;
-import com.dearme.demo.domain.user.dto.user.CertificateInfoDto;
-import com.dearme.demo.domain.user.dto.user.DocumentInfoDto;
+import com.dearme.demo.domain.user.dto.counselorprofile.CareerInfoDto;
+import com.dearme.demo.domain.user.dto.counselorprofile.CategoryInfoDto;
+import com.dearme.demo.domain.user.dto.counselorprofile.CertificateInfoDto;
+import com.dearme.demo.domain.user.dto.counselorprofile.DocumentInfoDto;
 import com.dearme.demo.domain.user.entity.*;
 import lombok.Builder;
 import lombok.Data;

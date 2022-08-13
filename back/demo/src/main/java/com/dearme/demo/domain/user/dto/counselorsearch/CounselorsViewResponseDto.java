@@ -1,9 +1,8 @@
-package com.dearme.demo.domain.user.dto.counselor;
+package com.dearme.demo.domain.user.dto.counselorsearch;
 
-import com.dearme.demo.domain.user.dto.user.CategoryInfoDto;
+import com.dearme.demo.domain.user.dto.counselorprofile.CategoryInfoDto;
 import com.dearme.demo.domain.user.entity.Category;
 import com.dearme.demo.domain.user.entity.User;
-import lombok.Builder;
 import lombok.Builder;
 import lombok.Data;
 

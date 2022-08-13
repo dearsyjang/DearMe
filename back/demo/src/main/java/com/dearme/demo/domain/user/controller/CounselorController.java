@@ -1,6 +1,6 @@
 package com.dearme.demo.domain.user.controller;
 
-import com.dearme.demo.domain.user.dto.counselor.CounselorSearchRequestDto;
+import com.dearme.demo.domain.user.dto.counselorsearch.CounselorSearchRequestDto;
 import com.dearme.demo.domain.user.service.CounselorService;
 import com.dearme.demo.global.common.CommonResponse;
 import lombok.RequiredArgsConstructor;

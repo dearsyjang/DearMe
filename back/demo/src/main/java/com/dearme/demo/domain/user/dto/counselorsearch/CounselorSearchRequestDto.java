@@ -1,8 +1,6 @@
-package com.dearme.demo.domain.user.dto.counselor;
+package com.dearme.demo.domain.user.dto.counselorsearch;
 
 import lombok.Data;
-
-import javax.validation.constraints.NotBlank;
 
 @Data
 public class CounselorSearchRequestDto {

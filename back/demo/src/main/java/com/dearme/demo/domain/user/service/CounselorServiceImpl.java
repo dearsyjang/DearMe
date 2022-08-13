@@ -4,9 +4,9 @@ import com.dearme.demo.domain.favorite.entity.Favorite;
 import com.dearme.demo.domain.review.entity.Review;
 import com.dearme.demo.domain.review.repository.ReviewRepository;
 import com.dearme.demo.domain.user.dto.etc.ReviewViewResponseDto;
-import com.dearme.demo.domain.user.dto.counselor.CounselorSearchRequestDto;
-import com.dearme.demo.domain.user.dto.counselor.CounselorViewResponseDto;
-import com.dearme.demo.domain.user.dto.counselor.CounselorsViewResponseDto;
+import com.dearme.demo.domain.user.dto.counselorsearch.CounselorSearchRequestDto;
+import com.dearme.demo.domain.user.dto.counselorsearch.CounselorViewResponseDto;
+import com.dearme.demo.domain.user.dto.counselorsearch.CounselorsViewResponseDto;
 import com.dearme.demo.domain.user.entity.Category;
 import com.dearme.demo.domain.user.exception.NoExistCounselorException;
 import com.dearme.demo.global.qtype.QUser;
@@ -90,10 +90,7 @@ public class CounselorServiceImpl implements CounselorService{
         List<Review> tempList = reviewRepository.findReviewsByCounselor_UserId(id);
         List<ReviewViewResponseDto> reviewList = new ArrayList<>();
         for(Review r : tempList){
-            reviewList.add(new ReviewViewResponseDto(r.getId(),
-                    r.getUser().getNickName(),
-                    r.getValue(),
-                    r.getContents()));
+            reviewList.add(ReviewViewResponseDto.of(r, r.getUser()));
         }
         return CounselorViewResponseDto.of(user, value, reviewList);
     }

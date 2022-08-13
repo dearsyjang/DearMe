@@ -1,10 +1,10 @@
-package com.dearme.demo.domain.user.dto.user;
+package com.dearme.demo.domain.user.dto.counselorprofile;
 
 import com.dearme.demo.domain.user.entity.Category;
 import lombok.Data;
 
 @Data
-public class AddCategoryRequestDto {
+public class SignUpCategoryRequestDto {
     private String contents;
 
     public Category toEntity(){

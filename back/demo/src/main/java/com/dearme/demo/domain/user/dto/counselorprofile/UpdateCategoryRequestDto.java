@@ -1,4 +1,4 @@
-package com.dearme.demo.domain.user.dto.user;
+package com.dearme.demo.domain.user.dto.counselorprofile;
 
 import lombok.Data;
 

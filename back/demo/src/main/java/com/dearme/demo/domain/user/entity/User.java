@@ -90,7 +90,6 @@ public class User extends Base {
     private List<Favorite> favorites = new ArrayList<>();
 
     @OneToMany(mappedBy = "counselor", orphanRemoval = true, cascade = CascadeType.ALL)
-    @JsonBackReference
     private List<Group> groups = new ArrayList<>();
 
     @OneToMany(mappedBy = "user", orphanRemoval = true, cascade = CascadeType.ALL)

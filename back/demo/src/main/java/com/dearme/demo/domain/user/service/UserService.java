@@ -1,5 +1,6 @@
 package com.dearme.demo.domain.user.service;
 
+import com.dearme.demo.domain.user.dto.counselorprofile.*;
 import com.dearme.demo.domain.user.dto.etc.PointsUpdateResponseDto;
 import com.dearme.demo.domain.user.dto.etc.ReviewViewResponseDto;
 import com.dearme.demo.domain.user.dto.etc.UserGroupListResponseDto;
