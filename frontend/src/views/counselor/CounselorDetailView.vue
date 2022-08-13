@@ -3,9 +3,8 @@
   <div>
     <h2>상담사 프로필 페이지</h2>
 
-    
     <router-link to="/counseling-request"  >
-      <button v-if="`{{currentUser.data.type}}`!=COUNSELOR">상담 신청</button>
+      <button v-if="currentUser.data.type==`USER`">상담 신청</button>
     </router-link>
     <div class="counselor-profile">
       <div class="card">
@@ -33,34 +32,50 @@
 
                 <hr>
                 <div>개인상담가격 : {{counselor.data.price}} </div>
-                {{counselor.data.nickName}}
-                {{currentUser.data.nickname}}
                 <br>
                 <br>
-                <div class="card" id="carrer-card" style="width: 18rem;">
+                
+                <div class="accordion" id="accordionPanelsStayOpenExample">
+                  <div class="accordion-item">
+                    <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+                      <button class="accordion-button"   type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+                        약력
+                      </button>
+                    </h2>
+                    <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
+                      <div class="accordion-body">
+                       <div class="contents" v-for="(c,idx) in counselor.data.careers"
+                        :key="idx"
+                        :c="c">
+                        {{c.contents}}<button class="add-button"   v-if="counselor.data.nickName==currentUser.data.nickname" @click="deleteCareer(c.id)">x</button>
+                      </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="accordion-item">
+                    <h2 class="accordion-header" id="panelsStayOpen-headingTwo">
+                      <button class="accordion-button collapsed" v-if="counselor.data.nickName==currentUser.data.nickname" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
+                        약력 추가하기
+                      </button>
+                    </h2>
+                    <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingTwo">
+                      <div class="accordion-body">
+                        <form @submit.prevent="createCareerFunc" class="career-list-form">
+                        <div class="my-3 w-100 d-flex justify-content-start align-items-center ">
+                          <label for="review"></label>
+                          <input  placeholder="추가할 내용을 입력해주세요" type="text" id="review"  style="width:85%; height:25px " v-model="careerContent" required>
+                        </div>
+                        <button class="changebtn" >작성하기</button>
+                      </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- <div class="card" id="carrer-card" style="width: 18rem;">
                   <div class="card-header">
                     약력
-                    <!-- <button class="add-button" v-if="usercheck()==true">+</button> -->
-
-                    <button class="add-button" >+</button>
-                    <div class="example-modal-window">
-                      <p>버튼을 누르면 모달 대화 상자가 열립니다.</p>
-                      <button @click="openModal">열기</button>
-
-                      <!-- 컴포넌트 MyModal -->
-                      <MyModal @close="closeModal" v-if="modal">
-                        <!-- default 슬롯 콘텐츠 -->
-                        <p>Vue.js Modal Window!</p>
-                        <div><input v-model="message"></div>
-                        <!-- /default -->
-                        <!-- footer 슬롯 콘텐츠 -->
-                        
-                          <button @click="doSend">제출</button>
-                        
-                        <!-- /footer -->
-                      </MyModal>
-                    </div>
-
+                    <button class="add-button" v-if="counselor.data.nickName==currentUser.data.nickname">+</button>          
                   </div>
                   <ul class="list-group list-group-flush">
                     <li class="list-group-item">
@@ -71,13 +86,50 @@
                       </div>
                     </li>
                   </ul>
-                </div>
+                </div> -->
               
-                <br>
+                <br><br><br>
 
-                <div class="card" id="certificate-card" style="width: 18rem;">
+                <div class="accordion" id="accordionPanelsStayThreeExample">
+                  <div class="accordion-item">
+                    <h2 class="accordion-header" id="panelsStayOpen-headingThree">
+                      <button class="accordion-button"   type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="true" aria-controls="panelsStayOpen-collapseThree">
+                        자격증
+                      </button>
+                    </h2>
+                    <div id="panelsStayThree-collapseThree" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingThree">
+                      <div class="accordion-body">
+                       <div v-for="(c,idx) in counselor.data.certificates"
+                      :key="idx"
+                      :c="c">
+                      {{c.contents}}<button class="add-button"   v-if="counselor.data.nickName==currentUser.data.nickname" @click="deleteCertificate(c.id)">x</button>
+                      </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="accordion-item">
+                    <h2 class="accordion-header" id="panelsStayOpen-headingFour">
+                      <button class="accordion-button collapsed" v-if="counselor.data.nickName==currentUser.data.nickname" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseFour" aria-expanded="false" aria-controls="panelsStayOpen-collapseFour">
+                        자격증 추가하기
+                      </button>
+                    </h2>
+                    <div id="panelsStayOpen-collapseFour" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingFour">
+                      <div class="accordion-body">
+                        <form @submit.prevent="createCertificateFunc" class="certificate-list-form">
+                        <div class="my-3 w-100 d-flex justify-content-start align-items-center ">
+                          <label for="review"></label>
+                          <input  placeholder="추가할 내용을 입력해주세요" type="text" id="review"  style="width:85%; height:25px " v-model="certificateContent" required>
+                        </div>
+                        <button class="changebtn" >작성하기</button>
+                      </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- <div class="card" id="certificate-card" style="width: 18rem;">
                   <div class="card-header">
-                    자격증<button class="add-button">+</button>
+                    자격증<button class="add-button" v-if="counselor.data.nickName==currentUser.data.nickname">+</button>
                   </div>
                   <ul class="list-group list-group-flush">
                     <li class="list-group-item">
@@ -88,13 +140,35 @@
                       </div> 
                     </li>
                   </ul>
-                </div>
+                </div> -->
 
                 <br>
 
-                <div class="card" id="certificate-card" style="width: 18rem;">
+
+                <div class="accordion" id="accordionPanelsStayFiveExample">
+                  <div class="accordion-item">
+                    <h2 class="accordion-header" id="panelsStayOpen-headingFive">
+                      <button class="accordion-button"   type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseFive" aria-expanded="true" aria-controls="panelsStayOpen-collapseFive">
+                        전문분야
+                      </button>
+                    </h2>
+                    <div id="panelsStayOpen-collapseFive" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingFive">
+                      <div class="accordion-body">
+                       <div v-for="(c,idx) in counselor.data.categories"
+                        :key="idx"
+                        :c="c">
+                        {{c.contents}}<button class="add-button"   v-if="counselor.data.nickName==currentUser.data.nickname" @click="deleteCertificate(c.id)">x</button>
+                      </div>
+                      </div>
+                    </div>
+                  </div>
+            
+                </div>
+
+
+                <!-- <div class="card" id="certificate-card" style="width: 18rem;">
                   <div class="card-header">
-                    전문분야 <button class="add-button">+</button>
+                    전문분야<button class="add-button" v-if="counselor.data.nickName==currentUser.data.nickname">+</button>
                   </div>
                   <ul class="list-group list-group-flush">
                     <li class="list-group-item">
@@ -105,11 +179,30 @@
                         </div> 
                     </li>
                   </ul>
-                </div>
+                </div> -->
 
                 <br>
 
-                <div class="card" id="review-card" style="width: 18rem;">
+                <div class="accordion" id="accordionPanelsStayFiveExample">
+                  <div class="accordion-item">
+                    <h2 class="accordion-header" id="panelsStayOpen-headingFive">
+                      <button class="accordion-button"   type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseFive" aria-expanded="true" aria-controls="panelsStayOpen-collapseFive">
+                        리뷰
+                      </button>
+                    </h2>
+                    <div id="panelsStayOpen-collapseFive" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingFive">
+                      <div class="accordion-body">
+                       <div v-for="(c,idx) in counselor.data.reviews"
+                      :key="idx"
+                      :c="c">
+                      {{c.contents}}<button class="add-button"   v-if="counselor.data.nickName==currentUser.data.nickname" @click="deleteCertificate(c.id)">x</button>
+                      </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- <div class="card" id="review-card" style="width: 18rem;">
                   <div class="card-header">
                     리뷰
                   </div>
@@ -122,7 +215,7 @@
                       </div> 
                     </li>
                   </ul>
-                </div>
+                </div> -->
 
              
              
@@ -142,7 +235,7 @@
       <div v-else>
         <button class="btn btn-link" @click="favoriteCounselor(counselorId)"><i class="fa-solid fa-heart" style="color:red"></i></button>
       </div> -->
-      
+<!--       
       <div class="counselor-info-create">
         <div class="black-bg" v-if = "isModalViewed==true">
         <div class="white-bg">
@@ -159,14 +252,14 @@
         </div>
         </div>
       </div>
-    
+     -->
 
 
 
       <!-- <span v-if="currentUser.type === student"> 
         <button>개인상담신청하기</button>
         </span> -->
-      <div class="price">
+      <!-- <div class="price">
         <h4>상담 가격</h4>
         <div class="personal-price" 
         v-if ="ispersonalpriced==false"
@@ -174,10 +267,10 @@
           <li>개인상담 : <input type="text">point</li>
         </div>
         <div v-else>
-          개인상담가격띄워야됨
+          개인상담가격띄워야됨 -->
           <!-- {{counselor.price}} -->
-        </div> 
-      </div>
+        <!-- </div> 
+      </div> -->
 <!-- 
 
       
@@ -237,7 +330,7 @@
 
 
   import { mapActions,mapGetters} from 'vuex'
-  import MyModal from '@/views/counselor/components/ModalComp.vue'
+
 
   export default {
     name : 'CounselorDetailView',
@@ -247,7 +340,7 @@
     // ManageGroupListComp,
     // ReviewListComp,
     // InfoItemComp,
-    MyModal 
+   
 },  
 
     data() {
@@ -255,12 +348,13 @@
         counselorId: this.$route.params.counselorId,
         isModalViewed: false,
         infoContent:'',
+        careerContent:'',
+        certificateContent:'',
         isdone : false,
         ispersonalpriced: false,
         isgrouppriced: false,
         ismaked: false,
-        modal: false,
-        message: ''
+        
   
       }
     },
@@ -271,24 +365,31 @@
     }
     },
     methods: {
-      ...mapActions(['fetchCounselor','favoriteCounselor','isfavorite' ,'fetchCurrentUser']),
+      ...mapActions(['fetchCounselor',
+      'favoriteCounselor',
+      'isfavorite' ,
+      'fetchCurrentUser',
+       'deleteCareer',
+       'createCareer',
+       'deleteCertificate',
+       'createCertificate']),
+   
+      nick1() {
+        return this.currentUser.data.nickName
+      },
 
-      openModal() {
-      this.modal = true
-    },
-    closeModal() {
-      this.modal = false
-    },
-    doSend() {
-      if (this.message.length > 0) {
-        alert(this.message)
-        this.message = ''
-        this.closeModal()
-      } else {
-        alert('메시지를 입력해주세요.')
-      }
-    },
-     
+      createCareerFunc() {
+        this.createCareer(this.careerContent)
+
+      },
+      createCertificateFunc() {
+        this.createCertificate(this.certificateContent)
+
+      },
+      // createCategoryFunc() {
+      //   this.createCareer(this.categoryContent)
+
+      // },
       createInfo(){
         if (this.isdone === false){
         
@@ -309,7 +410,8 @@
     created() {
       this.fetchCurrentUser()
       this.fetchCounselor(this.counselorId)
-    
+      
+  
       // this.favorite =''
       },
   }
@@ -356,6 +458,11 @@ div {
 
 
 .card-header{
+  display: flex;
+  justify-content: space-between;
+
+}
+.contents{
   display: flex;
   justify-content: space-between;
 

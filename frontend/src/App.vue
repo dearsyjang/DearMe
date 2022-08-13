@@ -20,7 +20,9 @@ import "bulma/css/bulma.css"
   export default {
     name: 'App',
     components: { TopBar, BottomBar },
+    methods : {}
   }
+
 </script>
 
 <style>

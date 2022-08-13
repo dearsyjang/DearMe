@@ -7,6 +7,8 @@ const BOARD ='/boards'
 const COMMENT ='/comments'
 const COUNSELOR = '/counselors'
 const COUNSELING = '/counselings'
+const CAREER = '/careers'
+const CERTIFICATE = '/certificates'
 export default {
   member : {
     login: () => HOST + MEMBER + '/token',
@@ -17,6 +19,10 @@ export default {
     idCheck: () => HOST + MEMBER + '/id',
     // profile: username => HOST + MEMBER + 'profile/' + username,
     // profile: () => HOST + MEMBER 
+    careerCreate: () => HOST + MEMBER + CAREER ,
+    careerDelete: (careerId) => HOST + MEMBER + CAREER + `/${careerId}`,
+    certificateCreate: () => HOST + MEMBER + CERTIFICATE ,
+    certificateDelete: (certificateId) => HOST + MEMBER + CERTIFICATE + `/${certificateId}`
   },
   board : {
     boardCreate: () => HOST + BOARD,
@@ -27,7 +33,7 @@ export default {
     commentEdit: (boardPk, commentPk) => HOST + BOARD + `/${boardPk}` + COMMENT + `/${commentPk}`
   },
   counselors: {
-     counselors : () => HOST + COUNSELOR,
+     counselors : () => HOST + COUNSELOR + "?",
      counselor : (counselorId) => HOST + COUNSELOR  + `/${counselorId}`,
     // filter : (categoryId) => HOST + MEMBER + '/filter' +  `/${categoryId}`,
     // search : (keyword) => HOST + MEMBER + '/search' +  `/${keyword}`,
@@ -38,5 +44,5 @@ export default {
     requestCreate: () => HOST + '/counseling-documents',
     
   }
-
+  //downPrice=0&upPrice=1000000&reviewCntUp=FALSE&reviewCntDown=FALSE&reviewScoreUp=FALSE&reviewScoreDown=FALSE&favorite=FALSE
 }

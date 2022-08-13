@@ -32,7 +32,14 @@ const router = createRouter({
     ...counselingRequest,
     ...counselingSchedule
 
-  ]
+  ],
+  scrollBehavior(to, from, savedPosition) {
+    if (savedPosition) {
+      return savedPosition
+    } else {
+      return { top: 0 }
+    }
+  },
 
 // vue 기본 양식
 // const routes = [
