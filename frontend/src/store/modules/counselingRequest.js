@@ -80,8 +80,9 @@ export default {
       })
         .then(res => {
           commit('SET_REQUEST', res.data)
+          alert('상담 신청이 완료되었습니다.')
           router.push({
-            name: 'request'
+            name: 'counselorList'
           })
         })
         .catch((err) => {
