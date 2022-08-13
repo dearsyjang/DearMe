@@ -205,8 +205,8 @@ public class UserServiceImpl implements UserService{
             file.delete();
         }
         if(target.getType().equals(Type.COUNSELOR)){
-            reviewRepository.deleteReviewByCounselor_Id(id);
-            favoriteRepository.deleteFavoriteByCounselor_Id(id);
+            reviewRepository.deleteReviewByCounselor_UserId(target.getUserId());
+            favoriteRepository.deleteFavoriteByCounselor_UserId(target.getUserId());
         }
 
         try {

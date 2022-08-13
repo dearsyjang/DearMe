@@ -12,5 +12,5 @@ public interface ReviewRepository extends JpaRepository<Review, Long> {
     List<Review> findReviewsByCounselor_UserId(Long userId);
 
 
-    void deleteReviewByCounselor_Id(String counselorId);
+    void deleteReviewByCounselor_UserId(Long counselorId);
 }
