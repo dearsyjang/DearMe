@@ -57,9 +57,7 @@ public class FavoriteServiceImpl implements FavoriteService {
         List<Favorite> tempList = favoriteRepository.findFavoriteByUser_Id(id);
         List<FavoriteViewResponseDto> favoriteList = new ArrayList<>();
         for(Favorite f : tempList){
-            favoriteList.add(new FavoriteViewResponseDto(f.getId(),
-                    f.getCounselor().getUserId(),
-                    f.getCounselor().getNickName()));
+            favoriteList.add(FavoriteViewResponseDto.of(f));
         }
         return favoriteList;
     }

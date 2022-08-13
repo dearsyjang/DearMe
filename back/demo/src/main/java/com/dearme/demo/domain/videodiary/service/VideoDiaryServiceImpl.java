@@ -1,15 +1,14 @@
 package com.dearme.demo.domain.videodiary.service;
 
 
+import com.dearme.demo.domain.textdiary.exception.TextDiarySentimentException;
 import com.dearme.demo.domain.user.entity.Type;
 import com.dearme.demo.domain.user.entity.User;
 import com.dearme.demo.domain.user.exception.NoExistUserException;
 import com.dearme.demo.domain.user.repository.UserRepository;
 import com.dearme.demo.domain.videodiary.dto.*;
 import com.dearme.demo.domain.videodiary.entity.VideoDiary;
-import com.dearme.demo.domain.videodiary.exception.CounselorPostVideoDiaryException;
-import com.dearme.demo.domain.videodiary.exception.NoPermissionVideoDiaryException;
-import com.dearme.demo.domain.videodiary.exception.NoVideoDiaryException;
+import com.dearme.demo.domain.videodiary.exception.*;
 import com.dearme.demo.domain.videodiary.repository.VideoDiaryRepository;
 import com.google.api.gax.core.CredentialsProvider;
 import com.google.api.gax.core.FixedCredentialsProvider;
@@ -59,13 +58,7 @@ public class VideoDiaryServiceImpl implements VideoDiaryService {
         videoDiary.setUser(user);
         String[] text = videoSTT(videoDiary.getRealFileName());
         videoDiary.setContents(text[0]);
-        videoDiary.setSentiment(text[1]);
-        if(text[2].equals(null))
-            throw new NoVideoDiaryException();
-        videoDiary.setPercentage(Double.parseDouble(text[2]));
-        videoDiary.setPositive(Double.parseDouble(text[3]));
-        videoDiary.setNegative(Double.parseDouble(text[4]));
-        videoDiary.setNeutral(Double.parseDouble(text[5]));
+        videoDiary.setSentimentInfo(text, 1);
         videoDiaryRepository.save(videoDiary);
         return new PostVideoDiaryResponseDto(videoDiary.getId(), videoDiary.getTitle(), videoDiary.getContents(), videoDiary.getSentiment(), videoDiary.getPercentage(), videoDiary.getPositive(), videoDiary.getNegative(), videoDiary.getNeutral());
     }
@@ -82,15 +75,7 @@ public class VideoDiaryServiceImpl implements VideoDiaryService {
             videoDiary.updateTitle(dto.getTitle());
             videoDiary.updateContents(dto.getContents());
             if(dto.getSentiment().equals(videoDiary.getSentiment())){
-                String result[] = new String[5];
-                result = getSentiment(videoDiary.getContents());
-                if(result[0].equals(null))
-                    throw new NoVideoDiaryException();
-                videoDiary.updateSentiment(result[0]);
-                videoDiary.updatePercentage(Double.parseDouble(result[1]));
-                videoDiary.updatePositive(Double.parseDouble(result[2]));
-                videoDiary.updateNegative(Double.parseDouble(result[3]));
-                videoDiary.updateNeutral(Double.parseDouble(result[4]));
+                videoDiary.setSentimentInfo(getSentiment(videoDiary.getContents()), 0);
             }else{
                 videoDiary.updateSentiment(dto.getSentiment());
                 videoDiary.updatePercentage(100);
@@ -160,7 +145,7 @@ public class VideoDiaryServiceImpl implements VideoDiaryService {
                 System.out.println(line);
             }
         }catch(Exception e){
-            System.out.println(e);
+            throw new VideoDiaryRecordingException();
         }
 
         filePath = filePath+".mp3";
@@ -192,7 +177,7 @@ public class VideoDiaryServiceImpl implements VideoDiaryService {
             speech.close();
         }
         catch (Exception e) {
-            e.printStackTrace();
+            throw new VideoDiaryRecordingException();
         }
         String result[] = new String[5];
         result = getSentiment(text[0]);
@@ -241,17 +226,18 @@ public class VideoDiaryServiceImpl implements VideoDiaryService {
                 max=Math.max(max, positive);
                 double neutral= Math.round(Double.parseDouble(jObj3.get("neutral").toString())*1000)/1000.0;
                 max=Math.max(max, neutral);
-
+                if(result.length!=5)
+                    throw new VideoDiarySentimentException();
                 result[0]=jObj2.getString("sentiment");
                 result[1]=max+"";
                 result[2]=positive+"";
                 result[3]=negative+"";
                 result[4]=neutral+"";
             } else {
-                System.out.println("response is error : " + response.getStatusLine().getStatusCode());
+                throw new VideoDiarySentimentException();
             }
         } catch (Exception e){
-            System.err.println(e.toString());
+            throw new VideoDiarySentimentException();
         }
         return result;
     }

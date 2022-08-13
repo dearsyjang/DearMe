@@ -6,6 +6,7 @@ import com.dearme.demo.domain.textdiary.dto.TextDiaryDetailsResponseDto;
 import com.dearme.demo.domain.textdiary.dto.TextDiaryListResponseDto;
 import com.dearme.demo.domain.textdiary.entity.TextDiary;
 import com.dearme.demo.domain.textdiary.exception.NoPermissionTextDiaryException;
+import com.dearme.demo.domain.textdiary.exception.TextDiarySentimentException;
 import com.dearme.demo.domain.textdiary.repository.TextDiaryRepository;
 import com.dearme.demo.domain.user.entity.Type;
 import com.dearme.demo.domain.user.entity.User;
@@ -52,12 +53,7 @@ public class TextDiaryServiceImpl implements TextDiaryService{
             throw new CounselorPostVideoDiaryException();
         TextDiary textDiary = dto.toEntity();
         textDiary.setUser(user);
-        String[] text = getSentiment(dto.getContents());
-        textDiary.setSentiment(text[0]);
-        textDiary.setPercentage(Double.parseDouble(text[1]));
-        textDiary.setPositive(Double.parseDouble(text[2]));
-        textDiary.setNegative(Double.parseDouble(text[3]));
-        textDiary.setNeutral(Double.parseDouble(text[4]));
+        textDiary.setSentimentInfo(getSentiment(dto.getContents()));
         return new PostTextDiaryResponseDto(textDiaryRepository.save(textDiary).getId(), textDiary.getSentiment(), textDiary.getPercentage(), textDiary.getPositive(), textDiary.getNegative(), textDiary.getNeutral());
     }
 
@@ -133,17 +129,18 @@ public class TextDiaryServiceImpl implements TextDiaryService{
                 max=Math.max(max, positive);
                 double neutral= Math.round(Float.parseFloat(jObj3.get("neutral").toString())*100)/100.0;
                 max=Math.max(max, neutral);
-
+                if(result.length!=5)
+                    throw new TextDiarySentimentException();
                 result[0]=jObj2.getString("sentiment");
                 result[1]=max+"";
                 result[2]=positive+"";
                 result[3]=negative+"";
                 result[4]=neutral+"";
             } else {
-                System.out.println("response is error : " + response.getStatusLine().getStatusCode());
+                throw new TextDiarySentimentException();
             }
         } catch (Exception e){
-            System.err.println(e.toString());
+            throw new TextDiarySentimentException();
         }
         return result;
     }
