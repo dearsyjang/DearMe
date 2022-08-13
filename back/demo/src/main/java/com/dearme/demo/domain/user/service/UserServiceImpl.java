@@ -1,5 +1,7 @@
 package com.dearme.demo.domain.user.service;
 
+import com.dearme.demo.domain.favorite.repository.FavoriteRepository;
+import com.dearme.demo.domain.recordingroom.exception.RecordingDeleteException;
 import com.dearme.demo.domain.review.entity.Review;
 import com.dearme.demo.domain.review.repository.ReviewRepository;
 import com.dearme.demo.domain.user.dto.counselorprofile.*;
@@ -11,7 +13,9 @@ import com.dearme.demo.domain.user.dto.user.*;
 import com.dearme.demo.domain.user.entity.*;
 import com.dearme.demo.domain.user.exception.*;
 import com.dearme.demo.domain.user.repository.*;
+import com.dearme.demo.domain.videodiary.entity.VideoDiary;
 import com.dearme.demo.global.util.jwt.JwtProvider;
+import io.openvidu.java.client.OpenVidu;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Value;
@@ -43,8 +47,12 @@ public class UserServiceImpl implements UserService{
     private final GroupUserRepository groupUserRepository;
 
     private final ReviewRepository reviewRepository;
+
+    private final FavoriteRepository favoriteRepository;
     @Value("${path.image:/image/}")
     private String IMAGE_PATH;
+
+    private final OpenVidu openvidu;
 
     @Override
     @Transactional
@@ -197,7 +205,15 @@ public class UserServiceImpl implements UserService{
             file.delete();
         }
         if(target.getType().equals(Type.COUNSELOR)){
-            reviewRepository.deleteReviewByCounselorId(id);
+            reviewRepository.deleteReviewByCounselor_UserId(target.getUserId());
+            favoriteRepository.deleteFavoriteByCounselor_UserId(target.getUserId());
+        }
+
+        try {
+            for (VideoDiary v : target.getVideoDiaries())
+                openvidu.deleteRecording(v.getRealFileName());
+        }catch (Exception e){
+            throw new RecordingDeleteException();
         }
         userRepository.deleteUserById(id);
     }

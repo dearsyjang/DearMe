@@ -145,7 +145,8 @@ public class VideoDiaryServiceImpl implements VideoDiaryService {
                 System.out.println(line);
             }
         }catch(Exception e){
-            throw new VideoDiaryRecordingException();
+            //throw new VideoDiaryRecordingException();
+            e.printStackTrace();
         }
 
         filePath = filePath+".mp3";
