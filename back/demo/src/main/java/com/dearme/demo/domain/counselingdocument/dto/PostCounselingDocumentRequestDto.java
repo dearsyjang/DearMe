@@ -22,7 +22,6 @@ public class PostCounselingDocumentRequestDto {
     private Integer hours;
     @NotBlank(message = "contents는 비워둘 수 없습니다.")
     private String contents;
-    @NotBlank(message = "isOpen은 비워둘 수 없습니다.")
     private Boolean isOpen;
 
     public CounselingDocument toEntity(){
