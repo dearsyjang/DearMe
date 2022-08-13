@@ -35,7 +35,7 @@ public class Board extends Base {
     private String contents;
 
     @Column(nullable = false)
-    private Integer hitCnt=0;
+    private int hitCnt=0;
 
     @Column(nullable = false)
     private LocalDateTime date;
@@ -49,7 +49,7 @@ public class Board extends Base {
         this.user=user;
     }
     @Builder
-    public Board(String title, String contents, Integer hitCnt, LocalDateTime date){
+    public Board(String title, String contents, int hitCnt, LocalDateTime date){
         this.title=title;
         this.contents=contents;
         this.hitCnt=hitCnt;
