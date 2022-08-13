@@ -36,6 +36,8 @@ const router = createRouter({
   
     ...counselingSchedule
 
+
+
   ],
   scrollBehavior(to, from, savedPosition) {
     if (savedPosition) {

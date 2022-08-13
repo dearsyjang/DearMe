@@ -52,6 +52,7 @@ export default {
     groupRequest: () => HOST + '/counseling-doucments/groups',
     groupDetail: groupId => HOST + GROUP +`/${groupId}`,
 
+    
   }
   //downPrice=0&upPrice=1000000&reviewCntUp=FALSE&reviewCntDown=FALSE&reviewScoreUp=FALSE&reviewScoreDown=FALSE&favorite=FALSE
 }
