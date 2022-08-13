@@ -139,7 +139,7 @@ export default {
   // 회원 정보(비밀번호, 닉네임) 수정
   updateProfile({ commit, getters }, { pw, nickname}) {
     axios({
-      url: drf.member.profileEdit(currentUser),
+      url: drf.member.profileEdit(profileId),
       method: 'put',
       data: { pw, nickname },
       headers: getters.authHeader
