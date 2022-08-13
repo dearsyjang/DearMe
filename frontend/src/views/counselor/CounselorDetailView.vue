@@ -2,7 +2,9 @@
   <div>
   <div>
     <h2>상담사 프로필 페이지</h2>
-    
+    <router-link :to="{ name: 'counselingReview', params : {counselorId : counselor.data.userId}}">
+                <button>리뷰 쓰러가는 버튼! 상담 나가기에 버튼 달아도 되고 종료시 라우터 푸시로 해도됨</button>
+                </router-link>
     <router-link to="/counseling-request"  >
       <button v-if="currentUser.data.type==`USER`">상담 신청</button>
     </router-link>
