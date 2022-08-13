@@ -260,6 +260,7 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
+    @Transactional
     public void deleteCounselorCertificate(String id, Long certificateId) {
         certificateRepository.deleteCertificateByCounselorProfile_Counselor_IdAndId(id, certificateId);
     }
