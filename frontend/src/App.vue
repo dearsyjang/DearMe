@@ -22,6 +22,7 @@ import "bulma/css/bulma.css"
     name: 'App',
     components: { TopBar, BottomBar },
   }
+
 </script>
 
 <style>

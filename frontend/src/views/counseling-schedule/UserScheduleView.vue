@@ -18,15 +18,24 @@
 </template>
 
 <script>
-
 import ScheduleCardGroup from './components/ScheduleCardGroup.vue'
 import ScheduleCardPersonal from './components/ScheduleCardPersonal.vue'
+import { mapActions, mapGetters } from 'vuex'
 
 
 export default {
   components: { ScheduleCardPersonal, ScheduleCardGroup },
     name:'UserScheduleView',
-    Components: { ScheduleCardPersonal },
+    Components: { ScheduleCardGroup },
+    computed: {
+      ...mapGetters(['counselings'])
+    },
+    methods: {
+      ...mapActions(['fetchSchedules'])
+    },
+    created() {
+      this.fetchSchedules()
+    }
 
 }
 </script>

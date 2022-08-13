@@ -34,19 +34,21 @@ export default {
     // 회원가입
     saveToken({ commit }, token) {
       commit('SET_TOKEN', token)
+      console.log('setToken 완료!')
       // 회원가입시 받은 토큰을 로컬스토리지에 추가
       localStorage.setItem('token', token)
     },
+
     // 로그아웃
     removeToken({ commit }) {
       // 현재 사용자 비움
-      commit('SET_TOKEN', '')
-      localStorage.removeItem('token', '')
-      commit('SET_CURRENT_USER', '')
-
+      commit('SET_TOKEN')
+      localStorage.setItem('token', '')
+      // commit('SET_CURRENT_USER', '')
     },
-    // 받아오는 데이터가 한개일 경우 입력, 여러개일 경우 {}안에 담아와야함
-    login({ commit, dispatch}, data) {
+
+    // 받아오는 데이터가 한개일 경우 입력, 여러 개일 경우 {}안에 담아와야함
+    login({ commit, dispatch, getters}, data) {
       axios({
         // url: 'https://i7d206.p.ssafy.io/users/token?id=id1&pw=pw1',
         url: drf.member.login()+`?id=${data.id}&pw=${data.pw}`,
@@ -57,7 +59,13 @@ export default {
           console.log(res.data)
           dispatch('saveToken', token)
           dispatch('fetchCurrentUser')
-          router.push({ name: 'mypageUser' })
+          setTimeout(
+            function(){
+              console.log('로그인 완료! currentUser', getters.currentUser)
+              router.push({ name: 'mypageUser' })    
+            }, 10
+          )
+          
         })
         .catch(err => {
           console.error(err)
@@ -66,7 +74,7 @@ export default {
         })
     },
     // POST 요청일 경우 FormData로 보내야함 (SignupUserView 참고)
-    signup({ commit, dispatch }, formData) {
+    signup({ commit }, formData) {
       axios({
         url: drf.member.signup(),
         method: 'post',
@@ -84,7 +92,7 @@ export default {
           const token = res.data.data.accessToken
           console.log(token)
           // 로컬스토리지에 토큰 저장
-          dispatch('saveToken', token)
+          // dispatch('saveToken', token)
           alert('회원가입 성공')
           // 여기서 바로 마이페이지로 넘어갈지 고민중..
           router.push({ name: 'login' })
@@ -96,10 +104,11 @@ export default {
         })
     },
     // 로그아웃은 별도 요청 없이 현재 사용자 리셋
-    logout({ dispatch, getters}) {
+    logout({ dispatch, getters, commit}) {
       dispatch('removeToken')
+      commit('SET_CURRENT_USER', {})
       console.log(getters.currentUser)
-      router.push({ name: 'login' })
+      router.push({ name: 'home' })
     },
   
   // fetchCurrentUser({ commit, getters, dispatch }) {

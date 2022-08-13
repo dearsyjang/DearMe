@@ -1,5 +1,5 @@
 <template>
-  <div class="container py-4">
+  <div class="container py-4" v-if="!isLoggedIn">
     <div>
       <h1>LOGIN</h1>
     </div>
@@ -34,7 +34,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['authError'])
+    ...mapGetters(['authError', 'isLoggedIn'])
   },
   methods: {
     ...mapActions([ 'login' ]),

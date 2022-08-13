@@ -10,9 +10,9 @@ import point from './point.js'
 import calendar from './calendar.js'
 import textDiary from './textDiary.js'
 import counseling from './counseling.js'
-import schedule from './schedule.js'
 import counselingRequest from './counselingRequest.js'
 import videodiary from './videoDiary.js'
+import counselingSchedule from './counselingSchedule.js'
 
 
 const router = createRouter({
@@ -29,7 +29,7 @@ const router = createRouter({
     ...textDiary,
     ...counselingRequest,
     ...counseling,
-    ...schedule,
+    ...counselingSchedule,
     ...videodiary,    
 
   ]

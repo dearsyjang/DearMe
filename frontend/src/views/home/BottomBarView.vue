@@ -1,18 +1,14 @@
 <template>
 <div id="bottombardetail">
-  <h1>{{ currentUser.data.type }}</h1>
+  <h1>{{ usertype }}</h1>
   <template v-if="isLoggedin && usertype == COUNSELOR">
     <div id="bottombar" class="container">
       <div>
-        <router-link to="/schedule" class="img mx-3"><img id="emotion" src="../../assets/images/schedule.png" alt="schedule"></router-link>
+        <router-link to="/schedule" class="img mx-3"><img id="schedule" src="../../assets/images/schedule.png" alt="schedule"></router-link>
         <p class="text">상담일정</p>
       </div>
-      <div v-if="usertype == COUNSELOR">
-        <router-link to="/calendar" class="img mx-3"><img id="emotion" src="../../assets/images/emotion.png" alt="emotion"></router-link>
-        <p class="text">감정달력</p>
-      </div>
       <div>
-        <router-link to="/mypage/request" class="img mx-3"><img id="calendar" src="../../assets/images/request.png" alt="request"></router-link>
+        <router-link to="/mypage/request" class="img mx-3"><img id="requst" src="../../assets/images/request.png" alt="request"></router-link>
         <p class="text">상담신청</p>
       </div>
       <div>
@@ -67,7 +63,13 @@ export default {
     // usertype() {
     //   return this.currentUser.data.type
     // }
+  },
+  method: {
+    usertype() {
+      return this.currentUser.data.type
+    }
   }
+
 }
 </script>
 

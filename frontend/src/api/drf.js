@@ -1,9 +1,12 @@
+
+
 // const HOST = 'http://localhost:8080/api/'
 const HOST = "https://i7d206.p.ssafy.io"
 const MEMBER = '/users'
 const BOARD ='/boards'
 const COMMENT ='/comments'
 const COUNSELOR = '/counselors'
+const COUNSELING = '/counselings'
 
 export default {
   member : {
@@ -29,7 +32,8 @@ export default {
      counselor : (counselorId) => HOST + COUNSELOR  + `/${counselorId}`,
     // filter : (categoryId) => HOST + MEMBER + '/filter' +  `/${categoryId}`,
     // search : (keyword) => HOST + MEMBER + '/search' +  `/${keyword}`,
+  },
+  counselingSchedule: {
+    counselingSchedule: () => HOST + COUNSELING,
   }
-
-
 }

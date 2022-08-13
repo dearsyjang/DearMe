@@ -12,8 +12,7 @@
         <div v-if="this.currentUser" class="collapse navbar-collapse" id="navbarSupportedContent">
           <div class="navbar-nav">
             <li><router-link to="/member/Profile" class="mx-3">회원정보수정</router-link></li>
-            <button @click="logOUT()">로그아웃</button>
-            <!-- <li><router-link to="logout" class="mx-4">로그아웃</router-link></li> -->
+            <button v-if="isLoggedIn" @click="logOUT()">로그아웃</button>
           </div>
         </div>
         <div v-else class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -49,8 +48,7 @@ export default {
     }
   },
   computed: {
-    // 로그인 여부 확인
-    ...mapGetters(['currentUser'])
+    ...mapGetters(['currentUser', 'isLoggedIn'])
   }
 }
 </script>
