@@ -4,6 +4,7 @@ import board from './modules/board';
 import counselors from './modules/counselors';
 import counselingSchedule from './modules/counselingSchedule'
 import bottombar from './modules/bottombar'
+import group from './modules/group';
 
 export default new Vuex.Store({
   strict: true,
@@ -12,6 +13,7 @@ export default new Vuex.Store({
     board,
     counselors,
     counselingSchedule,
-    bottombar
+    bottombar,
+    group,
   },
 });

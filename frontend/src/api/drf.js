@@ -4,6 +4,7 @@ const MEMBER = '/users'
 const BOARD ='/boards'
 const COMMENT ='/comments'
 const COUNSELOR = '/counselors'
+const GROUP = '/groups'
 
 export default {
   member : {
@@ -14,7 +15,7 @@ export default {
     currentUser: () => HOST + MEMBER,// 정보수정
     idCheck: () => HOST + MEMBER + '/id',
     // profile: username => HOST + MEMBER + 'profile/' + username,
-    // profile: () => HOST + MEMBER 
+    // profile: () => HOST + MEMBER
   },
   board : {
     boardCreate: () => HOST + BOARD,
@@ -29,6 +30,11 @@ export default {
      counselor : (counselorId) => HOST + COUNSELOR  + `/${counselorId}`,
     // filter : (categoryId) => HOST + MEMBER + '/filter' +  `/${categoryId}`,
     // search : (keyword) => HOST + MEMBER + '/search' +  `/${keyword}`,
+  },
+  group : {
+    groupRequest: () => HOST + '/counseling-doucments/groups',
+    groupDetail: groupId => HOST + GROUP +`/${groupId}`,
+
   }
 
 

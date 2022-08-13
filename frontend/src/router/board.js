@@ -1,7 +1,7 @@
 import BoardListView from '@/views/board/BoardListView.vue'
-import ArticleView from '@/views/board/ArticleView.vue'
-import ArticleUpdateView from '@/views/board/ArticleUpdateView.vue'
-import ArticleCreateView from '@/views/board/ArticleCreateView.vue'
+import BoardDetailVeiw from '@/views/board/BoardDetailView.vue'
+import BoardUpdateView from '@/views/board/BoardUpdateView.vue'
+import BoardCreateView from '@/views/board/BoardCreateView.vue'
 
 export default [
   {
@@ -12,16 +12,16 @@ export default [
   {
     path: '/board/create',
     name: 'boardCreate',
-    component: ArticleCreateView
+    component: BoardCreateView
   },
   {
-    path: '/board/1', // :articlePK
+    path: '/board/:boardPk',
     name: 'boardDetail',
-    component: ArticleView
+    component: BoardDetailVeiw
   },
   {
-    path: '/board/:articlePk/update',
+    path: '/board/:boardPk/update',
     name: 'boardUpdate',
-    component: ArticleUpdateView
+    component: BoardUpdateView
   }
 ]
