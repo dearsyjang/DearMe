@@ -108,60 +108,60 @@ INSERT INTO USER(created_at, updated_at, id, pw, nick_name, gender, type, birth,
 VALUES (now(), now(), 'test49', 'test49', 'test49', 'FEMALE' ,'COUNSELOR', '2021-01-01', 'test49@test', '010-0047-1111','basic.png', 'basic', 0, 'refreshToken');
 
 
-INSERT INTO COUNSELOR_PROFILE(counselor_id, created_at, updated_at, introduce, price, reviewcnt, reviewvalue)
+INSERT INTO COUNSELOR_PROFILE(counselor_id, created_at, updated_at, introduce, price, review_cnt, review_value)
 VALUES(6, now(), now(), 'hello6', 1000, 0, 0);
 
-INSERT INTO COUNSELOR_PROFILE(counselor_id, created_at, updated_at, introduce, price, reviewcnt, reviewvalue)
+INSERT INTO COUNSELOR_PROFILE(counselor_id, created_at, updated_at, introduce, price, review_cnt, review_value)
 VALUES(7, now(), now(), 'hello7', 5000, 0, 0);
 
-INSERT INTO COUNSELOR_PROFILE(counselor_id, created_at, updated_at, introduce, price, reviewcnt, reviewvalue)
+INSERT INTO COUNSELOR_PROFILE(counselor_id, created_at, updated_at, introduce, price, review_cnt, review_value)
 VALUES(8, now(), now(), 'hello8', 10000, 0, 0);
 
-INSERT INTO COUNSELOR_PROFILE(counselor_id, created_at, updated_at, introduce, price, reviewcnt, reviewvalue)
+INSERT INTO COUNSELOR_PROFILE(counselor_id, created_at, updated_at, introduce, price, review_cnt, review_value)
 VALUES(9, now(), now(), 'hello9', 15000, 0, 0);
 
-INSERT INTO COUNSELOR_PROFILE(counselor_id, created_at, updated_at, introduce, price, reviewcnt, reviewvalue)
+INSERT INTO COUNSELOR_PROFILE(counselor_id, created_at, updated_at, introduce, price, review_cnt, review_value)
 VALUES(10, now(), now(), 'hello10', 20000, 0, 0);
 
-INSERT INTO COUNSELOR_PROFILE(counselor_id, created_at, updated_at, introduce, price, reviewcnt, reviewvalue)
+INSERT INTO COUNSELOR_PROFILE(counselor_id, created_at, updated_at, introduce, price, review_cnt, review_value)
 VALUES(30, now(), now(), 'hello30', 1000, 0, 0);
-INSERT INTO COUNSELOR_PROFILE(counselor_id, created_at, updated_at, introduce, price, reviewcnt, reviewvalue)
+INSERT INTO COUNSELOR_PROFILE(counselor_id, created_at, updated_at, introduce, price, review_cnt, review_value)
 VALUES(31, now(), now(), 'hello31', 1000, 0, 0);
-INSERT INTO COUNSELOR_PROFILE(counselor_id, created_at, updated_at, introduce, price, reviewcnt, reviewvalue)
+INSERT INTO COUNSELOR_PROFILE(counselor_id, created_at, updated_at, introduce, price, review_cnt, review_value)
 VALUES(32, now(), now(), 'hello32', 1000, 0, 0);
-INSERT INTO COUNSELOR_PROFILE(counselor_id, created_at, updated_at, introduce, price, reviewcnt, reviewvalue)
+INSERT INTO COUNSELOR_PROFILE(counselor_id, created_at, updated_at, introduce, price, review_cnt, review_value)
 VALUES(33, now(), now(), 'hello33', 1000, 0, 0);
-INSERT INTO COUNSELOR_PROFILE(counselor_id, created_at, updated_at, introduce, price, reviewcnt, reviewvalue)
+INSERT INTO COUNSELOR_PROFILE(counselor_id, created_at, updated_at, introduce, price, review_cnt, review_value)
 VALUES(34, now(), now(), 'hello34', 1000, 0, 0);
-INSERT INTO COUNSELOR_PROFILE(counselor_id, created_at, updated_at, introduce, price, reviewcnt, reviewvalue)
+INSERT INTO COUNSELOR_PROFILE(counselor_id, created_at, updated_at, introduce, price, review_cnt, review_value)
 VALUES(35, now(), now(), 'hello35', 1000, 0, 0);
-INSERT INTO COUNSELOR_PROFILE(counselor_id, created_at, updated_at, introduce, price, reviewcnt, reviewvalue)
+INSERT INTO COUNSELOR_PROFILE(counselor_id, created_at, updated_at, introduce, price, review_cnt, review_value)
 VALUES(36, now(), now(), 'hello36', 1000, 0, 0);
-INSERT INTO COUNSELOR_PROFILE(counselor_id, created_at, updated_at, introduce, price, reviewcnt, reviewvalue)
+INSERT INTO COUNSELOR_PROFILE(counselor_id, created_at, updated_at, introduce, price, review_cnt, review_value)
 VALUES(37, now(), now(), 'hello37', 1000, 0, 0);
-INSERT INTO COUNSELOR_PROFILE(counselor_id, created_at, updated_at, introduce, price, reviewcnt, reviewvalue)
+INSERT INTO COUNSELOR_PROFILE(counselor_id, created_at, updated_at, introduce, price, review_cnt, review_value)
 VALUES(38, now(), now(), 'hello38', 1000, 0, 0);
-INSERT INTO COUNSELOR_PROFILE(counselor_id, created_at, updated_at, introduce, price, reviewcnt, reviewvalue)
+INSERT INTO COUNSELOR_PROFILE(counselor_id, created_at, updated_at, introduce, price, review_cnt, review_value)
 VALUES(39, now(), now(), 'hello39', 1000, 0, 0);
-INSERT INTO COUNSELOR_PROFILE(counselor_id, created_at, updated_at, introduce, price, reviewcnt, reviewvalue)
+INSERT INTO COUNSELOR_PROFILE(counselor_id, created_at, updated_at, introduce, price, review_cnt, review_value)
 VALUES(40, now(), now(), 'hello40', 1000, 0, 0);
-INSERT INTO COUNSELOR_PROFILE(counselor_id, created_at, updated_at, introduce, price, reviewcnt, reviewvalue)
+INSERT INTO COUNSELOR_PROFILE(counselor_id, created_at, updated_at, introduce, price, review_cnt, review_value)
 VALUES(41, now(), now(), 'hello41', 1000, 0, 0);
-INSERT INTO COUNSELOR_PROFILE(counselor_id, created_at, updated_at, introduce, price, reviewcnt, reviewvalue)
+INSERT INTO COUNSELOR_PROFILE(counselor_id, created_at, updated_at, introduce, price, review_cnt, review_value)
 VALUES(42, now(), now(), 'hello42', 1000, 0, 0);
-INSERT INTO COUNSELOR_PROFILE(counselor_id, created_at, updated_at, introduce, price, reviewcnt, reviewvalue)
+INSERT INTO COUNSELOR_PROFILE(counselor_id, created_at, updated_at, introduce, price, review_cnt, review_value)
 VALUES(43, now(), now(), 'hello43', 1000, 0, 0);
-INSERT INTO COUNSELOR_PROFILE(counselor_id, created_at, updated_at, introduce, price, reviewcnt, reviewvalue)
+INSERT INTO COUNSELOR_PROFILE(counselor_id, created_at, updated_at, introduce, price, review_cnt, review_value)
 VALUES(44, now(), now(), 'hello44', 1000, 0, 0);
-INSERT INTO COUNSELOR_PROFILE(counselor_id, created_at, updated_at, introduce, price, reviewcnt, reviewvalue)
+INSERT INTO COUNSELOR_PROFILE(counselor_id, created_at, updated_at, introduce, price, review_cnt, review_value)
 VALUES(45, now(), now(), 'hello45', 1000, 0, 0);
-INSERT INTO COUNSELOR_PROFILE(counselor_id, created_at, updated_at, introduce, price, reviewcnt, reviewvalue)
+INSERT INTO COUNSELOR_PROFILE(counselor_id, created_at, updated_at, introduce, price, review_cnt, review_value)
 VALUES(46, now(), now(), 'hello46', 1000, 0, 0);
-INSERT INTO COUNSELOR_PROFILE(counselor_id, created_at, updated_at, introduce, price, reviewcnt, reviewvalue)
+INSERT INTO COUNSELOR_PROFILE(counselor_id, created_at, updated_at, introduce, price, review_cnt, review_value)
 VALUES(47, now(), now(), 'hello47', 1000, 0, 0);
-INSERT INTO COUNSELOR_PROFILE(counselor_id, created_at, updated_at, introduce, price, reviewcnt, reviewvalue)
+INSERT INTO COUNSELOR_PROFILE(counselor_id, created_at, updated_at, introduce, price, review_cnt, review_value)
 VALUES(48, now(), now(), 'hello48', 1000, 0, 0);
-INSERT INTO COUNSELOR_PROFILE(counselor_id, created_at, updated_at, introduce, price, reviewcnt, reviewvalue)
+INSERT INTO COUNSELOR_PROFILE(counselor_id, created_at, updated_at, introduce, price, review_cnt, review_value)
 VALUES(49, now(), now(), 'hello49', 1000, 0, 0);
 
 

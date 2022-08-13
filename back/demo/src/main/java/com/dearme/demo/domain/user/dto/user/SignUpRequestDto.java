@@ -53,7 +53,7 @@ public class SignUpRequestDto {
                 .introduce(counselorProfile.getIntroduce())
                 .price(counselorProfile.getPrice())
                 .value(0L)
-                .reviewcnt(0L)
+                .reviewCnt(0L)
                 .build();
     }
 }
