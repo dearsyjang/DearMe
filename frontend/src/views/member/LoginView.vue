@@ -1,7 +1,7 @@
 <template>
   <div class="container py-4">
     <div>
-      <h1>LOGIN</h1>
+      <h1 id="login-title">LOGIN</h1>
     </div>
     <div class="form-group mt-4">
       <label class="form-label mt-4 mx-2" for="id">아이디</label>
@@ -56,3 +56,7 @@ export default {
   unmounted() {},
 }
 </script>
+
+<style>
+
+</style>
