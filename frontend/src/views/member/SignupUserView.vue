@@ -1,99 +1,46 @@
 <template>
-  <div class="container">
-    <form @submit.prevent="signUp()">
-      <div class="form-group">
-        <label for="id" class="form-label mt-2">아이디</label>
-        <div class="row">
-          <input id="inputId" type="text" class="form-control col-sm-6 mx-3" placeholder="아이디" v-model="credentials.id">
-          <button @click="idCheck()" class="btn btn-primary col-sm-3" id="sameId">중복검사</button>
-        </div>
+  <div class="login-wrapper d-flex align-items-center justify-content-center">
+    <div class="custom-container">
+      <div class="text-center px-4" id="signup-img">
+        <img src="@/assets/images/img/bg-img/user.png" alt="">
       </div>
-      <div class="form-group has-success">
-        <label class="form-label mt-2" for="password">비밀번호</label>
-        <input type="password" class="form-control" placeholder="비밀번호" v-model="credentials.pw">
-      </div>
-      <div class="form-group">
-        <label class="form-label mt-2" for="nickname">닉네임</label>
-        <div class="row">
-          <input type="text" class="form-control col-sm-6 mx-3" placeholder="닉네임" id="inputId" v-model="credentials.nickName">
-          <button @click="idCheck()" class="btn btn-primary col-sm-3" id="sameId">중복검사</button>
-        </div>
-      </div>
-      <div class="birth_wrap ">
-        <label class="form-label mt-2" for="birth">생년월일</label>
-        <div class="row">
-          <div class="bir_yy col-sm-4">
-            <span class="ps_box">
-              <input
-                type="text"
-                class="form-control"
-                id="yy"
-                placeholder="년(4자)"
-                maxlength="4"
-              />
-            </span>
+      <!-- Register Form -->
+      <div class="register-form mt-4">
+        <h6 class="mb-3 text-center">{{ $route.params.type }}</h6>
+        <h6 class="mb-3 text-center">아래 항목을 입력하시오.</h6>
+        <form >
+          <div class="form-group">
+            <input class="form-control" type="text" v-model="credentials.id" placeholder="아이디">
           </div>
-          <div class="bir_mm col-sm-4">
-            <span class="ps_box focus">
-              <select class="form-select" id="mm">
-                <option>월</option>
-                <option v-for="month in months" :key="month">{{ month }}</option>
-              </select>
-            </span>
-          </div>
-          <div class="bir_mm col-sm-4">
-            <span class="ps_box focus">
-              <select class="form-select" id="mm">
-                <option>일</option>
-                <option v-for="day in days" :key="day">{{ day }}</option>
-              </select>
-            </span>
-          </div>
-        </div>
-      </div>
-      <div clss="form-group">
-        <label class="form-label mt-2" for="email">이메일</label>
-        <input
-          v-model="credentials.email"
-          placeholder="이메일"
-          type="email"
-          class="form-control"
-          id="email"
-        />
-      </div>
-      <div class="row">
-        <div class="form-group col-md-4">
-          <label class="form-label mt-2" for="gender">성별</label>
-          <select class="form-select" v-model="credentials.gender" id="gender">
-            <option value="MALE">남자</option>
-            <option value="FEMALE">여자</option>
-          </select>
-        </div>
-        <div class="form-group col-md-4">
-          <label class="form-label mt-2" for="type">사용자 구분</label>
-          <div class="row">
-            <div class="form-group col-md-6">
-              <input @click="imCounselor()" value="COUNSELOR" type="radio" class="btn-check" name="options-outlined" id="success-outlined" autocomplete="off" checked>
-              <label class="btn btn-outline-success" for="success-outlined">상담사</label>
+          <div class="form-group position-relative">
+            <input class="form-control" type="password" v-model="credentials.pw" placeholder="비밀번호">
+            <div class="position-absolute">
+              <i class="bi bi-eye"></i>
+              <i class="bi bi-eye-slash"></i>
             </div>
-            <div class="form-group col-md-6">
-              <input @click="imUser()" value="USER" type="radio" class="btn-check" name="options-outlined" id="danger-outlined" autocomplete="off">
-              <label class="btn btn-outline-success" for="danger-outlined">사용자</label>
-            </div>
-
           </div>
-        </div>
+          <div class="form-group">
+            <input class="form-control" type="text" v-model="credentials.nickName" placeholder="닉네임">
+          </div>
+          <div class="form-group">
+              <select class="form-select" id="defaultSelect" v-model="credentials.gender" >
+                <option selected value="0">성별</option>
+                <option value="MALE">남성</option>
+                <option value="FEMALE">여성</option>
+              </select>
+          </div>
+          <div class="form-group">
+            <input class="form-control" type="email" v-model="credentials.email" placeholder="이메일">
+          </div>
+          <div class="form-group row d-flex justify-content-evenly">
+            <input class="form-control col-sm-3" id="signup-birth" type="text" name="yy" placeholder="년(4자)">
+            <input class="form-control col-sm-3" id="signup-birth" type="text" name="mm" placeholder="월(2자)">
+            <input class="form-control col-sm-3" id="signup-birth" type="text" name="dd" placeholder="일(2자)">
+          </div>
+          <button @click="signUp()" class="btn btn-primary w-100" type="submit">회원가입</button>
+        </form>
       </div>
-      <div v-if="this.isCounselor">
-        <label class="form-label mt-2" for="inputGroupFile01">자격증명서 (상담사 해당)</label>
-        <div class="input-group mb-3">
-          <input @change="inputImg()" ref="serveryImg" type="file" class="form-control" id="inputGroupFile01">
-        </div>
-      </div>
-      <div class="d-grid gap-2">
-        <button type="submit" class="btn btn-primary btn-sm">가입하기</button>
-      </div>
-    </form>
+    </div>
   </div>
 </template>
 <script>
@@ -109,7 +56,7 @@ export default {
       credentials: {
         id: '',
         pw: '',
-        type: '',
+        type: this.$route.params.type,
         nickName: '',
         birth: '2022/02/02',
         gender: '',
@@ -179,10 +126,11 @@ export default {
 }
 </script>
 <style scoped>
-  #inputId {
-    width: 60%;
+  #signup-birth {
+  width: 100px;
   }
-  #sameId {
-    width: 30%;
+  #signup-img {
+    width: 200px;
+    margin: auto;
   }
 </style>
