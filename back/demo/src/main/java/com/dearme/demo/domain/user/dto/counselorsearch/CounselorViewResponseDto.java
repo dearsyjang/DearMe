@@ -44,7 +44,7 @@ public class CounselorViewResponseDto {
                 .nickName(entity.getNickName())
                 .pictureUrl(entity.getPicture().getRealFileName())
                 .value(value)
-                .reviewCnt(entity.getCounselorProfile().getReviewcnt())
+                .reviewCnt(entity.getCounselorProfile().getReviewCnt())
                 .price(entity.getCounselorProfile().getPrice())
                 .introduce(entity.getCounselorProfile().getIntroduce())
                 .document(toDocumentInfoDto(entity.getCounselorProfile().getDocuments()))

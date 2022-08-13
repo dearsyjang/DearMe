@@ -33,10 +33,10 @@ public class CounselorProfile extends Base {
     private String introduce;
 
     @Setter
-    private Long reviewvalue;
+    private Long reviewValue;
 
     @Setter
-    private Long reviewcnt;
+    private Long reviewCnt;
 
     @OneToMany(mappedBy = "counselorProfile", orphanRemoval = true, cascade = CascadeType.ALL)
     @Setter
@@ -55,8 +55,8 @@ public class CounselorProfile extends Base {
     private List<Category> categories = new ArrayList<>();
 
     public void updateReviewValue(Long value, int num){
-        this.reviewvalue += value;
-        this.reviewcnt +=num;
+        this.reviewValue += value;
+        this.reviewCnt +=num;
     }
 
     public void updateCounselorProfile(Long price, String introduce){
@@ -65,10 +65,10 @@ public class CounselorProfile extends Base {
     }
 
     @Builder
-    public CounselorProfile(Long price, String introduce, Long value, Long reviewcnt) {
+    public CounselorProfile(Long price, String introduce, Long value, Long reviewCnt) {
         this.price = price;
         this.introduce = introduce;
-        this.reviewvalue = value;
-        this.reviewcnt=reviewcnt;
+        this.reviewValue = value;
+        this.reviewCnt=reviewCnt;
     }
 }

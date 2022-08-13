@@ -23,7 +23,7 @@ public class CounselorProfileInfoDto {
 
     public static CounselorProfileInfoDto of(CounselorProfile entity){
         double value=0f;
-        if(entity.getReviewcnt()>=1f) value=Math.round((entity.getReviewvalue()/ entity.getReviewcnt())*100)/100.0;
+        if(entity.getReviewCnt()>=1f) value=Math.round((entity.getReviewValue()/ entity.getReviewCnt())*100)/100.0;
         return CounselorProfileInfoDto.builder()
                 .introduce(entity.getIntroduce())
                 .price(entity.getPrice())

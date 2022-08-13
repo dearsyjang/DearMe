@@ -4,12 +4,13 @@ import com.dearme.demo.domain.review.entity.Review;
 import lombok.Data;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @Data
 public class ReviewSaveRequestDto {
-    @NotBlank(message = "id는 비워둘 수 없습니다.")
+    @NotNull(message = "id는 비워둘 수 없습니다.")
     private Long id;
-    @NotBlank(message = "value는 비워둘 수 없습니다.")
+    @NotNull(message = "value는 비워둘 수 없습니다.")
     private Long value;
     @NotBlank(message = "contents는 비워둘 수 없습니다.")
     private String contents;

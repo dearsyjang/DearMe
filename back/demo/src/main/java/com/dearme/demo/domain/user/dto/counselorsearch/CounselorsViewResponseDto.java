@@ -32,7 +32,7 @@ public class CounselorsViewResponseDto {
                 .nickName(counselor.getNickName())
                 .pictureUrl(counselor.getPicture().getFileName())
                 .price(counselor.getCounselorProfile().getPrice())
-                .reviewCnt(counselor.getCounselorProfile().getReviewcnt())
+                .reviewCnt(counselor.getCounselorProfile().getReviewCnt())
                 .categories(toCategoryInfoDto(counselor.getCounselorProfile().getCategories()))
                 .value(value)
                 .build();

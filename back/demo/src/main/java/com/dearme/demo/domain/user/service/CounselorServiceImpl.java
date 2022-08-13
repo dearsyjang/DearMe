@@ -97,7 +97,7 @@ public class CounselorServiceImpl implements CounselorService{
 
     public double ReviewCalc(User user){
         double value=0f;
-        if(user.getCounselorProfile().getReviewcnt()>=1f) value=Math.round((user.getCounselorProfile().getReviewvalue()/ user.getCounselorProfile().getReviewcnt())*100)/100.0;
+        if(user.getCounselorProfile().getReviewCnt()>=1f) value=Math.round((user.getCounselorProfile().getReviewValue()/ user.getCounselorProfile().getReviewCnt())*100)/100.0;
         return value;
     }
     public OrderSpecifier order(CounselorSearchRequestDto dto){

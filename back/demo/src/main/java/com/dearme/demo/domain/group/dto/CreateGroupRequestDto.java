@@ -4,6 +4,7 @@ import com.dearme.demo.domain.group.entity.Group;
 import lombok.Data;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @Data
 public class CreateGroupRequestDto {
@@ -11,7 +12,7 @@ public class CreateGroupRequestDto {
     private String title;
     @NotBlank(message = "contents는 비워둘 수 없습니다.")
     private String contents;
-    @NotBlank(message = "price는 비워둘 수 없습니다.")
+    @NotNull(message = "price는 비워둘 수 없습니다.")
     private Long price;
 
     public Group toEntity(){
