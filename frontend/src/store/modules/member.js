@@ -55,6 +55,7 @@ export default {
         .then(res => {
           const token = res.data.data.accessToken
           console.log(res.data)
+          alert(res.data)
           dispatch('saveToken', token)
           dispatch('fetchCurrentUser')
           router.push({ name: 'mypageUser' })
@@ -101,7 +102,7 @@ export default {
       console.log(getters.currentUser)
       router.push({ name: 'login' })
     },
-  
+
   // fetchCurrentUser({ commit, getters, dispatch }) {
   //   if (getters.isLoggedIn) {
   //     axios({
@@ -132,8 +133,8 @@ export default {
     .then(res => {
       console.log(res)
       commit('SET_CURRENT_USER', res.data)
-    })       
-      
+    })
+
     .catch(err => console.error(err) )
   },
 }
