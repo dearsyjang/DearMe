@@ -1,16 +1,19 @@
 <template>
   <div>
-    <group-info-vue class="groupInfo"></group-info-vue>
-    <group-content-vue class="groupContent"></group-content-vue>
+    <group-info :group="group" class="groupInfo"></group-info>
+    <group-content :group="group" class="groupContent"></group-content>
+    <p>{{ group }}</p>
+    <p></p>
   </div>
 </template>
 <script>
-import groupContentVue from "./components/groupContent.vue";
-import groupInfoVue from "./components/groupInfo.vue";
+import { mapGetters, mapActions } from 'vuex'
+import groupContent from "./components/groupContent.vue";
+import groupInfo from "./components/groupInfo.vue";
 export default {
   components: {
-    groupContentVue,
-    groupInfoVue,
+    groupContent,
+    groupInfo,
   },
   data() {
     return {
@@ -18,10 +21,19 @@ export default {
     };
   },
   setup() {},
-  created() {},
+  created() {
+    this.fetchGroup(1)
+  },
   mounted() {},
   unmounted() {},
-  methods: {},
+  computed: {
+    ...mapGetters(['group']),
+
+  },
+  methods: {
+    ...mapActions(['fetchGroup']),
+
+  },
 };
 </script>
 <style scoped>

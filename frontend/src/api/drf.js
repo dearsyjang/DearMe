@@ -6,6 +6,7 @@ const MEMBER = '/users'
 const BOARD ='/boards'
 const COMMENT ='/comments'
 const COUNSELOR = '/counselors'
+const GROUP = '/groups'
 
 const COUNSELING = '/counselings'
 const CAREER = '/careers'
@@ -25,6 +26,7 @@ export default {
     careerDelete: (careerId) => HOST + MEMBER + CAREER + `/${careerId}`,
     certificateCreate: () => HOST + MEMBER + CERTIFICATE ,
     certificateDelete: (certificateId) => HOST + MEMBER + '/certificate' + `/${certificateId}`
+    // profile: () => HOST + MEMBER
   },
   board : {
     boardCreate: () => HOST + BOARD,
@@ -45,7 +47,11 @@ export default {
     requestList: () => HOST + COUNSELING,
     requestDetail: (counselingDocumentId) => HOST + COUNSELING  + `/${counselingDocumentId}`,
     requestCreate: () => HOST + '/counseling-documents',
-    
+  },
+  group : {
+    groupRequest: () => HOST + '/counseling-doucments/groups',
+    groupDetail: groupId => HOST + GROUP +`/${groupId}`,
+
   }
   //downPrice=0&upPrice=1000000&reviewCntUp=FALSE&reviewCntDown=FALSE&reviewScoreUp=FALSE&reviewScoreDown=FALSE&favorite=FALSE
 }

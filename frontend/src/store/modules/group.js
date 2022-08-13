@@ -1,54 +1,60 @@
-import axios from "axios";
-import drf from "@/api/drf";
-import router from "@/router";
+import axios from 'axios'
+import drf from '@/api/drf'
+import router from '@/router'
 
-export default createStore({
+
+export default {
   state: {
-    nickname: "",
-    groupRequestContent: "",
-    isOpenCalender: true,
+    groups: [],
+    group: {},
+    groupRequest:{}
   },
   getters: {
-    nickname: (state) => state.nickname,
-    groupReqeust: (state) => state.groupRequestContent,
-    isOpenCalender: (state) => state.isOpenCalender,
+    groups: state => state.groups,
+    group: state => state.group,
+    grouprequest: state => state.groupRequest
   },
   mutations: {
-    NICKNAME: (state, nickname) => (state.nickname = nickname),
-    GROUPREQUEST: (state, groupRequest) => (state.groupRequest = groupRequest),
-    ISOPENCALENDER: (state, isOpenCalender) =>
-      (state.isOpenCalender = isOpenCalender),
+    SET_GROUPS: (state, groups) => state.groups = groups,
+    SET_GROUP: (state, group) => state.group = group,
+    SET_GROUP_REQUEST : (state, groupRequest) => state.groupRequest = groupRequest
   },
   actions: {
-    // 그룹 참가 신청 작성
-    createRequest({ commit, getters }, groupReqeust, groupId) {
+    groupRequest({ commit }, content) {
       axios({
-        url: drf.group.request(),
-        method: "post",
-        data: groupReqeust,
-        headers: getters.authHeader,
-      }).then((res) => {
-        commit("GROUPREQUEST", res.data);
+        url: drf.group.groupRequest(),
+        method: 'post',
+        data: content
+      })
+      .then(res =>{
+        console.log(res.data)
+        console.log(res.data.data)
+        commit('SET_GROUP_REQUEST', res.data.data)
+        alert('그룹 신청 성공')
         router.push({
-          name: "groupReqeust",
-        });
-      });
+          name: 'mypageUser'
+        })})
+      .catch(err => console.error(err.response))
     },
-    // 신청서 작성을 위한 사용자 닉네임 받아오기
-    fetchNickname({ commit, getters }, userId) {
+    // 그룹 상세 페이지 내용 패치
+    fetchGroup({ commit, getters }, groupId){
       axios({
-        url: drf.group.request(userId),
-        method: "GET",
+        url: drf.group.groupDetail(groupId),
+        method: 'get',
         headers: getters.authHeader,
       })
-        .then((res) => commit("NICKNAME", res.data))
-        .catch((err) => {
-          console.error(err.response);
-          if (err.response.status === 404) {
-            router.push({ name: "NotFound404" });
-          }
-        });
-    },
+      .then(res => {
+        console.log(res.data)
+        console.log(res.data.data)
+        commit('SET_GROUP', res.data.data)
+        console.log(getters.group)
+      })
+      .catch(err => {
+        console.error(err)
+        if (err.response.status === 404) {
+          router.push({ name: 'NotFound404' })
+        }
+      })
+    }
   },
-  modules: {},
-});
+}

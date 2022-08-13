@@ -1,8 +1,8 @@
 <template>
   <div>
-    <h1>그룹 참가 신청하기</h1>
+    <h1>{{ $route.params.title }}그룹 참가 신청하기</h1>
     <div id="groupRequestName" class="d-flex justify-content-center">
-      <div>신청자 : 장수0</div>
+      <div>신청자 : </div>
     </div>
     <div class="groupRequestContent">
       <div>
@@ -10,6 +10,7 @@
           rows="10"
           cols="40"
           placeholder="상담 내용을 입력하시오."
+          v-model="contents"
         ></textarea>
       </div>
       <!-- user / counselor 구분 -->
@@ -28,28 +29,32 @@
               role="switch"
               id="flexSwitchCheckChecked"
               checked
+              v-model="isOpen"
+              @click="switchOpen()"
             />
             <label for="flexSwitchCheckChecked">감정달력 공개</label>
           </div>
         </div>
         <div class="d-flex justify-content-end">
-          <router-link to="/counselor_list"
-            ><button class="mx-3">완료</button></router-link
-          >
+          <button @click="onSubmit()" class="mx-3">신청</button>
         </div>
       </div>
     </div>
   </div>
 </template>
 <script>
-import { mapActions } from "vuex";
+import { mapActions, mapGetters } from "vuex";
 export default {
+  props: {
+    group:Object
+  },
   components: {},
   data() {
     return {
-      nickname: "",
-      isOpenCalender: true,
-      requestContent: "",
+      // groupId 받아오는거 생각해보기
+      groupId: 1,
+      isOpen: true,
+      contents: "",
     };
   },
   setup() {},
@@ -57,13 +62,22 @@ export default {
   mounted() {},
   unmounted() {},
   methods: {
-    ...mapActions(["createRequest"]),
+    ...mapActions(["groupRequest"]),
     onSubmit() {
-      if (this.action === "create") {
-        this.createRequest(this.GroupReqeustView);
+      const data = {
+        'id': this.groupId,
+        'isOpen': this.isOpen,
+        'contents': this.contents
       }
+      this.groupRequest(data)
     },
+    switchOpen() {
+      this.isOpen = !this.isOpen
+    }
   },
+  computed: {
+    ...mapGetters(['currentUser'])
+  }
 };
 </script>
 <style scoped>
