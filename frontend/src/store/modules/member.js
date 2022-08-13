@@ -209,13 +209,13 @@ export default {
           .catch(err => console.error(err.response))
       }
   },
-  createCertificate({ commit, getters }, contents) {
+  createCertificate({ commit, getters }, content) {
      
     
     axios({
       url: drf.member.certificateCreate(),
       method: 'post',
-      data: contents,
+      data: {contents:content},
       headers: {
         'Content-Type': 'application/json',
        'Authorization': getters.authHeader2
@@ -234,7 +234,6 @@ export default {
       axios({
         url: drf.member.certificateDelete(certificateId),
         method: 'delete',
-        data: {},
         headers: {
           'Content-Type': 'application/json',
          'Authorization': getters.authHeader2

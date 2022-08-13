@@ -2,7 +2,7 @@
   <div>
   <div>
     <h2>상담사 프로필 페이지</h2>
-
+    
     <router-link to="/counseling-request"  >
       <button v-if="currentUser.data.type==`USER`">상담 신청</button>
     </router-link>
@@ -32,8 +32,51 @@
 
                 <hr>
                 <div>개인상담가격 : {{counselor.data.price}} </div>
+                <!-- <button class="add-button"   v-if="counselor.data.nickName==currentUser.data.nickname" @click="deleteCertificate(c.id)">개인상담가격수정</button> -->
                 <br>
                 <br>
+
+
+
+                <div class="accordion" id="accordionPanelsStayFiveExample">
+                  <div class="accordion-item">
+                    <h2 class="accordion-header" id="panelsStayOpen-headingFive">
+                      <button class="accordion-button"   type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseFive" aria-expanded="true" aria-controls="panelsStayOpen-collapseFive">
+                        전문분야
+                      </button>
+                    </h2>
+                    <div id="panelsStayOpen-collapseFive" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingFive">
+                      <div class="accordion-body">
+                       <div  class="contents" v-for="(c,idx) in counselor.data.categories"
+                        :key="idx"
+                        :c="c">
+                        {{c.contents}}<button class="add-button"   v-if="counselor.data.nickName==currentUser.data.nickname" @click="deleteCertificate(c.id)">x</button>
+                      </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <br>
+
+
+                
+
+                <br>
+                <!-- <div class="card" id="certificate-card" style="width: 18rem;">
+                  <div class="card-header">
+                    전문분야<button class="add-button" v-if="counselor.data.nickName==currentUser.data.nickname">+</button>
+                  </div>
+                  <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                      <div v-for="(c,idx) in counselor.data.categories"
+                        :key="idx"
+                        :c="c">
+                        {{c.contents}}
+                        </div> 
+                    </li>
+                  </ul>
+                </div> -->
                 
                 <div class="accordion" id="accordionPanelsStayOpenExample">
                   <div class="accordion-item">
@@ -97,9 +140,9 @@
                         자격증
                       </button>
                     </h2>
-                    <div id="panelsStayThree-collapseThree" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingThree">
+                    <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingThree">
                       <div class="accordion-body">
-                       <div v-for="(c,idx) in counselor.data.certificates"
+                       <div class="contents" v-for="(c,idx) in counselor.data.certificates"
                       :key="idx"
                       :c="c">
                       {{c.contents}}<button class="add-button"   v-if="counselor.data.nickName==currentUser.data.nickname" @click="deleteCertificate(c.id)">x</button>
@@ -145,54 +188,20 @@
                 <br>
 
 
-                <div class="accordion" id="accordionPanelsStayFiveExample">
-                  <div class="accordion-item">
-                    <h2 class="accordion-header" id="panelsStayOpen-headingFive">
-                      <button class="accordion-button"   type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseFive" aria-expanded="true" aria-controls="panelsStayOpen-collapseFive">
-                        전문분야
-                      </button>
-                    </h2>
-                    <div id="panelsStayOpen-collapseFive" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingFive">
-                      <div class="accordion-body">
-                       <div v-for="(c,idx) in counselor.data.categories"
-                        :key="idx"
-                        :c="c">
-                        {{c.contents}}<button class="add-button"   v-if="counselor.data.nickName==currentUser.data.nickname" @click="deleteCertificate(c.id)">x</button>
-                      </div>
-                      </div>
-                    </div>
-                  </div>
-            
-                </div>
-
-
-                <!-- <div class="card" id="certificate-card" style="width: 18rem;">
-                  <div class="card-header">
-                    전문분야<button class="add-button" v-if="counselor.data.nickName==currentUser.data.nickname">+</button>
-                  </div>
-                  <ul class="list-group list-group-flush">
-                    <li class="list-group-item">
-                      <div v-for="(c,idx) in counselor.data.categories"
-                        :key="idx"
-                        :c="c">
-                        {{c.contents}}
-                        </div> 
-                    </li>
-                  </ul>
-                </div> -->
+                
 
                 <br>
 
-                <div class="accordion" id="accordionPanelsStayFiveExample">
+                <div class="accordion" id="accordionPanelsStaySixExample">
                   <div class="accordion-item">
-                    <h2 class="accordion-header" id="panelsStayOpen-headingFive">
-                      <button class="accordion-button"   type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseFive" aria-expanded="true" aria-controls="panelsStayOpen-collapseFive">
+                    <h2 class="accordion-header" id="panelsStayOpen-headingSix">
+                      <button class="accordion-button"   type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseSix" aria-expanded="true" aria-controls="panelsStayOpen-collapseSix">
                         리뷰
                       </button>
                     </h2>
-                    <div id="panelsStayOpen-collapseFive" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingFive">
+                    <div id="panelsStayOpen-collapseSix" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingSix">
                       <div class="accordion-body">
-                       <div v-for="(c,idx) in counselor.data.reviews"
+                       <div  class="contents" v-for="(c,idx) in counselor.data.reviews"
                       :key="idx"
                       :c="c">
                       {{c.contents}}<button class="add-button"   v-if="counselor.data.nickName==currentUser.data.nickname" @click="deleteCertificate(c.id)">x</button>

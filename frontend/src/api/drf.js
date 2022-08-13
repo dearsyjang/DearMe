@@ -22,7 +22,7 @@ export default {
     careerCreate: () => HOST + MEMBER + CAREER ,
     careerDelete: (careerId) => HOST + MEMBER + CAREER + `/${careerId}`,
     certificateCreate: () => HOST + MEMBER + CERTIFICATE ,
-    certificateDelete: (certificateId) => HOST + MEMBER + CERTIFICATE + `/${certificateId}`
+    certificateDelete: (certificateId) => HOST + MEMBER + '/certificate' + `/${certificateId}`
   },
   board : {
     boardCreate: () => HOST + BOARD,

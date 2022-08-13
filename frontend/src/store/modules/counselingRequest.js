@@ -68,7 +68,10 @@ export default {
           contents : request.contents,
           isOpen : request.isOpen,
           id : request.id,
-          date : request.date2,
+          year : request.year,
+          month : request.month,
+          day : request.day,
+          hours : request.hours
         },
         headers: {
           'Content-Type': 'application/json',
@@ -82,6 +85,15 @@ export default {
           })
         })
         .catch((err) => {
+       
+          console.log(request.contents)
+          console.log(request.isOpen)
+          console.log(request.id)
+          console.log(request.year)
+          console.log(request.month)
+          console.log(request.day)
+          console.log(request.hours)
+
           console.error(err)
           console.error(err.response.data)
          

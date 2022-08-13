@@ -56,7 +56,7 @@
     </section>
   
     <br><br><br><br>
-    <select v-model="selectHour" class="form-select" style="width:50%; height:240px; display:inline-block; text-align: center ; " multiple aria-label="multiple select example">
+    <select  v-model="selectHour" class="form-select" style="width:50%; height:240px; display:inline-block; text-align: center ; " multiple aria-label="multiple select example">
       <option disabled value="">상담가능시간</option>
       <hr>
       <option >09:00</option>
@@ -111,16 +111,21 @@ import { mapGetters,mapActions } from 'vuex'
       month2:0,
       day2:0,
       year2:0,
-      selectHour:0,
+      selectHour:{},
+      selectHour2:{},
       contents: '',
-      date2 :'',
-      id:1,
+      date2 :'1',
+      id:0,
+      
       isOpen:true,
       newRequest:{
-        contents : this.contents,
-          isOpen : this.isOpen,
-          id : this.id,
-          date : this.date2,
+        contents : '',
+          isOpen : '',
+          id : '',
+          year : '',
+          month : '',
+          day : '',
+          hours : 0
       },
 
     
@@ -147,7 +152,6 @@ import { mapGetters,mapActions } from 'vuex'
   computed : {
     ...mapGetters(['currentUser','request']),
     ...mapGetters(['requests']),
-    ...mapGetters(['currentUser']),
     },
     methods: {
     ...mapActions(['fetchCurrentUser','createRequest']),
@@ -163,17 +167,34 @@ import { mapGetters,mapActions } from 'vuex'
       // formData.append('id', this.id)
       // formData.append('date', this.date2)
       // this.createRequest(this.formData)
-      this.date2 = `${this.year2}-${this.month2}-${this.day2}${Object.values(this.selectHour)}`,
+      this.date2 = `${this.year2}-${this.month2}-${this.day2} ${this.selectHour[0]}:00`,
+      this.selectHour2= 'T'+this.selectHour[0]+':00.000Z',
+      this.id=this.currentUser.data.userId,
+      this.date3 = new Date(this.date2)
+      let hour4 = this.date3.getHours()
+      this.newRequest={
+        contents : this.contents,
+          isOpen : this.isOpen,
+          id : this.id,
+          year : this.year2,
+          month : this.month2,
+          day : this.day2,
+          hours : hour4
+      },
+
       this.createRequest(this.newRequest)
 
-      console.log(this.day2)
-      console.log(this.year2)
-      console.log(this.month2)
-      console.log(Object.values(this.selectHour))
-      console.log(this.contents)
-      console.log(this.isOpen)
-      console.log(this.date2)
-      console.log(this.id)
+      console.log(this.newRequest.contents)
+      console.log(this.newRequest.isOpen)
+      console.log(this.newRequest.day)
+      console.log(this.newRequest.year)
+      console.log(this.newRequest.month)
+      console.log(this.newRequest.hours)
+      console.log(this.newRequest.id)
+      console.log(typeof(this.newRequest.hours))
+      console.log(this.date3)
+      
+      console.log(Number(this.selectHour[0]))
       },
 
     
