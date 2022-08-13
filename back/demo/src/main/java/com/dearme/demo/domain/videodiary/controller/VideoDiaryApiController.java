@@ -8,6 +8,7 @@ import com.google.gson.JsonObject;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -21,7 +22,7 @@ public class VideoDiaryApiController {
 
 
     @PostMapping
-    public ResponseEntity<CommonResponse> postDiary(HttpServletRequest request, @RequestBody PostVideoDiaryRequestDto dto) throws IOException {
+    public ResponseEntity<CommonResponse> postDiary(HttpServletRequest request, @RequestBody @Validated PostVideoDiaryRequestDto dto) throws IOException {
 
         String id = (String) request.getAttribute("id");
         return new ResponseEntity<>(CommonResponse.getSuccessResponse(videoDiaryService.postVideoDiary(id, dto)), HttpStatus.OK);
@@ -29,7 +30,7 @@ public class VideoDiaryApiController {
     }
 
     @PutMapping("/{videoDiaryId}")
-    public ResponseEntity<CommonResponse> postUpdateDiary(HttpServletRequest request, @PathVariable Long videoDiaryId, @RequestBody PostUpdateVideoDiaryRequestDto dto) throws IOException {
+    public ResponseEntity<CommonResponse> postUpdateDiary(HttpServletRequest request, @PathVariable Long videoDiaryId, @RequestBody @Validated PostUpdateVideoDiaryRequestDto dto) throws IOException {
         String id = (String) request.getAttribute("id");
         return new ResponseEntity<>(CommonResponse.getSuccessResponse(videoDiaryService.postUpdateVideoDiary(id, videoDiaryId, dto)), HttpStatus.OK);
     }

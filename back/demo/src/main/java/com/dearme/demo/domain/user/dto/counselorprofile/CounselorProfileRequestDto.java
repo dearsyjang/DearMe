@@ -6,14 +6,17 @@ import com.dearme.demo.domain.user.entity.Certificate;
 import lombok.Builder;
 import lombok.Data;
 
+import javax.validation.constraints.NotBlank;
 import java.util.ArrayList;
 import java.util.List;
 
 @Data
 @Builder
 public class CounselorProfileRequestDto {
+    @NotBlank(message = "price는 비워둘 수 없습니다.")
     private Long price;
 
+    @NotBlank(message = "introduce는 비워둘 수 없습니다.")
     private String introduce;
 
     List<SignUpCareerRequestDto> careers;
