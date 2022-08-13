@@ -22,7 +22,11 @@
           <h2>그룹 상담</h2>
         </div>
           <div>
-            <groupcard-comp></groupcard-comp>
+            <groupcard-comp 
+            v-for="(request,idx) in requests.data"
+                :key="idx"
+                :request="request">
+            </groupcard-comp>
           </div>
           
     </div>

@@ -47,6 +47,7 @@ export default {
     requestList: () => HOST + COUNSELING,
     requestDetail: (counselingDocumentId) => HOST + COUNSELING  + `/${counselingDocumentId}`,
     requestCreate: () => HOST + '/counseling-documents',
+    requestUpdate: () => HOST + COUNSELING,
   },
   group : {
     groupRequest: () => HOST + '/counseling-doucments/groups',
