@@ -16,6 +16,7 @@ import lombok.NoArgsConstructor;
 @JsonInclude(value = JsonInclude.Include.NON_NULL)
 @Builder
 public class UserInfoResponseDto {
+    private Long userId;
     private String id;
     private String pw;
     private String nickname;
@@ -29,6 +30,7 @@ public class UserInfoResponseDto {
 
     public static UserInfoResponseDto ofUser(User user){
         return UserInfoResponseDto.builder()
+                .userId(user.getUserId())
                 .id(user.getId())
                 .pw(user.getPw())
                 .nickname(user.getNickName())
@@ -43,6 +45,7 @@ public class UserInfoResponseDto {
 
     public static UserInfoResponseDto ofCounselor(User counselor){
         return UserInfoResponseDto.builder()
+                .userId(counselor.getUserId())
                 .id(counselor.getId())
                 .pw(counselor.getPw())
                 .nickname(counselor.getNickName())
