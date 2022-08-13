@@ -10,7 +10,7 @@ export default [
     component: CounselingRequestListView,
   },
   {
-    path: "/counseling-request/document",
+    path: "/counseling-request/:counselingId",
     name: "CounselingRequestDocument",
     component: CounselingRequestDocumentView,
   },
