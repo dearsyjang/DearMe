@@ -6,6 +6,7 @@ import com.dearme.demo.domain.favorite.dto.FavoriteViewResponseDto;
 import com.dearme.demo.domain.favorite.entity.Favorite;
 import com.dearme.demo.domain.favorite.exception.NoExistFavoriteException;
 import com.dearme.demo.domain.favorite.exception.NoFavoriteDeletePermissionException;
+import com.dearme.demo.domain.favorite.exception.NoFavoriteSaveCounselorPermissionException;
 import com.dearme.demo.domain.favorite.exception.NoFavoriteSavePermissionException;
 import com.dearme.demo.domain.favorite.repository.FavoriteRepository;
 import com.dearme.demo.domain.favorite.entity.Favorite;
@@ -40,10 +41,13 @@ public class FavoriteServiceImpl implements FavoriteService {
         if(user.getType().equals(Type.COUNSELOR)){
             throw new NoFavoriteSavePermissionException();
         }
-        favorite.setUser(user);
         User counselor = userRepository.findById(dto.getId()).orElseThrow(() -> {
             throw new NoExistCounselorException();
         });
+        if(counselor.getType().equals(Type.USER)){
+            throw new NoFavoriteSaveCounselorPermissionException();
+        }
+        favorite.setUser(user);
         favorite.setCounselor(counselor);
 
         favoriteRepository.save(favorite);
