@@ -242,6 +242,33 @@ export default {
                 })
                 .then (response => {
                     console.log('저장요청', response)
+                    console.log()
+                })
+                .catch((error) => { // 말을 해야 저장 가능!
+                    if (error.response.status === 500) {
+                        alert('괜찮아요! 편하게 이야기를 들려주세요😊')
+                    } 
+                });
+            },
+            getRecording(){
+                const authHeader = this.authHeader2
+                console.log(authHeader)
+                const recordingId = this.recordingId
+                axios({
+                    method: 'post',
+                    url: "https://i7d206.p.ssafy.io/video-diaries" + recordingId,
+                    headers: {
+                        Authorization : authHeader
+                    },
+                    data: ({
+                        realFileName: this.recordingId,
+                        title: this.title                        
+                    }),
+                })
+                .then (response => {
+                    console.log('저장요청', response)
+                    this.title
+                    console.log(this.title)
                 })
                 .catch((error) => { // 말을 해야 저장 가능!
                     if (error.response.status === 500) {

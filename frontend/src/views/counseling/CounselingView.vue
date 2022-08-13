@@ -53,7 +53,7 @@
 import axios from 'axios';
 import { OpenVidu } from 'openvidu-browser';
 import UserVideo from './components/UserVideo';
-// import { mapGetters } from 'vuex';
+import { mapGetters } from 'vuex';
 
 axios.defaults.headers.post['Content-Type'] = 'application/json';
 const OPENVIDU_SERVER_URL = "https://i7d206.p.ssafy.io:4443";
@@ -65,6 +65,10 @@ export default {
     UserVideo,
   },
 
+  computed: {
+        ...mapGetters(['authHeader2'])
+  },
+
   data() {
     return {
       OV: undefined,
@@ -74,6 +78,7 @@ export default {
       subscribers: [],
       mySessionId: '', // 방 이름
       myUserName: '', // 유저 닉네임
+      counselingId: this.$route.params.counselingId,
     };
   },
 
@@ -82,23 +87,23 @@ export default {
   // Second request performs a POST to /openvidu/api/sessions/<sessionId>/connection (the path requires the sessionId to assign the token to this same session)
 
 
-  // 닉네임 가져오기
-  create() {
-    let access_token = localStorage.getItem('token')
-    let config = {
-      headers: {
-        Authorization: access_token
-      }
-    }
+  // // 닉네임 가져오기
+  // create() {
+  //   let access_token = localStorage.getItem('token')
+  //   let config = {
+  //     headers: {
+  //       Authorization: access_token
+  //     }
+  //   }
 
-    axios
-      .get('https://i7d206.p.ssafy.io/users', config)
-      .then(response => {
-        console.log(response)
-        let myUserName = response.data.data.nickName
-        this.myUserName = myUserName
-      })
-  },
+  //   axios
+  //     .get('https://i7d206.p.ssafy.io/users', config)
+  //     .then(response => {
+  //       console.log(response)
+  //       let myUserName = response.data.data.nickName
+  //       this.myUserName = myUserName
+  //     })
+  // },
 
 
   // created() {
@@ -263,7 +268,11 @@ export default {
 
     // See https://docs.openvidu.io/en/stable/reference-docs/REST-API/#post-openviduapisessionsltsession_idgtconnection
     createToken() {
-this.OV = new OpenVidu();
+
+      const authHeader = this.authHeader2
+      var counselingId = this.counselingId
+
+      this.OV = new OpenVidu();
 
       // --- Init a session --- 세션 초기화
       this.session = this.OV.initSession();
@@ -292,13 +301,13 @@ this.OV = new OpenVidu();
       return new Promise((resolve, reject) => {
         axios
           .post(
-            `https://i7d206.p.ssafy.io/counseling-room`,
+            `https://i7d206.p.ssafy.io/counseling-rooms`,
             {
-              counselingId : 7,
+              counselingId : counselingId,
             },           
              {
               headers: {
-                Authorization : 'token eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6InRlc3QzMSIsImlzcyI6ImRlYXJtZSIsImlhdCI6MTY2MDE4MTQ2MywiZXhwIjoxNjYwMTg1MDYzfQ.-HHWFWV0Qu4nbcXtNVzQL_pCnAMPZopPY45i_3iOp5Q'
+                Authorization : authHeader
               }
             }
           )

@@ -34,6 +34,7 @@ export default {
     // search : (keyword) => HOST + MEMBER + '/search' +  `/${keyword}`,
   },
   counselingSchedule: {
+    counselingSchedules: () => HOST + COUNSELING,
     counselingSchedule: () => HOST + COUNSELING,
   }
 }
