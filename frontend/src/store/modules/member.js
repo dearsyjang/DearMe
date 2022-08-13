@@ -12,6 +12,8 @@ export default {
     currentUser: {},
     profile: {},
     authError: null,
+    career:{},
+    certificate:{}
   },
   getters: {
     // 로그인, 로그아웃 경우에 현재 사용자 업데이트
@@ -22,6 +24,8 @@ export default {
     authHeader2: state => `Token ${state.token}`,
     authHeader: state => ({ Authorization: `Token ${state.token}`}),
     authError: state => state.authError,
+    career: state => state.career,
+    certificate: state => state.certificate,
   },
   mutations: {
     SET_TOKEN: (state, token) => state.token = token,
@@ -29,6 +33,8 @@ export default {
     SET_PROFILE: (state, profile) => state.profile = profile,
     SET_AUTH_ERROR: (state, error) => state.authError = error,
 
+    SET_CAREERS: (state, career) => state.career = career,
+    SET_CERTIFICATES: (state, certificate) => state.certificate = certificate
   },
   actions: {
     // 회원가입
@@ -120,21 +126,126 @@ export default {
   //       })
   //   }
   // },
-  fetchCurrentUser({ commit, getters }) {
+  // fetchCurrentUser({ commit, getters }) {
+  //   axios({
+  //    url: drf.member.currentUser(),
+  //    method : 'GET',
+  //    headers: {
+  //     'Content-Type': 'application/json',
+  //     'Authorization': getters.authHeader2
+  //     }
+  //   })
+  //   .then(res => {
+  //     console.log(res)
+  //     commit('SET_CURRENT_USER', res.data)
+  //   })       
+      
+  //   .catch(err => console.error(err) )
+  // },
+   fetchCurrentUser({ commit, getters, dispatch }) {
+      /*
+      GET: 사용자가 로그인 했다면(토큰이 있다면)
+        currentUserInfo URL로 요청보내기
+          성공하면
+            state.cuurentUser에 저장
+          실패하면(토큰이 잘못되었다면)
+            기존 토큰 삭제
+            LoginView로 이동
+      */
+      if (getters.isLoggedIn) {
+        axios({
+          url: drf.member.currentUser(),
+          method: 'get',
+          headers: {
+                 'Content-Type': 'application/json',
+                'Authorization': getters.authHeader2
+               }
+        })
+          .then(res => commit('SET_CURRENT_USER', res.data))
+          .catch(err => {
+            if (err.response.status === 401) {
+              dispatch('removeToken')
+              router.push({ name: 'login' })
+            }
+          })
+      }
+    },
+
+
+    createCareer({ commit, getters }, contents) {
+     
+    
+      axios({
+        url: drf.member.careerCreate(),
+        method: 'post',
+        data: contents,
+        headers: {
+          'Content-Type': 'application/json',
+         'Authorization': getters.authHeader2
+        }
+      })
+        .then(res => {
+          commit('SET_CAREERS', res.data)
+        })
+        .catch(err => console.error(err.response))
+    },
+
+
+    deleteCareer({ commit, getters }, careerId) {
+
+      if (confirm('정말 삭제하시겠습니까?')) {
+        axios({
+          url: drf.member.careerDelete(careerId),
+          method: 'delete',
+          data: {},
+          headers: {
+            'Content-Type': 'application/json',
+           'Authorization': getters.authHeader2
+          }
+        })
+          .then(res => {
+            commit('SET_CAREERS', res.data)
+            //router.push({ name: 'movie', params : {movieId} }).catch(()=>{})
+          })
+          .catch(err => console.error(err.response))
+      }
+  },
+  createCertificate({ commit, getters }, content) {
+     
+    
     axios({
-     url: drf.member.currentUser(),
-     method : 'GET',
-     headers: {
-      'Content-Type': 'application/json',
-      'Authorization': getters.authHeader2
+      url: drf.member.certificateCreate(),
+      method: 'post',
+      data: {contents:content},
+      headers: {
+        'Content-Type': 'application/json',
+       'Authorization': getters.authHeader2
       }
     })
-    .then(res => {
-      console.log(res)
-      commit('SET_CURRENT_USER', res.data)
-    })       
-      
-    .catch(err => console.error(err) )
+      .then(res => {
+        commit('SET_CERTIFICATES', res.data)
+      })
+      .catch(err => console.error(err.response))
   },
+
+
+  deleteCertificate({ commit, getters }, certificateId) {
+
+    if (confirm('정말 삭제하시겠습니까?')) {
+      axios({
+        url: drf.member.certificateDelete(certificateId),
+        method: 'delete',
+        headers: {
+          'Content-Type': 'application/json',
+         'Authorization': getters.authHeader2
+        }
+      })
+        .then(res => {
+          commit('SET_CERTIFICATES', res.data)
+          //router.push({ name: 'movie', params : {movieId} }).catch(()=>{})
+        })
+        .catch(err => console.error(err.response))
+    }
+},
 }
 }

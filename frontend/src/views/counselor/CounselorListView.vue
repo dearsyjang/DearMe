@@ -153,7 +153,7 @@
     ...mapActions(['fetchCounselors']),
     ...mapActions(['filterCounselors']),
     ...mapActions(['searchCounselors']),
-
+    
     // search :function() {
     //     if (this.inputData) {
     //     this.$store.dispatch('searchCounselor', this.inputData)

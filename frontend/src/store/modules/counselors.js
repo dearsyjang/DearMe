@@ -10,6 +10,10 @@ export default {
     searched_counselor: [],
     filtering_counselor: [],
     favorite: '',
+    careers: [],
+    categories:[],
+    certificates:[],
+    reviews:[],
   },
 
   getters: {
@@ -32,10 +36,15 @@ export default {
   },
 
   actions: {
-
+    
     fetchCounselors({ commit, getters }) {
+      let s='';
+      let q=0;
+      let w = 1000000;
+      let a = false;
       axios({
-       url: drf.counselors.counselors(),
+        
+       url: drf.counselors.counselors()+ "category" +s +"&downPrice=" +q + "&upPrice=" + w + "&reviewCntUp=" + a + "&reviewCntDown=" + a + "&reviewScoreUp=" +a + "&reviewScoreDown=" +a + "&favorite=" + a,
        method : 'GET',
        headers: {
         'Content-Type': 'application/json',
