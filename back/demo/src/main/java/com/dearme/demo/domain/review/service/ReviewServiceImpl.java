@@ -7,7 +7,6 @@ import com.dearme.demo.domain.review.exception.NoExistReviewException;
 import com.dearme.demo.domain.review.exception.NoReviewDeletePermissionException;
 import com.dearme.demo.domain.review.exception.NoReviewSavePermissionException;
 import com.dearme.demo.domain.review.repository.ReviewRepository;
-import com.dearme.demo.domain.user.dto.ReviewViewResponseDto;
 import com.dearme.demo.domain.user.entity.Type;
 import com.dearme.demo.domain.user.entity.User;
 import com.dearme.demo.domain.user.exception.NoExistCounselorException;
@@ -36,7 +35,7 @@ public class ReviewServiceImpl implements ReviewService {
             throw new NoReviewSavePermissionException();
         }
         review.setUser(user);
-        User counselor = userRepository.findUserById(dto.getId()).orElseThrow(() -> {
+        User counselor = userRepository.findById(dto.getId()).orElseThrow(() -> {
             throw new NoExistCounselorException();
         });
         counselor.getCounselorProfile().updateReviewValue(review.getValue(), 1);
@@ -56,7 +55,7 @@ public class ReviewServiceImpl implements ReviewService {
         if(user.getId().equals(review.getUser().getId())){
 
             User counselor = userRepository.findUserById(review.getCounselor().getId()).orElseThrow(() -> {
-                throw new NoExistUserException();
+                throw new NoExistCounselorException();
             });
             counselor.getCounselorProfile().updateReviewValue(-1 * review.getValue(), -1);
             reviewRepository.delete(review);

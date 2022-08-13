@@ -6,6 +6,7 @@ import com.dearme.demo.global.common.CommonResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,7 +18,7 @@ public class TextDiaryController {
     private final TextDiaryService textDiaryService;
 
     @PostMapping
-    public ResponseEntity<CommonResponse> postDiary(HttpServletRequest request, @RequestBody PostTextDiaryRequestDto dto){
+    public ResponseEntity<CommonResponse> postDiary(HttpServletRequest request, @RequestBody @Validated PostTextDiaryRequestDto dto){
         String id = (String) request.getAttribute("id");
         return new ResponseEntity<>(CommonResponse.getSuccessResponse(textDiaryService.postTextDiary(id, dto)), HttpStatus.OK);
     }

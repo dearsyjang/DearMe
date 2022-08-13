@@ -35,8 +35,7 @@ public class CommentServiceImpl implements CommentService{
     @Override
     @Transactional
     public CommentSaveResponseDto commentSave(String id, Long boardId, CommentSaveRequestDto dto){
-        Comment comment;
-        comment=dto.toCommentEntity();
+        Comment comment=dto.toCommentEntity();
         Board board = boardRepository.findBoardById(boardId).orElseThrow(()->{
             throw new NoExistBoardException();
         });
@@ -62,7 +61,7 @@ public class CommentServiceImpl implements CommentService{
         User user = userRepository.findUserById(id).orElseThrow(() -> {
             throw new NoExistCounselorException();
         });
-        if(user.getId().equals(comment.getUser().getId())){
+        if(user.getUserId().equals(comment.getUser().getUserId())){
             comment.update(LocalDateTime.now(), dto.getContents());
             return new CommentUpdateResponseDto(comment.getId());
         }else{
@@ -78,7 +77,7 @@ public class CommentServiceImpl implements CommentService{
         User user = userRepository.findUserById(id).orElseThrow(() -> {
             throw new NoExistCounselorException();
         });
-        if(user.getId().equals(comment.getUser().getId())){
+        if(user.getUserId().equals(comment.getUser().getUserId())){
             commentRepository.delete(comment);
         }else{
             throw new NoCommentDeletePermissionException();

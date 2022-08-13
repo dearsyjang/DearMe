@@ -9,6 +9,7 @@ import com.dearme.demo.domain.favorite.exception.NoFavoriteDeletePermissionExcep
 import com.dearme.demo.domain.favorite.exception.NoFavoriteSavePermissionException;
 import com.dearme.demo.domain.favorite.repository.FavoriteRepository;
 import com.dearme.demo.domain.favorite.entity.Favorite;
+import com.dearme.demo.domain.group.exception.GroupDeleteException;
 import com.dearme.demo.domain.user.entity.Type;
 import com.dearme.demo.domain.user.entity.User;
 import com.dearme.demo.domain.user.exception.NoExistCounselorException;
@@ -40,7 +41,7 @@ public class FavoriteServiceImpl implements FavoriteService {
             throw new NoFavoriteSavePermissionException();
         }
         favorite.setUser(user);
-        User counselor = userRepository.findUserById(dto.getId()).orElseThrow(() -> {
+        User counselor = userRepository.findById(dto.getId()).orElseThrow(() -> {
             throw new NoExistCounselorException();
         });
         favorite.setCounselor(counselor);
@@ -56,9 +57,7 @@ public class FavoriteServiceImpl implements FavoriteService {
         List<Favorite> tempList = favoriteRepository.findFavoriteByUser_Id(id);
         List<FavoriteViewResponseDto> favoriteList = new ArrayList<>();
         for(Favorite f : tempList){
-            favoriteList.add(new FavoriteViewResponseDto(f.getId(),
-                    f.getCounselor().getUserId(),
-                    f.getCounselor().getNickName()));
+            favoriteList.add(FavoriteViewResponseDto.of(f));
         }
         return favoriteList;
     }
@@ -73,7 +72,8 @@ public class FavoriteServiceImpl implements FavoriteService {
         User user = userRepository.findUserById(id).orElseThrow(() -> {
             throw new NoExistUserException();
         });
-        if(user.getId().equals(favorite.getUser().getId())){
+
+        if(user.getUserId().equals(favorite.getCounselor().getUserId())){
             favoriteRepository.delete(favorite);
         }else{
             throw new NoFavoriteDeletePermissionException();

@@ -17,7 +17,6 @@ public class Document extends Base {
     private Long id;
 
     @ManyToOne
-    @JsonManagedReference // 순환참조 방지
     @JoinColumn(name = "counselor_id")
     private CounselorProfile counselorProfile;
 

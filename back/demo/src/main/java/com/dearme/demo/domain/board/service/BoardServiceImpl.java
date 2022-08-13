@@ -66,21 +66,12 @@ public class BoardServiceImpl implements BoardService{
         List<Comment> temp = board.getComments();
 
         board.updateHitCnt();
-        List<CommentResponseDto> commentResponseDto = new ArrayList<>();
+        List<CommentResponseDto> commentResponseDtos = new ArrayList<>();
         for(Comment c: temp){
-            commentResponseDto.add(new CommentResponseDto(board.getUser().getUserId(), c.getUser().getUserId(), c.getUser().getNickName(),
-                    c.getDate(),
-                    c.getContents()));
+            commentResponseDtos.add(CommentResponseDto.of(c));
         }
 
-        return new BoardViewResponseDto(board.getId(),
-                board.getUser().getUserId(),
-                board.getUser().getNickName(),
-                board.getTitle(),
-                board.getContents(),
-                board.getHitCnt(),
-                board.getDate(),
-                commentResponseDto);
+        return BoardViewResponseDto.of(board, commentResponseDtos);
     }
 
     @Transactional
@@ -93,7 +84,7 @@ public class BoardServiceImpl implements BoardService{
         User user = userRepository.findUserById(id).orElseThrow(() -> {
             throw new NoExistUserException();
         });
-        if(user.getId().equals(board.getUser().getId())){
+        if(user.getUserId().equals(board.getUser().getUserId())){
             board.update(dto.getTitle(), dto.getContents(), LocalDateTime.now());
             return new BoardUpdateResponseDto(board.getId());
         }else{
@@ -109,7 +100,7 @@ public class BoardServiceImpl implements BoardService{
         User user = userRepository.findUserById(id).orElseThrow(() -> {
             throw new NoExistUserException();
         });
-        if(user.getId().equals(board.getUser().getId())){
+        if(user.getUserId().equals(board.getUser().getUserId())){
             boardRepository.delete(board);
         }else{
             throw new NoBoardDeletePermissionException();

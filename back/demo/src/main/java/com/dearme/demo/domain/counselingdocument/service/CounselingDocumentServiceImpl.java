@@ -5,7 +5,11 @@ import com.dearme.demo.domain.counselingdocument.dto.PostCounselingDocumentReque
 import com.dearme.demo.domain.counselingdocument.dto.PostCounselingDocumentResponseDto;
 import com.dearme.demo.domain.counselingdocument.dto.PostGroupCounselingDocumentDto;
 import com.dearme.demo.domain.counselingdocument.entity.CounselingDocument;
+import com.dearme.demo.domain.counselingdocument.exception.NoExistDocumentException;
 import com.dearme.demo.domain.counselingdocument.repository.CounselingDocumentRepository;
+import com.dearme.demo.domain.favorite.entity.Favorite;
+import com.dearme.demo.domain.favorite.exception.NoExistFavoriteException;
+import com.dearme.demo.domain.favorite.exception.NoFavoriteDeletePermissionException;
 import com.dearme.demo.domain.group.entity.Group;
 import com.dearme.demo.domain.group.exception.GroupNotFoundExcetion;
 import com.dearme.demo.domain.group.repository.GroupRepository;
@@ -66,6 +70,12 @@ public class CounselingDocumentServiceImpl implements CounselingDocumentService{
     @Override
     @Transactional
     public void deleteUserCounselingDocument(String id, Long counselingDocumentId) {
+        userRepository.findUserById(id).orElseThrow(() -> {
+            throw new NoExistUserException();
+        });
+        counselingDocumentRepository.findById(counselingDocumentId).orElseThrow(() -> {
+            throw new NoExistDocumentException();
+        });
         counselingDocumentRepository.deleteCounselingDocumentByUser_IdAndId(id, counselingDocumentId);
     }
 }

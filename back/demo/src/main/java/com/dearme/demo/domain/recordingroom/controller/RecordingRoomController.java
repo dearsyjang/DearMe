@@ -26,8 +26,8 @@ public class RecordingRoomController {
     /*******************/
     @RequestMapping(value = "/get-token", method = RequestMethod.GET)
     public ResponseEntity<CommonResponse> getSessionToken(HttpServletRequest request){
-        //String id = (String) request.getAttribute("id");
-        return ResponseEntity.ok().body(CommonResponse.getSuccessResponse(recordingRoomService.getSessionToken()));
+        String id = (String) request.getAttribute("id");
+        return ResponseEntity.ok().body(CommonResponse.getSuccessResponse(recordingRoomService.getSessionToken(id)));
     }
     @RequestMapping(value = "/start", method = RequestMethod.POST)
     public ResponseEntity<CommonResponse> startRecording(@RequestBody Map<String, Object> params) {
