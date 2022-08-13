@@ -90,15 +90,15 @@ export default {
         .catch(err => console.error(err))
     },
     // 게시글 수정
-    updateBoard({ commit, getters }, { boardPk, title, content}) {
+    updateBoard({ commit, getters }, { boardId, content}) {
       axios({
-        url: drf.board.update.boardEdit(boardPk),
+        url: drf.board.update.boardEdit(boardId),
         method: 'put',
-        data: { title, content },
+        data: content,
         headers: getters.authHeader
       })
         .then(res => {
-          commit('SET_BOARD', res.data)
+          commit('SET_BOARD', res.data.data)
           router.push({
             name: 'boardDetail',
             // params: { boardPk: getters.board.pk }

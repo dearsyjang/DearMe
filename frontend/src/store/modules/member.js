@@ -110,23 +110,20 @@ export default {
       router.push({ name: 'login' })
     },
   },
-  fetchCurrentUser({ commit, getters, dispatch }) {
-    if (getters.isLoggedIn) {
-      axios({
-        url: drf.member.currentUserInfo(),
-        method: 'get',
-        headers: getters.authHeader,
-      })
-        .then(res => {
-          commit('SET_CURRENT_USER', res.data.data.accessToken)
-        })
-        .catch(err => {
-          if (err.response.status == 401) {
-            dispatch('removeToken')
-            router.push({ name: 'login' })
-          }
-        })
-    }
-  },
+  fetchCurrentUser({ commit, getters }) {
+    axios({
+     url: drf.member.currentUser(),
+     method : 'GET',
+     headers: {
+      'Content-Type': 'application/json',
+      'Authorization': getters.authHeader2
+      }
+    })
+    .then(res => {
+      console.log(res)
+      commit('SET_CURRENT_USER', res.data)
+    })
 
+    .catch(err => console.error(err) )
+  },
 }

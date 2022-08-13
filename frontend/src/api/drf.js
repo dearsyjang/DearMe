@@ -12,7 +12,7 @@ export default {
     login: () => HOST + MEMBER + '/token',
     logout: () => HOST + MEMBER + '/token',
     signup: () => HOST + MEMBER,
-    currentUserInfo: () => HOST + MEMBER + '/token',
+    currentUser: () => HOST + MEMBER,// 정보수정
     idCheck: () => HOST + MEMBER + '/id',
   },
   board : {

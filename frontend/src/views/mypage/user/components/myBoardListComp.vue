@@ -1,8 +1,9 @@
 <template>
 <div class="container BoardList">
-  <div class="form-group row">
-    <p class="col-sm-4">힘들어요</p>
-    <p class="col-sm-4">2022.08.05</p>
+  <!-- {{ boards }} -->
+  <div v-for="board in boards" :key="board" class="form-group row">
+    <p class="col-sm-4">{{ board.title }}</p>
+    <p class="col-sm-4">{{ board.date }}</p>
     <button class="col-sm-4 btn btn-primary">게시글</button>
   </div>
 </div>
@@ -18,7 +19,9 @@ export default {
     }
   },
   setup() {},
-  created() {},
+  created() {
+    this.fetchBoards()
+  },
   mounted() {},
   unmounted() {},
   methods: {

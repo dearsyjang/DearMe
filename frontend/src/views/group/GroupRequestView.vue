@@ -36,7 +36,7 @@
           </div>
         </div>
         <div class="d-flex justify-content-end">
-          <button @click="onSubmit()" class="mx-3">완료</button>
+          <button @click="onSubmit()" class="mx-3">신청</button>
         </div>
       </div>
     </div>

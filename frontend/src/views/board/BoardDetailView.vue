@@ -59,7 +59,7 @@ export default {
     ...mapActions(['fetchBoard', 'deleteBoard']),
   },
   created() {
-    this.fetchBoard(2)},
+    this.fetchBoard(1)},
   mounted() {},
   unmounted() {},
 }

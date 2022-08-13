@@ -1,7 +1,9 @@
 <template>
   <div class="Info container">
     <div class="row">
-      <label id="con1" class="col-sm-6 col-form-label" for="nickname">나는야 고민왕</label>
+      {{ currentUser }}
+
+      <label id="con1" class="col-sm-6 col-form-label" for="nickname"></label>
       <p id="con1" class="form-control col-sm-6">사용자</p>
     </div>
     <div id="point">
@@ -14,6 +16,7 @@
   </div>
 </template>
 <script>
+import { mapGetters } from 'vuex';
 export default {
   components: {},
   data() {
@@ -27,7 +30,11 @@ export default {
   unmounted() {},
   methods: {
     // 회원 정보 수정 매서드 받아와서 패치하고 출력
+  },
+  computed:{
+    ...mapGetters(['currentUser']),
   }
+
 }
 </script>
 <style scoped>

@@ -20,7 +20,7 @@ export default [
     component: BoardDetailVeiw
   },
   {
-    path: '/board/:articlePk/update',
+    path: '/board/:boardPk/update',
     name: 'boardUpdate',
     component: BoardUpdateView
   }
