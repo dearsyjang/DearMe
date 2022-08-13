@@ -61,6 +61,7 @@ export default {
         .then(res => {
           const token = res.data.data.accessToken
           console.log(res.data)
+         
           dispatch('saveToken', token)
           dispatch('fetchCurrentUser')
           router.push({ name: 'mypageUser' })

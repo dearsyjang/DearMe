@@ -71,10 +71,13 @@ export default {
         }
       })
       .then(res =>{
+    
         commit('SET_COUNSELOR', res.data)})       
       .catch(err => {
         console.error(err.response)
+      
         if (err.response.status === 404) {
+
           router.push({ name: 'NotFound404' })
         }
       })

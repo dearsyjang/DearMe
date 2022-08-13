@@ -351,6 +351,7 @@
     // InfoItemComp,
    
 },  
+
     data() {
       return {
         counselorId: this.$route.params.counselorId,
