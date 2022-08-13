@@ -6,6 +6,7 @@ import com.dearme.demo.global.common.CommonResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -18,7 +19,7 @@ public class GroupController {
     private final GroupServiceImpl groupService;
 
     @PostMapping
-    public ResponseEntity<CommonResponse> createGroup(HttpServletRequest request, @RequestBody CreateGroupRequestDto dto){
+    public ResponseEntity<CommonResponse> createGroup(HttpServletRequest request, @RequestBody @Validated CreateGroupRequestDto dto){
         String id = (String) request.getAttribute("id");
         return new ResponseEntity<>(CommonResponse.getSuccessResponse(groupService.createGroup(id, dto)), HttpStatus.OK);
     }
