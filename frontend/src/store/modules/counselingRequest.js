@@ -58,13 +58,18 @@ export default {
       },
 
     // 상담 요청 작성
-    createRequest({ commit, getters }, formData) {
+    createRequest({ commit, getters }, request) {
       // console.log(request)
       // console.log(getters.authHeader)
       axios({
         url: drf.counselingRequest.requestCreate(),
         method: 'post',
-        data: formData,
+        data: {
+          contents : request.contents,
+          isOpen : request.isOpen,
+          id : request.id,
+          date : request.date2,
+        },
         headers: {
           'Content-Type': 'application/json',
           'Authorization': getters.authHeader2

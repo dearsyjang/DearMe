@@ -59,14 +59,14 @@
     <select v-model="selectHour" class="form-select" style="width:50%; height:240px; display:inline-block; text-align: center ; " multiple aria-label="multiple select example">
       <option disabled value="">상담가능시간</option>
       <hr>
-      <option >09:00 ~ 10:00</option>
-      <option >10:00 ~ 11:00</option>
-      <option >11:00 ~ 12:00</option>
-      <option >13:00 ~ 14:00</option>
-      <option >14:00 ~ 15:00</option>
-      <option >15:00 ~ 16:00</option>
-      <option >16:00 ~ 17:00</option>
-      <option >17:00 ~ 18:00</option>
+      <option >09:00</option>
+      <option >10:00</option>
+      <option >11:00</option>
+      <option >13:00</option>
+      <option >14:00</option>
+      <option >15:00</option>
+      <option >16:00</option>
+      <option >17:00</option>
     </select>
     <br>
  
@@ -113,10 +113,15 @@ import { mapGetters,mapActions } from 'vuex'
       year2:0,
       selectHour:0,
       contents: '',
-      date2 : '',
+      date2 :'',
       id:1,
       isOpen:true,
-    
+      newRequest:{
+        contents : this.contents,
+          isOpen : this.isOpen,
+          id : this.id,
+          date : this.date2,
+      },
 
     
     days: [
@@ -151,14 +156,15 @@ import { mapGetters,mapActions } from 'vuex'
    
 
     onSubmit() {
-      let formData = new FormData()
-      this.date2 = `${this.year2}-${this.month2}-${this.day2}${Object.values(this.selectHour)}`
-      formData.append('contents', this.contents)
-      formData.append('isOpen', this.isOpen)
-      formData.append('id', this.id)
-      formData.append('date', this.date2)
-      this.createRequest(this.formData)
-  
+      // let formData = new FormData()
+      // this.date2 = `${this.year2}-${this.month2}-${this.day2}${Object.values(this.selectHour)}`
+      // formData.append('contents', this.contents)
+      // formData.append('isOpen', this.isOpen)
+      // formData.append('id', this.id)
+      // formData.append('date', this.date2)
+      // this.createRequest(this.formData)
+      this.date2 = `${this.year2}-${this.month2}-${this.day2}${Object.values(this.selectHour)}`,
+      this.createRequest(this.newRequest)
 
       console.log(this.day2)
       console.log(this.year2)
