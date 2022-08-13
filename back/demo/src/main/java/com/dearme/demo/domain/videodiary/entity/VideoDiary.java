@@ -59,6 +59,13 @@ public class VideoDiary extends Base {
         this.month = month;
         this.day = day;
     }
+    public void setSentimentInfo(String[] text, int save) {
+        this.sentiment = text[save];
+        this.percentage = Double.parseDouble(text[save+1]);
+        this.positive = Double.parseDouble(text[save+2]);
+        this.negative = Double.parseDouble(text[save+3]);
+        this.neutral = Double.parseDouble(text[save+4]);
+    }
     public void updateTitle(String title){
         this.title = title;
     }

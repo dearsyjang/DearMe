@@ -13,6 +13,7 @@ public class CounselingInfoResponseDto {
     private Long id;
     private Long userId;
     private Long counselorId;
+    private String counselorNickName;
     private Integer year;
     private Integer month;
     private Integer day;
@@ -40,6 +41,7 @@ public class CounselingInfoResponseDto {
                 .id(entity.getId())
                 .userId(entity.getUser().getUserId())
                 .counselorId(entity.getCounselor().getUserId())
+                .counselorNickName(entity.getCounselor().getNickName())
                 .year(entity.getYear())
                 .month(entity.getMonth())
                 .day(entity.getDay())

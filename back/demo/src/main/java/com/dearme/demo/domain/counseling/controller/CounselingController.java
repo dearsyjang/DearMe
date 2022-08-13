@@ -6,6 +6,7 @@ import com.dearme.demo.global.common.CommonResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -23,7 +24,7 @@ public class CounselingController {
     }
 
     @PutMapping
-    public ResponseEntity<CommonResponse> updateCounseling(HttpServletRequest request,@RequestBody UpdateCounselingRequestDto dto){
+    public ResponseEntity<CommonResponse> updateCounseling(HttpServletRequest request,@RequestBody @Validated UpdateCounselingRequestDto dto){
         String id = (String) request.getAttribute("id");
         return new ResponseEntity<>(CommonResponse.getSuccessResponse(counselingService.updateCounseling(id, dto)), HttpStatus.OK);
     }

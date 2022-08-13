@@ -6,10 +6,15 @@ import com.dearme.demo.domain.textdiary.dto.TextDiaryDetailsResponseDto;
 import com.dearme.demo.domain.textdiary.dto.TextDiaryListResponseDto;
 import com.dearme.demo.domain.textdiary.entity.TextDiary;
 import com.dearme.demo.domain.textdiary.exception.NoPermissionTextDiaryException;
+import com.dearme.demo.domain.textdiary.exception.TextDiarySentimentException;
 import com.dearme.demo.domain.textdiary.repository.TextDiaryRepository;
+import com.dearme.demo.domain.user.entity.Type;
 import com.dearme.demo.domain.user.entity.User;
 import com.dearme.demo.domain.user.exception.NoExistUserException;
 import com.dearme.demo.domain.user.repository.UserRepository;
+import com.dearme.demo.domain.videodiary.entity.VideoDiary;
+import com.dearme.demo.domain.videodiary.exception.CounselorPostVideoDiaryException;
+import com.dearme.demo.domain.videodiary.exception.NoPermissionVideoDiaryException;
 import lombok.RequiredArgsConstructor;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -44,21 +49,19 @@ public class TextDiaryServiceImpl implements TextDiaryService{
         User user = userRepository.findUserById(id).orElseThrow(() -> {
             throw new NoExistUserException();
         });
+        if(user.getType().equals(Type.COUNSELOR))
+            throw new CounselorPostVideoDiaryException();
         TextDiary textDiary = dto.toEntity();
         textDiary.setUser(user);
-        String[] text = getSentiment(dto.getContents());
-        textDiary.setSentiment(text[0]);
-        textDiary.setPercentage(Double.parseDouble(text[1]));
-        textDiary.setPositive(Double.parseDouble(text[2]));
-        textDiary.setNegative(Double.parseDouble(text[3]));
-        textDiary.setNeutral(Double.parseDouble(text[4]));
+        textDiary.setSentimentInfo(getSentiment(dto.getContents()));
         return new PostTextDiaryResponseDto(textDiaryRepository.save(textDiary).getId(), textDiary.getSentiment(), textDiary.getPercentage(), textDiary.getPositive(), textDiary.getNegative(), textDiary.getNeutral());
     }
 
     @Override
     public TextDiaryDetailsResponseDto getDetails(String id, Long textDiaryId) {
         TextDiary textDiary = textDiaryRepository.findById(textDiaryId).get();
-        if(!textDiary.getUser().getId().equals(id)) throw new NoPermissionTextDiaryException();
+        if(!textDiary.getUser().getId().equals(id))
+            throw new NoPermissionTextDiaryException();
         return TextDiaryDetailsResponseDto.of(textDiary);
     }
 
@@ -77,7 +80,15 @@ public class TextDiaryServiceImpl implements TextDiaryService{
     @Override
     @Transactional
     public void delete(String id, Long textDiaryId) {
-        textDiaryRepository.deleteByUser_IdAndId(id, textDiaryId);
+        User user = userRepository.findUserById(id).orElseThrow(() -> {
+            throw new NoExistUserException();
+        });
+        TextDiary textDiary = textDiaryRepository.findById(textDiaryId).get();
+        if(user.getId().equals(textDiary.getUser().getId()))
+            textDiaryRepository.deleteByUser_IdAndId(id, textDiaryId);
+        else
+            throw new NoPermissionTextDiaryException();
+
     }
 
     public String[] getSentiment(String text){
@@ -118,17 +129,18 @@ public class TextDiaryServiceImpl implements TextDiaryService{
                 max=Math.max(max, positive);
                 double neutral= Math.round(Float.parseFloat(jObj3.get("neutral").toString())*100)/100.0;
                 max=Math.max(max, neutral);
-
+                if(result.length!=5)
+                    throw new TextDiarySentimentException();
                 result[0]=jObj2.getString("sentiment");
                 result[1]=max+"";
                 result[2]=positive+"";
                 result[3]=negative+"";
                 result[4]=neutral+"";
             } else {
-                System.out.println("response is error : " + response.getStatusLine().getStatusCode());
+                throw new TextDiarySentimentException();
             }
         } catch (Exception e){
-            System.err.println(e.toString());
+            throw new TextDiarySentimentException();
         }
         return result;
     }

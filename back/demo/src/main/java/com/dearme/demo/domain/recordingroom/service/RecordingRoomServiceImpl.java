@@ -2,12 +2,19 @@ package com.dearme.demo.domain.recordingroom.service;
 
 import com.dearme.demo.domain.recordingroom.dto.GetSessionTokenResponseDto;
 import com.dearme.demo.domain.recordingroom.dto.RecordingResponseDto;
+import com.dearme.demo.domain.recordingroom.exception.*;
+import com.dearme.demo.domain.review.exception.NoReviewSavePermissionException;
+import com.dearme.demo.domain.user.entity.Type;
+import com.dearme.demo.domain.user.entity.User;
+import com.dearme.demo.domain.user.exception.NoExistUserException;
+import com.dearme.demo.domain.user.repository.UserRepository;
 import io.openvidu.java.client.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import javax.naming.NoPermissionException;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -16,7 +23,7 @@ import java.util.concurrent.ConcurrentHashMap;
 public class RecordingRoomServiceImpl implements RecordingRoomService {
 
 
-
+    private final UserRepository userRepository;
     private final OpenVidu openvidu;
     // Collection to pair session names and OpenVidu Session objects
     private Map<String, Session> mapSessions = new ConcurrentHashMap<>();
@@ -28,7 +35,14 @@ public class RecordingRoomServiceImpl implements RecordingRoomService {
 
 
     @Override
-    public GetSessionTokenResponseDto getSessionToken() {
+    public GetSessionTokenResponseDto getSessionToken(String id) {
+        User user = userRepository.findUserById(id).orElseThrow(() -> {
+            throw new NoExistUserException();
+        });
+        if(user.getType().equals(Type.COUNSELOR)){
+            throw new NoRecordingPermissionException();
+        }
+
         OpenViduRole role = OpenViduRole.PUBLISHER;
 
         // Build connectionProperties object with the serverData and the role
@@ -43,8 +57,7 @@ public class RecordingRoomServiceImpl implements RecordingRoomService {
             // Generate a new token with the recently created connectionProperties
             token = session.createConnection(connectionProperties).getToken();
         } catch (Exception e) {
-            e.printStackTrace();
-            return null;
+            throw new RecordingGetTokenException();
         }
         return GetSessionTokenResponseDto.of(token);
     }
@@ -59,7 +72,7 @@ public class RecordingRoomServiceImpl implements RecordingRoomService {
             recording = openvidu.startRecording(sessionId, properties);
             this.sessionRecordings.put(sessionId, true);
         } catch (OpenViduJavaClientException | OpenViduHttpException e) {
-            e.printStackTrace();
+            throw new RecordingStartException();
         }
         return RecordingResponseDto.of(recording);
     }
@@ -71,7 +84,7 @@ public class RecordingRoomServiceImpl implements RecordingRoomService {
             recording = openvidu.stopRecording(recordingId);
             this.sessionRecordings.remove(recording.getSessionId());
         } catch (OpenViduJavaClientException | OpenViduHttpException e) {
-            e.printStackTrace();
+            throw new RecordingStopException();
         }
         return RecordingResponseDto.of(recording);
     }
@@ -81,7 +94,7 @@ public class RecordingRoomServiceImpl implements RecordingRoomService {
         try {
             openvidu.deleteRecording(recordingId);
         }catch (Exception e){
-            e.printStackTrace();
+            throw new RecordingDeleteException();
         }
     }
 
@@ -91,7 +104,7 @@ public class RecordingRoomServiceImpl implements RecordingRoomService {
         try {
             recording = openvidu.getRecording(recordingId);
         }catch (Exception e){
-            e.printStackTrace();
+            throw new RecordingGetException();
         }
         return RecordingResponseDto.of(recording);
     }

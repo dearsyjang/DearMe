@@ -1,5 +1,6 @@
 package com.dearme.demo.domain.user.dto.user;
 
+import com.dearme.demo.domain.user.dto.counselorprofile.CounselorProfileRequestDto;
 import com.dearme.demo.domain.user.entity.*;
 import com.dearme.demo.domain.user.exception.CounselorProfileValidationException;
 import lombok.Data;

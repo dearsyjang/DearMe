@@ -1,9 +1,9 @@
 package com.dearme.demo.global.converter;
 
-import com.dearme.demo.domain.user.dto.user.CounselorProfileRequestDto;
-import com.dearme.demo.domain.user.dto.user.SignUpCareerRequestDto;
-import com.dearme.demo.domain.user.dto.user.SignUpCategoryRequestDto;
-import com.dearme.demo.domain.user.dto.user.SignUpCertificateDto;
+import com.dearme.demo.domain.user.dto.counselorprofile.CounselorProfileRequestDto;
+import com.dearme.demo.domain.user.dto.counselorprofile.SignUpCareerRequestDto;
+import com.dearme.demo.domain.user.dto.counselorprofile.SignUpCategoryRequestDto;
+import com.dearme.demo.domain.user.dto.counselorprofile.SignUpCertificateDto;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.core.convert.converter.Converter;

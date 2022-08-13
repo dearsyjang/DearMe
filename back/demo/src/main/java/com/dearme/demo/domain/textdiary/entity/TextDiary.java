@@ -54,4 +54,12 @@ public class TextDiary extends Base {
         user.getTextDiaries().add(this);
         this.user = user;
     }
+
+    public void setSentimentInfo(String[] text) {
+        this.sentiment = text[0];
+        this.percentage = Double.parseDouble(text[1]);
+        this.positive = Double.parseDouble(text[2]);
+        this.negative = Double.parseDouble(text[3]);
+        this.neutral = Double.parseDouble(text[4]);
+    }
 }

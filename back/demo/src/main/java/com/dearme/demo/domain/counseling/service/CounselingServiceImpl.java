@@ -9,6 +9,7 @@ import com.dearme.demo.domain.counselingdocument.entity.CounselingDocument;
 import com.dearme.demo.domain.group.entity.Group;
 import com.dearme.demo.domain.user.entity.Type;
 import com.dearme.demo.domain.user.entity.User;
+import com.dearme.demo.domain.user.exception.NoExistCounselorException;
 import com.dearme.demo.domain.user.exception.NoExistUserException;
 import com.dearme.demo.domain.user.repository.UserRepository;
 import com.dearme.demo.global.scheduler.CounselDayJob;
@@ -39,6 +40,7 @@ public class CounselingServiceImpl implements CounselingService{
 
     @Override
     public void createCounseling(CounselingDocument counselingDocument) {
+
         Counseling counseling = counselingDocument.toCounselingEntity();
         counseling.setCounselingDocument(counselingDocument);
         counselingRepository.save(counseling);
@@ -106,7 +108,7 @@ public class CounselingServiceImpl implements CounselingService{
         });
 
         User counselor = userRepository.findUserById(counseling.getCounselor().getId()).orElseThrow(() -> {
-            throw new NoExistUserException();
+            throw new NoExistCounselorException();
         });
 
         try {

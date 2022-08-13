@@ -21,7 +21,6 @@ public class CounselorProfile extends Base {
     @MapsId
     @OneToOne
     @JoinColumn(name = "counselor_id")
-    @JsonManagedReference // 순환참조 방지
     @Setter
     private User counselor;
 
@@ -40,22 +39,18 @@ public class CounselorProfile extends Base {
     private Long reviewcnt;
 
     @OneToMany(mappedBy = "counselorProfile", orphanRemoval = true, cascade = CascadeType.ALL)
-    @JsonBackReference // 순환참조 방지
     @Setter
     private List<Document> documents = new ArrayList<>();
 
     @OneToMany(mappedBy = "counselorProfile", orphanRemoval = true, cascade = CascadeType.ALL)
-    @JsonBackReference // 순환참조 방지
     @Setter
     private List<Career> careers = new ArrayList<>();
 
     @OneToMany(mappedBy = "counselorProfile", orphanRemoval = true, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JsonBackReference // 순환참조 방지
     @Setter
     private List<Certificate> certificates = new ArrayList<>();
 
     @OneToMany(mappedBy = "counselorProfile", orphanRemoval = true, cascade = CascadeType.ALL)
-    @JsonBackReference // 순환참조 방지
     @Setter
     private List<Category> categories = new ArrayList<>();
 

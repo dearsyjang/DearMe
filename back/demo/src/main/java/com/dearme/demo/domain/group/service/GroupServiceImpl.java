@@ -4,11 +4,13 @@ import com.dearme.demo.domain.group.dto.CreateGroupRequestDto;
 import com.dearme.demo.domain.group.dto.CreateGroupResponseDto;
 import com.dearme.demo.domain.group.dto.GroupInfoResponseDto;
 import com.dearme.demo.domain.group.entity.Group;
+import com.dearme.demo.domain.group.exception.GroupDeleteException;
 import com.dearme.demo.domain.group.exception.GroupNotFoundExcetion;
 import com.dearme.demo.domain.group.exception.UserCreateGroupException;
 import com.dearme.demo.domain.group.repository.GroupRepository;
 import com.dearme.demo.domain.user.entity.Type;
 import com.dearme.demo.domain.user.entity.User;
+import com.dearme.demo.domain.user.exception.NoExistCounselorException;
 import com.dearme.demo.domain.user.exception.NoExistUserException;
 import com.dearme.demo.domain.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -27,7 +29,7 @@ public class GroupServiceImpl implements GroupService{
     @Override
     public CreateGroupResponseDto createGroup(String id, CreateGroupRequestDto dto) {
         User counselor = userRepository.findUserById(id).orElseThrow(() -> {
-            throw new NoExistUserException();
+            throw new NoExistCounselorException();
         });
         if(counselor.getType().equals(Type.USER)){
             throw new UserCreateGroupException();
@@ -40,7 +42,17 @@ public class GroupServiceImpl implements GroupService{
     @Override
     @Transactional
     public void deleteCounselorGroup(String id, Long groupId) {
-        groupRepository.deleteGroupByCounselor_IdAndId(id, groupId);
+        User counselor = userRepository.findUserById(id).orElseThrow(() -> {
+            throw new NoExistCounselorException();
+        });
+        Group group = groupRepository.findById(groupId).orElseThrow(() -> {
+            throw new GroupNotFoundExcetion();
+        });
+        if(counselor.getUserId().equals(group.getCounselor().getUserId())){
+            groupRepository.deleteGroupByCounselor_IdAndId(id, groupId);
+        }else{
+            throw new GroupDeleteException();
+        }
     }
 
     @Override
