@@ -152,7 +152,7 @@ export default {
             this.mainStreamManager = publisher;
             console.log('메인스트림', this.mainStreamManager)
 						this.publisher = publisher;
-            // this.session.publish(this.publisher)
+            this.session.publish(this.publisher)
           })
           .catch(error => {
               console.log('There was an error connecting to the session:', error.code, error.message);
