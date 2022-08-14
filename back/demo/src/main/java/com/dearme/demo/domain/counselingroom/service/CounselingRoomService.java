@@ -10,7 +10,7 @@ import io.openvidu.java.client.OpenViduJavaClientException;
 public interface CounselingRoomService {
     CreateCounselingRoomResponseDto createCounselingRoom(String id, CreateCounselingRoomRequestDto dto) throws OpenViduJavaClientException, OpenViduHttpException;
 
-    GetSessionTokenResponseDto getSessionToken(String id, Long counselingId);
+    GetSessionTokenResponseDto getSessionToken(String id, Long counselingId) throws OpenViduJavaClientException, OpenViduHttpException;
 
     CreateCounselingRoomResponseDto createGroupCounselingRoom(String id, CreateGroupCounselingRoomRequestDto dto) throws OpenViduJavaClientException, OpenViduHttpException;
 }
