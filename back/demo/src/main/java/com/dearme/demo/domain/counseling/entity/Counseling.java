@@ -53,10 +53,13 @@ public class Counseling {
 
     private String token;
 
-    public void updateCounselingRoom(CounselingRoom counselingRoom, String token){
+    public void updateToken(String token){
+        this.token = token;
+    }
+
+    public void updateCounselingRoom(CounselingRoom counselingRoom){
         counselingRoom.getCounselings().add(this);
         this.counselingRoom = counselingRoom;
-        this.token = token;
     }
 
     public void updateCounseling(Status status){
