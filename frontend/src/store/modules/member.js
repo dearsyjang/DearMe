@@ -187,6 +187,7 @@ export default {
       })
         .then(res => {
           commit('SET_CAREERS', res.data)
+          location.reload();
         })
         .catch(err => console.error(err.response))
     },
@@ -206,6 +207,7 @@ export default {
         })
           .then(res => {
             commit('SET_CAREERS', res.data)
+            location.reload();
             //router.push({ name: 'movie', params : {movieId} }).catch(()=>{})
           })
           .catch(err => console.error(err.response))
@@ -223,12 +225,11 @@ export default {
        'Authorization': getters.authHeader2
       }
     })
-    .then(res => {
-      console.log(res)
-      commit('SET_CURRENT_USER', res.data)
-    })
-
-    .catch(err => console.error(err) )
+      .then(res => {
+        commit('SET_CERTIFICATES', res.data)
+        location.reload();
+      })
+      .catch(err => console.error(err.response))
   },
 
 
@@ -245,6 +246,7 @@ export default {
       })
         .then(res => {
           commit('SET_CERTIFICATES', res.data)
+          location.reload();
           //router.push({ name: 'movie', params : {movieId} }).catch(()=>{})
         })
         .catch(err => console.error(err.response))
