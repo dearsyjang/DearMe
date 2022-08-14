@@ -108,7 +108,7 @@ export default {
       console.log(getters.currentUser)
       router.push({ name: 'login' })
     },
-  
+
   // fetchCurrentUser({ commit, getters, dispatch }) {
   //   if (getters.isLoggedIn) {
   //     axios({
@@ -223,10 +223,12 @@ export default {
        'Authorization': getters.authHeader2
       }
     })
-      .then(res => {
-        commit('SET_CERTIFICATES', res.data)
-      })
-      .catch(err => console.error(err.response))
+    .then(res => {
+      console.log(res)
+      commit('SET_CURRENT_USER', res.data)
+    })
+
+    .catch(err => console.error(err) )
   },
 
 

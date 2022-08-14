@@ -1,7 +1,10 @@
 <template>
   <div>
-    <p>즐겨찾기 모음 ▼</p>
-    <my-favorite-list-comp class="d-flex justify-content-around"></my-favorite-list-comp>
+    <div class="container">
+      <span id="toc-toggle" @click="openCloseToc()">즐겨찾기 ▼ </span>
+      <!-- <span class="badge bg-primary rounded-pill">{{ favorite.length }}</span> -->
+    </div>
+    <my-favorite-list-comp id="toc-content3"></my-favorite-list-comp>
   </div>
 </template>
 <script>
@@ -19,12 +22,26 @@ export default {
   created() {},
   mounted() {},
   unmounted() {},
-  methods: {}
+  methods: {
+    openCloseToc: function() {
+    if(document.getElementById('toc-content3').style.display === 'block') {
+      document.getElementById('toc-content3').style.display = 'none';
+    } else {
+      document.getElementById('toc-content3').style.display = 'block';
+    }
+  }
+  }
 }
 </script>
 <style scoped>
-  p {
-      text-align: left;
-      color: #1E2022;
-    }
+   #toc-content3 {
+    display: none;
+  }
+  #toc-toggle {
+    cursor: pointer;
+    color: black;
+  }
+  #toc-toggle:hover {
+    text-decoration: none;
+  }
 </style>
