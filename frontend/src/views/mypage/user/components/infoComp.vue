@@ -1,6 +1,21 @@
 <template>
   <div class="container">
     <div class="row">
+
+      {{ currentUser }}
+
+      <label id="con1" class="col-sm-6 col-form-label" for="nickname"></label>
+      <p id="con1" class="form-control col-sm-6">사용자</p>
+    </div>
+    <div id="point">
+      <label class="form-label" for="myPoint">잔여포인트</label>
+    </div>
+    <div class="row">
+      <p id="con2" class="form-control col-sm-6">500 pt</p>
+      <router-link to="/point">
+      <button id="con2" class="btn btn-primary col-sm-6">충전하기</button>
+      </router-link>
+
       <div class="container direction-rtl my-4">
       <div class="card mb-3">
         <div class="card-body">
@@ -29,6 +44,7 @@
         </div>
       </div>
       </div>
+
     </div>
   </div>
 </template>
