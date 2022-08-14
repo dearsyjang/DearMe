@@ -31,10 +31,10 @@
         <div class="col-md-8">
           <div class="card-body">
             <h5 class="card-title">닉네임 : {{counselor.nickName}}</h5>
-
-
-  
-            
+<!-- 
+            {{currentUser}} -->
+            {{favorite.data}}
+            "counselor.counselorId in favorite.data && "
             <div v-if="!favorite">
             <button class="btn btn-link" ><span style='font-size:20px;'>&#129505;</span></button>
             </div>
@@ -58,7 +58,7 @@
 </template>
 
 <script>
-import {  mapGetters } from 'vuex';
+import {  mapActions, mapGetters } from 'vuex';
   export default {
     name : 'CounselorItem',
     props:{
@@ -68,10 +68,12 @@ import {  mapGetters } from 'vuex';
       ...mapGetters(['favorite','currentUser']),
     },
     methods: {
-     
+     ...mapActions(['favoriteGet','fetchCurrenUser'])
     },
 
     created() {
+      this.fetchCurrenUser()
+      this.favoriteGet()
       this.favorite=''
     }
   }

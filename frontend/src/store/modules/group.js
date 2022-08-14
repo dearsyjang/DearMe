@@ -44,10 +44,9 @@ export default {
         headers: getters.authHeader,
       })
       .then(res => {
-        console.log(res.data)
-        console.log(res.data.data)
+ 
         commit('SET_GROUP', res.data.data)
-        console.log(getters.group)
+       
       })
       .catch(err => {
         console.error(err)
@@ -67,10 +66,9 @@ export default {
           },
       })
       .then(res => {
-        console.log(res.data)
-        console.log(res.data.data)
+ 
         commit('SET_GROUPS', res.data.data)
-        console.log(getters.group)
+      
       })
       .catch(err => {
         console.error(err)

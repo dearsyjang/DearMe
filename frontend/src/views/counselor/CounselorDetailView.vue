@@ -3,11 +3,11 @@
   <div>
     <!-- {{currentUser.data}} -->
     <!-- {{groups}} -->
-   
+
     <h2>상담사 프로필 페이지</h2>
-    <router-link :to="{ name: 'counselingReview', params : {counselorId : counselor.data.userId}}">
+    <!-- <router-link :to="{ name: 'counselingReview', params : {counselorId : counselor.data.userId}}">
                 <button>리뷰 쓰러가는 버튼! 상담 나가기에 버튼 달아도 되고 종료시 라우터 푸시로 해도됨</button>
-                </router-link>
+                </router-link> -->
     <router-link to="/counseling-request"  >
       <button v-if="currentUser.data.type==`USER`">상담 신청</button>
     </router-link>
@@ -25,12 +25,14 @@
 <!--             
                 <button class="createinfo" v-if="currentUser.id === profile.user.id && isdone==false" @click="isModalViewed=true">작성하기</button>
                 <button v-else>개인상담신청하기</button> -->
-              {{favorite.data}}
-                <div v-if="!favorite">
-                <button class="btn btn-link" @click="favoriteAdd(counselor.data.userId)"><span style='font-size:20px;'>&#129505;</span></button>
+
+                {{counselor.data.userId}}
+                {{favorite.data}}
+                <div v-if="isfavorite!=1 || favorite.data==false">
+                <button class="btn btn-link" @click="favoriteaddfunc()"><span style='font-size:20px;'>&#129505;</span></button>
                 </div>
-                <div v-else>
-                <button class="btn btn-link" @click="favoritedelete(favorite.data.id)"><span style='font-size:20px;'>&#127830;</span></button>
+                <div v-if="isfavorite==1 || favorite.data==true"> 
+                <button class="btn btn-link" @click="favoritedeletefunc()"><span style='font-size:20px;'>&#127830;</span></button>
                 </div>
 
 
@@ -408,6 +410,7 @@
         ispersonalpriced: false,
         isgrouppriced: false,
         ismaked: false,
+        isfavorite:''
         
   
       }
@@ -448,7 +451,19 @@
       },
       // createCategoryFunc() {
       //   this.createCareer(this.categoryContent)
+      favoriteaddfunc() {
+        let userId= this.counselor.data.userId
+        this.favoriteAdd(userId)
+        this.isfavorite=2
+        console.log(this.isfavorite)
+      },
 
+      favoritedeletefunc() {
+        let id = this.favorite.data.id
+        this.favoriteDelete(id)
+        this.isfavorite=1
+        console.log(this.isfavorite)
+      },
       // },
       createInfo(){
         if (this.isdone === false){

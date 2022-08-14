@@ -42,7 +42,9 @@ export default {
      counselors : () => HOST + COUNSELOR + "?",
      counselor : (counselorId) => HOST + COUNSELOR  + `/${counselorId}`,
      reviews : () => HOST + '/reviews',
-     favorites : () => HOST + '/favorites'
+     favorites : () => HOST + '/favorites',
+     favoriteAdd : () => HOST + '/favorites',
+     favoriteDelete : (favoriteId) => HOST + '/favorites' + `/${favoriteId}`
     // filter : (categoryId) => HOST + MEMBER + '/filter' +  `/${categoryId}`,
     // search : (keyword) => HOST + MEMBER + '/search' +  `/${keyword}`,
   },

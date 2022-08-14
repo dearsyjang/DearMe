@@ -160,7 +160,7 @@ export default {
      
       console.log(Id)
       axios({
-        url: drf.counselors.favorites(),
+        url: drf.counselors.favoriteAdd(),
         method: 'post',
         data: {id: Id},
         headers: {
@@ -170,7 +170,7 @@ export default {
       })
         .then(res => {
           commit('SET_FAVORITE', res.data)
-          //location.reload();
+          location.reload();
          
         })
         .catch(err => {
@@ -181,7 +181,7 @@ export default {
      
       console.log(favoriteId)
       axios({
-        url: drf.counselors.favorites(favoriteId),
+        url: drf.counselors.favoriteDelete(favoriteId),
         method: 'delete',
         headers: {
           'Content-Type': 'application/json',
@@ -190,7 +190,7 @@ export default {
       })
         .then(res => {
           commit('SET_FAVORITE', res.data)
-          //location.reload();
+          location.reload();
           
         })
         .catch(err => {
