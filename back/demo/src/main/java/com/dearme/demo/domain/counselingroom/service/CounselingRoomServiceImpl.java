@@ -49,9 +49,11 @@ public class CounselingRoomServiceImpl implements CounselingRoomService{
             throw new NoExistCounselingException();
         });
         String sessionName = UUID.randomUUID().toString();
+        String serverData = "{\"serverData\": \"" + id + "\"}";
 
         ConnectionProperties connectionProperties = new ConnectionProperties.Builder()
                 .type(ConnectionType.WEBRTC)
+                .data(serverData)
                 .role(OpenViduRole.PUBLISHER).build();
 
         Session session = openVidu.createSession();
@@ -93,9 +95,11 @@ public class CounselingRoomServiceImpl implements CounselingRoomService{
             throw new GroupNotFoundExcetion();
         });
 
+        String serverData = "{\"serverData\": \"" + id + "\"}";
         String sessionName = UUID.randomUUID().toString();
 
         ConnectionProperties connectionProperties = new ConnectionProperties.Builder()
+                .data(serverData)
                 .type(ConnectionType.WEBRTC)
                 .role(OpenViduRole.PUBLISHER).build();
 
@@ -109,15 +113,14 @@ public class CounselingRoomServiceImpl implements CounselingRoomService{
                 .group(group)
                 .build();
         counselingRoomRepository.save(counselingRoom);
-
-        connectionProperties = new ConnectionProperties.Builder()
-                .type(ConnectionType.WEBRTC)
-                .role(OpenViduRole.SUBSCRIBER).build();
-
+        
         List<Counseling> counselings = counselingRepository.findAllByGroup_Id(group.getId());
 
         for(Counseling counseling : counselings){
-            String userToken = session.createConnection(connectionProperties).getToken();
+            String userToken = session.createConnection(new ConnectionProperties.Builder()
+                    .type(ConnectionType.WEBRTC)
+                    .data("{\"serverData\": \"" + counseling.getUser().getId() + "\"}")
+                    .role(OpenViduRole.SUBSCRIBER).build()).getToken();
             counseling.updateCounselingRoom(counselingRoom, userToken);
             counselingRepository.save(counseling);
         }
