@@ -137,11 +137,11 @@ export default {
     .catch(err => console.error(err) )
   },
   // 회원 정보(비밀번호, 닉네임) 수정
-  updateProfile({ commit, getters }, { pw, nickname}) {
+  updateProfile({ commit, getters }, { pw, nickname, counselorProfile }) {
     axios({
-      url: drf.member.profileEdit(profileId),
+      url: drf.member.profileEdit(),
       method: 'put',
-      data: { pw, nickname },
+      data: counselorProfile === null ? { pw, nickname } : { pw, nickname, counselorProfile },
       headers: getters.authHeader
     })
       .then(res => {

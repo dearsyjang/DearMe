@@ -1,11 +1,10 @@
 <template>
-  <div>
-    <form @submit.prevent="updateprofile()">
-
+  <div class="container">
+    <form @submit.prevent="updateUserProfile">
       아이디 : {{currentUser.data.id}}
       <hr>
-      비밀번호 : {{currentUser.data.pw}}
-      <hr>
+      <p>현재 비밀번호</p>
+        <input type="text">
       <div class="form-group has-success">
         <label class="form-label mt-2" for="password1">새 비밀번호</label>
         <input type="password" class="form-control is-valid" placeholder="비밀번호" v-model="credentials.password1">
@@ -35,7 +34,7 @@
       <button type="submit">수정하기</button>
     </form>
 
-    <button>탈퇴하기</button>
+    <!-- <button>탈퇴하기</button> -->
 
   </div>
 </template>
@@ -47,11 +46,15 @@
   export default {
     data() {
       return {
-        iscounselor: ,
+        counselorProfile: {
+          introduce: '',
+          price: ''
+
+        },
         credentials: {
           pw: '',
           nickName: '',
-          
+
         }
 
       }
@@ -60,12 +63,25 @@
 
 
     computed : {
-    ...mapGetters(['currentUser']),
+    ...mapGetters(['currentUser',  ]),
+
     },
     methods: {
     ...mapActions(['fetchCurrentUser']),
     ...mapActions(['updateProfile']),
 
+    updateUserProfile () {
+      console.log(this.currentUser.data.type)
+      console.log(this.currentUser.data.counselorProfile)
+      if (this.currentUser.data.type === 'USER') {
+        this.counselorProfile = null  
+      } else {
+        this.counselorProfile.introduce = ''
+        this.counselorProfile.price = ''
+      } 
+
+      // this.updateProfile()
+    }
     },
     
   created() {
