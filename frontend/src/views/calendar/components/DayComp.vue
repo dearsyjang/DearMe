@@ -6,16 +6,22 @@
       <div class="player-container" v-if="this.isTextOn">
           {{this.textDiary.contents}}
       </div>
+      <div class="delete button">
+        <button @click="deleteTextDiary">텍스트 일기 삭제</button>
+      </div>
 
       <button v-on:click = "this.isVideoOn =!this.isVideoOn">영상 일기 보기</button>
       <div class="player-container" v-if="this.isVideoOn">
           {{this.videoSource}}
-            <vue3-video-player src="{{this.videoSource}}"></vue3-video-player>
+            <vue3-video-player :src="videoSource"></vue3-video-player>
+        </div>
+        <div class="delete button">
+          <button @click="deleteVideoDiary">영상 일기 삭제</button>
         </div>
   </div>
 </template>
 <script>
-import { mapGetters } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 import axios from 'axios';
 export default {
   name: 'DayComp',
@@ -27,20 +33,22 @@ export default {
       videoDiaryId: 0,
       textDiary: [],
       videoDiary: [],
-      videoSource : '',
+      videoSource : 0,
     };
+  },
+  mounted() {
   },
   created() {
     this.textDiaryId = this.$route.params.textDiaryId
     this.videoDiaryId = this.$route.params.videoDiaryId
     this.getTextDiary()
     this.getVideoDiary()
-    },
+  },
   computed: {
     ...mapGetters(['authHeader2'])
     },
   methods: {
-    getTextDiary() {
+   getTextDiary() {
       const authHeader = this.authHeader2
        axios
           .get(
@@ -80,6 +88,9 @@ export default {
           .catch(error => {
             console.error(error)
           })
+    },
+    computed: {
+    ...mapActions(['deleteTextDiary', 'deleteVideoDiary'])
     },
   },
 }

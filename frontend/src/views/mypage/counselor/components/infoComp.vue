@@ -17,7 +17,8 @@ export default {
   components: {},
   data() {
     return {
-      sampleData: ''
+      sampleData: '',
+      
     }
   },
   setup() {},
