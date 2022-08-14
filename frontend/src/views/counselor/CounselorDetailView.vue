@@ -50,7 +50,7 @@
 
                 
 
-
+<!-- 
                 {{counselor.data.userId}}
                 {{favorite.data}}
                 <div v-if="isfavorite!=1 || favorite.data==false">
@@ -58,7 +58,7 @@
                 </div>
                 <div v-if="isfavorite==1 || favorite.data==true"> 
                 <button class="btn btn-link" @click="favoritedeletefunc()"><span style='font-size:20px;'>&#127830;</span></button>
-                </div>
+                </div> -->
 
 
 
@@ -436,11 +436,8 @@
         ispersonalpriced: false,
         isgrouppriced: false,
         ismaked: false,
-<<<<<<< frontend/src/views/counselor/CounselorDetailView.vue
       
-=======
-        isfavorite:''
->>>>>>> frontend/src/views/counselor/CounselorDetailView.vue
+      
         
   
       }
@@ -462,11 +459,7 @@
        'createCertificate',
        'fetchGroups',
        'favoriteAdd',
-<<<<<<< frontend/src/views/counselor/CounselorDetailView.vue
        'favoriteDelete',
-=======
-       'favoritedelete',
->>>>>>> frontend/src/views/counselor/CounselorDetailView.vue
        'favoriteGet']),
    
       nick1() {
@@ -494,34 +487,19 @@
 
       // createCategoryFunc() {
       //   this.createCareer(this.categoryContent)
-<<<<<<< frontend/src/views/counselor/CounselorDetailView.vue
       // favoriteaddfunc() {
       //   let userId= this.counselor.data.userId
-      //   this.favoriteAdd(this.counselor.data.userId)
-      //   console.log(userId)
-    
+      //   this.favoriteAdd(userId)
+      //   this.isfavorite=2
+      //   console.log(this.isfavorite)
       // },
 
       // favoritedeletefunc() {
       //   let id = this.favorite.data.id
       //   this.favoriteDelete(id)
-      //   console.log(id)
+      //   this.isfavorite=1
+      //   console.log(this.isfavorite)
       // },
-=======
-      favoriteaddfunc() {
-        let userId= this.counselor.data.userId
-        this.favoriteAdd(userId)
-        this.isfavorite=2
-        console.log(this.isfavorite)
-      },
-
-      favoritedeletefunc() {
-        let id = this.favorite.data.id
-        this.favoriteDelete(id)
-        this.isfavorite=1
-        console.log(this.isfavorite)
-      },
->>>>>>> frontend/src/views/counselor/CounselorDetailView.vue
       // },
 
 
@@ -546,15 +524,11 @@
       this.fetchCurrentUser()
       this.fetchCounselor(this.counselorId)
       this.fetchGroups()
-      this.favoriteGet()
-<<<<<<< frontend/src/views/counselor/CounselorDetailView.vue
+      // this.favoriteGet()
       // this.check()
   
 
-=======
   
-      this.favorite =''
->>>>>>> frontend/src/views/counselor/CounselorDetailView.vue
       },
   }
 </script>

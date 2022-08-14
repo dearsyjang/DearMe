@@ -78,27 +78,7 @@ export default {
       })
     },
 
-    fetchGroups({ commit, getters } ){
-      axios({
-        url: drf.group.groups(),
-        method: 'get',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': getters.authHeader2
-          },
-      })
-      .then(res => {
- 
-        commit('SET_GROUPS', res.data.data)
-      
-      })
-      .catch(err => {
-        console.error(err)
-        if (err.response.status === 404) {
-          router.push({ name: 'NotFound404' })
-        }
-      })
-    },
+
 
     
    
