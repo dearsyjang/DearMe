@@ -8,6 +8,7 @@ import lombok.Data;
 @Builder
 public class GroupInfoResponseDto {
     private Long id;
+    private String nickName;
     private String title;
     private String contents;
     private Long price;
@@ -17,6 +18,7 @@ public class GroupInfoResponseDto {
     public static GroupInfoResponseDto of(Group entity){
         return GroupInfoResponseDto.builder()
                 .id(entity.getId())
+                .nickName(entity.getCounselor().getNickName())
                 .title(entity.getTitle())
                 .contents(entity.getContents())
                 .price(entity.getPrice())
