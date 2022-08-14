@@ -11,6 +11,7 @@
         <form >
           <div class="form-group">
             <input class="form-control" type="text" v-model="credentials.id" placeholder="아이디">
+            <button class="btn btn-primary" @click="idCheck()">중복확인</button>
           </div>
           <div class="form-group position-relative">
             <input class="form-control" type="password" v-model="credentials.pw" placeholder="비밀번호">
@@ -21,6 +22,7 @@
           </div>
           <div class="form-group">
             <input class="form-control" type="text" v-model="credentials.nickName" placeholder="닉네임">
+            <button class="btn btn-primary" @click="nicknameCheck()">중복확인</button>
           </div>
           <div class="form-group">
               <select class="form-select" id="defaultSelect" v-model="credentials.gender" >
@@ -95,16 +97,32 @@ export default {
     // 아이디 중복 확인 (response 수정해야함)
     idCheck(){
       axios({
-        url: drf.member.idCheck()+`/${this.credentials.id}`,
+        url: drf.member.idCheck(this.credentials.id),
         method: 'get'
       })
       .then(res => {
-        if (res.status === 'success'){
-          alert('사용 가능한 아이디 입니다.')
-        }
-        else{
-          alert('중복된 아이디가 존재합니다.')
-        }
+        alert(`${this.credentials.id}는 사용가능한 아이디 입니다.`)
+        console.log(res.data)
+        console.log(res.data.data)
+      })
+      .catch(err => {
+        alert(err.response.data.message)
+          console.error(err.response.data.message)
+      })
+    },
+    nicknameCheck(){
+      axios({
+        url: drf.member.nickNameCheck(this.credentials.nickName),
+        method: 'get'
+      })
+      .then(res => {
+        alert(`${this.credentials.nickName}는 사용가능한 닉네임 입니다.`)
+        console.log(res.data)
+        console.log(res.data.data)
+      })
+      .catch(err => {
+        alert(err.response.data.message)
+        // console.error(err.response.data.message)
       })
     },
     imCounselor() {
