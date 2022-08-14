@@ -3,11 +3,11 @@
   <div>
     <!-- {{currentUser.data}} -->
     <!-- {{groups}} -->
-   
+
     <h2>상담사 프로필 페이지</h2>
-    <router-link :to="{ name: 'counselingReview', params : {counselorId : counselor.data.userId}}">
+    <!-- <router-link :to="{ name: 'counselingReview', params : {counselorId : counselor.data.userId}}">
                 <button>리뷰 쓰러가는 버튼! 상담 나가기에 버튼 달아도 되고 종료시 라우터 푸시로 해도됨</button>
-                </router-link>
+                </router-link> -->
     <router-link to="/counseling-request"  >
       <button v-if="currentUser.data.type==`USER`">상담 신청</button>
     </router-link>
@@ -25,6 +25,17 @@
 <!--             
                 <button class="createinfo" v-if="currentUser.id === profile.user.id && isdone==false" @click="isModalViewed=true">작성하기</button>
                 <button v-else>개인상담신청하기</button> -->
+
+                {{counselor.data.userId}}
+                {{favorite.data}}
+                <div v-if="isfavorite!=1 || favorite.data==false">
+                <button class="btn btn-link" @click="favoriteaddfunc()"><span style='font-size:20px;'>&#129505;</span></button>
+                </div>
+                <div v-if="isfavorite==1 || favorite.data==true"> 
+                <button class="btn btn-link" @click="favoritedeletefunc()"><span style='font-size:20px;'>&#127830;</span></button>
+                </div>
+
+
                 <div>자기소개 : {{counselor.data.introduce}}</div>
               </div>
               </div> 
@@ -228,34 +239,6 @@
 
                 <br>
 
-                <!-- <div class="accordion" id="accordionPanelsStaySevenExample">
-                  <div class="accordion-item">
-                    <h2 class="accordion-header" id="panelsStayOpen-headingSeven">
-                      <button class="accordion-button"   type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseSeven" aria-expanded="true" aria-controls="panelsStayOpen-collapseSeven">
-                        운영중인 그룹
-                      </button>
-                    </h2>
-                    <div id="panelsStayOpen-collapseSeven" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingSeven">
-                      <div class="accordion-body">
-                       <div  class="contents" v-for="(c,idx) in counselor.data.groups"
-                      :key="idx"
-                      :c="c">
-                      {{c.contents}}
-                      </div>
-                      </div>
-                    </div>
-                  </div>
-                </div> -->
-
-
-
-                <br>
-
-
-        
-
-                <br>
-
                 <div class="accordion" id="accordionPanelsStaySixExample">
                   <div class="accordion-item">
                     <h2 class="accordion-header" id="panelsStayOpen-headingSix">
@@ -427,12 +410,13 @@
         ispersonalpriced: false,
         isgrouppriced: false,
         ismaked: false,
+        isfavorite:''
         
   
       }
     },
     computed : {
-      ...mapGetters(['counselor','currentUser', 'favorite','groups']),
+      ...mapGetters(['counselor','currentUser', 'favorite','groups','favorite']),
       infos() {
       return this.$store.state.infos
     }
@@ -446,7 +430,10 @@
        'createCareer',
        'deleteCertificate',
        'createCertificate',
-       'fetchGroups']),
+       'fetchGroups',
+       'favoriteAdd',
+       'favoritedelete',
+       'favoriteGet']),
    
       nick1() {
         return this.currentUser.data.nickName
@@ -464,7 +451,19 @@
       },
       // createCategoryFunc() {
       //   this.createCareer(this.categoryContent)
+      favoriteaddfunc() {
+        let userId= this.counselor.data.userId
+        this.favoriteAdd(userId)
+        this.isfavorite=2
+        console.log(this.isfavorite)
+      },
 
+      favoritedeletefunc() {
+        let id = this.favorite.data.id
+        this.favoriteDelete(id)
+        this.isfavorite=1
+        console.log(this.isfavorite)
+      },
       // },
       createInfo(){
         if (this.isdone === false){
@@ -487,9 +486,9 @@
       this.fetchCurrentUser()
       this.fetchCounselor(this.counselorId)
       this.fetchGroups()
-      
+      this.favoriteGet()
   
-      // this.favorite =''
+      this.favorite =''
       },
   }
 </script>

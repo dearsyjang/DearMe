@@ -43,7 +43,9 @@ export default {
      counselors : () => HOST + COUNSELOR + "?",
      counselor : (counselorId) => HOST + COUNSELOR  + `/${counselorId}`,
      reviews : () => HOST + '/reviews',
-     favorites : () => HOST + '/favorites'
+     favorites : () => HOST + '/favorites',
+     favoriteAdd : () => HOST + '/favorites',
+     favoriteDelete : (favoriteId) => HOST + '/favorites' + `/${favoriteId}`
     // filter : (categoryId) => HOST + MEMBER + '/filter' +  `/${categoryId}`,
     // search : (keyword) => HOST + MEMBER + '/search' +  `/${keyword}`,
   },
@@ -62,6 +64,7 @@ export default {
     counselingSchedule: () => HOST + COUNSELING,
     groupDetail: groupId => HOST + GROUP +`/${groupId}`,
     groups: () => HOST + MEMBER + GROUP
+    
   }
   //downPrice=0&upPrice=1000000&reviewCntUp=FALSE&reviewCntDown=FALSE&reviewScoreUp=FALSE&reviewScoreDown=FALSE&favorite=FALSE
 }

@@ -15,12 +15,12 @@ export default [
     component: BoardCreateView
   },
   {
-    path: '/board/:boardPk',
+    path: '/board/:boardId',
     name: 'boardDetail',
     component: BoardDetailVeiw
   },
   {
-    path: '/board/:boardPk/update',
+    path: '/board/:boardId/update',
     name: 'boardUpdate',
     component: BoardUpdateView
   }
