@@ -95,6 +95,7 @@ export default {
       this.session.on('streamCreated', ({ stream }) => {
         const subscriber = this.session.subscribe(stream);
         this.subscribers.push(subscriber);
+        console.log('aaaaa')
         console.log(stream)
         console.log(subscriber)
       });
@@ -139,7 +140,7 @@ export default {
             
               this.session.connect(token, { clientData: this.myUserName })
           .then(() => {
-
+              console.log('initPublisher')
               // 영상 가져오기
               let subscriber = this.OV.initPublisher(undefined, {
                   audioSource: undefined, // The source of audio. If undefined default microphone
