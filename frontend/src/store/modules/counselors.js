@@ -160,7 +160,7 @@ export default {
      
       console.log(Id)
       axios({
-        url: drf.counselors.favoriteAdd(),
+        url: drf.counselors.favoriteA(),
         method: 'post',
         data: {id: Id},
         headers: {
@@ -181,7 +181,7 @@ export default {
      
       console.log(favoriteId)
       axios({
-        url: drf.counselors.favoriteDelete(favoriteId),
+        url: drf.counselors.favoriteD(favoriteId),
         method: 'delete',
         headers: {
           'Content-Type': 'application/json',

@@ -26,6 +26,31 @@
                 <button class="createinfo" v-if="currentUser.id === profile.user.id && isdone==false" @click="isModalViewed=true">작성하기</button>
                 <button v-else>개인상담신청하기</button> -->
 
+                
+                <!--{{favorite.data}} -->
+
+
+
+                <!-- <div v-for="(f,idx) in favorite.data"
+                :key="idx"
+                :f="f">
+                {{f}} -->
+                <!-- <div v-if="check(counselorId !=counselor.data.userId)==true" >
+                  <button class="btn btn-link" style="color: black " @click="favoriteAdd(counselor.data.userId)">★
+                  </button>
+                </div>
+                
+
+                <div v-else> 
+                  <button class="btn btn-link" style="color: red" @click="favoriteDelete(f.id)">★
+                  </button>
+                </div> -->
+                
+                <!-- </div>  -->
+
+                
+
+
                 {{counselor.data.userId}}
                 {{favorite.data}}
                 <div v-if="isfavorite!=1 || favorite.data==false">
@@ -34,6 +59,7 @@
                 <div v-if="isfavorite==1 || favorite.data==true"> 
                 <button class="btn btn-link" @click="favoritedeletefunc()"><span style='font-size:20px;'>&#127830;</span></button>
                 </div>
+
 
 
                 <div>자기소개 : {{counselor.data.introduce}}</div>
@@ -410,7 +436,11 @@
         ispersonalpriced: false,
         isgrouppriced: false,
         ismaked: false,
+<<<<<<< frontend/src/views/counselor/CounselorDetailView.vue
+      
+=======
         isfavorite:''
+>>>>>>> frontend/src/views/counselor/CounselorDetailView.vue
         
   
       }
@@ -419,12 +449,12 @@
       ...mapGetters(['counselor','currentUser', 'favorite','groups','favorite']),
       infos() {
       return this.$store.state.infos
+      
     }
     },
     methods: {
       ...mapActions(['fetchCounselor',
       'favoriteCounselor',
-      'isfavorite' ,
       'fetchCurrentUser',
        'deleteCareer',
        'createCareer',
@@ -432,7 +462,11 @@
        'createCertificate',
        'fetchGroups',
        'favoriteAdd',
+<<<<<<< frontend/src/views/counselor/CounselorDetailView.vue
+       'favoriteDelete',
+=======
        'favoritedelete',
+>>>>>>> frontend/src/views/counselor/CounselorDetailView.vue
        'favoriteGet']),
    
       nick1() {
@@ -449,8 +483,31 @@
        
 
       },
+      // check(num1) {
+      //   if (num1.value%2 == 1){
+      //     return true;
+      //   } else {
+      //     return false;
+      //   }
+      // },
+
+
       // createCategoryFunc() {
       //   this.createCareer(this.categoryContent)
+<<<<<<< frontend/src/views/counselor/CounselorDetailView.vue
+      // favoriteaddfunc() {
+      //   let userId= this.counselor.data.userId
+      //   this.favoriteAdd(this.counselor.data.userId)
+      //   console.log(userId)
+    
+      // },
+
+      // favoritedeletefunc() {
+      //   let id = this.favorite.data.id
+      //   this.favoriteDelete(id)
+      //   console.log(id)
+      // },
+=======
       favoriteaddfunc() {
         let userId= this.counselor.data.userId
         this.favoriteAdd(userId)
@@ -464,7 +521,10 @@
         this.isfavorite=1
         console.log(this.isfavorite)
       },
+>>>>>>> frontend/src/views/counselor/CounselorDetailView.vue
       // },
+
+
       createInfo(){
         if (this.isdone === false){
         
@@ -487,8 +547,14 @@
       this.fetchCounselor(this.counselorId)
       this.fetchGroups()
       this.favoriteGet()
+<<<<<<< frontend/src/views/counselor/CounselorDetailView.vue
+      // this.check()
+  
+
+=======
   
       this.favorite =''
+>>>>>>> frontend/src/views/counselor/CounselorDetailView.vue
       },
   }
 </script>
