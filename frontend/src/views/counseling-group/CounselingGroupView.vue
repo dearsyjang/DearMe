@@ -5,7 +5,6 @@
         <div class="form-group">
           <p class="text-center">
             <button class="btn btn-lg btn-success" @click="createToken()">그룹 상담방 개설</button>
-            <button class="btn btn-lg btn-success" @click="joinSession()">이거 아니야..</button>
           </p>
         </div>
       </div>
