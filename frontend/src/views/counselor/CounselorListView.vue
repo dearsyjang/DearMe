@@ -1,7 +1,7 @@
 <!-- <template>
   <div>
     <h1>상담사 리스트 페이지</h1>
-
+    
     <div id="counselorListMain">
       <div id="counselorListSelectBar">
         <div class="select-bar">
@@ -124,8 +124,39 @@
 
 <template>
   <div>
-     카운슬러 목록 기모링~
+    <form @submit.prevent="onSubmit" >
+      
+    <div id="counselorListMain">
+      <div id="counselorListSelectBar">
+        <div class="select-bar">
+          <select v-model="align" class="form-select rounded-pill"  aria-label="Default select example" style="40px">
+            <option class="select-item" hidden="" disabled="disabled" selected="selected" value="">상담사 필터</option>         
+            <option class="select-item" value=1>별점 높은 순</option>
+            <option class="select-item" value=2>리뷰 많은 순</option>
+          </select>
+        </div>
+      </div>
+    </div>
 
+    <div id="counselorListMain">
+      <div id="counselorListSelectBar">
+        <div class="select-bar">
+          <select v-model="categories"  class="form-select rounded-pill"  aria-label="Default select example" style="40px">
+            <option class="select-item" hidden="" disabled="disabled" selected="selected" value="">상담사 필터</option>         
+            <option class="select-item" value=3>가족</option>
+            <option class="select-item" value=4>직장,진로</option>
+            <option class="select-item" value=5>연애,결혼</option>
+            <option class="select-item" value=6>자기이해</option>   
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <button type="submit" class="btn" >신청하기</button>
+    </form>
+    
+     카운슬러 목록 기모링~
+    
     <counselor-list-item
       v-for="(counselor,idx) in counselors.data"
       :key="idx"
@@ -184,6 +215,7 @@
 
 
 <style>
+
 
 
 
