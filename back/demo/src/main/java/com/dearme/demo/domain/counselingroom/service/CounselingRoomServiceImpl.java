@@ -125,6 +125,12 @@ public class CounselingRoomServiceImpl implements CounselingRoomService{
                 .build();
         counselingRoomRepository.save(counselingRoom);
 
+        List<Counseling> counselings = counselingRepository.findAllByGroup_Id(counselingRoom.getGroup().getId());
+        for(Counseling counseling : counselings){
+            counseling.updateCounselingRoom(counselingRoom);
+            counselingRepository.save(counseling);
+        }
+
         sessionMap.put(sessionName, session);
 
         return CreateCounselingRoomResponseDto.of(counselingRoom);
