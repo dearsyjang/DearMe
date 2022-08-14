@@ -113,7 +113,7 @@ public class CounselingRoomServiceImpl implements CounselingRoomService{
                 .group(group)
                 .build();
         counselingRoomRepository.save(counselingRoom);
-        
+
         List<Counseling> counselings = counselingRepository.findAllByGroup_Id(group.getId());
 
         for(Counseling counseling : counselings){
