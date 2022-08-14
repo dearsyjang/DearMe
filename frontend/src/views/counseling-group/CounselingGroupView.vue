@@ -4,8 +4,8 @@
       <div id="join-dialog" class="jumbotron vertical-center">
         <div class="form-group">
           <p class="text-center">
-            <button class="btn btn-lg btn-success" @click="createToken()">상담방 입장</button>
-            <button class="btn btn-lg btn-success" @click="joinToken()">그룹 상담방 입장</button>
+            <button class="btn btn-lg btn-success" @click="createToken()">그룹 상담방 개설</button>
+            <button class="btn btn-lg btn-success" @click="joinSession()">이거 아니야..</button>
           </p>
         </div>
       </div>
@@ -43,9 +43,6 @@
 
 <script>
 import axios from 'axios';
-// axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
-// axios.defaults.headers.common['Content-Type'] = 'application/x-www-form-urlencoded'
-// axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
 import { OpenVidu } from 'openvidu-browser';
 import UserVideo from './components/UserVideo';
 import { mapGetters } from 'vuex';
@@ -70,11 +67,11 @@ export default {
       session: undefined,
       mainStreamManager: undefined,
       publisher: undefined,
-      subscribers: [],
       subscriber: undefined,
+      subscribers: [],
       mySessionId: '', // 방 이름
       myUserName: '', // 유저 닉네임
-      counselingId: this.$route.params.counselingId,
+      groupId: this.$route.params.groupId,
     };
   },
 
@@ -115,12 +112,16 @@ export default {
       return new Promise((resolve, reject) => {
         
         let authHeader = this.authHeader2
-        let counselingId = this.counselingId // 왜!!!!!!!!!!!!!!!!!!! 토큰!!!!!!!!!!!!!!!!!
-        console.log(counselingId)
+        let groupId = this.groupId // 왜!!!!!!!!!!!!!!!!!!! 토큰!!!!!!!!!!!!!!!!!
+        console.log('Token', authHeader)
+        console.log('그룹아이디', groupId)
 
         axios
-          .get(
-            `https://i7d206.p.ssafy.io/counseling-rooms/` + counselingId,       
+          .post(
+            `https://i7d206.p.ssafy.io/counseling-rooms/groups`,
+            {
+              groupId: groupId
+            },       
              {
               headers: {
                 Authorization : authHeader
@@ -132,7 +133,7 @@ export default {
             console.log('data', data)
             resolve(data.token)
             console.log(data.data.counselorToken)
-            return data.data.token
+            return data.data.counselorToken
           })
           .then((token) => {
             console.log(token)
@@ -141,7 +142,7 @@ export default {
           .then(() => {
 
               // 영상 가져오기
-              let subscriber = this.OV.initPublisher(undefined, {
+              let publisher = this.OV.initPublisher(undefined, {
                   audioSource: undefined, // The source of audio. If undefined default microphone
                   videoSource: undefined, // The source of video. If undefined default webcam
                   publishAudio: true,     // Whether you want to start publishing with your audio unmuted or not
@@ -152,11 +153,9 @@ export default {
                   mirror: false           // Whether to mirror your local video or not
               });
 
-            this.mainStreamManager = subscriber;
-            console.log('메인스트림', this.mainStreamManager)
-						this.subscriber = subscriber;
-            console.log('subscriber', subscriber)
-            this.session.subscriber(this.subscriber)
+            this.mainStreamManager = publisher;
+						this.publisher = publisher;
+            this.session.publish(this.publisher)
           })
           .catch(error => {
               console.log('There was an error connecting to the session:', error.code, error.message);
@@ -165,61 +164,61 @@ export default {
           .catch((error) => reject(error.response));
 			});
 		},
-    // joinSession() {
-    //   // --- Get an OpenVidu object ---
-    //   this.OV = new OpenVidu();
+    joinSession() {
+      // --- Get an OpenVidu object ---
+      this.OV = new OpenVidu();
 
-    //   // --- Init a session --- 세션 초기화
-    //   this.session = this.OV.initSession();
+      // --- Init a session --- 세션 초기화
+      this.session = this.OV.initSession();
 
-    //   // --- Specify the actions when events take place in the session ---
-    //   // On every new Stream received... 참가자 추가
-    //   this.session.on('streamCreated', ({ stream }) => {
-    //     const subscriber = this.session.subscribe(stream);
-    //     this.subscribers.push(subscriber);
-    //   });
-    //   // On every Stream destroyed...
-    //   this.session.on('streamDestroyed', ({ stream }) => {
-    //     const index = this.subscribers.indexOf(stream.streamManager, 0);
-    //     if (index >= 0) {
-    //       this.subscribers.splice(index, 1);
-    //     }
-    //   });
+      // --- Specify the actions when events take place in the session ---
+      // On every new Stream received... 참가자 추가
+      this.session.on('streamCreated', ({ stream }) => {
+        const subscriber = this.session.subscribe(stream);
+        this.subscribers.push(subscriber);
+      });
+      // On every Stream destroyed...
+      this.session.on('streamDestroyed', ({ stream }) => {
+        const index = this.subscribers.indexOf(stream.streamManager, 0);
+        if (index >= 0) {
+          this.subscribers.splice(index, 1);
+        }
+      });
 
-    //   // On every asynchronous exception... 비동기 오류
-    //   this.session.on('exception', ({ exception }) => {
-    //     console.warn(exception);
-    //   });
+      // On every asynchronous exception... 비동기 오류
+      this.session.on('exception', ({ exception }) => {
+        console.warn(exception);
+      });
 
-    //   // token을 백에서 받아오자
-    //   this.getToken().then(token => {
-    //     console.log(token)
-    //     this.session.connect(token, { clientData: this.myUserName })
-    //       .then(() => {
+      // token을 백에서 받아오자
+      this.getToken().then(token => {
+        console.log(token)
+        this.session.connect(token, { clientData: this.myUserName })
+          .then(() => {
 
-    //           // 영상 가져오기
-    //           let publisher = this.OV.initPublisher(undefined, {
-    //               audioSource: undefined, // The source of audio. If undefined default microphone
-    //               videoSource: undefined, // The source of video. If undefined default webcam
-    //               publishAudio: true,     // Whether you want to start publishing with your audio unmuted or not
-    //               publishVideo: true,     // Whether you want to start publishing with your video enabled or not
-    //               resolution: '640x480',  // The resolution of your video
-    //               frameRate: 30,          // The frame rate of your video
-    //               insertMode: 'APPEND',   // How the video is inserted in the target element 'video-container'
-    //               mirror: false           // Whether to mirror your local video or not
-    //           });
+              // 영상 가져오기
+              let publisher = this.OV.initPublisher(undefined, {
+                  audioSource: undefined, // The source of audio. If undefined default microphone
+                  videoSource: undefined, // The source of video. If undefined default webcam
+                  publishAudio: true,     // Whether you want to start publishing with your audio unmuted or not
+                  publishVideo: true,     // Whether you want to start publishing with your video enabled or not
+                  resolution: '640x480',  // The resolution of your video
+                  frameRate: 30,          // The frame rate of your video
+                  insertMode: 'APPEND',   // How the video is inserted in the target element 'video-container'
+                  mirror: false           // Whether to mirror your local video or not
+              });
 
-    //         this.mainStreamManager = publisher;
-		// 				this.publisher = publisher;
+            this.mainStreamManager = publisher;
+						this.publisher = publisher;
 
-    //         this.session.publish(this.publisher)
-    //       })
-    //       .catch(error => {
-    //           console.log('There was an error connecting to the session:', error.code, error.message);
-    //       });
-    //   });
-    //   window.addEventListener('beforeunload', this.leaveSession);
-    //   },
+            this.session.publish(this.publisher)
+          })
+          .catch(error => {
+              console.log('There was an error connecting to the session:', error.code, error.message);
+          });
+      });
+      window.addEventListener('beforeunload', this.leaveSession);
+      },
 
 
     leaveSession() {
@@ -264,6 +263,8 @@ export default {
       this.session.on('streamCreated', ({ stream }) => {
         const subscriber = this.session.subscribe(stream);
         this.subscribers.push(subscriber);
+        console.log(stream)
+        console.log(subscriber)
       });
       // On every Stream destroyed...
       this.session.on('streamDestroyed', ({ stream }) => {
@@ -282,12 +283,16 @@ export default {
       return new Promise((resolve, reject) => {
         
         let authHeader = this.authHeader2
-        let counselingId = this.counselingId // 왜!!!!!!!!!!!!!!!!!!! 토큰!!!!!!!!!!!!!!!!!
-        console.log(counselingId)
+        let groupId = this.groupId // 왜!!!!!!!!!!!!!!!!!!! 토큰!!!!!!!!!!!!!!!!!
+        console.log('Token', authHeader)
+        console.log('그룹아이디', groupId)
 
         axios
-          .get(
-            `https://i7d206.p.ssafy.io/counseling-rooms/` + counselingId,       
+          .post(
+            `https://i7d206.p.ssafy.io/counseling-rooms/groups`,
+            {
+              groupId: groupId
+            },       
              {
               headers: {
                 Authorization : authHeader
@@ -299,7 +304,7 @@ export default {
             console.log('data', data)
             resolve(data.token)
             console.log(data.data.counselorToken)
-            return data.data.token
+            return data.data.counselorToken
           })
           .then((token) => {
             console.log(token)
@@ -330,7 +335,7 @@ export default {
           .catch((error) => reject(error.response));
 			});
 		},
-	}
+	},
 }
 </script>
 

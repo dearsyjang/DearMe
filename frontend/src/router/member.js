@@ -6,6 +6,7 @@ import FindIdView from '@/views/member/FindIdVeiw.vue'
 import FindPasswordView from '@/views/member/FindPasswordVeiw.vue'
 import ProfileUserView from '@/views/member/ProfileUserView.vue'
 import SignupTypeView from '@/views/member/SignupTypeView.vue'
+
 export default [
   {
     path: '/member/login',

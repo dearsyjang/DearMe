@@ -34,7 +34,7 @@
               </router-link></td> -->
               <td>{{ board.title }}</td>
               <td>{{ board.hitCnt }}</td>
-              <td>{{ board.date }}</td>
+              <td>{{ board.date[0] }}. {{ board.date[1] }}. {{ board.date[2] }}</td>
             </tr>
           </tbody>
         </table>

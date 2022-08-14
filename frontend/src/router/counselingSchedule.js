@@ -1,6 +1,9 @@
 
 import counselorScheduleView from '@/views/counselingSchedule/CounselorScheduleView.vue'
 import TodayScheduleView from '@/views/counselingSchedule/TodayScheduleView.vue'
+import UserSchedule from '@/views/counseling-schedule/UserScheduleView.vue'
+import counselorGroupSchedule from '@/views/counseling-schedule/CounselorGroupScheduleView.vue'
+
 export default [
 
   {
@@ -13,5 +16,14 @@ export default [
     name: 'todaySchedule',
     component: TodayScheduleView
   },
-     
+  {
+    path: '/counseling-schedule/userschedule',
+    name: 'userSchedule',
+    component: UserSchedule
+    },
+    {
+      path: '/counseling-schedule/counselorschedule',
+      name: 'counselorGroupSchedule',
+      component: counselorGroupSchedule
+    },     
 ]
