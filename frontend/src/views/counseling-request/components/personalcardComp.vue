@@ -1,27 +1,65 @@
 <template>
-    <div>
-        <div class="card w-50">
-            <div class="card-body1">
-                <h5 class="card-title">해당 닉네임1</h5>
-                <p class="card-text">해당 상담일1</p>
-                <a href="#" class="btn btn-primary">신청서 보기</a>
-            </div>
+  <div>
+    
+    <div v-for="(re,idx) in request"
+      :key="idx"
+      :re="re">
+    <div v-if="re.counselorId== currentUser.data.userId && re.status==`UNACCEPTED`  && re.groupId == null" class="card mb-3" style="max-width: 540px;">
+      <div class="row g-0">
+        <div class="col-md-4">
+           
+          상담번호: {{re.id}}
+          <br>
+          유저 번호: {{re.userId}}
+          <br>
+          상담사:{{re.counselorNickName}}
+          <br>
+          상담일 : {{re.year}}/{{re.month}}/{{re.day}}
         </div>
-        <div class="card w-50">
-            <div class="card-body2">
-                <h5 class="card-title">해당 닉네임2</h5>
-                <p class="card-text">해당 상담일2</p>
-                <a href="#" class="btn btn-primary">신청서 보기</a>
-            </div>
+        <div class="col-md-8">
+          <div class="card-body">
+            <h5 class="card-title"> </h5>
+            <!-- <p class="card-text">{{request}}</p> -->
+            <p class="card-text"><small class="text-muted">
+                <router-link :to="{ name: 'CounselingRequestDocument', params : {counselingId : re.id}}">
+                <button>신청서보기</button>
+                </router-link>
+            </small></p>
+          </div>
         </div>
+      </div>
     </div>
+    </div>
+
+
+  </div>
+
+
 </template>
+
 <script>
-export default {
-    name : 'personalcardComp'
-    
+import { mapGetters,mapActions } from 'vuex'
+  export default {
+    name : 'personalcardComp',
+    props:{
+      request: Array,
+      day: Object
+    },
+     computed:{
+    ...mapGetters(['requests','currentUser']),
+  },
+  methods: {
+    ...mapActions(['fetchRequests', 'fetchCurrentUser']),
+  },
+  created() {
+    this.fetchCurrentUser()
+    this.fetchRequests()
 }
-</script>
-<style>
     
+  }
+
+</script>
+
+<style>
+
 </style>

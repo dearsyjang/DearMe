@@ -61,6 +61,7 @@ export default {
         .then(res => {
           const token = res.data.data.accessToken
           console.log(res.data)
+         
           dispatch('saveToken', token)
           dispatch('fetchCurrentUser')
           router.push({ name: 'mypageUser' })
@@ -107,7 +108,7 @@ export default {
       console.log(getters.currentUser)
       router.push({ name: 'login' })
     },
-  
+
   // fetchCurrentUser({ commit, getters, dispatch }) {
   //   if (getters.isLoggedIn) {
   //     axios({
@@ -186,6 +187,7 @@ export default {
       })
         .then(res => {
           commit('SET_CAREERS', res.data)
+          location.reload();
         })
         .catch(err => console.error(err.response))
     },
@@ -205,6 +207,7 @@ export default {
         })
           .then(res => {
             commit('SET_CAREERS', res.data)
+            location.reload();
             //router.push({ name: 'movie', params : {movieId} }).catch(()=>{})
           })
           .catch(err => console.error(err.response))
@@ -224,6 +227,7 @@ export default {
     })
       .then(res => {
         commit('SET_CERTIFICATES', res.data)
+        location.reload();
       })
       .catch(err => console.error(err.response))
   },
@@ -242,6 +246,7 @@ export default {
       })
         .then(res => {
           commit('SET_CERTIFICATES', res.data)
+          location.reload();
           //router.push({ name: 'movie', params : {movieId} }).catch(()=>{})
         })
         .catch(err => console.error(err.response))

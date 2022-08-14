@@ -11,6 +11,7 @@ import infoComp from './components/infoComp.vue'
 import myBoardComp from './components/myBoardComp.vue'
 import myGroupComp from './components/myGroupComp.vue'
 import myFavoriteComp from './components/myFavoriteComp.vue'
+
 export default {
   components: {
     infoComp,
@@ -31,5 +32,8 @@ export default {
 }
 </script>
 <style scoped>
-
+div{
+  background-color: #e6edf9;
+  min-height: 30vh;
+}
 </style>

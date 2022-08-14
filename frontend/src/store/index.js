@@ -5,8 +5,8 @@ import counselors from './modules/counselors';
 import counselingSchedule from './modules/counselingSchedule'
 import bottombar from './modules/bottombar'
 import group from './modules/group';
-
 import counselingRequest from './modules/counselingRequest';
+
 export default new Vuex.Store({
   strict: true,
   modules: {

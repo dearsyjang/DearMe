@@ -55,6 +55,29 @@ export default {
           router.push({ name: 'NotFound404' })
         }
       })
+    },
+
+    fetchGroups({ commit, getters } ){
+      axios({
+        url: drf.group.groups(),
+        method: 'get',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': getters.authHeader2
+          },
+      })
+      .then(res => {
+        console.log(res.data)
+        console.log(res.data.data)
+        commit('SET_GROUPS', res.data.data)
+        console.log(getters.group)
+      })
+      .catch(err => {
+        console.error(err)
+        if (err.response.status === 404) {
+          router.push({ name: 'NotFound404' })
+        }
+      })
     }
   },
 }

@@ -19,13 +19,15 @@ export default {
     // currentUserInfo: () => HOST + MEMBER + '/token',
     currentUserInfo: () => HOST + MEMBER + '/token',
     currentUser: () => HOST + MEMBER,// 정보수정
-    idCheck: () => HOST + MEMBER + '/id',
+    idCheck: id => HOST + MEMBER + `/id` + `/${id}`,
+    nickNameCheck: nickname => HOST + MEMBER + `/nickname` + `/${nickname}`,
     // profile: username => HOST + MEMBER + 'profile/' + username,
     // profile: () => HOST + MEMBER 
     careerCreate: () => HOST + MEMBER + CAREER ,
     careerDelete: (careerId) => HOST + MEMBER + CAREER + `/${careerId}`,
     certificateCreate: () => HOST + MEMBER + CERTIFICATE ,
-    certificateDelete: (certificateId) => HOST + MEMBER + '/certificate' + `/${certificateId}`
+    certificateDelete: (certificateId) => HOST + MEMBER + '/certificate' + `/${certificateId}`,
+
     // profile: () => HOST + MEMBER
   },
   board : {
@@ -40,6 +42,8 @@ export default {
     
      counselors : () => HOST + COUNSELOR + "?",
      counselor : (counselorId) => HOST + COUNSELOR  + `/${counselorId}`,
+     reviews : () => HOST + '/reviews',
+     favorites : () => HOST + '/favorites'
     // filter : (categoryId) => HOST + MEMBER + '/filter' +  `/${categoryId}`,
     // search : (keyword) => HOST + MEMBER + '/search' +  `/${keyword}`,
   },
@@ -47,11 +51,17 @@ export default {
     requestList: () => HOST + COUNSELING,
     requestDetail: (counselingDocumentId) => HOST + COUNSELING  + `/${counselingDocumentId}`,
     requestCreate: () => HOST + '/counseling-documents',
+    requestUpdate: () => HOST + COUNSELING,
   },
   group : {
     groupRequest: () => HOST + '/counseling-doucments/groups',
+    groupDetail: groupId => HOST + GROUP +`/${groupId}`,    
+  },
+  counselingSchedule: {
+    counselingSchedules: () => HOST + COUNSELING,
+    counselingSchedule: () => HOST + COUNSELING,
     groupDetail: groupId => HOST + GROUP +`/${groupId}`,
-
+    groups: () => HOST + MEMBER + GROUP
   }
   //downPrice=0&upPrice=1000000&reviewCntUp=FALSE&reviewCntDown=FALSE&reviewScoreUp=FALSE&reviewScoreDown=FALSE&favorite=FALSE
 }
