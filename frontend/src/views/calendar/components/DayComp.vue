@@ -7,7 +7,7 @@
           {{this.textDiary.contents}}
       </div>
       <div class="delete button">
-        <button @click="deleteTextDiary">텍스트 일기 삭제</button>
+        <button @click="deleteTextDiary()">텍스트 일기 삭제</button>
       </div>
 
       <button v-on:click = "this.isVideoOn =!this.isVideoOn">영상 일기 보기</button>
@@ -16,7 +16,7 @@
             <vue3-video-player :src="videoSource"></vue3-video-player>
         </div>
         <div class="delete button">
-          <button @click="deleteVideoDiary">영상 일기 삭제</button>
+          <button @click="deleteVideoDiary()">영상 일기 삭제</button>
         </div>
   </div>
 </template>
@@ -48,6 +48,7 @@ export default {
     ...mapGetters(['authHeader2'])
     },
   methods: {
+   ...mapActions(['deleteTextDiary', 'deleteVideoDiary']),
    getTextDiary() {
       const authHeader = this.authHeader2
        axios
@@ -89,9 +90,7 @@ export default {
             console.error(error)
           })
     },
-    computed: {
-    ...mapActions(['deleteTextDiary', 'deleteVideoDiary'])
-    },
+    
   },
 }
 </script>

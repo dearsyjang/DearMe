@@ -11,7 +11,8 @@ const GROUP = '/groups'
 const COUNSELING = '/counselings'
 const CAREER = '/careers'
 const CERTIFICATE = '/certificates'
-const CALENDAR = '/calendar'
+const TEXTDIARY = '/text-diaries'
+// const VIDEODIARY = '/video-diaries'
 export default {
   member : {
     login: () => HOST + MEMBER + '/token',
@@ -65,8 +66,8 @@ export default {
     groups: () => HOST + MEMBER + GROUP
   },
   calendar: {
-    textDiaryEdit: textDiaryId => HOST + CALENDAR + `/${textDiaryId}`,
-    videoDiaryEdit: videoDiaryId => HOST + CALENDAR + `/${videoDiaryId}`,
+    textDiaryEdit: textDiaryId => HOST + TEXTDIARY + `/${textDiaryId}`,
+    // videoDiaryEdit: videoDiaryId => HOST + CALENDAR + `/${videoDiaryId}`,
 
   }
   //downPrice=0&upPrice=1000000&reviewCntUp=FALSE&reviewCntDown=FALSE&reviewScoreUp=FALSE&reviewScoreDown=FALSE&favorite=FALSE
