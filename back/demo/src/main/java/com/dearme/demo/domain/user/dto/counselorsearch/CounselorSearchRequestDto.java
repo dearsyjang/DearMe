@@ -2,9 +2,6 @@ package com.dearme.demo.domain.user.dto.counselorsearch;
 
 import lombok.Data;
 
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 @Data
@@ -22,7 +19,7 @@ public class CounselorSearchRequestDto {
     private Boolean reviewScoreUp;
     @NotNull(message = "reviewScoreDown은 비워둘 수 없습니다.")
     private Boolean reviewScoreDown;
-    @NotNull(message = "favorite은비워둘 수 없습니다.")
+    @NotNull(message = "favorite은 비워둘 수 없습니다.")
     private Boolean favorite;
 
 }
