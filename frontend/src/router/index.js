@@ -15,6 +15,7 @@ import counselingRequest from './counselingRequest.js'
 import videodiary from './videoDiary.js'
 
 
+import counselingSchedule from './counselingSchedule.js'
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes: [
@@ -32,7 +33,28 @@ const router = createRouter({
     ...schedule,
     ...videodiary,    
 
-  ]
+  
+    ...counselingSchedule
+
+
+
+  ],
+  scrollBehavior(to, from, savedPosition) {
+    if (savedPosition) {
+      return savedPosition
+    } else {
+      return { top: 0 }
+    }
+  },
+
+// vue 기본 양식
+// const routes = [
+//   // {
+//   //   path: '/',
+//   //   name: 'home',
+//   //   component: HomeView
+//   // },
+
 })
 
 export default router
