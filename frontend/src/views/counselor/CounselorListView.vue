@@ -255,19 +255,16 @@
     name: 'CounselorListView',
     components: {CounselorListItem},
     data () {
-
       return {
-        filter: [],
+        filter: {
+          reviewScoreUp: false,
+          reviewCntUp: false,
+          reviewScoreDown: false,
+          reviewCntDown: false,
+          category: '',
+          favorite: false
+        },
       }
-      // return {filter:{
-      //   reviewScoreUp:false,
-      //   reviewCntUp:false,
-      //   reviewScoreDown:false,
-      //   reviewCntDown:false,
-      //   category:'',
-      //   favorite:false
-      // }
-    
     },
     
 
@@ -275,6 +272,7 @@
     ...mapGetters(['counselors']),
     ...mapGetters(['searched_counselors']),
     ...mapGetters(['filtering_counselors'])
+    
     },
     methods: {
     ...mapActions(['fetchCounselors']),
@@ -282,18 +280,9 @@
     ...mapActions(['searchCounselors']),
 
      onSubmit () {
-      // this.filter=[
-      //   reviewScoreUp=Boolean(this.filter.reviewScoreUp),
-      //   reviewCntUp=Boolean(this.filter.reviewCntUp),
-      //   reviewScoreDown=Boolean(this.filter.reviewScoreDown),
-      //   reviewCntDown=Boolean(this.filter.reviewCntDown),
-      //   category=this.filter.category,
-      //   favorite=Boolean(this.filter.favorite)]
-      this.filter.reviewScoreUp2= this.filter.reviewScoreUp
-
-
+    
      this.fetchCounselors(this.filter)
-      // console.log(typeof)
+      
       this.reviewScoreUp=false,
       this.reviewCntUp=false,
       this.reviewScoreDown=false,
@@ -346,6 +335,7 @@
     
   created() {
     this.fetchCounselors()
+  
   },
 }
 </script>

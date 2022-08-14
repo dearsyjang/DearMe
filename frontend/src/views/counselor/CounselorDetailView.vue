@@ -1,6 +1,9 @@
 <template>
   <div>
   <div>
+    <!-- {{currentUser.data}} -->
+    <!-- {{groups}} -->
+   
     <h2>상담사 프로필 페이지</h2>
     <router-link :to="{ name: 'counselingReview', params : {counselorId : counselor.data.userId}}">
                 <button>리뷰 쓰러가는 버튼! 상담 나가기에 버튼 달아도 되고 종료시 라우터 푸시로 해도됨</button>
@@ -190,11 +193,10 @@
                 <br>
 
 
-                
-
+          
                 <br>
 
-                <!-- <div class="accordion" id="accordionPanelsStaySevenExample">
+                <div class="accordion" id="accordionPanelsStaySevenExample">
                   <div class="accordion-item">
                     <h2 class="accordion-header" id="panelsStayOpen-headingSeven">
                       <button class="accordion-button"   type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseSeven" aria-expanded="true" aria-controls="panelsStayOpen-collapseSeven">
@@ -206,12 +208,16 @@
                        <div  class="contents" v-for="(c,idx) in counselor.data.groups"
                       :key="idx"
                       :c="c">
-                      {{c.contents}}
+                      그룹 번호 : {{c.id}}
+                      그룹 이름 : {{c.title}}
+                      <router-link :to="{name:'groupDetail', params: {groupId:c.id}}">
+                      <button>그룹 상세페이지</button>
+                      </router-link>
                       </div>
                       </div>
                     </div>
                   </div>
-                </div> -->
+                </div>
 
 
 
@@ -398,7 +404,7 @@
       }
     },
     computed : {
-      ...mapGetters(['counselor','currentUser', 'favorite']),
+      ...mapGetters(['counselor','currentUser', 'favorite','groups']),
       infos() {
       return this.$store.state.infos
     }
@@ -411,7 +417,8 @@
        'deleteCareer',
        'createCareer',
        'deleteCertificate',
-       'createCertificate']),
+       'createCertificate',
+       'fetchGroups']),
    
       nick1() {
         return this.currentUser.data.nickName
@@ -451,6 +458,7 @@
     created() {
       this.fetchCurrentUser()
       this.fetchCounselor(this.counselorId)
+      this.fetchGroups()
       
   
       // this.favorite =''

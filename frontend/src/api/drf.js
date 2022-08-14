@@ -25,7 +25,8 @@ export default {
     careerCreate: () => HOST + MEMBER + CAREER ,
     careerDelete: (careerId) => HOST + MEMBER + CAREER + `/${careerId}`,
     certificateCreate: () => HOST + MEMBER + CERTIFICATE ,
-    certificateDelete: (certificateId) => HOST + MEMBER + '/certificate' + `/${certificateId}`
+    certificateDelete: (certificateId) => HOST + MEMBER + '/certificate' + `/${certificateId}`,
+
     // profile: () => HOST + MEMBER
   },
   board : {
@@ -40,7 +41,8 @@ export default {
     
      counselors : () => HOST + COUNSELOR + "?",
      counselor : (counselorId) => HOST + COUNSELOR  + `/${counselorId}`,
-     reviews : () => HOST + '/reviews'
+     reviews : () => HOST + '/reviews',
+     favorites : () => HOST + '/favorites'
     // filter : (categoryId) => HOST + MEMBER + '/filter' +  `/${categoryId}`,
     // search : (keyword) => HOST + MEMBER + '/search' +  `/${keyword}`,
   },
@@ -53,7 +55,7 @@ export default {
   group : {
     groupRequest: () => HOST + '/counseling-doucments/groups',
     groupDetail: groupId => HOST + GROUP +`/${groupId}`,
-
+    groups: () => HOST + MEMBER + GROUP
     
   }
   //downPrice=0&upPrice=1000000&reviewCntUp=FALSE&reviewCntDown=FALSE&reviewScoreUp=FALSE&reviewScoreDown=FALSE&favorite=FALSE
