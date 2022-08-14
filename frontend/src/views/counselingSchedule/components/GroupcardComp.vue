@@ -4,7 +4,7 @@
     <div v-for="(re,idx) in request"
       :key="idx"
       :re="re">
-    <div v-if="re.counselorId== currentUser.data.userId && re.status==`UNACCEPTED` && re.groupId != null "  class="card mb-3" style="max-width: 540px;">
+    <div v-if="re.counselorId== currentUser.data.userId && re.status==`ACCEPTED` && re.groupId != null && today==`${re.year}-${re.month}-${re.day}` "  class="card mb-3" style="max-width: 540px;">
       <div class="row g-0">
         <div class="col-md-4">
            
@@ -33,11 +33,33 @@
   </div>
 </template>
 <script>
+import { mapGetters,mapActions } from 'vuex'
 export default {
-    name : 'groupcardComp'
-    
+    name : 'GroupcardComp',
+     data () {
+      return {
+       today : this.$route.params.today
+    }
+    },
+    props:{
+      request: Array,
+      day: Object
+    },
+     computed:{
+    ...mapGetters(['requests','currentUser']),
+  },
+  methods: {
+    ...mapActions(['fetchRequests', 'fetchCurrentUser']),
+  },
+  created() {
+    this.fetchCurrentUser()
+    this.fetchRequests()
 }
-</script>
-<style>
     
+  }
+
+</script>
+
+<style>
+
 </style>

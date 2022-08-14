@@ -52,7 +52,7 @@
                        <div  class="contents" v-for="(c,idx) in counselor.data.categories"
                         :key="idx"
                         :c="c">
-                        {{c.contents}}<button class="add-button"   v-if="counselor.data.nickName==currentUser.data.nickname" @click="deleteCertificate(c.id)">x</button>
+                        {{c.contents}}
                       </div>
                       </div>
                     </div>
@@ -194,6 +194,34 @@
 
                 <br>
 
+                <!-- <div class="accordion" id="accordionPanelsStaySevenExample">
+                  <div class="accordion-item">
+                    <h2 class="accordion-header" id="panelsStayOpen-headingSeven">
+                      <button class="accordion-button"   type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseSeven" aria-expanded="true" aria-controls="panelsStayOpen-collapseSeven">
+                        운영중인 그룹
+                      </button>
+                    </h2>
+                    <div id="panelsStayOpen-collapseSeven" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingSeven">
+                      <div class="accordion-body">
+                       <div  class="contents" v-for="(c,idx) in counselor.data.groups"
+                      :key="idx"
+                      :c="c">
+                      {{c.contents}}
+                      </div>
+                      </div>
+                    </div>
+                  </div>
+                </div> -->
+
+
+
+                <br>
+
+
+        
+
+                <br>
+
                 <div class="accordion" id="accordionPanelsStaySixExample">
                   <div class="accordion-item">
                     <h2 class="accordion-header" id="panelsStayOpen-headingSix">
@@ -206,7 +234,7 @@
                        <div  class="contents" v-for="(c,idx) in counselor.data.reviews"
                       :key="idx"
                       :c="c">
-                      {{c.contents}}<button class="add-button"   v-if="counselor.data.nickName==currentUser.data.nickname" @click="deleteCertificate(c.id)">x</button>
+                      {{c.contents}}
                       </div>
                       </div>
                     </div>
