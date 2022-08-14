@@ -1,6 +1,7 @@
 package com.dearme.demo.domain.videodiary.service;
 
 
+import com.dearme.demo.domain.recordingroom.exception.RecordingDeleteException;
 import com.dearme.demo.domain.textdiary.exception.TextDiarySentimentException;
 import com.dearme.demo.domain.user.entity.Type;
 import com.dearme.demo.domain.user.entity.User;
@@ -15,6 +16,7 @@ import com.google.api.gax.core.FixedCredentialsProvider;
 import com.google.auth.oauth2.ServiceAccountCredentials;
 import com.google.cloud.speech.v1.*;
 import com.google.protobuf.ByteString;
+import io.openvidu.java.client.OpenVidu;
 import lombok.RequiredArgsConstructor;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -46,6 +48,8 @@ public class VideoDiaryServiceImpl implements VideoDiaryService {
     private String SENTIMENT_ID;
     @Value("${sentiment.key:0}")
     private String SENTIMENT_KEY;
+
+    private final OpenVidu openvidu;
 
     @Override
     public PostVideoDiaryResponseDto postVideoDiary(String id, PostVideoDiaryRequestDto dto) throws IOException {
@@ -123,10 +127,19 @@ public class VideoDiaryServiceImpl implements VideoDiaryService {
             throw new NoExistUserException();
         });
         VideoDiary videoDiary = videoDiaryRepository.findById(videoDiaryId).get();
+
+
+        try {
+            openvidu.deleteRecording(videoDiary.getRealFileName());
+        }catch (Exception e){
+            throw new RecordingDeleteException();
+        }
+
         if(user.getId().equals(videoDiary.getUser().getId()))
             videoDiaryRepository.deleteByUser_IdAndId(id, videoDiaryId);
         else
             throw new NoPermissionVideoDiaryException();
+
 
     }
 
