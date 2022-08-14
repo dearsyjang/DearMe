@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="container">
-      <span id="toc-toggle" @click="openCloseToc()">내가 작성한 게시글 ▼ </span>
+      <span id="toc-toggle" @click="openCloseToc()">나의 그룹 상담 ▼ </span>
       <!-- <span class="badge bg-primary rounded-pill">{{ groups.length }}</span> -->
     </div>
     <my-group-list-comp id="toc-content2"></my-group-list-comp>

@@ -1,4 +1,5 @@
 <template>
+{{ currentUser }}
   <div class="container">
     <div class="row">
       <div class="container direction-rtl my-4">

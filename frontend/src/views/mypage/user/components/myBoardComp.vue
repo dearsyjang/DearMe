@@ -26,7 +26,7 @@ export default {
   mounted() {},
   unmounted() {},
   methods: {
-    ...mapActions(['fetchBoards', 'fetchMyid']),
+    ...mapActions(['fetchMyBoards', 'fetchMyid']),
 
     openCloseToc: function() {
     if(document.getElementById('toc-content').style.display === 'block') {

@@ -7,7 +7,7 @@ const BOARD ='/boards'
 const COMMENT ='/comments'
 const COUNSELOR = '/counselors'
 const GROUP = '/groups'
-
+const FAVORITE = '/favorites'
 const COUNSELING = '/counselings'
 const CAREER = '/careers'
 const CERTIFICATE = '/certificates'
@@ -57,6 +57,9 @@ export default {
 
     groupAccept: () => HOST + '/counseling-doucments',
     groupCancel: groupId => HOST + GROUP + `/${groupId}`
+  },
+  mypage : {
+    myFavorite: () => HOST + FAVORITE,
   }
 
 
