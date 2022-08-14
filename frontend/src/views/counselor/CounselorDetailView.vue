@@ -25,6 +25,15 @@
 <!--             
                 <button class="createinfo" v-if="currentUser.id === profile.user.id && isdone==false" @click="isModalViewed=true">작성하기</button>
                 <button v-else>개인상담신청하기</button> -->
+              {{favorite.data}}
+                <div v-if="!favorite">
+                <button class="btn btn-link" @click="favoriteAdd(counselor.data.userId)"><span style='font-size:20px;'>&#129505;</span></button>
+                </div>
+                <div v-else>
+                <button class="btn btn-link" @click="favoritedelete(favorite.data.id)"><span style='font-size:20px;'>&#127830;</span></button>
+                </div>
+
+
                 <div>자기소개 : {{counselor.data.introduce}}</div>
               </div>
               </div> 
@@ -404,7 +413,7 @@
       }
     },
     computed : {
-      ...mapGetters(['counselor','currentUser', 'favorite','groups']),
+      ...mapGetters(['counselor','currentUser', 'favorite','groups','favorite']),
       infos() {
       return this.$store.state.infos
     }
@@ -418,7 +427,10 @@
        'createCareer',
        'deleteCertificate',
        'createCertificate',
-       'fetchGroups']),
+       'fetchGroups',
+       'favoriteAdd',
+       'favoritedelete',
+       'favoriteGet']),
    
       nick1() {
         return this.currentUser.data.nickName
@@ -459,9 +471,9 @@
       this.fetchCurrentUser()
       this.fetchCounselor(this.counselorId)
       this.fetchGroups()
-      
+      this.favoriteGet()
   
-      // this.favorite =''
+      this.favorite =''
       },
   }
 </script>
