@@ -25,16 +25,29 @@
 <!--             
                 <button class="createinfo" v-if="currentUser.id === profile.user.id && isdone==false" @click="isModalViewed=true">작성하기</button>
                 <button v-else>개인상담신청하기</button> -->
+                
+                <!--{{favorite.data}} -->
 
-                {{counselor.data.userId}}
-                {{favorite.data}}
-                <div v-if="isfavorite!=1 || favorite.data==false">
-                <button class="btn btn-link" @click="favoriteaddfunc()"><span style='font-size:20px;'>&#129505;</span></button>
-                </div>
-                <div v-if="isfavorite==1 || favorite.data==true"> 
-                <button class="btn btn-link" @click="favoritedeletefunc()"><span style='font-size:20px;'>&#127830;</span></button>
-                </div>
 
+
+                <!-- <div v-for="(f,idx) in favorite.data"
+                :key="idx"
+                :f="f">
+                {{f}} -->
+                <!-- <div v-if="check(counselorId !=counselor.data.userId)==true" >
+                  <button class="btn btn-link" style="color: black " @click="favoriteAdd(counselor.data.userId)">★
+                  </button>
+                </div>
+                
+
+                <div v-else> 
+                  <button class="btn btn-link" style="color: red" @click="favoriteDelete(f.id)">★
+                  </button>
+                </div> -->
+                
+                <!-- </div>  -->
+=
+                
 
                 <div>자기소개 : {{counselor.data.introduce}}</div>
               </div>
@@ -410,7 +423,7 @@
         ispersonalpriced: false,
         isgrouppriced: false,
         ismaked: false,
-        isfavorite:''
+      
         
   
       }
@@ -419,12 +432,12 @@
       ...mapGetters(['counselor','currentUser', 'favorite','groups','favorite']),
       infos() {
       return this.$store.state.infos
+      
     }
     },
     methods: {
       ...mapActions(['fetchCounselor',
       'favoriteCounselor',
-      'isfavorite' ,
       'fetchCurrentUser',
        'deleteCareer',
        'createCareer',
@@ -432,7 +445,7 @@
        'createCertificate',
        'fetchGroups',
        'favoriteAdd',
-       'favoritedelete',
+       'favoriteDelete',
        'favoriteGet']),
    
       nick1() {
@@ -449,22 +462,32 @@
        
 
       },
+      // check(num1) {
+      //   if (num1.value%2 == 1){
+      //     return true;
+      //   } else {
+      //     return false;
+      //   }
+      // },
+
+
       // createCategoryFunc() {
       //   this.createCareer(this.categoryContent)
-      favoriteaddfunc() {
-        let userId= this.counselor.data.userId
-        this.favoriteAdd(userId)
-        this.isfavorite=2
-        console.log(this.isfavorite)
-      },
-
-      favoritedeletefunc() {
-        let id = this.favorite.data.id
-        this.favoriteDelete(id)
-        this.isfavorite=1
-        console.log(this.isfavorite)
-      },
+      // favoriteaddfunc() {
+      //   let userId= this.counselor.data.userId
+      //   this.favoriteAdd(this.counselor.data.userId)
+      //   console.log(userId)
+    
       // },
+
+      // favoritedeletefunc() {
+      //   let id = this.favorite.data.id
+      //   this.favoriteDelete(id)
+      //   console.log(id)
+      // },
+      // },
+
+
       createInfo(){
         if (this.isdone === false){
         
@@ -487,8 +510,9 @@
       this.fetchCounselor(this.counselorId)
       this.fetchGroups()
       this.favoriteGet()
+      // this.check()
   
-      this.favorite =''
+
       },
   }
 </script>
