@@ -3,12 +3,6 @@
     <top-bar></top-bar>
     <bottom-bar></bottom-bar>
   </div>
-  <nav>
-    <router-link to="/member/login">login</router-link> |
-    <router-link to="/member/signupuser">signup(user)</router-link> |
-    <router-link to="/member/signupcounselor">signup(counselor)</router-link> |
-    <router-link to="/counseling-request/document">req doc</router-link>|
-  </nav>
   <router-view/>
 </template>
 
@@ -27,8 +21,10 @@ import "bulma/css/bulma.css"
 
 <style>
 /* @import '../assets/css/style.css'; */
+@import './assets/css/member.css';
+@import './assets/css/topbar.css';
 
-#app {
+/* #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -47,5 +43,5 @@ nav a {
 
 nav a.router-link-exact-active {
   color: #42b983;
-}
+} */
 </style>

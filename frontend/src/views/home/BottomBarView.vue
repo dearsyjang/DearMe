@@ -6,7 +6,7 @@
       <p class="text">감정달력</p>
     </div>
     <div>
-      <router-link to="/schedule" class="img mx-3"><img id="calendar" src="../../assets/images/calendar.png" alt="calendar"></router-link>
+      <router-link to="/counseling-schedule/userschedule" class="img mx-3"><img id="calendar" src="../../assets/images/calendar.png" alt="calendar"></router-link>
       <p class="text">상담일정</p>
     </div>
     <div>

@@ -1,22 +1,19 @@
 <template>
   <div>
-    <!-- user / counselor 같은 컴포넌트 사용 (v-if로 구분) -->
-    <!-- <div v-if="isCounselor===true">
-      <p>운영 중인 그룹 ▼</p>
-      <button>그룹 생성</button>
-      <my-group-listt-comp class="d-flex justify-content-around"></my-group-listt-comp>
-    </div> -->
-    <div id="Group">
-      <p>그룹 모음 ▼</p>
-      <my-group-listt-comp class="d-flex justify-content-around"></my-group-listt-comp>
+    <div class="container">
+      <span id="toc-toggle" @click="openCloseToc()">내가 작성한 게시글 ▼ </span>
+      <!-- <span class="badge bg-primary rounded-pill">{{ groups.length }}</span> -->
     </div>
+    <my-group-list-comp id="toc-content2"></my-group-list-comp>
+    <!-- <my-group-list-comp :groups="groups" id="toc-content"></my-group-list-comp> -->
   </div>
 </template>
 <script>
-import myGroupListtComp from './myGroupListComp.vue'
+import { mapActions, mapGetters } from 'vuex'
+import myGroupListComp from './myGroupListComp.vue'
 export default {
   components: {
-    myGroupListtComp
+    myGroupListComp
   },
   data() {
     return {
@@ -24,15 +21,36 @@ export default {
     }
   },
   setup() {},
-  created() {},
+  created() {
+    // this.fetchGroups()
+  },
   mounted() {},
   unmounted() {},
-  methods: {}
+  methods: {
+    ...mapActions(['fetchGroups',]),
+
+    openCloseToc: function() {
+    if(document.getElementById('toc-content2').style.display === 'block') {
+      document.getElementById('toc-content2').style.display = 'none';
+    } else {
+      document.getElementById('toc-content2').style.display = 'block';
+    }
+  }
+  },
+  computed: {
+    ...mapGetters(['groups'])
+  },
 }
 </script>
 <style scoped>
-  p {
-      text-align: left;
-      color: #1E2022;
-    }
+   #toc-content2 {
+    display: none;
+  }
+  #toc-toggle {
+    cursor: pointer;
+    color: black;
+  }
+  #toc-toggle:hover {
+    text-decoration: none;
+  }
 </style>

@@ -116,8 +116,6 @@ export default {
         .then(res => {
           commit('SET_REQUEST', res.data)
           alert('상담 신청이 수락되었습니다.')
-          console.log(change.id)
-          console.log(change.status)
           router.push({
             name: 'CounselingRequestList',
         

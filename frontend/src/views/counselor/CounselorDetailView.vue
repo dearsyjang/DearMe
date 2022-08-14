@@ -25,6 +25,7 @@
 <!--             
                 <button class="createinfo" v-if="currentUser.id === profile.user.id && isdone==false" @click="isModalViewed=true">작성하기</button>
                 <button v-else>개인상담신청하기</button> -->
+
                 
                 <!--{{favorite.data}} -->
 
@@ -46,8 +47,20 @@
                 </div> -->
                 
                 <!-- </div>  -->
-=
+
                 
+
+
+                {{counselor.data.userId}}
+                {{favorite.data}}
+                <div v-if="isfavorite!=1 || favorite.data==false">
+                <button class="btn btn-link" @click="favoriteaddfunc()"><span style='font-size:20px;'>&#129505;</span></button>
+                </div>
+                <div v-if="isfavorite==1 || favorite.data==true"> 
+                <button class="btn btn-link" @click="favoritedeletefunc()"><span style='font-size:20px;'>&#127830;</span></button>
+                </div>
+
+
 
                 <div>자기소개 : {{counselor.data.introduce}}</div>
               </div>
@@ -423,7 +436,11 @@
         ispersonalpriced: false,
         isgrouppriced: false,
         ismaked: false,
+<<<<<<< frontend/src/views/counselor/CounselorDetailView.vue
       
+=======
+        isfavorite:''
+>>>>>>> frontend/src/views/counselor/CounselorDetailView.vue
         
   
       }
@@ -445,7 +462,11 @@
        'createCertificate',
        'fetchGroups',
        'favoriteAdd',
+<<<<<<< frontend/src/views/counselor/CounselorDetailView.vue
        'favoriteDelete',
+=======
+       'favoritedelete',
+>>>>>>> frontend/src/views/counselor/CounselorDetailView.vue
        'favoriteGet']),
    
       nick1() {
@@ -473,6 +494,7 @@
 
       // createCategoryFunc() {
       //   this.createCareer(this.categoryContent)
+<<<<<<< frontend/src/views/counselor/CounselorDetailView.vue
       // favoriteaddfunc() {
       //   let userId= this.counselor.data.userId
       //   this.favoriteAdd(this.counselor.data.userId)
@@ -485,6 +507,21 @@
       //   this.favoriteDelete(id)
       //   console.log(id)
       // },
+=======
+      favoriteaddfunc() {
+        let userId= this.counselor.data.userId
+        this.favoriteAdd(userId)
+        this.isfavorite=2
+        console.log(this.isfavorite)
+      },
+
+      favoritedeletefunc() {
+        let id = this.favorite.data.id
+        this.favoriteDelete(id)
+        this.isfavorite=1
+        console.log(this.isfavorite)
+      },
+>>>>>>> frontend/src/views/counselor/CounselorDetailView.vue
       // },
 
 
@@ -510,9 +547,14 @@
       this.fetchCounselor(this.counselorId)
       this.fetchGroups()
       this.favoriteGet()
+<<<<<<< frontend/src/views/counselor/CounselorDetailView.vue
       // this.check()
   
 
+=======
+  
+      this.favorite =''
+>>>>>>> frontend/src/views/counselor/CounselorDetailView.vue
       },
   }
 </script>
