@@ -19,7 +19,8 @@
               :key="secondIdx"
             > 
               <div class="card" style="height:50px; width:30px">
-              <router-link to="/calendar/DayComp" :class="{ 'has-text-grey-light': idx === 0 && day >= lastMonthStart || dates.length - 1 === idx && nextMonthStart > day,
+              <router-link 
+    :to="{ name: 'todaySchedule', params: {today: `${year}-${month}-${day}`}}" :class="{ 'has-text-grey-light': idx === 0 && day >= lastMonthStart || dates.length - 1 === idx && nextMonthStart > day,
               'has-text-primary': day === today && month === currentMonth && year === currentYear && idx <32
               }">
               {{ day }}
@@ -37,7 +38,7 @@
 
 <script>
 export default {
-    name: 'CalendarComp',
+  name: 'calendarComp',
   data() {
     return {
       days: [
