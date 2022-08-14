@@ -187,6 +187,7 @@ export default {
       })
         .then(res => {
           commit('SET_CAREERS', res.data)
+          location.reload();
         })
         .catch(err => console.error(err.response))
     },
@@ -206,6 +207,7 @@ export default {
         })
           .then(res => {
             commit('SET_CAREERS', res.data)
+            location.reload();
             //router.push({ name: 'movie', params : {movieId} }).catch(()=>{})
           })
           .catch(err => console.error(err.response))
@@ -225,6 +227,7 @@ export default {
     })
       .then(res => {
         commit('SET_CERTIFICATES', res.data)
+        location.reload();
       })
       .catch(err => console.error(err.response))
   },
@@ -243,6 +246,7 @@ export default {
       })
         .then(res => {
           commit('SET_CERTIFICATES', res.data)
+          location.reload();
           //router.push({ name: 'movie', params : {movieId} }).catch(()=>{})
         })
         .catch(err => console.error(err.response))

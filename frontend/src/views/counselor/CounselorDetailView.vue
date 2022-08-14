@@ -419,10 +419,12 @@
 
       createCareerFunc() {
         this.createCareer(this.careerContent)
+        
 
       },
       createCertificateFunc() {
         this.createCertificate(this.certificateContent)
+       
 
       },
       // createCategoryFunc() {

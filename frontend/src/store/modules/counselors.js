@@ -37,22 +37,36 @@ export default {
 
   actions: {
     
-    fetchCounselors({ commit, getters }) {
+     fetchCounselors({ commit, getters } ,filter) {
+      // filter.reviewCntUp
+      // filter.reviewCntDown
+      // filter.reviewScoreUp
+      // filter.reviewScoreDown
+      //filter.category,
+      // filter.favorite
       let s='';
       let q=0;
       let w = 1000000;
       let a = false;
+      let b = false;
+      let c = false;
+      let d = false;
+      let e = false;
+      if (filter != undefined){
+      console.log(filter.reviewScoreUp2)}
       axios({
         
-       url: drf.counselors.counselors()+ "category" +s +"&downPrice=" +q + "&upPrice=" + w + "&reviewCntUp=" + a + "&reviewCntDown=" + a + "&reviewScoreUp=" +a + "&reviewScoreDown=" +a + "&favorite=" + a,
+       url: drf.counselors.counselors()+ "category=" +s +"&downPrice=" +q + "&upPrice=" + w + "&reviewCntUp=" + a + "&reviewCntDown=" + b + "&reviewScoreUp=" +c + "&reviewScoreDown=" +d + "&favorite=" + e,
        method : 'GET',
        headers: {
         'Content-Type': 'application/json',
         'Authorization': getters.authHeader2
-        }
+        },
+        // data : { a: this.filter.reviewCntUp }
       })
       .then(res => {
         commit('SET_COUNSELORS', res.data)
+        console.log(filter)
       })       
         
       .catch(err => {
