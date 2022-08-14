@@ -137,11 +137,15 @@ export default {
     .catch(err => console.error(err) )
   },
   // 회원 정보(비밀번호, 닉네임) 수정
-  updateProfile({ commit, getters }, { pw, nickname, counselorProfile }) {
+  updateProfile({ commit, getters }, update) {
+    console.log(update.counselorProfile )
     axios({
       url: drf.member.profileEdit(),
       method: 'put',
-      data: counselorProfile === null ? { pw, nickname } : { pw, nickname, counselorProfile },
+      data: {
+        counselorProfile: update.counselorProfile, 
+        nickName: update.credentials.nickName, 
+        pw: update.credentials.pw }, 
       headers: getters.authHeader
     })
       .then(res => {
@@ -151,6 +155,21 @@ export default {
           
         })
       })
+  },
+  //탈퇴
+  deleteUser({ commit, getters }, userId) {
+    if (confirm('정말 탈퇴하시겠습니까?')) {
+      axios({
+        url: drf.member.userDelete(userId),
+        method: 'delete',
+        headers: getters.authHeader
+      })
+        .then(() => {
+          commit('SET_CURRENT_USER', {})
+          router.push({ name: 'App', })
+        })
+        .catch(err => console.error(err.response))
+    }
   },
 }
 }
