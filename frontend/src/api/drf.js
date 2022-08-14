@@ -35,9 +35,7 @@ export default {
   group : {
     groupRequest: () => HOST + '/counseling-documents/groups',
     groupDetail: groupId => HOST + GROUP +`/${groupId}`,
-    groupAccept: () => HOST + '/counseling-doucments'
-
+    groupAccept: () => HOST + '/counseling-doucments',
+    groupCancel: groupId => HOST + GROUP + `/${groupId}`
   }
-
-
 }

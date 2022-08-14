@@ -10,6 +10,8 @@
             <!-- <p class="col-sm-4">{{ group.title }}</p>
             <p class="col-sm-4">{{ group.date[0] }}.{{ group.date[1] }}.{{ group.date[2] }}</p> -->
             <button class="col-sm-4 btn btn-primary">상담방 입장</button>
+            <!-- ()안에 groupid 받아와서 입력 -->
+            <button @click="groupCancel()">그룹 탈퇴</button>
           </div>
         </div>
       </div>
@@ -17,6 +19,7 @@
   </div>
 </template>
 <script>
+import { mapActions} from 'vuex'
 export default {
   props: {
     groups: Object
@@ -31,7 +34,10 @@ export default {
   created() {},
   mounted() {},
   unmounted() {},
-  methods: {}
+  methods: {
+    ...mapActions(['groupCancel']),
+
+  }
 }
 </script>
 <style scoped>

@@ -84,6 +84,22 @@ export default {
           router.push({ name: 'NotFound404' })
         }
       })
-    }
+    },
+    // 회원의 그룹 탈퇴
+    groupCancel({ commit, getters }, baordId) {
+      if (confirm('정말 그룹 나가기를 하시겠습니까?')) {
+        axios({
+          url: drf.board.groupCancel(baordId),
+          method: 'delete',
+          headers: getters.authHeader
+        })
+          .then(() => {
+            // SET 을 어디에 해야할지 고민
+            commit('SET_GROUP', {})
+            router.push({ name: 'mypageUser' })
+          })
+          .catch(err => console.error(err.response))
+      }
+    },
   },
 }
