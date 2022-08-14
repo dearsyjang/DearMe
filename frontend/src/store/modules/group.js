@@ -20,11 +20,16 @@ export default {
     SET_GROUP_REQUEST : (state, groupRequest) => state.groupRequest = groupRequest
   },
   actions: {
-    groupRequest({ commit }, content) {
+    groupRequest({ commit, getters }, content) {
       axios({
         url: drf.group.groupRequest(),
         method: 'post',
-        data: content
+        data: content,
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization' : `Bearer ${getters.authHeader3}`
+        },
+        // headers: getters.authHeader,
       })
       .then(res =>{
         console.log(res.data)
@@ -44,6 +49,30 @@ export default {
         headers: getters.authHeader,
       })
       .then(res => {
+        console.log(res.data)
+        console.log(res.data.data)
+        commit('SET_GROUP', res.data.data)
+        console.log(getters.group)
+      })
+      .catch(err => {
+        console.error(err)
+        if (err.response.status === 404) {
+          router.push({ name: 'NotFound404' })
+        }
+      })
+    },
+    groupAccept({ commit, getters }, content){
+      axios({
+        url: drf.group.groupAccept,
+        method: 'get',
+        data: content,
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization' : `Bearer ${getters.authHeader3}`
+        },
+      })
+      .then(res => {
+        // 어디에 저장할지 생각
         console.log(res.data)
         console.log(res.data.data)
         commit('SET_GROUP', res.data.data)

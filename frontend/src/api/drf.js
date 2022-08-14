@@ -33,8 +33,9 @@ export default {
     // search : (keyword) => HOST + MEMBER + '/search' +  `/${keyword}`,
   },
   group : {
-    groupRequest: () => HOST + '/counseling-doucments/groups',
+    groupRequest: () => HOST + '/counseling-documents/groups',
     groupDetail: groupId => HOST + GROUP +`/${groupId}`,
+    groupAccept: () => HOST + '/counseling-doucments'
 
   }
 

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>{{ $route.params.title }}그룹 참가 신청하기</h1>
+    <h1>그룹 참가 수락하기</h1>
     <div id="groupRequestName" class="d-flex justify-content-center">
       <div>신청자 : </div>
     </div>
@@ -9,28 +9,17 @@
         <textarea
           rows="10"
           cols="40"
-          placeholder="상담 내용을 입력하시오."
+          placeholder="this.contents"
           v-model="contents"
         ></textarea>
       </div>
-      <div>
-        <div class="d-flex justify-content-start">
-          <div class="form-check form-switch mx-3">
-            <input
-              class="form-check-input"
-              type="checkbox"
-              role="switch"
-              id="flexSwitchCheckChecked"
-              checked
-              v-model="isOpen"
-              @click="switchOpen()"
-            />
-            <label for="flexSwitchCheckChecked">감정달력 공개</label>
-          </div>
-        </div>
-        <div class="d-flex justify-content-end">
-          <button @click="onSubmit()" class="mx-3">신청</button>
-        </div>
+      <div class="d-flex justify-content-end">
+        <button @click="accept()">수락</button>
+        <button @click="unaccept()" class="mx-3">거절</button>
+        <button @click="reject()" class="mx-3">보류</button>
+      </div>
+      <div v-if="isOpen">
+        <button>감정달력 보러가기</button>
       </div>
     </div>
   </div>
@@ -39,16 +28,18 @@
 import { mapActions, mapGetters } from "vuex";
 export default {
   props: {
-    group:Object
+    // group:Object
   },
   components: {},
   data() {
     return {
       // groupDetail에서 상담사 프로필에서 params로 groupid 받아오기
       // groupDetail에서 params로 보내기
-      groupId: 1,
-      isOpen: true,
-      contents: "",
+      id: 1,
+      status: '' ,
+      // 라우터 다 연결 후 fetch 실행하고 group 내용 받아오기
+      // contents: this.group.title,
+      isOpen: false
     };
   },
   setup() {},
@@ -56,18 +47,22 @@ export default {
   mounted() {},
   unmounted() {},
   methods: {
-    ...mapActions(["groupRequest"]),
-    onSubmit() {
-      const data = {
-        'id': this.groupId,
-        'isOpen': this.isOpen,
-        'contents': this.contents
+    ...mapActions(['groupAccept']),
+    accept() {
+      const sumbitData = {
+        id: this.id,
+        status: this.status
       }
-      this.groupRequest(data)
+      this.status = 'ACCEPTED';
+      this.groupAccept(sumbitData)
+      this.isOpen = true
     },
-    switchOpen() {
-      this.isOpen = !this.isOpen
-    }
+    unaccept() {
+      this.status = 'UNACCEPTED';
+    },
+    reject() {
+      this.status = 'ACCEPTED';
+    },
   },
   computed: {
     ...mapGetters(['currentUser'])

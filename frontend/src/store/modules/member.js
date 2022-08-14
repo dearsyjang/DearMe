@@ -20,6 +20,7 @@ export default {
     profile: state => state.profile,
     // 현재 사용자의 토큰을 나타냄 (요청 보낼 때, header에서 사용)
     authHeader2: state => `Token ${state.token}`,
+    authHeader3: state => `${state.token}`,
     authHeader: state => ({ Authorization: `Token ${state.token}`}),
     authError: state => state.authError,
   },

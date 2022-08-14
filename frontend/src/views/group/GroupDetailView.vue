@@ -22,6 +22,7 @@ export default {
   },
   setup() {},
   created() {
+    // 상담사 프로필에서 params로 groupid 받아오기
     this.fetchGroup(1)
   },
   mounted() {},
