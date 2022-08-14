@@ -2,11 +2,10 @@
   <div class="login-wrapper d-flex align-items-center justify-content-center">
     <div class="custom-container">
       <div class="text-center px-4">
-        <img class="login-intro-img" src="@/assets/images/img/bg-img/loginImg.jpg">
+        <img class="login-intro-img" src="@/assets/images/logo.png">
       </div>
       <div class="register-form mt-4">
         <h6 class="mb-3 text-center">Dear Me는 로그인 후 이용가능합니다.</h6>
-        <form >
           <div class="form-group">
             <input class="form-control" type="text" v-model="credentials.id" placeholder="아이디">
           </div>
@@ -14,7 +13,6 @@
             <input class="form-control" type="text" v-model="credentials.pw" placeholder="비밀번호">
           </div>
           <button @click="LogIn()" class="btn btn-primary w-100" >LOGIN</button>
-        </form>
       </div>
 
       <div class="login-meta-data text-center">

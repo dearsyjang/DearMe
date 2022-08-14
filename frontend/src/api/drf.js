@@ -13,7 +13,8 @@ export default {
     signup: () => HOST + MEMBER,
     // currentUserInfo: () => HOST + MEMBER + '/token',
     currentUser: () => HOST + MEMBER,// 정보수정
-    idCheck: () => HOST + MEMBER + '/id',
+    idCheck: id => HOST + MEMBER + `/id` + `/${id}`,
+    nickNameCheck: nickname => HOST + MEMBER + `/nickname` + `/${nickname}`,
     // profile: username => HOST + MEMBER + 'profile/' + username,
     // profile: () => HOST + MEMBER
   },

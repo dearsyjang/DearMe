@@ -8,9 +8,9 @@
       <div class="register-form mt-4">
         <h6 class="mb-3 text-center">{{ $route.params.type }}</h6>
         <h6 class="mb-3 text-center">아래 항목을 입력하시오.</h6>
-        <form >
           <div class="form-group">
             <input class="form-control" type="text" v-model="credentials.id" placeholder="아이디">
+            <button class="btn btn-primary" @click="idCheck()">중복확인</button>
           </div>
           <div class="form-group position-relative">
             <input class="form-control" type="password" v-model="credentials.pw" placeholder="비밀번호">
@@ -21,6 +21,7 @@
           </div>
           <div class="form-group">
             <input class="form-control" type="text" v-model="credentials.nickName" placeholder="닉네임">
+            <button class="btn btn-primary" @click="nicknameCheck()">중복확인</button>
           </div>
           <div class="form-group">
               <select class="form-select" id="defaultSelect" v-model="credentials.gender" >
@@ -38,7 +39,6 @@
             <input class="form-control col-sm-3" id="signup-birth" type="text" name="dd" placeholder="일(2자)">
           </div>
           <button @click="signUp()" class="btn btn-primary w-100" type="submit">회원가입</button>
-        </form>
       </div>
     </div>
   </div>
@@ -62,6 +62,7 @@ export default {
         gender: '',
         email: '',
         picture: '',
+        phone: '01090596456'
       },
       months: [
         1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12
@@ -75,7 +76,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['authError'])
+    ...mapGetters(['authError', 'currentUser'])
   },
   methods: {
     ...mapActions(['signup']),
@@ -89,22 +90,39 @@ export default {
       formData.append('birth', this.credentials.birth)
       formData.append('gender', this.credentials.gender)
       formData.append('email', this.credentials.email)
+      formData.append('phone', this.credentials.phone)
       this.signup(formData)
       // console.log(formData.getAll('id'))
     },
     // 아이디 중복 확인 (response 수정해야함)
     idCheck(){
       axios({
-        url: drf.member.idCheck()+`/${this.credentials.id}`,
+        url: drf.member.idCheck(this.credentials.id),
         method: 'get'
       })
       .then(res => {
-        if (res.status === 'success'){
-          alert('사용 가능한 아이디 입니다.')
-        }
-        else{
-          alert('중복된 아이디가 존재합니다.')
-        }
+        alert(`${this.credentials.id}는 사용가능한 아이디 입니다.`)
+        console.log(res.data)
+        console.log(res.data.data)
+      })
+      .catch(err => {
+        alert(err.response.data.message)
+          console.error(err.response.data.message)
+      })
+    },
+    nicknameCheck(){
+      axios({
+        url: drf.member.nickNameCheck(this.credentials.nickName),
+        method: 'get'
+      })
+      .then(res => {
+        alert(`${this.credentials.nickName}는 사용가능한 닉네임 입니다.`)
+        console.log(res.data)
+        console.log(res.data.data)
+      })
+      .catch(err => {
+        alert(err.response.data.message)
+        // console.error(err.response.data.message)
       })
     },
     imCounselor() {

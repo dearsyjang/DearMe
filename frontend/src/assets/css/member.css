@@ -7288,7 +7288,7 @@ form .btn-lg {
 }
 
 /* RTL */
-[view-mode=rtl] body .rtl-mode-switching svg {
+/* [view-mode=rtl] body .rtl-mode-switching svg {
   color: #0d5afd;
 }
 [view-mode=rtl] body .rtl-mode-switching .rtl-mode-text {
@@ -7437,7 +7437,7 @@ form .btn-lg {
   padding-right: 2rem;
 }
 [view-mode=rtl] body .alert,
-[view-mode=rtl] body .form-group,
+/* [view-mode=rtl] body .form-group, */
 [view-mode=rtl] body .btn.d-flex,
 [view-mode=rtl] body .list-group,
 [view-mode=rtl] body .input-group,
