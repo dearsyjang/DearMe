@@ -251,6 +251,41 @@ export default {
         })
         .catch(err => console.error(err.response))
     }
-},
+  },
+  // 회원 정보(비밀번호, 닉네임) 수정
+  updateProfile({ commit, getters }, update) {
+    console.log(update.counselorProfile )
+    axios({
+      url: drf.member.profileEdit(),
+      method: 'put',
+      data: {
+        counselorProfile: update.counselorProfile, 
+        nickName: update.credentials.nickName, 
+        pw: update.credentials.pw }, 
+      headers: getters.authHeader
+    })
+      .then(res => {
+        commit('SET_PROFILE', res.data)
+        router.push({
+          name: 'mypageUser',
+          
+        })
+      })
+  },
+  //탈퇴
+  deleteUser({ commit, getters }, userId) {
+    if (confirm('정말 탈퇴하시겠습니까?')) {
+      axios({
+        url: drf.member.userDelete(userId),
+        method: 'delete',
+        headers: getters.authHeader
+      })
+        .then(() => {
+          commit('SET_CURRENT_USER', {})
+          router.push({ name: 'App', })
+        })
+        .catch(err => console.error(err.response))
+    }
+  },
 }
 }
