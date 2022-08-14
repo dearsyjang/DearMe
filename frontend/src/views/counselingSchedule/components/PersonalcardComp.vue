@@ -4,10 +4,10 @@
     <div v-for="(re,idx) in request"
       :key="idx"
       :re="re">
-    <div v-if="re.counselorId== currentUser.data.userId && re.status==`UNACCEPTED`  && re.groupId == null" class="card mb-3" style="max-width: 540px;">
+    <div v-if="re.counselorId== currentUser.data.userId && re.status==`ACCEPTED`  && re.groupId == null && today==`${re.year}-${re.month}-${re.day}`" class="card mb-3" style="max-width: 540px;">
       <div class="row g-0">
         <div class="col-md-4">
-           
+      
           상담번호: {{re.id}}
           <br>
           유저 번호: {{re.userId}}
@@ -40,7 +40,12 @@
 <script>
 import { mapGetters,mapActions } from 'vuex'
   export default {
-    name : 'personalcardComp',
+    name : 'PersonalcardComp',
+    data () {
+      return {
+       today : this.$route.params.today
+    }
+    },
     props:{
       request: Array,
       day: Object
@@ -54,6 +59,7 @@ import { mapGetters,mapActions } from 'vuex'
   created() {
     this.fetchCurrentUser()
     this.fetchRequests()
+    console.log(this.today)
 }
     
   }

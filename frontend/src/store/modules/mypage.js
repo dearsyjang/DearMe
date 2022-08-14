@@ -18,8 +18,8 @@ export default {
   },
   actions: {
     // 나의 게시글 패치
+
     fetchMyBoards({ commit, getters }) {
-      // page, size 가 뭐지
       axios({
         url: drf.board.boardsList()+'?page=0&size=5',
         method: 'get',

@@ -1,7 +1,7 @@
 <template>
   <div>
     <br><br><br><br>
-    <h1>수락 대기 중인 상담</h1>
+    <h1>오늘의 상담</h1>
     <hr>
     <br><br>
     <div>
@@ -34,15 +34,15 @@
   </div>
 </template>
 <script>
-import personalcardComp from '@/views/counseling-request/components/personalcardComp.vue'
-import groupcardComp from '@/views/counseling-request/components/groupcardComp.vue'
+import PersonalcardComp from '@/views/counselingSchedule/components/PersonalcardComp.vue'
+import GroupcardComp from '@/views/counselingSchedule/components/GroupcardComp.vue'
 
 import { mapGetters,mapActions } from 'vuex'
 export default {
-  name : 'CounselingRequestList',
+  name : 'TodayScheduleView',
   components: {
-    personalcardComp,
-    groupcardComp,
+    PersonalcardComp,
+    GroupcardComp,
   },
   data() {
     return {

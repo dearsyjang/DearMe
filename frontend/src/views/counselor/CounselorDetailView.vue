@@ -2,36 +2,265 @@
   <div>
   <div>
     <h2>상담사 프로필 페이지</h2>
-
-
-    <router-link to="/counseling-request/document">
-      <button>상담 신청</button>
+    <router-link :to="{ name: 'counselingReview', params : {counselorId : counselor.data.userId}}">
+                <button>리뷰 쓰러가는 버튼! 상담 나가기에 버튼 달아도 되고 종료시 라우터 푸시로 해도됨</button>
+                </router-link>
+    <router-link to="/counseling-request"  >
+      <button v-if="currentUser.data.type==`USER`">상담 신청</button>
     </router-link>
     <div class="counselor-profile">
       <div class="card">
         <div class="card mb-3" style="max-width: 540px;">
           <div class="row g-0">
             <div class="col-md-4">
-              {{counselor}}
-               <p class="card-title">{{counselor.picUrl}}</p> 
-               <p class="card-title">{{counselor.nickname}}</p> 
+               
+               <p class="card-title">상담사 사진 : {{counselor.data.picUrl}}</p> 
+               <p class="card-title">상담사 이름 : {{counselor.data.nickName}}</p> 
             </div>
             <div class="col-md-8">
               <div class="card-body">
 <!--             
                 <button class="createinfo" v-if="currentUser.id === profile.user.id && isdone==false" @click="isModalViewed=true">작성하기</button>
                 <button v-else>개인상담신청하기</button> -->
-                </div>
-                </div> 
+                <div>자기소개 : {{counselor.data.introduce}}</div>
+              </div>
+              </div> 
                 <div class="counselor-info">
                   <!-- <info-item-comp v-for="info in infos"
                   :key="info.Content"
                   :info="info"></info-item-comp> -->
-                자기소개 : {{counselor.info}}
-                개인상담가격 : {{counselor.price}} 
-                약력 : {{counselor.careers}}
-                전문분야 :{{counselor.categories}}
-                자격증 : {{counselor.certificates}}
+                
+                
+
+                <hr>
+                <div>개인상담가격 : {{counselor.data.price}} </div>
+                <!-- <button class="add-button"   v-if="counselor.data.nickName==currentUser.data.nickname" @click="deleteCertificate(c.id)">개인상담가격수정</button> -->
+                <br>
+                <br>
+
+
+
+                <div class="accordion" id="accordionPanelsStayFiveExample">
+                  <div class="accordion-item">
+                    <h2 class="accordion-header" id="panelsStayOpen-headingFive">
+                      <button class="accordion-button"   type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseFive" aria-expanded="true" aria-controls="panelsStayOpen-collapseFive">
+                        전문분야
+                      </button>
+                    </h2>
+                    <div id="panelsStayOpen-collapseFive" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingFive">
+                      <div class="accordion-body">
+                       <div  class="contents" v-for="(c,idx) in counselor.data.categories"
+                        :key="idx"
+                        :c="c">
+                        {{c.contents}}
+                      </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <br>
+
+
+                
+
+                <br>
+                <!-- <div class="card" id="certificate-card" style="width: 18rem;">
+                  <div class="card-header">
+                    전문분야<button class="add-button" v-if="counselor.data.nickName==currentUser.data.nickname">+</button>
+                  </div>
+                  <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                      <div v-for="(c,idx) in counselor.data.categories"
+                        :key="idx"
+                        :c="c">
+                        {{c.contents}}
+                        </div> 
+                    </li>
+                  </ul>
+                </div> -->
+                
+                <div class="accordion" id="accordionPanelsStayOpenExample">
+                  <div class="accordion-item">
+                    <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+                      <button class="accordion-button"   type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+                        약력
+                      </button>
+                    </h2>
+                    <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
+                      <div class="accordion-body">
+                       <div class="contents" v-for="(c,idx) in counselor.data.careers"
+                        :key="idx"
+                        :c="c">
+                        {{c.contents}}<button class="add-button"   v-if="counselor.data.nickName==currentUser.data.nickname" @click="deleteCareer(c.id)">x</button>
+                      </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="accordion-item">
+                    <h2 class="accordion-header" id="panelsStayOpen-headingTwo">
+                      <button class="accordion-button collapsed" v-if="counselor.data.nickName==currentUser.data.nickname" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
+                        약력 추가하기
+                      </button>
+                    </h2>
+                    <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingTwo">
+                      <div class="accordion-body">
+                        <form @submit.prevent="createCareerFunc" class="career-list-form">
+                        <div class="my-3 w-100 d-flex justify-content-start align-items-center ">
+                          <label for="review"></label>
+                          <input  placeholder="추가할 내용을 입력해주세요" type="text" id="review"  style="width:85%; height:25px " v-model="careerContent" required>
+                        </div>
+                        <button class="changebtn" >작성하기</button>
+                      </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- <div class="card" id="carrer-card" style="width: 18rem;">
+                  <div class="card-header">
+                    약력
+                    <button class="add-button" v-if="counselor.data.nickName==currentUser.data.nickname">+</button>          
+                  </div>
+                  <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                      <div v-for="(c,idx) in counselor.data.careers"
+                        :key="idx"
+                        :c="c">
+                        {{c.contents}}
+                      </div>
+                    </li>
+                  </ul>
+                </div> -->
+              
+                <br><br><br>
+
+                <div class="accordion" id="accordionPanelsStayThreeExample">
+                  <div class="accordion-item">
+                    <h2 class="accordion-header" id="panelsStayOpen-headingThree">
+                      <button class="accordion-button"   type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="true" aria-controls="panelsStayOpen-collapseThree">
+                        자격증
+                      </button>
+                    </h2>
+                    <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingThree">
+                      <div class="accordion-body">
+                       <div class="contents" v-for="(c,idx) in counselor.data.certificates"
+                      :key="idx"
+                      :c="c">
+                      {{c.contents}}<button class="add-button"   v-if="counselor.data.nickName==currentUser.data.nickname" @click="deleteCertificate(c.id)">x</button>
+                      </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="accordion-item">
+                    <h2 class="accordion-header" id="panelsStayOpen-headingFour">
+                      <button class="accordion-button collapsed" v-if="counselor.data.nickName==currentUser.data.nickname" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseFour" aria-expanded="false" aria-controls="panelsStayOpen-collapseFour">
+                        자격증 추가하기
+                      </button>
+                    </h2>
+                    <div id="panelsStayOpen-collapseFour" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingFour">
+                      <div class="accordion-body">
+                        <form @submit.prevent="createCertificateFunc" class="certificate-list-form">
+                        <div class="my-3 w-100 d-flex justify-content-start align-items-center ">
+                          <label for="review"></label>
+                          <input  placeholder="추가할 내용을 입력해주세요" type="text" id="review"  style="width:85%; height:25px " v-model="certificateContent" required>
+                        </div>
+                        <button class="changebtn" >작성하기</button>
+                      </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- <div class="card" id="certificate-card" style="width: 18rem;">
+                  <div class="card-header">
+                    자격증<button class="add-button" v-if="counselor.data.nickName==currentUser.data.nickname">+</button>
+                  </div>
+                  <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                      <div v-for="(c,idx) in counselor.data.certificates"
+                      :key="idx"
+                      :c="c">
+                      {{c.contents}}
+                      </div> 
+                    </li>
+                  </ul>
+                </div> -->
+
+                <br>
+
+
+                
+
+                <br>
+
+                <!-- <div class="accordion" id="accordionPanelsStaySevenExample">
+                  <div class="accordion-item">
+                    <h2 class="accordion-header" id="panelsStayOpen-headingSeven">
+                      <button class="accordion-button"   type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseSeven" aria-expanded="true" aria-controls="panelsStayOpen-collapseSeven">
+                        운영중인 그룹
+                      </button>
+                    </h2>
+                    <div id="panelsStayOpen-collapseSeven" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingSeven">
+                      <div class="accordion-body">
+                       <div  class="contents" v-for="(c,idx) in counselor.data.groups"
+                      :key="idx"
+                      :c="c">
+                      {{c.contents}}
+                      </div>
+                      </div>
+                    </div>
+                  </div>
+                </div> -->
+
+
+
+                <br>
+
+
+        
+
+                <br>
+
+                <div class="accordion" id="accordionPanelsStaySixExample">
+                  <div class="accordion-item">
+                    <h2 class="accordion-header" id="panelsStayOpen-headingSix">
+                      <button class="accordion-button"   type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseSix" aria-expanded="true" aria-controls="panelsStayOpen-collapseSix">
+                        리뷰
+                      </button>
+                    </h2>
+                    <div id="panelsStayOpen-collapseSix" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingSix">
+                      <div class="accordion-body">
+                       <div  class="contents" v-for="(c,idx) in counselor.data.reviews"
+                      :key="idx"
+                      :c="c">
+                      {{c.contents}}
+                      </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- <div class="card" id="review-card" style="width: 18rem;">
+                  <div class="card-header">
+                    리뷰
+                  </div>
+                  <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                      <div v-for="(c,idx) in counselor.data.reviews"
+                      :key="idx"
+                      :c="c">
+                      {{c.contents}}
+                      </div> 
+                    </li>
+                  </ul>
+                </div> -->
+
+             
+             
+            
+
+ 
                 </div>
               </div>
             </div>
@@ -39,13 +268,13 @@
         </div>
       </div>
 
-      <div v-if="!favorite">
+      <!-- <div v-if="!favorite">
         <button class="btn btn-link" @click="favoriteCounselor(counselorId)"><i class="fa-solid fa-heart" style="color:black"></i></button>
       </div>
       <div v-else>
         <button class="btn btn-link" @click="favoriteCounselor(counselorId)"><i class="fa-solid fa-heart" style="color:red"></i></button>
-      </div>
-      
+      </div> -->
+<!--       
       <div class="counselor-info-create">
         <div class="black-bg" v-if = "isModalViewed==true">
         <div class="white-bg">
@@ -62,14 +291,14 @@
         </div>
         </div>
       </div>
-    
+     -->
 
 
 
       <!-- <span v-if="currentUser.type === student"> 
         <button>개인상담신청하기</button>
         </span> -->
-      <div class="price">
+      <!-- <div class="price">
         <h4>상담 가격</h4>
         <div class="personal-price" 
         v-if ="ispersonalpriced==false"
@@ -77,10 +306,10 @@
           <li>개인상담 : <input type="text">point</li>
         </div>
         <div v-else>
-          개인상담가격띄워야됨
+          개인상담가격띄워야됨 -->
           <!-- {{counselor.price}} -->
-        </div> 
-      </div>
+        <!-- </div> 
+      </div> -->
 <!-- 
 
       
@@ -125,7 +354,7 @@
       <file-list-comp>
       </file-list-comp> -->
 
-     
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
      
 
   </div>
@@ -152,16 +381,19 @@
     // InfoItemComp,
    
 },  
- 
+
     data() {
       return {
         counselorId: this.$route.params.counselorId,
         isModalViewed: false,
         infoContent:'',
+        careerContent:'',
+        certificateContent:'',
         isdone : false,
         ispersonalpriced: false,
         isgrouppriced: false,
         ismaked: false,
+        
   
       }
     },
@@ -172,10 +404,31 @@
     }
     },
     methods: {
-      ...mapActions(['fetchCounselor','favoriteCounselor','isfavorite']),
-    
-      
+      ...mapActions(['fetchCounselor',
+      'favoriteCounselor',
+      'isfavorite' ,
+      'fetchCurrentUser',
+       'deleteCareer',
+       'createCareer',
+       'deleteCertificate',
+       'createCertificate']),
+   
+      nick1() {
+        return this.currentUser.data.nickName
+      },
 
+      createCareerFunc() {
+        this.createCareer(this.careerContent)
+
+      },
+      createCertificateFunc() {
+        this.createCertificate(this.certificateContent)
+
+      },
+      // createCategoryFunc() {
+      //   this.createCareer(this.categoryContent)
+
+      // },
       createInfo(){
         if (this.isdone === false){
         
@@ -194,8 +447,10 @@
       },
     },
     created() {
+      this.fetchCurrentUser()
       this.fetchCounselor(this.counselorId)
-      console.log(this.counselorId)
+      
+  
       // this.favorite =''
       },
   }
@@ -241,5 +496,18 @@ div {
 }
 
 
+.card-header{
+  display: flex;
+  justify-content: space-between;
 
+}
+.contents{
+  display: flex;
+  justify-content: space-between;
+
+}
+.add-button{
+  border:none;
+  background-color: transparent
+}
 </style>

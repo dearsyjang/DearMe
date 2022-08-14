@@ -10,6 +10,10 @@ export default {
     searched_counselor: [],
     filtering_counselor: [],
     favorite: '',
+    careers: [],
+    categories:[],
+    certificates:[],
+    reviews:[],
   },
 
   getters: {
@@ -18,24 +22,29 @@ export default {
     searched_counselor: state => state.searched_counselor,
     filtering_counselor: state => state.filtering_counselor,
     favorite: state => state.favorite,
-    
+    reviews: state => state.reviews
   },
 
   mutations: {
 
     SET_COUNSELORS:(state, counselors)=> state.counselors=counselors,
     SET_COUNSELOR:(state,counselor)=>state.counselor=counselor,
-    SET_COUNSELOR_REVIEWS: (state, reviews) => (state.counselor.reviews = reviews),
     SEARCH_COUNSELOR: (state, searched_counselor) => state.searched_counselor = searched_counselor,
     FILTER_COUNSELOR: (state, filtering_counselor) => state.filtering_counselor = filtering_counselor,
     SET_FAVORTIE: (state, favorite) => state.favorite = favorite,
+    SET_COUNSELOR_REVIEWS: (state, reviews) => state.reviews = reviews
   },
 
   actions: {
-
+    
     fetchCounselors({ commit, getters }) {
+      let s='';
+      let q=0;
+      let w = 1000000;
+      let a = false;
       axios({
-       url: drf.counselors.counselors(),
+        
+       url: drf.counselors.counselors()+ "category" +s +"&downPrice=" +q + "&upPrice=" + w + "&reviewCntUp=" + a + "&reviewCntDown=" + a + "&reviewScoreUp=" +a + "&reviewScoreDown=" +a + "&favorite=" + a,
        method : 'GET',
        headers: {
         'Content-Type': 'application/json',
@@ -62,17 +71,46 @@ export default {
         }
       })
       .then(res =>{
+    
         commit('SET_COUNSELOR', res.data)})       
       .catch(err => {
         console.error(err.response)
+      
         if (err.response.status === 404) {
+
           router.push({ name: 'NotFound404' })
         }
       })
     },
 
     
-
+    createReview({ commit, getters }, review) {
+     
+      
+      
+      axios({
+        url: drf.counselors.reviews(),
+        method: 'post',
+        data: {
+          id : review.id,
+          contents: review.contents,
+          value : review.value},
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': getters.authHeader2
+          }
+      })
+        .then(res => {
+          commit('SET_COUNSELOR_REVIEWS', res.data)
+          router.push({ name: 'home' })
+        })
+        .catch(err => {
+          
+          console.log(review.id)
+          console.log(review.contents)
+          console.log(review.value)
+          console.error(err.response)})
+    },
 
 
 

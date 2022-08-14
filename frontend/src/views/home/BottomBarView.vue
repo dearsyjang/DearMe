@@ -14,7 +14,7 @@
       <p class="text">마이페이지</p>
     </div>
     <div>
-      <router-link to="/counselor_list" class="img mx-3"><img id="counselor" src="../../assets/images/counselor.png" alt="counselor"></router-link>
+      <router-link to="/counselors/counselorList" class="img mx-3"><img id="counselor" src="../../assets/images/counselor.png" alt="counselor"></router-link>
     <p class="text">상담사조회</p>
     </div>
     <div>
