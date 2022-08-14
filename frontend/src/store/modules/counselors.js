@@ -136,21 +136,20 @@ export default {
 
 
 
-    favorite({ commit, getters }, currentUserId) {
+    favorite({ commit, getters }, UserId) {
      
-      
       
       axios({
         url: drf.counselors.favorites(),
         method: 'post',
-        data: currentUserId,
+        data: UserId,
         headers: {
           'Content-Type': 'application/json',
           'Authorization': getters.authHeader2
           }
       })
         .then(res => {
-          commit('SET_COUNSELOR_REVIEWS', res.data)
+          commit('SET_FAVORITE', res.data)
           router.push({ name: 'home' })
         })
         .catch(err => {

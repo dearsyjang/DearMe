@@ -31,13 +31,24 @@
         <div class="col-md-8">
           <div class="card-body">
             <h5 class="card-title">닉네임 : {{counselor.nickName}}</h5>
+            <span style='font-size:100px;'>&#129505;</span>
+            <p>I will display &#129505;</p>
+            <div v-if="!like">
+            <button class="btn btn-link" @click="likeMovie(movieId)"><i class="fa-solid fa-heart" style="color:black"></i></button>
+            </div>
+            <div v-else>
+            <button class="btn btn-link" @click="likeMovie(movieId)"><i class="fa-solid fa-heart" style="color:red"></i></button>
+            </div>
             <!-- <p class="card-text">{{counselor}}</p> -->
             <p class="card-text"><small class="text-muted">평점 / 후기 수 :{{counselor.value}}/{{counselor.reviewCnt}}</small></p>
           </div>
         </div>
       </div>
     </div>
+    
     </router-link>
+
+    
 
   </div>
 
