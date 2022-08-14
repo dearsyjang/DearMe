@@ -5,19 +5,19 @@
     <!--v-if="action"==""으로 작성, 수정 구분해주기-->
     <hr>
     <div class="container">
-        <h4 id="article-form-title-text">제목</h4>
-        <form @submit.prevent="onSubmit" class="article-form">
-            <input id="article-form-title" type="text" v-model="data.title" placeholder="제목을 입력해주세요.">
-            <br>
-            <br>
-            <h4 id="article-form-content-text">내용</h4>
-            <textarea id="article-form-content" rows="10" max-rows="10" v-model="data.contents" placeholder="내용을 입력해주세요."></textarea>
-            <br>
-            <div>
-                <button type="submit" class="btn" id="article-form-submit-button">저장</button>
-                <router-link :to="{ name: 'board' }"><button button type="button" class="btn" id="article-form-cancel-button">취소</button></router-link>
-            </div>
-        </form>
+      <h4 id="article-form-title-text">제목</h4>
+      <form @submit.prevent="onSubmit()" class="article-form">
+        <input id="article-form-title" type="text" v-model="data.title" placeholder="제목을 입력해주세요.">
+        <br>
+        <br>
+        <h4 id="article-form-content-text">내용</h4>
+        <textarea id="article-form-content" rows="10" max-rows="10" v-model="data.contents" placeholder="내용을 입력해주세요."></textarea>
+        <br>
+        <div>
+            <button type="submit" class="btn" id="article-form-submit-button">저장</button>
+            <router-link :to="{ name: 'board' }"><button button type="button" class="btn" id="article-form-cancel-button">취소</button></router-link>
+        </div>
+      </form>
     </div>
   </div>
 </template>
@@ -39,12 +39,13 @@ export default {
   methods: {
     ...mapActions(['createBoard']),
     onSubmit() {
-      // 토큰문제로 axios 에러 발생하는 듯
-      const formData = new FormData()
-      formData.append('title', this.data.title)
-      formData.append('contents', this.data.contents)
-      console.log(formData.getAll('title'))
-      this.createBoard(this.formData)
+      const subData = {
+        'title': this.data.title,
+        'contents': this.data.contents,
+        // 'date': '2202/02/02'
+      }
+      console.log(subData)
+      this.createBoard(subData)
       }
   },
   created() {},

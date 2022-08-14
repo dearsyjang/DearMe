@@ -1,5 +1,6 @@
 import CalendarView from '@/views/calendar/CalendarView.vue'
 import DayComp from '@/views/calendar/components/DayComp'
+
 export default [
     {
         path: '/calendar',

@@ -1,15 +1,11 @@
 <template>
   <div id="app">
     <top-bar></top-bar>
+    <div class="body">
+      <router-view/>
+    </div>
     <bottom-bar></bottom-bar>
   </div>
-  <nav>
-    <router-link to="/member/login">login</router-link> |
-    <router-link to="/member/signupuser">signup(user)</router-link> |
-    <router-link to="/member/signupcounselor">signup(counselor)</router-link> |
-    <router-link to="/counseling-request/document">req doc</router-link>|
-  </nav>
-  <router-view/>
 </template>
 
 <script>
@@ -25,23 +21,22 @@ import "bulma/css/bulma.css"
 
 <style>
 #app {
+  flex-direction:column;
+  justify-content: center;
+  align-items:center;
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
+  color: black;
 }
 
-nav {
-  padding: 30px;
-}
-
-nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-nav a.router-link-exact-active {
-  color: #42b983;
+.body {
+  width: 100%;
+  height: 77vh;
+  padding: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
 }
 </style>
