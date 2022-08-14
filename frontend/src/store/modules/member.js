@@ -61,9 +61,10 @@ export default {
         .then(res => {
           const token = res.data.data.accessToken
           console.log(res.data)
-         
+
           dispatch('saveToken', token)
           dispatch('fetchCurrentUser')
+          location.reload();
           router.push({ name: 'mypageUser' })
         })
         .catch(err => {
@@ -139,8 +140,8 @@ export default {
   //   .then(res => {
   //     console.log(res)
   //     commit('SET_CURRENT_USER', res.data)
-  //   })       
-      
+  //   })
+
   //   .catch(err => console.error(err) )
   // },
    fetchCurrentUser({ commit, getters, dispatch }) {
@@ -162,7 +163,11 @@ export default {
                 'Authorization': getters.authHeader2
                }
         })
-          .then(res => commit('SET_CURRENT_USER', res.data))
+          .then(res => {
+
+            commit('SET_CURRENT_USER', res.data)
+            location.reload();
+          })
           .catch(err => {
             if (err.response.status === 401) {
               dispatch('removeToken')
@@ -174,8 +179,8 @@ export default {
 
 
     createCareer({ commit, getters }, contents) {
-     
-    
+
+
       axios({
         url: drf.member.careerCreate(),
         method: 'post',
@@ -214,8 +219,8 @@ export default {
       }
   },
   createCertificate({ commit, getters }, content) {
-     
-    
+
+
     axios({
       url: drf.member.certificateCreate(),
       method: 'post',

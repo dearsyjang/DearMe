@@ -1,52 +1,87 @@
 <template>
-    <div class="board-list container">
-        <br>
-        <h1>상담 게시판</h1>
-        <router-link to="/board/create"><button type="button" id="create-button" class="btn mb-3">새 글 작성</button></router-link>
-      <div>
-        <!-- <div class="col-md-6 col-xl-4">
-          <div class="card bg-warning text-white mb-3">
-            <div class="card-header">{{ board.}}</div>
-            <div class="card-body">
-              <h5 class="card-title text-white">Warning card title</h5>
-              <p class="card-text">
-                Some quick example text to build on the card title and make up.
-              </p>
-            </div>
+<div class="page-content-wrapper py-3">
+  <div class="shop-pagination pb-3">
+    <div class="container">
+      <div class="card">
+        <div class="card-body p-2">
+          <div class="d-flex align-items-center justify-content-between">
+            <small class="ms-1">게시글 목록</small>
+            <router-link to="/board/create"><button class="btn btn-primary btn-sm">게시글 작성</button></router-link>
           </div>
-        </div> -->
-        <table>
-          <thead>
-          <tr>
-            <th>No</th>
-            <th>nickName</th>
-            <th>title</th>
-            <th>hitCnt</th>
-            <th>date</th>
-          </tr>
-          </thead>
-          <tbody>
-            <tr v-for="board in boards" :key="board.id">
-              <td>{{ board.id }}</td>
-              <td>{{ board.nickName }}</td>
-              <!-- <td><router-link :to="{ name: 'boardDetail', params: { boardid: board.id }}">
-              {{ board.title }}
-              </router-link></td> -->
-              <td>{{ board.title }}</td>
-              <td>{{ board.hitCnt }}</td>
-              <td>{{ board.date }}</td>
-            </tr>
-          </tbody>
-        </table>
+        </div>
       </div>
     </div>
+  </div>
+  <div class="top-products-area product-list-wrap">
+    <div class="container">
+      <div class="row g-3">
+        <div v-for="board in boards" :key="board" class="col-12">
+          <div class="card single-product-card">
+            <div class="card-body">
+              <div class="d-flex align-items-center">
+                <div class="card-side-img">
+                </div>
+                <div class="card-content px-4 py-2">
+                  <a class="product-title d-block text-truncate mt-0" href="#">{{ board.title }}</a>
+                  <p class="sale-price">{{ board.date[0]}}.{{ board.date[1] }}.{{ board.date[2] }}</p>
+                  <router-link :to="{ name: 'boardDetail', params: {boardId: board.id }}">
+                    <a class="btn btn-danger btn-sm disabled" href="#">
+                      게시글 자세히 보기
+                    </a>
+                  </router-link>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="shop-pagination pt-3">
+      <div class="container">
+        <div class="card">
+          <div class="card-body py-3">
+            <nav aria-label="Page navigation example">
+              <ul class="pagination pagination-two justify-content-center">
+                <li class="page-item">
+                  <a class="page-link" href="#" aria-label="Previous">
+                    <i class="bi bi-chevron-left"></i>
+                  </a>
+                </li>
+                <li class="page-item active">
+                  <a class="page-link" href="#">1</a>
+                </li>
+                <li class="page-item">
+                  <a class="page-link" href="#">2</a>
+                </li>
+                <li class="page-item">
+                  <a class="page-link" href="#">3</a>
+                </li>
+                <li class="page-item">
+                  <a class="page-link" href="#">...</a>
+                </li>
+                <li class="page-item">
+                  <a class="page-link" href="#">9</a>
+                </li>
+                <li class="page-item">
+                  <a class="page-link" href="#" aria-label="Next">
+                    <i class="bi bi-chevron-right"></i>
+                  </a>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 </template>
 
 <script>
 import { mapActions, mapGetters } from 'vuex'
 
 export default {
-// 임시 게시글 데이터
   computed: {
     ...mapGetters(['boards'])
   },

@@ -1,35 +1,45 @@
 <template>
-  <div id="article-form">
-    <br>
-    <h1>게시글 작성하기</h1>
-    <!--v-if="action"==""으로 작성, 수정 구분해주기-->
-    <hr>
+  <div class="page-content-wrapper py-3">
+  <div class="shop-pagination pb-3">
     <div class="container">
-      <h4 id="article-form-title-text">제목</h4>
-      <form class="article-form">
-        <p>{{ board.title }}</p>
-        <br>
-        <br>
-        <h4 id="article-form-content-text">내용</h4>
-        <p id="article-form-content" rows="10" max-rows="10">{{ board.contents }}</p>
-        <br>
-        <div>
-          <router-link :to="{name: 'boardUpdate'}"><button>수정</button></router-link>
-          <router-link :to="{ name: 'board' }"><button button type="button" class="btn" id="article-form-cancel-button">목록</button></router-link>
+      <div class="card">
+        <div class="card-body p-2">
+          <div class="d-flex align-items-center justify-content-between">
+            <small class="ms-1">게시글 보기</small>
+            <div>
+              <router-link to="/board"><button class="btn btn-primary btn-sm">목록</button></router-link>
+              <button @click="onSubmit()" class="btn btn-danger btn-sm mx-3">편집</button>
+            </div>
+          </div>
         </div>
-        <div>
-        </div>
-      </form>
+      </div>
     </div>
-    <!-- <p>{{ board.comments }}</p> -->
-    <!-- <div v-for="comment in board.comments" :key="comment">
-      <comment-list-comp :comment="comment.contents" ></comment-list-comp>
-    </div> -->
-    <!-- counselor 경우 -->
+  </div>
+  <div class="top-products-area product-list-wrap">
+    <div class="container">
+      <div class="row g-3">
+          <div class="card single-product-card">
+            <div class="card-body">
+              <div class="d-flex align-items-center">
+                <div class="form-group">
+                  <label class="form-label" for="exampleInputText">제목</label>
+                  <p>{{ board.title }}</p>
+                </div>
+              </div>
+              <div class="d-flex align-items-center">
+                <div class="form-group">
+                  <label class="form-label" for="exampleInputText">내용</label>
+                  <p>{{ board.contents }}</p>
+                </div>
+              </div>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
     <comment-list-form></comment-list-form>
     <comment-list-comp :comments="board.comments"></comment-list-comp>
-
-  </div>
+</div>
 </template>
 
 <script>
@@ -38,6 +48,8 @@ import { mapActions, mapGetters } from 'vuex'
 import commentListForm from './components/commentListForm.vue'
 import commentListComp from './components/commentListComp.vue'
 export default {
+  props: {
+  },
   components: {
     commentListForm,
     commentListComp,
@@ -47,7 +59,8 @@ export default {
     return {
       data: {
         title: '',
-        contents: ''
+        contents: '',
+        boardId: this.$route.params.boardId
       }
     }
   },
@@ -59,7 +72,7 @@ export default {
     ...mapActions(['fetchBoard', 'deleteBoard']),
   },
   created() {
-    this.fetchBoard(1)},
+    this.fetchBoard(this.data.boardId)},
   mounted() {},
   unmounted() {},
 }

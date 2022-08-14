@@ -27,6 +27,7 @@ export default {
       })
       .then(res => {
         commit('SET_BOARDS', res.data.data.content)
+        location.reload();
       })
       .catch(err => console.error(err.response))
     },
@@ -39,6 +40,7 @@ export default {
       })
       .then(res => {
         commit('SET_MY_ID', res.data.data.id)
+        location.reload();
       })
       .catch(err => console.error(err.response))
     },

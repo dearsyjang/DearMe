@@ -15,7 +15,6 @@
       <router-link to="/point">
       <button id="con2" class="btn btn-primary col-sm-6">충전하기</button>
       </router-link>
-
       <div class="container direction-rtl my-4">
       <div class="card mb-3">
         <div class="card-body">
@@ -58,7 +57,8 @@ export default {
     }
   },
   setup() {},
-  created() {},
+  created() {
+  },
   mounted() {},
   unmounted() {},
   methods: {
