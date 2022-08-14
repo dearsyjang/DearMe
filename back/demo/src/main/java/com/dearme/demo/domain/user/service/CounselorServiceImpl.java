@@ -101,13 +101,13 @@ public class CounselorServiceImpl implements CounselorService{
         return value;
     }
     public OrderSpecifier order(CounselorSearchRequestDto dto){
-         if(dto.getReviewCntUp()){
+         if(dto.getReviewCntUp().equals("true")){
             return user.counselorProfile.reviewcnt.asc();
-        }else if(dto.getReviewCntDown()){
+        }else if(dto.getReviewCntDown().equals("true")){
             return user.counselorProfile.reviewcnt.desc();
-        }else if(dto.getReviewScoreUp()){
+        }else if(dto.getReviewScoreUp().equals("true")){
             return user.counselorProfile.reviewvalue.asc();
-        }else if(dto.getReviewScoreDown()){
+        }else if(dto.getReviewScoreDown().equals("true")){
             return user.counselorProfile.reviewvalue.desc();
         }else{
             return user.nickName.asc();
