@@ -54,7 +54,10 @@ export default {
       })
         .then(res => {
           const token = res.data.data.accessToken
+
+
           console.log(res.data)
+
           dispatch('saveToken', token)
           dispatch('fetchCurrentUser')
           router.push({ name: 'mypageUser' })
@@ -79,8 +82,11 @@ export default {
       .then(res => {
           // console.log(res)
           // console.log(res.data)
+
+
           // console.log(res.data.data)
           // console.log(res.data.data.accessToken)
+
           const token = res.data.data.accessToken
           console.log(token)
           // 로컬스토리지에 토큰 저장
@@ -171,5 +177,24 @@ export default {
         .catch(err => console.error(err.response))
     }
   },
+  fetchCurrentUser({ commit, getters, dispatch }) {
+    if (getters.isLoggedIn) {
+      axios({
+        url: drf.member.currentUserInfo(),
+        method: 'get',
+        headers: getters.authHeader,
+      })
+        .then(res => {
+          commit('SET_CURRENT_USER', res.data.data.accessToken)
+        })
+        .catch(err => {
+          if (err.response.status == 401) {
+            dispatch('removeToken')
+            router.push({ name: 'login' })
+          }
+        })
+    }
+  },
+
 }
 }

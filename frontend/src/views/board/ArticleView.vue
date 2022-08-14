@@ -1,134 +1,74 @@
 <template>
-  <div id="ArticleView" class="container">
+  <div id="article-form">
     <br>
-    <!--데이터 연결하기-->
-    <div id="ArticleViewTop">
-        <h3 id="article-view-top-title">제목</h3>
-        <p id="article-view-top-date">작성일: </p>
-        <p id="article-view-user">작성자: </p>
-    </div>
-
-    <div id="ArticleViewMiddle">
-        <p>게시글 내용</p>
-    </div>
-    
-    <div>
-        <!--버튼 if -->
-        <button id="article-view-update-button" class="btn m-1">수정하기</button>
-        <button id="article-view-delete-button" class="btn m-1" @click="articleDelete(articlePk)">삭제하기</button>
-        <router-link :to="{ name: 'board' }">
-        <button id="article-view-back-button" type="button" class="btn m-1">글 목록</button>
-        </router-link>
-    </div>
-
-    <div id="article-view-bottom">
-        <!-- <comment-list></comment-list> -->
+    <h1>게시글 작성하기</h1>
+    <!--v-if="action"==""으로 작성, 수정 구분해주기-->
+    <hr>
+    <div class="container">
+      <h4 id="article-form-title-text">제목</h4>
+      <form class="article-form">
+        <input id="article-form-title" type="text" v-model="data.title" placeholder="제목을 입력해주세요.">
         <br>
-        <comment-create-form></comment-create-form>
+        <br>
+        <h4 id="article-form-content-text">내용</h4>
+        <textarea id="article-form-content" rows="10" max-rows="10" v-model="data.contents" placeholder="내용을 입력해주세요."></textarea>
+        <br>
+        <div>
+            <button type="submit" class="btn" id="article-form-submit-button">저장</button>
+            <router-link :to="{ name: 'board' }"><button button type="button" class="btn" id="article-form-cancel-button">취소</button></router-link>
+        </div>
+      </form>
     </div>
-    
   </div>
-
 </template>
 
 <script>
-import CommentCreateForm from './components/CommentCreateForm.vue'
-// import CommentList from './components/CommentList.vue'
-
+import { mapActions, mapGetters } from 'vuex'
 export default {
-  components: { 
-    // CommentList, 
-    CommentCreateForm 
-    },
-}
+  components: {},
+  data() {
+    return {
+      data: {
+        title: this.board.title,
+        contents: this.board.contents
+      }
+    }
+  },
+  computed: {
+    ...mapGetters(['board'])
 
+  },
+  methods: {
+    ...mapActions(['fetchBoard']),
+  },
+  created() {
+    this.fetchBoard(1)},
+  mounted() {},
+  unmounted() {},
+}
 </script>
 
 <style>
-#ArticleView {
-  width: auto;
-  display: flex;  
-  flex-direction: column;
-  justify-content:space-between;
-  font-size: 20px;
+#article-form-title, #article-form-content {
+    width: 100%;
 }
 
-#ArticleViewTop {
-  width: auto;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+#article-form-title-text, #article-form-content-text{
+  text-align: start;
 }
 
-#article-view-top-title{
-  font-size:40px;
-  font-weight:bold;
-}
-
-#article-view-top-date, #article-view-user{
-  font-size: 15px;
-  
-}
-
-#article-view-user {
-    margin:none;
-}
-
-#ArticleViewMiddle{
-  height: 300px;
-  width: 100%;
-  padding: 10px;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  background-color: #F9F7F7;
-}
-
-#like-button{
-  background-color:transparent;
-  color: black;
-}
-
-#article-view-update-button{
+#article-form-submit-button {
   width:auto; height:50px;
   background-color: #3282B8;
+  margin: 3px;
+  outline: none;
 }
 
-#article-view-delete-button{
+#article-form-cancel-button{
   width:auto; height:50px;
   background-color: #B83232;
+  margin: 3px;
+  outline: none;
 }
 
-#article-view-back-button{
-  width:auto; height:50px;
-  background-color: #5fb832;
-}
-
-#article-view-middle-buttons{
-  width: 100%;
-  margin-top: 10px;
-  margin-bottom: 10px;
-}
-
-#ArticleViewBottom {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;  
-  margin-top: 10px;
-  margin-bottom: 10px;
-}
-
-#ArticleViewBottom a{
-  align-self: flex-end;
-}
-
-#CommentList {
-  width: 100%;
-  text-align:start;
-  margin-top: 5px;
-  margin-bottom: 5px;  
-}
 </style>

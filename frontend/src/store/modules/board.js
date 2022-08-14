@@ -26,13 +26,14 @@ export default {
   actions: {
     // 전체 게시글 조회
     fetchBoards({ commit, getters }) {
+      // page, size 가 뭐지
       axios({
-        url: drf.board.boardsList(),
+        url: drf.board.boardsList()+`page=0&size=5`,
         method: 'get',
         headers: getters.authHeader,
       })
-        .then(res => commit('SET_BOARDS', res.data))
-        .catch(err => console.error(err.response))
+      .then(res => commit('SET_BOARDS', res.data.data))
+      .catch(err => console.error(err.response))
     },
 
     // 게시글 상세 페이지
@@ -53,20 +54,29 @@ export default {
 
     // 게시글 작성
     createBoard({ commit, getters }, board) {
-      // console.log(board)
-      // console.log(getters.authHeader)
+      console.log(getters.authHeader2)
       axios({
-        url: drf.board.create(),
+        url: 'https://i7d206.p.ssafy.io/boards',
         method: 'post',
-        data: board,
-        headers: getters.authHeader
-      })
+        data: {
+          'title': board.title,
+          'contents': board.contents
+        },
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': getters.authHeader2
+          }
+        // headers: getters.authHeader
+    })
         .then(res => {
-          commit('SET_BOARD', res.data)
+          console.log(res.data)
+          console.log(res.data.data)
+          commit('SET_BOARD', res.data.data)
           router.push({
             name: 'board'
           })
         })
+        .catch(err => console.error(err))
     },
     // 게시글 수정
     updateBoard({ commit, getters }, { boardPk, title, content}) {
