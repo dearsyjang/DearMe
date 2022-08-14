@@ -26,6 +26,7 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex'
+// 사용자 스케줄 => /counseling-schedule/userschedule
 
 
 export default {
