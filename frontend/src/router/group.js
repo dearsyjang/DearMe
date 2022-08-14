@@ -8,7 +8,7 @@ export default [
     component: GroupRequestView,
   },
   {
-    path: "/group/detail",
+    path: "/group/detail/:groupId",
     name: "groupDetail",
     component: GroupDetailView,
   },

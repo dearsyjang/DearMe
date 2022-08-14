@@ -1,8 +1,13 @@
 <template>
   <div>
   <div>
+    <!-- {{currentUser.data}} -->
+    <!-- {{groups}} -->
+   
     <h2>상담사 프로필 페이지</h2>
-    
+    <router-link :to="{ name: 'counselingReview', params : {counselorId : counselor.data.userId}}">
+                <button>리뷰 쓰러가는 버튼! 상담 나가기에 버튼 달아도 되고 종료시 라우터 푸시로 해도됨</button>
+                </router-link>
     <router-link to="/counseling-request"  >
       <button v-if="currentUser.data.type==`USER`">상담 신청</button>
     </router-link>
@@ -50,7 +55,7 @@
                        <div  class="contents" v-for="(c,idx) in counselor.data.categories"
                         :key="idx"
                         :c="c">
-                        {{c.contents}}<button class="add-button"   v-if="counselor.data.nickName==currentUser.data.nickname" @click="deleteCertificate(c.id)">x</button>
+                        {{c.contents}}
                       </div>
                       </div>
                     </div>
@@ -188,7 +193,66 @@
                 <br>
 
 
-                
+          
+                <br>
+
+                <div class="accordion" id="accordionPanelsStaySevenExample">
+                  <div class="accordion-item">
+                    <h2 class="accordion-header" id="panelsStayOpen-headingSeven">
+                      <button class="accordion-button"   type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseSeven" aria-expanded="true" aria-controls="panelsStayOpen-collapseSeven">
+                        운영중인 그룹
+                      </button>
+                    </h2>
+                    <div id="panelsStayOpen-collapseSeven" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingSeven">
+                      <div class="accordion-body">
+                       <div  class="contents" v-for="(c,idx) in counselor.data.groups"
+                      :key="idx"
+                      :c="c">
+                      그룹 번호 : {{c.id}}
+                      그룹 이름 : {{c.title}}
+                      <router-link :to="{name:'groupDetail', params: {groupId:c.id}}">
+                      <button>그룹 상세페이지</button>
+                      </router-link>
+                      </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+
+
+                <br>
+
+
+        
+
+                <br>
+
+                <!-- <div class="accordion" id="accordionPanelsStaySevenExample">
+                  <div class="accordion-item">
+                    <h2 class="accordion-header" id="panelsStayOpen-headingSeven">
+                      <button class="accordion-button"   type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseSeven" aria-expanded="true" aria-controls="panelsStayOpen-collapseSeven">
+                        운영중인 그룹
+                      </button>
+                    </h2>
+                    <div id="panelsStayOpen-collapseSeven" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingSeven">
+                      <div class="accordion-body">
+                       <div  class="contents" v-for="(c,idx) in counselor.data.groups"
+                      :key="idx"
+                      :c="c">
+                      {{c.contents}}
+                      </div>
+                      </div>
+                    </div>
+                  </div>
+                </div> -->
+
+
+
+                <br>
+
+
+        
 
                 <br>
 
@@ -204,7 +268,7 @@
                        <div  class="contents" v-for="(c,idx) in counselor.data.reviews"
                       :key="idx"
                       :c="c">
-                      {{c.contents}}<button class="add-button"   v-if="counselor.data.nickName==currentUser.data.nickname" @click="deleteCertificate(c.id)">x</button>
+                      {{c.contents}}
                       </div>
                       </div>
                     </div>
@@ -351,6 +415,7 @@
     // InfoItemComp,
    
 },  
+
     data() {
       return {
         counselorId: this.$route.params.counselorId,
@@ -367,7 +432,7 @@
       }
     },
     computed : {
-      ...mapGetters(['counselor','currentUser', 'favorite']),
+      ...mapGetters(['counselor','currentUser', 'favorite','groups']),
       infos() {
       return this.$store.state.infos
     }
@@ -380,7 +445,8 @@
        'deleteCareer',
        'createCareer',
        'deleteCertificate',
-       'createCertificate']),
+       'createCertificate',
+       'fetchGroups']),
    
       nick1() {
         return this.currentUser.data.nickName
@@ -388,10 +454,12 @@
 
       createCareerFunc() {
         this.createCareer(this.careerContent)
+        
 
       },
       createCertificateFunc() {
         this.createCertificate(this.certificateContent)
+       
 
       },
       // createCategoryFunc() {
@@ -418,6 +486,7 @@
     created() {
       this.fetchCurrentUser()
       this.fetchCounselor(this.counselorId)
+      this.fetchGroups()
       
   
       // this.favorite =''

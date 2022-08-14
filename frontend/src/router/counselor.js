@@ -17,7 +17,7 @@ export default [
         name: 'attachfile',
         component: FileFormComp
       },
-      {
+         {
         path: '/counselors/:counselorId',
         name: 'counselorProfile',
         component: CounselorDetailView

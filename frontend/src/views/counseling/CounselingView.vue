@@ -3,17 +3,9 @@
     <div id="join" v-if="!session">
       <div id="join-dialog" class="jumbotron vertical-center">
         <div class="form-group">
-          <!-- <p>
-            <label>Participant</label>
-            <input v-model="myUserName" class="form-control" type="text" required />
-          </p>
-          <p>
-            <label>Session</label>
-            <input v-model="mySessionId" class="form-control" type="text" required />
-          </p> -->
           <p class="text-center">
-            <button class="btn btn-lg btn-success" @click="joinSession()">Join!</button>
-            <button class="btn btn-lg btn-success" @click="createToken()">token!</button>
+            <button class="btn btn-lg btn-success" @click="createToken()">상담방 입장</button>
+            <button class="btn btn-lg btn-success" @click="joinToken()">그룹 상담방 입장</button>
           </p>
         </div>
       </div>
@@ -51,18 +43,25 @@
 
 <script>
 import axios from 'axios';
+// axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
+// axios.defaults.headers.common['Content-Type'] = 'application/x-www-form-urlencoded'
+// axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
 import { OpenVidu } from 'openvidu-browser';
 import UserVideo from './components/UserVideo';
-// import { mapGetters } from 'vuex';
+import { mapGetters } from 'vuex';
 
 axios.defaults.headers.post['Content-Type'] = 'application/json';
-const OPENVIDU_SERVER_URL = "https://i7d206.p.ssafy.io:4443";
-const OPENVIDU_SERVER_SECRET = "dearme";
+// const OPENVIDU_SERVER_URL = "https://i7d206.p.ssafy.io:4443";
+// const OPENVIDU_SERVER_SECRET = "dearme";
 
 export default {
   name: 'App',
   components: {
     UserVideo,
+  },
+
+  computed: {
+    ...mapGetters(['authHeader2'])
   },
 
   data() {
@@ -72,8 +71,10 @@ export default {
       mainStreamManager: undefined,
       publisher: undefined,
       subscribers: [],
+      subscriber: undefined,
       mySessionId: '', // 방 이름
       myUserName: '', // 유저 닉네임
+      counselingId: this.$route.params.counselingId,
     };
   },
 
@@ -81,42 +82,9 @@ export default {
   // First request performs a POST to /openvidu/api/sessions (we send a customSessionId field to name the session with our mySessionId value retrieved from HTML input)
   // Second request performs a POST to /openvidu/api/sessions/<sessionId>/connection (the path requires the sessionId to assign the token to this same session)
 
-
-  // 닉네임 가져오기
-  create() {
-    let access_token = localStorage.getItem('token')
-    let config = {
-      headers: {
-        Authorization: access_token
-      }
-    }
-
-    axios
-      .get('https://i7d206.p.ssafy.io/users', config)
-      .then(response => {
-        console.log(response)
-        let myUserName = response.data.data.nickName
-        this.myUserName = myUserName
-      })
-  },
-
-
-  // created() {
-  //   axios({
-  //     method: 'get',
-  //     url: 'https://i7d206.p.ssafy.io/users',
-  //     headers:{
-  //       Authorization: `Token ${state.token}`
-  //     }
-  //   })
-  //   .then((data) => {
-  //     this.myUserName = data.data.nickName
-  //   })
-  // },
-
   methods: {
-    joinSession() {
-      // --- Get an OpenVidu object ---
+    joinToken() {
+
       this.OV = new OpenVidu();
 
       // --- Init a session --- 세션 초기화
@@ -127,6 +95,8 @@ export default {
       this.session.on('streamCreated', ({ stream }) => {
         const subscriber = this.session.subscribe(stream);
         this.subscribers.push(subscriber);
+        console.log(stream)
+        console.log(subscriber)
       });
       // On every Stream destroyed...
       this.session.on('streamDestroyed', ({ stream }) => {
@@ -141,14 +111,37 @@ export default {
         console.warn(exception);
       });
 
-      // token을 백에서 받아오자
-      this.getToken().then(token => {
-        console.log(token)
-        this.session.connect(token, { clientData: this.myUserName })
+
+      return new Promise((resolve, reject) => {
+        
+        let authHeader = this.authHeader2
+        let counselingId = this.counselingId // 왜!!!!!!!!!!!!!!!!!!! 토큰!!!!!!!!!!!!!!!!!
+        console.log(counselingId)
+
+        axios
+          .get(
+            `https://i7d206.p.ssafy.io/counseling-rooms/` + counselingId,       
+             {
+              headers: {
+                Authorization : authHeader
+              }
+            }
+          )
+          .then((response) => response.data)
+          .then((data) => {
+            console.log('data', data)
+            resolve(data.token)
+            console.log(data.data.counselorToken)
+            return data.data.token
+          })
+          .then((token) => {
+            console.log(token)
+            
+              this.session.connect(token, { clientData: this.myUserName })
           .then(() => {
 
               // 영상 가져오기
-              let publisher = this.OV.initPublisher(undefined, {
+              let subscriber = this.OV.initPublisher(undefined, {
                   audioSource: undefined, // The source of audio. If undefined default microphone
                   videoSource: undefined, // The source of video. If undefined default webcam
                   publishAudio: true,     // Whether you want to start publishing with your audio unmuted or not
@@ -159,17 +152,74 @@ export default {
                   mirror: false           // Whether to mirror your local video or not
               });
 
-            this.mainStreamManager = publisher;
-						this.publisher = publisher;
-
-            this.session.publish(this.publisher)
+            this.mainStreamManager = subscriber;
+            console.log('메인스트림', this.mainStreamManager)
+						this.subscriber = subscriber;
+            console.log('subscriber', subscriber)
+            this.session.subscriber(this.subscriber)
           })
           .catch(error => {
               console.log('There was an error connecting to the session:', error.code, error.message);
           });
-      });
-      window.addEventListener('beforeunload', this.leaveSession);
-      },
+          })
+          .catch((error) => reject(error.response));
+			});
+		},
+    // joinSession() {
+    //   // --- Get an OpenVidu object ---
+    //   this.OV = new OpenVidu();
+
+    //   // --- Init a session --- 세션 초기화
+    //   this.session = this.OV.initSession();
+
+    //   // --- Specify the actions when events take place in the session ---
+    //   // On every new Stream received... 참가자 추가
+    //   this.session.on('streamCreated', ({ stream }) => {
+    //     const subscriber = this.session.subscribe(stream);
+    //     this.subscribers.push(subscriber);
+    //   });
+    //   // On every Stream destroyed...
+    //   this.session.on('streamDestroyed', ({ stream }) => {
+    //     const index = this.subscribers.indexOf(stream.streamManager, 0);
+    //     if (index >= 0) {
+    //       this.subscribers.splice(index, 1);
+    //     }
+    //   });
+
+    //   // On every asynchronous exception... 비동기 오류
+    //   this.session.on('exception', ({ exception }) => {
+    //     console.warn(exception);
+    //   });
+
+    //   // token을 백에서 받아오자
+    //   this.getToken().then(token => {
+    //     console.log(token)
+    //     this.session.connect(token, { clientData: this.myUserName })
+    //       .then(() => {
+
+    //           // 영상 가져오기
+    //           let publisher = this.OV.initPublisher(undefined, {
+    //               audioSource: undefined, // The source of audio. If undefined default microphone
+    //               videoSource: undefined, // The source of video. If undefined default webcam
+    //               publishAudio: true,     // Whether you want to start publishing with your audio unmuted or not
+    //               publishVideo: true,     // Whether you want to start publishing with your video enabled or not
+    //               resolution: '640x480',  // The resolution of your video
+    //               frameRate: 30,          // The frame rate of your video
+    //               insertMode: 'APPEND',   // How the video is inserted in the target element 'video-container'
+    //               mirror: false           // Whether to mirror your local video or not
+    //           });
+
+    //         this.mainStreamManager = publisher;
+		// 				this.publisher = publisher;
+
+    //         this.session.publish(this.publisher)
+    //       })
+    //       .catch(error => {
+    //           console.log('There was an error connecting to the session:', error.code, error.message);
+    //       });
+    //   });
+    //   window.addEventListener('beforeunload', this.leaveSession);
+    //   },
 
 
     leaveSession() {
@@ -201,69 +251,10 @@ export default {
      *   3) The Connection.token must be consumed in Session.connect() method
     */
 
-
-    // 원래 코드
-    // getToken (mySessionId) {
-		// 	return this.createSession(mySessionId).then(sessionId => this.createToken(sessionId));
-		// },
-
-
-    // --------------- 백이랑 통신할 때, 이 부분 살려주기 --------------------------------------------
-    // 백으로 사용자 accessToken을 보내줘야해
-    // accessToken을 가져오자
-    getToken(usertoken) {
-      // console.log(usertoken)
-      usertoken = localStorage.getItem('token')
-      usertoken = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6InRlc3QzMSIsImlzcyI6ImRlYXJtZSIsImlhdCI6MTY2MDE4MTQ2MywiZXhwIjoxNjYwMTg1MDYzfQ.-HHWFWV0Qu4nbcXtNVzQL_pCnAMPZopPY45i_3iOp5Q'
-
-      // usertoken을 sessionId 토큰으로 변환 => createToken
-      // let idtoken = this.createSession(usertoken).then(sessionId => this.createToken(sessionId));
-      // console.log('idtoken', idtoken)
-      return usertoken
-    },
-
-
-    // See https://docs.openvidu.io/en/stable/reference-docs/REST-API/#post-openviduapisessions
-    createSession(sessionId) {
-      return new Promise((resolve, reject) => {
-        axios
-          .post(
-            `${OPENVIDU_SERVER_URL}/openvidu/api/sessions`,
-            JSON.stringify({
-              customSessionId: sessionId,
-            }),
-            {
-              auth: {
-                username: 'OPENVIDUAPP',
-                password: OPENVIDU_SERVER_SECRET,
-              },
-            }
-          )
-          .then((response) => response.data)
-          .then((data) => resolve(data.id))
-          .catch((error) => {
-            if (error.response.status === 409) {
-              resolve(sessionId);
-            } else {
-              console.warn(
-                `No connection to OpenVidu Server. This may be a certificate error at ${OPENVIDU_SERVER_URL}`
-              );
-              if (
-                window.confirm(
-                  `No connection to OpenVidu Server. This may be a certificate error at ${OPENVIDU_SERVER_URL}\n\nClick OK to navigate and accept it. If no certificate warning is shown, then check that your OpenVidu Server is up and running at "${OPENVIDU_SERVER_URL}"`
-                )
-              ) {
-                location.assign(`${OPENVIDU_SERVER_URL}/accept-certificate`);
-              }
-              reject(error.response);
-            }
-          });
-      });
-    },
-
-    // See https://docs.openvidu.io/en/stable/reference-docs/REST-API/#post-openviduapisessionsltsession_idgtconnection
+    // 백이랑 통신 코드!!
     createToken() {
-this.OV = new OpenVidu();
+
+      this.OV = new OpenVidu();
 
       // --- Init a session --- 세션 초기화
       this.session = this.OV.initSession();
@@ -288,17 +279,18 @@ this.OV = new OpenVidu();
       });
 
 
-
       return new Promise((resolve, reject) => {
+        
+        let authHeader = this.authHeader2
+        let counselingId = this.counselingId // 왜!!!!!!!!!!!!!!!!!!! 토큰!!!!!!!!!!!!!!!!!
+        console.log(counselingId)
+
         axios
-          .post(
-            `https://i7d206.p.ssafy.io/counseling-room`,
-            {
-              counselingId : 7,
-            },           
+          .get(
+            `https://i7d206.p.ssafy.io/counseling-rooms/` + counselingId,       
              {
               headers: {
-                Authorization : 'token eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6InRlc3QzMSIsImlzcyI6ImRlYXJtZSIsImlhdCI6MTY2MDE4MTQ2MywiZXhwIjoxNjYwMTg1MDYzfQ.-HHWFWV0Qu4nbcXtNVzQL_pCnAMPZopPY45i_3iOp5Q'
+                Authorization : authHeader
               }
             }
           )
@@ -307,7 +299,7 @@ this.OV = new OpenVidu();
             console.log('data', data)
             resolve(data.token)
             console.log(data.data.counselorToken)
-            return data.data.counselorToken
+            return data.data.token
           })
           .then((token) => {
             console.log(token)
@@ -329,18 +321,11 @@ this.OV = new OpenVidu();
 
             this.mainStreamManager = publisher;
 						this.publisher = publisher;
-
             this.session.publish(this.publisher)
           })
           .catch(error => {
               console.log('There was an error connecting to the session:', error.code, error.message);
           });
-
-
-
-
-
-
           })
           .catch((error) => reject(error.response));
 			});

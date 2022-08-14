@@ -5,6 +5,8 @@ import SignupCounselorView from '@/views/member/SignupCounselorView.vue'
 import FindIdView from '@/views/member/FindIdVeiw.vue'
 import FindPasswordView from '@/views/member/FindPasswordVeiw.vue'
 import ProfileUserView from '@/views/member/ProfileUserView.vue'
+import SignupTypeView from '@/views/member/SignupTypeView.vue'
+
 export default [
   {
     path: '/member/login',
@@ -15,6 +17,11 @@ export default [
     path: '/member/logout',
     name: 'logout',
     component: LogoutView
+  },
+  {
+    path: '/member/signuptype',
+    name: 'signuptype',
+    component: SignupTypeView
   },
   {
     path: '/member/signupuser',

@@ -80,8 +80,9 @@ export default {
       })
         .then(res => {
           commit('SET_REQUEST', res.data)
+          alert('상담 신청이 완료되었습니다.')
           router.push({
-            name: 'request'
+            name: 'counselorList'
           })
         })
         .catch((err) => {
@@ -94,6 +95,34 @@ export default {
           console.log(request.day)
           console.log(request.hours)
 
+          console.error(err)
+          console.error(err.response.data)
+         
+        })
+    },
+
+    updateRequest({ commit, getters }, change ) {
+      
+      axios({
+        url: drf.counselingRequest.requestUpdate(),
+        method: 'put',
+        data: { id: change.id,
+              status: change.status },
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': getters.authHeader2
+          }
+      })
+        .then(res => {
+          commit('SET_REQUEST', res.data)
+          alert('상담 신청이 수락되었습니다.')
+          router.push({
+            name: 'CounselingRequestList',
+        
+          })
+        })
+        .catch((err) => {
+        
           console.error(err)
           console.error(err.response.data)
          

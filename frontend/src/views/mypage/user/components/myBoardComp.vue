@@ -1,10 +1,14 @@
 <template>
   <div class="Board">
-    <p class="title">내가 작성한 게시글 ▼ </p>
-    <my-board-list-comp class="d-flex justify-content-around"></my-board-list-comp>
+    <div class="container">
+      <span id="toc-toggle" @click="openCloseToc()">내가 작성한 게시글 ▼ </span>
+      <span class="badge bg-primary rounded-pill">{{ boards.length }}</span>
+    </div>
+    <my-board-list-comp :boards="boards" id="toc-content" ></my-board-list-comp>
   </div>
 </template>
 <script>
+import { mapActions, mapGetters } from 'vuex'
 import MyBoardListComp from './myBoardListComp.vue'
 export default {
   components: {
@@ -16,15 +20,36 @@ export default {
     }
   },
   setup() {},
-  created() {},
+  created() {
+    this.fetchBoards()
+  },
   mounted() {},
   unmounted() {},
-  methods: {}
+  methods: {
+    ...mapActions(['fetchBoards', 'fetchMyid']),
+
+    openCloseToc: function() {
+    if(document.getElementById('toc-content').style.display === 'block') {
+      document.getElementById('toc-content').style.display = 'none';
+    } else {
+      document.getElementById('toc-content').style.display = 'block';
+    }
+  }
+  },
+  computed: {
+    ...mapGetters(['boards', 'myId'])
+  },
 }
 </script>
 <style scoped>
-  p {
-    text-align: left;
-    color: #1E2022;
+   #toc-content {
+    display: none;
+  }
+  #toc-toggle {
+    cursor: pointer;
+    color: black;
+  }
+  #toc-toggle:hover {
+    text-decoration: none;
   }
 </style>
