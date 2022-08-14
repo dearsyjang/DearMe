@@ -31,6 +31,18 @@
         <div class="col-md-8">
           <div class="card-body">
             <h5 class="card-title">닉네임 : {{counselor.nickName}}</h5>
+
+
+            <!-- <div v-if="f.counselorId !=counselor.data.userId">
+            <button class="btn btn-link" style="color: black " @click="favoriteAdd(counselor.data.userId)">★
+            </button>
+            </div>
+            <div v-if="f.counselorId ==counselor.data.userId"> 
+            <button class="btn btn-link" style="color: red" @click="favoriteDelete(f.id)">★
+            </button>
+            </div> -->
+           
+
 <!-- 
             {{currentUser}} -->
             {{favorite.data}}
@@ -41,6 +53,7 @@
             <div v-else>
             <button class="btn btn-link" ><span style='font-size:20px;'>&#127830;</span></button>
             </div>
+
             <!-- <p class="card-text">{{counselor}}</p> -->
             <p class="card-text"><small class="text-muted">평점 / 후기 수 :{{counselor.value}}/{{counselor.reviewCnt}}</small></p>
           </div>

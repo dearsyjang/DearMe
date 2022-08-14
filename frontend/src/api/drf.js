@@ -45,8 +45,8 @@ export default {
      counselor : (counselorId) => HOST + COUNSELOR  + `/${counselorId}`,
      reviews : () => HOST + '/reviews',
      favorites : () => HOST + '/favorites',
-     favoriteAdd : () => HOST + '/favorites',
-     favoriteDelete : (favoriteId) => HOST + '/favorites' + `/${favoriteId}`
+     favoriteA : () => HOST + '/favorites',
+     favoriteD : (favoriteId) => HOST + '/favorites' + `/${favoriteId}`
     // filter : (categoryId) => HOST + MEMBER + '/filter' +  `/${categoryId}`,
     // search : (keyword) => HOST + MEMBER + '/search' +  `/${keyword}`,
   },

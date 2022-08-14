@@ -16,4 +16,9 @@ export default [
         name: 'counselingReview',
         component: CounselingReViewComp
       },
+      {
+        path: '/counseling/review/:counselorId',
+        name: 'counselingReview',
+        component: CounselingReViewComp
+      },
   ]
