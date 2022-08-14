@@ -83,6 +83,7 @@ export default {
   // Second request performs a POST to /openvidu/api/sessions/<sessionId>/connection (the path requires the sessionId to assign the token to this same session)
 
   methods: {
+    // 사용자!!!
     joinToken() {
 
       this.OV = new OpenVidu();
@@ -117,8 +118,6 @@ export default {
         
         let authHeader = this.authHeader2
         let counselingId = this.counselingId // 왜!!!!!!!!!!!!!!!!!!! 토큰!!!!!!!!!!!!!!!!!
-        console.log(counselingId)
-
         axios
           .get(
             `https://i7d206.p.ssafy.io/counseling-rooms/` + counselingId,       
@@ -130,19 +129,16 @@ export default {
           )
           .then((response) => response.data)
           .then((data) => {
-            console.log('data', data)
             resolve(data.token)
-            console.log(data.data.counselorToken)
             return data.data.token
           })
           .then((token) => {
-            console.log(token)
             
               this.session.connect(token, { clientData: this.myUserName })
           .then(() => {
               console.log('initPublisher')
               // 영상 가져오기
-              let subscriber = this.OV.initPublisher(undefined, {
+              let publisher = this.OV.initPublisher(undefined, {
                   audioSource: undefined, // The source of audio. If undefined default microphone
                   videoSource: undefined, // The source of video. If undefined default webcam
                   publishAudio: true,     // Whether you want to start publishing with your audio unmuted or not
@@ -153,11 +149,11 @@ export default {
                   mirror: false           // Whether to mirror your local video or not
               });
 
-            this.mainStreamManager = subscriber;
+            this.mainStreamManager = publisher;
             console.log('메인스트림', this.mainStreamManager)
-						this.subscriber = subscriber;
-            console.log('subscriber', subscriber)
-            this.session.subscriber(this.subscriber)
+						this.publisher = publisher;
+            // this.session.publish(this.publisher)
+            const subs
           })
           .catch(error => {
               console.log('There was an error connecting to the session:', error.code, error.message);
