@@ -55,9 +55,13 @@ export default {
   },
   group : {
     groupRequest: () => HOST + '/counseling-doucments/groups',
+    groupDetail: groupId => HOST + GROUP +`/${groupId}`,    
+  },
+  counselingSchedule: {
+    counselingSchedules: () => HOST + COUNSELING,
+    counselingSchedule: () => HOST + COUNSELING,
     groupDetail: groupId => HOST + GROUP +`/${groupId}`,
     groups: () => HOST + MEMBER + GROUP
-    
   }
   //downPrice=0&upPrice=1000000&reviewCntUp=FALSE&reviewCntDown=FALSE&reviewScoreUp=FALSE&reviewScoreDown=FALSE&favorite=FALSE
 }

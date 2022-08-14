@@ -3,12 +3,6 @@
     <top-bar></top-bar>
     <bottom-bar></bottom-bar>
   </div>
-  <nav>
-    <router-link to="/member/login">login</router-link> |
-    <router-link to="/member/signupuser">signup(user)</router-link> |
-    <router-link to="/member/signupcounselor">signup(counselor)</router-link> |
-    <router-link to="/counseling-request/document">req doc</router-link>|
-  </nav>
   <router-view/>
 </template>
 

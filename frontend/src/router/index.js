@@ -10,9 +10,9 @@ import point from './point.js'
 import calendar from './calendar.js'
 import textDiary from './textDiary.js'
 import counseling from './counseling.js'
-import schedule from './schedule.js'
 import counselingRequest from './counselingRequest.js'
 import videodiary from './videoDiary.js'
+import counselingGroup from './counselingGroup.js'
 
 
 import counselingSchedule from './counselingSchedule.js'
@@ -30,31 +30,18 @@ const router = createRouter({
     ...textDiary,
     ...counselingRequest,
     ...counseling,
-    ...schedule,
     ...videodiary,    
-
-  
-    ...counselingSchedule
-
-
-
+    ...counselingSchedule,
+    ...counselingGroup
   ],
-  scrollBehavior(to, from, savedPosition) {
-    if (savedPosition) {
-      return savedPosition
-    } else {
-      return { top: 0 }
-    }
-  },
 
-// vue 기본 양식
-// const routes = [
-//   // {
-//   //   path: '/',
-//   //   name: 'home',
-//   //   component: HomeView
-//   // },
-
+  // scrollBehavior(to, from, savedPosition) {
+  //   if (savedPosition) {
+  //     return savedPosition
+  //   } else {
+  //     return { top: 0 }
+  //   }
+  // },
 })
 
 export default router
