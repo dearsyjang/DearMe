@@ -56,39 +56,4 @@ export default {
 </script>
 
 <style>
-#topbar > .navbar {
-  position: sticky;
-  display:flex;
-  flex-direction:row;
-  background-color: #FDFDFD;
-  border-bottom: 1px solid black;
-}
-
-#topbar > .navbar a{
-  text-decoration: none;
-}
-
-#topbar > .navbar a:hover{
-  color: #3F72AF;
-  transition:all.3s;
-  border-bottom: 3px solid;
-}
-
-#topbar > .navbar a.router-link-exact-active {
-  color: #3F72AF;
-  border-bottom: 3px solid;
-  width: auto;
-}
-
-#navbarSupportedContent {
-  justify-content: end;
-}
-
-#img > .logoimg {
-  max-width: 100%;
-  width: auto;
-  height: auto;
-  align-content: center;
-  justify-content: center;
-}
 </style>
