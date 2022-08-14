@@ -17,7 +17,7 @@ import counseling from './counseling.js'
 import schedule from './schedule.js'
 
 import counselingRequest from './counselingRequest.js'
-
+import counselingSchedule from './counselingSchedule.js'
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes: [
@@ -34,10 +34,7 @@ const router = createRouter({
     ...textDiary,
 
     ...counselingRequest,
-
-    ...counseling,
-    ...schedule,    
-
+    ...counselingSchedule
 
   ]
 

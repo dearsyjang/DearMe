@@ -10,6 +10,7 @@ export default {
     token: localStorage.getItem('token') || '',
     // 로그인된 사용자
     currentUser: {},
+    profile: {},
     authError: null,
   },
   getters: {
@@ -25,6 +26,7 @@ export default {
   mutations: {
     SET_TOKEN: (state, token) => state.token = token,
     SET_CURRENT_USER: (state, user) => state.currentUser = user,
+    SET_PROFILE: (state, profile) => state.profile = profile,
     SET_AUTH_ERROR: (state, error) => state.authError = error,
 
   },
@@ -52,6 +54,10 @@ export default {
       })
         .then(res => {
           const token = res.data.data.accessToken
+
+
+          console.log(res.data)
+
           dispatch('saveToken', token)
           dispatch('fetchCurrentUser')
           router.push({ name: 'mypageUser' })
@@ -76,6 +82,11 @@ export default {
       .then(res => {
           // console.log(res)
           // console.log(res.data)
+
+
+          // console.log(res.data.data)
+          // console.log(res.data.data.accessToken)
+
           const token = res.data.data.accessToken
           console.log(token)
           // 로컬스토리지에 토큰 저장
@@ -96,6 +107,75 @@ export default {
       console.log(getters.currentUser)
       router.push({ name: 'login' })
     },
+  
+  // fetchCurrentUser({ commit, getters, dispatch }) {
+  //   if (getters.isLoggedIn) {
+  //     axios({
+  //       url: drf.member.currentUserInfo(),
+  //       method: 'get',
+  //       headers: getters.authHeader,
+  //     })
+  //       .then(res => {
+  //         commit('SET_CURRENT_USER', res.data.data.accessToken)
+  //       })
+  //       .catch(err => {
+  //         if (err.response.status == 401) {
+  //           dispatch('removeToken')
+  //           router.push({ name: 'login' })
+  //         }
+  //       })
+  //   }
+  // },
+  fetchCurrentUser({ commit, getters }) {
+    axios({
+     url: drf.member.currentUser(),
+     method : 'GET',
+     headers: {
+      'Content-Type': 'application/json',
+      'Authorization': getters.authHeader2
+      }
+    })
+    .then(res => {
+      console.log(res)
+      commit('SET_CURRENT_USER', res.data)
+    })       
+      
+    .catch(err => console.error(err) )
+  },
+  // 회원 정보(비밀번호, 닉네임) 수정
+  updateProfile({ commit, getters }, update) {
+    console.log(update.counselorProfile )
+    axios({
+      url: drf.member.profileEdit(),
+      method: 'put',
+      data: {
+        counselorProfile: update.counselorProfile, 
+        nickName: update.credentials.nickName, 
+        pw: update.credentials.pw }, 
+      headers: getters.authHeader
+    })
+      .then(res => {
+        commit('SET_PROFILE', res.data)
+        router.push({
+          name: 'mypageUser',
+          
+        })
+      })
+  },
+  //탈퇴
+  deleteUser({ commit, getters }, userId) {
+    if (confirm('정말 탈퇴하시겠습니까?')) {
+      axios({
+        url: drf.member.userDelete(userId),
+        method: 'delete',
+        headers: getters.authHeader
+      })
+        .then(() => {
+          commit('SET_CURRENT_USER', {})
+          router.push({ name: 'App', })
+        })
+        .catch(err => console.error(err.response))
+    }
   },
   fetchCurrentUser({ commit, getters, dispatch }) {
     if (getters.isLoggedIn) {
@@ -116,4 +196,5 @@ export default {
     }
   },
 
+}
 }

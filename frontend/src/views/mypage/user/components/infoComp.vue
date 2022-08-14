@@ -9,7 +9,9 @@
     </div>
     <div class="row">
       <p id="con2" class="form-control col-sm-6">500 pt</p>
+      <router-link to="/point">
       <button id="con2" class="btn btn-primary col-sm-6">충전하기</button>
+      </router-link>
     </div>
   </div>
 </template>
