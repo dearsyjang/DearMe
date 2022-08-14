@@ -1,5 +1,6 @@
 package com.dearme.demo.domain.user.dto.counselorsearch;
 
+import com.dearme.demo.domain.group.entity.Group;
 import com.dearme.demo.domain.user.dto.etc.ReviewViewResponseDto;
 import com.dearme.demo.domain.user.dto.counselorprofile.CareerInfoDto;
 import com.dearme.demo.domain.user.dto.counselorprofile.CategoryInfoDto;
@@ -37,6 +38,7 @@ public class CounselorViewResponseDto {
 
     private List<CategoryInfoDto> categories;
     private List<ReviewViewResponseDto> reviews;
+    private List<CounselorGroupInfoResponseDto> groups;
 
     public static CounselorViewResponseDto of(User entity, Double value, List<ReviewViewResponseDto> reviews){
         return CounselorViewResponseDto.builder()
@@ -51,6 +53,7 @@ public class CounselorViewResponseDto {
                 .careers(toCareerInfoDto(entity.getCounselorProfile().getCareers()))
                 .certificates(toCertificationInfoDto(entity.getCounselorProfile().getCertificates()))
                 .categories(toCategoryInfoDto(entity.getCounselorProfile().getCategories()))
+                .groups(toCounselorGroupInfoResponseDto(entity.getGroups()))
                 .reviews(reviews)
                 .build();
     }
@@ -82,4 +85,12 @@ public class CounselorViewResponseDto {
         }
         return result;
     }
+    private static List<CounselorGroupInfoResponseDto> toCounselorGroupInfoResponseDto(List<Group> groups){
+        List<CounselorGroupInfoResponseDto> result = new ArrayList<>();
+        for(Group group : groups){
+            result.add(CounselorGroupInfoResponseDto.of(group));
+        }
+        return result;
+    }
+
 }

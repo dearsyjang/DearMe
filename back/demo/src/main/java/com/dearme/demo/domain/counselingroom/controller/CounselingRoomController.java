@@ -33,7 +33,7 @@ public class CounselingRoomController {
     }
 
     @GetMapping("/{counselingId}")
-    public ResponseEntity<CommonResponse> getSessionToken(HttpServletRequest request, @PathVariable("counselingId") Long counselingId){
+    public ResponseEntity<CommonResponse> getSessionToken(HttpServletRequest request, @PathVariable("counselingId") Long counselingId) throws OpenViduJavaClientException, OpenViduHttpException {
         String id = (String) request.getAttribute("id");
         return ResponseEntity.ok().body(CommonResponse.getSuccessResponse(counselingRoomService.getSessionToken(id, counselingId)));
     }

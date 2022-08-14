@@ -24,7 +24,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
 
 @Service
 @RequiredArgsConstructor
@@ -39,6 +41,8 @@ public class CounselingRoomServiceImpl implements CounselingRoomService{
     private final GroupRepository groupRepository;
 
     private final OpenVidu openVidu;
+
+    private Map<String, Session> sessionMap = new ConcurrentHashMap<>();
 
     @Override
     public CreateCounselingRoomResponseDto createCounselingRoom(String id, CreateCounselingRoomRequestDto dto) throws OpenViduJavaClientException, OpenViduHttpException {
@@ -65,22 +69,33 @@ public class CounselingRoomServiceImpl implements CounselingRoomService{
                 .build();
         counselingRoomRepository.save(counselingRoom);
 
-        String userToken = session.createConnection(new ConnectionProperties.Builder()
-                .type(ConnectionType.WEBRTC)
-                .role(OpenViduRole.SUBSCRIBER).build()).getToken();
+        sessionMap.put(sessionName, session);
 
-        counseling.updateCounselingRoom(counselingRoom, userToken);
+        counseling.updateCounselingRoom(counselingRoom);
         counselingRepository.save(counseling);
         return CreateCounselingRoomResponseDto.of(counselingRoom);
     }
 
     @Override
-    public GetSessionTokenResponseDto getSessionToken(String id, Long counselingId) {
+    public GetSessionTokenResponseDto getSessionToken(String id, Long counselingId) throws OpenViduJavaClientException, OpenViduHttpException {
+
         Counseling counseling = counselingRepository.findCounselingByUser_IdAndId(id, counselingId).orElseThrow(() -> {
             throw new NoExistCounselingException();
         });
+
         if(counseling.getCounselingRoom() == null)
             throw new CounselingRoomNotCreatedYet();
+
+        String sessionName = counseling.getCounselingRoom().getSessionName();
+        Session session = sessionMap.get(sessionName);
+
+        ConnectionProperties connectionProperties = new ConnectionProperties.Builder()
+                .type(ConnectionType.WEBRTC)
+                .role(OpenViduRole.SUBSCRIBER).build();
+
+        String token = session.createConnection(connectionProperties).getToken();
+        counseling.updateToken(token);
+
         return GetSessionTokenResponseDto.of(counseling);
     }
 
@@ -110,17 +125,14 @@ public class CounselingRoomServiceImpl implements CounselingRoomService{
                 .build();
         counselingRoomRepository.save(counselingRoom);
 
-        connectionProperties = new ConnectionProperties.Builder()
-                .type(ConnectionType.WEBRTC)
-                .role(OpenViduRole.SUBSCRIBER).build();
-
-        List<Counseling> counselings = counselingRepository.findAllByGroup_Id(group.getId());
-
+        List<Counseling> counselings = counselingRepository.findAllByGroup_Id(counselingRoom.getGroup().getId());
         for(Counseling counseling : counselings){
-            String userToken = session.createConnection(connectionProperties).getToken();
-            counseling.updateCounselingRoom(counselingRoom, userToken);
+            counseling.updateCounselingRoom(counselingRoom);
             counselingRepository.save(counseling);
         }
+
+        sessionMap.put(sessionName, session);
+
         return CreateCounselingRoomResponseDto.of(counselingRoom);
     }
 }
