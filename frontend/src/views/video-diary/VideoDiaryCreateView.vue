@@ -23,27 +23,12 @@
                 <button type="button" class="btn" @click="stopRecording"><h1>종료</h1></button>
                 <button type="button" class="btn" @click="deleteRecording"><h1>삭제</h1></button>
                 <button type="button" class="btn" @click="saveRecording"><h1>저장</h1></button>
-                <button type="button" class="btn" @click="getRecording"><h1>다시보기</h1></button>
             </div>
-        </div>
-        <div class="player-container">
-            <!-- <vue3-video-player :src="{{ this.recordingId }}"></vue3-video-player> -->
-            <vue3-video-player src="https://i7d206.p.ssafy.io:4443/openvidu/recordings/ses_QtLHqSPcqs/ses_QtLHqSPcqs.mp4"></vue3-video-player>
-        </div>
-        <div class="app">
-            <!-- <img alt="Vue logo" src="./assets/logo.png" /> -->
-            <vitar show-mesh />
-            
-            <button @click="play('video1')">play 1st video</button>
-            <button style="margin-left: 20px" @click="volumeDown('video2')">
-            volume -
-            </button>
-            <button style="margin-left: 20px" @click="volumeUp('video2')">
-            volume +
-            </button>
-            <span style="margin-left: 20px">{{ volume }}</span>
-            <button @click="destroy('video3')">destroy hls video</button>
-            <button style="margin-left: 20px" @click="pip('video3')">pip</button>
+            <div class="player-container" v-if="this.isTextOn">
+            <textarea v-model="this.sentiment"></textarea>
+            <textarea v-model="this.contents"></textarea>
+            <button type="button" class="btn" @click="updateText"><h1>수정하기</h1></button>
+            </div>
         </div>
     </div>
     
@@ -74,6 +59,10 @@ export default {
             title: '',
             players: {},
             volume: 80,
+            isTextOn: false,
+            sentiment: '',
+            contents: '',
+            videoId:'',
             source:'https://i7d206.p.ssafy.io:4443/openvidu/recordings/ses_QtLHqSPcqs/ses_QtLHqSPcqs.mp4',
         };
     },
@@ -251,7 +240,7 @@ export default {
                 })
             },
 
-            saveRecording(){
+        saveRecording() {
                 const authHeader = this.authHeader2
                 console.log(authHeader)    
                 axios({
@@ -267,6 +256,10 @@ export default {
                 })
                 .then (response => {
                     console.log('저장요청', response)
+                    this.isTextOn = true
+                    this.sentiment = response.data.data.sentiment
+                    this.contents = response.data.data.contents
+                    this.videoId = response.data.data.id
                 })
                 .catch((error) => { // 말을 해야 저장 가능!
                     if (error.response.status === 500) {
@@ -292,10 +285,27 @@ export default {
                 .catch((error) => { // 말을 해야 저장 가능!
                     console.log('에러입니다', error)
                 });
-        },
-        play(id) {
-            console.log('custom play: id =', id);
-            this.players && this.players[id] && this.players[id].play();
+        },updateText(){
+                const authHeader = this.authHeader2
+                console.log(authHeader)    
+                axios({
+                    method: 'put',
+                    url: "https://i7d206.p.ssafy.io/video-diaries/" + this.videoId,
+                    headers: {
+                        Authorization : authHeader
+                    },
+                    data: ({
+                        title: this.title,
+                        contents: this.contents,
+                        sentiment: this.sentiment                      
+                    }),
+                })
+                .then (response => {
+                    console.log('수정 요청', response)
+                })
+                .catch((error) => { // 말을 해야 저장 가능!
+                    console.log('에러입니다', error)
+                });
         },
         }
     }
