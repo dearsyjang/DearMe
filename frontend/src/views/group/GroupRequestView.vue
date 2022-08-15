@@ -14,7 +14,7 @@
       <div class="card product-details-card mb-3 direction-rtl">
         <div class="card-body">
 
-          <h1>{{ group.counselor }} 상담사</h1>
+          <h1>{{ group?.counselor }} 상담사</h1>
           <p>최고의 상담사</p>
         </div>
       </div>
@@ -22,7 +22,7 @@
       <div class="card product-details-card mb-3 direction-rtl">
         <div class="card-body">
           <h5>그룹 상담 신청 내용</h5>
-          <p>{{ group.contents }}</p>
+          <p>{{ group?.contents }}</p>
           <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum soluta tempore tenetur provident eligendi
             porro, eius nulla? Aliquam, blanditiis id. Corporis.</p>
           <p class="mb-0">Lorem ipsum dolor sit, amet consectetur adipisicing elit. At ut fugit accusantium quo quidem
@@ -41,18 +41,24 @@ export default {
   components: {},
   data() {
     return {
-      // groupId 받아오는거 생각해보기
       groupId: this.$route.params.groupId,
       isOpen: true,
       contents: "",
     };
   },
-  setup() {},
   created() {
-    this.fetchGroup(this.groupId)
+//     setTimeout(() => {
+// 	this.fetchGroup(this.groupId)
+// }, 2000)
+// console.log('1', this.group)
+//   },
+  //   this.fetchGroup(this.groupId).then(() => {
+  //     console.log('4', this.group)
+  //     resolve()
+  //   })
+  //   console.log('1', this.group)
+  // },
   },
-  mounted() {},
-  unmounted() {},
   methods: {
     ...mapActions(["groupRequest", 'fetchGroup']),
     onSubmit() {
