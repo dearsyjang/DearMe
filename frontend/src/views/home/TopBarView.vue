@@ -35,6 +35,7 @@
           <ul class="sidenav-nav ps-0">
             <br>
             <li><router-link to="/calendar" class="mx-3" style="text-decoration:none"><i class="bi bi-calendar-heart"></i>감정 달력</router-link></li>
+            <li><router-link to="/member/Profile" class="mx-3" style="text-decoration:none"><i class="bi bi-eyeglasses"></i>회원정보수정</router-link></li>
             <li><router-link to="/board" class="mx-3" style="text-decoration:none"><i class="bi bi-clipboard"></i>상담 게시판</router-link></li>
             <li><router-link to="/counselor" class="mx-3" style="text-decoration:none"><i class="bi bi-people"></i>상담사 조회</router-link></li>
             <li><router-link to="/mypage" class="mx-3" style="text-decoration:none"><i class="bi bi-house"></i>마이 페이지</router-link></li>
