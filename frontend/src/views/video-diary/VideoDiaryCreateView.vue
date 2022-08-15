@@ -23,7 +23,27 @@
                 <button type="button" class="btn" @click="stopRecording"><h1>종료</h1></button>
                 <button type="button" class="btn" @click="deleteRecording"><h1>삭제</h1></button>
                 <button type="button" class="btn" @click="saveRecording"><h1>저장</h1></button>
+                <button type="button" class="btn" @click="getRecording"><h1>다시보기</h1></button>
             </div>
+        </div>
+        <div class="player-container">
+            <!-- <vue3-video-player :src="{{ this.recordingId }}"></vue3-video-player> -->
+            <vue3-video-player src="https://i7d206.p.ssafy.io:4443/openvidu/recordings/ses_QtLHqSPcqs/ses_QtLHqSPcqs.mp4"></vue3-video-player>
+        </div>
+        <div class="app">
+            <!-- <img alt="Vue logo" src="./assets/logo.png" /> -->
+            <vitar show-mesh />
+            
+            <button @click="play('video1')">play 1st video</button>
+            <button style="margin-left: 20px" @click="volumeDown('video2')">
+            volume -
+            </button>
+            <button style="margin-left: 20px" @click="volumeUp('video2')">
+            volume +
+            </button>
+            <span style="margin-left: 20px">{{ volume }}</span>
+            <button @click="destroy('video3')">destroy hls video</button>
+            <button style="margin-left: 20px" @click="pip('video3')">pip</button>
         </div>
     </div>
     
@@ -35,6 +55,8 @@
 import axios from 'axios';
 import { OpenVidu } from 'openvidu-browser';
 import { mapGetters } from 'vuex';
+
+
 
 var OV;
 var session;
@@ -50,6 +72,9 @@ export default {
             record_status: false,
             video: '',
             title: '',
+            players: {},
+            volume: 80,
+            source:'https://i7d206.p.ssafy.io:4443/openvidu/recordings/ses_QtLHqSPcqs/ses_QtLHqSPcqs.mp4',
         };
     },
     
@@ -248,7 +273,30 @@ export default {
                         alert('괜찮아요! 편하게 이야기를 들려주세요😊')
                     } 
                 });
-            }
+            },
+
+            getRecording(){
+                const authHeader = this.authHeader2
+                console.log(authHeader)    
+                axios({
+                    method: 'get',
+                    url: "https://i7d206.p.ssafy.io/recording/get/ses_QtLHqSPcqs",
+                    headers: {
+                        Authorization : authHeader
+                    },
+                })
+                .then (response => {
+                    console.log('다시보기 요청', response)
+                    this.video.src=response.url
+                })
+                .catch((error) => { // 말을 해야 저장 가능!
+                    console.log('에러입니다', error)
+                });
+        },
+        play(id) {
+            console.log('custom play: id =', id);
+            this.players && this.players[id] && this.players[id].play();
+        },
         }
     }
 </script>
@@ -256,5 +304,27 @@ export default {
 <style scoped>
 input{
     width: auto;
+}
+.app {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+  margin-top: 20px;
+}
+.test-player-wrap {
+  width: 720px;
+  height: 405px;
+  position: relative;
+  margin: 20px auto;
+}
+.btn-play {
+  color: white;
+  margin-right: 10px;
+  cursor: pointer;
+}
+.btn-play svg {
+  width: 16px;
 }
 </style>

@@ -8,7 +8,7 @@ export default [
     component: textDiaryCreateView,
   },
   {
-    path: "/text-diary/detail",
+    path: "/text-diary/:textDiaryId",
     name: "textDiaryDetail",
     component: textDiaryDetailView, 
   },

@@ -5,7 +5,6 @@
         <div class="form-group">
           <p class="text-center">
             <button class="btn btn-lg btn-success" @click="createToken()">상담방 입장</button>
-            <button class="btn btn-lg btn-success" @click="joinToken()">그룹 상담방 입장</button>
           </p>
         </div>
       </div>
@@ -54,6 +53,10 @@ axios.defaults.headers.post['Content-Type'] = 'application/json';
 // const OPENVIDU_SERVER_URL = "https://i7d206.p.ssafy.io:4443";
 // const OPENVIDU_SERVER_SECRET = "dearme";
 
+
+// 사용자 => 상담방 입장
+// 코드 한 번 더 정리하기
+
 export default {
   name: 'App',
   components: {
@@ -85,11 +88,13 @@ export default {
   methods: {
     // 사용자!!!
     joinToken() {
+    // joinToken() {
 
-      this.OV = new OpenVidu();
+    //   this.OV = new OpenVidu();
 
-      // --- Init a session --- 세션 초기화
-      this.session = this.OV.initSession();
+    //   // --- Init a session --- 세션 초기화
+    //   this.session = this.OV.initSession();
+
 
       // --- Specify the actions when events take place in the session ---
       // On every new Stream received... 참가자 추가
@@ -108,19 +113,38 @@ export default {
         }
       });
 
-      // On every asynchronous exception... 비동기 오류
-      this.session.on('exception', ({ exception }) => {
-        console.warn(exception);
-      });
+    //   // --- Specify the actions when events take place in the session ---
+    //   // On every new Stream received... 참가자 추가
+    //   this.session.on('streamCreated', ({ stream }) => {
+    //     const subscriber = this.session.subscribe(stream);
+    //     this.subscribers.push(subscriber);
+    //     console.log('aaaaa')
+    //     console.log(stream)
+    //     console.log(subscriber)
+    //   });
+    //   // On every Stream destroyed...
+    //   this.session.on('streamDestroyed', ({ stream }) => {
+    //     const index = this.subscribers.indexOf(stream.streamManager, 0);
+    //     if (index >= 0) {
+    //       this.subscribers.splice(index, 1);
+    //     }
+    //   });
 
 
-      return new Promise((resolve, reject) => {
-        
+    //   // On every asynchronous exception... 비동기 오류
+    //   this.session.on('exception', ({ exception }) => {
+    //     console.warn(exception);
+    //   });
+
+
+    //   return new Promise((resolve, reject) => {
+
+
         let authHeader = this.authHeader2
         let counselingId = this.counselingId // 왜!!!!!!!!!!!!!!!!!!! 토큰!!!!!!!!!!!!!!!!!
         axios
           .get(
-            `https://i7d206.p.ssafy.io/counseling-rooms/` + counselingId,       
+            `https://i7d206.p.ssafy.io/counseling-rooms/` + counselingId,
              {
               headers: {
                 Authorization : authHeader
@@ -133,7 +157,7 @@ export default {
             return data.data.token
           })
           .then((token) => {
-            
+
               this.session.connect(token, { clientData: this.myUserName })
           .then(() => {
               console.log('initPublisher')
@@ -159,8 +183,56 @@ export default {
           });
           })
           .catch((error) => reject(error.response));
-			});
+			}
 		},
+
+    //     let authHeader = this.authHeader2
+    //     let counselingId = this.counselingId // 왜!!!!!!!!!!!!!!!!!!! 토큰!!!!!!!!!!!!!!!!!
+    //     axios
+    //       .get(
+    //         `https://i7d206.p.ssafy.io/counseling-rooms/` + counselingId,
+    //          {
+    //           headers: {
+    //             Authorization : authHeader
+    //           }
+    //         }
+    //       )
+    //       .then((response) => response.data)
+    //       .then((data) => {
+    //         resolve(data.token)
+    //         return data.data.token
+    //       })
+    //       .then((token) => {
+
+    //           this.session.connect(token, { clientData: this.myUserName })
+    //       .then(() => {
+    //           console.log('initPublisher')
+    //           // 영상 가져오기
+    //           let publisher = this.OV.initPublisher(undefined, {
+    //               audioSource: undefined, // The source of audio. If undefined default microphone
+    //               videoSource: undefined, // The source of video. If undefined default webcam
+    //               publishAudio: true,     // Whether you want to start publishing with your audio unmuted or not
+    //               publishVideo: true,     // Whether you want to start publishing with your video enabled or not
+    //               resolution: '640x480',  // The resolution of your video
+    //               frameRate: 30,          // The frame rate of your video
+    //               insertMode: 'APPEND',   // How the video is inserted in the target element 'video-container'
+    //               mirror: false           // Whether to mirror your local video or not
+    //           });
+
+    //         this.mainStreamManager = publisher;
+    //         console.log('메인스트림', this.mainStreamManager)
+		// 				this.publisher = publisher;
+    //         // this.session.publish(this.publisher)
+
+    //         this.session.publish(this.publisher)
+    //       })
+    //       .catch(error => {
+    //           console.log('There was an error connecting to the session:', error.code, error.message);
+    //       });
+    //       })
+    //       .catch((error) => reject(error.response));
+		// 	});
+		// },
     // joinSession() {
     //   // --- Get an OpenVidu object ---
     //   this.OV = new OpenVidu();
@@ -276,14 +348,14 @@ export default {
 
 
       return new Promise((resolve, reject) => {
-        
+
         let authHeader = this.authHeader2
         let counselingId = this.counselingId // 왜!!!!!!!!!!!!!!!!!!! 토큰!!!!!!!!!!!!!!!!!
         console.log(counselingId)
 
         axios
           .get(
-            `https://i7d206.p.ssafy.io/counseling-rooms/` + counselingId,       
+            `https://i7d206.p.ssafy.io/counseling-rooms/` + counselingId,
              {
               headers: {
                 Authorization : authHeader
@@ -299,7 +371,7 @@ export default {
           })
           .then((token) => {
             console.log(token)
-            
+
               this.session.connect(token, { clientData: this.myUserName })
           .then(() => {
 
@@ -327,7 +399,6 @@ export default {
 			});
 		},
 	}
-}
 </script>
 
 <style scoped>

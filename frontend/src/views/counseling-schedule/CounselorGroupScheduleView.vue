@@ -5,7 +5,6 @@
       <hr>
       <br>
       <h2 id="userschedule-group">1:1 상담</h2>
-      {{ counselings.data.groupCounselings }}
       <div v-for="(counseling, idx) in counselings.data.groupCounselings" :key="idx" :counseling="counseling">
         <div class="card" style="width: 18rem; height: 8rem;">
           <h5 class="card-title">{{ counseling.groupId }}</h5>
@@ -26,6 +25,10 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex'
+
+// 상담사 그룹 스케줄 => /counseling-schedule/counselorschedule
+// 템플릿 수정하기...
+// 링크 정리하고 버튼 위치 정하기...
 
 
 export default {

@@ -4,6 +4,7 @@ import TodayScheduleView from '@/views/counselingSchedule/TodayScheduleView.vue'
 import UserSchedule from '@/views/counseling-schedule/UserScheduleView.vue'
 import counselorGroupSchedule from '@/views/counseling-schedule/CounselorGroupScheduleView.vue'
 
+
 export default [
 
   {
