@@ -1,10 +1,9 @@
 <template>
   <div>
-    <div>
+    <div v-if="currentUser.data.type==`USER`">
       <h1 id="userschedule-title">상담 일정</h1>
       <hr>
       <br>
-      {{counselings.data.counseling}}
       <h2 id="userschedule-group">1:1 상담</h2>
       <div v-for="(counseling, idx) in counselings.data.counselings" :key="idx" :counseling="counseling">
         <div v-if="counseling.status==`ACCEPTED` && counseling.groupId == null" class="card" style="width: 18rem; height: 8rem;">
@@ -27,7 +26,7 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex'
-// 사용자 스케줄 => /counseling-schedule/userschedule
+// 사용자 스케줄 => /counseling-schedule/userschedule 혹은 하단바
 
 
 export default {
@@ -38,13 +37,14 @@ export default {
       }
     },
     computed: {
-      ...mapGetters(['counselings']),
+      ...mapGetters(['counselings', 'currentUser']),
     },
     methods: {
-      ...mapActions(['fetchSchedules'])
+      ...mapActions(['fetchSchedules', 'fetchCurrentUser'])
     },
     created() {
       this.fetchSchedules()
+      this.fetchCurrentUser()
     }
 }
 </script>

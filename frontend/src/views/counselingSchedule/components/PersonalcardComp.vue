@@ -22,7 +22,10 @@
             <!-- <p class="card-text">{{request}}</p> -->
             <p class="card-text"><small class="text-muted">
                 <router-link :to="{ name: 'CounselingRequestDocument', params : {counselingId : re.id}}">
-                <button>신청서보기</button>
+                <button>신청서 보기</button>
+                </router-link>
+                <router-link :to="{ name: 'counseling', params : {counselingId : re.id}}">
+                <button>상담방 개설</button>
                 </router-link>
             </small></p>
           </div>
