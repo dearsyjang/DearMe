@@ -77,8 +77,8 @@ export default {
     position: fixed;
     bottom: 0px;
     left: 0px;
-    border-top: 1px solid black;
-    background-color: #FDFDFD;
+    border-top: 1px;
+    background-color: #F9F7F7;
     display: flex;
     margin: 0;
     padding: 0;

@@ -1,8 +1,8 @@
 <template>
-  <div id="topbar">
+  <div>
     <!--상단바-->
     <div class="header-demo-bg shadow-sm">
-      <div class="container">
+      <div id="topbar" class="container">
         <!-- Header Content -->
         <div
           class="header-content header-style-five position-relative d-flex align-items-center justify-content-between">
