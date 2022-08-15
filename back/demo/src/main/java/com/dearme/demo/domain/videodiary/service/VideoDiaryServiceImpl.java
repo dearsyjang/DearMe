@@ -104,8 +104,14 @@ public class VideoDiaryServiceImpl implements VideoDiaryService {
     @Override
     public VideoDiaryDetailsResponseDto getDetails(String id, Long videoDiaryId) {
         VideoDiary videoDiary = videoDiaryRepository.findById(videoDiaryId).get();
-        if(!videoDiary.getUser().getId().equals(id))
-            throw new NoPermissionVideoDiaryException();
+        if(!videoDiary.getUser().getId().equals(id)) {
+            Long userId = videoDiary.getUser().getUserId();
+            CounselingDocument latestCounselingDocument = counselingDocumentRepository.findTop1ByCounselor_IdAndUser_UserIdOrderByYearDescMonthDescHoursDesc(id, userId).orElseThrow(() -> {
+               throw new NoExistDocumentException();
+            });
+            if(!latestCounselingDocument.getIsOpen())
+                throw new NoPermissionVideoDiaryException();
+        }
         return VideoDiaryDetailsResponseDto.of(videoDiary);
     }
 
