@@ -50,10 +50,10 @@ public class VideoDiaryApiController {
         String id = (String) request.getAttribute("id");
         videoDiaryService.delete(id, videoDiaryId);
     }
-    /*******************/
-    /** Recording API **/
-    /*******************/
 
-
-
+    @GetMapping("/users/{userId}/year/{year}/month/{month}")
+    public ResponseEntity<CommonResponse> getUserList(HttpServletRequest request, @PathVariable("userId") Long userId, @PathVariable("year") Integer year, @PathVariable("month") Integer month){
+        String id = (String) request.getAttribute("id");
+        return new ResponseEntity<>(CommonResponse.getSuccessResponse(videoDiaryService.getUserList(id, userId, year, month)), HttpStatus.OK);
+    }
 }
