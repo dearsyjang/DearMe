@@ -162,6 +162,7 @@ export default {
         })
           .then(res => {
             commit('SET_CURRENT_USER', res.data)
+           
           })
           .catch(err => {
             if (err.response.status === 401) {

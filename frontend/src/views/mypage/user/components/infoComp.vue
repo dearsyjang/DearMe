@@ -25,16 +25,16 @@
                 <div class="card mx-auto bg-gray">
                   <img src="@/assets/images/img/bg-img/user.png" alt="">
                 </div>
-                <p class="mb-0" id="info-pl">{{ this.nickname }}</p>
+                <p class="mb-0" id="info-pl">{{ currentUser?.data?.nickname }}</p>
               </div>
             </div>
             <div class="col-4">
               <div>
-                <p id="info-p">{{ this.type}}</p>
+                <p id="info-p">{{ currentUser?.data?.type }}</p>
               </div>
               <div class="my-3">
                 <span>잔여 포인트 : </span>
-                <span id="info-p">{{ this.points }}pt</span>
+                <span id="info-p">{{ currentUser?.data?.points }}pt</span>
               </div>
                 <router-link :to="{ name: 'PointView'}"><a class="btn btn-round btn-outline-info" href="#">충전하기</a></router-link>
               <div>
@@ -55,9 +55,6 @@ export default {
   data() {
     return {
       sampleData: '',
-      nickname : '',
-      type : '',
-      points : '',
     }
   },
   setup() {},
