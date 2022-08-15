@@ -77,7 +77,7 @@ export default {
     position: fixed;
     bottom: 0px;
     left: 0px;
-    border-top: 1px;
+    border-top: 0px solid grey;
     background-color: #F9F7F7;
     display: flex;
     margin: 0;

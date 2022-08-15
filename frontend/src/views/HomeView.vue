@@ -1,11 +1,11 @@
 <template>
-<div id="home">
+<div id="home container">
     <div class="card">
       <div class="card-body">
       <h5 class="card-title">Dear Me</h5>
       <br>
       <div class="card-text">
-        서비스 소개  어쩌고저쩌고
+        <img src="../assets/images/main3.png" id="main" alt="main">
       </div>
       </div>
     </div>
@@ -23,6 +23,9 @@ export default {
 </script>
 
 <style scoped>
+body{
+  background-color: #F9F7F7;
+}
 .card {
   justify-content: center;
   width: auto;
@@ -60,5 +63,10 @@ export default {
   border-width: 0px;
   border-radius: 5px;
   margin-bottom: 20px;
+}
+
+img{
+  width: 100%;
+  height: 30%;
 }
 </style>

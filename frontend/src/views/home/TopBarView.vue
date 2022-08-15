@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div >
     <!--상단바-->
     <div class="header-demo-bg shadow-sm">
       <div id="topbar" class="container">
@@ -43,12 +43,12 @@
             <li><router-link to="/member/Profile" class="mx-3" style="text-decoration:none"><i class="bi bi-eyeglasses"></i>회원정보수정</router-link></li>
             <hr>
             <li>
-              <div class="night-mode-nav">
+              <!-- <div class="night-mode-nav">
                 <i class="bi bi-moon"></i> Night Mode
                 <div class="form-check form-switch">
                   <input class="form-check-input form-check-success" id="darkSwitch" type="checkbox">
                 </div>
-              </div>
+              </div> -->
             </li>
             <li>
               <a @click="logOUT()"><i class="bi bi-box-arrow-right" fill="#red"></i> Logout</a>

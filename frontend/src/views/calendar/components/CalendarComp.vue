@@ -2,10 +2,10 @@
   <section class="section" >
     <div class="container">
       <h2 class="subtitle has-text-centered">
-        <button class="button is-small is-info is-outlined mr-5"
+        <button class="btn" type="button"
         @click="calendarData(-1)">&lt;</button>
         {{ year }}년 {{ month }}월
-        <button class="button is-small is-info is-outlined ml-5"
+        <button type="button" class="btn"
         @click="calendarData(1)">&gt;</button>
       </h2>
       <table class="table has-text-centered is-fullwidth">
@@ -16,10 +16,8 @@
           <tr v-for="(date, idx) in dates" :key="idx">
             <td
               v-for="(day, secondIdx) in date" 
-              :key="secondIdx"
-              
-            > 
-            
+              :key="secondIdx"            
+            >     
               <div v-if="day<8&& idx === 0 && day >= lastMonthStart || dates.length - 1 === idx && nextMonthStart > day"
               @click="calendarData(1)"
                 :class="'has-text-grey-light'">
@@ -31,7 +29,7 @@
                 {{ day }}
               </div>
               <div v-else>
-              <div class="card" style="height:50px; width:30px">
+              <div>
               
               <router-link :to="{
                 name: 'calendarDay',
@@ -239,19 +237,37 @@ export default {
   },
 };
 </script>
-<style>
+<style scoped>
+@import url('https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap');
+* {
+  font-family: 'Gowun Dodum', sans-serif;
+}
+
 .container a{
   text-decoration: none;
   color: black;
 }
-body{
+.body{
   background-color: #F9F7F7;
 }
 section{
   background-color: #F9F7F7;
   height: 100%;
 }
+.table{
+  background-color: #F9F7F7;
+  height: 580px;
+}
+.td{
+  height: 100px;
+  padding: 5px
+}
 .card{
   background-color: #F9F7F7;
+  border: none;
+  shadow: none;
+}
+.td{
+  padding: none;
 }
 </style>
