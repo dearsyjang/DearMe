@@ -61,10 +61,7 @@ export default {
         .then(res => {
           const token = res.data.data.accessToken
           console.log(res.data)
-         
           dispatch('saveToken', token)
-          dispatch('fetchCurrentUser')
-          router.push({ name: 'mypageUser' })
         })
         .catch(err => {
           console.error(err)
@@ -74,14 +71,14 @@ export default {
     },
     // POST 요청일 경우 FormData로 보내야함 (SignupUserView 참고)
     signup({ commit, dispatch }, formData) {
+
       axios({
         url: drf.member.signup(),
         method: 'post',
         data: formData,
-        // haeder 이형식이면 axios error 발생
-        // headers: {
-        //   'Content-Type': 'multipart/form-data'
-        // }
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
       })
       .then(res => {
           // console.log(res)
@@ -143,7 +140,7 @@ export default {
       
   //   .catch(err => console.error(err) )
   // },
-   fetchCurrentUser({ commit, getters, dispatch }) {
+    fetchCurrentUser({ commit, getters, dispatch }) {
       /*
       GET: 사용자가 로그인 했다면(토큰이 있다면)
         currentUserInfo URL로 요청보내기
@@ -162,7 +159,10 @@ export default {
                 'Authorization': getters.authHeader2
                }
         })
-          .then(res => commit('SET_CURRENT_USER', res.data))
+          .then(res => {
+            commit('SET_CURRENT_USER', res.data)
+            router.push({ name: 'mypageUser' })
+          })
           .catch(err => {
             if (err.response.status === 401) {
               dispatch('removeToken')
@@ -170,6 +170,7 @@ export default {
             }
           })
       }
+      
     },
 
 
