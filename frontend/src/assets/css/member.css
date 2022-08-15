@@ -4971,11 +4971,11 @@ a.affan-element-item i {
 
 .form-control {
   -webkit-transition-duration: 500ms;
-          transition-duration: 500ms;
+          /* transition-duration: 500ms; */
   border-style: solid;
-  padding: 0.5rem 1rem;
-  height: 41px;
-  max-height: 41px;
+  /* padding: 0.5rem 1rem; */
+  /* height: 41px; */
+  /* max-height: 41px; */
   font-size: 14px;
   color: #073984;
   background-color: #ffffff;
@@ -5009,7 +5009,7 @@ a.affan-element-item i {
 }
 
 textarea.form-control {
-  min-height: 120px;
+  /* min-height: 120px; */
 }
 
 .form-control-plaintext {
