@@ -1518,7 +1518,7 @@ textarea:invalid {
 
 /* :: Miscellaneous */
 .page-content-wrapper {
-  margin-top: 50px;
+  /* margin-top: 50px; */
   margin-bottom: 62px;
 }
 
