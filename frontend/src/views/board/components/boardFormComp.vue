@@ -31,7 +31,6 @@
                 <div class="">
                   <label class="form-label board-text-title" for="exampleInputText">내용</label>
                   <textarea class="form-control " v-model="data.contents" cols="20" rows="10" placeholder="내용을 입력하시오."></textarea>
-
                 </div>
               </div>
             </div>
