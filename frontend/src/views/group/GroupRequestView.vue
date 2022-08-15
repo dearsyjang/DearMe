@@ -3,7 +3,7 @@
     <div class="container">
       <div class="card my-2">
         <div class="card-body p-2">
-          <div class="d-flex align-items-center justify-content-between">
+          <div class="justify-content-between">
             <small class="ms-1 board-text-index">그룹 참가 신청</small>
             <!-- <div>
               <router-link to="/board"><button class="board-btn-index btn-sm mx-2">목록</button></router-link>
@@ -13,31 +13,27 @@
       </div>
       <div class="card product-details-card mb-3 direction-rtl">
         <div class="card-body">
-
-          <h1>{{ group?.counselor }} 상담사</h1>
-          <p>최고의 상담사</p>
+          <h1>{{ group.title }}</h1>
+          <h5>{{ group.counselor}} 상담사</h5>
         </div>
       </div>
-
       <div class="card product-details-card mb-3 direction-rtl">
         <div class="card-body">
           <h5>그룹 상담 신청 내용</h5>
-          <p>{{ group?.contents }}</p>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum soluta tempore tenetur provident eligendi
-            porro, eius nulla? Aliquam, blanditiis id. Corporis.</p>
-          <p class="mb-0">Lorem ipsum dolor sit, amet consectetur adipisicing elit. At ut fugit accusantium quo quidem
-            magni laboriosam!</p>
         </div>
+        <textarea class="form-control" cols="3" rows="15" placeholder="상담 내용을 입력하시오."></textarea>
     </div>
+    <form action="#" class="text-center ">
+      <router-link :to="{name: 'groupRequest', params: {groupId: this.group.id}}">
+        <button @click="onSubmit()" class="w-btn-neon2 " type="button">그룹 참가신청</button>
+      </router-link>
+    </form>
   </div>
 </div>
 </template>
 <script>
 import { mapActions, mapGetters } from "vuex";
 export default {
-  props: {
-    group:Object
-  },
   components: {},
   data() {
     return {
@@ -47,17 +43,7 @@ export default {
     };
   },
   created() {
-//     setTimeout(() => {
-// 	this.fetchGroup(this.groupId)
-// }, 2000)
-// console.log('1', this.group)
-//   },
-  //   this.fetchGroup(this.groupId).then(() => {
-  //     console.log('4', this.group)
-  //     resolve()
-  //   })
-  //   console.log('1', this.group)
-  // },
+    this.fetchGroup(this.groupId);
   },
   methods: {
     ...mapActions(["groupRequest", 'fetchGroup']),
@@ -78,23 +64,6 @@ export default {
   }
 };
 </script>
-<style scoped>
-.groupRequestContent {
-  background-color: #f0f5f9;
-  padding-top: 30px;
-}
-#groupRequestName {
-  background-color: #f0f5f9;
-  width: 30%;
-  margin: auto;
-  border: solid #1e2022 1px;
-  margin-bottom: 10px;
-}
-h1 {
-  border: solid #1e2022 1px;
-  width: 90%;
-  margin: auto;
-  background-color: #f0f5f9;
-  margin-bottom: 10px;
-}
+<style>
+
 </style>
