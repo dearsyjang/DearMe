@@ -69,91 +69,7 @@
         </div>
       </div>
 
-      <!-- <div v-if="!favorite">
-        <button class="btn btn-link" @click="favoriteCounselor(counselorId)"><i class="fa-solid fa-heart" style="color:black"></i></button>
-      </div>
-      <div v-else>
-        <button class="btn btn-link" @click="favoriteCounselor(counselorId)"><i class="fa-solid fa-heart" style="color:red"></i></button>
-      </div> -->
-<!--       
-      <div class="counselor-info-create">
-        <div class="black-bg" v-if = "isModalViewed==true">
-        <div class="white-bg">
-          <form @submit.prevent="createInfo" class="info-create-form">
-            <div class="my-3 w-100 d-flex justify-content-start align-items-center ">
-              <label for="review">자기소개 작성</label>
-              
-              <input  type="text" id="review"  style="width:85%; height:300px " v-model="infoContent" required>
-            </div>
-            <hr>
-            <button class="changebtn" >작성하기   </button> <button class="changebtn" @click="isModalViewed=false">닫기</button>
-          </form>
-          
-        </div>
-        </div>
-      </div>
-     -->
 
-
-
-      <!-- <span v-if="currentUser.type === student"> 
-        <button>개인상담신청하기</button>
-        </span> -->
-      <!-- <div class="price">
-        <h4>상담 가격</h4>
-        <div class="personal-price" 
-        v-if ="ispersonalpriced==false"
-        @keyup.enter="ispersonalpriced=true">
-          <li>개인상담 : <input type="text">point</li>
-        </div>
-        <div v-else>
-          개인상담가격띄워야됨 -->
-          <!-- {{counselor.price}} -->
-        <!-- </div> 
-      </div> -->
-<!-- 
-
-      
-      <h4>전문분야</h4>
-      <div class="category-list row row-cols-2 row-cols-md-5 g-3">
-        <span v-for="category in counselor.categories" 
-        :key="category.key">
-        {{category}}
-        </span> 
-      </div>
-     
-      <div class="career-list row row-cols-2 row-cols-md-5 g-3">
-        <span v-for="career in counselor.careers" 
-        :key="career.key">
-        {{career.title}}
-        {{career.contents}}
-        </span> 
-      </div>
-
-      <div class="manage-group-list row row-cols-2 row-cols-md-5 g-3">
-        <span v-for="group in counselor.groups" 
-        :key="group.key">
-        {{group}}
-        </span> 
-      </div>
-
-      <div class="review-list row row-cols-2 row-cols-md-5 g-3">
-        <span v-for="review in counselor.reviews" 
-        :key="review.key">
-        {{review.content}}
-        </span> 
-      </div> -->
-
-
-      <!-- <career-list-comp>
-      </career-list-comp>
-      <manage-group-list-comp>
-      </manage-group-list-comp>
-      <review-list-comp>
-      </review-list-comp>
-      
-      <file-list-comp>
-      </file-list-comp> -->
 
     <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
      
@@ -161,11 +77,6 @@
   </div>
 </template>
 <script>
-  // import InfoItemComp from '@/views/counselor/components/InfoItemComp.vue'
-  // import CareerListComp from '@/views/counselor/components/CareerListComp.vue'
-  // import FileListComp from '@/views/counselor/components/FileListComp.vue'
-  // import ManageGroupListComp from '@/views/counselor/components/ManageGroupListComp.vue'
-  // import ReviewListComp from '@/views/counselor/components/ReviewListComp.vue'
 
 
 
@@ -176,11 +87,7 @@
   export default {
     name : 'CounselorDetailView',
     components: {
-    // CareerListComp,
-    // FileListComp,
-    // ManageGroupListComp,
-    // ReviewListComp,
-    // InfoItemComp,
+
    counselorInfoComp,
    counselorInfoComp2
 },  
@@ -255,10 +162,7 @@
       changeDp() {
         this.d=true
         this.f=false
-        // this.isRed = false
-        // this.isBold = false
-        // this.isRed2 = true
-        // this.isBold2 = true
+
         this.isRed = !this.isRed;
         this.isBold = !this.isBold;
         this.isRed2 = !this.isRed2;
@@ -268,10 +172,7 @@
       changeFp(){
         this.d=false
         this.f=true
-        // this.isRed = true
-        // this.isBold = true
-        // this.isRed2 = false
-        // this.isBold2 = false
+
         this.isRed = !this.isRed;
         this.isBold = !this.isBold;
         this.isRed2 = !this.isRed2;
