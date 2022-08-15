@@ -1099,7 +1099,7 @@ body,
 html {
   font-family: "Poppins", sans-serif;
   overflow-x: hidden;
-  background-color: white;
+  background-color: none;
   color: #8480ae;
   scrollbar-width: thin;
   letter-spacing: -0.25px;
@@ -1515,7 +1515,7 @@ textarea:invalid {
 
 /* :: Miscellaneous */
 .page-content-wrapper {
-  margin-top: 50px;
+  /* margin-top: 50px; */
   margin-bottom: 62px;
 }
 

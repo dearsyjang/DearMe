@@ -106,10 +106,10 @@ export default {
         })
     },
     // 게시글 삭제
-    deleteBoard({ commit, getters }, boardPk) {
+    deleteBoard({ commit, getters }, boardId) {
       if (confirm('정말 삭제하시겠습니까?')) {
         axios({
-          url: drf.board.boardEdit(boardPk),
+          url: drf.board.boardEdit(boardId),
           method: 'delete',
           headers: getters.authHeader
         })
