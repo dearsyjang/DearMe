@@ -62,6 +62,7 @@ export default {
           const token = res.data.data.accessToken
           console.log(res.data)
           dispatch('saveToken', token)
+          router.push({ name: 'mypageUser' })
         })
         .catch(err => {
           console.error(err)
@@ -161,7 +162,6 @@ export default {
         })
           .then(res => {
             commit('SET_CURRENT_USER', res.data)
-            router.push({ name: 'mypageUser' })
           })
           .catch(err => {
             if (err.response.status === 401) {
