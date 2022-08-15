@@ -242,6 +242,16 @@ export default {
 <style>
 .container a{
   text-decoration: none;
-  color: black
+  color: black;
+}
+body{
+  background-color: #F9F7F7;
+}
+section{
+  background-color: #F9F7F7;
+  height: 100%;
+}
+.card{
+  background-color: #F9F7F7;
 }
 </style>
