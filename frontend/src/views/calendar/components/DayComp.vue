@@ -1,6 +1,5 @@
 <template>
   <div>
-      
       <router-link :to="{ name: 'videodiary' }"><button id="videodiary-enter-btn" class="btn"><h1>📷</h1></button></router-link>
       <button v-on:click = "this.isTextOn =!this.isTextOn">텍스트 일기 보기</button>
       <div class="player-container" v-if="this.isTextOn">
