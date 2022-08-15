@@ -58,7 +58,7 @@ export default {
 
     fetchGroups({ commit, getters } ){
       axios({
-        url: drf.group.groups(),
+        url: drf.counselingSchedule.groups(),
         method: 'get',
         headers: {
           'Content-Type': 'application/json',
