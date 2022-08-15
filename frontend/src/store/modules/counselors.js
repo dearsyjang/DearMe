@@ -75,6 +75,7 @@ export default {
       .then(res => {
         commit('SET_COUNSELORS', res.data)
         console.log(filter)
+       
       })       
         
       .catch(err => {
