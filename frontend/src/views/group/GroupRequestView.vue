@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>{{ $route.params.title }}그룹 참가 신청하기</h1>
+    <h1>그룹 참가 신청하기</h1>
     <div id="groupRequestName" class="d-flex justify-content-center">
       <div>신청자 : </div>
     </div>

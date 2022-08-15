@@ -1099,7 +1099,7 @@ body,
 html {
   font-family: "Poppins", sans-serif;
   overflow-x: hidden;
-  background-color: none;
+  background-color: #F9F7F7;
   color: #8480ae;
   scrollbar-width: thin;
   letter-spacing: -0.25px;

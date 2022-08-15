@@ -14,7 +14,7 @@
 
       </div>
     </div>
-    <!-- isCounselor 여부로 신청버튼 유무 결정 
+    <!-- isCounselor 여부로 신청버튼 유무 결정
     v-if 상담사는 상담방 개설, user는 신청하기 버튼-->
     <div v-if="currentUser.data.type==`USER`">
     <router-link :to="{name : 'groupRequest', params: {title:group.title}}"><button>신청</button></router-link>
