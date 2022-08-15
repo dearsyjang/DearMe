@@ -17,12 +17,12 @@ export default {
   },
   data() {
     return {
-      sampleData: "",
+      groupId: this.$route.params.groupId,
     };
   },
   setup() {},
   created() {
-    this.fetchGroup(1)
+    this.fetchGroup(this.groupId)
   },
   mounted() {},
   unmounted() {},
