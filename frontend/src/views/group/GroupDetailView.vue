@@ -4,7 +4,7 @@
       <div class="card my-2">
         <div class="card-body p-2">
           <div class="d-flex align-items-center justify-content-between">
-            <small class="ms-1 board-text-index">그룹 상세 페이지</small>
+            <small class="ms-1 board-text-index">그룹 상세</small>
             <div>
               <router-link to="/board"><button class="board-btn-index btn-sm mx-2">목록</button></router-link>
             </div>
@@ -43,7 +43,7 @@
             <p class="text-center group-price">₩ {{ group.price }}</p>
           </div>
           <form action="#" class="text-center">
-            <router-link to="/group/request">
+            <router-link :to="{name: 'groupRequest', params: {groupId: this.group.id}}">
               <button class="btn btn-primary">그룹 참가신청</button>
             </router-link>
           </form>
@@ -83,7 +83,7 @@ export default {
 </script>
 <style>
 .group-btn {
-  background-color: #B2C8DF;
+  background-color: #504E48;
   border: none;
 
 }

@@ -1,46 +1,36 @@
 <template>
-  <div>
-    <h1>그룹 참가 신청하기</h1>
-    <div id="groupRequestName" class="d-flex justify-content-center">
-      <div>신청자 : </div>
-    </div>
-    <div class="groupRequestContent">
-      <div>
-        <textarea
-          rows="10"
-          cols="40"
-          placeholder="상담 내용을 입력하시오."
-          v-model="contents"
-        ></textarea>
-      </div>
-      <!-- user / counselor 구분 -->
-      <!-- <div v-if="isCounselor === true"> -->
-      <div class="d-flex justify-content-end">
-        <button>수락</button>
-        <button class="mx-3">거절</button>
-      </div>
-      <!-- <div v-if="isCounselor === false"> -->
-      <div>
-        <div class="d-flex justify-content-start">
-          <div class="form-check form-switch mx-3">
-            <input
-              class="form-check-input"
-              type="checkbox"
-              role="switch"
-              id="flexSwitchCheckChecked"
-              checked
-              v-model="isOpen"
-              @click="switchOpen()"
-            />
-            <label for="flexSwitchCheckChecked">감정달력 공개</label>
+  <div class="page-content-wrapper py-3 group-bg">
+    <div class="container">
+      <div class="card my-2">
+        <div class="card-body p-2">
+          <div class="d-flex align-items-center justify-content-between">
+            <small class="ms-1 board-text-index">그룹 참가 신청</small>
+            <!-- <div>
+              <router-link to="/board"><button class="board-btn-index btn-sm mx-2">목록</button></router-link>
+            </div> -->
           </div>
         </div>
-        <div class="d-flex justify-content-end">
-          <button @click="onSubmit()" class="mx-3">신청</button>
+      </div>
+      <div class="card product-details-card mb-3 direction-rtl">
+        <div class="card-body">
+
+          <h1>{{ group.counselor }} 상담사</h1>
+          <p>최고의 상담사</p>
         </div>
       </div>
+
+      <div class="card product-details-card mb-3 direction-rtl">
+        <div class="card-body">
+          <h5>그룹 상담 신청 내용</h5>
+          <p>{{ group.contents }}</p>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum soluta tempore tenetur provident eligendi
+            porro, eius nulla? Aliquam, blanditiis id. Corporis.</p>
+          <p class="mb-0">Lorem ipsum dolor sit, amet consectetur adipisicing elit. At ut fugit accusantium quo quidem
+            magni laboriosam!</p>
+        </div>
     </div>
   </div>
+</div>
 </template>
 <script>
 import { mapActions, mapGetters } from "vuex";
@@ -52,22 +42,24 @@ export default {
   data() {
     return {
       // groupId 받아오는거 생각해보기
-      groupId: 1,
+      groupId: this.$route.params.groupId,
       isOpen: true,
       contents: "",
     };
   },
   setup() {},
-  created() {},
+  created() {
+    this.fetchGroup(this.groupId)
+  },
   mounted() {},
   unmounted() {},
   methods: {
-    ...mapActions(["groupRequest"]),
+    ...mapActions(["groupRequest", 'fetchGroup']),
     onSubmit() {
       const data = {
-        'id': this.groupId,
-        'isOpen': this.isOpen,
-        'contents': this.contents
+        id: this.groupId,
+        isOpen: this.isOpen,
+        contents: this.contents
       }
       this.groupRequest(data)
     },
@@ -76,7 +68,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['currentUser'])
+    ...mapGetters(['currentUser', 'group'])
   }
 };
 </script>
