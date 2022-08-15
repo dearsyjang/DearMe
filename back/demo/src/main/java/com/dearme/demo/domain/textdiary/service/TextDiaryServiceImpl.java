@@ -59,8 +59,14 @@ public class TextDiaryServiceImpl implements TextDiaryService{
     @Override
     public TextDiaryDetailsResponseDto getDetails(String id, Long textDiaryId) {
         TextDiary textDiary = textDiaryRepository.findById(textDiaryId).get();
-        if(!textDiary.getUser().getId().equals(id))
-            throw new NoPermissionTextDiaryException();
+        if(!textDiary.getUser().getId().equals(id)) {
+            Long userId = textDiary.getUser().getUserId();
+            CounselingDocument latestCounselingDocument = counselingDocumentRepository.findTop1ByCounselor_IdAndUser_UserIdOrderByYearDescMonthDescHoursDesc(id, userId).orElseThrow(() -> {
+                throw new NoExistDocumentException();
+            });
+            if(!latestCounselingDocument.getIsOpen())
+                throw new NoPermissionTextDiaryException();
+        }
         return TextDiaryDetailsResponseDto.of(textDiary);
     }
 
