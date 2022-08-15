@@ -20,6 +20,9 @@ import "bulma/css/bulma.css"
 </script>
 
 <style>
+#app {
+   background-color: #F9F7F7;
+}
 /* @import '../assets/css/style.css'; */
 @import './assets/css/member.css';
 @import './assets/css/topbar.css';

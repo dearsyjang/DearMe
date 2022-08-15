@@ -4,6 +4,7 @@
     <div v-for="(re,idx) in request"
       :key="idx"
       :re="re">
+      <!-- {{re}} -->
     <div v-if="re.counselorId== currentUser.data.userId && re.status==`ACCEPTED`  && re.groupId == null && today==`${re.year}-${re.month}-${re.day}`" class="card mb-3" style="max-width: 540px;">
       <div class="row g-0">
         <div class="col-md-4">

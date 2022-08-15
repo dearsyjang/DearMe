@@ -21,47 +21,45 @@
     
     <!-- <router-link 
     :to="`/counselors/${counselor.counselorId}`"> -->
+
+
     <router-link 
-    :to="{ name: 'counselorProfile', params: {counselorId: counselor.counselorId}}">
-    <div class="card mb-3" style="max-width: 540px;">
+    :to="{ name: 'counselorProfile', params: {counselorId: counselor.counselorId}}" style="text-decoration:none">
+    
+    <div class="card mb-3" id="counselor-card3" style="max-width: 90%;">
+      <div class="row">
+        <div class="card-pic col-md-16 " style="max-width:50%;">
+          <img src = "@/assets/images/강지명.png" class="counselor-img2"/>
+          {{counselor.pictureUrl}}
+        </div> 
+        <div class="card-body col-md-16" style="max-width:50%;" >
+          <h5 class="card-title">{{counselor.nickName}} 상담사</h5>
+          <div class="counseling-price">1:1 상담 : {{counselor.price}} point</div>
+          <p class="card-text"><small class="text-muted">&#11088; {{counselor.value}} ({{counselor.reviewCnt}})</small></p>
+        </div>
+      </div>
+    </div>
+    </router-link>
+
+
+    <!-- <router-link 
+    :to="{ name: 'counselorProfile', params: {counselorId: counselor.counselorId}}" style="text-decoration:none">
+    <div class="card mb-3" id="counselor-card" style="max-width: 90%;">
       <div class="row g-0">
         <div class="col-md-4">
-          사진:{{counselor.pictureUrl}}
+         <img src = "@/assets/images/강지명.png" class="counselor-img"/>
         </div>
         <div class="col-md-8">
           <div class="card-body">
-            <h5 class="card-title">닉네임 : {{counselor.nickName}}</h5>
-
-
-            <!-- <div v-if="f.counselorId !=counselor.data.userId">
-            <button class="btn btn-link" style="color: black " @click="favoriteAdd(counselor.data.userId)">★
-            </button>
-            </div>
-            <div v-if="f.counselorId ==counselor.data.userId"> 
-            <button class="btn btn-link" style="color: red" @click="favoriteDelete(f.id)">★
-            </button>
-            </div> -->
-           
-
-<!-- 
-            {{currentUser}} -->
-            <!-- {{favorite.data}} -->
-            <!-- "counselor.counselorId in favorite.data && "
-            <div v-if="!favorite">
-            <button class="btn btn-link" ><span style='font-size:20px;'>&#129505;</span></button>
-            </div>
-            <div v-else>
-            <button class="btn btn-link" ><span style='font-size:20px;'>&#127830;</span></button>
-            </div> -->
-
-            <!-- <p class="card-text">{{counselor}}</p> -->
-            <p class="card-text"><small class="text-muted">평점 / 후기 수 :{{counselor.value}}/{{counselor.reviewCnt}}</small></p>
+            <h5 class="card-title">{{counselor.nickName}} 상담사</h5>
+            <div class="counseling-price">1:1 상담 : {{counselor.price}} point</div>
+            <p class="card-text"><small class="text-muted">&#11088; {{counselor.value}} ({{counselor.reviewCnt}})</small></p>
           </div>
         </div>
       </div>
     </div>
     
-    </router-link>
+    </router-link> -->
 
     
 
@@ -85,14 +83,36 @@ import {  mapActions, mapGetters } from 'vuex';
     },
 
     created() {
-      this.fetchCurrenUser()
-      this.favoriteGet()
-      this.favorite=''
+      // this.fetchCurrenUser()
+      // this.favoriteGet()
+      // this.favorite=''
     }
   }
 
 </script>
 
 <style>
+.counselor-img2{
+  margin-left:15px;
+}
+.card-title{
+  margin-top : 20px;
+}
+.card-pic{
+  padding:40px;
 
+}
+.card-body{
+  float: right;
+  margin-bottom: 5%;
+}
+
+.counseling-price{
+  font-size: 2px;
+  margin-top : 60px;
+}
+
+#counselor-card:hover {
+  transform: scale(1.03)
+}
 </style>

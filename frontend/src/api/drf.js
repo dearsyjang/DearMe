@@ -58,13 +58,14 @@ export default {
   },
   group : {
     groupRequest: () => HOST + '/counseling-doucments/groups',
-    groupDetail: groupId => HOST + GROUP +`/${groupId}`,    
+    groupDetail: groupId => HOST + GROUP +`/${groupId}`, 
+    groups: () => HOST + MEMBER + GROUP   
   },
   counselingSchedule: {
     counselingSchedules: () => HOST + COUNSELING,
     counselingSchedule: () => HOST + COUNSELING,
     groupDetail: groupId => HOST + GROUP +`/${groupId}`,
-    groups: () => HOST + MEMBER + GROUP
+   
     
   },
   textDiary : {
