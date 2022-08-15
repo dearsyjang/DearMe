@@ -1095,6 +1095,7 @@ caption,
   padding: 0;
 }
 
+/* 배경 */
 body,
 html {
   font-family: "Poppins", sans-serif;
@@ -1890,7 +1891,7 @@ a.affan-element-item i {
 .header-area {
   -webkit-transition-duration: 500ms;
           transition-duration: 500ms;
-  background-color: #3282B8;;
+  background-color: #005691;
   width: 100%;
   height: 50px;
   position: fixed;
@@ -1929,7 +1930,7 @@ a.affan-element-item i {
   cursor: pointer;
 }
 .header-content .navbar--toggler span {
-  width: 23px;
+  width: auto;
   height: 2px;
   background-color: #1f0757;
   margin-bottom: 5px;
@@ -2076,7 +2077,7 @@ a.affan-element-item i {
   color: #0d5afd;
 }
 .header-content.header-style-five .navbar--toggler {
-  border: 2px solid #ebebeb;
+  border: 1px solid black;
   padding: 5px;
   border-radius: 4px;
 }
@@ -2090,8 +2091,9 @@ a.affan-element-item i {
 .header-content.header-style-six .search-trigger-btn {
   color: #1f0757;
 }
+
 .header-content.header-style-six .search-trigger-btn:hover, .header-content.header-style-six .search-trigger-btn:focus {
-  color: #0d5afd;
+  color: #52734D;
 }
 
 .bg-success .header-content .navbar--toggler,
@@ -2190,8 +2192,9 @@ a.affan-element-item i {
   color: #ffffff;
 }
 
+/* 상단바 */
 .header-demo-bg {
-  background-color: #ffffff;
+  background-color: #fdca60;
 }
 
 /* :: Sidenav */
@@ -3634,7 +3637,6 @@ a.affan-element-item i {
 
 /* :: Card */
 .card {
-  border-radius: 6px;
 }
 
 .card-img,
@@ -3655,7 +3657,6 @@ a.affan-element-item i {
 
 .card-gradient-bg {
   background: #0cebeb;
-  background: -webkit-gradient(linear, left top, right top, from(#29ffc6), color-stop(#20e3b2), to(#0cebeb));
   background: linear-gradient(to right, #29ffc6, #20e3b2, #0cebeb);
 }
 
