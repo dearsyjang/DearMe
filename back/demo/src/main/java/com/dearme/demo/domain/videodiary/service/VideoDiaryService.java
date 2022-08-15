@@ -14,4 +14,6 @@ public interface VideoDiaryService {
     VideoDiaryListResponseDto getList(String id, Integer year, Integer month);
 
     void delete(String id, Long videoDiaryId);
+
+    VideoDiaryListResponseDto getUserList(String id, Long userId, Integer year, Integer month);
 }
