@@ -34,6 +34,7 @@ export default {
   },
   data() {
     return {
+      boardId: this.$route.params.boardId,
       data: {
         title: '',
         contents: ''
@@ -45,17 +46,17 @@ export default {
 
   },
   methods: {
-    ...mapActions(['fetchBoard', 'deleteBoard']),
+    ...mapActions(['fetchBoard', 'deleteBoard', 'updateBoard']),
     onsubmit() {
       const data = {
         title: this.title,
         contents: this.contents
       }
-      this.deleteBoard(this.board.id, data)
+      this.updateBoard(this.board.id, data)
     }
   },
   created() {
-    this.fetchBoard(1)},
+    this.fetchBoard(this.boardId)},
   mounted() {},
   unmounted() {},
 }
