@@ -51,9 +51,12 @@ export default {
       ...mapActions(['fetchSchedules', 'fetchCurrentUser'])
     },
     created() {
-      this.fetchSchedules()
       this.fetchCurrentUser()
-    }
+      this.fetchSchedules()
+      
+    },
+    mounted(){
+    },
 }
 </script>
 
