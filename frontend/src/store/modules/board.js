@@ -91,21 +91,20 @@ export default {
         .catch(err => console.error(err))
     },
     // 게시글 수정
-    updateBoard({ commit, getters }, board) {
+    updateBoard({ commit, getters },content) {
+      console.log(content)
+      console.log(getters.board.id)
       axios({
-        url: drf.board.boardEdit(board.id),
+        url: drf.board.boardEdit(getters.board.id),
         method: 'put',
-        data: {
-          'title': board.title,
-          'contents': board.contents
-        },
+        data: content,
         headers: getters.authHeader
       })
         .then(res => {
           commit('SET_BOARD', res.data.data)
           router.push({
             name: 'boardDetail',
-            // params: { boardPk: getters.board.pk }
+            params: { boardId: getters.board.id }
           })
         })
     },
@@ -148,7 +147,10 @@ export default {
         url: drf.board.commentEdit(boardPk, commentPk),
         method: 'put',
         data: contents,
-        headers: getters.authHeader,
+        headers: {
+          'Content-Type': 'application/json',
+         'Authorization': getters.authHeader2
+        }
       })
         .then(res => {
           commit('SET_BOARD_COMMENTS', res.data)
