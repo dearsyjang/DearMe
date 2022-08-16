@@ -17,22 +17,18 @@
   </div>
   <div class="top-products-area product-list-wrap">
     <div class="container">
-      <div class="row">
-          <div class="card single-product-card">
-            <div class="card-body">
-              <div v-for="comment in comments" :key="comment"  class="d-flex row align-items-center">
-                <div class="form-group">
-                  <i class="bi bi-chat-right-heart"></i>
-                  <p class="text-end">COUNSELOR ID : {{ comment.userId }} | {{ comment.date[0] }}.{{ comment.date[1] }}.{{ comment.date[2] }}.{{ comment.date[3] }}</p>
-                  <p class="board-detail-context">{{ comment.contents }}</p>
-                </div>
-              </div>
+        <div class="card-body">
+          <div v-for="comment in comments" :key="comment"  class="d-flex row align-items-center">
+            <div class="form-group">
+              <p class="text-end">COUNSELOR ID : {{ comment.userId }} | {{ comment.date[0] }}.{{ comment.date[1] }}.{{ comment.date[2] }}</p>
+              <p class="board-detail-context">{{ comment.contents }}</p>
             </div>
           </div>
         </div>
-      </div>
+
     </div>
-  <div>
+  </div>
+<div>
 </div>
 <div class="modal fade" id="commentCreate" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">

@@ -1,20 +1,22 @@
 <template>
-<div class="container direction-rtl">
-  <!-- <div class="row " v-for="group in groups" :key="group"></div> -->
-    <div class="row ">
-      <div class="card">
-        <div class="card-body">
-          <div class="row"  >
-            <p class="col-sm-4">상담방 이름</p>
-            <p class="col-sm-4">개설 날짜</p>
-            <!-- <p class="col-sm-4">{{ group.title }}</p>
-            <p class="col-sm-4">{{ group.date[0] }}.{{ group.date[1] }}.{{ group.date[2] }}</p> -->
-            <button class="col-sm-4 btn btn-primary">상담방 입장</button>
+<div class="page-content-wrapper py-3">
+  <div class="blog-wrapper direction-rtl">
+    <div class="container">
+      <div class="row g-3">
+        <div v-for="group in groups" :key="group" class="col-6 col-sm-4 col-md-3">
+          <div class="card position-relative shadow-sm">
+            <div class="card-body">
+              <router-link :to="{ name: 'groupDetail', params: {groupId: group.id }}">
+              <span class="badge bg-danger rounded-pill mb-2 d-inline-block"><i class="bi bi-hand-thumbs-up-fill"></i> {{ board.hitCnt}}</span>
+              <h4 class="blog-title d-block text-dark board-title">{{ group.title }}</h4>
+              </router-link>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
+</div>
 </template>
 <script>
 export default {
@@ -27,19 +29,17 @@ export default {
       sampleData: ''
     }
   },
-  setup() {},
-  created() {},
-  mounted() {},
-  unmounted() {},
-  methods: {}
+  created() {
+
+  },
+  methods: {
+
+  },
+  computed: {
+
+  }
 }
 </script>
-<style scoped>
-  /* .MygroupList {
-    background-color: #F0F5F9;
-  }
-  p, button {
-    width: 160px;
-    display: table-cell;
-  } */
+<style >
+
 </style>

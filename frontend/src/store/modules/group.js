@@ -7,24 +7,31 @@ export default {
   state: {
     groups: [],
     group: {},
-    groupRequest:{}
+    groupRequest:{},
+    myGroup: []
   },
   getters: {
     groups: state => state.groups,
     group: state => state.group,
-    grouprequest: state => state.groupRequest
+    grouprequest: state => state.groupRequest,
+    mygroup: state => state.myGroup
   },
   mutations: {
     SET_GROUPS: (state, groups) => state.groups = groups,
     SET_GROUP: (state, group) => state.group = group,
-    SET_GROUP_REQUEST : (state, groupRequest) => state.groupRequest = groupRequest
+    SET_GROUP_REQUEST : (state, groupRequest) => state.groupRequest = groupRequest,
+    SET_MY_GROUP: (state, mygroup) => state.myGroup = mygroup
   },
   actions: {
-    groupRequest({ commit }, content) {
+    groupRequest({ commit, getters }, content) {
       axios({
         url: drf.group.groupRequest(),
         method: 'post',
-        data: content
+        data: content,
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': getters.authHeader2
+        }
       })
       .then(res =>{
         console.log(res.data)
@@ -34,7 +41,9 @@ export default {
         router.push({
           name: 'mypageUser'
         })})
-      .catch(err => console.error(err.response))
+      .catch(err => {
+        console.log(err)
+      })
     },
     // 그룹 상세 페이지 내용 패치
     fetchGroup({ commit, getters }, groupId){
@@ -44,9 +53,9 @@ export default {
         headers: getters.authHeader,
       })
       .then(res => {
-        console.log('2', getters.group)
+        // console.log('2', getters.group)
         commit('SET_GROUP', res.data.data)
-        console.log('3', getters.group)
+        // console.log('3', getters.group)
       })
       .catch(err => {
         console.error(err)
@@ -68,6 +77,25 @@ export default {
       .then(res => {
 
         commit('SET_GROUPS', res.data.data)
+
+      })
+      .catch(err => {
+        console.error(err)
+        if (err.response.status === 404) {
+          router.push({ name: 'NotFound404' })
+        }
+      })
+    },
+    fetchMyGroup({ commit, getters } ){
+      axios({
+        url: drf.group.myGroup(),
+        method: 'get',
+        headers: getters.authHeader
+      })
+      .then(res => {
+        console.log(res.data)
+        console.log(res.data.data)
+        commit('SET_MY_GROUP', res.data.data.groups)
 
       })
       .catch(err => {

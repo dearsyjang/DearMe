@@ -1520,7 +1520,7 @@ textarea:invalid {
 /* :: Miscellaneous */
 .page-content-wrapper {
   /* margin-top: 50px; */
-  margin-bottom: 62px;
+  /* margin-bottom: 62px; */
 }
 
 .affan-page-item {
@@ -6747,7 +6747,7 @@ form .btn-lg {
 .blog-title {
   font-weight: 500;
   overflow: hidden;
-  height: 48px;
+  /* height: 48px; */
 }
 .blog-title:hover, .blog-title:focus {
   color: #0d5afd !important;
@@ -6929,8 +6929,8 @@ form .btn-lg {
   max-height: 7rem;
 }
 
-.shop-pagination small {
-  border-left: 3px solid #0d5afd;
+small {
+  border-left: 3px solid #5B5792;
   padding-left: 0.5rem;
   line-height: 1;
 }

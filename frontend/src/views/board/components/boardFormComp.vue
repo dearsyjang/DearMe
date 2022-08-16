@@ -1,5 +1,5 @@
 <template>
-<div class="page-content-wrapper py-3 board-bg-sky">
+<div class="page-content-wrapper py-3 board-bg">
   <div class="shop-pagination pb-3">
     <div class="container">
       <div class="card">
@@ -16,26 +16,13 @@
     </div>
   </div>
   <div class="top-products-area product-list-wrap">
-    <div class="container">
-      <div class="row g-3">
-          <div class="card single-product-card">
-            <div class="card-body ">
-              <div class=" ">
-                <div class="form-group ">
-                  <label class="form-label board-text-title board-input" for="exampleInputText">제목</label>
-                  <input class="form-control board-input " v-model="data.title" id="exampleInputText" type="text" placeholder="제목을 입력하시오.">
-                </div>
-              </div>
-
-              <div class="">
-                <div class="">
-                  <label class="form-label board-text-title" for="exampleInputText">내용</label>
-                  <textarea class="form-control " v-model="data.contents" cols="20" rows="10" placeholder="내용을 입력하시오."></textarea>
-                </div>
-              </div>
-            </div>
-        </div>
+    <div class="container ">
+      <div class="form-group ">
+        <label class="board-text-bold form-label board-text-title board-input" for="exampleInputText">제목</label>
+        <input class="form-control board-input " v-model="data.title" id="exampleInputText" type="text" placeholder="제목을 입력하시오.">
       </div>
+      <label class="board-text-bold form-label board-text-title" for="exampleInputText">내용</label>
+      <textarea class="form-control " v-model="data.contents" cols="20" rows="10" placeholder="내용을 입력하시오."></textarea>
     </div>
   </div>
 </div>

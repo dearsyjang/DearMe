@@ -23,7 +23,10 @@ import "bulma/css/bulma.css"
 /* @import '../assets/css/style.css'; */
 @import './assets/css/member.css';
 @import './assets/css/topbar.css';
-
+@import url('https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap');
+* {
+  font-family: 'Gowun Dodum', sans-serif;
+}
 body{
   background-color: #F9F7F7;
 }

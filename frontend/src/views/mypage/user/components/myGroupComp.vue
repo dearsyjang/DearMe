@@ -1,11 +1,10 @@
 <template>
   <div>
     <div class="container">
-      <span id="toc-toggle" @click="openCloseToc()">내가 작성한 게시글 ▼ </span>
-      <!-- <span class="badge bg-primary rounded-pill">{{ groups.length }}</span> -->
+      <span class="board-text-bold form-label board-text-title" id="group-toggle" @click="openCloseToc()">내가 속한 그룹 상담방 <i class="bi bi-caret-down-fill"></i></span>
+      <span class="badge mypage-badge rounded-pill mx-1">{{ mygroup.length }}</span>
+      <my-group-list-comp :groups="mygroup" id="group-toc-content" ></my-group-list-comp>
     </div>
-    <my-group-list-comp id="toc-content2"></my-group-list-comp>
-    <!-- <my-group-list-comp :groups="groups" id="toc-content"></my-group-list-comp> -->
   </div>
 </template>
 <script>
@@ -22,35 +21,38 @@ export default {
   },
   setup() {},
   created() {
-    // this.fetchGroups()
+    this.fetchMyGroup()
   },
   mounted() {},
   unmounted() {},
   methods: {
-    ...mapActions(['fetchGroups',]),
+    ...mapActions(['fetchMyGroup',]),
 
     openCloseToc: function() {
-    if(document.getElementById('toc-content2').style.display === 'block') {
-      document.getElementById('toc-content2').style.display = 'none';
+    if(document.getElementById('group-toc-content').style.display === 'block') {
+      document.getElementById('group-toc-content').style.display = 'none';
     } else {
-      document.getElementById('toc-content2').style.display = 'block';
+      document.getElementById('group-toc-content').style.display = 'block';
     }
   }
   },
   computed: {
-    ...mapGetters(['groups'])
+    ...mapGetters(['mygroup'])
   },
 }
 </script>
-<style scoped>
-   #toc-content2 {
+<style >
+   #group-toc-content {
     display: none;
   }
-  #toc-toggle {
+  #group-toggle {
     cursor: pointer;
     color: black;
   }
-  #toc-toggle:hover {
+  #group-toggle:hover {
     text-decoration: none;
+  }
+  .mypage-badge{
+    background-color: #595892;
   }
 </style>

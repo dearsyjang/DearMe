@@ -21,7 +21,7 @@ export default {
     idCheck: id => HOST + MEMBER + `/id` + `/${id}`,
     nickNameCheck: nickname => HOST + MEMBER + `/nickname` + `/${nickname}`,
     // profile: username => HOST + MEMBER + 'profile/' + username,
-    // profile: () => HOST + MEMBER 
+    // profile: () => HOST + MEMBER
     careerCreate: () => HOST + MEMBER + CAREER ,
     careerDelete: (careerId) => HOST + MEMBER + CAREER + `/${careerId}`,
     certificateCreate: () => HOST + MEMBER + CERTIFICATE ,
@@ -40,7 +40,7 @@ export default {
     commentEdit: (boardPk, commentPk) => HOST + BOARD + `/${boardPk}` + COMMENT + `/${commentPk}`
   },
   counselors: {
-    
+
      counselors : () => HOST + COUNSELOR + "?",
      counselor : (counselorId) => HOST + COUNSELOR  + `/${counselorId}`,
      reviews : () => HOST + '/reviews',
@@ -58,14 +58,15 @@ export default {
   },
   group : {
     groupRequest: () => HOST + '/counseling-doucments/groups',
-    groupDetail: groupId => HOST + GROUP +`/${groupId}`,    
+    groupDetail: groupId => HOST + GROUP +`/${groupId}`,
+    myGroup:() => HOST + MEMBER + GROUP,
   },
   counselingSchedule: {
     counselingSchedules: () => HOST + COUNSELING,
     counselingSchedule: () => HOST + COUNSELING,
     groupDetail: groupId => HOST + GROUP +`/${groupId}`,
     groups: () => HOST + MEMBER + GROUP
-    
+
   },
   textDiary : {
     textDiaryCreate: () => HOST + TEXTDIARY,
