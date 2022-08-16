@@ -9,9 +9,11 @@ import com.dearme.demo.domain.board.exception.comment.NoCommentSavePermissionExc
 import com.dearme.demo.domain.board.exception.comment.NoCommentUpdatePermissionException;
 import com.dearme.demo.domain.board.exception.comment.NoExistCommentException;
 import com.dearme.demo.domain.counseling.exception.NoExistCounselingException;
+import com.dearme.demo.domain.counselingdocument.exception.AlreadyExistCounselorDocumentException;
 import com.dearme.demo.domain.counselingroom.exception.CounselingRoomNotCreatedYet;
 import com.dearme.demo.domain.group.exception.UserCreateGroupException;
 import com.dearme.demo.domain.textdiary.exception.AlreadyExistTextDiaryException;
+import com.dearme.demo.domain.textdiary.exception.CounselorPostTextDiaryException;
 import com.dearme.demo.domain.textdiary.exception.NoPermissionTextDiaryException;
 import com.dearme.demo.domain.user.exception.*;
 import com.dearme.demo.global.common.CommonResponse;
@@ -148,13 +150,18 @@ public class ExceptionHandlerUtil {
         return ResponseEntity.badRequest().body(CommonResponse.getErrorResponse(e.getMessage()));
     }
 
-    @ExceptionHandler(CounselorProfileValidationException.class)
-    ResponseEntity<CommonResponse> handleCounselorProfileValidationException(CounselorProfileValidationException e){
+    @ExceptionHandler(CounselorPostTextDiaryException.class)
+    ResponseEntity<CommonResponse> handleCounselorPostTextDiaryException(CounselorPostTextDiaryException e){
         return ResponseEntity.badRequest().body(CommonResponse.getErrorResponse(e.getMessage()));
     }
 
     @ExceptionHandler(UserCreateGroupException.class)
     ResponseEntity<CommonResponse> handleUserCreateGroupException(UserCreateGroupException e){
+        return ResponseEntity.badRequest().body(CommonResponse.getErrorResponse(e.getMessage()));
+    }
+
+    @ExceptionHandler(AlreadyExistTextDiaryException.class)
+    ResponseEntity<CommonResponse> handleAlreadyExistCounselorDocumentException(AlreadyExistCounselorDocumentException e){
         return ResponseEntity.badRequest().body(CommonResponse.getErrorResponse(e.getMessage()));
     }
 }

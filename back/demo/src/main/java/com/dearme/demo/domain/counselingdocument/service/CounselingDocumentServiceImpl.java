@@ -5,12 +5,10 @@ import com.dearme.demo.domain.counselingdocument.dto.PostCounselingDocumentReque
 import com.dearme.demo.domain.counselingdocument.dto.PostCounselingDocumentResponseDto;
 import com.dearme.demo.domain.counselingdocument.dto.PostGroupCounselingDocumentDto;
 import com.dearme.demo.domain.counselingdocument.entity.CounselingDocument;
+import com.dearme.demo.domain.counselingdocument.exception.AlreadyExistCounselorDocumentException;
 import com.dearme.demo.domain.counselingdocument.exception.CounselorCreateCounselingException;
 import com.dearme.demo.domain.counselingdocument.exception.NoExistDocumentException;
 import com.dearme.demo.domain.counselingdocument.repository.CounselingDocumentRepository;
-import com.dearme.demo.domain.favorite.entity.Favorite;
-import com.dearme.demo.domain.favorite.exception.NoExistFavoriteException;
-import com.dearme.demo.domain.favorite.exception.NoFavoriteDeletePermissionException;
 import com.dearme.demo.domain.group.entity.Group;
 import com.dearme.demo.domain.group.exception.GroupNotFoundExcetion;
 import com.dearme.demo.domain.group.repository.GroupRepository;
@@ -46,9 +44,18 @@ public class CounselingDocumentServiceImpl implements CounselingDocumentService{
         if(user.getType().equals(Type.COUNSELOR)){
             throw new CounselorCreateCounselingException();
         }
-        User counselor = userRepository.findById(dto.getId()).orElseThrow(() -> {
+        User counselor = userRepository.findUserByUserId(dto.getId()).orElseThrow(() -> {
             throw new NoExistCounselorException();
         });
+        System.out.println(id);
+        if(counselingDocumentRepository.existsCounselingDocumentByUser_IdAndCounselor_UserIdAndYearAndMonthAndDayAndHours(id,
+                counselor.getUserId(),
+                counselingDocument.getYear(),
+                counselingDocument.getMonth(),
+                counselingDocument.getDay(),
+                counselingDocument.getHours())){
+            throw new AlreadyExistCounselorDocumentException();
+        }
         counselingDocument.setUser(user);
         counselingDocument.setCounselor(counselor);
         counselingService.createCounseling(counselingDocument);
