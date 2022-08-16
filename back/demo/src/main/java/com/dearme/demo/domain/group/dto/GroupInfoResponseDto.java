@@ -12,6 +12,8 @@ public class GroupInfoResponseDto {
     private String title;
     private String contents;
     private Long price;
+    private Long day;
+    private Long hours;
     private Long counselorId;
     private String counselor;
 
@@ -22,6 +24,8 @@ public class GroupInfoResponseDto {
                 .title(entity.getTitle())
                 .contents(entity.getContents())
                 .price(entity.getPrice())
+                .day(entity.getDay())
+                .hours(entity.getHours())
                 .counselorId(entity.getCounselor().getUserId())
                 .counselor(entity.getCounselor().getNickName())
                 .build();
