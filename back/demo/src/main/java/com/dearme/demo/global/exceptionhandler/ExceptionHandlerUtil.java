@@ -146,4 +146,9 @@ public class ExceptionHandlerUtil {
     ResponseEntity<CommonResponse> handleAlreadyExistTextDiaryException(AlreadyExistTextDiaryException e){
         return ResponseEntity.badRequest().body(CommonResponse.getErrorResponse(e.getMessage()));
     }
+
+    @ExceptionHandler(CounselorProfileValidationException.class)
+    ResponseEntity<CommonResponse> handleCounselorProfileValidationException(CounselorProfileValidationException e){
+        return ResponseEntity.badRequest().body(CommonResponse.getErrorResponse(e.getMessage()));
+    }
 }
