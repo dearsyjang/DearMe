@@ -1,8 +1,9 @@
 
-import counselorScheduleView from '@/views/counselingSchedule/CounselorScheduleView.vue'
-import TodayScheduleView from '@/views/counselingSchedule/TodayScheduleView.vue'
+import counselorScheduleView from '@/views/counseling-schedule/CounselorScheduleView.vue'
+import TodayScheduleView from '@/views/counseling-schedule/TodayScheduleView.vue'
 import UserSchedule from '@/views/counseling-schedule/UserScheduleView.vue'
 import counselorGroupSchedule from '@/views/counseling-schedule/CounselorGroupScheduleView.vue'
+
 
 export default [
 

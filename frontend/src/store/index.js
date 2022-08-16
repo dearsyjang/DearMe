@@ -6,6 +6,8 @@ import counselingSchedule from './modules/counselingSchedule'
 import bottombar from './modules/bottombar'
 import group from './modules/group';
 import counselingRequest from './modules/counselingRequest';
+import textDiary from './modules/textDiary';
+import createPersistedState from 'vuex-persistedstate';
 
 export default new Vuex.Store({
   strict: true,
@@ -17,5 +19,10 @@ export default new Vuex.Store({
     bottombar,
     counselingRequest,
     group,
+    textDiary,
   },
+  //vuex plugin 명시
+  plugins: [createPersistedState({
+      paths: ["member"]
+  })]
 });

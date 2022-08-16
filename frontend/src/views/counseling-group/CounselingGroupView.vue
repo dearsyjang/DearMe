@@ -4,16 +4,16 @@
       <div id="join-dialog" class="jumbotron vertical-center">
         <div class="form-group">
           <p class="text-center">
-            <button class="btn btn-lg btn-success" @click="createToken()">그룹 상담방 개설</button>
-            <button class="btn btn-lg btn-success" @click="joinSession()">이거 아니야..</button>
+            <button class="btn btn-lg btn-success" @click="createGroupSession()">그룹 상담방 개설</button>
           </p>
         </div>
       </div>
     </div>
 
+    <!--세션 오픈 / 비디오-->
     <div id="session" v-if="session">
       <div id="session-header">
-        <h1 id="session-title">{{ mySessionId }}</h1>
+        <!-- <h1 id="session-title">{{ mySessionId }}</h1> -->
         <input
           class="btn btn-large btn-danger"
           type="button"
@@ -80,177 +80,7 @@ export default {
   // Second request performs a POST to /openvidu/api/sessions/<sessionId>/connection (the path requires the sessionId to assign the token to this same session)
 
   methods: {
-    joinToken() {
-
-      this.OV = new OpenVidu();
-
-      // --- Init a session --- 세션 초기화
-      this.session = this.OV.initSession();
-
-      // --- Specify the actions when events take place in the session ---
-      // On every new Stream received... 참가자 추가
-      this.session.on('streamCreated', ({ stream }) => {
-        const subscriber = this.session.subscribe(stream);
-        this.subscribers.push(subscriber);
-        console.log(stream)
-        console.log(subscriber)
-      });
-      // On every Stream destroyed...
-      this.session.on('streamDestroyed', ({ stream }) => {
-        const index = this.subscribers.indexOf(stream.streamManager, 0);
-        if (index >= 0) {
-          this.subscribers.splice(index, 1);
-        }
-      });
-
-      // On every asynchronous exception... 비동기 오류
-      this.session.on('exception', ({ exception }) => {
-        console.warn(exception);
-      });
-
-
-      return new Promise((resolve, reject) => {
-        
-        let authHeader = this.authHeader2
-        let groupId = this.groupId // 왜!!!!!!!!!!!!!!!!!!! 토큰!!!!!!!!!!!!!!!!!
-        console.log('Token', authHeader)
-        console.log('그룹아이디', groupId)
-
-        axios
-          .post(
-            `https://i7d206.p.ssafy.io/counseling-rooms/groups`,
-            {
-              groupId: groupId
-            },       
-             {
-              headers: {
-                Authorization : authHeader
-              }
-            }
-          )
-          .then((response) => response.data)
-          .then((data) => {
-            console.log('data', data)
-            resolve(data.token)
-            console.log(data.data.counselorToken)
-            return data.data.counselorToken
-          })
-          .then((token) => {
-            console.log(token)
-            
-              this.session.connect(token, { clientData: this.myUserName })
-          .then(() => {
-
-              // 영상 가져오기
-              let publisher = this.OV.initPublisher(undefined, {
-                  audioSource: undefined, // The source of audio. If undefined default microphone
-                  videoSource: undefined, // The source of video. If undefined default webcam
-                  publishAudio: true,     // Whether you want to start publishing with your audio unmuted or not
-                  publishVideo: true,     // Whether you want to start publishing with your video enabled or not
-                  resolution: '640x480',  // The resolution of your video
-                  frameRate: 30,          // The frame rate of your video
-                  insertMode: 'APPEND',   // How the video is inserted in the target element 'video-container'
-                  mirror: false           // Whether to mirror your local video or not
-              });
-
-            this.mainStreamManager = publisher;
-						this.publisher = publisher;
-            this.session.publish(this.publisher)
-          })
-          .catch(error => {
-              console.log('There was an error connecting to the session:', error.code, error.message);
-          });
-          })
-          .catch((error) => reject(error.response));
-			});
-		},
-    joinSession() {
-      // --- Get an OpenVidu object ---
-      this.OV = new OpenVidu();
-
-      // --- Init a session --- 세션 초기화
-      this.session = this.OV.initSession();
-
-      // --- Specify the actions when events take place in the session ---
-      // On every new Stream received... 참가자 추가
-      this.session.on('streamCreated', ({ stream }) => {
-        const subscriber = this.session.subscribe(stream);
-        this.subscribers.push(subscriber);
-      });
-      // On every Stream destroyed...
-      this.session.on('streamDestroyed', ({ stream }) => {
-        const index = this.subscribers.indexOf(stream.streamManager, 0);
-        if (index >= 0) {
-          this.subscribers.splice(index, 1);
-        }
-      });
-
-      // On every asynchronous exception... 비동기 오류
-      this.session.on('exception', ({ exception }) => {
-        console.warn(exception);
-      });
-
-      // token을 백에서 받아오자
-      this.getToken().then(token => {
-        console.log(token)
-        this.session.connect(token, { clientData: this.myUserName })
-          .then(() => {
-
-              // 영상 가져오기
-              let publisher = this.OV.initPublisher(undefined, {
-                  audioSource: undefined, // The source of audio. If undefined default microphone
-                  videoSource: undefined, // The source of video. If undefined default webcam
-                  publishAudio: true,     // Whether you want to start publishing with your audio unmuted or not
-                  publishVideo: true,     // Whether you want to start publishing with your video enabled or not
-                  resolution: '640x480',  // The resolution of your video
-                  frameRate: 30,          // The frame rate of your video
-                  insertMode: 'APPEND',   // How the video is inserted in the target element 'video-container'
-                  mirror: false           // Whether to mirror your local video or not
-              });
-
-            this.mainStreamManager = publisher;
-						this.publisher = publisher;
-
-            this.session.publish(this.publisher)
-          })
-          .catch(error => {
-              console.log('There was an error connecting to the session:', error.code, error.message);
-          });
-      });
-      window.addEventListener('beforeunload', this.leaveSession);
-      },
-
-
-    leaveSession() {
-      // --- Leave the session by calling 'disconnect' method over the Session object ---
-      if (this.session) this.session.disconnect();
-      this.session = undefined;
-      this.mainStreamManager = undefined;
-      this.publisher = undefined;
-      this.subscribers = [];
-      this.OV = undefined;
-      window.removeEventListener('beforeunload', this.leaveSession);
-      },
-
-    updateMainVideoStreamManager(stream) {
-      if (this.mainStreamManager === stream) return;
-      this.mainStreamManager = stream;
-    },
-
-
-    /**
-     * --------------------------
-     * SERVER-SIDE RESPONSIBILITY
-     * --------------------------
-     * These methods retrieve the mandatory user token from OpenVidu Server.
-     * This behavior MUST BE IN YOUR SERVER-SIDE IN PRODUCTION (by using
-     * the API REST, openvidu-java-client or openvidu-node-client):
-     *   1) Initialize a Session in OpenVidu Server	(POST /openvidu/api/sessions)
-     *   2) Create a Connection in OpenVidu Server (POST /openvidu/api/sessions/<SESSION_ID>/connection)
-     *   3) The Connection.token must be consumed in Session.connect() method
-    */
-
-    // 백이랑 통신 코드!!
+    // 상담사 => 그룹 상담방 개설
     createToken() {
 
       this.OV = new OpenVidu();
@@ -279,11 +109,10 @@ export default {
         console.warn(exception);
       });
 
-
       return new Promise((resolve, reject) => {
         
         let authHeader = this.authHeader2
-        let groupId = this.groupId // 왜!!!!!!!!!!!!!!!!!!! 토큰!!!!!!!!!!!!!!!!!
+        let groupId = this.groupId
         console.log('Token', authHeader)
         console.log('그룹아이디', groupId)
 

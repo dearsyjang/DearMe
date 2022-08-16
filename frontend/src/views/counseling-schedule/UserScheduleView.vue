@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div>
+    <div v-if="currentUser.data.type==`USER`">
       <h1 id="userschedule-title">상담 일정</h1>
       <hr>
       <br>
@@ -26,6 +26,7 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex'
+// 사용자 스케줄 => /counseling-schedule/userschedule 혹은 하단바
 
 
 export default {
@@ -36,13 +37,14 @@ export default {
       }
     },
     computed: {
-      ...mapGetters(['counselings']),
+      ...mapGetters(['counselings', 'currentUser']),
     },
     methods: {
-      ...mapActions(['fetchSchedules'])
+      ...mapActions(['fetchSchedules', 'fetchCurrentUser'])
     },
     created() {
       this.fetchSchedules()
+      this.fetchCurrentUser()
     }
 }
 </script>

@@ -1,7 +1,6 @@
 import axios from 'axios'
 import drf from '@/api/drf'
 
-import _ from 'lodash'
 
 export default {
   state: {
@@ -31,7 +30,6 @@ export default {
       .catch(err => console.error(err.response))
     },
     fetchMyId({ commit, getters }) {
-      // page, size 가 뭐지
       axios({
         url: drf.member.signup(),
         method: 'get',

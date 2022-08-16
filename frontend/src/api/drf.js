@@ -1,5 +1,3 @@
-
-
 // const HOST = 'http://localhost:8080/api/'
 const HOST = "https://i7d206.p.ssafy.io"
 const MEMBER = '/users'
@@ -7,10 +5,11 @@ const BOARD ='/boards'
 const COMMENT ='/comments'
 const COUNSELOR = '/counselors'
 const GROUP = '/groups'
-
+const TEXTDIARY = '/text-diaries'
 const COUNSELING = '/counselings'
 const CAREER = '/careers'
 const CERTIFICATE = '/certificates'
+
 export default {
   member : {
     login: () => HOST + MEMBER + '/token',
@@ -27,6 +26,8 @@ export default {
     careerDelete: (careerId) => HOST + MEMBER + CAREER + `/${careerId}`,
     certificateCreate: () => HOST + MEMBER + CERTIFICATE ,
     certificateDelete: (certificateId) => HOST + MEMBER + '/certificate' + `/${certificateId}`,
+    profileEdit: () => HOST + MEMBER,
+    userDelete: () => HOST + MEMBER
 
     // profile: () => HOST + MEMBER
   },
@@ -43,7 +44,9 @@ export default {
      counselors : () => HOST + COUNSELOR + "?",
      counselor : (counselorId) => HOST + COUNSELOR  + `/${counselorId}`,
      reviews : () => HOST + '/reviews',
-     favorites : () => HOST + '/favorites'
+     favorites : () => HOST + '/favorites',
+     favoriteA : () => HOST + '/favorites',
+     favoriteD : (favoriteId) => HOST + '/favorites' + `/${favoriteId}`
     // filter : (categoryId) => HOST + MEMBER + '/filter' +  `/${categoryId}`,
     // search : (keyword) => HOST + MEMBER + '/search' +  `/${keyword}`,
   },
@@ -55,13 +58,21 @@ export default {
   },
   group : {
     groupRequest: () => HOST + '/counseling-doucments/groups',
-    groupDetail: groupId => HOST + GROUP +`/${groupId}`,    
+    groupDetail: groupId => HOST + GROUP +`/${groupId}`, 
+    groups: () => HOST + MEMBER + GROUP   
   },
   counselingSchedule: {
     counselingSchedules: () => HOST + COUNSELING,
     counselingSchedule: () => HOST + COUNSELING,
     groupDetail: groupId => HOST + GROUP +`/${groupId}`,
-    groups: () => HOST + MEMBER + GROUP
-  }
+   
+    
+  },
+  textDiary : {
+    textDiaryCreate: () => HOST + TEXTDIARY,
+    textDiaryList: () => HOST + TEXTDIARY,
+    textDiaryDetail: textDiaryId => HOST + TEXTDIARY + `/${textDiaryId}`,
+    textDiaryEdit: textDiaryId => HOST + TEXTDIARY + `/${textDiaryId}`,
+  },
   //downPrice=0&upPrice=1000000&reviewCntUp=FALSE&reviewCntDown=FALSE&reviewScoreUp=FALSE&reviewScoreDown=FALSE&favorite=FALSE
 }

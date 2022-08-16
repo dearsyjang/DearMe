@@ -1,6 +1,31 @@
 <template>
-<div>
-  <div id="bottombar" class="container">
+<div id="bottombardetail">
+  <template v-if="isLoggedin && usertype == COUNSELOR">
+    <div id="bottombar" class="container">
+      <div>
+        <router-link to="/schedule" class="img mx-3"><img id="schedule" src="../../assets/images/schedule.png" alt="schedule"></router-link>
+        <p class="text">상담일정</p>
+      </div>
+      <div>
+        <router-link to="/mypage/request" class="img mx-3"><img id="requst" src="../../assets/images/request.png" alt="request"></router-link>
+        <p class="text">상담신청</p>
+      </div>
+      <div>
+        <router-link to="/mypage/user" class="img mx-3"><img id="home" src="../../assets/images/home.png" alt="home"></router-link>
+        <p class="text">마이페이지</p>
+      </div>
+      <div>
+        <router-link to="/counselors/counselorList" class="img mx-3"><img id="counselor" src="../../assets/images/counselor.png" alt="counselor"></router-link>
+      <p class="text">상담사조회</p>
+      </div>
+      <div>
+        <router-link to="/board" class="img mx-3"><img id="board" src="../../assets/images/board.png" alt="board"></router-link>
+        <p class="text">상담게시판</p>
+      </div>
+    </div>
+  </template>
+  <template v-if="isLoggedIn && usertype == USER">
+    <div id="bottombar" class="container">
     <div>
       <router-link to="/calendar" class="img mx-3"><img id="emotion" src="../../assets/images/emotion.png" alt="emotion"></router-link>
       <p class="text">감정달력</p>
@@ -22,72 +47,28 @@
       <p class="text">상담게시판</p>
     </div>
   </div>
-</div>
-  <!-- <template v-if="type=USER">
-    <div class="container">
-      <div>
-        <router-link to="/calendar" class="img mx-3"><img id="emotion" src="../../assets/images/emotion.png" alt="emotion"></router-link>
-        <p class="text">감정달력</p>
-      </div>
-      <div>
-        <router-link to="/mypage/counselor" class="img mx-3"><img id="calendar" src="../../assets/images/calendar.png" alt="calendar"></router-link>
-        <p class="text">상담일정</p>
-      </div>
-      <div>
-        <router-link to="/mypage/user" class="img mx-3"><img id="home" src="../../assets/images/home.png" alt="home"></router-link>
-        <p class="text">마이페이지</p>
-      </div>
-      <div>
-        <router-link to="/counselors/counselorList" class="img mx-3"><img id="counselor" src="../../assets/images/counselor.png" alt="counselor"></router-link>
-      <p class="text">상담사조회</p>
-      </div>
-      <div>
-        <router-link to="/board" class="img mx-3"><img id="board" src="../../assets/images/board.png" alt="board"></router-link>
-        <p class="text">상담게시판</p>
-      </div>
-    </div>
   </template>
-  <template v-if="type=counselor">
-    <div class="container">
-      <div>
-        <router-link to="/calendar" class="img mx-3"><img id="emotion" src="../../assets/images/emotion.png" alt="emotion"></router-link>
-        <p class="text">감정달력</p>
-      </div>
-      <div>
-        <router-link to="/mypage/counselor" class="img mx-3"><img id="request" src="../../assets/images/request.png" alt="request"></router-link>
-        <p class="text">상담신청</p>
-      </div>
-      <div>
-        <router-link to="/mypage/user" class="img mx-3"><img id="home" src="../../assets/images/home.png" alt="home"></router-link>
-        <p class="text">마이페이지</p>
-      </div>
-      <div>
-        <router-link to="/counselors/counselorList" class="img mx-3"><img id="counselor" src="../../assets/images/counselor.png" alt="counselor"></router-link>
-      <p class="text">상담사조회</p>
-      </div>
-      <div>
-        <router-link to="/board" class="img mx-3"><img id="board" src="../../assets/images/board.png" alt="board"></router-link>
-        <p class="text">상담게시판</p>
-      </div>
-    </div>
-  </template> -->
+  </div>
 </template>
 
 <script>
-// import { mapActions, mapGetters } from 'vuex'
+import { mapGetters } from 'vuex'
 
 export default {
   name: 'BottomBar',
   components: {},
-  // computed: {
-  //   ...mapGetters(['type'])
-  // },
-  // methods: {
-  //   ...mapActions(['getuserType'])
-  // },
-  // created() {
-    
-  // }
+  computed: {
+    ...mapGetters(['isLoggedIn', 'currentUser']),
+    // usertype() {
+    //   return this.currentUser.data.type
+    // }
+  },
+  method: {
+    usertype() {
+      return this.currentUser.data.type
+    }
+  }
+
 }
 </script>
 
@@ -96,8 +77,8 @@ export default {
     position: fixed;
     bottom: 0px;
     left: 0px;
-    border-top: 1px solid black;
-    background-color: #FDFDFD;
+    border-top: 0px solid grey;
+    background-color: #F9F7F7;
     display: flex;
     margin: 0;
     padding: 0;

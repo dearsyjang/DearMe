@@ -27,6 +27,7 @@ export default {
             })
             .then(res => {
                 commit('SET_COUNSELINGS', res.data)
+                
             })
             .catch(err => {
                 console.error(err.response)

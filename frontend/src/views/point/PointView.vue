@@ -1,5 +1,7 @@
 <template>
 
+
+
   <section class="test">
     <select v-model="selected">
       <option disabled value="">충전할 포인트를 선택해 주세요.  </option>
@@ -39,7 +41,7 @@ export default {
   },
   methods: {
     
-
+    
     
     requestPay : function() {
       const point= this.selected
@@ -92,25 +94,6 @@ export default {
   },
 
 }
-    //   rsp => {
-    //     const selected = this.selected
-    //     if(rsp.success){
-            // fetch('http://localhost:8080/users/points', {
-            //     method: 'PUT',
-            //     headers: {
-            //         'Content-Type': 'application/json',
-            //         'Authorization' : 'ad eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6ImlkIiwiaXNzIjoiZGVhcm1lIiwiaWF0IjoxNjU5NjgwMzg0LCJleHAiOjE2NTk2ODM5ODR9.izg6xcOPKIdxiU6QjTQ2GoVKFqSsBwBgyP4FCd6uibQ'
-            //     },
-            //     body: JSON.stringify({price: selected})
-            // }).then((response) => response.json()).then((selected) => {
-            //     console.log(selected);
-            // });
-            // alert("완료 -> imp_uid : " + rsp.imp_uid+" / merchant_uid(orderKey) : " + rsp.merchant_uid);
-    //     }else{
-            // alert("실패 : 코드(" + rsp.error_code + ") / 메시지(" + rsp.error_msg + ")");
-    //     }
-    // }
-//   },
-// },
+   
 
 </script>
