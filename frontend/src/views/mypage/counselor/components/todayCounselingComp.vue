@@ -1,9 +1,8 @@
 <template>
-  <div>
-    <div id="Group">
-      <p>오늘의 상담 ▼</p>
-      <today-counseling-list-comp class="d-flex justify-content-around"></today-counseling-list-comp>
-    </div>
+<div class="container">
+    <span class="board-text-bold form-label board-text-title" id="toc-toggle">오늘의 상담 <i class="bi bi-caret-down-fill"></i></span>
+    <span class="badge mypage-badge rounded-pill mx-1"></span>
+    <today-counseling-list-comp id="toc-content" ></today-counseling-list-comp>
   </div>
 </template>
 <script>
@@ -24,9 +23,6 @@ export default {
   methods: {}
 }
 </script>
-<style scoped>
-  p {
-      text-align: left;
-      color: #1E2022;
-    }
+<style >
+
 </style>
