@@ -64,8 +64,8 @@ export default {
   methods: {
     ...mapActions(['fetchBoard', 'deleteBoard']),
   },
-  created() {
-    this.fetchBoard(this.$route.params.boardId)
+  async created() {
+    await this.fetchBoard(this.$route.params.boardId)
   },
   mounted() {
   },
