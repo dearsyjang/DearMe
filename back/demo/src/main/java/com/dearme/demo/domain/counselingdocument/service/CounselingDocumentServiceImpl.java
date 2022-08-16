@@ -65,6 +65,9 @@ public class CounselingDocumentServiceImpl implements CounselingDocumentService{
         User user = userRepository.findUserById(id).orElseThrow(() -> {
             throw new NoExistUserException();
         });
+        if(user.getType().equals(Type.COUNSELOR)){
+            throw new CounselorCreateCounselingException();
+        }
         counselingDocument.setUser(user);
         counselingDocument.setGroup(group);
         counselingDocument.setCounselor(group.getCounselor());
