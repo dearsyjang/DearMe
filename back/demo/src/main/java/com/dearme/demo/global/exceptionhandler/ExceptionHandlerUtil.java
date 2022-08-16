@@ -10,6 +10,7 @@ import com.dearme.demo.domain.board.exception.comment.NoCommentUpdatePermissionE
 import com.dearme.demo.domain.board.exception.comment.NoExistCommentException;
 import com.dearme.demo.domain.counseling.exception.NoExistCounselingException;
 import com.dearme.demo.domain.counselingroom.exception.CounselingRoomNotCreatedYet;
+import com.dearme.demo.domain.textdiary.exception.AlreadyExistTextDiaryException;
 import com.dearme.demo.domain.textdiary.exception.NoPermissionTextDiaryException;
 import com.dearme.demo.domain.user.exception.*;
 import com.dearme.demo.global.common.CommonResponse;
@@ -138,6 +139,11 @@ public class ExceptionHandlerUtil {
 
     @ExceptionHandler(NoPermissionUserInfoException.class)
     ResponseEntity<CommonResponse> handleNoPermissionUserInfoException(NoPermissionUserInfoException e){
+        return ResponseEntity.badRequest().body(CommonResponse.getErrorResponse(e.getMessage()));
+    }
+
+    @ExceptionHandler(AlreadyExistTextDiaryException.class)
+    ResponseEntity<CommonResponse> handleAlreadyExistTextDiaryException(AlreadyExistTextDiaryException e){
         return ResponseEntity.badRequest().body(CommonResponse.getErrorResponse(e.getMessage()));
     }
 }
