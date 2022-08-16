@@ -163,4 +163,10 @@ public class UserController {
         userService.updateUserProfileImage(id, picture);
         return ResponseEntity.accepted().build();
     }
+
+    @GetMapping("/{userId}")
+    public ResponseEntity<CommonResponse> counselorRequestUserInfo(HttpServletRequest request, @PathVariable("userId") Long userId){
+        String id = (String) request.getAttribute("id");
+        return new ResponseEntity<>(CommonResponse.getSuccessResponse(userService.getUserInfo(id, userId)), HttpStatus.OK);
+    }
 }

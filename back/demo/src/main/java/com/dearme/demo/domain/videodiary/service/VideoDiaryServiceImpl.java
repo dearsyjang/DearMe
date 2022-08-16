@@ -26,8 +26,6 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.BasicResponseHandler;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.json.JSONObject;
-import org.quartz.*;
-import org.quartz.impl.StdSchedulerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -37,7 +35,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
-import java.util.Calendar;
 
 @Service
 @RequiredArgsConstructor
@@ -103,8 +100,14 @@ public class VideoDiaryServiceImpl implements VideoDiaryService {
     @Override
     public VideoDiaryDetailsResponseDto getDetails(String id, Long videoDiaryId) {
         VideoDiary videoDiary = videoDiaryRepository.findById(videoDiaryId).get();
-        if(!videoDiary.getUser().getId().equals(id))
-            throw new NoPermissionVideoDiaryException();
+        if(!videoDiary.getUser().getId().equals(id)) {
+            Long userId = videoDiary.getUser().getUserId();
+            CounselingDocument latestCounselingDocument = counselingDocumentRepository.findTop1ByCounselor_IdAndUser_UserIdOrderByYearDescMonthDescHoursDesc(id, userId).orElseThrow(() -> {
+               throw new NoExistDocumentException();
+            });
+            if(!latestCounselingDocument.getIsOpen())
+                throw new NoPermissionVideoDiaryException();
+        }
         return VideoDiaryDetailsResponseDto.of(videoDiary);
     }
 

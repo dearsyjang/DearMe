@@ -2746,41 +2746,41 @@ VALUES(now(), now(), 'contents1', 29, 7, 'title1', 2022, 29);
 INSERT INTO TEXT_DIARY(created_at, updated_at, contents, day, month, title, year, user_id)
 VALUES(now(), now(), 'contents1', 30, 7, 'title1', 2022, 29);
 
-INSERT INTO COUNSELING(day, month, status, year, counselor_id, user_id)
-VALUES(1, 8, 'ACCEPTED', 2022, 6, 1);
+INSERT INTO COUNSELING(hours, day, month, status, year, counselor_id, user_id)
+VALUES(15, 1, 8, 'ACCEPTED', 2022, 6, 1);
 
-INSERT INTO COUNSELING_DOCUMENT(contents, day, is_open, month, year, counseling_id, counselor_id, user_id)
-VALUES('contents1', 1, 'FALSE', 8, 2022, 1, 6, 1);
+INSERT INTO COUNSELING_DOCUMENT(hours, contents, day, is_open, month, year, counseling_id, counselor_id, user_id)
+VALUES(15, 'contents1', 1, 'FALSE', 8, 2022, 1, 6, 1);
 
-INSERT INTO COUNSELING(day, month, status, year, counselor_id, user_id)
-VALUES(2, 8, 'ACCEPTED', 2022, 6, 1);
+INSERT INTO COUNSELING(hours, day, month, status, year, counselor_id, user_id)
+VALUES(17, 2, 8, 'ACCEPTED', 2022, 6, 1);
 
-INSERT INTO COUNSELING_DOCUMENT(contents, day, is_open, month, year, counseling_id, counselor_id, user_id)
-VALUES('contents1', 2, 'FALSE', 8, 2022, 2, 6, 1);
+INSERT INTO COUNSELING_DOCUMENT(hours, contents, day, is_open, month, year, counseling_id, counselor_id, user_id)
+VALUES(17, 'contents1', 2, 'FALSE', 8, 2022, 2, 6, 1);
 
-INSERT INTO COUNSELING(day, month, status, year, counselor_id, user_id)
-VALUES(3, 8, 'ACCEPTED', 2022, 6, 1);
+INSERT INTO COUNSELING(hours, day, month, status, year, counselor_id, user_id)
+VALUES(19, 3, 8, 'ACCEPTED', 2022, 6, 1);
 
-INSERT INTO COUNSELING_DOCUMENT(contents, day, is_open, month, year, counseling_id, counselor_id, user_id)
-VALUES('contents1', 3, 'FALSE', 8, 2022, 3, 6, 1);
+INSERT INTO COUNSELING_DOCUMENT(hours, contents, day, is_open, month, year, counseling_id, counselor_id, user_id)
+VALUES(19, 'contents1', 3, 'FALSE', 8, 2022, 3, 6, 1);
 
-INSERT INTO COUNSELING(day, month, status, year, counselor_id, user_id)
-VALUES(4, 8, 'ACCEPTED', 2022, 6, 1);
+INSERT INTO COUNSELING(hours, day, month, status, year, counselor_id, user_id)
+VALUES(17, 4, 8, 'ACCEPTED', 2022, 6, 1);
 
-INSERT INTO COUNSELING_DOCUMENT(contents, day, is_open, month, year, counseling_id, counselor_id, user_id)
-VALUES('contents1', 4, 'FALSE', 8, 2022, 4, 6, 1);
+INSERT INTO COUNSELING_DOCUMENT(hours, contents, day, is_open, month, year, counseling_id, counselor_id, user_id)
+VALUES(17, 'contents1', 4, 'FALSE', 8, 2022, 4, 6, 1);
 
-INSERT INTO COUNSELING(day, month, status, year, counselor_id, user_id)
-VALUES(5, 8, 'ACCEPTED', 2022, 6, 1);
+INSERT INTO COUNSELING(hours, day, month, status, year, counselor_id, user_id)
+VALUES(15, 5, 8, 'ACCEPTED', 2022, 6, 1);
 
-INSERT INTO COUNSELING_DOCUMENT(contents, day, is_open, month, year, counseling_id, counselor_id, user_id)
-VALUES('contents1', 5, 'FALSE', 8, 2022, 5, 6, 1);
+INSERT INTO COUNSELING_DOCUMENT(hours, contents, day, is_open, month, year, counseling_id, counselor_id, user_id)
+VALUES(15, 'contents1', 5, 'FALSE', 8, 2022, 5, 6, 1);
 
-INSERT INTO COUNSELING(day, month, status, year, counselor_id, user_id)
-VALUES(6, 8, 'ACCEPTED', 2022, 6, 1);
+INSERT INTO COUNSELING(hours, day, month, status, year, counselor_id, user_id)
+VALUES(16, 6, 8, 'ACCEPTED', 2022, 6, 1);
 
-INSERT INTO COUNSELING_DOCUMENT(contents, day, is_open, month, year, counseling_id, counselor_id, user_id)
-VALUES('contents1', 6, 'FALSE', 8, 2022, 6, 6, 1);
+INSERT INTO COUNSELING_DOCUMENT(hours, contents, day, is_open, month, year, counseling_id, counselor_id, user_id)
+VALUES(16, 'contents1', 6, 'FALSE', 8, 2022, 6, 6, 1);
 
 INSERT INTO COUNSELING(day, month, status, year, counselor_id, user_id)
 VALUES(10, 8, 'UNACCEPTED', 2022, 31, 11);

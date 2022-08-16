@@ -242,6 +242,17 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
+    public UserInfoResponseDto getUserInfo(String counselorId, Long userId) {
+        CounselingDocument latestCounselingDocument = counselingDocumentRepository.findTop1ByCounselor_IdAndUser_UserIdOrderByYearDescMonthDescHoursDesc(counselorId, userId).orElseThrow(() -> {
+           throw new NoExistDocumentException();
+        });
+        if(!latestCounselingDocument.getIsOpen()){
+            return getUserInfo(latestCounselingDocument.getUser().getId());
+        }
+        throw new NoPermissionUserInfoException();
+    }
+
+    @Override
     public List<ReviewViewResponseDto> getReviews(String id) {
         User user = userRepository.findUserById(id).orElseThrow(() -> {
             throw new NoExistUserException();
