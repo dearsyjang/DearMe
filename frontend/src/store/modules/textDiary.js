@@ -23,6 +23,17 @@ export default {
     SET_TEXTDIARY: (state, textDiary) => state.textDiary = textDiary,
   },
   actions: {
+    // 전체 텍스트 일기장 조회
+    fetchTextDiaries({ commit, getters }) {
+      axios({
+        url: drf.textDiary.textDiaryList(),
+        method: 'get',
+        headers: getters.authHeader,
+      })
+      .then(res => commit('SET_TEXTDIARIES', res.data.data))
+      .catch(err => console.error(err.response))
+    },
+
     //텍스트 일기 상세 페이지
     fetchTextDiary({ commit, getters }, textDiaryPk) {
       axios({
@@ -30,11 +41,7 @@ export default {
         method: 'get',
         headers: getters.authHeader,
       })
-        .then(res =>{
-          console.log(res.data.data)
-          commit('SET_TEXTDIARY', res.data.data)
-          
-        } )
+        .then(res => commit('SET_TEXTDIARY', res.data))
         
         .catch(err => {
           console.error(err.response)
@@ -63,8 +70,17 @@ export default {
         // headers: getters.authHeader
     } )
         .then(res => {
+          console.log(res.data)
+          console.log(this.contents)
+          console.log('1')
+          console.log(res.data.data)
           commit('SET_TEXTDIARY', res.data.data)
-          router.go()        
+          console.log(getters.textDiary.id)
+          router.push({
+            name: 'textDiaryDetail',
+            params: { textDiaryId: getters.textDiary.id
+            }
+          })
         })
         .catch(err => console.log(err))
     },
@@ -79,7 +95,8 @@ export default {
           })
             .then(() => {
               commit('SET_TEXTDIARY', {})
-              router.push({ to:'/calendar' })
+              
+              router.push({ name: 'textDiaryList' })
             })
             
             .catch(err => console.error(err.response))

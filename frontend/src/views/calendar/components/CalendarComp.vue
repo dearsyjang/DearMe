@@ -1,10 +1,12 @@
 <template>
-  <section class="section">
+  <section class="section" >
     <div class="container">
       <h2 class="subtitle has-text-centered">
-        <button class="btn" type="button" @click="calendarData(-1)">&lt;</button>
+        <button class="btn" type="button"
+        @click="calendarData(-1)">&lt;</button>
         {{ year }}년 {{ month }}월
-        <button type="button" class="btn" @click="calendarData(1)">&gt;</button>
+        <button type="button" class="btn"
+        @click="calendarData(1)">&gt;</button>
       </h2>
       <table class="table has-text-centered is-fullwidth">
         <thead>
@@ -12,79 +14,48 @@
         </thead>
         <tbody>
           <tr v-for="(date, idx) in dates" :key="idx">
-            <td v-for="(day, secondIdx) in date" :key="secondIdx">
+            <td
+              v-for="(day, secondIdx) in date" 
+              :key="secondIdx"            
+            >     
               <div v-if="day<8&& idx === 0 && day >= lastMonthStart || dates.length - 1 === idx && nextMonthStart > day"
-                @click="calendarData(1)" :class="'has-text-grey-light'">
+              @click="calendarData(1)"
+                :class="'has-text-grey-light'">
                 {{ day }}
               </div>
-              <div
-                v-else-if="day>24&& idx === 0 && day >= lastMonthStart || dates.length - 1 === idx && nextMonthStart > day"
-                @click="calendarData(-1)" :class="'has-text-grey-light'">
+              <div v-else-if="day>24&& idx === 0 && day >= lastMonthStart || dates.length - 1 === idx && nextMonthStart > day"
+              @click="calendarData(-1)"
+                :class="'has-text-grey-light'">
                 {{ day }}
               </div>
               <div v-else>
-                <div>
-
-                  <router-link :to="{
+              <div>
+              
+              <router-link :to="{
                 name: 'calendarDay',
-                query: {
+                params: {
                   textDiaryId: this.dayInfo[day].textDiaryId,
-                  videoDiaryId: this.dayInfo[day].videoDiaryId},
-              }" :class="{ 'has-text-grey-light': idx === 0 && day >= lastMonthStart || dates.length - 1 === idx && nextMonthStart > day,
+                videoDiaryId: this.dayInfo[day].videoDiaryId},
+              }" 
+                :class="{ 'has-text-grey-light': idx === 0 && day >= lastMonthStart || dates.length - 1 === idx && nextMonthStart > day,
               'has-text-primary': day === today && month === currentMonth && year === currentYear && idx <32
               }">
-                    {{ day }}
-                    {{this.dayInfo[day].textEmoji}}
-                    {{this.dayInfo[day].videoEmoji}}
-                    <br>
-                  </router-link>
-                </div>
+              {{this.dayInfo[day].textDiaryId}}
+              {{ day }}
+              <br>
+              </router-link>
+              </div>
               </div>
             </td>
           </tr>
         </tbody>
-
       </table>
-      <button v-if="dayTextDiary" class="board-btn-submit btn-sm mx-2" data-bs-toggle="modal"
-        data-bs-target="#textDiaryView">텍스트 일기 작성하기</button>
-      <button v-else class="board-btn-submit btn-sm mx-2">텍스트 일기 작성 완료!</button>
-
-      <div class="modal fade" id="textDiaryView" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">텍스트 일기</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-
-            <div class="container">
-              <form @submit.prevent="textDiarySave()" class="textDiary-form">
-                <p>일기 제목을 입력하시오. (50자 이내)</p>
-                <input v-model="data.title" type="text" placeholder="제목을 입력하시오" maxlength="50">
-                <p class="mt-5">일기 내용을 입력하시오.</p>
-                <p>(후에 추가 수정은 불가합니다.)</p>
-                <textarea v-model="data.contents" placeholder="일기 내용을 입력하시오"></textarea> <br>
-                <button type="submit" class="btn" id="textDiary-form-submit-button">저장</button>
-              </form>
-            </div>
-
-          </div>
-        </div>
-      </div>
-      <button v-if="dayVideoDiary" class="board-btn-submit btn-sm mx-2" data-bs-toggle="modal" data-bs-target="#videoDiaryView">
-        <router-link :to="{ name: 'videodiary' }"><button id="videodiary-enter-btn" class="btn">
-            <h1>영상 일기 작성하기</h1>
-          </button></router-link>
-      </button>
-      <button v-else class="board-btn-submit btn-sm mx-2">영상 일기 작성 완료!</button>
-
     </div>
-
   </section>
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex';
+import { mapGetters } from 'vuex';
 import axios from 'axios';
 
 export default {
@@ -108,13 +79,9 @@ export default {
       lastMonthStart: 0,
       nextMonthStart: 0,
       today: 0,
+      textDiaries:[],
+      videoDiaries: [],
       dayInfo: [],
-      data: {
-        contents: '',
-        title: '',
-      },
-      dayTextDiary:true,
-      dayVideoDiary:true,
     };
   },
   created() { // 데이터에 접근이 가능한 첫 번째 라이프 사이클
@@ -126,21 +93,12 @@ export default {
     this.today = date.getDate(); // 오늘 날짜
     this.calendarData();
     this.getTextDiaries();
-    this.getVideoDiaries();
   },
   computed: {
     ...mapGetters(['authHeader2'])
     },
   methods: {
-     ...mapActions(['createTextDiary']),
-    textDiarySave() {
-      const subData = {
-        title: this.data.title,
-        contents: this.data.contents,
-      }
-      this.createTextDiary(subData)
-              
-    },
+
     getTextDiaries() {
         const authHeader = this.authHeader2
       console.log(authHeader) 
@@ -163,28 +121,9 @@ export default {
             
             
             this.textDiaries.forEach(element => {
-              if(this.today==element.day){
-                this.dayTextDiary=false;
-              }
               this.dayInfo[element.day].textDiaryId = element.id
               this.dayInfo[element.day].textDiarySentiment = element.sentiment
               this.dayInfo[element.day].textDiaryPercentage = element.percentage
-              this.dayInfo[element.day].textEmoji=''
-              if(element.sentiment=='positive'){
-                    if(element.percentage>=90)  this.dayInfo[element.day].textEmoji='🌈'
-                    else if(element.percentage>=80) this.dayInfo[element.day].textEmoji='🌈'
-                    else if(element.percentage>=70) this.dayInfo[element.day].textEmoji='🌈'
-                    else if(element.percentage>=60) this.dayInfo[element.day].textEmoji='🌈'
-                    else this.dayInfo[element.day].textEmoji='🌈'
-              }else if(element.sentiment=='negative'){
-                    if(element.percentage>=90)  this.dayInfo[element.day].textEmoji='🌈'
-                    else if(element.percentage>=80) this.dayInfo[element.day].textEmoji='🌈'
-                    else if(element.percentage>=70) this.dayInfo[element.day].textEmoji='🌈'
-                    else if(element.percentage>=60) this.dayInfo[element.day].textEmoji='🌈'
-                    else this.dayInfo[element.day].textEmoji='🌈'
-              }else{
-                    this.dayInfo[element.day].textEmoji='🌈'
-              }
             });
             this.getVideoDiaries();
           })
@@ -211,28 +150,9 @@ export default {
             
             
             this.videoDiaries.forEach(element => {
-              if(this.today==element.day){
-                this.dayVideoDiary=false;
-              }
               this.dayInfo[element.day].videoDiaryId = element.id
               this.dayInfo[element.day].videoDiarySentiment = element.sentiment
               this.dayInfo[element.day].videoDiaryPercentage = element.percentage
-              this.dayInfo[element.day].videoEmoji=''
-              if(element.sentiment=='positive'){
-                    if(element.percentage>=90)  this.dayInfo[element.day].videoEmoji='🌈'
-                    else if(element.percentage>=80) this.dayInfo[element.day].videoEmoji='🌈'
-                    else if(element.percentage>=70) this.dayInfo[element.day].videoEmoji='🌈'
-                    else if(element.percentage>=60) this.dayInfo[element.day].videoEmoji='🌈'
-                    else this.dayInfo[element.day].videoEmoji='🌈'
-              }else if(element.sentiment=='negative'){
-                    if(element.percentage>=90)  this.dayInfo[element.day].videoEmoji='🌈'
-                    else if(element.percentage>=80) this.dayInfo[element.day].videoEmoji='🌈'
-                    else if(element.percentage>=70) this.dayInfo[element.day].videoEmoji='🌈'
-                    else if(element.percentage>=60) this.dayInfo[element.day].videoEmoji='🌈'
-                    else this.dayInfo[element.day].videoEmoji='🌈'
-              }else{
-                    this.dayInfo[element.day].videoEmoji='🌈'
-              }
             });
         })
           .catch(error => {
@@ -262,8 +182,6 @@ export default {
         monthLastDate,
         lastMonthLastDate,
       );
-      this.getTextDiaries()
-      this.getVideoDiaries()
     },
     getFirstDayLastDate(year, month) {
       const firstDay = new Date(year, month - 1, 1).getDay(); // 이번 달 시작 요일
