@@ -65,7 +65,7 @@ export default {
     this.fetchBoard(this.$route.params.boardId)
   },
   mounted() {
-
+    
   },
   unmounted() {},
 }
