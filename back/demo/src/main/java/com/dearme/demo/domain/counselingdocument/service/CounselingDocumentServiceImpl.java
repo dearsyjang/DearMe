@@ -47,7 +47,6 @@ public class CounselingDocumentServiceImpl implements CounselingDocumentService{
         User counselor = userRepository.findUserByUserId(dto.getId()).orElseThrow(() -> {
             throw new NoExistCounselorException();
         });
-        System.out.println(id);
         if(counselingDocumentRepository.existsCounselingDocumentByUser_IdAndCounselor_UserIdAndYearAndMonthAndDayAndHours(id,
                 counselor.getUserId(),
                 counselingDocument.getYear(),
@@ -74,6 +73,9 @@ public class CounselingDocumentServiceImpl implements CounselingDocumentService{
         });
         if(user.getType().equals(Type.COUNSELOR)){
             throw new CounselorCreateCounselingException();
+        }
+        if(counselingDocumentRepository.existsCounselingDocumentByUser_IdAndGroup_Id(id, group.getId())){
+            throw new AlreadyExistCounselorDocumentException();
         }
         counselingDocument.setUser(user);
         counselingDocument.setGroup(group);
