@@ -86,7 +86,7 @@ export default {
           })
         })
         .catch((err) => {
-       
+          alert('상담 신청 양식을 채워주세요.')
           console.log(request.contents)
           console.log(request.isOpen)
           console.log(request.id)
