@@ -27,6 +27,6 @@ export default new Vuex.Store({
   },
   //vuex plugin 명시
   plugins: [createPersistedState({
-      paths: ['member', 'mypage', 'member', 'group', 'counselingSchedule']
+      paths: ['member', 'mypage', 'group', 'counselingSchedule']
   })]
 });

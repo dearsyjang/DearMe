@@ -1,20 +1,20 @@
 <template>
 <div>
-  <div v-if="isLoggedIn">
+  <div v-if="currentUser!='' && isLoggedIn">
     <div id="bottombar" class="container">
-      <div v-if="currentUser.data.type ==`USER`">
+      <div v-if="currentUser.data?.type ==`USER`">
         <router-link to="/calendar" class="img mx-3"><img id="emotion" src="../../assets/images/emotion.png" alt="emotion"></router-link>
         <p class="text">감정달력</p>
       </div>
-      <div v-if="currentUser.data.type ==`COUNSELOR`">
+      <div v-if="currentUser.data?.type ==`COUNSELOR`">
         <router-link to="/counseling-schedule/counselor-schedule" class="img mx-3"><img id="schedule" src="../../assets/images/schedule.png" alt="schedule"></router-link>
         <p class="text">일정달력</p>
       </div>
-    <div v-if="currentUser.data.type ==`USER`">
+    <div v-if="currentUser.data?.type ==`USER`">
       <router-link to="/counseling-schedule/userschedule" class="img mx-3"><img id="calendar" src="../../assets/images/calendar.png" alt="calendar"></router-link>
       <p class="text">상담일정</p>
     </div>
-    <div v-if="currentUser.data.type ==`COUNSELOR`">
+    <div v-if="currentUser.data?.type ==`COUNSELOR`">
         <router-link to="/counseling-request/list" class="img mx-3"><img id="request" src="../../assets/images/request.png" alt="request"></router-link>
         <p class="text">상담신청</p>
       </div>
@@ -48,14 +48,10 @@ export default {
     // }
   },
   methods: {
-      ...mapActions(['fetchSchedules', 'fetchCurrentUser'])
+      ...mapActions(['fetchCurrentUser'])
     },
     created() {
       this.fetchCurrentUser()
-      this.fetchSchedules()
-      
-    },
-    mounted(){
     },
 }
 </script>
