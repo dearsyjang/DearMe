@@ -242,6 +242,9 @@ export default {
 * {
   font-family: 'Gowun Dodum', sans-serif;
 }
+body{
+  background-color: #F9F7F7;
+}
 
 .container a{
   text-decoration: none;
@@ -256,10 +259,10 @@ section{
 }
 .table{
   background-color: #F9F7F7;
-  height: 580px;
+  height: 600px;
 }
 .td{
-  height: 100px;
+  height: 110px;
   padding: 5px
 }
 .card{

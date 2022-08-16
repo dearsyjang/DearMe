@@ -1,15 +1,15 @@
 <template>
-  <div >
+  <div id="topbar">
     <!--상단바-->
     <div class="header-demo-bg shadow-sm">
-      <div id="topbar" class="container">
+      <div class="container">
         <!-- Header Content -->
         <div
           class="header-content header-style-five position-relative d-flex align-items-center justify-content-between">
           <!-- Logo Wrapper -->
           <div class="logo-wrapper">
             <a href="page-home.html">
-              <img id="logoimg" src="../../assets/images/logo.png" alt="logo">
+              <img id="logoimg" src="../../assets/images/logo3.png" alt="logo">
             </a>
           </div>
           <!-- Navbar Toggler -->

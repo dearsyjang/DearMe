@@ -12,6 +12,7 @@
             <vue3-video-player :src="videoSource"></vue3-video-player>
         </div>
         <button @click="deleteVideoDiary()">영상 일기 삭제</button>
+      <button v-on:click = "this.isTextOn =!this.isTextOn">영상 일기 보기</button>
   </div>
 </template>
 <script>
