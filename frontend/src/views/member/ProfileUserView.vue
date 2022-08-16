@@ -36,7 +36,7 @@
         />
         <label for="uploadItemFile">
           <div class="wrapper-image" >
-              <img ref="uploadItemImage">
+              <img id = "profile" ref="uploadItemImage">
           </div>      
         </label>
         </div>  
@@ -79,7 +79,7 @@ import axios from 'axios'
 
 
     computed : {
-    ...mapGetters(['currentUser',  ]),
+    ...mapGetters(['currentUser' ]),
 
     },
     methods: {
@@ -92,48 +92,17 @@ import axios from 'axios'
         
         itemImage.src = window.URL.createObjectURL(image.files[0]);//img src에 blob주소 변환
         
-        this.itemImageInfo.uploadImages = itemImage.src; //이미지 주소 data 변수에 바인딩해서 나타내게 처리
         
-        itemImage.width ='200'; // 이미지 넓이
+        itemImage.width ='100'; // 이미지 넓이
         
-        itemImage.onload = () => {
-          window.URL.revokeObjectURL(this.src)  //나중에 반드시 해제해주어야 메모리 누수가 안생김.
-        }
      
       }
     },
 
     getImage () {
-      const authHeader = this.authHeader2
-        axios({
-            method:'get', 
-            url: "https://i7d206.p.ssafy.io/users/image",
-            headers: {
-              Authorization : authHeader,
-            },
-            })
-        .then(response => {
-            console.log(response);
-            
-          let itemImage = this.$refs.uploadItemImage; //img dom 접근
-          itemImage.src = "data:image/png;base64," + btoa(unescape(encodeURIComponent(response.data)))
-            document.body.appendChild(itemImage);
-        // itemImage.src = window.URL.createObjectURL("https://i7d206.p.ssafy.io//home/ubuntu/docker-volume/image/basic.png");//img src에 blob주소 변환
+      const img = document.getElementById('profile');
+      img.src = this.currentUser.data.pictureUrl
         
-        // this.itemImageInfo.uploadImages = itemImage.src; //이미지 주소 data 변수에 바인딩해서 나타내게 처리
-        
-        // itemImage.width ='200'; // 이미지 넓이
-        
-        // itemImage.onload = () => {
-        //   window.URL.revokeObjectURL(this.src)  //나중에 반드시 해제해주어야 메모리 누수가 안생김.
-        // }
-            
-
-            
-        })
-        .catch(error => {
-            console.error(error)
-        });
     },
     updateUserProfile () {
       // console.log(this.currentUser.data.type)
@@ -171,6 +140,9 @@ import axios from 'axios'
     
   created() {
     this.fetchCurrentUser()
+    
+  },
+  mounted(){
     this.getImage();
   },
 }
