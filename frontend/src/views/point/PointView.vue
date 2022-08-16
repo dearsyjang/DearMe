@@ -1,8 +1,7 @@
 <template>
-
-
-
+<div class="point">
   <section class="test">
+    <h1 class="pointTitle">포인트 충전</h1>
     <select v-model="selected">
       <option disabled value="">충전할 포인트를 선택해 주세요.  </option>
       <option>1000</option>
@@ -10,13 +9,13 @@
       <option>3000</option>
     </select>
     <br>
-    <span>선택함 : {{ selected }}  point</span>
+    <div>선택함 : {{ selected }}  point</div>
       
-    <button @click="requestPay()">
+    <button @click="requestPay()" class="w-btn w-btn-charge2">
       결제하기
     </button>
   </section>
-
+</div>
 </template>
 
 
@@ -97,3 +96,40 @@ export default {
    
 
 </script>
+<style>
+body {
+  background-color: #F9F7F7 !important;
+}
+
+.pointTitle {
+  font-size: 50px;
+  padding-bottom: 100px;
+
+}
+
+.test {
+  position: absolute; top: 400%; left: 21%;
+}
+.w-btn-charge2 {
+    /* position: relative; */
+    position: absolute; top: 700%; right: -17%;
+    
+    border: none;
+    min-width: 320px;
+    min-height: 40px;
+    background: linear-gradient(
+        90deg,
+        #8d8cb0 0%,
+        #636294 100%
+    );
+    border-radius: 1000px;
+    color: darkslategray;
+    cursor: pointer;
+    box-shadow: 12px 12px 24px #76769a1a;
+    font-weight: 500;
+    transition: 0.3s;
+    color: #E8E5DC;
+    font-size:25px
+}
+
+</style>

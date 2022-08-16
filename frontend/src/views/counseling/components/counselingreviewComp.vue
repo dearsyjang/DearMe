@@ -1,6 +1,6 @@
 <template>
   <div>
-    <form @submit.prevent="onSubmit" class="review-list-form">
+    <form @submit.prevent="onSubmit()" class="review-list-form">
         
 
         <div class="star-rating space-x-4 mx-auto">
