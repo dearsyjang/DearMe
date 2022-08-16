@@ -34,7 +34,7 @@
                     <button class="w-btn-check" @click="nicknameCheck()">중복확인</button>
                   </div>
                   <div class="form-group">
-                      <select class="form-select" id="defaultSelect" v-model="credentials.gender" >
+                      <select class="form-select" id="defaultSelect" v-model="credentials.gender">
                         <option selected>성별</option>
                         <option value="MALE">남성</option>
                         <option value="FEMALE">여성</option>
@@ -50,7 +50,20 @@
                   </div>
                   <div class="form-group">
                     <form id="formElem" enctype="multipart/form-data">
-                      <input type="file" class="hidden_input" id="reviewImageFileOpenInput" accept="image/*" multiple>
+                       <div class="itemFileBox" ref="itemFileBox">
+                        <input type="file" 
+                                class="item-file-image" 
+                                id="uploadItemFile" 
+                                ref="uploadItemFile"
+                                @change="onFileSelected"
+                                accept="image/*"
+                        />
+                        <label for="uploadItemFile">
+                          <div class="wrapper-image" >
+                              <img ref="uploadItemImage">
+                          </div>      
+                        </label>
+                        </div>  
                     </form>
                   </div>
                   <button @click="signUp()" class="w-btn-signup w-100" type="submit">회원가입</button>
@@ -115,6 +128,22 @@ export default {
   methods: {
     ...mapActions(['signup']),
     // 회원가입 폼 제출
+    onFileSelected(event){
+      let image = event.target;
+      if(image.files[0]){
+                
+        let itemImage = this.$refs.uploadItemImage; //img dom 접근
+        
+        itemImage.src = window.URL.createObjectURL(image.files[0]);//img src에 blob주소 변환
+        
+        itemImage.width ='200'; // 이미지 넓이
+        
+        itemImage.onload = () => {
+          window.URL.revokeObjectURL(this.src)  //나중에 반드시 해제해주어야 메모리 누수가 안생김.
+        }
+     
+      }
+    },
     signUp() {
       let formData = new FormData()
       formData.append('id', this.credentials.id)
