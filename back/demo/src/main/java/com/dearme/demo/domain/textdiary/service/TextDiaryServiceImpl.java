@@ -8,6 +8,7 @@ import com.dearme.demo.domain.textdiary.dto.PostTextDiaryResponseDto;
 import com.dearme.demo.domain.textdiary.dto.TextDiaryDetailsResponseDto;
 import com.dearme.demo.domain.textdiary.dto.TextDiaryListResponseDto;
 import com.dearme.demo.domain.textdiary.entity.TextDiary;
+import com.dearme.demo.domain.textdiary.exception.AlreadyExistTextDiaryException;
 import com.dearme.demo.domain.textdiary.exception.NoPermissionTextDiaryException;
 import com.dearme.demo.domain.textdiary.exception.TextDiarySentimentException;
 import com.dearme.demo.domain.textdiary.repository.TextDiaryRepository;
@@ -51,6 +52,9 @@ public class TextDiaryServiceImpl implements TextDiaryService{
         if(user.getType().equals(Type.COUNSELOR))
             throw new CounselorPostVideoDiaryException();
         TextDiary textDiary = dto.toEntity();
+        if (textDiaryRepository.existsTextDiaryByUser_IdAndYearAndMonthAndDay(id, textDiary.getYear(), textDiary.getMonth(), textDiary.getDay())) {
+            throw new AlreadyExistTextDiaryException();
+        }
         textDiary.setUser(user);
         textDiary.setSentimentInfo(getSentiment(dto.getContents()));
         return new PostTextDiaryResponseDto(textDiaryRepository.save(textDiary).getId(), textDiary.getSentiment(), textDiary.getPercentage(), textDiary.getPositive(), textDiary.getNegative(), textDiary.getNeutral());
