@@ -2,10 +2,10 @@
   <section class="section" >
     <div class="container">
       <h2 class="subtitle has-text-centered">
-        <button class="button is-small is-info is-outlined mr-5"
+        <button class="btn" type="button"
         @click="calendarData(-1)">&lt;</button>
         {{ year }}년 {{ month }}월
-        <button class="button is-small is-info is-outlined ml-5"
+        <button type="button" class="btn"
         @click="calendarData(1)">&gt;</button>
       </h2>
       <table class="table has-text-centered is-fullwidth">
@@ -16,16 +16,35 @@
           <tr v-for="(date, idx) in dates" :key="idx">
             <td
               v-for="(day, secondIdx) in date" 
-              :key="secondIdx"
-            > 
-              <div class="card" style="height:50px; width:30px">
-              <router-link to="/calendar/DayComp" :class="{ 'has-text-grey-light': idx === 0 && day >= lastMonthStart || dates.length - 1 === idx && nextMonthStart > day,
+              :key="secondIdx"            
+            >     
+              <div v-if="day<8&& idx === 0 && day >= lastMonthStart || dates.length - 1 === idx && nextMonthStart > day"
+              @click="calendarData(1)"
+                :class="'has-text-grey-light'">
+                {{ day }}
+              </div>
+              <div v-else-if="day>24&& idx === 0 && day >= lastMonthStart || dates.length - 1 === idx && nextMonthStart > day"
+              @click="calendarData(-1)"
+                :class="'has-text-grey-light'">
+                {{ day }}
+              </div>
+              <div v-else>
+              <div>
+              
+              <router-link :to="{
+                name: 'calendarDay',
+                params: {
+                  textDiaryId: this.dayInfo[day].textDiaryId,
+                videoDiaryId: this.dayInfo[day].videoDiaryId},
+              }" 
+                :class="{ 'has-text-grey-light': idx === 0 && day >= lastMonthStart || dates.length - 1 === idx && nextMonthStart > day,
               'has-text-primary': day === today && month === currentMonth && year === currentYear && idx <32
               }">
+              {{this.dayInfo[day].textDiaryId}}
               {{ day }}
               <br>
-              
               </router-link>
+              </div>
               </div>
             </td>
           </tr>
@@ -36,8 +55,11 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+import axios from 'axios';
+
 export default {
-    name: 'CalendarComp',
+  name: 'CalendarComp',
   data() {
     return {
       days: [
@@ -57,6 +79,9 @@ export default {
       lastMonthStart: 0,
       nextMonthStart: 0,
       today: 0,
+      textDiaries:[],
+      videoDiaries: [],
+      dayInfo: [],
     };
   },
   created() { // 데이터에 접근이 가능한 첫 번째 라이프 사이클
@@ -67,8 +92,73 @@ export default {
     this.month = this.currentMonth;
     this.today = date.getDate(); // 오늘 날짜
     this.calendarData();
+    this.getTextDiaries();
   },
+  computed: {
+    ...mapGetters(['authHeader2'])
+    },
   methods: {
+
+    getTextDiaries() {
+        const authHeader = this.authHeader2
+      console.log(authHeader) 
+      this.dayInfo.length = 31
+      for (let i = 0; i <= 31; i++){
+        this.dayInfo[i]=[]
+       }
+        axios
+          .get(
+            `https://i7d206.p.ssafy.io/text-diaries/year/` + this.year + `/month/` + this.month,
+            {
+              headers: {
+                Authorization: authHeader
+              }
+            }
+          )
+          .then(response => {
+            console.log(response)
+            this.textDiaries = response.data.data.textDiaries;
+            
+            
+            this.textDiaries.forEach(element => {
+              this.dayInfo[element.day].textDiaryId = element.id
+              this.dayInfo[element.day].textDiarySentiment = element.sentiment
+              this.dayInfo[element.day].textDiaryPercentage = element.percentage
+            });
+            this.getVideoDiaries();
+          })
+          .catch(error => {
+            console.error(error)
+          })
+
+    },
+    getVideoDiaries() {
+        const authHeader = this.authHeader2
+        console.log(authHeader)    
+        axios
+            .get(
+                `https://i7d206.p.ssafy.io/video-diaries/year/`+this.year + `/month/` + this.month,
+                {
+                  headers: {
+                        Authorization : authHeader
+                    }  
+                }
+            )
+          .then(response => {
+            console.log(response)
+            this.videoDiaries = response.data.data.videoDiaries;
+            
+            
+            this.videoDiaries.forEach(element => {
+              this.dayInfo[element.day].videoDiaryId = element.id
+              this.dayInfo[element.day].videoDiarySentiment = element.sentiment
+              this.dayInfo[element.day].videoDiaryPercentage = element.percentage
+            });
+        })
+          .catch(error => {
+          console.error(error)
+        })
+    },
     calendarData(arg) { // 인자를 추가
       if (arg < 0) { // -1이 들어오면 지난 달 달력으로 이동
         this.month -= 1;
@@ -147,11 +237,37 @@ export default {
   },
 };
 </script>
-<style>
+<style scoped>
+@import url('https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap');
+* {
+  font-family: 'Gowun Dodum', sans-serif;
+}
+
 .container a{
   text-decoration: none;
-  color: black
+  color: black;
+}
+.body{
+  background-color: #F9F7F7;
+}
+section{
+  background-color: #F9F7F7;
+  height: 100%;
+}
+.table{
+  background-color: #F9F7F7;
+  height: 580px;
+}
+.td{
+  height: 100px;
+  padding: 5px
+}
+.card{
+  background-color: #F9F7F7;
+  border: none;
+  shadow: none;
+}
+.td{
+  padding: none;
 }
 </style>
-
-

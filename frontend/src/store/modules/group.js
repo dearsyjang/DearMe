@@ -44,9 +44,9 @@ export default {
         headers: getters.authHeader,
       })
       .then(res => {
- 
+        console.log('2', getters.group)
         commit('SET_GROUP', res.data.data)
-       
+        console.log('3', getters.group)
       })
       .catch(err => {
         console.error(err)
@@ -66,9 +66,9 @@ export default {
           },
       })
       .then(res => {
- 
+
         commit('SET_GROUPS', res.data.data)
-      
+
       })
       .catch(err => {
         console.error(err)
@@ -80,7 +80,7 @@ export default {
 
 
 
-    
-   
+
+
   },
 }

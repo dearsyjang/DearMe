@@ -24,7 +24,7 @@
 
           <form @submit.prevent="onSubmit" >
 
-            <p2 >정렬</p2>
+            <div>정렬</div>
             <br><br>
               <div class="form-check form-check-inline">
                 <input class="form-check-input" type="radio" id="1" value="true" name="radio1" v-model="filter.reviewScoreUp">
@@ -55,7 +55,7 @@
               <br>
               <hr>
            
-              <p2 >전문 분야</p2>
+              <div >전문 분야</div>
               <br><br>
               <div class="form-check form-check-inline">
                 <input class="form-check-input" type="radio" id="3" value="가족" name="radio2" v-model="filter.category">
@@ -86,7 +86,7 @@
               <br>
               <hr>
              
-              <p2 >즐겨찾기</p2>
+              <div >즐겨찾기</div>
               <br>
                       <div class="form-check form-check-inline">
                 <input class="form-check-input" type="checkbox" id="7" value="true" v-model="filter.favorite">

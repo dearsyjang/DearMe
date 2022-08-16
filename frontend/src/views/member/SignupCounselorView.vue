@@ -39,6 +39,9 @@
             <input class="form-control col-sm-3" id="signup-birth" type="text" name="mm" placeholder="월(2자)">
             <input class="form-control col-sm-3" id="signup-birth" type="text" name="dd" placeholder="일(2자)">
           </div>
+          <form id="formElem" enctype="multipart/form-data">
+              <input type="file" class="hidden_input" id="reviewImageFileOpenInput" accept="image/*" multiple>
+            </form>
           <button @click="signUp()" class="btn btn-primary w-100" type="submit">회원가입</button>
         </form>
       </div>
@@ -64,6 +67,22 @@ export default {
         gender: '',
         email: '',
         picture: '',
+        counselorProfile: `{"introduce" : "introduce my self",     
+              "price" : 100,    
+                "careers" : [   
+                    { "contents" : "contents1" }, 
+                    { "contents" : "contents1" }, 
+                    { "contents" : "contents1" },    
+                    { "contents" : "contents1" }   
+                  ],   
+                  "certificates" : [      
+                    { "contents" : "contents1" }   
+                  ],     
+                  "categories" : [      
+                    { "contents" : "contents1" }    
+                  ]}  `
+      
+
       },
       months: [
         1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12
@@ -90,7 +109,10 @@ export default {
       formData.append('nickName', this.credentials.nickName)
       formData.append('birth', this.credentials.birth)
       formData.append('gender', this.credentials.gender)
+      formData.append('phone', '01032153214')
       formData.append('email', this.credentials.email)
+      formData.append('counselorProfile', this.credentials.counselorProfile)
+      formData.append('picture', document.getElementById('formElem')[0].files[0]);
       this.signup(formData)
       // console.log(formData.getAll('id'))
     },

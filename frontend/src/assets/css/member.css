@@ -1095,14 +1095,17 @@ caption,
   padding: 0;
 }
 
+/* 배경 */
 body,
 html {
   font-family: "Poppins", sans-serif;
   overflow-x: hidden;
-  background-color: white;
+  background-color: #F9F7F7;
   color: #8480ae;
   scrollbar-width: thin;
   letter-spacing: -0.25px;
+  width: 100%;
+  height: 100%;
 }
 
 h1,
@@ -1126,6 +1129,7 @@ a:focus {
           transition-duration: 500ms;
   text-decoration: none;
   outline: 0 solid transparent;
+  color: black;
 }
 
 ul {
@@ -1515,7 +1519,7 @@ textarea:invalid {
 
 /* :: Miscellaneous */
 .page-content-wrapper {
-  margin-top: 50px;
+  /* margin-top: 50px; */
   margin-bottom: 62px;
 }
 
@@ -1887,7 +1891,7 @@ a.affan-element-item i {
 .header-area {
   -webkit-transition-duration: 500ms;
           transition-duration: 500ms;
-  background-color: #ffffff;
+  background-color: #005691;
   width: 100%;
   height: 50px;
   position: fixed;
@@ -1917,7 +1921,7 @@ a.affan-element-item i {
   display: block;
 }
 .header-content .logo-wrapper a img {
-  max-height: 26px;
+  max-height: 30px;
   width: auto;
 }
 .header-content .navbar--toggler {
@@ -1926,7 +1930,7 @@ a.affan-element-item i {
   cursor: pointer;
 }
 .header-content .navbar--toggler span {
-  width: 23px;
+  width: auto;
   height: 2px;
   background-color: #1f0757;
   margin-bottom: 5px;
@@ -1994,6 +1998,7 @@ a.affan-element-item i {
   border-radius: 50%;
   display: -webkit-box;
   display: -ms-flexbox;
+  color: #yellow;
   display: flex;
   -webkit-box-align: center;
       -ms-flex-align: center;
@@ -2006,7 +2011,7 @@ a.affan-element-item i {
   width: 14px;
   margin-bottom: 3px;
   border-radius: 0;
-  color: #8480ae;
+  color: #white;
 }
 .header-content.header-style-two .navbar--toggler span:last-child {
   margin-bottom: 0;
@@ -2072,7 +2077,7 @@ a.affan-element-item i {
   color: #0d5afd;
 }
 .header-content.header-style-five .navbar--toggler {
-  border: 2px solid #ebebeb;
+  border: 1px solid black;
   padding: 5px;
   border-radius: 4px;
 }
@@ -2086,8 +2091,9 @@ a.affan-element-item i {
 .header-content.header-style-six .search-trigger-btn {
   color: #1f0757;
 }
+
 .header-content.header-style-six .search-trigger-btn:hover, .header-content.header-style-six .search-trigger-btn:focus {
-  color: #0d5afd;
+  color: #52734D;
 }
 
 .bg-success .header-content .navbar--toggler,
@@ -2186,8 +2192,9 @@ a.affan-element-item i {
   color: #ffffff;
 }
 
+/* 상단바 */
 .header-demo-bg {
-  background-color: #ffffff;
+  background-color: #fdca60;
 }
 
 /* :: Sidenav */
@@ -3616,7 +3623,6 @@ a.affan-element-item i {
   margin-bottom: 2.75rem;
 }
 .cs-logo a img {
-  max-height: 2rem;
 }
 
 .cs-newsletter-form .modal-body {
@@ -3631,8 +3637,6 @@ a.affan-element-item i {
 
 /* :: Card */
 .card {
-  border: 0;
-  border-radius: 6px;
 }
 
 .card-img,
@@ -3653,7 +3657,6 @@ a.affan-element-item i {
 
 .card-gradient-bg {
   background: #0cebeb;
-  background: -webkit-gradient(linear, left top, right top, from(#29ffc6), color-stop(#20e3b2), to(#0cebeb));
   background: linear-gradient(to right, #29ffc6, #20e3b2, #0cebeb);
 }
 
@@ -4969,11 +4972,11 @@ a.affan-element-item i {
 
 .form-control {
   -webkit-transition-duration: 500ms;
-          transition-duration: 500ms;
+          /* transition-duration: 500ms; */
   border-style: solid;
-  padding: 0.5rem 1rem;
-  height: 41px;
-  max-height: 41px;
+  /* padding: 0.5rem 1rem; */
+  /* height: 41px; */
+  /* max-height: 41px; */
   font-size: 14px;
   color: #073984;
   background-color: #ffffff;
@@ -5007,7 +5010,7 @@ a.affan-element-item i {
 }
 
 textarea.form-control {
-  min-height: 120px;
+  /* min-height: 120px; */
 }
 
 .form-control-plaintext {
@@ -7852,6 +7855,7 @@ form .btn-lg {
   left: 0;
 }
 [view-mode=rtl] body .dataTable-table th a {
+  text-decoration: none;
   text-align: right;
 }
 [view-mode=rtl] body .dataTable-bottom > div:last-child,

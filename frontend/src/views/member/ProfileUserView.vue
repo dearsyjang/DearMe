@@ -26,6 +26,20 @@
       </div>
       <hr>
       사진 : {{currentUser.pictureUrl}}
+      <div class="itemFileBox" ref="itemFileBox">
+        <input type="file" 
+                class="item-file-image" 
+                id="uploadItemFile" 
+                ref="uploadItemFile"
+                @change="onFileSelected"
+                accept="image/*"
+        />
+        <label for="uploadItemFile">
+          <div class="wrapper-image" >
+              <img ref="uploadItemImage">
+          </div>      
+        </label>
+        </div>  
       <hr>
       이메일 : {{currentUser.data.email}}
       <hr>
@@ -42,7 +56,7 @@
 <script>
 
   import {  mapActions, mapGetters} from 'vuex'
-
+import axios from 'axios'
   export default {
     data() {
       return {
@@ -70,7 +84,57 @@
     },
     methods: {
     ...mapActions(['fetchCurrentUser', 'updateProfile', 'deleteUser' ]),
+    onFileSelected(event){
+      let image = event.target;
+      if(image.files[0]){
+                
+        let itemImage = this.$refs.uploadItemImage; //img dom 접근
+        
+        itemImage.src = window.URL.createObjectURL(image.files[0]);//img src에 blob주소 변환
+        
+        this.itemImageInfo.uploadImages = itemImage.src; //이미지 주소 data 변수에 바인딩해서 나타내게 처리
+        
+        itemImage.width ='200'; // 이미지 넓이
+        
+        itemImage.onload = () => {
+          window.URL.revokeObjectURL(this.src)  //나중에 반드시 해제해주어야 메모리 누수가 안생김.
+        }
+     
+      }
+    },
 
+    getImage () {
+      const authHeader = this.authHeader2
+        axios({
+            method:'get', 
+            url: "https://i7d206.p.ssafy.io/users/image",
+            headers: {
+              Authorization : authHeader,
+            },
+            })
+        .then(response => {
+            console.log(response);
+            
+          let itemImage = this.$refs.uploadItemImage; //img dom 접근
+          itemImage.src = "data:image/png;base64," + btoa(unescape(encodeURIComponent(response.data)))
+            document.body.appendChild(itemImage);
+        // itemImage.src = window.URL.createObjectURL("https://i7d206.p.ssafy.io//home/ubuntu/docker-volume/image/basic.png");//img src에 blob주소 변환
+        
+        // this.itemImageInfo.uploadImages = itemImage.src; //이미지 주소 data 변수에 바인딩해서 나타내게 처리
+        
+        // itemImage.width ='200'; // 이미지 넓이
+        
+        // itemImage.onload = () => {
+        //   window.URL.revokeObjectURL(this.src)  //나중에 반드시 해제해주어야 메모리 누수가 안생김.
+        // }
+            
+
+            
+        })
+        .catch(error => {
+            console.error(error)
+        });
+    },
     updateUserProfile () {
       // console.log(this.currentUser.data.type)
       // console.log(this.currentUser.data.counselorProfileInfoDto.introduce)
@@ -82,11 +146,32 @@
       } 
 
       this.updateProfile(this.update)
+    },
+    updateImage () {
+      const authHeader = this.authHeader2
+        axios({
+            method:'put', 
+            url: "https://i7d206.p.ssafy.io/users/image",
+            headers: {
+              'Content-Type': 'multipart/form-data',
+              Authorization : authHeader,
+            },
+            data: ({
+              picture: document.getElementById('formElem')[0].files[0],
+              }),
+            })
+        .then(response => {
+            console.log(response);
+        })
+        .catch(error => {
+            console.error(error)
+        });
     }
     },
     
   created() {
     this.fetchCurrentUser()
+    this.getImage();
   },
 }
 </script>
