@@ -1,27 +1,32 @@
 <template>
-<div class="container direction-rtl">
-  <!-- <div class="row " v-for="group in groups" :key="group"></div> -->
-    <div class="row ">
-      <div class="card">
-        <div class="card-body">
-          <div class="row"  >
-            <p class="col-sm-4">상담사 이름</p>
-            <p class="col-sm-4">상담 횟수 : 1 회</p>
-            <!-- <p class="col-sm-4">{{ group.title }}</p>
-            <p class="col-sm-4">{{ group.date[0] }}.{{ group.date[1] }}.{{ group.date[2] }}</p> -->
-            <button class="col-sm-4 btn btn-primary">상담사 프로필</button>
+<div class="page-content-wrapper py-3">
+  <div class="blog-wrapper direction-rtl">
+    <div class="container">
+      <div class="row g-3">
+        <div class="col-6 col-sm-4 col-md-3">
+          <div v-for="favorite in myFavorite" :key="favorite" class="card position-relative shadow-sm">
+            <div class="card-body">
+              <router-link :to="{ name: 'counselorProfile', params: {counselorId: favorite.counselorId }}">
+              <span class="badge bg-danger rounded-pill mb-2 d-inline-block"><i class="bi bi-hand-thumbs-up-fill"></i> {{ board.hitCnt}}</span>
+              <h4 class="blog-title d-block text-dark board-title">{{ favorite.counselorId }}</h4>
+              </router-link>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
+</div>
 </template>
 <script>
 export default {
+  props: {
+    myFavorite: Array,
+  },
   components: {},
   data() {
     return {
-      sampleData: ''
+
     }
   },
   setup() {},
@@ -32,11 +37,7 @@ export default {
 }
 </script>
 <style scoped>
-  /* .Favorite {
-    background-color: #F0F5F9;
-  }
-  p, button {
-    width: 160px;
-    display: table-cell;
-  } */
+.bg-p {
+  background-color: #5B5792
+}
 </style>

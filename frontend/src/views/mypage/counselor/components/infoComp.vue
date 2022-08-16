@@ -1,43 +1,71 @@
 <template>
-  <div class="Info container">
-    <div class="row">
-      <label id="con1" class="col-sm-6 col-form-label" for="nickname">정윤해</label>
-      <p id="con1" class="form-control col-sm-6">상담사</p>
-    </div>
-    <div id="point">
-      <label class="form-label" for="myPoint">잔여포인트</label>
-    </div>
-    <div class="row">
-      <button id="con2" class="btn btn-primary col-sm-6">내 프로필</button>
+<div class="page-content-wrapper py-3 board-bg">
+  <div class="shop-pagination pb-3">
+    <div class="container">
+      <div class="card">
+        <div class="card-body p-2">
+          <div class="d-flex align-items-center justify-content-between">
+            <small class="ms-1 board-text-index ">{{ currentUser?.data?.id }} MYPAGE</small>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
+  <div class="top-products-area product-list-wrap">
+    <div class="container">
+      <div class="card user-info-card mb-3">
+        <div class="card-body d-flex align-items-center">
+          <div class="user-profile me-3">
+            <img src="@/assets/images/emotion.png" alt="">
+            <i class="bi bi-pencil"></i>
+            <form action="#">
+              <input class="form-control" type="file">
+            </form>
+          </div>
+          <div class="user-info">
+            <div class="d-flex align-items-center">
+              <h5 class="mb-1 board-text-bold">{{ currentUser?.data?.nickname }}</h5>
+              <span class="badge bg-warning ms-2 rounded-pill">{{ currentUser?.data?.type }}</span>
+            </div>
+            <div class="d-flex align-items-center">
+              <p class="mb-0 me-4 board-mypoint board-text-bold">최고의 상담사</p>
+              <router-link :to="{ name: 'counselorProfile', params: {counselorId: currentUser.data.id}}">
+              <button class="w-btn w-btn-charge" type="button">프로필</button>
+              </router-link>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 </template>
 <script>
+import { mapActions, mapGetters } from 'vuex';
 export default {
   components: {},
   data() {
     return {
-      sampleData: ''
+      sampleData: '',
     }
   },
   setup() {},
-  created() {},
-  mounted() {},
+  created() {
+    this.fetchCurrentUser()
+  },
+  mounted() {
+  },
   unmounted() {},
-  methods: {}
+  methods: {
+    ...mapActions(['fetchCurrentUser']),
+    // 회원 정보 수정 매서드 받아와서 패치하고 출력
+  },
+  computed:{
+    ...mapGetters(['currentUser']),
+  }
+
 }
 </script>
 <style scoped>
-  div {
-    background-color: #F0F5F9;
-  }
-  con1 {
-    width: 160px;
-    display: table-cell;
-  }
-  con2 {
-    width: 160px;
-    display: table-cell;
-  }
 
 </style>

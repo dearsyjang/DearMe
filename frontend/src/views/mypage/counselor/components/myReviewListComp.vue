@@ -1,9 +1,22 @@
 <template>
-<div class="container BoardList">
-  <div class="form-group row">
-    <p class="col-sm-4">5점</p>
-    <p class="col-sm-4">2022.08.05</p>
-    <button class="col-sm-4 btn btn-primary">리뷰보기</button>
+<div class="page-content-wrapper py-3">
+  <div class="blog-wrapper direction-rtl">
+    <div class="container">
+      <div class="row g-3">
+        <div class="col-6 col-sm-4 col-md-3">
+          <div class="card position-relative shadow-sm">
+            <div class="card-body">
+              <span class="badge bg-danger rounded-pill mb-2 d-inline-block"><i class="bi bi-hand-thumbs-up-fill"></i>4.5</span>
+              <h4 class="blog-title d-block text-dark board-title">상담사 아이디</h4>
+              <!-- <router-link :to="{ name: 'boardDetail', params: {boardId: board.id }}">
+              <span class="badge bg-danger rounded-pill mb-2 d-inline-block"><i class="bi bi-hand-thumbs-up-fill"></i> {{ board.hitCnt}}</span>
+              <h4 class="blog-title d-block text-dark board-title">{{ board.title }}</h4>
+              </router-link> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 </template>

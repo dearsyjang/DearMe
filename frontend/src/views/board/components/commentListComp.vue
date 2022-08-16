@@ -1,6 +1,5 @@
 <template>
 <div class="page-content-wrapper py-3 board-bg-sky">
-  <div v-if="board.comments">
   <div class="shop-pagination pb-3">
     <div class="container">
       <div class="card">
@@ -18,26 +17,20 @@
   </div>
   <div class="top-products-area product-list-wrap">
     <div class="container">
-      <div class="row">
-          <div class="card single-product-card">
-            <div class="card-body">
-              
-              <div v-for="comment in board.comments" :key="comment"  class="d-flex row align-items-center">
-                  <div class="form-group">
-                    <i class="bi bi-chat-right-heart"></i>
-                    
-                    <p class="text-end">COUNSELOR ID : {{ comment.userId }} | {{ comment.date[0] }}.{{ comment.date[1] }}.{{ comment.date[2] }}.{{ comment.date[3] }}</p>
-                    <p class="board-detail-context">{{ comment.contents }}</p>
-                  </div>
-              </div>
+        <div class="card-body">
+          <div v-for="comment in comments" :key="comment"  class="d-flex row align-items-center">
+            <div class="form-group">
+              <p class="text-end">COUNSELOR ID : {{ comment.userId }} | {{ comment.date[0] }}.{{ comment.date[1] }}.{{ comment.date[2] }}</p>
+              <p class="board-detail-context">{{ comment.contents }}</p>
             </div>
           </div>
         </div>
-      </div>
+
     </div>
-  <div>
+  </div>
+<div>
 </div>
-<div class="modal fade" v-if="isModal" id="commentCreate" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="commentCreate" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -52,40 +45,34 @@
   </div>
 </div>
 </div>
-</div>
 </template>
 <script>
 import {  mapActions, mapGetters  } from 'vuex'
 export default {
   props: {
-    comments: null,
-    boardId: null,
+    comments: Object,
+    boardIdComment: Object
   },
   components: {},
   data() {
     return {
-      isModal: true,
       isCounselor: false,
-      contents: '',
+      contents: ''
     }
   },
   setup() {},
   created() {
-  },
-  mounted() {
     this.checkCounselor()
   },
+  mounted() {},
   unmounted() {},
   methods: {
     ...mapActions(['createComment']),
     onSubmit() {
-      this.isModal=!this.isModal
       this.createComment({
         contents: this.contents
       })
-      
       this.$router.push({ name: 'boardDetail', params: {boardId: this.boardId} })
-      this.$router.go()
     },
     checkCounselor() {
       if (this.currentUser.data.type === 'COUNSELOR') {
@@ -94,7 +81,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['currentUser' ,'board'])
+    ...mapGetters(['currentUser'])
   }
 }
 </script>

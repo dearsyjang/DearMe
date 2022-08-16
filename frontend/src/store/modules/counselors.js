@@ -3,7 +3,7 @@ import drf from '@/api/drf'
 import router from '@/router'
 
 export default {
-  
+
   state: {
     counselors: [],
     counselor:[],
@@ -36,7 +36,7 @@ export default {
   },
 
   actions: {
-    
+
     fetchCounselors({ commit, getters } ,filter) {
       // filter.reviewCntUp
       // filter.reviewCntDown
@@ -63,21 +63,21 @@ export default {
         e = filter.favorite;
       }
       axios({
-        
+
        url: drf.counselors.counselors()+ "category=" +s +"&downPrice=" +q + "&upPrice=" + w + "&reviewCntUp=" + a + "&reviewCntDown=" + b + "&reviewScoreUp=" +c + "&reviewScoreDown=" +d + "&favorite=" + e,
        method : 'GET',
        headers: {
         'Content-Type': 'application/json',
         'Authorization': getters.authHeader2
         },
-        
+
       })
       .then(res => {
         commit('SET_COUNSELORS', res.data)
         console.log(filter)
-       
-      })       
-        
+
+      })
+
       .catch(err => {
         console.error(err)
       })
@@ -94,11 +94,11 @@ export default {
         }
       })
       .then(res =>{
-    
-        commit('SET_COUNSELOR', res.data)})       
+
+        commit('SET_COUNSELOR', res.data)})
       .catch(err => {
         console.error(err.response)
-      
+
         if (err.response.status === 404) {
 
           router.push({ name: 'NotFound404' })
@@ -106,11 +106,11 @@ export default {
       })
     },
 
-    
+
     createReview({ commit, getters }, review) {
-     
-      
-      
+
+
+
       axios({
         url: drf.counselors.reviews(),
         method: 'post',
@@ -128,7 +128,7 @@ export default {
           router.push({ name: 'home' })
         })
         .catch(err => {
-          
+
           console.log(review.id)
           console.log(review.contents)
           console.log(review.value)
@@ -138,7 +138,7 @@ export default {
 
 
     favoriteGet({ commit, getters }) {
-     
+
       axios({
         url: drf.counselors.favorites(),
         method: 'get',
@@ -148,17 +148,18 @@ export default {
           }
       })
         .then(res => {
+          console.log(res.data)
           commit('SET_FAVORITE', res.data)
           //location.reload();
 
         })
         .catch(err => {
-          
+
           console.error(err.response)})
     },
 
     favoriteAdd({ commit, getters }, Id) {
-     
+
       console.log(Id)
       axios({
         url: drf.counselors.favoriteA(),
@@ -172,14 +173,14 @@ export default {
         .then(res => {
           commit('SET_FAVORITE', res.data)
           location.reload();
-         
+
         })
         .catch(err => {
-          
+
           console.error(err.response)})
     },
     favoriteDelete({ commit, getters }, favoriteId) {
-     
+
       console.log(favoriteId)
       axios({
         url: drf.counselors.favoriteD(favoriteId),
@@ -192,10 +193,10 @@ export default {
         .then(res => {
           commit('SET_FAVORITE', res.data)
           location.reload();
-          
+
         })
         .catch(err => {
-          
+
           console.error(err.response)})
     },
 
@@ -208,16 +209,16 @@ export default {
     //    method : 'GET',
     //    headers: getters.authHeader,
     //   })
-    //   .then(res => commit('SET_COUNSLORS', res.data))       
-        
+    //   .then(res => commit('SET_COUNSLORS', res.data))
+
     //   .catch(err => console.error(err.response))
     // },
 
 
 
-    
-    // searchCounselors({ commit, getters }, keywords ) { 
-      
+
+    // searchCounselors({ commit, getters }, keywords ) {
+
     //   axios({
     //     url: drf.counselors.search(keywords),
     //     method : 'GET',
@@ -229,20 +230,20 @@ export default {
     //    .then(res => {
     //       commit('SEARCH_COUNSELORS', res.data)
     //       router.push({ name: 'counselorSearch'}).catch(()=>{})
-        
+
     //     })
-      
+
     //    .catch(err => {
     //      console.error(err.response)
     //      if (err.response.status === 404) {
     //        router.push({ name: 'NotFound404' })
     //      }
     //    })
-      
+
     // },
 
-    // filterCounselors({ commit, getters }, categoryId ) { 
-      
+    // filterCounselors({ commit, getters }, categoryId ) {
+
     //   axios({
     //     url: drf.counselors.filter(categoryId),
     //     method : 'GET',
@@ -254,18 +255,18 @@ export default {
     //    .then(res => {
     //       commit('FILTER_COUNSELORS', res.data)
     //       router.push({ name: 'counselorList'}).catch(()=>{})
-        
+
     //     })
-      
+
     //    .catch(err => {
     //      console.error(err.response)
     //      if (err.response.status === 404) {
     //        router.push({ name: 'NotFound404' })
     //      }
     //    })
-      
+
     // },
-    
+
 
 
 
@@ -284,7 +285,7 @@ export default {
             }
           })
           commit('SET_FAVORITE', favorite)
-          
+
         })
         .catch(err => console.error(err.response))
     },
@@ -300,8 +301,8 @@ export default {
 
     },
 
-		
-    
+
+
 
 
 
