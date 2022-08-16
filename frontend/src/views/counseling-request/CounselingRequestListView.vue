@@ -1,34 +1,38 @@
 <template>
   <div>
     <br><br><br><br>
-    <h1>수락 대기 중인 상담</h1>
-    <hr>
+    <h1 class="counseling-request-list-title">수락 대기 중인 상담</h1>
+    
     <br><br>
-    <div>
-        <div>
-            <h2>1:1 상담</h2>
-              <div>
-                <personalcard-comp 
-                v-for="(request,idx) in requests.data"
-                :key="idx"
-                :request="request">
-                </personalcard-comp>
-              </div>
-        </div>
-    </div>
-    <br>
-    <div>
-        <div>
-          <h2>그룹 상담</h2>
-        </div>
+    <div class="counseling-request-list-cards">
+      <div>
           <div>
-            <groupcard-comp 
-            v-for="(request,idx) in requests.data"
-                :key="idx"
-                :request="request">
-            </groupcard-comp>
+              <h2>1:1 상담</h2>
+              <hr>                <div>
+                  <personalcard-comp 
+                  v-for="(request,idx) in requests.data"
+                  :key="idx"
+                  :request="request">
+                  </personalcard-comp>
+                </div>
           </div>
-          
+      </div>
+      <br>
+      <div>
+          <div>
+            <br>
+            <h2>그룹 상담</h2>
+             <hr>  
+          </div>
+            <div>
+              <groupcard-comp 
+              v-for="(request,idx) in requests.data"
+                  :key="idx"
+                  :request="request">
+              </groupcard-comp>
+            </div>
+            
+      </div>
     </div>
     <br><br><br><br><br><br><br>
   </div>
@@ -65,3 +69,13 @@ export default {
 }
 }
 </script>
+
+<style >
+.counseling-request-list-title{
+  text-align: center
+}
+
+.counseling-request-list-cards{
+  justify-content: center;
+}
+</style>
