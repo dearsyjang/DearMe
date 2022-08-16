@@ -31,7 +31,9 @@
         <textarea class="form-control" v-model="contents" rows="13" placeholder="상담 내용을 입력하시오."></textarea>
       </div>
       <form action="#" class="text-center ">
-        <button @click="onSubmit()" class="w-btn-neon2 " type="button">그룹 참가신청</button>
+        <router-link :to="{name: 'groupRequest', params: {groupId: this.group.id}}">
+          <button @click="onSubmit()" class="w-btn-neon2 " type="button">그룹 참가신청</button>
+        </router-link>
       </form>
   </div>
 </div>
@@ -42,22 +44,22 @@ export default {
   components: {},
   data() {
     return {
+      groupId: this.$route.params.groupId,
       isOpen: false,
       contents: "",
       openMent: '비공개'
     };
   },
   created() {
-    this.fetchGroup(this.$route.params.groupId);
-    console.log(this.group.id)
+    this.fetchGroup(this.groupId);
   },
   methods: {
-    ...mapActions(['groupRequest', 'fetchGroup']),
+    ...mapActions(["groupRequest", 'fetchGroup']),
     onSubmit() {
       const data = {
-        id: this.group.id,
-        isOpen : this.isOpen,
-        contents : this.contents
+        id: this.groupId,
+        isOpen: this.isOpen,
+        contents: this.contents
       }
       console.log(data)
       this.groupRequest(data)

@@ -58,7 +58,7 @@ export default {
     requestUpdate: () => HOST + COUNSELING,
   },
   group : {
-    groupRequest: () => HOST + '/counseling-documents/groups',
+    groupRequest: () => HOST + '/counseling-doucments/groups',
     groupDetail: groupId => HOST + GROUP +`/${groupId}`,
     groups: () => HOST + MEMBER + GROUP,
     myGroup:() => HOST + MEMBER + GROUP,
