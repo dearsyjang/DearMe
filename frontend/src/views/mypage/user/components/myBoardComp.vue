@@ -21,9 +21,11 @@ export default {
   },
   setup() {},
   created() {
+    
+  },
+  mounted() {
     this.findMyBoard()
   },
-  mounted() {},
   unmounted() {},
   methods: {
     ...mapActions(['fetchBoards', 'fetchMyid']),

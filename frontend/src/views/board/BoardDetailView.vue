@@ -20,7 +20,7 @@
       <div class="form-group ">
         <div class="d-flex justify-content-between">
           <label class="board-text-bold board-text-title" >{{ board.title }}</label>
-          <p>{{ board.date[0]}}.{{ board.date[1] }}.{{ board.date[2] }}</p>
+          <p>{{ board.date ? board.date[0] : ''}}.{{ board.date ? board.date[1] : '' }}.{{ board.date ? board.date[2] : '' }}</p>
         </div>
         <hr class="my-2">
         <div>
@@ -61,11 +61,10 @@ export default {
   methods: {
     ...mapActions(['fetchBoard', 'deleteBoard']),
   },
-  created() {
-    this.fetchBoard(this.$route.params.boardId)
+  async created() {
+    await this.fetchBoard(this.$route.params.boardId)
   },
   mounted() {
-    
   },
   unmounted() {},
 }
