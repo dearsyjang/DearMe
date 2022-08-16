@@ -12,9 +12,6 @@ export default {
   getters: {
     textDiaries: state => state.textDiaries,
     textDiary: state => state.textDiary,
-    isAuthor2: (state, getters) => {
-      return state.board.user?.username === getters.currentUser.username
-    },
     isTextDiary: state => !_.isEmpty(state.diary),
 
   },
