@@ -31,6 +31,10 @@ public class Group {
 
     private Long price;
 
+    private Long day;
+
+    private Long hours;
+
     @OneToMany(mappedBy = "group", orphanRemoval = true, cascade = CascadeType.ALL)
     List<GroupUser> groupUsers = new ArrayList<>();
 
@@ -40,9 +44,11 @@ public class Group {
     }
 
     @Builder
-    public Group(String title, String contents, Long price){
+    public Group(String title, String contents, Long price, Long day, Long hours){
         this.title = title;
         this.contents = contents;
         this.price = price;
+        this.day=day;
+        this.hours=hours;
     }
 }
