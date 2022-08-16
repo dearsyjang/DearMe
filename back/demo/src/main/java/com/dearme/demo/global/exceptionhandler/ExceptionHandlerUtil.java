@@ -10,6 +10,7 @@ import com.dearme.demo.domain.board.exception.comment.NoCommentUpdatePermissionE
 import com.dearme.demo.domain.board.exception.comment.NoExistCommentException;
 import com.dearme.demo.domain.counseling.exception.NoExistCounselingException;
 import com.dearme.demo.domain.counselingroom.exception.CounselingRoomNotCreatedYet;
+import com.dearme.demo.domain.group.exception.UserCreateGroupException;
 import com.dearme.demo.domain.textdiary.exception.AlreadyExistTextDiaryException;
 import com.dearme.demo.domain.textdiary.exception.NoPermissionTextDiaryException;
 import com.dearme.demo.domain.user.exception.*;
@@ -149,6 +150,11 @@ public class ExceptionHandlerUtil {
 
     @ExceptionHandler(CounselorProfileValidationException.class)
     ResponseEntity<CommonResponse> handleCounselorProfileValidationException(CounselorProfileValidationException e){
+        return ResponseEntity.badRequest().body(CommonResponse.getErrorResponse(e.getMessage()));
+    }
+
+    @ExceptionHandler(UserCreateGroupException.class)
+    ResponseEntity<CommonResponse> handleUserCreateGroupException(UserCreateGroupException e){
         return ResponseEntity.badRequest().body(CommonResponse.getErrorResponse(e.getMessage()));
     }
 }
