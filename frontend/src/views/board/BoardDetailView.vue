@@ -24,7 +24,10 @@
             <p>{{ board.date[0]}}.{{ board.date[1] }}.{{ board.date[2] }}</p>
             <p>{{ board.nickName }}</p>
           </div>
+<<<<<<< HEAD
           <p>{{ board.date ? board.date[0] : ''}}.{{ board.date ? board.date[1] : '' }}.{{ board.date ? board.date[2] : '' }}</p>
+=======
+>>>>>>> f3e3a08a952d473bd2cd8f53f019d87aad11ba82
         </div>
         <hr class="my-2">
         <div>
