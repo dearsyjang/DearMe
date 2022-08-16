@@ -334,12 +334,11 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public byte[] getUserProfileImage(String id) throws IOException {
-        User user = userRepository.findUserById(id).orElseThrow(() -> {
+    public byte[] getUserProfileImage(Long userId) throws IOException {
+        User user = userRepository.findUserByUserId(userId).orElseThrow(() -> {
             throw new NoExistUserException();
         });
         InputStream inputStream = new FileInputStream(IMAGE_PATH + user.getPicture().getRealFileName());
-        System.out.println(IMAGE_PATH + user.getPicture().getRealFileName());
         return IOUtils.toByteArray(inputStream);
     }
 

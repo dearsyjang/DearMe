@@ -151,10 +151,10 @@ public class UserController {
         return ResponseEntity.ok().build();
     }
 
-    @GetMapping(value = "/image", produces = {MediaType.IMAGE_JPEG_VALUE, MediaType.IMAGE_PNG_VALUE, MediaType.IMAGE_PNG_VALUE})
-    public byte[] userProfileImage(HttpServletRequest request) throws IOException {
-        String id = (String) request.getAttribute ("id");
-        return userService.getUserProfileImage(id);
+    @GetMapping(value = "/{userId}/image", produces = {MediaType.IMAGE_JPEG_VALUE, MediaType.IMAGE_PNG_VALUE, MediaType.IMAGE_PNG_VALUE})
+    public byte[] userProfileImage(HttpServletRequest request, @PathVariable("userId") Long userId) throws IOException {
+//        String id = (String) request.getAttribute ("id");
+        return userService.getUserProfileImage(userId);
     }
 
     @PutMapping("/image")

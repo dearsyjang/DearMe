@@ -38,7 +38,7 @@ public class UserInfoResponseDto {
                 .phone(user.getPhone())
                 .gender(user.getGender())
                 .type(user.getType())
-                .pictureUrl(user.getPicture().getRealFileName())
+                .pictureUrl("https://i7d206.p.ssafy.io/users/" + user.getUserId() + "/image")
                 .points(user.getPoints())
                 .build();
     }
@@ -53,7 +53,8 @@ public class UserInfoResponseDto {
                 .phone(counselor.getPhone())
                 .gender(counselor.getGender())
                 .type(counselor.getType())
-                .pictureUrl(counselor.getPicture().getRealFileName())
+//                .pictureUrl(counselor.getPicture().getRealFileName())
+                .pictureUrl("https://i7d206.p.ssafy.io/users/" + counselor.getUserId() + "/image")
                 .points(counselor.getPoints())
                 .counselorProfileInfoDto(CounselorProfileInfoDto.of(counselor.getCounselorProfile()))
                 .build();
