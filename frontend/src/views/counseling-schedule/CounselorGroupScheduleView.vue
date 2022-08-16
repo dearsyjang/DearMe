@@ -11,13 +11,13 @@
           <h5 class="card-title">{{ counseling.groupId }}</h5>
           <router-link :to="{ name: 'counselinggroup', params: { groupId: counseling.groupId }}"><button  class="btn" id="enter-button">상담방 입장</button></router-link>
         </div>
-      </div> 
+      </div>
       <h2 id="userschedule-group">그룹 상담</h2>
       <div v-for="(counseling, idx) in counselings.data.counselings" :key="idx" :counseling="counseling">
         <div v-if="counseling.groupId != null" class="card" style="width: 18rem; height: 8rem;">
           <h5 class="card-title">상담일: {{ counseling.year }}. {{ counseling.month }}. {{ counseling.day }}</h5>
           <h5 class="card-title">상담사: {{ counseling.counselorNickName }}</h5>
-      </div> 
+      </div>
     </div>
   </div>
   </div>
@@ -59,7 +59,7 @@ hr {
   width: 100%;
 }
 #userschedule-personal, #userschedule-group {
-  text-align: left;  
+  text-align: left;
 }
 
 </style>
