@@ -36,7 +36,8 @@ public class GroupServiceImpl implements GroupService{
         }
         Group group = dto.toEntity();
         group.setCounselor(counselor);
-        return new CreateGroupResponseDto(groupRepository.save(group).getId());
+        groupRepository.save(group);
+        return new CreateGroupResponseDto(group.getId(), group.getDay(), group.getHours());
     }
 
     @Override

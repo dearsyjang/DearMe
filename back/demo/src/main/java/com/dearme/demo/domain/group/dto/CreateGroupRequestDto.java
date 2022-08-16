@@ -14,8 +14,11 @@ public class CreateGroupRequestDto {
     private String contents;
     @NotNull(message = "price는 비워둘 수 없습니다.")
     private Long price;
-
+    @NotNull(message = "day는 비워둘 수 없습니다.")
+    private Long day;
+    @NotNull(message = "hours는 비워둘 수 없습니다.")
+    private Long hours;
     public Group toEntity(){
-        return Group.builder().title(this.title).contents(this.contents).price(this.price).build();
+        return Group.builder().title(this.title).contents(this.contents).price(this.price).day(this.day).hours(this.hours).build();
     }
 }

@@ -7,4 +7,6 @@ import lombok.Data;
 @AllArgsConstructor
 public class CreateGroupResponseDto {
     private Long id;
+    private Long day;
+    private Long hours;
 }
