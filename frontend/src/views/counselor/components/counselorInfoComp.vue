@@ -1,13 +1,13 @@
 <template>
   <div>
     <div class="page-content-wrapper py-3 board-bg">
-      <div class="shop-pagination pb-3">
+      <div class="shop-pagination">
         <div class="container">
-          <div class="self-introduce my-3">
+          <div class="self-introduce ">
             <h5>{{counselor.data.introduce}} 안녕하세요.상담사 강지명입니다.
             마음의 병이 생겼다면 우리는 어떻게 해야 할까요. 오랫동안 전문상담사를 양성해 온 천성문 교수는 심리상담이 필요한 이유를 쉽게 설명하였습니다.
             '진료는 의사에게 약은 약사에게'라는 문구를 우리는 잘 알고잇다. 가변은 상처라면 집에서 간단히 처리를하지만 그렇지ㅏ 않다면 우리는 병원을 찾게 된다.
-            적절한 치료를 하고 주사나 약을 처방받고 며칠간 치료를 다니다가 낫지 않으면 수술을 하기도 한다. 그러나 우리의 마음은 누가 치료해주는가</h5>
+            </h5>
           </div>
           <div class="counselor-info">
             <div class="accordion" id="accordionPanelsStayOpenExample">
