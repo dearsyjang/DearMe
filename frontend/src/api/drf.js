@@ -9,6 +9,7 @@ const TEXTDIARY = '/text-diaries'
 const COUNSELING = '/counselings'
 const CAREER = '/careers'
 const CERTIFICATE = '/certificates'
+const VIDEODIARY = '/video-diaries'
 
 export default {
   member : {
@@ -74,6 +75,12 @@ export default {
     textDiaryList: () => HOST + TEXTDIARY,
     textDiaryDetail: textDiaryId => HOST + TEXTDIARY + `/${textDiaryId}`,
     textDiaryEdit: textDiaryId => HOST + TEXTDIARY + `/${textDiaryId}`,
+  },
+  videoDiary : {
+    videoDiaryCreate: () => HOST + VIDEODIARY,
+    videoDiaryList: () => HOST + VIDEODIARY,
+    videoDiaryDetail: videoDiaryId => HOST + VIDEODIARY + `/${videoDiaryId}`,
+    videoDiaryEdit: videoDiaryId => HOST + VIDEODIARY + `/${videoDiaryId}`,
   },
   //downPrice=0&upPrice=1000000&reviewCntUp=FALSE&reviewCntDown=FALSE&reviewScoreUp=FALSE&reviewScoreDown=FALSE&favorite=FALSE
 }

@@ -271,6 +271,7 @@
 }
 .white-bg {
   width: 100% ;
+  background :white ;
   background-color :#F9F7F7 ;
   border-radius:8px;
   padding : 20px;

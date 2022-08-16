@@ -8,7 +8,9 @@ import group from './modules/group';
 import counselingRequest from './modules/counselingRequest';
 import textDiary from './modules/textDiary';
 import createPersistedState from 'vuex-persistedstate';
-import mypage from './modules/mypage'
+import mypage from './modules/mypage';
+import videoDiary from './modules/videoDiary';
+
 export default new Vuex.Store({
   strict: true,
   modules: {
@@ -20,7 +22,8 @@ export default new Vuex.Store({
     counselingRequest,
     group,
     textDiary,
-    mypage
+    mypage,
+    videoDiary,
   },
   //vuex plugin 명시
   plugins: [createPersistedState({
