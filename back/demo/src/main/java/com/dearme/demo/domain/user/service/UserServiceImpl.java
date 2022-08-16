@@ -1,8 +1,5 @@
 package com.dearme.demo.domain.user.service;
 
-import com.dearme.demo.domain.counselingdocument.entity.CounselingDocument;
-import com.dearme.demo.domain.counselingdocument.exception.NoExistDocumentException;
-import com.dearme.demo.domain.counselingdocument.repository.CounselingDocumentRepository;
 import com.dearme.demo.domain.favorite.repository.FavoriteRepository;
 import com.dearme.demo.domain.recordingroom.exception.RecordingDeleteException;
 import com.dearme.demo.domain.review.entity.Review;
@@ -52,9 +49,6 @@ public class UserServiceImpl implements UserService{
     private final ReviewRepository reviewRepository;
 
     private final FavoriteRepository favoriteRepository;
-
-    private final CounselingDocumentRepository counselingDocumentRepository;
-
     @Value("${path.image:/image/}")
     private String IMAGE_PATH;
 

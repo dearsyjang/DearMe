@@ -91,7 +91,7 @@ public class CounselingRoomServiceImpl implements CounselingRoomService{
 
         ConnectionProperties connectionProperties = new ConnectionProperties.Builder()
                 .type(ConnectionType.WEBRTC)
-                .role(OpenViduRole.SUBSCRIBER).build();
+                .role(OpenViduRole.PUBLISHER).build();
 
         String token = session.createConnection(connectionProperties).getToken();
         counseling.updateToken(token);
