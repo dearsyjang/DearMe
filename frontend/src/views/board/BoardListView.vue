@@ -1,5 +1,5 @@
 <template>
-<div class="page-content-wrapper py-3 board-bg-sky">
+<div class="page-content-wrapper py-3 board-bg">
   <div class="shop-pagination pb-3">
     <div class="container">
       <div class="card ">
