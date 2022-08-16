@@ -1,9 +1,11 @@
 <template>
   <div id="textDiaryDetail">
     <div id="textDiaryTitle">
-      {{ textDiary.data.year}}.
-      {{ textDiary.data.month}}.
-      {{ textDiary.data.day}}
+      <div class="text-diary-date">
+      {{ textDiary.data.year}}/{{ textDiary.data.month}}/{{ textDiary.data.day}}
+      </div>
+      <hr>
+
       {{ textDiary.data.title }}
       </div>
     <div id="textDiaryContents" class="card">
@@ -13,11 +15,11 @@
     </div>
     <router-link :to="{ name:'calendar' }">
       <div id="textDiaryList-button">
-          <button>목록</button>
+        <button>다른 일기 보러가기</button>
       </div>
     </router-link>
     <div id="textDiaryDelete-button">
-        <button @click="deleteTextDiary(textDiaryId)">삭제</button>
+        <button @click="deleteTextDiary(textDiaryId)">삭제하기</button>
     </div>
   </div>
         
@@ -61,3 +63,17 @@ export default {
   
 }
 </script>
+
+<style>
+.text-diary-date{
+  text-align:center
+}
+
+#textDiaryDelete-button{
+  float:right
+}
+
+#textDiaryList-button{
+  float:left
+}
+</style>

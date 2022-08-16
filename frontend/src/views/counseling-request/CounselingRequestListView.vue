@@ -1,14 +1,14 @@
 <template>
   <div>
-    <br><br><br><br>
+    <br>
     <h1 class="counseling-request-list-title">수락 대기 중인 상담</h1>
-    
-    <br><br>
+    <hr>
+    <br>
     <div class="counseling-request-list-cards">
       <div>
           <div>
-              <h2>1:1 상담</h2>
-              <hr>                <div>
+              <h2 style="text-align:center">1:1 상담</h2>
+                             <div>
                   <personalcard-comp 
                   v-for="(request,idx) in requests.data"
                   :key="idx"
@@ -21,7 +21,7 @@
       <div>
           <div>
             <br>
-            <h2>그룹 상담</h2>
+            <h2 style="text-align:center">그룹 상담</h2>
              <hr>  
           </div>
             <div>
@@ -72,7 +72,8 @@ export default {
 
 <style >
 .counseling-request-list-title{
-  text-align: center
+  text-align: center;
+  background-color: 
 }
 
 .counseling-request-list-cards{

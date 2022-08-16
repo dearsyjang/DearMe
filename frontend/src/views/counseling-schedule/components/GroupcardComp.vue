@@ -1,35 +1,26 @@
 <template>
-     <div>
-    
+  <div>
+    <div class="group-today-cards">
     <div v-for="(re,idx) in request"
       :key="idx"
       :re="re">
       <!-- {{re}} -->
-    <div v-if="re.counselorId== currentUser.data.userId && re.status==`ACCEPTED` && re.groupId != null && today==`${re.year}-${re.month}-${re.day}` "  class="card mb-3" style="max-width: 540px;">
+    <div v-if="re.counselorId== currentUser.data.userId && re.status==`ACCEPTED` && re.groupId != null && today==`${re.year}-${re.month}-${re.day}` "  class="card mb-3" id="today-group-card">
+      <router-link :to="{ name: 'CounselingRequestDocument', params : {counselingId : re.id}}">
       <div class="row g-0">
-        <div class="col-md-4">
-           
-          상담번호: {{re.id}}
-          <br>
-          그룹 번호: {{re.groupId}}
-          <br>
-          상담사:{{re.counselorNickName}}
-          <br>
-          상담일 : {{re.year}}/{{re.month}}/{{re.day}}
-        </div>
-        <div class="col-md-8">
-          <div class="card-body">
-            <h5 class="card-title"> </h5>
-            <!-- <p class="card-text">{{request}}</p> -->
-            <p class="card-text"><small class="text-muted">
-                <button>신청서보기</button>
-            </small></p>
-          </div>
+        <div class="col-md-4" style="text-decoration: none">
+          <div class="personal-request-index" style="text-decoration: none">{{idx}}</div>
+          <p>그룹 번호: {{re.groupId}}</p>
+                
+          <p>상담사:{{re.counselorNickName}}</p>
+        
+          <p>상담일 : {{re.year}}/{{re.month}}/{{re.day}}</p>
         </div>
       </div>
+      </router-link>
     </div>
     </div>
-
+  </div>
 
   </div>
 </template>
@@ -62,5 +53,19 @@ export default {
 </script>
 
 <style>
+
+.group-today-cards{
+  max-width:90%;
+  margin:auto;
+  text-decoration: none;
+}
+
+.personal-request-index{
+  background-color: bisque;
+   color:bisque;
+}
+a:link {
+  text-decoration: none;
+}
 
 </style>

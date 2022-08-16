@@ -1,43 +1,29 @@
 <template>
   <div>
-    
+    <div class="personal-today-cards">
     <div v-for="(re,idx) in request"
       :key="idx"
       :re="re">
       <!-- {{re}} -->
-    <div v-if="re.counselorId== currentUser.data.userId && re.status==`ACCEPTED`  && re.groupId == null && today==`${re.year}-${re.month}-${re.day}`" class="card mb-3" style="max-width: 540px;">
-      <div class="row g-0">
-        <div class="col-md-4">
-      
-          상담번호: {{re.id}}
-          <br>
-          유저 번호: {{re.userId}}
-          <br>
-          상담사:{{re.counselorNickName}}
-          <br>
-          상담일 : {{re.year}}/{{re.month}}/{{re.day}}
-        </div>
-        <div class="col-md-8">
-          <div class="card-body">
-            <h5 class="card-title"> </h5>
-            <!-- <p class="card-text">{{request}}</p> -->
-            <p class="card-text"><small class="text-muted">
-                <router-link :to="{ name: 'CounselingRequestDocument', params : {counselingId : re.id}}">
-                <button>신청서 보기</button>
-                </router-link>
-                <router-link :to="{ name: 'counseling', params : {counselingId : re.id}}">
-                <button>상담방 개설</button>
-                </router-link>
-            </small></p>
-          </div>
+    <div v-if="re.counselorId== currentUser.data.userId && re.status==`ACCEPTED`  && re.groupId == null && today==`${re.year}-${re.month}-${re.day}`" class="card mb-3" id="today-personal-card" >
+      <router-link :to="{ name: 'CounselingRequestDocument', params : {counselingId : re.id}}">
+      <div class="row g-0" >
+        <div class="col-md-4" style="text-decoration: none">
+          <div class="personal-request-index" style="text-decoration: none"> {{idx}}</div>
+          <p>유저 번호: {{re.userId}}</p>
+          
+          <p>상담사:{{re.counselorNickName}}</p>
+        
+          <p>상담일 : {{re.year}}/{{re.month}}/{{re.day}}</p>
         </div>
       </div>
+      </router-link>
     </div>
     </div>
 
 
-  </div>
-
+      </div>
+    </div>
 
 </template>
 
@@ -71,5 +57,25 @@ import { mapGetters,mapActions } from 'vuex'
 </script>
 
 <style>
+
+
+.personal-today-cards{
+  max-width:90%;
+  margin:auto;
+  text-decoration: none;
+}
+
+a:link{
+  text-decoration: none;
+}
+
+
+
+.personal-request-index{
+  background-color: bisque;
+   color:bisque;
+   
+}
+
 
 </style>

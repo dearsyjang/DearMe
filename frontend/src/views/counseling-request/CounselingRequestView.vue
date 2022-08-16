@@ -4,24 +4,24 @@
   <div class="requestform">
     <div class="card">
       <div class="card-body">
-        <h1>상담 신청하기</h1>
+        <h1 style="text-align:center">상담 신청하기</h1>
       </div>
     </div>
     <div class="card">
-      <div class="card-body">
+      <div class="card-body" style="height: 50px;">
         <p>신청자 : {{currentUser.data.nickname}}</p>
       </div>
     </div>
 
 
     <form @submit.prevent="onSubmit" class="article-form">
-    <br><br><br><br>
-    <textarea style="width:90%; height:90%" v-model="contents" placeholder="내용을 작성하시오..."></textarea>
-    <br><br><br><br>
+    <textarea style="width:100%; height: 400px; justify-content:center " v-model="contents" placeholder="상담 원하는 내용을 작성해 주세요"></textarea>
 
-
+   
+    <div class="request-calendar">
+       <p style="text-align: center;">상담 날짜를 선택해주세요</p>
     <section class="section" >
-      <div class="container">
+      <div class="container" id="cal-contain">
         <h2 class="subtitle has-text-centered">
           <button class="button is-small is-info is-outlined mr-5"
           @click="calendarData(-1)">&lt;</button>
@@ -29,7 +29,7 @@
           <button class="button is-small is-info is-outlined ml-5"
           @click="calendarData(1)">&gt;</button>
         </h2>
-        <table class="table has-text-centered is-fullwidth" @click="year2=year">
+        <table class="table has-text-centered is-fullwidth" @click="year2=year" id="cal-table">
           <thead>
             <th v-for="day in days" :key="day" style="text-align:center">{{ day }}</th>
           </thead>
@@ -44,7 +44,7 @@
                   <div @click="month2=month" :class="{ 'has-text-grey-light': idx === 0 && day >= lastMonthStart || dates.length - 1 === idx && nextMonthStart > day,
                   'has-text-primary': day === today && month === currentMonth && year === currentYear && idx <32 
                   }">
-                  {{ day }}
+                  <div @click="timeon()" >{{ day }}</div>
                 
                   </div>
                 </div>
@@ -54,10 +54,12 @@
         </table>
       </div>
     </section>
-  
-    <br><br><br><br>
-    <select  v-model="selectHour" class="form-select" style="width:50%; height:240px; display:inline-block; text-align: center ; " multiple aria-label="multiple select example">
-      <option disabled value="">상담가능시간</option>
+    </div>
+
+    
+    <div v-if="isSelected==true">
+    <select  v-model="selectHour" class="form-select"  style="width:100%; height:240px; display:inline-block; text-align: center ; " multiple aria-label="multiple select example">
+      <option disabled value="">상담시간을 선택해주세요</option>
       <hr>
       <option >09:00</option>
       <option >10:00</option>
@@ -68,6 +70,7 @@
       <option >16:00</option>
       <option >17:00</option>
     </select>
+    </div>
     <br>
  
 
@@ -75,8 +78,8 @@
     <br><br><br>
     <div id="app">  
     <div class="form-switch" @click="isOpen= !isOpen">
-        <input class="form-check-input"  type="checkbox" role="switch" id="flexSwitchCheckChecked" checked>
-        <label class="form-check-label"  for="flexSwitchCheckChecked">감정달력 공개여부</label>
+        <input class="form-check-input6"  type="checkbox" role="switch" id="flexSwitchCheckChecked" checked>
+        <label class="form-check-label6"  for="flexSwitchCheckChecked">감정달력 공개여부</label>
     </div>
     </div>
 
@@ -116,7 +119,8 @@ import { mapGetters,mapActions } from 'vuex'
       contents: '',
       date2 :'1',
       id:0,
-      
+      isRed : false,
+      isBold : false,
       isOpen:true,
       newRequest:{
         contents : '',
@@ -157,7 +161,11 @@ import { mapGetters,mapActions } from 'vuex'
     ...mapActions(['fetchCurrentUser','createRequest']),
     ...mapActions(['fetchRequests',]),
 
-   
+   timeon(){
+      this.isSelected=true
+      this.isRed = !this.isRed;
+      this.isBold = !this.isBold;
+   },
 
     onSubmit() {
       // let formData = new FormData()
@@ -296,7 +304,7 @@ import { mapGetters,mapActions } from 'vuex'
 }
 </script>
 
-<style scoped>
+<style >
 .requestform {
   width : auto
 }
@@ -304,4 +312,12 @@ import { mapGetters,mapActions } from 'vuex'
   text-decoration: none;
   color: black
 }
+#article-form-submit-button{
+  width:100%
+}
+.request-calendar{
+  width:100%;
+  border: 1px solid;
+}
+
 </style>

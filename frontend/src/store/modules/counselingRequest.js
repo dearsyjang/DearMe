@@ -34,7 +34,12 @@ export default {
           'Authorization': getters.authHeader2
           }
       })
-        .then(res => commit('SET_REQUESTS', res.data))
+        .then(res => {
+          
+          console.log(res)
+          
+          
+          commit('SET_REQUESTS', res.data)})
         .catch(err => console.error(err.response))
     },
 

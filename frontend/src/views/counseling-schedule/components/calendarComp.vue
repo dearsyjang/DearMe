@@ -1,5 +1,6 @@
 <template>
-  <section class="section" >
+  <div>
+  <section class="section" id="full-calendar"  >
     <div class="container">
       <h2 class="subtitle has-text-centered">
         <button class="button is-small is-info is-outlined mr-5"
@@ -8,7 +9,7 @@
         <button class="button is-small is-info is-outlined ml-5"
         @click="calendarData(1)">&gt;</button>
       </h2>
-      <table class="table has-text-centered is-fullwidth">
+      <table class="table has-text-centered is-fullwidth" id="calendar-table">
         <thead>
           <th v-for="day in days" :key="day" style="text-align:center">{{ day }}</th>
         </thead>
@@ -18,7 +19,7 @@
               v-for="(day, secondIdx) in date" 
               :key="secondIdx"
             > 
-              <div class="card" style="height:50px; width:30px">
+              <div class="container" style="height:50px; width:30px">
               <router-link 
     :to="{ name: 'todaySchedule', params: {today: `${year}-${month}-${day}`}}" :class="{ 'has-text-grey-light': idx === 0 && day >= lastMonthStart || dates.length - 1 === idx && nextMonthStart > day,
               'has-text-primary': day === today && month === currentMonth && year === currentYear && idx <32
@@ -34,6 +35,7 @@
       </table>
     </div>
   </section>
+  </div>
 </template>
 
 <script>
@@ -152,6 +154,26 @@ export default {
 .container a{
   text-decoration: none;
   color: black
+}
+
+#calendar-table {
+  background-color: #F9F7F7;
+  height:550px;
+}
+
+.body{
+  background-color: #F9F7F7;
+}
+section{
+  background-color: #F9F7F7;
+  height: 100%;
+}
+.table{
+  background-color: #F9F7F7;
+  height: 580px;
+}
+#full-calendar{
+  height:1000px;
 }
 </style>
 

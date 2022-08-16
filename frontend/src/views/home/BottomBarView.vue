@@ -3,11 +3,11 @@
   <template v-if="isLoggedin && usertype == COUNSELOR">
     <div id="bottombar" class="container">
       <div>
-        <router-link to="/schedule" class="img mx-3"><img id="schedule" src="../../assets/images/schedule.png" alt="schedule"></router-link>
+        <router-link to="/counseling-schedule/counselor-schedule" class="img mx-3"><img id="schedule" src="../../assets/images/schedule.png" alt="schedule"></router-link>
         <p class="text">상담일정</p>
       </div>
       <div>
-        <router-link to="/mypage/request" class="img mx-3"><img id="requst" src="../../assets/images/request.png" alt="request"></router-link>
+        <router-link to="/counseling-request/list" class="img mx-3"><img id="requst" src="../../assets/images/request.png" alt="request"></router-link>
         <p class="text">상담신청</p>
       </div>
       <div>

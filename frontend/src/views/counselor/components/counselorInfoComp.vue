@@ -17,7 +17,7 @@
           </h2>
           <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
             <div class="accordion-body">
-              <div class="contents" v-for="(c,idx) in counselor.data.careers"
+              <div class="contents-career" v-for="(c,idx) in counselor.data.careers"
               :key="idx"
               :c="c">
               -{{c.contents}}<button class="add-button"   v-if="counselor.data.nickName==currentUser.data.nickname" @click="deleteCareer(c.id)">x</button>
@@ -54,7 +54,7 @@
           </h2>
           <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingThree">
             <div class="accordion-body">
-              <div class="contents" v-for="(c,idx) in counselor.data.certificates"
+              <div class="contents-certificates" v-for="(c,idx) in counselor.data.certificates"
             :key="idx"
             :c="c">
             -{{c.contents}}<button class="add-button"   v-if="counselor.data.nickName==currentUser.data.nickname" @click="deleteCertificate(c.id)">x</button>
@@ -131,5 +131,13 @@ export default{
 <style>
 .self-introduce{
   margin:20px;
+}
+
+.contents-career{
+  text-align: left
+}
+
+.contents-certificates{
+  text-align: left
 }
 </style>

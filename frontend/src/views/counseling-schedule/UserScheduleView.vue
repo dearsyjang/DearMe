@@ -1,12 +1,13 @@
 <template>
   <div>
     <div v-if="currentUser.data.type==`USER`">
+      <div v-if="counseling!=undefined">
       <h1 id="userschedule-title">상담 일정</h1>
       <hr>
       <br>
-      <h2 id="userschedule-group">1:1 상담</h2>
+      <h2 id="userschedule-personal">1:1 상담</h2>
       <div v-for="(counseling, idx) in counselings.data.counselings" :key="idx" :counseling="counseling">
-        <div v-if="counseling.status==`ACCEPTED` && counseling.groupId == null" class="card" style="width: 18rem; height: 8rem;">
+        <div v-if="counseling.status==`ACCEPTED` && counseling.groupId == null" class="card" style="width: 18rem; height: 8rem;" id="user-personal-card">
           <h5 class="card-title">상담일: {{ counseling.year }}. {{ counseling.month }}. {{ counseling.day }}</h5>
           <h5 class="card-title">상담사: {{ counseling.counselorNickName }}</h5>
           <router-link :to="{ name: 'counseling', params: { counselingId: counseling.id }}"><button  class="btn" id="enter-button">상담방 입장</button></router-link>
@@ -14,13 +15,14 @@
       </div> 
       <h2 id="userschedule-group">그룹 상담</h2>
       <div v-for="(counseling, idx) in counselings.data.counselings" :key="idx" :counseling="counseling">
-        <div v-if="counseling.status==`ACCEPTED` && counseling.groupId != null" class="card" style="width: 18rem; height: 8rem;">
+        <div v-if="counseling.status==`ACCEPTED` && counseling.groupId != null" class="card" style="width: 18rem; height: 8rem;" id="user-group-card">
           <h5 class="card-title">상담일: {{ counseling.year }}. {{ counseling.month }}. {{ counseling.day }}</h5>
           <h5 class="card-title">상담사: {{ counseling.counselorNickName }}</h5>
           <router-link :to="{ name: 'counseling', params: { counselingId: counseling.id }}"><button  class="btn" id="enter-button">상담방 입장</button></router-link>
       </div> 
+      </div>
+      </div>
     </div>
-  </div>
   </div>
 </template>
 
@@ -45,6 +47,7 @@ export default {
     created() {
       this.fetchSchedules()
       this.fetchCurrentUser()
+      console.log(this.counseling)
     }
 }
 </script>
@@ -57,8 +60,15 @@ export default {
 hr {
   width: 100%;
 }
-#userschedule-personal, #userschedule-group {
-  text-align: left;  
-}
 
+#userschedule-title{
+  text-align:center;
+}
+#userschedule-personal, #userschedule-group {
+  text-align: center;  
+}
+#user-personal-card{
+  margin:auto;
+  margin-bottom:7px;
+}
 </style>

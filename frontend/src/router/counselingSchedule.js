@@ -26,5 +26,6 @@ export default [
       path: '/counseling-schedule/counselorschedule',
       name: 'counselorGroupSchedule',
       component: counselorGroupSchedule
-    },     
+    }, 
+ 
 ]
