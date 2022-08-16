@@ -1,6 +1,7 @@
 <template>
   <div>
-    <h1>텍스트 일기 작성</h1>
+    <h1 style="text-align:center">텍스트 일기 작성</h1>
+    <hr>
         <content-Comp></content-Comp>
 
   </div>
