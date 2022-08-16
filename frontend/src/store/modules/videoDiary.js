@@ -6,33 +6,34 @@ import _ from 'lodash'
 
 export default {
   state: {
-    textDiaries: [],
-    textDiary: {},
+    videoDiaries: [],
+    videoDiary: {},
   },
   getters: {
-    textDiaries: state => state.textDiaries,
-    textDiary: state => state.textDiary,
+    videoDiaries: state => state.videoDiaries,
+    videoDiary: state => state.videoDiary,
     isAuthor2: (state, getters) => {
       return state.board.user?.username === getters.currentUser.username
     },
-    isTextDiary: state => !_.isEmpty(state.diary),
+    isvideoDiary: state => !_.isEmpty(state.diary),
 
   },
   mutations: {
-    SET_TEXTDIARIES: (state, textDiaries) => state.textDiaries = textDiaries,
-    SET_TEXTDIARY: (state, textDiary) => state.textDiary = textDiary,
+    SET_VIDEODIARIES: (state, videoDiaries) => state.videoDiaries = videoDiaries,
+    SET_VIDEODIARY: (state, videoDiary) => state.videoDiary = videoDiary,
   },
   actions: {
-    //텍스트 일기 상세 페이지
-    fetchTextDiary({ commit, getters }, textDiaryPk) {
+
+    //영상 일기 상세 페이지
+    fetchVideoDiary({ commit, getters }, videoDiaryPk) {
       axios({
-        url: drf.textDiary.textDiaryDetail(textDiaryPk),
+        url: drf.videoDiary.videoDiaryDetail(videoDiaryPk),
         method: 'get',
         headers: getters.authHeader,
       })
         .then(res =>{
           console.log(res.data.data)
-          commit('SET_TEXTDIARY', res.data.data)
+          commit('SET_VIDEODIARY', res.data.data)
           
         } )
         
@@ -44,15 +45,15 @@ export default {
         })
       },
 
-    // 텍스트 일기 작성
-    createTextDiary({ commit, getters }, textDiary) {
+    // 영상 일기 작성
+    createVideoDiary({ commit, getters }, videoDiary) {
       
       axios({
-        url: drf.textDiary.textDiaryCreate(),
+        url: drf.videoDiary.videoDiaryCreate(),
         method: 'post',
         data: {
-          contents: textDiary.contents,
-          title: textDiary.title,
+          contents: videoDiary.contents,
+          title: videoDiary.title,
           
         },
         headers: {
@@ -63,22 +64,22 @@ export default {
         // headers: getters.authHeader
     } )
         .then(res => {
-          commit('SET_TEXTDIARY', res.data.data)
+          commit('SET_VIDEODIARY', res.data.data)
           router.go()        
         })
         .catch(err => console.log(err))
     },
-     // 텍스트 일기 삭제
-     deleteTextDiary({ commit, getters }, textDiaryPk) {
+     // 영상 일기 삭제
+     deleteVideoDiary({ commit, getters }, videoDiaryPk) {
         if (confirm('정말 삭제하시겠습니까?')) {
             
           axios({
-            url: drf.textDiary.textDiaryEdit(textDiaryPk),
+            url: drf.videoDiary.videoDiaryEdit(videoDiaryPk),
             method: 'delete',
             headers: getters.authHeader
           })
             .then(() => {
-              commit('SET_TEXTDIARY', {})
+              commit('SET_VIDEODIARY', {})
               router.push({ to:'/calendar' })
             })
             

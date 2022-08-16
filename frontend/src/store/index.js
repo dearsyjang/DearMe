@@ -7,6 +7,7 @@ import bottombar from './modules/bottombar'
 import group from './modules/group';
 import counselingRequest from './modules/counselingRequest';
 import textDiary from './modules/textDiary';
+import videoDiary from './modules/videoDiary';
 import createPersistedState from 'vuex-persistedstate';
 import mypage from './modules/mypage'
 export default new Vuex.Store({
