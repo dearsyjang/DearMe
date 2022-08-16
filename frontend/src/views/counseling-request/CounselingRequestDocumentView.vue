@@ -11,11 +11,13 @@
             
           <div v-if="re.counselorId== currentUser.data.userId && re.status==`UNACCEPTED`  && re.id ==counselingId" class="card mb-3" style="max-width: 540px;">
             <div class="row g-0">
+                <!-- <div class="counseling-index">상담번호: {{re.id}}</div> -->
               <div class="col-md-4">
         
-                상담번호: {{re.id}}
+    
                 <br>
                 유저 번호: {{re.userId}}
+
                 <br>
                 내용~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
                 <!-- {{re.contetns}}  백에 요청-->
@@ -29,20 +31,35 @@
                   <h5 class="card-title"> </h5>
                   <p class="card-text"><small class="text-muted">
                   </small></p>
+
+                    <div v-if="re.status==`UNACCEPTED`">
+                      <router-link :to="{ name: 'counseling', params : {counselingId : re.id}}">
+                        <button id="open-room">상담방 개설</button>
+                      </router-link>
+                    </div>
+                    <div v-else>   
                      <div id="requset-accept-btn">
+                        {{re}}
+                        
                         <button  @click="onSubmit">수락하기</button>
 
                         <router-link to="/counseling-request/list">
                         <button>거절하기</button>
                         </router-link>
                         </div>
-
+                    </div>
                 </div>
               </div>
             </div>
           </div>
           </div>
       </div>
+      
+
+
+
+
+
       
   </div>
 </template>
@@ -93,7 +110,13 @@ export default {
 
 
 <style >
+
 #requset-accept-btn{
-  float: right
+  float: right;
+  margin-bottom: 10px;
+}
+#open-room{
+  float: right;
+  margin-bottom: 10px;
 }
 </style>

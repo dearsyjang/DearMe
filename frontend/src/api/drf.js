@@ -10,6 +10,7 @@ const VIDEODIARY = '/video-diaries'
 const COUNSELING = '/counselings'
 const CAREER = '/careers'
 const CERTIFICATE = '/certificates'
+const VIDEODIARY = '/video-diaries'
 
 export default {
   member : {

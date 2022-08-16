@@ -65,6 +65,7 @@ export default {
         method: 'get',
         headers: {
           'Content-Type': 'application/json',
+
           'Authorization': getters.authHeader2
           },
       })

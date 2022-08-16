@@ -10,7 +10,7 @@
           <div class="card">
             <div class="card-body p-2">
               <div class="d-flex align-items-center justify-content-between">
-                <small class="ms-1 board-text-index ">{{counselor.data.nickName}} 상담사</small>
+                <small class="ms-1 board-text-index ">{{ counselor.data.nickName }} 상담사 프로필</small>
               </div>
             </div>
           </div>
@@ -25,7 +25,7 @@
               </div>
               <div class="user-info">
                 <div class="d-flex align-items-center">
-                  <h5 class="mb-1 board-text-bold">{{ currentUser?.data?.nickname }}</h5>
+                  <h5 class="mb-1 board-text-bold">{{ counselor.data.nickName }}</h5>
                   <span class="badge bg-warning ms-2 rounded-pill">COUNSELOR</span>
                 </div>
                 <div>
@@ -56,7 +56,7 @@
         </div>
       </div>
       <div class="top-products-area product-list-wrap">
-        <div v-if="d==true && f==false">
+        <div class="" v-if="d==true && f==false">
           <counselor-info-comp></counselor-info-comp>
         </div>
         <div v-if="d==false && f==true">
@@ -239,11 +239,9 @@
   margin: 4px;
   text-align: center;
   justify-content: center;
-  background-color: rgb(199, 217, 255);
-
-
-
+  background-color: #EFCC70;
 }
+
 .group-enter-btn{
    background-color: #F9F7F7;
    border: none;
@@ -302,16 +300,17 @@ width: 100%
  float: right;
  height: 50px;
  border: none;
- background-color: rgb(233, 233, 233);
+ color: white;
+ background-color: #595892db;
 }
 .red{
-color:blue
+color:#595892
         }
 .bold{
 font-weight: bold;
         }
 .red2{
-color:blue
+color:#595892
         }
 .bold2{
 font-weight: bold;
@@ -335,5 +334,7 @@ font-weight: bold;
   background-color: #595892;
 }
 
-
+.top-products-area {
+  margin-bottom: 20px;
+}
 </style>

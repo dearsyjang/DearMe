@@ -66,7 +66,7 @@ export default {
 
 }
 </script>
-<style scoped>
+<style >
 #info-p {
   font-size: large;
 }
