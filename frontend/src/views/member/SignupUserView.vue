@@ -1,47 +1,63 @@
 <template>
-  <div class="login-wrapper d-flex align-items-center justify-content-center">
-    <div class="custom-container">
-      <div class="text-center px-4" id="signup-img">
-        <img src="@/assets/images/img/bg-img/user.png" alt="">
-      </div>
-      <!-- Register Form -->
-      <div class="register-form mt-4">
-        <h6 class="mb-3 text-center">{{ $route.params.type }}</h6>
-        <h6 class="mb-3 text-center">아래 항목을 입력하시오.</h6>
-          <div class="form-group">
-            <input class="form-control" type="text" v-model="credentials.id" placeholder="아이디">
-            <button class="btn btn-primary" @click="idCheck()">중복확인</button>
-          </div>
-          <div class="form-group position-relative">
-            <input class="form-control" type="password" v-model="credentials.pw" placeholder="비밀번호">
-            <div class="position-absolute">
-              <i class="bi bi-eye"></i>
-              <i class="bi bi-eye-slash"></i>
+<div class="member-gb">
+  <div class="page-content-wrapper py-3 ">
+      <div class="shop-pagination pb-3">
+        <div class="container">
+          <div class="card">
+            <div class="card-body p-2">
+              <div class="d-flex align-items-center justify-content-between">
+                <small class="ms-1 board-text-index">{{ $route.params.type }} 회원가입</small>
+              </div>
             </div>
           </div>
-          <div class="form-group">
-            <input class="form-control" type="text" v-model="credentials.nickName" placeholder="닉네임">
-            <button class="btn btn-primary" @click="nicknameCheck()">중복확인</button>
-          </div>
-          <div class="form-group">
-              <select class="form-select" id="defaultSelect" v-model="credentials.gender" >
-                <option selected value="0">성별</option>
-                <option value="MALE">남성</option>
-                <option value="FEMALE">여성</option>
-              </select>
-          </div>
-          <div class="form-group">
-            <input class="form-control" type="email" v-model="credentials.email" placeholder="이메일">
-          </div>
-          <div class="form-group row d-flex justify-content-evenly">
-            <input class="form-control col-sm-3" id="signup-birth" type="text" name="yy" placeholder="년(4자)">
-            <input class="form-control col-sm-3" id="signup-birth" type="text" name="mm" placeholder="월(2자)">
-            <input class="form-control col-sm-3" id="signup-birth" type="text" name="dd" placeholder="일(2자)">
-          </div>
-          <button @click="signUp()" class="btn btn-primary w-100" type="submit">회원가입</button>
+        </div>
       </div>
-    </div>
+      <div class="top-products-area product-list-wrap">
+        <div class="container">
+          <div class="login-wrapper d-flex align-items-center justify-content-center">
+            <div class="custom-container">
+              <div class="register-form mt-4">
+                <h6 class="mb-3 text-center">아래 항목을 입력하시오.</h6>
+                  <div class="form-group d-flex justify-content-center">
+                    <input class="form-control" type="text" v-model="credentials.id" placeholder="아이디">
+                    <button class="w-btn-check" @click="idCheck()">중복확인</button>
+                  </div>
+                  <div class="form-group position-relative">
+                    <input class="form-control" type="password" v-model="credentials.pw" placeholder="비밀번호">
+                    <div class="position-absolute">
+                      <!-- <i class="bi bi-eye"></i>
+                      <i class="bi bi-eye-slash"></i> -->
+                    </div>
+                  </div>
+                  <div class="form-group d-flex justify-content-center">
+                    <input class="form-control" type="text" v-model="credentials.nickName" placeholder="닉네임">
+                    <button class="w-btn-check" @click="nicknameCheck()">중복확인</button>
+                  </div>
+                  <div class="form-group">
+                      <select class="form-select" id="defaultSelect" v-model="credentials.gender" >
+                        <option selected>성별</option>
+                        <option value="MALE">남성</option>
+                        <option value="FEMALE">여성</option>
+                      </select>
+                  </div>
+                  <div class="form-group">
+                    <input class="form-control" type="email" v-model="credentials.email" placeholder="이메일">
+                  </div>
+                  <div class="form-group row d-flex justify-content-center">
+                    <input class="form-control col-sm-3" id="signup-birth" type="text" name="yy" placeholder="년(4자)">
+                    <input class="form-control col-sm-3" id="signup-birth" type="text" name="mm" placeholder="월(2자)">
+                    <input class="form-control col-sm-3" id="signup-birth" type="text" name="dd" placeholder="일(2자)">
+                  </div>
+                  <button @click="signUp()" class="w-btn-signup w-100" type="submit">회원가입</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
   </div>
+</div>
+
+
 </template>
 <script>
 import { mapActions, mapGetters } from 'vuex'
@@ -143,12 +159,50 @@ export default {
 
 }
 </script>
-<style scoped>
+<style>
   #signup-birth {
-  width: 100px;
+    width: 100px;
   }
   #signup-img {
     width: 200px;
     margin: auto;
   }
+  .w-btn-check {
+    /* position: relative; */
+    border: none;
+    min-width: 70px;
+    min-height: 20px;
+    background: linear-gradient(
+        90deg,
+        #5b5792bd 0%,
+        #5b5792bb 100%
+    );
+    border-radius: 10px;
+    color: darkslategray;
+    cursor: pointer;
+    /* box-shadow: 12px 12px 24px #5a554747; */
+    font-weight: 700;
+    transition: 0.3s;
+    color: #E9E5DC;
+    margin-left: 8px;
+    font-size: 13px;
+}
+.w-btn-signup {
+    /* position: relative; */
+    border: none;
+    min-width: 170px;
+    min-height: 50px;
+    background: linear-gradient(
+        90deg,
+        #5B5792 0%,
+        #5B5792 100%
+    );
+    border-radius: 1000px;
+    color: darkslategray;
+    cursor: pointer;
+    box-shadow: 12px 12px 24px #5a554747;
+    font-weight: 700;
+    transition: 0.3s;
+    color: #E9E5DC
+}
 </style>

@@ -107,19 +107,20 @@ export default {
 .w-btn-neon2 {
     /* position: relative; */
     border: none;
-    min-width: 200px;
+    min-width: 170px;
     min-height: 50px;
     background: linear-gradient(
         90deg,
-        #B2C8DF 0%,
-        #86b2e1 100%
+        #8d8cb0 0%,
+        #636294 100%
     );
     border-radius: 1000px;
     color: darkslategray;
     cursor: pointer;
-    box-shadow: 12px 12px 24px #B2C8DF;
+    box-shadow: 12px 12px 24px #76769a66;
     font-weight: 700;
     transition: 0.3s;
+    color: #E8E5DC
 }
 
 .w-btn-neon2:hover {

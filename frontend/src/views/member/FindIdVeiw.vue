@@ -1,20 +1,38 @@
 <template>
-  <div class="login-wrapper d-flex align-items-center justify-content-center">
-    <div class="custom-container">
-      <div class="text-center px-4 my-3">
-        <h1 class="mb-3 text-center">비밀번호 찾기</h1>
-        <img class="login-intro-img" src="@/assets/images/img/bg-img/loginImg.jpg" alt="">
-      </div>
-
-      <div class="register-form mt-4">
-        <form action="page-forget-password-success.html">
-          <div class="form-group text-start mb-3">
-            <input class="form-control" type="text" placeholder="id를 입력하시오.">
+<div class="member-gb">
+  <div class="page-content-wrapper py-3 ">
+      <div class="shop-pagination pb-3">
+        <div class="container">
+          <div class="card">
+            <div class="card-body p-2">
+              <div class="d-flex align-items-center justify-content-between">
+                <small class="ms-1 board-text-index">비밀번호 찾기</small>
+              </div>
+            </div>
           </div>
-          <button class="btn btn-primary w-100" type="submit">비밀번호 찾기</button>
-        </form>
+        </div>
       </div>
-    </div>
+      <div class="shop-pagination pb-3">
+        <div class="container">
+            <img src="@/assets/images/main3.png" alt="">
+          </div>
+        </div>
+      </div>
+      <div class="top-products-area product-list-wrap">
+        <div class="container">
+          <div class="form-group mt-4">
+            <label class="form-label mx-2" for="id">아이디</label>
+            <input type="text" class="form-control" placeholder="아이디">
+          </div>
+          <div class="form-group mt-4">
+            <label class="form-label mx-2" for="email">이메일</label>
+            <input type="text" class="form-control" placeholder="이메일">
+          </div>
+          <div class="form-group mt-4">
+            <button class="w-btn-signup w-100">비밀번호 찾기</button>
+          </div>
+        </div>
+      </div>
   </div>
 </template>
 <script>
@@ -32,8 +50,5 @@ export default {
   methods: {}
 }
 </script>
-<style scoped>
-img {
-  width: 300px;
-}
+<style>
 </style>

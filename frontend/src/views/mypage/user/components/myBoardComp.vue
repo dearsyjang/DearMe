@@ -1,10 +1,10 @@
 <template>
-  <div class="Board">
+  <div>
     <div class="container">
-      <span id="toc-toggle" @click="openCloseToc()">내가 작성한 게시글 ▼ </span>
-      <span class="badge bg-primary rounded-pill">{{ boards.length }}</span>
+      <span class="board-text-bold form-label board-text-title" id="toc-toggle" @click="openCloseToc()">내가 작성한 게시글 <i class="bi bi-caret-down-fill"></i></span>
+      <span class="badge mypage-badge rounded-pill mx-1">{{ this.myboard.length }}</span>
+      <my-board-list-comp :boards="this.myboard" id="toc-content" ></my-board-list-comp>
     </div>
-    <my-board-list-comp :boards="boards" id="toc-content" ></my-board-list-comp>
   </div>
 </template>
 <script>
@@ -16,12 +16,12 @@ export default {
   },
   data() {
     return {
-      sampleData: ''
+      myboard: []
     }
   },
   setup() {},
   created() {
-    this.fetchBoards()
+    this.findMyBoard()
   },
   mounted() {},
   unmounted() {},
@@ -34,10 +34,23 @@ export default {
     } else {
       document.getElementById('toc-content').style.display = 'block';
     }
+  },
+  findMyBoard() {
+    this.fetchBoards()
+    // console.log(this.currentUser.data.nickname)
+    let MYBOARD = []
+    for(var i = 0; i < this.boards.length; i++) {
+      if (this.boards[i].nickName === this.currentUser.data.nickname){
+        MYBOARD.push(this.boards[i])
+      }
+    }
+    console.log(MYBOARD)
+    this.myboard = MYBOARD
+    console.log(this.myboard)
   }
   },
   computed: {
-    ...mapGetters(['boards', 'myId'])
+    ...mapGetters(['boards', 'myId', 'currentUser'])
   },
 }
 </script>
@@ -51,5 +64,8 @@ export default {
   }
   #toc-toggle:hover {
     text-decoration: none;
+  }
+  .mypage-badge{
+    background-color: #595892;
   }
 </style>
