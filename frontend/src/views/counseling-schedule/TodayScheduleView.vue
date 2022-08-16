@@ -1,12 +1,12 @@
 <template>
   <div>
-    <br><br><br><br>
-    <h1>오늘의 상담</h1>
+    <br>
+    <h1 style="text-align:center">오늘의 상담</h1>
     <hr>
     <br><br>
     <div>
         <div>
-            <h2>1:1 상담</h2>
+            <h2 style="text-align:center">1:1 상담</h2>
               <div>
                 <personalcard-comp 
                 v-for="(request,idx) in requests.data"
@@ -19,7 +19,8 @@
     <br>
     <div>
         <div>
-          <h2>그룹 상담</h2>
+          <hr>
+          <h2 style="text-align:center">그룹 상담</h2>
         </div>
           <div>
             <groupcard-comp 
@@ -65,3 +66,9 @@ export default {
 }
 }
 </script>
+
+<style >
+body{
+  background-color: #F9F7F7;
+}
+</style>
