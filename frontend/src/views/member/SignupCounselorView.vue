@@ -88,7 +88,7 @@ export default {
       credentials: {
         id: '',
         pw: '',
-        type: this.$route.params.type,
+        type: '',
         nickName: '',
         birth: '2022/02/02',
         gender: '',
@@ -148,11 +148,11 @@ export default {
       let formData = new FormData()
       formData.append('id', this.credentials.id)
       formData.append('pw', this.credentials.pw)
-      formData.append('type', this.credentials.type)
+      formData.append('type', this.$route.params.type)
       formData.append('nickName', this.credentials.nickName)
       formData.append('birth', this.credentials.birth)
       formData.append('gender', this.credentials.gender)
-      formData.append('phone', '01032153214')
+      formData.append('phone', '01032153212')
       formData.append('email', this.credentials.email)
       formData.append('counselorProfile', this.credentials.counselorProfile)
       formData.append('picture', document.getElementById('formElem')[0].files[0]);
