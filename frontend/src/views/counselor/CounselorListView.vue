@@ -1,131 +1,9 @@
-<!-- <template>
-  <div>
-    <h1>상담사 리스트 페이지</h1>
-    
-    <div id="counselorListMain">
-      <div id="counselorListSelectBar">
-        <div class="select-bar">
-          <select v-model="filter" @change="selectFilter" class="form-select rounded-pill"  aria-label="Default select example" style="40px">
-            <option class="select-item" hidden="" disabled="disabled" selected="selected" value="">상담사 필터</option>         
-            <option class="select-item" value=1>별점 높은 순</option>
-            <option class="select-item" value=2>리뷰 많은 순</option>
-            <option class="select-item" value=3>즐겨찾기</option>
-          </select>
-        </div>
-      </div>
-    </div>
-    <div v-if="!isempty">
-      <div v-if="check(filtering_counselors)">
-      </div>
-      <div v-else>
-        <div class="counselor-list row row-cols-2 row-cols-md-5 g-3">
-          <counselor-list-item-comp
-          v-for="(counselor,idx) in filtering_counselors"
-          :key="idx"
-          :counselor="counselor">
-          </counselor-list-item-comp>
-        </div>
-      </div>
-    </div>
-
-    <div class="search-counselor">
-      <span>[상담사검색] </span>
-      <input type="text"
-      v-model.trim="inputData"
-      @keyup.enter="search">
-      <button @click="search">검색</button>
-      <hr>
-      <div v-if="!isempty">
-        <div v-if="check(searched_counselor)">        
-          <h2>검색 결과가 없습니다. </h2>   
-        </div>
-        <div v-else>
-          <div class="counselor-list row row-cols-2 row-cols-md-5 g-3">
-          <counselor-list-item-comp
-          v-for="(counselor,idx) in searched_counselor"
-          :key="idx"
-          :counselor="counselor">
-          </counselor-list-item-comp>
-          </div>
-        </div>
-      </div>
-    </div>  
-
-    <div class="counselor-list">
-      <counselor-list-item-comp
-      v-for="temp in temps"
-      :key="temp.pk"
-      :temp="temp">
-      </counselor-list-item-comp>
-    </div>
-
-  </div>
-</template>
-
-<script>
-  import CounselorListItemComp from '@/views/counselor/components/CounselorListItemComp.vue'
-  import { mapActions, mapGetters } from 'vuex'
-  export default {
-    name : 'CounselorDetailView',
-    components: {CounselorListItemComp},
-    data: function() {
-    return {
-      isempty:true,
-      inputData:'',
-      filter:''
- 
-      }
-    },
-  computed:{
-    ...mapGetters(['searched_counselor', 'filtering_counselors']),
-
-    temps() {
-      return this.$store.state.temps
-    }
-  },
-  methods:{
-    search :function() {
-        if (this.inputData) {
-        this.$store.dispatch('searchCounselor', this.inputData)
-        this.isempty = false
-        }
-        else{ alert('내용을 입력해주세요!!')
-      }
-    },
-
-    selectFilter: function (){
-    this.$store.dispatch('filterCounselor',this.filter)
-    this.isempty = false
-    },
-
-    ...mapActions(['searchCounselor','filterCounselor']),
-    
-   
-
-    check : function(arr)  {
-    if(Array.isArray(arr) && arr.length === 0)  {
-      return true;
-    }
-    return false;
-    }
-
-  },
-  }
-</script>
-<style>
-.counselor-list{
- 
-  width : 500px;
-  margin: auto;
-}
-</style> -->
-
 
 
 <template>
   <div>
     
-      <img src = "@/assets/images/counselor.jpeg" class="counselor-img"/>
+      <img src = "@/assets/images/counselor.jpeg" class="counselor-img-top"/>
       <hr>
       <div class="counselor-list-top">
       
@@ -220,31 +98,7 @@
             
           
 
-          <!-- <div id="counselorListMain">
-            <div id="counselorListSelectBar">
-              <div class="select-bar">
-                <select v-model="align" class="form-select rounded-pill"  aria-label="Default select example" style="40px">
-                  <option class="select-item" hidden="" disabled="disabled" selected="selected" value="">상담사 필터</option>         
-                  <option class="select-item" value=1>별점 높은 순</option>
-                  <option class="select-item" value=2>리뷰 많은 순</option>
-                </select>
-              </div>
-            </div>
-          </div>
-
-          <div id="counselorListMain">
-            <div id="counselorListSelectBar">
-              <div class="select-bar">
-                <select v-model="categories"  class="form-select rounded-pill"  aria-label="Default select example" style="40px">
-                  <option class="select-item" hidden="" disabled="disabled" selected="selected" value="">상담사 필터</option>         
-                  <option class="select-item" value=3>가족</option>
-                  <option class="select-item" value=4>직장,진로</option>
-                  <option class="select-item" value=5>연애,결혼</option>
-                  <option class="select-item" value=6>자기이해</option>   
-                </select>
-              </div>
-            </div>
-          </div> -->
+  
           <hr>
           <div class="bottom-btn">
           <button @click=resetFilter() type="reset" class="btn" id="reset-btn" >초기화하기</button>
@@ -319,41 +173,13 @@
       console.log(Boolean(this.filter.reviewScoreDown))
       console.log(this.filter.category)
       console.log(Boolean(this.filter.favorite  ))
-      // if (this.filter.reviewCntDown 
-      // ||this.filter.reviewCntUp 
-      // ||this.filter.reviewScoreUp
-      // ||this.filter.reviewScoreDown
-      // ||this.filter.category 
-      // ||this.filter.favorite)  {  this.$store.dispatch('fetchCounselors',this.filter)}
-      // else if (this.filter.reviewCntUp) {this.$store.dispatch('fetchCounselors',this.filter)}
-      // else if (this.filter.reviewScoreUp) {this.$store.dispatch('fetchCounselors',this.filter)}
-      // else if (this.filter.reviewScoreDown) {this.$store.dispatch('fetchCounselors',this.filter)}
-      // else if (this.filter.category) {this.$store.dispatch('fetchCounselors',this.filter)}
-      // else if (this.filter.favorite) {this.$store.dispatch('fetchCounselors',this.filter)}
+
     },
     resetFilter () {
       location.reload();
     }
     
-    // search :function() {
-    //     if (this.inputData) {
-    //     this.$store.dispatch('searchCounselor', this.inputData)
-    //     this.isempty = false
-    //     }
-    //     else{ alert('내용을 입력해주세요!!')
-    //   }
-    // }, 
-  //   selectFilter: function (){
-  //   this.$store.dispatch('filterMovie',this.filter)
-  //   this.isempty = false
-  //  },
 
-  //   check : function(arr)  {
-  //   if(Array.isArray(arr) && arr.length === 0)  {
-  //     return true;
-  //   }
-  //   return false;
-  //   }
     },
     
   created() {
@@ -369,13 +195,7 @@
 
 /* @import './assets/css/counselor-list.css'; */
 
-.list {
-  display: flex;
-  flex-direction: row-reverse;
-  justify-content: space-around;
-  text-align: center;
 
-}
 .filter-img{
   width:20px;
   
@@ -396,9 +216,10 @@
    margin:auto;
    justify-content: space-around;
 }
-.counselor-img{
+.counselor-img-top{
   opacity: 90%;
   width: 100%;
+
 }
 .list input {
   display: none;

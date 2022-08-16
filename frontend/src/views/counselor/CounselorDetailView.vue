@@ -8,21 +8,19 @@
                 </router-link> -->
  
     
-    <div class="counselor-profile">
+    <div class="counselor-profile" id="counselor-detail-profile">
       <div class="card">
-        <div class="card mb-3" style="max-width: 540px;">
+        <div class="card mb-3" >
           <div class="row g-0">
-
-
-            <div class="card2 mb-3" id="counselor-card" >
+            <div class="card2 mb-3" id="counselor-detail-card" >
               <div class="row">
                 <div class="card-pic col-md-16 " style="max-width:50%;">
                   <img src = "@/assets/images/강지명.png" class="counselor-img2"/>
                   {{counselor.data.picUrl}}
                  
                 </div> 
-                <div class="card-body col-md-16" style="max-width:50%;" >
-                    <h5 class="card-title2">{{counselor.data.nickName}}상담사</h5>
+                <div class="card-body col-md-16" id="counselor-detail-body" style="max-width:50%;" >
+                    <h5 class="card-title" id="counselor-detail-title">{{counselor.data.nickName}}상담사</h5>
                   
                   <p class="card-text"><small class="text-muted">&#11088; {{counselor.data.value}} ({{counselor.data.reviewCnt}})</small></p>
                   전문분야<div  class="category-contents" v-for="(c,idx) in counselor.data.categories"
@@ -229,6 +227,8 @@
 
 
 <style>
+
+
 .category-btn{
   font-size:5px;
   border : 2px solid;
@@ -248,41 +248,19 @@
    border: none;
 }
 
-.counseling-price2{
-  font-size:5px;
-}
-.counseling-request2{
-  background-color: none;
-}
-.counseling-price{
-  font-size: 2px;
- 
-}
-.card-title {
-  float: left
-}
-.card-body{
+
+#counselor-detail-body{
   float: right
 }
-.counselor-profile {
+#counselor-detail-profile {
+  width:100%;
   margin:auto;
   text-align: center;
-}
-.price {
-  border : solid black 1px;
-  margin : auto;
-  margin-top : 20px;
-}
-.counselor-info {
-
-  margin: auto;
-
+  justify-content: center;
 }
 
-div {
-  box-sizing : border-box;
 
-}
+
 
 .black-bg {
   width: 100% ; height : 100%;
@@ -297,21 +275,8 @@ div {
   padding : 20px;
 
 }
-.card {
-  margin: auto
-}
 
 
-.card-header{
-  display: flex;
-  justify-content: space-between;
-
-}
-.contents{
-  display: flex;
-  justify-content: space-between;
-
-}
 .add-button{
   border:none;
   background-color: transparent
@@ -350,21 +315,11 @@ color:blue
 font-weight: bold;
         }
 
-.card-title2{
-  margin-top:20px;
-}
 
 .counselor-img2{
   margin-top:20px;
 }
 
-.card-category{
-  justify-content: center;
-  font-size: 15px;
-  width: 110px;
-  margin-top: 30px;
-  text-align: center;
-}
 
 .one-on-one-request-btn{
   background-color: black;
@@ -374,19 +329,6 @@ font-weight: bold;
   height: 40px;
 }
 
-.card-body2{
-   justify-content: center;
-   text-align: center;
-}
 
-#card-category3{
-  margin-top: 30px;
-  margin-right:80px;
-  font-size: 15px;
-  text-align: center;
-  justify-content: center;
-}
-#counselor-card{
-  height:280px
-}
+
 </style>
