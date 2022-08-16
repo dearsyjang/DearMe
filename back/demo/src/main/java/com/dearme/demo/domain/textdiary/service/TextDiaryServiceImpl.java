@@ -1,10 +1,14 @@
 package com.dearme.demo.domain.textdiary.service;
 
+import com.dearme.demo.domain.counselingdocument.entity.CounselingDocument;
+import com.dearme.demo.domain.counselingdocument.exception.NoExistDocumentException;
+import com.dearme.demo.domain.counselingdocument.repository.CounselingDocumentRepository;
 import com.dearme.demo.domain.textdiary.dto.PostTextDiaryRequestDto;
 import com.dearme.demo.domain.textdiary.dto.PostTextDiaryResponseDto;
 import com.dearme.demo.domain.textdiary.dto.TextDiaryDetailsResponseDto;
 import com.dearme.demo.domain.textdiary.dto.TextDiaryListResponseDto;
 import com.dearme.demo.domain.textdiary.entity.TextDiary;
+import com.dearme.demo.domain.textdiary.exception.AlreadyExistTextDiaryException;
 import com.dearme.demo.domain.textdiary.exception.NoPermissionTextDiaryException;
 import com.dearme.demo.domain.textdiary.exception.TextDiarySentimentException;
 import com.dearme.demo.domain.textdiary.repository.TextDiaryRepository;
@@ -12,9 +16,7 @@ import com.dearme.demo.domain.user.entity.Type;
 import com.dearme.demo.domain.user.entity.User;
 import com.dearme.demo.domain.user.exception.NoExistUserException;
 import com.dearme.demo.domain.user.repository.UserRepository;
-import com.dearme.demo.domain.videodiary.entity.VideoDiary;
 import com.dearme.demo.domain.videodiary.exception.CounselorPostVideoDiaryException;
-import com.dearme.demo.domain.videodiary.exception.NoPermissionVideoDiaryException;
 import lombok.RequiredArgsConstructor;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -24,20 +26,18 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.BasicResponseHandler;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.json.JSONObject;
-import org.quartz.*;
-import org.quartz.impl.StdSchedulerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.*;
-import java.util.Calendar;
 
 @Service
 @RequiredArgsConstructor
 public class TextDiaryServiceImpl implements TextDiaryService{
     private final TextDiaryRepository textDiaryRepository;
     private final UserRepository userRepository;
+    private final CounselingDocumentRepository counselingDocumentRepository;
 
     @Value("${sentiment.id:0}")
     private String SENTIMENT_ID;
@@ -52,6 +52,9 @@ public class TextDiaryServiceImpl implements TextDiaryService{
         if(user.getType().equals(Type.COUNSELOR))
             throw new CounselorPostVideoDiaryException();
         TextDiary textDiary = dto.toEntity();
+        if (textDiaryRepository.existsTextDiaryByUser_IdAndYearAndMonthAndDay(id, textDiary.getYear(), textDiary.getMonth(), textDiary.getDay())) {
+            throw new AlreadyExistTextDiaryException();
+        }
         textDiary.setUser(user);
         textDiary.setSentimentInfo(getSentiment(dto.getContents()));
         return new PostTextDiaryResponseDto(textDiaryRepository.save(textDiary).getId(), textDiary.getSentiment(), textDiary.getPercentage(), textDiary.getPositive(), textDiary.getNegative(), textDiary.getNeutral());
@@ -60,8 +63,14 @@ public class TextDiaryServiceImpl implements TextDiaryService{
     @Override
     public TextDiaryDetailsResponseDto getDetails(String id, Long textDiaryId) {
         TextDiary textDiary = textDiaryRepository.findById(textDiaryId).get();
-        if(!textDiary.getUser().getId().equals(id))
-            throw new NoPermissionTextDiaryException();
+        if(!textDiary.getUser().getId().equals(id)) {
+            Long userId = textDiary.getUser().getUserId();
+            CounselingDocument latestCounselingDocument = counselingDocumentRepository.findTop1ByCounselor_IdAndUser_UserIdOrderByYearDescMonthDescHoursDesc(id, userId).orElseThrow(() -> {
+                throw new NoExistDocumentException();
+            });
+            if(!latestCounselingDocument.getIsOpen())
+                throw new NoPermissionTextDiaryException();
+        }
         return TextDiaryDetailsResponseDto.of(textDiary);
     }
 
@@ -89,6 +98,20 @@ public class TextDiaryServiceImpl implements TextDiaryService{
         else
             throw new NoPermissionTextDiaryException();
 
+    }
+
+    @Override
+    public TextDiaryListResponseDto getUserList(String id, Long userId, Integer year, Integer month) {
+        CounselingDocument latestCounselingDocument = counselingDocumentRepository.findTop1ByCounselor_IdAndUser_UserIdOrderByYearDescMonthDescHoursDesc(id, userId).orElseThrow(() -> {
+            throw new NoExistDocumentException();
+        });
+        User user = userRepository.findUserByUserId(userId).orElseThrow(() -> {
+            throw new NoExistUserException();
+        });
+        if(latestCounselingDocument.getIsOpen()){
+            return getList(user.getId(), year, month);
+        }
+        throw new NoPermissionTextDiaryException();
     }
 
     public String[] getSentiment(String text){

@@ -26,6 +26,8 @@ public interface UserService {
 
     UserInfoResponseDto getUserInfo(String id);
 
+    UserInfoResponseDto getUserInfo(String counselorId, Long userId);
+
     List<ReviewViewResponseDto> getReviews(String id);
 
     UserGroupListResponseDto getGroups(String id);

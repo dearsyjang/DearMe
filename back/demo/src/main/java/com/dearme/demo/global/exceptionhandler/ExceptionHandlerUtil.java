@@ -9,7 +9,12 @@ import com.dearme.demo.domain.board.exception.comment.NoCommentSavePermissionExc
 import com.dearme.demo.domain.board.exception.comment.NoCommentUpdatePermissionException;
 import com.dearme.demo.domain.board.exception.comment.NoExistCommentException;
 import com.dearme.demo.domain.counseling.exception.NoExistCounselingException;
+import com.dearme.demo.domain.counselingdocument.exception.AlreadyExistCounselorDocumentException;
 import com.dearme.demo.domain.counselingroom.exception.CounselingRoomNotCreatedYet;
+import com.dearme.demo.domain.group.exception.UserCreateGroupException;
+import com.dearme.demo.domain.textdiary.exception.AlreadyExistTextDiaryException;
+import com.dearme.demo.domain.textdiary.exception.CounselorPostTextDiaryException;
+import com.dearme.demo.domain.textdiary.exception.NoPermissionTextDiaryException;
 import com.dearme.demo.domain.user.exception.*;
 import com.dearme.demo.global.common.CommonResponse;
 import com.dearme.demo.global.util.jwt.InvalidAccessTokenException;
@@ -127,6 +132,31 @@ public class ExceptionHandlerUtil {
 
     @ExceptionHandler(CounselingRoomNotCreatedYet.class)
     ResponseEntity<CommonResponse> handleCounselingRoomNotCreatedYet(CounselingRoomNotCreatedYet e){
+        return ResponseEntity.badRequest().body(CommonResponse.getErrorResponse(e.getMessage()));
+    }
+
+    @ExceptionHandler(NoPermissionTextDiaryException.class)
+    ResponseEntity<CommonResponse> handleNoPermissionTextDiaryException(NoPermissionTextDiaryException e){
+        return ResponseEntity.badRequest().body(CommonResponse.getErrorResponse(e.getMessage()));
+    }
+
+    @ExceptionHandler(NoPermissionUserInfoException.class)
+    ResponseEntity<CommonResponse> handleNoPermissionUserInfoException(NoPermissionUserInfoException e){
+        return ResponseEntity.badRequest().body(CommonResponse.getErrorResponse(e.getMessage()));
+    }
+
+    @ExceptionHandler(AlreadyExistTextDiaryException.class)
+    ResponseEntity<CommonResponse> handleAlreadyExistTextDiaryException(AlreadyExistTextDiaryException e){
+        return ResponseEntity.badRequest().body(CommonResponse.getErrorResponse(e.getMessage()));
+    }
+
+    @ExceptionHandler(CounselorPostTextDiaryException.class)
+    ResponseEntity<CommonResponse> handleCounselorPostTextDiaryException(CounselorPostTextDiaryException e){
+        return ResponseEntity.badRequest().body(CommonResponse.getErrorResponse(e.getMessage()));
+    }
+
+    @ExceptionHandler(UserCreateGroupException.class)
+    ResponseEntity<CommonResponse> handleUserCreateGroupException(UserCreateGroupException e){
         return ResponseEntity.badRequest().body(CommonResponse.getErrorResponse(e.getMessage()));
     }
 
