@@ -10,6 +10,7 @@ import com.dearme.demo.domain.board.exception.comment.NoCommentUpdatePermissionE
 import com.dearme.demo.domain.board.exception.comment.NoExistCommentException;
 import com.dearme.demo.domain.counseling.exception.NoExistCounselingException;
 import com.dearme.demo.domain.counselingroom.exception.CounselingRoomNotCreatedYet;
+import com.dearme.demo.domain.textdiary.exception.NoPermissionTextDiaryException;
 import com.dearme.demo.domain.user.exception.*;
 import com.dearme.demo.global.common.CommonResponse;
 import com.dearme.demo.global.util.jwt.InvalidAccessTokenException;
@@ -130,4 +131,13 @@ public class ExceptionHandlerUtil {
         return ResponseEntity.badRequest().body(CommonResponse.getErrorResponse(e.getMessage()));
     }
 
+    @ExceptionHandler(NoPermissionTextDiaryException.class)
+    ResponseEntity<CommonResponse> handleNoPermissionTextDiaryException(NoPermissionTextDiaryException e){
+        return ResponseEntity.badRequest().body(CommonResponse.getErrorResponse(e.getMessage()));
+    }
+
+    @ExceptionHandler(NoPermissionUserInfoException.class)
+    ResponseEntity<CommonResponse> handleNoPermissionUserInfoException(NoPermissionUserInfoException e){
+        return ResponseEntity.badRequest().body(CommonResponse.getErrorResponse(e.getMessage()));
+    }
 }
