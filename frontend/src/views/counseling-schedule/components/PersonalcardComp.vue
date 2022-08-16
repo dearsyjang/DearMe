@@ -4,6 +4,7 @@
     <div v-for="(re,idx) in request"
       :key="idx"
       :re="re">
+      <!-- {{re}} -->
     <div v-if="re.counselorId== currentUser.data.userId && re.status==`ACCEPTED`  && re.groupId == null && today==`${re.year}-${re.month}-${re.day}`" class="card mb-3" style="max-width: 540px;">
       <div class="row g-0">
         <div class="col-md-4">
@@ -22,7 +23,10 @@
             <!-- <p class="card-text">{{request}}</p> -->
             <p class="card-text"><small class="text-muted">
                 <router-link :to="{ name: 'CounselingRequestDocument', params : {counselingId : re.id}}">
-                <button>신청서보기</button>
+                <button>신청서 보기</button>
+                </router-link>
+                <router-link :to="{ name: 'counseling', params : {counselingId : re.id}}">
+                <button>상담방 개설</button>
                 </router-link>
             </small></p>
           </div>

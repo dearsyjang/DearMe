@@ -1,34 +1,68 @@
 <template>
-  <div id="topbar">
-    <nav class="navbar navbar-expand-lg">
-      <div class="container-fluid">
-        <img id="logoimg" src="../../assets/images/logo.png" class="m-3 d-inline-block" alt="logo">
-
-        <button class="navbar-toggler mx-3 float-right" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <!-- 라우터 링크 연결하기 -->
-        <div v-if="this.currentUser" class="collapse navbar-collapse" id="navbarSupportedContent">
-          <div class="navbar-nav">
-            <li><router-link to="/member/Profile" class="mx-3">회원정보수정</router-link></li>
-            <button @click="logOUT()">로그아웃</button>
-            <!-- <li><router-link to="logout" class="mx-4">로그아웃</router-link></li> -->
+  <div >
+    <!--상단바-->
+    <div class="header-demo-bg shadow-sm">
+      <div id="topbar" class="container">
+        <!-- Header Content -->
+        <div
+          class="header-content header-style-five position-relative d-flex align-items-center justify-content-between">
+          <!-- Logo Wrapper -->
+          <div class="logo-wrapper">
+            <a href="page-home.html">
+              <img id="logoimg" src="../../assets/images/logo.png" alt="logo">
+            </a>
+          </div>
+          <!-- Navbar Toggler -->
+          <div class="navbar--toggler" id="affanNavbarToggler6" data-bs-toggle="offcanvas"
+            data-bs-target="#affanOffcanvas" aria-controls="affanOffcanvas">
+            <span class="d-block"></span>
+            <span class="d-block"></span>
+            <span class="d-block"></span>
           </div>
         </div>
-        <div v-else class="collapse navbar-collapse" id="navbarSupportedContent">
-          <div class="navbar-nav">
-            <li><router-link to="login" class="mx-4">로그인</router-link></li>
-          </div>
-        </div>
-
       </div>
-    </nav>
+    </div>
+
+    <!--사이드바-->
+    <div class="offcanvas offcanvas-start" id="affanOffcanvas" data-bs-scroll="true" tabindex="-1"
+    aria-labelledby="affanOffcanvsLabel">
+      <button class="btn-close btn-close-black text-reset" type="button" data-bs-dismiss="offcanvas"
+        aria-label="Close"></button>
+
+      <div class="offcanvas-body p-0">
+        <div class="sidenav-wrapper">
+          <!-- Sidenav Nav -->
+          <ul class="sidenav-nav ps-0">
+            <br>
+            <li><router-link to="/calendar" class="mx-3" style="text-decoration:none"><i class="bi bi-calendar-heart"></i>감정 달력</router-link></li>
+            <li><router-link to="/member/Profile" class="mx-3" style="text-decoration:none"><i class="bi bi-eyeglasses"></i>회원정보수정</router-link></li>
+            <li><router-link to="/board" class="mx-3" style="text-decoration:none"><i class="bi bi-clipboard"></i>상담 게시판</router-link></li>
+            <li><router-link to="/counselor" class="mx-3" style="text-decoration:none"><i class="bi bi-people"></i>상담사 조회</router-link></li>
+            <li><router-link to="/mypage" class="mx-3" style="text-decoration:none"><i class="bi bi-house"></i>마이 페이지</router-link></li>
+            <li><router-link to="/mypage" class="mx-3" style="text-decoration:none"><i class="bi bi-cash-coin"></i>포인트 충전</router-link></li>
+            <li><router-link to="/member/Profile" class="mx-3" style="text-decoration:none"><i class="bi bi-eyeglasses"></i>회원정보수정</router-link></li>
+            <hr>
+            <li>
+              <!-- <div class="night-mode-nav">
+                <i class="bi bi-moon"></i> Night Mode
+                <div class="form-check form-switch">
+                  <input class="form-check-input form-check-success" id="darkSwitch" type="checkbox">
+                </div>
+              </div> -->
+            </li>
+            <li>
+              <a @click="logOUT()"><i class="bi bi-box-arrow-right" fill="#red"></i> Logout</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
 import { mapActions, mapGetters } from 'vuex'
+
 export default {
   name: 'TopBar',
   components: {},

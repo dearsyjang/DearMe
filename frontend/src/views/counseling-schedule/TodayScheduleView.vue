@@ -34,8 +34,8 @@
   </div>
 </template>
 <script>
-import PersonalcardComp from '@/views/counselingSchedule/components/PersonalcardComp.vue'
-import GroupcardComp from '@/views/counselingSchedule/components/GroupcardComp.vue'
+import PersonalcardComp from '@/views/counseling-schedule/components/PersonalcardComp.vue'
+import GroupcardComp from '@/views/counseling-schedule/components/GroupcardComp.vue'
 
 import { mapGetters,mapActions } from 'vuex'
 export default {

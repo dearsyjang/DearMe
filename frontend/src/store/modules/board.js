@@ -53,6 +53,7 @@ export default {
           console.log(res.data)
           console.log(res.data.data)
           commit('SET_BOARD', res.data.data)
+          commit('SET_BOARD_COMMENTS', res.data.data.comments)
           console.log(getters.board)
         })
         .catch(err => {
@@ -80,9 +81,9 @@ export default {
         headers: getters.authHeader
     })
         .then(res => {
-          console.log(res.data)
-          console.log(res.data.data)
           commit('SET_BOARD', res.data.data)
+          commit('SET_BOARD_COMMENTS', res.data.data.comments)
+          console.log(getters.board)
           router.push({
             name: 'board'
           })
@@ -106,10 +107,10 @@ export default {
         })
     },
     // 게시글 삭제
-    deleteBoard({ commit, getters }, boardPk) {
+    deleteBoard({ commit, getters }, boardId) {
       if (confirm('정말 삭제하시겠습니까?')) {
         axios({
-          url: drf.board.boardEdit(boardPk),
+          url: drf.board.boardEdit(boardId),
           method: 'delete',
           headers: getters.authHeader
         })
@@ -132,12 +133,8 @@ export default {
       })
 
         .then(res => {
-          console.log(res.data)
-          console.log(res.data.data)
           commit('SET_BOARD_COMMENTS', res.data)
           console.log('댓글 성공')
-          console.log(getters.board)
-          console.log(getters.board.comments)
         })
         .catch(err => console.error(err))
     },

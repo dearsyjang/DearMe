@@ -29,22 +29,21 @@
                   <h5 class="card-title"> </h5>
                   <p class="card-text"><small class="text-muted">
                   </small></p>
+                     <div id="requset-accept-btn">
+                        <button  @click="onSubmit">수락하기</button>
+
+                        <router-link to="/counseling-request/list">
+                        <button>거절하기</button>
+                        </router-link>
+                        </div>
+
                 </div>
               </div>
             </div>
           </div>
           </div>
-
       </div>
       
-      <!-- <router-link to="/counseling-request/list"> -->
-      <button  @click="onSubmit">수락하기</button>
-      <!-- </router-link> -->
-
-      <router-link to="/counseling-request/list">
-      <button>거절하기</button>
-      </router-link>
-
   </div>
 </template>
 <script>
@@ -91,3 +90,10 @@ export default {
 }
 }
 </script>
+
+
+<style >
+#requset-accept-btn{
+  float: right
+}
+</style>

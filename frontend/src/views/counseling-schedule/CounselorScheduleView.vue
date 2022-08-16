@@ -7,7 +7,7 @@
 
 <script>
 
-  import calendarComp from '@/views/counselingSchedule/components/calendarComp.vue'
+  import calendarComp from '@/views/counseling-schedule/components/calendarComp.vue'
 
   export default {
     name : 'CounselorScheduleView',

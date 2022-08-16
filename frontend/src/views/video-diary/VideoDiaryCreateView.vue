@@ -24,6 +24,11 @@
                 <button type="button" class="btn" @click="deleteRecording"><h1>삭제</h1></button>
                 <button type="button" class="btn" @click="saveRecording"><h1>저장</h1></button>
             </div>
+            <div class="player-container" v-if="this.isTextOn">
+            <textarea v-model="this.sentiment"></textarea>
+            <textarea v-model="this.contents"></textarea>
+            <button type="button" class="btn" @click="updateText"><h1>수정하기</h1></button>
+            </div>
         </div>
     </div>
     
@@ -35,6 +40,8 @@
 import axios from 'axios';
 import { OpenVidu } from 'openvidu-browser';
 import { mapGetters } from 'vuex';
+
+
 
 var OV;
 var session;
@@ -50,6 +57,13 @@ export default {
             record_status: false,
             video: '',
             title: '',
+            players: {},
+            volume: 80,
+            isTextOn: false,
+            sentiment: '',
+            contents: '',
+            videoId:'',
+            source:'https://i7d206.p.ssafy.io:4443/openvidu/recordings/ses_QtLHqSPcqs/ses_QtLHqSPcqs.mp4',
         };
     },
     
@@ -226,7 +240,7 @@ export default {
                 })
             },
 
-            saveRecording(){
+        saveRecording() {
                 const authHeader = this.authHeader2
                 console.log(authHeader)    
                 axios({
@@ -242,13 +256,57 @@ export default {
                 })
                 .then (response => {
                     console.log('저장요청', response)
+                    this.isTextOn = true
+                    this.sentiment = response.data.data.sentiment
+                    this.contents = response.data.data.contents
+                    this.videoId = response.data.data.id
                 })
                 .catch((error) => { // 말을 해야 저장 가능!
                     if (error.response.status === 500) {
                         alert('괜찮아요! 편하게 이야기를 들려주세요😊')
                     } 
                 });
-            }
+            },
+
+            getRecording(){
+                const authHeader = this.authHeader2
+                console.log(authHeader)    
+                axios({
+                    method: 'get',
+                    url: "https://i7d206.p.ssafy.io/recording/get/ses_QtLHqSPcqs",
+                    headers: {
+                        Authorization : authHeader
+                    },
+                })
+                .then (response => {
+                    console.log('다시보기 요청', response)
+                    this.video.src=response.url
+                })
+                .catch((error) => { // 말을 해야 저장 가능!
+                    console.log('에러입니다', error)
+                });
+        },updateText(){
+                const authHeader = this.authHeader2
+                console.log(authHeader)    
+                axios({
+                    method: 'put',
+                    url: "https://i7d206.p.ssafy.io/video-diaries/" + this.videoId,
+                    headers: {
+                        Authorization : authHeader
+                    },
+                    data: ({
+                        title: this.title,
+                        contents: this.contents,
+                        sentiment: this.sentiment                      
+                    }),
+                })
+                .then (response => {
+                    console.log('수정 요청', response)
+                })
+                .catch((error) => { // 말을 해야 저장 가능!
+                    console.log('에러입니다', error)
+                });
+        },
         }
     }
 </script>
@@ -256,5 +314,27 @@ export default {
 <style scoped>
 input{
     width: auto;
+}
+.app {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+  margin-top: 20px;
+}
+.test-player-wrap {
+  width: 720px;
+  height: 405px;
+  position: relative;
+  margin: 20px auto;
+}
+.btn-play {
+  color: white;
+  margin-right: 10px;
+  cursor: pointer;
+}
+.btn-play svg {
+  width: 16px;
 }
 </style>

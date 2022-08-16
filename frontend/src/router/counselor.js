@@ -11,7 +11,7 @@ export default [
         name: 'counselorList',
         component: CounselorListView
       },
-   
+
       {
         path: '/counselors/attachFile',
         name: 'attachfile',

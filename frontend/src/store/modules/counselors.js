@@ -31,7 +31,7 @@ export default {
     SET_COUNSELOR:(state,counselor)=>state.counselor=counselor,
     SEARCH_COUNSELOR: (state, searched_counselor) => state.searched_counselor = searched_counselor,
     FILTER_COUNSELOR: (state, filtering_counselor) => state.filtering_counselor = filtering_counselor,
-    SET_FAVORTIE: (state, favorite) => state.favorite = favorite,
+    SET_FAVORITE: (state, favorite) => state.favorite = favorite,
     SET_COUNSELOR_REVIEWS: (state, reviews) => state.reviews = reviews
   },
 
@@ -75,6 +75,7 @@ export default {
       .then(res => {
         commit('SET_COUNSELORS', res.data)
         console.log(filter)
+       
       })       
         
       .catch(err => {
@@ -135,22 +136,63 @@ export default {
     },
 
 
-    favorite({ commit, getters }, currentUserId) {
+
+    favoriteGet({ commit, getters }) {
      
-      
-      
       axios({
         url: drf.counselors.favorites(),
-        method: 'post',
-        data: currentUserId,
+        method: 'get',
         headers: {
           'Content-Type': 'application/json',
           'Authorization': getters.authHeader2
           }
       })
         .then(res => {
-          commit('SET_COUNSELOR_REVIEWS', res.data)
-          router.push({ name: 'home' })
+          commit('SET_FAVORITE', res.data)
+          //location.reload();
+
+        })
+        .catch(err => {
+          
+          console.error(err.response)})
+    },
+
+    favoriteAdd({ commit, getters }, Id) {
+     
+      console.log(Id)
+      axios({
+        url: drf.counselors.favoriteA(),
+        method: 'post',
+        data: {id: Id},
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': getters.authHeader2
+          }
+      })
+        .then(res => {
+          commit('SET_FAVORITE', res.data)
+          location.reload();
+         
+        })
+        .catch(err => {
+          
+          console.error(err.response)})
+    },
+    favoriteDelete({ commit, getters }, favoriteId) {
+     
+      console.log(favoriteId)
+      axios({
+        url: drf.counselors.favoriteD(favoriteId),
+        method: 'delete',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': getters.authHeader2
+          }
+      })
+        .then(res => {
+          commit('SET_FAVORITE', res.data)
+          location.reload();
+          
         })
         .catch(err => {
           
@@ -242,6 +284,7 @@ export default {
             }
           })
           commit('SET_FAVORITE', favorite)
+          
         })
         .catch(err => console.error(err.response))
     },

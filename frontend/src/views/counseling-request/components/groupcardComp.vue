@@ -21,7 +21,7 @@
             <h5 class="card-title"> </h5>
             <!-- <p class="card-text">{{request}}</p> -->
             <p class="card-text"><small class="text-muted">
-                <button>신청서보기</button>
+                <button class="group-request-watch-btn">신청서보기</button>
             </small></p>
           </div>
         </div>
@@ -39,5 +39,8 @@ export default {
 }
 </script>
 <style>
-    
+.group-request-watch-btn{
+  float: right;
+  margin-bottom : 5px
+}
 </style>
