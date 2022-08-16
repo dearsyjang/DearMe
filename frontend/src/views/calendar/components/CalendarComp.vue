@@ -33,9 +33,10 @@
               }" :class="{ 'has-text-grey-light': idx === 0 && day >= lastMonthStart || dates.length - 1 === idx && nextMonthStart > day,
               'has-text-primary': day === today && month === currentMonth && year === currentYear && idx <32
               }">
-                    {{ day }}
-                    {{this.dayInfo[day].textEmoji}}
-                    {{this.dayInfo[day].videoEmoji}}
+                    <div>{{ day }}</div>
+                    <div>{{this.dayInfo[day].textEmoji}}</div>
+                    <!-- {{this.dayInfo[day].textEmoji}}
+                    {{this.dayInfo[day].videoEmoji}} -->
                     <br>
                   </router-link>
                 </div>
@@ -45,7 +46,7 @@
         </tbody>
 
       </table>
-      <button v-if="dayTextDiary" class="board-btn-submit btn-sm mx-2" data-bs-toggle="modal"
+      <!-- <button v-if="dayTextDiary" class="board-btn-submit btn-sm mx-2" data-bs-toggle="modal"
         data-bs-target="#textDiaryView">텍스트 일기 작성하기</button>
       <button v-else class="board-btn-submit btn-sm mx-2">텍스트 일기 작성 완료!</button>
 
@@ -76,7 +77,7 @@
             <h1>영상 일기 작성하기</h1>
           </button></router-link>
       </button>
-      <button v-else class="board-btn-submit btn-sm mx-2">영상 일기 작성 완료!</button>
+      <button v-else class="board-btn-submit btn-sm mx-2">영상 일기 작성 완료!</button> -->
 
     </div>
 

@@ -38,10 +38,10 @@ export default {
   },
   data() {
     return {
-      boardID: this.$route.params.boardId,
+      boardID: '',
       data: {
-        title: this.board.title,
-        contents: this.board.contents
+        title: '',
+        contents: ''
       }
     }
   },
@@ -51,18 +51,25 @@ export default {
   },
   methods: {
     ...mapActions(['fetchBoard', 'deleteBoard', 'updateBoard']),
-    onsubmit() {
+    onSubmit() {
       const data = {
-        title: this.title,
-        contents: this.contents
+        'id' : this.boardId,
+        'title': this.data.title,
+        'contents': this.data.contents,
+        // 'date': '2202/02/02'
       }
-      this.updateBoard(this.boardID, data)
+      console.log(this.data.title)
+      console.log(this.data.contents)
+      this.updateBoard(data)
     }
   },
   created() {
-    this.fetchBoard(this.boardID)
+    this.boardId=this.$route.params.boardId
+    this.fetchBoard(this.boardId)
   },
   mounted() {
+    this.data.title=this.board.title
+    this.data.contents=this.board.contents
   },
   unmounted() {},
 }

@@ -91,11 +91,14 @@ export default {
         .catch(err => console.error(err))
     },
     // 게시글 수정
-    updateBoard({ commit, getters }, { boardId, content}) {
+    updateBoard({ commit, getters }, board) {
       axios({
-        url: drf.board.update.boardEdit(boardId),
+        url: drf.board.boardEdit(board.id),
         method: 'put',
-        data: content,
+        data: {
+          'title': board.title,
+          'contents': board.contents
+        },
         headers: getters.authHeader
       })
         .then(res => {

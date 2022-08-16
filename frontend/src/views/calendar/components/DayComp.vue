@@ -67,11 +67,10 @@ export default {
            this.getTextDiary(this.$route.query.textDiaryId)
         
         this.videoDiaryId=this.$route.query.videoDiaryId
-        if(this.videoDiaryId!=undefined)
+        if(this.videoDiaryId!=undefined){
           this.getVideoDiary(this.$route.query.videoDiaryId)
-        console.log(this.textDiaryId)
-        console.log(this.videoDiaryId)
-        this.videoSource="https://i7d206.p.ssafy.io:4443/openvidu/recordings/" + this.videoDiary.realFileName + "/" + this.videoDiary.realFileName + ".mp4"
+          this.videoSource="https://i7d206.p.ssafy.io:4443/openvidu/recordings/" + this.videoDiary.realFileName + "/" + this.videoDiary.realFileName + ".mp4"
+        }
         //this.getVideoDiary()
   },
   computed: {
