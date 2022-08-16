@@ -21,6 +21,7 @@ export default {
     currentUser: state => state.currentUser,
     profile: state => state.profile,
     // 현재 사용자의 토큰을 나타냄 (요청 보낼 때, header에서 사용)
+    authHeader3: state => state.token,
     authHeader2: state => `Token ${state.token}`,
     authHeader: state => ({ Authorization: `Token ${state.token}`}),
     authError: state => state.authError,
@@ -138,8 +139,8 @@ export default {
   //   .then(res => {
   //     console.log(res)
   //     commit('SET_CURRENT_USER', res.data)
-  //   })       
-      
+  //   })
+
   //   .catch(err => console.error(err) )
   // },
     fetchCurrentUser({ commit, getters, dispatch }) {
@@ -163,7 +164,7 @@ export default {
         })
           .then(res => {
             commit('SET_CURRENT_USER', res.data)
-           
+
           })
           .catch(err => {
             if (err.response.status === 401) {
@@ -172,13 +173,13 @@ export default {
             }
           })
       }
-      
+
     },
 
 
     createCareer({ commit, getters }, contents) {
-     
-    
+
+
       axios({
         url: drf.member.careerCreate(),
         method: 'post',
@@ -217,8 +218,8 @@ export default {
       }
   },
   createCertificate({ commit, getters }, content) {
-     
-    
+
+
     axios({
       url: drf.member.certificateCreate(),
       method: 'post',
@@ -262,16 +263,16 @@ export default {
       url: drf.member.profileEdit(),
       method: 'put',
       data: {
-        counselorProfile: update.counselorProfile, 
-        nickName: update.credentials.nickName, 
-        pw: update.credentials.pw }, 
+        counselorProfile: update.counselorProfile,
+        nickName: update.credentials.nickName,
+        pw: update.credentials.pw },
       headers: getters.authHeader
     })
       .then(res => {
         commit('SET_PROFILE', res.data)
         router.push({
           name: 'mypageUser',
-          
+
         })
       })
   },

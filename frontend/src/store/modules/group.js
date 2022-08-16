@@ -23,11 +23,16 @@ export default {
     SET_MY_GROUP: (state, mygroup) => state.myGroup = mygroup
   },
   actions: {
-    groupRequest({ commit }, content) {
+    groupRequest({ commit, getters }, content) {
+      console.log(content)
       axios({
         url: drf.group.groupRequest(),
         method: 'post',
-        data: content
+        data: content,
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${getters.authHeader3}`
+          }
       })
       .then(res =>{
         console.log(res.data)
@@ -36,8 +41,9 @@ export default {
         alert('그룹 신청 성공')
         router.push({
           name: 'mypageUser'
-        })})
-      .catch(err => console.error(err.response))
+        })
+      })
+      .catch(err => console.error(err))
     },
     // 그룹 상세 페이지 내용 패치
     fetchGroup({ commit, getters }, groupId){
