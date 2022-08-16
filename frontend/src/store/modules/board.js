@@ -28,7 +28,7 @@ export default {
     fetchBoards({ commit, getters }) {
       // page, size 가 뭐지
       axios({
-        url: drf.board.boardsList()+'?page=0&size=5',
+        url: drf.board.boardsList()+'?page=0&size=20',
         method: 'get',
         headers: getters.authHeader,
       })
