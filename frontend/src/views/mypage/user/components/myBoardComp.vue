@@ -42,7 +42,7 @@ export default {
     // console.log(this.currentUser.data.nickname)
     let MYBOARD = []
     for(var i = 0; i < this.boards.length; i++) {
-      if (this.boards[i]?.nickName === this.currentUser?.data.nickname){
+      if (this.boards[i].nickName === this.currentUser.data.nickname){
         MYBOARD.push(this.boards[i])
       }
     }
