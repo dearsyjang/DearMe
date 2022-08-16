@@ -1,5 +1,8 @@
 package com.dearme.demo.domain.user.service;
 
+import com.dearme.demo.domain.counselingdocument.entity.CounselingDocument;
+import com.dearme.demo.domain.counselingdocument.exception.NoExistDocumentException;
+import com.dearme.demo.domain.counselingdocument.repository.CounselingDocumentRepository;
 import com.dearme.demo.domain.favorite.repository.FavoriteRepository;
 import com.dearme.demo.domain.recordingroom.exception.RecordingDeleteException;
 import com.dearme.demo.domain.review.entity.Review;
@@ -49,6 +52,9 @@ public class UserServiceImpl implements UserService{
     private final ReviewRepository reviewRepository;
 
     private final FavoriteRepository favoriteRepository;
+
+    private final CounselingDocumentRepository counselingDocumentRepository;
+
     @Value("${path.image:/image/}")
     private String IMAGE_PATH;
 
@@ -328,12 +334,11 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public byte[] getUserProfileImage(String id) throws IOException {
-        User user = userRepository.findUserById(id).orElseThrow(() -> {
+    public byte[] getUserProfileImage(Long userId) throws IOException {
+        User user = userRepository.findUserByUserId(userId).orElseThrow(() -> {
             throw new NoExistUserException();
         });
         InputStream inputStream = new FileInputStream(IMAGE_PATH + user.getPicture().getRealFileName());
-        System.out.println(IMAGE_PATH + user.getPicture().getRealFileName());
         return IOUtils.toByteArray(inputStream);
     }
 

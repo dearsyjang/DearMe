@@ -46,7 +46,8 @@ public interface UserService {
 
     void withdrawalUserGroup(String id, Long groupId);
 
-    byte[] getUserProfileImage(String id) throws IOException;
+//    byte[] getUserProfileImage(String id) throws IOException;
+    byte[] getUserProfileImage(Long userId) throws IOException;
 
     void updateUserProfileImage(String id, MultipartFile picture) throws IOException;
 }
