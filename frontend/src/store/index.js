@@ -13,6 +13,7 @@ import mypage from './modules/mypage'
 export default new Vuex.Store({
   strict: true,
   modules: {
+    mypage,
     member,
     board,
     counselors,

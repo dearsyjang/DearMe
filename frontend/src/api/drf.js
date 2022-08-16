@@ -67,13 +67,6 @@ export default {
     counselingSchedules: () => HOST + COUNSELING,
     counselingSchedule: () => HOST + COUNSELING,
     groupDetail: groupId => HOST + GROUP +`/${groupId}`,
-<<<<<<< HEAD
-    groups: () => HOST + MEMBER + GROUP
-    
-=======
-
-
->>>>>>> da388b9b9f8dbed3a7a60f1895d600f921450e01
   },
   textDiary : {
     textDiaryCreate: () => HOST + TEXTDIARY,
