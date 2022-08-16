@@ -1,8 +1,8 @@
 <template>
-  <div >
+  <div id="topbar">
     <!--상단바-->
     <div class="header-demo-bg shadow-sm">
-      <div id="topbar" class="container">
+      <div class="container">
         <!-- Header Content -->
         <div
           class="header-content header-style-five position-relative d-flex align-items-center justify-content-between">
@@ -37,7 +37,7 @@
             <li><router-link to="/calendar" class="mx-3" style="text-decoration:none"><i class="bi bi-calendar-heart"></i>감정 달력</router-link></li>
             <li><router-link to="/member/Profile" class="mx-3" style="text-decoration:none"><i class="bi bi-eyeglasses"></i>회원정보수정</router-link></li>
             <li><router-link to="/board" class="mx-3" style="text-decoration:none"><i class="bi bi-clipboard"></i>상담 게시판</router-link></li>
-            <li><router-link to="/counselor" class="mx-3" style="text-decoration:none"><i class="bi bi-people"></i>상담사 조회</router-link></li>
+            <li><router-link to="/counselors/counselorList" class="mx-3" style="text-decoration:none"><i class="bi bi-people"></i>상담사 조회</router-link></li>
             <li><router-link to="/mypage" class="mx-3" style="text-decoration:none"><i class="bi bi-house"></i>마이 페이지</router-link></li>
             <li><router-link to="/mypage" class="mx-3" style="text-decoration:none"><i class="bi bi-cash-coin"></i>포인트 충전</router-link></li>
             <li><router-link to="/member/Profile" class="mx-3" style="text-decoration:none"><i class="bi bi-eyeglasses"></i>회원정보수정</router-link></li>

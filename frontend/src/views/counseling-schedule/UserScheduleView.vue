@@ -1,6 +1,7 @@
 <template>
   <div>
-    <div v-if="currentUser.data.type==`USER`">
+    <div v-if="currentUser.data.type ==`USER`">
+    {{ currentUser.data.type }}
       <h1 id="userschedule-title">상담 일정</h1>
       <hr>
       <br>
