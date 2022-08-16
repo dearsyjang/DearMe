@@ -4,7 +4,7 @@
       <div class="card my-2">
         <div class="card-body p-2">
           <div class="justify-content-between">
-            <small class="ms-1 board-text-index">그룹 참가 신청</small>
+            <small class="ms-1 board-text-index">그룹 상담 참가 신청</small>
             <!-- <div>
               <router-link to="/board"><button class="board-btn-index btn-sm mx-2">목록</button></router-link>
             </div> -->

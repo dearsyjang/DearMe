@@ -11,6 +11,10 @@
                 <i class="bi bi-box-arrow-in-right"></i> 상담방 입장</span>
               <h4 class="blog-title d-block text-dark board-title">{{ group.title }}</h4>
               </router-link>
+              <!-- counseling.id 받아오는 방법 생각하기 -->
+              <!-- <router-link :to="{ name: 'counseling', params: { counselingId: counseling.id }}">
+                <button class="w-btn w-btn-charge" >상담방 입장</button>
+              </router-link> -->
             </div>
           </div>
         </div>
