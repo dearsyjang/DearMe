@@ -19,7 +19,7 @@
           <div class="card " >
             <div class="board-card-radius card-body board-card-bg">
                <router-link :to="{ name: 'boardDetail', params: {boardId: board.id }}">
-               <h1 class="card-title">{{ board.title }}</h1>
+               <h3 class="card-title">{{ board.title }}</h3>
                </router-link>
               <p class="card-text text-end ">{{ board.date[0]}}.{{ board.date[1] }}.{{ board.date[2] }}</p>
               <!-- <router-link :to="{ name: 'boardDetail', params: {boardId: board.id }}">
