@@ -1,10 +1,8 @@
 package com.dearme.demo.domain.videodiary.service;
 
 
-import com.dearme.demo.domain.counselingdocument.entity.CounselingDocument;
-import com.dearme.demo.domain.counselingdocument.exception.NoExistDocumentException;
-import com.dearme.demo.domain.counselingdocument.repository.CounselingDocumentRepository;
 import com.dearme.demo.domain.recordingroom.exception.RecordingDeleteException;
+import com.dearme.demo.domain.textdiary.exception.TextDiarySentimentException;
 import com.dearme.demo.domain.user.entity.Type;
 import com.dearme.demo.domain.user.entity.User;
 import com.dearme.demo.domain.user.exception.NoExistUserException;
@@ -49,8 +47,6 @@ public class VideoDiaryServiceImpl implements VideoDiaryService {
     private String SENTIMENT_KEY;
 
     private final OpenVidu openvidu;
-
-    private final CounselingDocumentRepository counselingDocumentRepository;
 
     @Override
     public PostVideoDiaryResponseDto postVideoDiary(String id, PostVideoDiaryRequestDto dto) throws IOException {
@@ -148,17 +144,6 @@ public class VideoDiaryServiceImpl implements VideoDiaryService {
             throw new NoPermissionVideoDiaryException();
 
 
-    }
-
-    @Override
-    public VideoDiaryListResponseDto getUserList(String id, Long userId, Integer year, Integer month) {
-        CounselingDocument latestCounselingDocument = counselingDocumentRepository.findTop1ByCounselor_IdAndUser_UserIdOrderByYearDescMonthDescHoursDesc(id, userId).orElseThrow(() -> {
-            throw new NoExistDocumentException();
-        });
-        if(latestCounselingDocument.getIsOpen()){
-            return getList(latestCounselingDocument.getUser().getId(), year, month);
-        }
-        throw new NoPermissionVideoDiaryException();
     }
 
 
