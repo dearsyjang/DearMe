@@ -1,134 +1,99 @@
 <template>
   <div>
-      <router-link :to="{ name: 'videodiary' }"><button id="videodiary-enter-btn" class="btn"><h1>📷</h1></button></router-link>
-      <button v-on:click = "this.isTextOn =!this.isTextOn">텍스트 일기 보기</button>
-      <div class="player-container" v-if="this.isTextOn">
-          {{this.textDiary.contents}}
+    <div v-if="this.textDiaryId!=undefined">
+      <button class="board-btn-submit btn-sm mx-2" data-bs-toggle="modal" data-bs-target="#textDiaryView">텍스트 일기
+        보기</button>
+
+      <div class="modal fade" id="textDiaryView" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">텍스트 일기</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            {{this.textDiary}}
+            <button @click="textDiaryDelete()" class="board-btn-submit btn-sm mx-3">삭제</button>
+
+          </div>
+        </div>
       </div>
- <button @click="deleteTextDiary()">텍스트 일기 삭제</button>
-      <button v-on:click = "this.isVideoOn =!this.isVideoOn">영상 일기 보기</button>
-      <div class="player-container" v-if="this.isVideoOn">
-          {{this.videoSource}}
+    </div>
+
+
+    <div v-if="videoDiaryId!=undefined">
+      <button class="board-btn-submit btn-sm mx-2" data-bs-toggle="modal"
+            data-bs-target="#videoDiaryView">영상 일기 보기</button>
+      </div>
+ 
+            <div class="modal fade" id="videoDiaryView" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">영상 일기</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="player-container">
+          {{this.videoDiary}}
+          
             <vue3-video-player :src="videoSource"></vue3-video-player>
         </div>
-        <button @click="deleteVideoDiary()">영상 일기 삭제</button>
+        <button @click="videoDiaryDelete()" class="board-btn-submit btn-sm mx-3">삭제</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
   </div>
 </template>
 <script>
-import { mapGetters } from 'vuex';
-import axios from 'axios';
+import { mapActions, mapGetters } from 'vuex';
 export default {
   name: 'DayComp',
   data() {
     return {
-      isVideoOn: false,
-      isTextOn: false,
-      textDiaryId: 0,
-      videoDiaryId: 0,
-      textDiary: [],
-      videoDiary: [],
-      videoSource : 0,
+      videoSource:'',
+      textDiaryId:'',
+      videoDiaryId:'',
     };
   },
   mounted() {
+
   },
   created() {
-    this.textDiaryId = this.$route.params.textDiaryId
-    this.videoDiaryId = this.$route.params.videoDiaryId
-    this.getTextDiary()
-    this.getVideoDiary()
+        this.textDiaryId=this.$route.query.textDiaryId
+        if(this.textDiaryId!=undefined)
+           this.getTextDiary(this.$route.query.textDiaryId)
+        
+        this.videoDiaryId=this.$route.query.videoDiaryId
+        if(this.videoDiaryId!=undefined){
+          this.getVideoDiary(this.$route.query.videoDiaryId)
+          this.videoSource="https://i7d206.p.ssafy.io:4443/openvidu/recordings/" + this.videoDiary.realFileName + "/" + this.videoDiary.realFileName + ".mp4"
+        }
+        //this.getVideoDiary()
   },
   computed: {
-    ...mapGetters(['authHeader2'])
+    ...mapGetters(['authHeader2', 'textDiary', 'videoDiary'])
     },
   methods: {
     //텍스트 일기 삭제
-      deleteTextDiary() {
-        const authHeader = this.authHeader2
-        if (confirm('텍스트 일기를 정말 삭제하시겠습니까?')) {
-          axios
-          .delete(
-            `https://i7d206.p.ssafy.io/text-diaries/`+this.textDiaryId,
-            {
-              headers: {
-                Authorization: authHeader
-              }
-            }
-          )
-          .then(response => {
-            console.log(response)
-          })
-          .catch(error => {
-            console.error(error)
-          })
-        }
-      },
-      // 영상 일기 삭제
-      //나중에 영상이 있을 때에만 삭제 버튼이 나오게 변경해주셔야합니다
-      deleteVideoDiary() {
-        const authHeader = this.authHeader2
-        if (confirm('영상 일기를 정말 삭제하시겠습니까?')) {
-          axios
-          .delete(
-            `https://i7d206.p.ssafy.io/video-diaries/`+this.videoDiaryId,
-            {
-              headers: {
-                Authorization: authHeader
-              }
-            }
-          )
-          .then(response => {
-            console.log(response)
-          })
-          .catch(error => {
-            console.error(error)
-          })
-        }
-      },
-   getTextDiary() {
-      const authHeader = this.authHeader2
-       axios
-          .get(
-            `https://i7d206.p.ssafy.io/text-diaries/`+this.textDiaryId,
-            {
-              headers: {
-                Authorization: authHeader
-              }
-            }
-          )
-          .then(response => {
-            console.log(response)
-            this.textDiary = response.data.data;
-          })
-          .catch(error => {
-            console.error(error)
-          })
+     ...mapActions(['fetchTextDiary', 'deleteTextDiary', 'fetchVideoDiary', 'deleteVideoDiary']),
+
+    textDiaryDelete() {
+      this.deleteTextDiary(this.textDiaryId)
     },
-    getVideoDiary() {
-      const authHeader = this.authHeader2
-       axios
-         .get(
-            `https://i7d206.p.ssafy.io/video-diaries/1`,
-            //실제는 아래처럼 써야함
-            // `https://i7d206.p.ssafy.io/video-diaries/1`+this.videoDiaryId,
-            {
-              headers: {
-                Authorization: authHeader
-              }
-            }
-          )
-          .then(response => {
-            console.log(response)
-            this.videoDiary = response.data.data
-            this.videoSource="https://i7d206.p.ssafy.io:4443/openvidu/recordings/" + this.videoSource.realFileName + "/" + this.videoSource.realFileName + ".mp4"
-            console.log(this.videoSource)
-            })
-          .catch(error => {
-            console.error(error)
-          })
+    // 영상 일기 삭제
+    videoDiaryDelete() {
+      this.deleteTextDiary(this.videoDiaryId)
     },
-    
-  },
+   getTextDiary(textDiaryPk) {
+       this.fetchTextDiary(textDiaryPk)
+    },
+    getVideoDiary(videoDiaryPk) {
+      this.fetchVideoDiary(videoDiaryPk)
+    },
+}
 }
 </script>
 <style>

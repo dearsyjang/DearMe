@@ -33,7 +33,7 @@ export default {
 </script>
 <style scoped>
 div{
-  background-color: #e6edf9;
+  background-color: #F9F7F7;
   min-height: 30vh;
 }
 </style>

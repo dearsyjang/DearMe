@@ -1,13 +1,14 @@
 <template>
   <div>
     <div class="container">
-      <span id="toc-toggle" @click="openCloseToc()">즐겨찾기 ▼ </span>
-      <!-- <span class="badge bg-primary rounded-pill">{{ favorite.length }}</span> -->
+      <span class="board-text-bold form-label board-text-title" id="toc-toggle" @click="openCloseToc()">즐겨찾는 상담사 <i class="bi bi-caret-down-fill"></i></span>
+      <span class="badge mypage-badge rounded-pill mx-1">1</span>
+      <my-favorite-list-comp :myFavorite="favorite.data" id="toc-content3" ></my-favorite-list-comp>
     </div>
-    <my-favorite-list-comp id="toc-content3"></my-favorite-list-comp>
   </div>
 </template>
 <script>
+import { mapActions, mapGetters  } from 'vuex';
 import myFavoriteListComp from './myFavoriteListComp.vue'
 export default {
   components: {
@@ -19,10 +20,13 @@ export default {
     }
   },
   setup() {},
-  created() {},
+  created() {
+    this.favoriteGet()
+
+  },
   mounted() {},
-  unmounted() {},
   methods: {
+    ...mapActions(['favoriteGet']),
     openCloseToc: function() {
     if(document.getElementById('toc-content3').style.display === 'block') {
       document.getElementById('toc-content3').style.display = 'none';
@@ -30,7 +34,11 @@ export default {
       document.getElementById('toc-content3').style.display = 'block';
     }
   }
+  },
+  computed: {
+    ...mapGetters(['favorite'])
   }
+
 }
 </script>
 <style scoped>

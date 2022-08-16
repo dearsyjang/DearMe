@@ -1,17 +1,14 @@
 <template>
-<div class="page-content-wrapper py-3 board-bg-sky">
-  <div v-if="board.id">
+<div class="page-content-wrapper py-3 board-bg">
   <div class="shop-pagination pb-3">
     <div class="container">
       <div class="card">
         <div class="card-body p-2">
           <div class="d-flex align-items-center justify-content-between">
-            <small class="ms-1 board-text-index">게시글 보기</small>
+            <small class="ms-1 board-text-index">게시글 상세</small>
             <div>
-              <router-link to="/board"><button class="board-btn-index btn-sm">목록</button></router-link>
-              
-              <router-link :to="{name: 'boardUpdate', params: {boardId: board.id}}"><button class="board-btn-edit btn-sm mx-2">편집</button></router-link>
-              
+              <router-link to="/board"><button class="board-btn-index btn-sm  mx-2">목록</button></router-link>
+              <router-link :to="{name: 'boardUpdate', params: {boardID: board.id}}"><button class="board-btn-edit btn-sm">편집</button></router-link>
             </div>
           </div>
         </div>
@@ -19,31 +16,21 @@
     </div>
   </div>
   <div class="top-products-area product-list-wrap">
-    <div class="container">
-      <div class="row g-3">
-          <div class="card single-product-card">
-            <div class="card-body">
-              <div class="">
-                <div class="form-group">
-                  <h1 class="form-label board-text-title" for="exampleInputText">제목</h1>
-                  <hr>
-                  <p class="board-detail-context">{{ board.title }}</p>
-                </div>
-              </div>
-              <div class="">
-                <div class="form-group">
-                  <h1 class="form-label board-text-title" for="exampleInputText">내용</h1>
-                  <hr>
-                  <p class="board-detail-context">{{ board.contents }}</p>
-                </div>
-              </div>
-            </div>
+    <div class="container ">
+      <div class="form-group ">
+        <div class="d-flex justify-content-between">
+          <label class="board-text-bold board-text-title" >{{ board.title }}</label>
+          <p>{{ board.date ? board.date[0] : ''}}.{{ board.date ? board.date[1] : '' }}.{{ board.date ? board.date[2] : '' }}</p>
+        </div>
+        <hr class="my-2">
+        <div>
+          <label class=" board-text-title">{{ board.contents }}</label>
         </div>
       </div>
     </div>
   </div>
-    <comment-list-comp :comments="board.comments" :boardId="board.id"></comment-list-comp>
-    </div>
+
+    <comment-list-comp :comments="board.comments" :boardIdComment="board.id"></comment-list-comp>
 </div>
 </template>
 
@@ -74,18 +61,18 @@ export default {
   methods: {
     ...mapActions(['fetchBoard', 'deleteBoard']),
   },
-  created() {
-  },
-  async mounted() {
+  async created() {
     await this.fetchBoard(this.$route.params.boardId)
+  },
+  mounted() {
   },
   unmounted() {},
 }
 </script>
 
 <style>
-.board-bg-sky {
-  background-color: #D6E6F2 ;
+.board-bg {
+  background-color: #F9F7F7 ;
 
 }
 .board-btn-index {
@@ -122,5 +109,8 @@ export default {
   font-size: large;
   color : #52616B;
   border: none;
+}
+.board-text-bold {
+  font-weight: bold;
 }
 </style>

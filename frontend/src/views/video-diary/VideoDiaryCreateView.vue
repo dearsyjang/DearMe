@@ -4,7 +4,7 @@
             <h2>{{ nowDate }} 영상 일기</h2>
             <h2></h2>
             <br>
-            <form @submit.prevent="joinSession"> 
+            <form @submit.prevent="joinSession">
                 <input type="text" id="videodiary-title" v-model="title">
                 <br>
                 <br>
@@ -19,19 +19,56 @@
             </div>
             <div id="video-diary">
                 <button type="button" class="btn" @click="leaveSession"></button>
-                <button type="button" class="btn" @click="startRecording"><h1>시작</h1></button>
-                <button type="button" class="btn" @click="stopRecording"><h1>종료</h1></button>
-                <button type="button" class="btn" @click="deleteRecording"><h1>삭제</h1></button>
-                <button type="button" class="btn" @click="saveRecording"><h1>저장</h1></button>
+                <button type="button" class="btn" @click="startRecording">
+                    <h1>시작</h1>
+                </button>
+                <button type="button" class="btn" @click="stopRecording">
+                    <h1>종료</h1>
+                </button>
+                <button type="button" class="btn" @click="deleteRecording">
+                    <h1>삭제</h1>
+                </button>
+                <button type="button" class="btn" @click="saveRecording">
+                    <h1>저장</h1>
+                </button>
+
+                <div v-if="videoSource!=''">
+                    <button class="board-btn-submit btn-sm mx-2" data-bs-toggle="modal"
+                        data-bs-target="#videoDiaryView">영상 다시보기</button>
+                  <div class="modal fade" id="videoDiaryView" tabindex="-1" aria-labelledby="exampleModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">영상 일기</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="player-container">
+                                    <vue3-video-player :src="videoSource"></vue3-video-player>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </div>
+
+
+
+
+
             </div>
             <div class="player-container" v-if="this.isTextOn">
-            <textarea v-model="this.sentiment"></textarea>
-            <textarea v-model="this.contents"></textarea>
-            <button type="button" class="btn" @click="updateText"><h1>수정하기</h1></button>
+                <textarea v-model="this.sentiment"></textarea>
+                <textarea v-model="this.contents"></textarea>
+                <button type="button" class="btn" @click="updateText">
+                    <h1>수정하기</h1>
+                </button>
             </div>
         </div>
     </div>
-    
+
 </template>
 
      
@@ -40,6 +77,8 @@
 import axios from 'axios';
 import { OpenVidu } from 'openvidu-browser';
 import { mapGetters } from 'vuex';
+
+
 
 
 
@@ -63,7 +102,7 @@ export default {
             sentiment: '',
             contents: '',
             videoId:'',
-            source:'https://i7d206.p.ssafy.io:4443/openvidu/recordings/ses_QtLHqSPcqs/ses_QtLHqSPcqs.mp4',
+            videoSource:'',
         };
     },
     
@@ -215,6 +254,8 @@ export default {
                     this.record_status = false;
                     console.log(response);
                     console.log("stop record", this.recordingId);
+                    this.videoSource="https://i7d206.p.ssafy.io:4443/openvidu/recordings/" + this.recordingId + "/" + this.recordingId + ".mp4"
+                
                 })
                 .catch(error => {
                     console.error(error)
@@ -266,26 +307,7 @@ export default {
                         alert('괜찮아요! 편하게 이야기를 들려주세요😊')
                     } 
                 });
-            },
-
-            getRecording(){
-                const authHeader = this.authHeader2
-                console.log(authHeader)    
-                axios({
-                    method: 'get',
-                    url: "https://i7d206.p.ssafy.io/recording/get/ses_QtLHqSPcqs",
-                    headers: {
-                        Authorization : authHeader
-                    },
-                })
-                .then (response => {
-                    console.log('다시보기 요청', response)
-                    this.video.src=response.url
-                })
-                .catch((error) => { // 말을 해야 저장 가능!
-                    console.log('에러입니다', error)
-                });
-        },updateText(){
+            },updateText(){
                 const authHeader = this.authHeader2
                 console.log(authHeader)    
                 axios({
@@ -314,6 +336,28 @@ export default {
 <style scoped>
 input{
     width: auto;
+}
+.app {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+  margin-top: 20px;
+}
+.test-player-wrap {
+  width: 720px;
+  height: 405px;
+  position: relative;
+  margin: 20px auto;
+}
+.btn-play {
+  color: white;
+  margin-right: 10px;
+  cursor: pointer;
+}
+.btn-play svg {
+  width: 16px;
 }
 .app {
   font-family: Avenir, Helvetica, Arial, sans-serif;

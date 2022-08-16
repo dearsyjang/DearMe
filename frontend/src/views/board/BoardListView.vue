@@ -1,5 +1,5 @@
 <template>
-<div class="page-content-wrapper py-3 board-bg-sky">
+<div class="page-content-wrapper py-3 board-bg">
   <div class="shop-pagination pb-3">
     <div class="container">
       <div class="card ">
@@ -19,7 +19,7 @@
           <div class="card " >
             <div class="board-card-radius card-body board-card-bg">
                <router-link :to="{ name: 'boardDetail', params: {boardId: board.id }}">
-               <h1 class="card-title">{{ board.title }}</h1>
+               <h3 class="card-title">{{ board.title }}</h3>
                </router-link>
               <p class="card-text text-end ">{{ board.date[0]}}.{{ board.date[1] }}.{{ board.date[2] }}</p>
               <!-- <router-link :to="{ name: 'boardDetail', params: {boardId: board.id }}">
@@ -88,9 +88,9 @@ export default {
   methods: {
     ...mapActions(['fetchBoards'])
   },
-  async created() {
+  created() {
     console.log()
-    await this.fetchBoards()
+    this.fetchBoards()
   }
 
 }

@@ -6,6 +6,7 @@ const COMMENT ='/comments'
 const COUNSELOR = '/counselors'
 const GROUP = '/groups'
 const TEXTDIARY = '/text-diaries'
+const VIDEODIARY = '/video-diaries'
 const COUNSELING = '/counselings'
 const CAREER = '/careers'
 const CERTIFICATE = '/certificates'
@@ -21,7 +22,7 @@ export default {
     idCheck: id => HOST + MEMBER + `/id` + `/${id}`,
     nickNameCheck: nickname => HOST + MEMBER + `/nickname` + `/${nickname}`,
     // profile: username => HOST + MEMBER + 'profile/' + username,
-    // profile: () => HOST + MEMBER 
+    // profile: () => HOST + MEMBER
     careerCreate: () => HOST + MEMBER + CAREER ,
     careerDelete: (careerId) => HOST + MEMBER + CAREER + `/${careerId}`,
     certificateCreate: () => HOST + MEMBER + CERTIFICATE ,
@@ -34,13 +35,13 @@ export default {
   board : {
     boardCreate: () => HOST + BOARD,
     boardsList: () => HOST + BOARD,
-    boardDetail: boardPk => HOST + BOARD + `/${boardPk}`,
-    boardEdit: boardPk => HOST + BOARD + `/${boardPk}`,
+    boardDetail: boardId => HOST + BOARD + `/${boardId}`,
+    boardEdit: boardId => HOST + BOARD + `/${boardId}`,
     commentCreate: boardPk => HOST + BOARD + `/${boardPk}` + COMMENT,
     commentEdit: (boardPk, commentPk) => HOST + BOARD + `/${boardPk}` + COMMENT + `/${commentPk}`
   },
   counselors: {
-    
+
      counselors : () => HOST + COUNSELOR + "?",
      counselor : (counselorId) => HOST + COUNSELOR  + `/${counselorId}`,
      reviews : () => HOST + '/reviews',
@@ -58,21 +59,26 @@ export default {
   },
   group : {
     groupRequest: () => HOST + '/counseling-doucments/groups',
-    groupDetail: groupId => HOST + GROUP +`/${groupId}`, 
-    groups: () => HOST + MEMBER + GROUP   
+    groupDetail: groupId => HOST + GROUP +`/${groupId}`,
+    groups: () => HOST + MEMBER + GROUP,
+    myGroup:() => HOST + MEMBER + GROUP,
   },
   counselingSchedule: {
     counselingSchedules: () => HOST + COUNSELING,
     counselingSchedule: () => HOST + COUNSELING,
     groupDetail: groupId => HOST + GROUP +`/${groupId}`,
-   
-    
   },
   textDiary : {
     textDiaryCreate: () => HOST + TEXTDIARY,
     textDiaryList: () => HOST + TEXTDIARY,
     textDiaryDetail: textDiaryId => HOST + TEXTDIARY + `/${textDiaryId}`,
     textDiaryEdit: textDiaryId => HOST + TEXTDIARY + `/${textDiaryId}`,
+  },
+  videoDiary : {
+    videoDiaryCreate: () => HOST + VIDEODIARY,
+    videoDiaryList: () => HOST + VIDEODIARY,
+    videoDiaryDetail: videoDiaryId => HOST + VIDEODIARY + `/${videoDiaryId}`,
+    videoDiaryEdit: videoDiaryId => HOST + VIDEODIARY + `/${videoDiaryId}`,
   },
   //downPrice=0&upPrice=1000000&reviewCntUp=FALSE&reviewCntDown=FALSE&reviewScoreUp=FALSE&reviewScoreDown=FALSE&favorite=FALSE
 }

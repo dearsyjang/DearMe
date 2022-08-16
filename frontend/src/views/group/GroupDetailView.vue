@@ -1,5 +1,6 @@
 <template>
-  <div class="page-content-wrapper py-3 group-bg">
+<div class=" group-bg">
+<div class="page-content-wrapper py-3 group-bg">
     <div class="container">
       <div class="card my-2">
         <div class="card-body p-2">
@@ -47,6 +48,8 @@
     </div>
   </div>
 </div>
+</div>
+
 </template>
 <script>
 import { mapGetters, mapActions } from 'vuex'
@@ -80,9 +83,11 @@ export default {
   background-color: #504E48;
   border: none;
 
+
 }
 .group-bg{
   background-color: #F9F7F7;
+  padding-bottom: 100%;
 }
 .group-price{
   font-size: large;
@@ -91,7 +96,7 @@ export default {
   border: none;
     background: linear-gradient(
         90deg,
-        #4a5069 0%,
+        #4c5372 0%,
         #293462 100%
     );
     border-radius: 1000px;
@@ -107,19 +112,20 @@ export default {
 .w-btn-neon2 {
     /* position: relative; */
     border: none;
-    min-width: 200px;
-    min-height: 50px;
+    min-width: 130px;
+    min-height: 40px;
     background: linear-gradient(
         90deg,
-        #B2C8DF 0%,
-        #86b2e1 100%
+        #EFCC70 0%,
+        #EFCC70 100%
     );
     border-radius: 1000px;
     color: darkslategray;
     cursor: pointer;
-    box-shadow: 12px 12px 24px #B2C8DF;
+
     font-weight: 700;
     transition: 0.3s;
+
 }
 
 .w-btn-neon2:hover {

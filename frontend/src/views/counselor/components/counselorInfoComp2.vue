@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="counselor-info">      
+    <div class="counselor-info">
       <br>
       <div class="accordion" id="accordionPanelsStaySevenExample">
         <div class="accordion-item">
@@ -60,8 +60,8 @@ export default{
   name: 'CounselorInfoComp2',
   computed : {
       ...mapGetters(['counselor','currentUser','groups']),
-   
-      
+
+
     },
     data() {
       return {
@@ -69,9 +69,9 @@ export default{
         infoContent:'',
         careerContent:'',
         certificateContent:'',
-  
-        
-  
+
+
+
       }
     },
     methods: {
@@ -89,7 +89,7 @@ export default{
             this.fetchCurrentUser()
             this.fetchCounselor(this.counselorId)
             this.fetchGroups()
-        
+
             },
 
 
