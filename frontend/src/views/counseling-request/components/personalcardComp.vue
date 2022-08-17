@@ -64,6 +64,15 @@ p {
   text-decoration: none;
 }
 
+p {
+  margin-left:10;
+}
+.personal-request-cards{
+  max-width:90%;
+  margin:auto;
+  text-decoration: none;
+}
+
 
 .personal-request-watch-btn{
   float: right;

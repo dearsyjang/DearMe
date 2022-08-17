@@ -97,7 +97,10 @@ export default {
       axios({
         url: drf.board.boardEdit(getters.board.id),
         method: 'put',
-        data: content,
+        data: {
+          'title': board.title,
+          'contents': board.contents
+        },
         headers: getters.authHeader
       })
         .then(res => {

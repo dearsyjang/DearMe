@@ -63,6 +63,7 @@
 </div>
 
     <!--세션 오픈-->
+    <!--세션 오픈-->
     <div id="session" v-if="session">
       <div class="card mt-4" id="my-camera">
         <user-video :stream-manager="mainStreamManager"/>
@@ -98,6 +99,7 @@
       <input class="btn btn-large btn-danger" type="button" id="buttonLeaveSession" @click="leaveSession" value="상담 종료"/>
     </div>
   </div>
+
 </template>
 
 <script>
@@ -107,7 +109,7 @@ import axios from 'axios';
 // axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
 import { OpenVidu } from 'openvidu-browser';
 import UserVideo from './components/UserVideo';
-import { mapGetters, mapActions } from 'vuex';
+import { mapGetters, mapActions} from 'vuex';
 
 axios.defaults.headers.post['Content-Type'] = 'application/json';
 // const OPENVIDU_SERVER_URL = "https://i7d206.p.ssafy.io:4443";
@@ -215,7 +217,7 @@ export default {
               this.session.connect(token, { clientData: this.myUserName })
           .then(() => {
               console.log('initPublisher')
-              // 영상 가져오기 => 모든 사용자는 publisher
+              // 영상 가져오기 => 모든 사용자는 publisher => 모든 사용자는 publisher
               let publisher = this.OV.initPublisher(undefined, {
                   audioSource: undefined, // The source of audio. If undefined default microphone
                   videoSource: undefined, // The source of video. If undefined default webcam
@@ -324,7 +326,7 @@ export default {
               this.session.connect(token, { clientData: this.myUserName })
           .then(() => {
 
-              // 영상 가져오기 => 모든 사용자는 publisher
+              // 영상 가져오기 => 모든 사용자는 publisher => 모든 사용자는 publisher
               let publisher = this.OV.initPublisher(undefined, {
                   audioSource: undefined, // The source of audio. If undefined default microphone
                   videoSource: undefined, // The source of video. If undefined default webcam
