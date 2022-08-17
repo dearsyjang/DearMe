@@ -98,8 +98,8 @@ export default {
         url: drf.board.boardEdit(getters.board.id),
         method: 'put',
         data: {
-          'title': board.title,
-          'contents': board.contents
+          'title': content.title,
+          'contents': content.contents
         },
         headers: getters.authHeader
       })
