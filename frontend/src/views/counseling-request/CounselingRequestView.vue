@@ -13,7 +13,7 @@
       </div>
     </div>
 
-
+  
     <form @submit.prevent="onSubmit" class="article-form">
     <textarea style="width:100%; height: 400px; justify-content:center " v-model="contents" placeholder="상담 원하는 내용을 작성해 주세요"></textarea>
 
@@ -56,9 +56,75 @@
     </section>
     </div>
     <div v-if="isSelected==true">
+
+    <div v-for="(counseling,idx) in counselings.data.counselings"
+    :key="idx"
+    :counseling="counseling">
+    <!-- {{year2}}
+    {{month2}}
+    {{day2}} -->
+    <div v-if="year2==counseling.year && month2 ==counseling.month && day2==counseling.day">
+    {{counseling.hours}}
+    </div>
+    
+    </div>
     <select  v-model="selectHour" class="form-select" style="width:100%; height:240px; display:inline-block; text-align: center ; " multiple aria-label="multiple select example">
       <option disabled value="">희망하는 상담 시간을 선택해주세요</option>
       <hr>
+      <!-- <div v-if="counseling.hours>=9 && counseling.hours<10">
+        <option disabled>09:00</option>
+      </div>
+      <div v-else>
+        <option >09:00</option>
+      </div>
+      <div v-if="counseling.hours>=10 && counseling.hours<11">
+        <option disabled>10:00</option>
+      </div>
+      <div v-else>
+        <option >10:00</option>
+      </div>
+      <div v-if="counseling.hours>=11 && counseling.hours<12">
+        <option disabled>11:00</option>
+      </div>
+      <div v-else>
+        <option >11:00</option>
+      </div>
+      <div v-if="counseling.hours>=13 && counseling.hours<14">
+        <option disabled>13:00</option>
+      </div>
+      <div v-else>
+        <option >13:00</option>
+      </div>
+      <div v-if="counseling.hours>=14 && counseling.hours<15">
+        <option disabled>14:00</option>
+      </div>
+      <div v-else>
+        <option >14:00</option>
+      </div>
+      <div v-if="counseling.hours>=15 && counseling.hours<16">
+        <option disabled>15:00</option>
+      </div>
+      <div v-else>
+        <option >15:00</option>
+      </div>
+      <div v-if="counseling.hours>=16 && counseling.hours<17">
+        <option disabled>16:00</option>
+      </div>
+      <div v-else>
+        <option >16:00</option>
+      </div>
+      <div v-if="counseling.hours>=17 && counseling.hours<18">
+        <option disabled>17:00</option>
+      </div>
+      <div v-else>
+        <option >17:00</option>
+      </div>
+      <div v-if="counseling.hours>=18 && counseling.hours<19">
+        <option disabled>18:00</option>
+      </div>
+      <div v-else>
+        <option >18:00</option>
+      </div> -->
       <option >09:00</option>
       <option >10:00</option>
       <option >11:00</option>
@@ -67,6 +133,8 @@
       <option >15:00</option>
       <option >16:00</option>
       <option >17:00</option>
+      <option >18:00</option>
+      
     </select>
     </div>
     <br>
@@ -114,7 +182,16 @@ import { mapGetters,mapActions } from 'vuex'
       contents: '',
       date2 :'1',
       id:0,
-      
+      nine:true,
+      ten:true,
+      eleven:true,
+      twelve:true,
+      thirteen:true,
+      fourteen:true,
+      fifteen:true,
+      sixteen:true,
+      seventeen:true,
+      eighteen:true,
       isOpen:true,
       newRequest:{
         contents : '',
@@ -149,18 +226,17 @@ import { mapGetters,mapActions } from 'vuex'
 
   computed : {
     ...mapGetters(['currentUser','request']),
-    ...mapGetters(['requests']),
+    ...mapGetters(['counselings','requests']),
     },
     methods: {
     ...mapActions(['fetchCurrentUser','createRequest']),
-    ...mapActions(['fetchRequests',]),
+    ...mapActions(['fetchSchedules','fetchRequests',]),
 
    timeon(){
       this.isSelected=true
-      this.isRed = !this.isRed;
-      this.isBold = !this.isBold;
+      console.log()
    },
-
+   
     onSubmit() {
       // let formData = new FormData()
       // this.date2 = `${this.year2}-${this.month2}-${this.day2}${Object.values(this.selectHour)}`
@@ -284,7 +360,7 @@ import { mapGetters,mapActions } from 'vuex'
   created() {
     this.fetchCurrentUser()
     this.fetchRequests()
-    
+    this.fetchSchedules()
     const dates = new Date();
     this.currentYear = dates.getFullYear(); // 이하 현재 년, 월 가지고 있기
     this.currentMonth = dates.getMonth() + 1;
