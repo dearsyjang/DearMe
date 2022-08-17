@@ -40,6 +40,5 @@ html, body{
   margin: 0;
   padding: 0;
   background-color: #F9F7F7;
-
 }
 </style>
