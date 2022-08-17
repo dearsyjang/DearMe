@@ -31,7 +31,6 @@ import "bulma/css/bulma.css"
   display:flex;
   flex-direction:column;
   justify-content: center;
-  position: relative;
   z-index: 1;
   background-color: #F9F7F7;
 }
