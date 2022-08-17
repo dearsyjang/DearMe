@@ -133,8 +133,42 @@ export default {
   object-fit: cover;
   margin-bottom: 0.4em;
 }
-
-.text {
-  font-size: 0.8em;
+.w-btn-check {
+    /* position: relative; */
+    border: none;
+    min-width: 70px;
+    min-height: 20px;
+    background: linear-gradient(
+        90deg,
+        #5b5792bd 0%,
+        #5b5792bb 100%
+    );
+    border-radius: 10px;
+    color: darkslategray;
+    cursor: pointer;
+    /* box-shadow: 12px 12px 24px #5a554747; */
+    font-weight: 700;
+    transition: 0.3s;
+    color: #E9E5DC;
+    margin-left: 8px;
+    font-size: 13px;
+}
+.w-btn-signup {
+    /* position: relative; */
+    border: none;
+    min-width: 170px;
+    min-height: 50px;
+    background: linear-gradient(
+        90deg,
+        #5B5792 0%,
+        #5B5792 100%
+    );
+    border-radius: 1000px;
+    color: darkslategray;
+    cursor: pointer;
+    box-shadow: 12px 12px 24px #5a554747;
+    font-weight: 700;
+    transition: 0.3s;
+    color: #E9E5DC
 }
 </style>

@@ -37,7 +37,7 @@
           <user-video
             :stream-manager="publisher"
            @click="updateMainVideoStreamManager(publisher)"/>
-          <div id="mynickname"><h6>{{ this.currentUser.data.nickname }}</h6></div>
+          <div id="mynickname"><h5>{{ this.currentUser.data.nickname }}</h5></div>
           </div>
           <div class="carousel-item">
             <user-video

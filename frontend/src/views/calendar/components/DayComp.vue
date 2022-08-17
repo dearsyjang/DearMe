@@ -1,8 +1,8 @@
 <template>
-<div id="daycomp">
+<div id="daycomp"> 
     <div class="custom-container">
         <div v-if="this.textDiaryId!=undefined">
-        <button class="btn" data-bs-toggle="modal" data-bs-target="#textDiaryView"><img id="text-diary-img" src="../../../assets/images/text-diary.png" alt="text-diary"></button>
+        <button class="btn mb-3" data-bs-toggle="modal" data-bs-target="#textDiaryView"><img id="text-diary-img" src="../../../assets/images/text-diary.png" alt="text-diary"></button>
 
     <div class="modal fade" id="textDiaryView" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
