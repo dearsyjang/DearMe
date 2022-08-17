@@ -116,4 +116,8 @@ export default {
   height: 80px;
   margin: 0;
 }
+.modal-dialog.modal-fullsize {
+  width: 100%;
+  height: auto;
+}
 </style>

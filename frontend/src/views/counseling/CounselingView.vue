@@ -10,10 +10,15 @@
                   <div class="body-contentbox">
                     <h3> 상담방에 입장하시겠습니까? </h3>
                     <div id="popup-btn">
-                      <button v-if="currentUser.data.type==`USER`" id="enter-button" class="btn btn-mg" @click="joinSession()">상담방 입장</button>
-                      <button v-if="currentUser.data.type==`COUNSELOR`" id="enter-button" class="btn btn-mg" @click="createSession()">상담방 개설</button>
-                      <router-link :to="{ name:'userSchedule' }"><button v-if="currentUser.data.type==`USER`" id="cancel-button" class="btn btn-mg">돌아가기</button></router-link>
-                      <router-link :to="{ name:'counselorSchedule' }"><button v-if="currentUser.data.type==`COUNSELOR`" id="cancel-button" class="btn btn-mg">돌아가기</button></router-link>
+                      <div v-if="isdone === false">
+                        <button v-if="currentUser.data.type==`USER`" id="enter-button" class="btn btn-mg" @click="joinSession()">상담방 입장</button>
+                        <button v-if="currentUser.data.type==`COUNSELOR`" id="enter-button" class="btn btn-mg" @click="createSession()">상담방 개설</button>
+                        <router-link :to="{ name:'userSchedule' }"><button v-if="currentUser.data.type==`USER`" id="cancel-button" class="btn btn-mg">돌아가기</button></router-link>
+                        <router-link :to="{ name:'counselorSchedule' }"><button v-if="currentUser.data.type==`COUNSELOR`" id="cancel-button" class="btn btn-mg">돌아가기</button></router-link>
+                      </div>
+                      <div v-if="isdone === true">
+                        <button class="board-btn-submit btn-sm mx-2" data-bs-toggle="modal" data-bs-target="#commentCreate">등록</button>
+                      </div> 
                   </div>
                 </div>
               </div>
@@ -23,6 +28,39 @@
       </div>
     </div>
   </div>
+
+  
+  <div class="modal fade" id="commentCreate" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">리뷰 등록하기</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form @submit.prevent="onSubmit" class="review-list-form">
+        <div class="star-rating space-x-4 mx-auto">
+          <input type="radio" id="5-stars" name="rating" value="5" v-model="value"/>
+          <label for="5-stars" class="star pr-4">★</label>
+          <input type="radio" id="4-stars" name="rating" value="4" v-model="value"/>
+          <label for="4-stars" class="star">★</label>
+          <input type="radio" id="3-stars" name="rating" value="3" v-model="value"/>
+          <label for="3-stars" class="star">★</label>
+          <input type="radio" id="2-stars" name="rating" value="2" v-model="value"/>
+          <label for="2-stars" class="star">★</label>
+          <input type="radio" id="1-star" name="rating" value="1" v-model="value" />
+          <label for="1-star" class="star">★</label>
+        </div>
+        <div class="my-3 w-100 d-flex justify-content-start align-items-center ">
+          <label for="review"></label>
+          <input  placeholder="평가를 50자 이내로 입력해주세요." type="text" id="review"  style="width:50%; height:25px; margin:auto" v-model="review.contents" required>
+        </div>
+        <button class="changebtn" >작성하기</button>
+      </form>
+      </div>
+    </div>
+  </div>
+</div>
 
     <!--세션 오픈-->
     <div id="session" v-if="session">
@@ -82,7 +120,7 @@ export default {
   },
 
   computed: {
-    ...mapGetters(['authHeader2', 'currentUser'])
+    ...mapGetters(['authHeader2', 'currentUser', 'reviews'])
   },
 
   data() {
@@ -96,6 +134,12 @@ export default {
       mySessionId: '',
       myUserName: '',
       counselingId: this.$route.params.counselingId,
+      isdone: false,
+      counselorId: this.$route.params.counselorId,
+      review : {
+      contents: '',
+      id: 6,
+      value : 0},
     };
   },
 
@@ -104,7 +148,19 @@ export default {
   // Second request performs a POST to /openvidu/api/sessions/<sessionId>/connection (the path requires the sessionId to assign the token to this same session)
 
   methods: {
-    ...mapActions(['fetchCurrentUser']),
+    ...mapActions(['fetchCurrentUser', 'createReview']),
+
+    onSubmit() {
+    this.review = {
+      id: 6,
+      contents: this.review.contents,
+      value: this.value
+    }
+    this.createReview(this.review)
+    console.log(this.review.id)
+    console.log(this.review.contents)
+    console.log(this.review.value)
+    },
 
     // 취업준비생 => 상담방 입장
     joinSession() {
@@ -187,6 +243,9 @@ export default {
     
 
     leaveSession() {
+
+
+      
       // --- Leave the session by calling 'disconnect' method over the Session object ---
       if (this.session) this.session.disconnect();
       this.session = undefined;
@@ -194,13 +253,19 @@ export default {
       this.publisher = undefined;
       this.subscribers = [];
       this.OV = undefined;
+      this.isdone = true;
+      // this.$router.push({ name: 'CounselingReview', params: {counselorId: 'counselingId'} })
       window.removeEventListener('beforeunload', this.leaveSession);
+      console.log(this.isdone)
       },
+      
+
 
     updateMainVideoStreamManager(stream) {
       if (this.mainStreamManager === stream) return;
       this.mainStreamManager = stream;
     },
+    
 
 
     // 상담사 => 1:1 상담방 개설
@@ -428,5 +493,35 @@ html{
   text-align: center;
   color: #1C3879;
   font-weight: bold;
+}
+.star-rating {
+  display: flex;
+  flex-direction: row-reverse;
+  font-size: 2.25rem;
+  line-height: 2.5rem;
+  justify-content: space-around;
+  padding: 0 0.2em;
+  text-align: center;
+  width: 5em;
+}
+ 
+.star-rating input {
+  display: none;
+}
+ 
+.star-rating label {
+  -webkit-text-fill-color: transparent; /* Will override color (regardless of order) */
+  -webkit-text-stroke-width: 2.3px;
+  -webkit-text-stroke-color: #2b2a29;
+  cursor: pointer;
+}
+ 
+.star-rating :checked ~ label {
+  -webkit-text-fill-color: gold;
+}
+ 
+.star-rating label:hover,
+.star-rating label:hover ~ label {
+  -webkit-text-fill-color: #fff58c;
 }
 </style>
