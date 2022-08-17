@@ -40,5 +40,9 @@ html, body{
   margin: 0;
   padding: 0;
   background-color: #F9F7F7;
+<<<<<<< HEAD
+=======
+
+>>>>>>> 0764d61d1c2e78a061a109c459776732b3741844
 }
 </style>
