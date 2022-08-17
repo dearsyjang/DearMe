@@ -1,33 +1,30 @@
 <template>
 <div id="home">
-  <!-- Hero Block Wrapper -->
-  <div>
-    <div class="custom-container">
-      <!-- Hero Block Content -->
-        <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
-          <div class="carousel-inner">
-          <div class="carousel-item active">
-            <img src="../assets/images/main.png" id="main" class="d-block w-100" alt="main">
-          </div>
-          <div class="carousel-item">
-            <img src="../assets/images/main2.png" id="main2" class="d-block w-100" alt="main2">
-          </div>
-          <div class="carousel-item">
-            <img src="../assets/images/main3.png" id="main3" class="d-block w-100" alt="main3">
-          </div>
-        </div>
-        <br>
-        <br>
-          <h3 id="text">수고했어요, 오늘도!</h3>
-          <h3 id="text">오늘 당신의 하루는 어땠나요?</h3>
-          <h3 id="text">우리 같이 이야기해볼까요?</h3>
-      <div class="m-5">
-        <a class="btn btn-warning btn-lg w-100 mb-3" href="/member/login">LOGIN</a>
-        <a class="btn btn-warning btn-lg w-100" href="/member/signuptype">SIGN UP</a>
-      </div>
-      </div>
+    <br>
+    <br>
+    <br>
+    <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="../assets/images/main.png" id="main" class="d-block w-100" alt="main">
+    </div>
+    <div class="carousel-item">
+      <img src="../assets/images/main2.png" id="main2" class="d-block w-100" alt="main2">
+    </div>
+    <div class="carousel-item">
+      <img src="../assets/images/main3.png" id="main3" class="d-block w-100" alt="main3">
     </div>
   </div>
+</div>
+    <br>
+    <br>
+    <h3>오늘도 수고했어요</h3>
+    <h3>오늘 당신의 하루를 들려주세요 😊</h3>
+    <br>
+
+    
+    <router-link :to="{ name:'login' }"><button id="login-button" class="w-btn-login w-100">LOGIN</button></router-link>
+    <router-link :to="{ name:'signuptype' }"><button id="signup2-button" class="w-btn-signup w-100">SIGN IN</button></router-link>
 </div>
 
 </template>
@@ -39,51 +36,57 @@ export default {
 </script>
 
 <style scoped>
-@import url('https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap');
-* {
-  font-family: 'Gowun Dodum', sans-serif;
-}
-
 #home{
-  display: flex;
-  height: 720px;
-  margin: 0 auto;
-  background-color: #F9F7F7;
-  align-items: center;
-}
-
-.text {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-    font-size: 20px;
-    font-weight: 700;
-    line-height: 1.2;
-    letter-spacing: 0.05em;
-    white-space: nowrap;
-    text-transform: uppercase;
-    color: #112D4E;
-    mix-blend-mode: multiply;
-    opacity: 0;
-    animation: fadeInText 3s 2s ease-out forwards;
-    margin: 5;
-}
-
-@keyframes scaleImage {
-    100% {
-        transform: scale(1);
-    }
-}
-
-@keyframes fadeInText {
-    100% {
-        opacity: 1;
-    }
-}
-
-/* .carousel-item{
   width: auto;
-  height:auto%;
-} */
+  height: 720px;
+  background-color: #F9F7F7;
+  justify-content: center;
+  align-content: center;
+  text-align: center;
+}
+body {
+  background-color: #F9F7F7;
+  overflow: hidden;
+  height: 100%;
+}
+.w-btn-login {
+    /* position: relative; */
+    border: none;
+    min-width: 170px;
+    min-height: 50px;
+    background: linear-gradient(
+        90deg,
+        #AF7AB3 0%,
+        #AF7AB3 100%
+    );
+    border-radius: 1000px;
+    color: darkslategray;
+    cursor: pointer;
+    box-shadow: 12px 12px 24px #5a554747;
+    font-weight: 700;
+    transition: 0.3s;
+    color: #E9E5DC;
+    margin-bottom: 10px;
+}
+
+.w-btn-signup {
+    /* position: relative; */
+    border: none;
+    min-width: 170px;
+    min-height: 50px;
+    background: linear-gradient(
+        90deg,
+        #AF7AB3 0%,
+        #5B5792 100%
+    );
+    border-radius: 1000px;
+    color: darkslategray;
+    cursor: pointer;
+    box-shadow: 12px 12px 24px #5a554747;
+    font-weight: 700;
+    transition: 0.3s;
+    color: #E9E5DC;
+    margin-bottom: 10px;
+}
+
 </style>

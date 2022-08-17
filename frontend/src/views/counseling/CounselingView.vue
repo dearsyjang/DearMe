@@ -25,7 +25,6 @@
   </div>
 
     <!--세션 오픈-->
-    <!--세션 오픈-->
     <div id="session" v-if="session">
       <div class="card mt-4" id="my-camera">
         <user-video :stream-manager="mainStreamManager"/>
@@ -38,7 +37,7 @@
           <user-video
             :stream-manager="publisher"
            @click="updateMainVideoStreamManager(publisher)"/>
-          <div id="mynickname"><h6>{{ this.currentUser.data.nickname }}</h6></div>
+          <div id="mynickname"><h5>{{ this.currentUser.data.nickname }}</h5></div>
           </div>
           <div class="carousel-item">
             <user-video

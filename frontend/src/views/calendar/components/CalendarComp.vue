@@ -3,12 +3,12 @@
   <br>
   <div id="calendar-btn" class="container">
     <button v-if="dayTextDiary" id="textdiary-btn" class="btn" data-bs-toggle="modal" data-bs-target="#textDiaryView"><img id="pencil-img" src="../../../assets/images/pencil.png" alt="pencil"></button>
-      <button v-else class="btn"><img id="camera-img" src="../../../assets/images/camera.png" alt="camera"></button>
+      <button v-else class="btn"><img id="check" src="../../../assets/images/check.png" alt="check"></button>
       <button v-if="dayVideoDiary" class="btn" id="textdiary-btn"  data-bs-toggle="modal" data-bs-target="#videoDiaryView">
       <router-link :to="{ name: 'videodiary' }"><button id="videodiary-enter-btn" class="btn">
       <img id="camera-img" src="../../../assets/images/camera.png" alt="camera"></button></router-link>
       </button>
-    <button v-else class="btn"><img id="camera-img" src="../../../assets/images/camera.png" alt="camera"></button>
+    <button v-else class="btn"><img id="checkimg" src="../../../assets/images/check.png" alt="check"></button>
   </div>
   <br>
     <!--달력-->
@@ -369,10 +369,15 @@ section{
   width: 40px;
   height: 40px;
   margin: 0;
-}
+  }
 #calendar-btn{
   justify-content: center;
   text-align: center;
+}
+#check{
+  width: 40px;
+  height: 40px;
+  margin: 0;
 }
 
 #h5{
