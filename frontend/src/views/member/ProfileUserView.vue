@@ -39,7 +39,7 @@
       사진 : {{currentUser.pictureUrl}}
       <div class="itemFileBox" ref="itemFileBox">
         <input type="file" 
-                class="item-file-image" 
+                class="item-file-image m-2" 
                 id="uploadItemFile" 
                 ref="uploadItemFile"
                 @change="onFileSelected"
@@ -51,7 +51,6 @@
           </div>      
         </label>
         </div>  
-     
     <br><br>
     <button class="btn btn-dark col-sm-3" type="submit" id="profile-btn">수정하기</button>
     </form>
@@ -204,5 +203,10 @@ import drf from '@/api/drf'
 
 .unchangable-info{
    font-weight : bold
+}
+
+#profile{
+  width: 30%;
+  height: 30%;
 }
 </style>

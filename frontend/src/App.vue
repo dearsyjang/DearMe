@@ -19,7 +19,7 @@ import "bulma/css/bulma.css"
 
 </script>
 
-<style>
+<style scoped>
 @import './assets/css/style.css';
 @import './assets/css/topbar.css';
 @import url('https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap');
@@ -31,7 +31,7 @@ import "bulma/css/bulma.css"
   display:flex;
   flex-direction:column;
   justify-content: center;
-  z-index: 1;
+  z-index: 0;
   background-color: #F9F7F7;
 }
 html, body{
@@ -40,6 +40,5 @@ html, body{
   margin: 0;
   padding: 0;
   background-color: #F9F7F7;
-
 }
 </style>

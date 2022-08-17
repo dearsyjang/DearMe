@@ -61,6 +61,11 @@ export default {
 </script>
 
 <style>
+body {
+  background-color: #F9F7F7;
+  overflow: hidden;
+  height: 100%;
+}
 .member-login-gb{
   background-color: #F9F7F7;
   height: 100%;
