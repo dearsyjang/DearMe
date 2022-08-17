@@ -48,7 +48,7 @@ export default {
       // 현재 사용자 비움
       commit('SET_TOKEN', '')
       localStorage.setItem('token', '')
-      commit('SET_CURRENT_USER', '')
+      
 
     },
     // 받아오는 데이터가 한개일 경우 입력, 여러개일 경우 {}안에 담아와야함
@@ -257,7 +257,7 @@ export default {
   },
   // 회원 정보(비밀번호, 닉네임) 수정
   updateProfile({ commit, getters }, update) {
-    console.log(update.counselorProfile )
+    console.log(update )
     axios({
       url: drf.member.profileEdit(),
       method: 'put',

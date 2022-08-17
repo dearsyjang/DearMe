@@ -35,19 +35,23 @@
                   </div>
                   <div class="form-group">
                       <select class="form-select" id="defaultSelect" v-model="credentials.gender" >
-                        <option selected>성별</option>
+                        <option selected disabled>성별</option>
                         <option value="MALE">남성</option>
                         <option value="FEMALE">여성</option>
                       </select>
                   </div>
                   <div class="form-group">
-                    <input class="form-control" type="email" v-model="credentials.email" placeholder="이메일">
+                    <input class="form-control" type="email" v-model="credentials.email" placeholder="이메일">    
+                  </div>
+                  <div class="form-group">
+                    <input class="form-control" type="phone" v-model="credentials.phone" placeholder="전화번호">
                   </div>
                   <div class="form-group row d-flex justify-content-center">
                     <input class="form-control col-sm-3" id="signup-birth" type="text" name="yy" placeholder="년(4자)">
                     <input class="form-control col-sm-3" id="signup-birth" type="text" name="mm" placeholder="월(2자)">
                     <input class="form-control col-sm-3" id="signup-birth" type="text" name="dd" placeholder="일(2자)">
                   </div>
+                  
                   <button @click="signUp()" class="w-btn-signup w-100" type="submit">회원가입</button>
               </div>
             </div>
@@ -78,7 +82,7 @@ export default {
         gender: '',
         email: '',
         picture: '',
-        phone: '01090596456'
+        phone: ''
       },
       months: [
         1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12

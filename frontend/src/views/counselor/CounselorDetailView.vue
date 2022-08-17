@@ -47,10 +47,10 @@
 
       <div class="top-products-area product-list-wrap">
         <div class="container">
-          <button id= "select-left" @click="changeDp()" :class="{ red:isRed, blod:isBold }">
+          <button id= "select-left" @click="changeDp()" :class="{ red:isRed, bold:isBold }">
             상담사 정보
           </button>
-          <button id="select-right" @click="changeFp()" :class="{ red:isRed2, blod:isBold2 }">
+          <button id="select-right" @click="changeFp()" :class="{ red:isRed2, bold:isBold2 }">
             상담 정보
           </button>
         </div>
@@ -114,7 +114,7 @@
       }
     },
     computed : {
-      ...mapGetters(['counselor','currentUser', 'favorite','groups','favorite']),
+      ...mapGetters(['counselings','counselor','currentUser', 'favorite','groups','favorite']),
       infos() {
       return this.$store.state.infos
 
