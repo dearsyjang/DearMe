@@ -39,6 +39,7 @@ export default {
   width: auto;
   margin: 0;
   display: inline-block;
+  z-index: 1000;
 }
 
 .comment-create-button{

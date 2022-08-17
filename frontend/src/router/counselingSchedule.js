@@ -22,4 +22,6 @@ export default [
     name: 'userSchedule',
     component: UserSchedule
     },
+
+
 ]
