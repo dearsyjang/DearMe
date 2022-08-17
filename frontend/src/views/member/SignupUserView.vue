@@ -41,7 +41,7 @@
                       </select>
                   </div>
                   <div class="form-group">
-                    <input class="form-control" type="email" v-model="credentials.email" placeholder="이메일">    
+                    <input class="form-control" type="email" v-model="credentials.email" placeholder="이메일">
                   </div>
                   <div class="form-group">
                     <input class="form-control" type="phone" v-model="credentials.phone" placeholder="전화번호">
@@ -51,7 +51,7 @@
                     <input class="form-control col-sm-3" id="signup-birth" type="text" name="mm" placeholder="월(2자)">
                     <input class="form-control col-sm-3" id="signup-birth" type="text" name="dd" placeholder="일(2자)">
                   </div>
-                  
+
                   <button @click="signUp()" class="w-btn-signup w-100" type="submit">회원가입</button>
               </div>
             </div>
@@ -73,6 +73,11 @@ export default {
   data() {
     return {
       isCounselor: false,
+      birthInput: {
+        yy: '',
+        mm: '',
+        dd: ''
+      },
       credentials: {
         id: '',
         pw: '',
