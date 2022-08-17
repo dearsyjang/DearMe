@@ -441,10 +441,10 @@ values (now(), now(), '본인에게만 집중하세요!! 남은 신경쓸거 없
 
 --> group
 -- 1
-insert into GROUP (contents, price, title, counselor_id)
+insert into dearme.group (contents, price, title, counselor_id)
 values ('가족과 갈등이 있으신분들의 참여를 기다립니다!', 0, '가족과의 갈등', 31);
 -- 2
-insert into GROUP (contents, price, title, counselor_id)
+insert into dearme.group (contents, price, title, counselor_id)
 values ('연인과의 관계에 고민이 있으신분들! 같이 얘기 나눠요!', 0, '연애와 결혼', 32);
 
 --> group_user
@@ -471,85 +471,85 @@ insert into counseling (day, hours, month, status, token, year,counseling_room_i
 values (16, 8, 8, 'ACCEPTED', null, 2022, null, 31, null, 1);
 
 insert into counseling_document (contents, day, hours, is_open, month, year, counseling_id, counselor_id, group_id, user_id)
-values ('우울합니다. 힘들어요. 매일 기분이 안좋습니다.', 16, 8, 'TRUE', 8, 2022, 1, 31, null, 1);
+values ('우울합니다. 힘들어요. 매일 기분이 안좋습니다.', 16, 8, true, 8, 2022, 1, 31, null, 1);
 -- 2
 insert into counseling (day, hours, month, status, token, year,counseling_room_id, counselor_id, group_id, user_id)
 values (21, 10, 8, 'UNACCEPTED', null, 2022, null, 31, null, 1);
 
 insert into counseling_document (contents, day, hours, is_open, month, year, counseling_id, counselor_id, group_id, user_id)
-values ('서류만 매일 떨어지고 있습니다. 자존감이 너무 낮아진 것 같아요...', 21, 10, 'TRUE', 8, 2022, 2, 31, null, 1);
+values ('서류만 매일 떨어지고 있습니다. 자존감이 너무 낮아진 것 같아요...', 21, 10, true, 8, 2022, 2, 31, null, 1);
 -- 3
 insert into counseling (day, hours, month, status, token, year,counseling_room_id, counselor_id, group_id, user_id)
 values (20, 12, 8, 'ACCEPTED', null, 2022, null, 32, null, 1);
 
 insert into counseling_document (contents, day, hours, is_open, month, year, counseling_id, counselor_id, group_id, user_id)
-values ('사람들이 무섭습니다. 밖으로 나가는게 두려워요.', 20, 12, 'FALSE', 8, 2022, 3, 32, null, 1);
+values ('사람들이 무섭습니다. 밖으로 나가는게 두려워요.', 20, 12, false, 8, 2022, 3, 32, null, 1);
 -- 4
 insert into counseling (day, hours, month, status, token, year,counseling_room_id, counselor_id, group_id, user_id)
 values (16, 14, 8, 'ACCEPTED', null, 2022, null, 31, 1, 1);
 
 insert into counseling_document (contents, day, hours, is_open, month, year, counseling_id, counselor_id, group_id, user_id)
-values ('부모님이랑 매일 싸우고있어요. 취업좀 빨리하라고 잔소리하시는거 듣는거 너무 힘듭니다.', 16, 14, 'FALSE', 8, 2022, 4, 31, 1, 1);
+values ('부모님이랑 매일 싸우고있어요. 취업좀 빨리하라고 잔소리하시는거 듣는거 너무 힘듭니다.', 16, 14, false, 8, 2022, 4, 31, 1, 1);
 -- 5
 insert into counseling (day, hours, month, status, token, year,counseling_room_id, counselor_id, group_id, user_id)
 values (20, 16, 8, 'ACCEPTED', null, 2022, null, 32, 2, 1);
 
 insert into counseling_document (contents, day, hours, is_open, month, year, counseling_id, counselor_id, group_id, user_id)
-values ('취준하면서 연애하기 너무 힘듭니다. 여자친구가 매번 보자고할때마다 거절하는게 너무 힘들어요', 20, 16, 'FALSE', 8, 2022, 5, 32, 2, 1);
+values ('취준하면서 연애하기 너무 힘듭니다. 여자친구가 매번 보자고할때마다 거절하는게 너무 힘들어요', 20, 16, false, 8, 2022, 5, 32, 2, 1);
 -- 6
 insert into counseling (day, hours, month, status, token, year,counseling_room_id, counselor_id, group_id, user_id)
 values (17, 18, 8, 'ACCEPTED', null, 2022, null, 31, null, 2);
 
 insert into counseling_document (contents, day, hours, is_open, month, year, counseling_id, counselor_id, group_id, user_id)
-values ('할 수 있는건 다한 것 같은데 도저히 일이 안풀리네요. 그냥 막막하기만 합니다.', 17, 18, 'FALSE', 8, 2022, 6, 31, null, 2);
+values ('할 수 있는건 다한 것 같은데 도저히 일이 안풀리네요. 그냥 막막하기만 합니다.', 17, 18, false, 8, 2022, 6, 31, null, 2);
 -- 7
 insert into counseling (day, hours, month, status, token, year,counseling_room_id, counselor_id, group_id, user_id)
 values (20, 20, 8, 'ACCEPTED', null, 2022, null, 31, null, 2);
 
 insert into counseling_document (contents, day, hours, is_open, month, year, counseling_id, counselor_id, group_id, user_id)
-values ('친구들은 다들 취업했는데 저만 몇년째 취준생이에요.', 20, 20, 'FALSE', 8, 2022, 7, 31, null, 2);
+values ('친구들은 다들 취업했는데 저만 몇년째 취준생이에요.', 20, 20, false, 8, 2022, 7, 31, null, 2);
 -- 8
 insert into counseling (day, hours, month, status, token, year,counseling_room_id, counselor_id, group_id, user_id)
 values (18, 8, 8, 'ACCEPTED', null, 2022, null, 32, null, 2);
 
 insert into counseling_document (contents, day, hours, is_open, month, year, counseling_id, counselor_id, group_id, user_id)
-values ('매번 불합격통보만 들으니 자존감이 너무 떨어집니다. 우울해져서 손에 아무것도 안잡혀요. 어떻게 극복할 수 있을까요? ', 18, 8, 'FALSE', 8, 2022, 8, 32, null, 2);
+values ('매번 불합격통보만 들으니 자존감이 너무 떨어집니다. 우울해져서 손에 아무것도 안잡혀요. 어떻게 극복할 수 있을까요? ', 18, 8, false, 8, 2022, 8, 32, null, 2);
 -- 9
 insert into counseling (day, hours, month, status, token, year,counseling_room_id, counselor_id, group_id, user_id)
 values (16, 10, 8, 'ACCEPTED', null, 2022, null, 31, 1, 2);
 
 insert into counseling_document (contents, day, hours, is_open, month, year, counseling_id, counselor_id, group_id, user_id)
-values ('아버지가 취업 언제할꺼냐고 매일 잔소리하시는게 너무 듣기 싫어요. 저도 하고싶지만 못하는건데 들을때마다 화가 납니다.', 16, 10, 'FALSE', 8, 2022, 9, 31, 1, 2);
+values ('아버지가 취업 언제할꺼냐고 매일 잔소리하시는게 너무 듣기 싫어요. 저도 하고싶지만 못하는건데 들을때마다 화가 납니다.', 16, 10, false, 8, 2022, 9, 31, 1, 2);
 -- 10
 insert into counseling (day, hours, month, status, token, year,counseling_room_id, counselor_id, group_id, user_id)
 values (20, 10, 8, 'ACCEPTED', null, 2022, null, 32, 2, 2);
 
 insert into counseling_document (contents, day, hours, is_open, month, year, counseling_id, counselor_id, group_id, user_id)
-values ('여자친구가 제가 취업할때까지 기다려줄까요? 가끔 여자친구 친구들의 남자친구 얘기에 자존감이 너무 떨어져요.', 20, 10, 'FALSE', 8, 2022, 10, 32, 2, 2);
+values ('여자친구가 제가 취업할때까지 기다려줄까요? 가끔 여자친구 친구들의 남자친구 얘기에 자존감이 너무 떨어져요.', 20, 10, false, 8, 2022, 10, 32, 2, 2);
 -- 11
 insert into counseling (day, hours, month, status, token, year,counseling_room_id, counselor_id, group_id, user_id)
 values (16, 16, 8, 'ACCEPTED', null, 2022, null, 31, 1, 3);
 
 insert into counseling_document (contents, day, hours, is_open, month, year, counseling_id, counselor_id, group_id, user_id)
-values ('저는 개발자가 하고싶은데 아버지는 공무원을 하기를 바라세요. 어떻게 아버지를 설득시킬 수 있을까요', 16, 16, 'FALSE', 8, 2022, 11, 31, 1, 3);
+values ('저는 개발자가 하고싶은데 아버지는 공무원을 하기를 바라세요. 어떻게 아버지를 설득시킬 수 있을까요', 16, 16, false, 8, 2022, 11, 31, 1, 3);
 -- 12
 insert into counseling (day, hours, month, status, token, year,counseling_room_id, counselor_id, group_id, user_id)
 values (20, 18, 8, 'ACCEPTED', null, 2022, null, 32, 2, 4);
 
 insert into counseling_document (contents, day, hours, is_open, month, year, counseling_id, counselor_id, group_id, user_id)
-values ('취준생인데 남자친구가 결혼하자고 합니다. 저는 결혼은 취업이후에 하고싶거든요. 고민입니다.', 20, 18, 'FALSE', 8, 2022, 12, 32, 2, 4);
+values ('취준생인데 남자친구가 결혼하자고 합니다. 저는 결혼은 취업이후에 하고싶거든요. 고민입니다.', 20, 18, false, 8, 2022, 12, 32, 2, 4);
 -- 13
 insert into counseling (day, hours, month, status, token, year,counseling_room_id, counselor_id, group_id, user_id)
 values (16, 18, 8, 'ACCEPTED', null, 2022, null, 31, 1, 5);
 
 insert into counseling_document (contents, day, hours, is_open, month, year, counseling_id, counselor_id, group_id, user_id)
-values ('어머니가 교사가 최고라고 사범대를 가라고하세요. 근데 저는 마케터가 꿈이거든요. 어떻게 설득할 수 있을까요?', 16, 18, 'FALSE', 8, 2022, 13, 31, 1, 5);
+values ('어머니가 교사가 최고라고 사범대를 가라고하세요. 근데 저는 마케터가 꿈이거든요. 어떻게 설득할 수 있을까요?', 16, 18, false, 8, 2022, 13, 31, 1, 5);
 -- 14
 insert into counseling (day, hours, month, status, token, year,counseling_room_id, counselor_id, group_id, user_id)
 values (20, 18, 8, 'ACCEPTED', null, 2022, null, 32, 2, 6);
 
 insert into counseling_document (contents, day, hours, is_open, month, year, counseling_id, counselor_id, group_id, user_id)
-values ('남자친구가 취업하라고 옆에서 너무 짜증나게해요. 헤어질까요?', 20, 18, 'FALSE', 8, 2022, 14, 32, 2, 6);
+values ('남자친구가 취업하라고 옆에서 너무 짜증나게해요. 헤어질까요?', 20, 18, false, 8, 2022, 14, 32, 2, 6);
 
 --> favorite
 insert into favorite (created_at, updated_at, counselor_user_id, id)
