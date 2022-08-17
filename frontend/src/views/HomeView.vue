@@ -81,14 +81,6 @@ export default {
         opacity: 1;
     }
 }
-#login-button:active {
-  top: 2px;
-}
-
-.carousel-inner{
-  width:auto;
-  height:auto;
-}
 
 /* .carousel-item{
   width: auto;
