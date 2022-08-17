@@ -17,7 +17,7 @@
                 <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
               </div>
               <div class="offcanvas-body small">
-                <form @submit.prevent="onSubmit" >
+                <form @submit.prevent="onSubmit()" >
                   <div class="filter-title">정렬</div>
                     <div class="form-check form-check-inline">
                       <input class="form-check-input" type="radio" id="1" value="true" name="radio1" v-model="filter.reviewScoreUp">
