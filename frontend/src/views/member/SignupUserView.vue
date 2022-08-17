@@ -46,6 +46,9 @@
                   <div class="form-group">
                     <input class="form-control" type="phone" v-model="credentials.phone" placeholder="전화번호">
                   </div>
+                  <div class="form-group">
+                    <input class="form-control" type="phone" v-model="credentials.phone" placeholder="전화번호">
+                  </div>
                   <div class="form-group row d-flex justify-content-center">
                     <input class="form-control col-sm-3" id="signup-birth" type="text" name="yy" placeholder="년(4자)">
                     <input class="form-control col-sm-3" id="signup-birth" type="text" name="mm" placeholder="월(2자)">
@@ -72,6 +75,11 @@ export default {
   data() {
     return {
       isCounselor: false,
+      birthInput: {
+        yy: '',
+        mm: '',
+        dd: ''
+      },
       credentials: {
         id: '',
         pw: '',
