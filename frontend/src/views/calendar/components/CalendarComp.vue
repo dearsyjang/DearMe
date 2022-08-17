@@ -1,6 +1,18 @@
 <template>
-  <section class="section">
-    <div class="container">
+<section>
+  <br>
+  <div id="calendar-btn" class="container">
+    <button v-if="dayTextDiary" id="textdiary-btn" class="btn" data-bs-toggle="modal" data-bs-target="#textDiaryView"><img id="pencil-img" src="../../../assets/images/pencil.png" alt="pencil"></button>
+      <button v-else class="btn"><img id="camera-img" src="../../../assets/images/camera.png" alt="camera"></button>
+      <button v-if="dayVideoDiary" class="btn" id="textdiary-btn"  data-bs-toggle="modal" data-bs-target="#videoDiaryView">
+      <router-link :to="{ name: 'videodiary' }"><button id="videodiary-enter-btn" class="btn">
+      <img id="camera-img" src="../../../assets/images/camera.png" alt="camera"></button></router-link>
+      </button>
+    <button v-else class="btn"><img id="camera-img" src="../../../assets/images/camera.png" alt="camera"></button>
+  </div>
+  <br>
+    <!--달력-->
+    <div id="calendar" class="container">
       <h2 class="subtitle has-text-centered">
         <button class="btn" type="button" @click="calendarData(-1)">&lt;</button>
         {{ year }}년 {{ month }}월
@@ -13,7 +25,7 @@
         <tbody>
           <tr v-for="(date, idx) in dates" :key="idx">
             <td v-for="(day, secondIdx) in date" :key="secondIdx">
-              <div v-if="day<8&& idx === 0 && day >= lastMonthStart || dates.length - 1 === idx && nextMonthStart > day"
+              <div v-if="day<8&& idx === 0 && day >= lastMonthStart || dates.length - 1 === idx && nextMonthStart > day "
                 @click="calendarData(1)" :class="'has-text-grey-light'">
                 {{ day }}
               </div>
@@ -33,10 +45,9 @@
               }" :class="{ 'has-text-grey-light': idx === 0 && day >= lastMonthStart || dates.length - 1 === idx && nextMonthStart > day,
               'has-text-primary': day === today && month === currentMonth && year === currentYear && idx <32
               }">
-                    <div>{{ day }}</div>
-                    <div>{{this.dayInfo[day].textEmoji}}</div>
-                    <!-- {{this.dayInfo[day].textEmoji}}
-                    {{this.dayInfo[day].videoEmoji}} -->
+                    {{ day }}
+                    <h5>{{this.dayInfo[day].textEmoji}}</h5>
+                    <h>{{this.dayInfo[day].videoEmoji}}</h>
                     <br>
                   </router-link>
                 </div>
@@ -46,9 +57,6 @@
         </tbody>
 
       </table>
-      <!-- <button v-if="dayTextDiary" class="board-btn-submit btn-sm mx-2" data-bs-toggle="modal"
-        data-bs-target="#textDiaryView">텍스트 일기 작성하기</button>
-      <button v-else class="board-btn-submit btn-sm mx-2">텍스트 일기 작성 완료!</button>
 
       <div class="modal fade" id="textDiaryView" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -72,16 +80,8 @@
           </div>
         </div>
       </div>
-      <button v-if="dayVideoDiary" class="board-btn-submit btn-sm mx-2" data-bs-toggle="modal" data-bs-target="#videoDiaryView">
-        <router-link :to="{ name: 'videodiary' }"><button id="videodiary-enter-btn" class="btn">
-            <h1>영상 일기 작성하기</h1>
-          </button></router-link>
-      </button>
-      <button v-else class="board-btn-submit btn-sm mx-2">영상 일기 작성 완료!</button> -->
-
     </div>
-
-  </section>
+</section>
 </template>
 
 <script>
@@ -166,25 +166,25 @@ export default {
             this.textDiaries.forEach(element => {
               if(this.today==element.day){
                 this.dayTextDiary=false;
-              }
+              } 
               this.dayInfo[element.day].textDiaryId = element.id
               this.dayInfo[element.day].textDiarySentiment = element.sentiment
               this.dayInfo[element.day].textDiaryPercentage = element.percentage
               this.dayInfo[element.day].textEmoji=''
               if(element.sentiment=='positive'){
-                    if(element.percentage>=90)  this.dayInfo[element.day].textEmoji='🌈'
-                    else if(element.percentage>=80) this.dayInfo[element.day].textEmoji='🌈'
-                    else if(element.percentage>=70) this.dayInfo[element.day].textEmoji='🌈'
-                    else if(element.percentage>=60) this.dayInfo[element.day].textEmoji='🌈'
-                    else this.dayInfo[element.day].textEmoji='🌈'
+                    if(element.percentage>=90)  this.dayInfo[element.day].textEmoji='⭐'
+                    else if(element.percentage>=80) this.dayInfo[element.day].textEmoji='☀'
+                    else if(element.percentage>=70) this.dayInfo[element.day].textEmoji='🌤'
+                    else if(element.percentage>=60) this.dayInfo[element.day].textEmoji='⛅'
+                    else this.dayInfo[element.day].textEmoji='☂'
               }else if(element.sentiment=='negative'){
-                    if(element.percentage>=90)  this.dayInfo[element.day].textEmoji='🌈'
-                    else if(element.percentage>=80) this.dayInfo[element.day].textEmoji='🌈'
-                    else if(element.percentage>=70) this.dayInfo[element.day].textEmoji='🌈'
-                    else if(element.percentage>=60) this.dayInfo[element.day].textEmoji='🌈'
-                    else this.dayInfo[element.day].textEmoji='🌈'
+                    if(element.percentage>=90)  this.dayInfo[element.day].textEmoji='🌪'
+                    else if(element.percentage>=80) this.dayInfo[element.day].textEmoji='⛈'
+                    else if(element.percentage>=70) this.dayInfo[element.day].textEmoji='🌧'
+                    else if(element.percentage>=60) this.dayInfo[element.day].textEmoji='🌦'
+                    else this.dayInfo[element.day].textEmoji='☔'
               }else{
-                    this.dayInfo[element.day].textEmoji='🌈'
+                    this.dayInfo[element.day].textEmoji='❔'
               }
             });
             this.getVideoDiaries();
@@ -220,19 +220,19 @@ export default {
               this.dayInfo[element.day].videoDiaryPercentage = element.percentage
               this.dayInfo[element.day].videoEmoji=''
               if(element.sentiment=='positive'){
-                    if(element.percentage>=90)  this.dayInfo[element.day].videoEmoji='🌈'
-                    else if(element.percentage>=80) this.dayInfo[element.day].videoEmoji='🌈'
-                    else if(element.percentage>=70) this.dayInfo[element.day].videoEmoji='🌈'
-                    else if(element.percentage>=60) this.dayInfo[element.day].videoEmoji='🌈'
-                    else this.dayInfo[element.day].videoEmoji='🌈'
+                    if(element.percentage>=90)  this.dayInfo[element.day].videoEmoji=''
+                    else if(element.percentage>=80) this.dayInfo[element.day].videoEmoji=''
+                    else if(element.percentage>=70) this.dayInfo[element.day].videoEmoji=''
+                    else if(element.percentage>=60) this.dayInfo[element.day].videoEmoji=''
+                    else this.dayInfo[element.day].videoEmoji=''
               }else if(element.sentiment=='negative'){
-                    if(element.percentage>=90)  this.dayInfo[element.day].videoEmoji='🌈'
-                    else if(element.percentage>=80) this.dayInfo[element.day].videoEmoji='🌈'
-                    else if(element.percentage>=70) this.dayInfo[element.day].videoEmoji='🌈'
-                    else if(element.percentage>=60) this.dayInfo[element.day].videoEmoji='🌈'
-                    else this.dayInfo[element.day].videoEmoji='🌈'
+                    if(element.percentage>=90)  this.dayInfo[element.day].videoEmoji=''
+                    else if(element.percentage>=80) this.dayInfo[element.day].videoEmoji=''
+                    else if(element.percentage>=70) this.dayInfo[element.day].videoEmoji=''
+                    else if(element.percentage>=60) this.dayInfo[element.day].videoEmoji=''
+                    else this.dayInfo[element.day].videoEmoji=''
               }else{
-                    this.dayInfo[element.day].videoEmoji='🌈'
+                    this.dayInfo[element.day].videoEmoji=''
               }
             });
         })
@@ -325,21 +325,24 @@ export default {
 * {
   font-family: 'Gowun Dodum', sans-serif;
 }
-
 .container a{
   text-decoration: none;
   color: black;
 }
-.body{
+
+div{
   background-color: #F9F7F7;
 }
-section{
+
+body{
   background-color: #F9F7F7;
+  width: 100%;
   height: 100%;
 }
-.table{
+
+table{
   background-color: #F9F7F7;
-  height: 580px;
+  height: auto;
 }
 .td{
   height: 100px;
@@ -352,5 +355,27 @@ section{
 }
 .td{
   padding: none;
+}
+#camera-img{
+  width: 40px;
+  height: 40px;
+  margin: 0;
+}
+section{
+  width: 100%;
+  height: 100%;
+}
+#pencil-img{
+  width: 40px;
+  height: 40px;
+  margin: 0;
+}
+#calendar-btn{
+  justify-content: center;
+  text-align: center;
+}
+
+#h5{
+  text-align: center;
 }
 </style>
