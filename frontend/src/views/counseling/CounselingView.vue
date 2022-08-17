@@ -25,6 +25,7 @@
   </div>
 
     <!--세션 오픈-->
+    <!--세션 오픈-->
     <div id="session" v-if="session">
       <div class="card mt-4" id="my-camera">
         <user-video :stream-manager="mainStreamManager"/>
@@ -60,6 +61,7 @@
       <input class="btn btn-large btn-danger" type="button" id="buttonLeaveSession" @click="leaveSession" value="상담 종료"/>
     </div>
   </div>
+
 </template>
 
 <script>
@@ -69,7 +71,7 @@ import axios from 'axios';
 // axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
 import { OpenVidu } from 'openvidu-browser';
 import UserVideo from './components/UserVideo';
-import { mapGetters, mapActions } from 'vuex';
+import { mapGetters, mapActions} from 'vuex';
 
 axios.defaults.headers.post['Content-Type'] = 'application/json';
 // const OPENVIDU_SERVER_URL = "https://i7d206.p.ssafy.io:4443";
@@ -82,7 +84,7 @@ export default {
   },
 
   computed: {
-    ...mapGetters(['authHeader2', 'currentUser'])
+    ...mapGetters(['authHeader2', 'currentUser', 'reviews'])
   },
 
   data() {
@@ -96,6 +98,12 @@ export default {
       mySessionId: '',
       myUserName: '',
       counselingId: this.$route.params.counselingId,
+      isdone: false,
+      counselorId: this.$route.params.counselorId,
+      review : {
+      contents: '',
+      id: 6,
+      value : 0},
     };
   },
 
@@ -104,7 +112,19 @@ export default {
   // Second request performs a POST to /openvidu/api/sessions/<sessionId>/connection (the path requires the sessionId to assign the token to this same session)
 
   methods: {
-    ...mapActions(['fetchCurrentUser']),
+    ...mapActions(['fetchCurrentUser', 'createReview']),
+
+    onSubmit() {
+    this.review = {
+      id: 6,
+      contents: this.review.contents,
+      value: this.value
+    }
+    this.createReview(this.review)
+    console.log(this.review.id)
+    console.log(this.review.contents)
+    console.log(this.review.value)
+    },
 
     // 취업준비생 => 상담방 입장
     joinSession() {
@@ -159,7 +179,7 @@ export default {
               this.session.connect(token, { clientData: this.myUserName })
           .then(() => {
               console.log('initPublisher')
-              // 영상 가져오기 => 모든 사용자는 publisher
+              // 영상 가져오기 => 모든 사용자는 publisher => 모든 사용자는 publisher
               let publisher = this.OV.initPublisher(undefined, {
                   audioSource: undefined, // The source of audio. If undefined default microphone
                   videoSource: undefined, // The source of video. If undefined default webcam
@@ -187,6 +207,9 @@ export default {
     
 
     leaveSession() {
+
+
+      
       // --- Leave the session by calling 'disconnect' method over the Session object ---
       if (this.session) this.session.disconnect();
       this.session = undefined;
@@ -194,13 +217,19 @@ export default {
       this.publisher = undefined;
       this.subscribers = [];
       this.OV = undefined;
+      this.isdone = true;
+      // this.$router.push({ name: 'CounselingReview', params: {counselorId: 'counselingId'} })
       window.removeEventListener('beforeunload', this.leaveSession);
+      console.log(this.isdone)
       },
+      
+
 
     updateMainVideoStreamManager(stream) {
       if (this.mainStreamManager === stream) return;
       this.mainStreamManager = stream;
     },
+    
 
 
     // 상담사 => 1:1 상담방 개설
@@ -259,7 +288,7 @@ export default {
               this.session.connect(token, { clientData: this.myUserName })
           .then(() => {
 
-              // 영상 가져오기 => 모든 사용자는 publisher
+              // 영상 가져오기 => 모든 사용자는 publisher => 모든 사용자는 publisher
               let publisher = this.OV.initPublisher(undefined, {
                   audioSource: undefined, // The source of audio. If undefined default microphone
                   videoSource: undefined, // The source of video. If undefined default webcam

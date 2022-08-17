@@ -81,4 +81,9 @@ export default {
         opacity: 1;
     }
 }
+
+/* .carousel-item{
+  width: auto;
+  height:auto%;
+} */
 </style>

@@ -22,6 +22,7 @@
           </div>
         </div>
       </div>
+      </router-link>
     </div>
   </div>
 </div>
