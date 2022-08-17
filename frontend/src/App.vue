@@ -32,7 +32,8 @@ import "bulma/css/bulma.css"
   flex-direction:column;
   justify-content: center;
   position: relative;
-  z-index: 100;
+  z-index: 1;
+  background-color: #F9F7F7;
 }
 html, body{
   width: 100%;
@@ -40,7 +41,5 @@ html, body{
   margin: 0;
   padding: 0;
   background-color: #F9F7F7;
-  position: relative;
-  z-index: 2;
 }
 </style>
