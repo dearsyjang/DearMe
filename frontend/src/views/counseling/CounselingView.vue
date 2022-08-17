@@ -2,78 +2,64 @@
   <div id="main-container" class="container">
     <div id="join" v-if="!session">
       <div id="join-dialog" class="jumbotron vertical-center">
-      <div class="container">
-    <div class="popup-wrap" id="popup">
-      <div class="popup">
-        <div class="popup-body">
-          <div class="body-content">
-            <div class="body-contentbox">
-              <h3> 상담방에 입장하시겠습니까? </h3>
-              <div id="popup-btn">
-                <button v-if="currentUser.data.type==`USER`" id="enter-button" class="btn btn-mg" @click="joinSession()">상담방 입장</button>
-                <button v-if="currentUser.data.type==`COUNSELOR`" id="enter-button" class="btn btn-mg" @click="createSession()">상담방 개설</button>
-                <router-link :to="{ name:'userSchedule' }"><button v-if="currentUser.data.type==`USER`" id="cancel-button" class="btn btn-mg">돌아가기</button></router-link>
-                <router-link :to="{ name:'counselorSchedule' }"><button v-if="currentUser.data.type==`COUNSELOR`" id="cancel-button" class="btn btn-mg">돌아가기</button></router-link>
+        <div class="container">
+          <div class="popup-wrap" id="popup">
+            <div class="popup">
+              <div class="popup-body">
+                <div class="body-content">
+                  <div class="body-contentbox">
+                    <h3> 상담방에 입장하시겠습니까? </h3>
+                    <div id="popup-btn">
+                      <button v-if="currentUser.data.type==`USER`" id="enter-button" class="btn btn-mg" @click="joinSession()">상담방 입장</button>
+                      <button v-if="currentUser.data.type==`COUNSELOR`" id="enter-button" class="btn btn-mg" @click="createSession()">상담방 개설</button>
+                      <router-link :to="{ name:'userSchedule' }"><button v-if="currentUser.data.type==`USER`" id="cancel-button" class="btn btn-mg">돌아가기</button></router-link>
+                      <router-link :to="{ name:'counselorSchedule' }"><button v-if="currentUser.data.type==`COUNSELOR`" id="cancel-button" class="btn btn-mg">돌아가기</button></router-link>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-</div>
-</div>
-</div>
+  </div>
 
-    <!--세션 오픈-->
     <!--세션 오픈-->
     <div id="session" v-if="session">
-      <div id="session-header">
-        <input
-          class="btn btn-large btn-danger"
-          type="button"
-          id="buttonLeaveSession"
-          @click="leaveSession"
-          value="Leave session"
-        />
+      <div class="card mt-4" id="my-camera">
+        <user-video :stream-manager="mainStreamManager"/>
       </div>
 
+      <div class="card-group">
+        <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel" data-interval="false">
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+          <user-video
+            :stream-manager="publisher"
+           @click="updateMainVideoStreamManager(publisher)"/>
+          <div id="mynickname"><h6>{{ this.currentUser.data.nickname }}</h6></div>
+          </div>
+          <div class="carousel-item">
+            <user-video
+             :stream-manager="publisher"
+             @click="updateMainVideoStreamManager(publisher)"/>
+            <div id="mynickname"><h5>{{ this.currentUser.data.nickname }}</h5></div>
+      </div>
 
-      <div id="main-video" class="col-md-6">
-        <div class="card" style="width: 18rem;">
-          <user-video :stream-manager="mainStreamManager" />
-        <div class="card-body">
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+        </div>
         </div>
       </div>
-        
-      </div>
-      <div id="video-container" class="col-md-6">
-        <div class="card" style="width: 18rem;">
-        <user-video
-          :stream-manager="publisher"
-          @click="updateMainVideoStreamManager(publisher)"
-        />
-        <div class="card-body">
-        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-        </div>
-      </div>
-      <div class="card" style="width: 18rem;">
-  <user-video
-          v-for="sub in subscribers"
-          :key="sub.stream.connection.connectionId"
-          :stream-manager="sub"
-          @click="updateMainVideoStreamManager(sub)"
-        />
-  <div class="card-body">
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-  </div>
-</div>
-        
-      </div>
-
+      <input class="btn btn-large btn-danger" type="button" id="buttonLeaveSession" @click="leaveSession" value="상담 종료"/>
     </div>
   </div>
-
 </template>
 
 <script>
@@ -83,7 +69,7 @@ import axios from 'axios';
 // axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
 import { OpenVidu } from 'openvidu-browser';
 import UserVideo from './components/UserVideo';
-import { mapGetters, mapActions} from 'vuex';
+import { mapGetters, mapActions } from 'vuex';
 
 axios.defaults.headers.post['Content-Type'] = 'application/json';
 // const OPENVIDU_SERVER_URL = "https://i7d206.p.ssafy.io:4443";
@@ -96,7 +82,7 @@ export default {
   },
 
   computed: {
-    ...mapGetters(['authHeader2', 'currentUser', 'currentUser'])
+    ...mapGetters(['authHeader2', 'currentUser'])
   },
 
   data() {
@@ -173,7 +159,7 @@ export default {
               this.session.connect(token, { clientData: this.myUserName })
           .then(() => {
               console.log('initPublisher')
-              // 영상 가져오기 => 모든 사용자는 publisher => 모든 사용자는 publisher
+              // 영상 가져오기 => 모든 사용자는 publisher
               let publisher = this.OV.initPublisher(undefined, {
                   audioSource: undefined, // The source of audio. If undefined default microphone
                   videoSource: undefined, // The source of video. If undefined default webcam
@@ -192,6 +178,7 @@ export default {
           })
           .catch(error => {
               console.log('There was an error connecting to the session:', error.code, error.message);
+              alert('아직 상담방이 개설되지 않았습니다 😥')
           });
           })
           .catch((error) => reject(error.response));
@@ -272,7 +259,7 @@ export default {
               this.session.connect(token, { clientData: this.myUserName })
           .then(() => {
 
-              // 영상 가져오기 => 모든 사용자는 publisher => 모든 사용자는 publisher
+              // 영상 가져오기 => 모든 사용자는 publisher
               let publisher = this.OV.initPublisher(undefined, {
                   audioSource: undefined, // The source of audio. If undefined default microphone
                   videoSource: undefined, // The source of video. If undefined default webcam
@@ -290,6 +277,7 @@ export default {
           })
           .catch(error => {
               console.log('There was an error connecting to the session:', error.code, error.message);
+              alert('아직 상담방이 개설되지 않았습니다 😥')
           });
           })
           .catch((error) => reject(error.response));
@@ -305,12 +293,33 @@ export default {
 </script>
 
 <style scoped>
-.card {
+#app{
+  width: 100%;
+  height: 100%;
+  background-color: #F9F7F7;
+}
+div{
+  background-color: #F9F7F7;
+  text-align: center;
+}
+body{
+  background-color: #F9F7F7;
+}
+#session{
+  flex-direction: column;
+}
+#main-container{
+  background-color: #F9F7F7;
+  width: auto;
+  height: auto;
+}
+#card {
   justify-content: center;
   width: auto;
-  height: 280px;
-  margin-bottom: 25px;
+  height: 100px;
   border-style: none;
+  border: none;
+  color: #1B262C;
 }
 .popup-wrap{
   background-color:rgba(0,0,0,.3); 
@@ -382,5 +391,42 @@ export default {
 html{
   background-color: #DBE2EF;
 }
-</style>
 
+#buttonLeaveSession{
+  background-color: #FF6B6B;
+  color: white;
+  margin: 0;
+}
+#video-button{
+  text-align: center;
+}
+#video{
+  width: auto;
+  height: auto;
+}
+#video-container1{
+  width: auto;
+  height: auto;
+  text-align: center;
+  border: 1px solid #A2B5BB;
+  margin-bottom: 1;
+}
+#video-container2{
+  width: auto;
+  height: auto;
+  text-align: center;
+  border: 1px solid #A2B5BB;
+}
+.my-nickname{
+  background-color: 112D4E;
+  color: white;
+  text-align: center;
+  margin: 0;
+}
+.h6{
+  margin: 0;
+  text-align: center;
+  color: #1C3879;
+  font-weight: bold;
+}
+</style>

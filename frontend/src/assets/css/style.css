@@ -2241,13 +2241,13 @@ a.affan-element-item i {
   width: 2rem;
   height: 3.5rem;
   border-radius: 2px 70px;
-  background-color: #ffffff;
+  background-color: #F9F7F7;
 }
 .sidenav-wrapper .sidenav-style1::after {
   content: "";
   width: 2rem;
   height: 0.25rem;
-  background-color: #ffffff;
+  background-color: #F9F7F7;
   position: absolute;
   border-radius: 0.5rem;
   bottom: 0.25rem;
@@ -2295,14 +2295,14 @@ a.affan-element-item i {
 }
 .sidenav-nav li a {
   position: relative;
-  z-index: 1;
+  z-index: 0;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  color: #8480ae;
+  color: #112D4E;
   padding-top: 0.625rem;
   padding-bottom: 0.625rem;
   padding-right: 1.25rem;
@@ -7292,7 +7292,7 @@ small {
 }
 
 /* RTL */
-/* [view-mode=rtl] body .rtl-mode-switching svg {
+[view-mode=rtl] body .rtl-mode-switching svg {
   color: #0d5afd;
 }
 [view-mode=rtl] body .rtl-mode-switching .rtl-mode-text {
@@ -7441,7 +7441,7 @@ small {
   padding-right: 2rem;
 }
 [view-mode=rtl] body .alert,
-/* [view-mode=rtl] body .form-group, */
+[view-mode=rtl] body .form-group,
 [view-mode=rtl] body .btn.d-flex,
 [view-mode=rtl] body .list-group,
 [view-mode=rtl] body .input-group,
