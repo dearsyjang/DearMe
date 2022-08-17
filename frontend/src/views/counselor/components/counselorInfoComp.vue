@@ -4,10 +4,7 @@
       <div class="shop-pagination">
         <div class="container">
           <div class="self-introduce ">
-            <h5>{{counselor.data.introduce}} 안녕하세요.상담사 강지명입니다.
-            마음의 병이 생겼다면 우리는 어떻게 해야 할까요. 오랫동안 전문상담사를 양성해 온 천성문 교수는 심리상담이 필요한 이유를 쉽게 설명하였습니다.
-            '진료는 의사에게 약은 약사에게'라는 문구를 우리는 잘 알고잇다. 가변은 상처라면 집에서 간단히 처리를하지만 그렇지ㅏ 않다면 우리는 병원을 찾게 된다.
-            </h5>
+            <h5>{{counselor.data.introduce}}</h5>
           </div>
           <div class="counselor-info">
             <div class="accordion" id="accordionPanelsStayOpenExample">

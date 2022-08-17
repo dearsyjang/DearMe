@@ -29,7 +29,7 @@
             </div>
             <div class="d-flex align-items-center">
               <p class="mb-0 me-4 board-mypoint board-text-bold">최고의 상담사</p>
-              <router-link :to="{ name: 'counselorProfile', params: {counselorId: currentUser.data.id}}">
+              <router-link :to="{ name: 'counselorProfile', params: {counselorId: currentUser?.data?.id}}">
               <button class="w-btn w-btn-charge" type="button">프로필</button>
               </router-link>
             </div>
