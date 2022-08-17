@@ -82,7 +82,7 @@ export default {
   },
 
   computed: {
-    ...mapGetters(['authHeader2', 'currentUser'])
+    ...mapGetters(['authHeader2', 'currentUser', 'reviews'])
   },
 
   data() {
@@ -96,6 +96,12 @@ export default {
       mySessionId: '',
       myUserName: '',
       counselingId: this.$route.params.counselingId,
+      isdone: false,
+      counselorId: this.$route.params.counselorId,
+      review : {
+      contents: '',
+      id: 6,
+      value : 0},
     };
   },
 
@@ -104,7 +110,19 @@ export default {
   // Second request performs a POST to /openvidu/api/sessions/<sessionId>/connection (the path requires the sessionId to assign the token to this same session)
 
   methods: {
-    ...mapActions(['fetchCurrentUser']),
+    ...mapActions(['fetchCurrentUser', 'createReview']),
+
+    onSubmit() {
+    this.review = {
+      id: 6,
+      contents: this.review.contents,
+      value: this.value
+    }
+    this.createReview(this.review)
+    console.log(this.review.id)
+    console.log(this.review.contents)
+    console.log(this.review.value)
+    },
 
     // 취업준비생 => 상담방 입장
     joinSession() {
@@ -187,6 +205,9 @@ export default {
     
 
     leaveSession() {
+
+
+      
       // --- Leave the session by calling 'disconnect' method over the Session object ---
       if (this.session) this.session.disconnect();
       this.session = undefined;
@@ -194,13 +215,19 @@ export default {
       this.publisher = undefined;
       this.subscribers = [];
       this.OV = undefined;
+      this.isdone = true;
+      // this.$router.push({ name: 'CounselingReview', params: {counselorId: 'counselingId'} })
       window.removeEventListener('beforeunload', this.leaveSession);
+      console.log(this.isdone)
       },
+      
+
 
     updateMainVideoStreamManager(stream) {
       if (this.mainStreamManager === stream) return;
       this.mainStreamManager = stream;
     },
+    
 
 
     // 상담사 => 1:1 상담방 개설

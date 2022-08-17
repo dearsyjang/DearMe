@@ -41,7 +41,10 @@
                       </select>
                   </div>
                   <div class="form-group">
-                    <input class="form-control" type="email" v-model="credentials.email" placeholder="이메일">
+                    <input class="form-control" type="email" v-model="credentials.email" placeholder="이메일">    
+                  </div>
+                  <div class="form-group">
+                    <input class="form-control" type="phone" v-model="credentials.phone" placeholder="전화번호">
                   </div>
                   <div class="form-group">
                     <input class="form-control" type="phone" v-model="credentials.phone" placeholder="전화번호">
