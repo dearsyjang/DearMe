@@ -1,0 +1,12 @@
+spring.datasource.driver-class-name=org.mariadb.jdbc.Driver
+spring.datasource.username=dearme
+spring.datasource.password=dearme
+spring.datasource.url=jdbc:mariadb://i7d206.p.ssafy.io:3306/dearme
+
+spring.jpa.hibernate.ddl-auto=create
+spring.jpa.properties.hibernate.globally_quoted_identifiers=true
+spring.jpa.show-sql=true
+
+spring.jpa.defer-datasource-initialization=true
+spring.sql.init.mode=always
+spring.sql.init.data-locations=classpath:sql/data.sql
