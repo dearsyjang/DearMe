@@ -1,5 +1,7 @@
 <template>
+
 <div class="page-content-wrapper py-3 board-bg">
+  <comment-list-comp :comments="board.comments" :boardIdComment="board.id"></comment-list-comp>
   <div class="shop-pagination pb-3">
     <div class="container">
       <div class="card">
@@ -20,7 +22,12 @@
       <div class="form-group ">
         <div class="d-flex justify-content-between">
           <label class="board-text-bold board-text-title" >{{ board.title }}</label>
+          <div>
+            <p>{{ board.nickName }}</p>
+          </div>
+
           <p>{{ board.date ? board.date[0] : ''}}.{{ board.date ? board.date[1] : '' }}.{{ board.date ? board.date[2] : '' }}</p>
+
         </div>
         <hr class="my-2">
         <div>
@@ -29,8 +36,6 @@
       </div>
     </div>
   </div>
-
-    <comment-list-comp :comments="board.comments" :boardIdComment="board.id"></comment-list-comp>
 </div>
 </template>
 

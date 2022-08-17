@@ -1,36 +1,40 @@
 <template>
     <div class="container">
         <div id="join" v-show="!joined">
-            <h2>{{ nowDate }} 영상 일기</h2>
+            <br>
+            <br>
+            <h1>{{ nowDate }} 영상 일기</h1>
             <h2></h2>
             <br>
             <form @submit.prevent="joinSession">
                 <input type="text" id="videodiary-title" v-model="title">
                 <br>
                 <br>
-                <input type="submit" value="영상일기 기록하기">
+                <button class="btn"><h3>🧡💛💚💙💜</h3></button>
             </form>
         </div>
 
         <div id="session" v-show="joined">
             <h1 v-text="sessionId"></h1>
-            <div>
-                <div id="publisher"></div>
+            <div class="container mb-5 mt-5" id="video-diary">
+                <div id="publisher" class="justify-content-center ml-4"></div>
             </div>
-            <div id="video-diary">
-                <button type="button" class="btn" @click="leaveSession"></button>
-                <button type="button" class="btn" @click="startRecording">
-                    <h1>시작</h1>
-                </button>
-                <button type="button" class="btn" @click="stopRecording">
-                    <h1>종료</h1>
-                </button>
-                <button type="button" class="btn" @click="deleteRecording">
-                    <h1>삭제</h1>
-                </button>
-                <button type="button" class="btn" @click="saveRecording">
-                    <h1>저장</h1>
-                </button>
+            <div class="container" id="video-diary-button">
+                <div id="video-button">
+                    <button type="button" class="btn" @click="leaveSession"></button>
+                    <button type="button" class="btn" @click="startRecording">
+                    <h1><i class="bi bi-circle-fill"></i></h1>
+                    </button>
+                    <button type="button" class="btn" @click="stopRecording">
+                    <h1><i class="bi bi-square-fill"></i></h1>
+                    </button>
+                    <button type="button" class="btn" @click="deleteRecording">
+                    <h1><i class="bi bi-trash-fill"></i></h1>
+                    </button>
+                    <button type="button" class="btn" @click="saveRecording">
+                    <h1><i class="bi bi-download"></i></h1>
+                    </button>
+                </div>
 
                 <div v-if="videoSource!=''">
                     <button class="board-btn-submit btn-sm mx-2" data-bs-toggle="modal"
@@ -53,11 +57,6 @@
                     </div>
                 </div>
                 </div>
-
-
-
-
-
             </div>
             <div class="player-container" v-if="this.isTextOn">
                 <textarea v-model="this.sentiment"></textarea>
@@ -334,16 +333,25 @@ export default {
 </script>
 
 <style scoped>
-input{
-    width: auto;
+div{
+  background-color: #F9F7F7;
+  min-height: 30vh;
 }
-.app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+.container{
+background-color: #F9F7F7;
+}
+body{
+  width: auto;
+  height: 800px;
+  background-color: #F9F7F7;
+  justify-content: center;
+  align-content: center;
   text-align: center;
-  color: #2c3e50;
-  margin-top: 20px;
+}
+#join{
+    text-align: center;
+    justify-content: center;
+    height: 800px;
 }
 .test-player-wrap {
   width: 720px;
@@ -359,14 +367,7 @@ input{
 .btn-play svg {
   width: 16px;
 }
-.app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 20px;
-}
+
 .test-player-wrap {
   width: 720px;
   height: 405px;
@@ -378,7 +379,17 @@ input{
   margin-right: 10px;
   cursor: pointer;
 }
+
 .btn-play svg {
   width: 16px;
+}
+#video-button{
+  text-align: center;
+}
+#publisher{
+    margin:0 auto; 
+}
+#video-diary{
+    margin:0 auto; 
 }
 </style>
