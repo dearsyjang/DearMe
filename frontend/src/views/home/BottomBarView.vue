@@ -18,8 +18,12 @@
         <router-link to="/counseling-request/list" class="img mx-3"><img id="request" src="../../assets/images/request.png" alt="request"></router-link>
         <p class="text">상담신청</p>
       </div>
-    <div>
+    <div  v-if="currentUser.data?.type ==`USER`">
       <router-link to="/mypage/user" class="img mx-3"><img id="home" src="../../assets/images/home.png" alt="home"></router-link>
+      <p class="text">마이페이지</p>
+    </div>
+    <div  v-if="currentUser.data?.type ==`COUNSELOR`">
+      <router-link to="/mypage/counselor" class="img mx-3"><img id="home" src="../../assets/images/home.png" alt="home"></router-link>
       <p class="text">마이페이지</p>
     </div>
     <div>
