@@ -59,9 +59,11 @@
 
 
                   <br><hr><br>
+                  <h3 class="counselor-info-set">상담 정보를 입력해주세요</h3>
+                  <br><br>
                   <div class="su-filter-title" id="category-select" >
                     <p style="text-align:center">전문 분야를 선택해주세요</p>
-                    <br>
+                   
                     <div class="ctrg-inside">
                     <div class="form-check form-check-inline">
                       <input class="form-check-input" type="radio" id="3" value="가족" name="radio2" v-model="credentials.counselorProfile.categories[0].contents">
@@ -89,20 +91,25 @@
                     </div>
                   </div>
                   </div>
-                  <br><br><br><br><br><br>
+                  
+                  <br><br><br>
+                  <p style="text-align:center">추가 정보를 입력해주세요</p>
                    <div class="form-group">
-                    주요 약력을 입력해주세요
+                    <div class="info-text">주요 약력을 입력해주세요</div>
                     <input class="form-control" type="text" v-model="credentials.counselorProfile.careers[0].contents" placeholder="약력">
                   </div>
                    <div class="form-group">
-                    주요 자격증을 입력해주세요
+                    <div class="info-text">주요 자격증을 입력해주세요</div>
                     <input class="form-control" type="text" v-model="credentials.counselorProfile.certificates[0].contents" placeholder="자격증">
                   </div>
                    <div class="form-group">
-                    상담가격 
-                    
+                    <div class="info-text">상담가격   </div>
                     <input class="form-control" type="text" v-model="credentials.counselorProfile.price" placeholder="가격">
                     <p>*회원가입 시 상담가격은 1000point부터 시작합니다</p>
+                  </div>
+                  <div class="form-group" >
+                    <div class="info-text">자기소개를 입력해주세요</div>
+                    <input class="form-control" id="self-intro" type="text" v-model="credentials.counselorProfile.introduce" placeholder="">
                   </div>
 
 
@@ -136,7 +143,7 @@ export default {
         phone: '',
         email: '',
         picture: '',
-        counselorProfile: {introduce : "introduce my self",
+        counselorProfile: {introduce : "",
               price : 1000,
                 careers : [
                     { contents : "" },
@@ -265,13 +272,27 @@ export default {
 .form-check-input{
   display: none;
 }
+.counselor-info-set{
+  margin:auto;
+  text-align:center;
+  padding:20px;
+}
 
 .form-check :checked ~ label {
   -webkit-text-fill-color: white;
   background-color: #7f7cb2db;
 }
 
+#signup-birth{
+  width:31%;
+ 
+}
 
+#self-intro{
+  height:200px;
+}
 
-
+.info-text{
+  margin-bottom:3px
+}
 </style>

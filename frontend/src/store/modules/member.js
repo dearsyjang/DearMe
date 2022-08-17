@@ -96,7 +96,7 @@ export default {
           router.push({ name: 'login' })
         })
         .catch((err) => {
-          console.error(err)
+          console.error(formData)
           console.error(err.response.data)
           commit('SET_AUTH_ERROR', err.response.data)
         })
