@@ -88,9 +88,9 @@ export default {
   methods: {
     ...mapActions(['fetchBoards'])
   },
-  async created() {
+  created() {
     console.log()
-    await this.fetchBoards()
+    this.fetchBoards()
   }
 
 }

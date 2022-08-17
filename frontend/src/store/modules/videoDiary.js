@@ -12,9 +12,6 @@ export default {
   getters: {
     videoDiaries: state => state.videoDiaries,
     videoDiary: state => state.videoDiary,
-    isAuthor2: (state, getters) => {
-      return state.board.user?.username === getters.currentUser.username
-    },
     isvideoDiary: state => !_.isEmpty(state.diary),
 
   },

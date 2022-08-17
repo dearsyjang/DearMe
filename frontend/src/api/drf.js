@@ -6,10 +6,10 @@ const COMMENT ='/comments'
 const COUNSELOR = '/counselors'
 const GROUP = '/groups'
 const TEXTDIARY = '/text-diaries'
+const VIDEODIARY = '/video-diaries'
 const COUNSELING = '/counselings'
 const CAREER = '/careers'
 const CERTIFICATE = '/certificates'
-const VIDEODIARY = '/video-diaries'
 
 export default {
   member : {
@@ -35,8 +35,8 @@ export default {
   board : {
     boardCreate: () => HOST + BOARD,
     boardsList: () => HOST + BOARD,
-    boardDetail: boardPk => HOST + BOARD + `/${boardPk}`,
-    boardEdit: boardPk => HOST + BOARD + `/${boardPk}`,
+    boardDetail: boardId => HOST + BOARD + `/${boardId}`,
+    boardEdit: boardId => HOST + BOARD + `/${boardId}`,
     commentCreate: boardPk => HOST + BOARD + `/${boardPk}` + COMMENT,
     commentEdit: (boardPk, commentPk) => HOST + BOARD + `/${boardPk}` + COMMENT + `/${commentPk}`
   },
@@ -58,7 +58,7 @@ export default {
     requestUpdate: () => HOST + COUNSELING,
   },
   group : {
-    groupRequest: () => HOST + '/counseling-doucments/groups',
+    groupRequest: () => HOST + '/counseling-documents/groups',
     groupDetail: groupId => HOST + GROUP +`/${groupId}`,
     groups: () => HOST + MEMBER + GROUP,
     myGroup:() => HOST + MEMBER + GROUP,
@@ -67,8 +67,6 @@ export default {
     counselingSchedules: () => HOST + COUNSELING,
     counselingSchedule: () => HOST + COUNSELING,
     groupDetail: groupId => HOST + GROUP +`/${groupId}`,
-
-
   },
   textDiary : {
     textDiaryCreate: () => HOST + TEXTDIARY,

@@ -4,15 +4,12 @@
     <div class="container">
       <div class="row g-3">
         <div class="col-6 col-sm-4 col-md-3">
-          <div class="card position-relative shadow-sm">
+          <div v-for="favorite in myFavorite" :key="favorite" class="card position-relative shadow-sm">
             <div class="card-body">
-              <span class="badge bg-p rounded-pill mb-2 d-inline-block">
-                <i class="bi bi-file-earmark-person"></i> 상담사 프로필</span>
-              <h4>상담사 이름</h4>
-              <!-- <router-link :to="{ name: 'boardDetail', params: {boardId: board.id }}">
+              <router-link :to="{ name: 'counselorProfile', params: {counselorId: favorite.counselorId }}">
               <span class="badge bg-danger rounded-pill mb-2 d-inline-block"><i class="bi bi-hand-thumbs-up-fill"></i> {{ board.hitCnt}}</span>
-              <h4 class="blog-title d-block text-dark board-title">{{ board.title }}</h4>
-              </router-link> -->
+              <h4 class="blog-title d-block text-dark board-title">{{ favorite.counselorId }}</h4>
+              </router-link>
             </div>
           </div>
         </div>
@@ -23,10 +20,13 @@
 </template>
 <script>
 export default {
+  props: {
+    myFavorite: Array,
+  },
   components: {},
   data() {
     return {
-      sampleData: ''
+
     }
   },
   setup() {},

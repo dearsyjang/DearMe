@@ -31,8 +31,8 @@
                 <div>
                   <p class="card-text"><P class="text-muted">&#11088; {{counselor.data.value}} ({{counselor.data.reviewCnt}})</P></p>
                 </div>
-                <div class="d-flex align-items-center">
-                  <P>전문분야</P>
+                <div class="row d-flex align-items-center">
+                  <div>전문분야</div>
                   <div class="category-contents" v-for="(c,idx) in counselor.data.categories"
                     :key="idx"
                     :c="c">
@@ -46,12 +46,12 @@
       </div>
 
       <div class="top-products-area product-list-wrap">
-        <div class="container">
-          <button id= "select-left" @click="changeDp()" :class="{ red:isRed, bold:isBold }">
-            상담사 정보
+        <div class="container d-flex align-items-center justify-content-center">
+          <button class="w-btn-outline w-btn-yellow-outline" type="button" @click="changeDp()" :class="{ red:isRed, blod:isBold }">
+              상담사 정보
           </button>
-          <button id="select-right" @click="changeFp()" :class="{ red:isRed2, bold:isBold2 }">
-            상담 정보
+          <button class="w-btn-outline w-btn-yellow-outline" type="button" @click="changeFp()" :class="{ red:isRed2, blod:isBold2 }">
+              상담 정보
           </button>
         </div>
       </div>
@@ -232,14 +232,14 @@
 
 .category-btn{
   font-size:5px;
-  border : 2px solid;
+  border : none;
   border-radius : 5px;
   width: 70px;
   height: 20px;
   margin: 4px;
   text-align: center;
   justify-content: center;
-  background-color: #EFCC70;
+  background-color: #efcb709e;
 }
 
 .group-enter-btn{
@@ -269,6 +269,7 @@
 }
 .white-bg {
   width: 100% ;
+  background :white ;
   background-color :#F9F7F7 ;
   border-radius:8px;
   padding : 20px;
@@ -286,7 +287,7 @@
 width: 100%
 }
 
-#select-left{
+/* #select-left{
  width: 50%;
  float: left;
  height: 50px;
@@ -301,7 +302,7 @@ width: 100%
  border: none;
  color: white;
  background-color: #595892db;
-}
+} */
 .red{
 color:#595892
         }
@@ -336,4 +337,26 @@ font-weight: bold;
 .top-products-area {
   margin-bottom: 20px;
 }
+.w-btn-outline {
+    position: relative;
+    padding: 15px 30px;
+    /* border-radius: 15px; */
+    font-family: "paybooc-Light", sans-serif;
+    /* box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2); */
+    text-decoration: none;
+    font-weight: 600;
+    width: 200px;
+    /* transition: 0.25s; */
+}
+
+.w-btn-yellow-outline:hover {
+    background-color: #EFCC70;
+    color: #6e6e6e;
+}
+.w-btn-yellow-outline {
+    border: 3px solid #EFCC70;
+    color: #6e6e6e;
+}
+
+
 </style>

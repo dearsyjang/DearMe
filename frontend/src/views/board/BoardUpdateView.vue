@@ -9,7 +9,7 @@
             <div>
               <router-link to="/board"><button class="board-btn-index btn-sm ">목록</button></router-link>
               <button @click="onSubmit()" class="board-btn-submit btn-sm mx-2">수정</button>
-              <button @click="deleteBoard(board.id)" class="board-btn-submit btn-sm ">삭제</button>
+              <button @click="deleteBoard(this.board.id)" class="board-btn-submit btn-sm ">삭제</button>
             </div>
           </div>
         </div>
@@ -38,10 +38,9 @@ export default {
   },
   data() {
     return {
-      boardID: this.$route.params.boardId,
       data: {
-        title: this.board.title,
-        contents: this.board.contents
+        title: '',
+        contents : ''
       }
     }
   },
@@ -51,18 +50,21 @@ export default {
   },
   methods: {
     ...mapActions(['fetchBoard', 'deleteBoard', 'updateBoard']),
-    onsubmit() {
+    onSubmit() {
       const data = {
-        title: this.title,
-        contents: this.contents
+        'title': this.data.title,
+        'contents': this.data.contents ,
+        // 'date': '2202/02/02'
       }
-      this.updateBoard(this.boardID, data)
+      this.updateBoard(data)
     }
   },
   created() {
-    this.fetchBoard(this.boardID)
+    this.fetchBoard(this.$route.params.boardID)
   },
   mounted() {
+    this.data.title=this.board.title
+    this.data.contents=this.board.contents
   },
   unmounted() {},
 }
