@@ -1,5 +1,7 @@
 <template>
+
 <div class="page-content-wrapper py-3 board-bg">
+  <comment-list-comp :comments="board.comments" :boardIdComment="board.id"></comment-list-comp>
   <div class="shop-pagination pb-3">
     <div class="container">
       <div class="card">
@@ -34,8 +36,6 @@
       </div>
     </div>
   </div>
-
-    <comment-list-comp :comments="board.comments" :boardIdComment="board.id"></comment-list-comp>
 </div>
 </template>
 

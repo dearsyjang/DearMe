@@ -7,22 +7,21 @@
           <div class="card position-relative shadow-sm">
             <div class="card-body">
               <span class="badge bg-danger rounded-pill mb-2 d-inline-block"><i class="bi bi-hand-thumbs-up-fill"></i>4.5</span>
-              <h4 class="blog-title d-block text-dark board-title">그룹 이름 / 취준생 닉네임</h4>
+              <h4 class="blog-title d-block text-dark board-title">그룹 상담방</h4>
               <h6>10:00 - 11:00</h6>
-              <!-- <router-link :to="{ name: 'boardDetail', params: {boardId: board.id }}">
-              <span class="badge bg-danger rounded-pill mb-2 d-inline-block"><i class="bi bi-hand-thumbs-up-fill"></i> {{ board.hitCnt}}</span>
-              <h4 class="blog-title d-block text-dark board-title">{{ board.title }}</h4>
-              </router-link> -->
             </div>
           </div>
         </div>
-      </div>
-    </div>
+        </div>
+        </div>
   </div>
 </div>
 </template>
 <script>
 export default {
+  props: {
+    requests: Array
+  },
   components: {},
   data() {
     return {

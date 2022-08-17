@@ -35,7 +35,6 @@ export default {
           }
       })
       .then(res =>{
-        console.log(res.data)
         console.log(res.data.data)
         commit('SET_GROUP_REQUEST', res.data.data)
         alert('그룹 신청 성공')
