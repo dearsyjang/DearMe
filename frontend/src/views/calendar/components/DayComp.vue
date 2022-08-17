@@ -1,10 +1,10 @@
 <template>
-  <div>
-    <div v-if="this.textDiaryId!=undefined">
-      <button class="board-btn-submit btn-sm mx-2" data-bs-toggle="modal" data-bs-target="#textDiaryView">텍스트 일기
-        보기</button>
+<div id="daycomp">
+    <div class="custom-container">
+        <div v-if="this.textDiaryId!=undefined">
+        <button class="btn" data-bs-toggle="modal" data-bs-target="#textDiaryView"><img id="text-diary-img" src="../../../assets/images/text-diary.png" alt="text-diary"></button>
 
-      <div class="modal fade" id="textDiaryView" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="textDiaryView" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
@@ -13,19 +13,17 @@
             </div>
             {{this.textDiary}}
             <button @click="textDiaryDelete()" class="board-btn-submit btn-sm mx-3">삭제</button>
-
           </div>
         </div>
-      </div>
     </div>
 
 
     <div v-if="videoDiaryId!=undefined">
-      <button class="board-btn-submit btn-sm mx-2" data-bs-toggle="modal"
-            data-bs-target="#videoDiaryView">영상 일기 보기</button>
+      <button class="btn" data-bs-toggle="modal"
+            data-bs-target="#videoDiaryView"><img id="video-diary-img" src="../../../assets/images/video-diary.png" alt="video-diary"></button>
       </div>
  
-            <div class="modal fade" id="videoDiaryView" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="videoDiaryView" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -43,9 +41,9 @@
     </div>
   </div>
 </div>
-
-
+    </div>
   </div>
+</div>
 </template>
 <script>
 import { mapActions, mapGetters } from 'vuex';
@@ -96,5 +94,26 @@ export default {
 }
 }
 </script>
-<style>
+<style scoped>
+.btn{
+    border: 0;
+    outline: 0;
+}
+#daycomp{
+  display: flex;
+  height: 720px;
+  margin: 0 auto;
+  background-color: #F9F7F7;
+  align-items: center;
+}
+#text-diary-img{
+  width: 80px;
+  height: 80px;
+  margin: 0;
+}
+#video-diary-img{
+  width: 80px;
+  height: 80px;
+  margin: 0;
+}
 </style>

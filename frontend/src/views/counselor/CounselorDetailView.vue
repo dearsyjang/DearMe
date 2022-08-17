@@ -114,7 +114,7 @@
       }
     },
     computed : {
-      ...mapGetters(['counselor','currentUser', 'favorite','groups','favorite']),
+      ...mapGetters(['counselings','counselor','currentUser', 'favorite','groups','favorite']),
       infos() {
       return this.$store.state.infos
 

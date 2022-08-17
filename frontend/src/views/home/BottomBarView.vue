@@ -72,7 +72,8 @@ export default {
     padding: 0;
     max-width: 100%;
     overflow-x: hidden;
-    z-index: 1; /* 맨 위로 올리기 position 썼을 때만 가능 */
+    /* z-index: 1; 
+    맨 위로 올리기 position 썼을 때만 가능 */
 }
 
 #bottombar > div {
