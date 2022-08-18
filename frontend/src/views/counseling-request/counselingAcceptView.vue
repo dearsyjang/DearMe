@@ -19,7 +19,9 @@
               <!-- <router-link :to="{ name: 'boardDetail', params: {boardId: board.id }}"> -->
                 <div class="d-flex justify-content-between">
                   <div>
-                    {{request}}
+                    {{this.$route.params.userId}}
+                    {{this.$route.params.status}}
+
                     <!-- <h2 class="card-title">{{personalInfo.userId}}</h2> -->
                   </div>
                   <div>
@@ -61,7 +63,7 @@ export default {
   setup() {},
   created() {
     this.request = this.$route.params.personalInfo
-    console.log(this.request)
+    console.log(this.$route.params.personalInfo)
   },
   mounted() {},
   unmounted() {},

@@ -16,35 +16,27 @@
 
         <div id="session" v-show="joined">
             <h1 v-text="sessionId"></h1>
-            <div class="card mb-3" style="width: auto; height: auto;">
-                <div class="card-footer">
                     <h1>{{ title }}</h1>
                     <hr>
                     <h3>주의 사항</h3>
                     <br>
                     <h4>영상 일기는 최단 10초에서 최장 1분까지 촬영가능합니다.</h4>
-                </div>
-                    <div class="card-body text-success">
+                    <hr>
                     <div id="publisher" class="justify-content-center ml-4"></div>
-                </div>
-                <div class="card-footer">
-                    <div id="video-button">
-                        <button type="button" class="btn" @click="leaveSession"></button>
-                        <button type="button" class="btn" @click="startRecording">
-                        <h1><i class="bi bi-circle-fill"></i></h1>
-                        </button>
-                        <button type="button" class="btn" @click="stopRecording">
-                        <h1><i class="bi bi-square-fill"></i></h1>
-                        </button>
-                        <button type="button" class="btn" @click="deleteRecording">
-                        <h1><i class="bi bi-trash-fill"></i></h1>
-                        </button>
-                        <button type="button" class="btn" @click="saveRecording">
-                        <h1><i class="bi bi-download"></i></h1>
+                    <div v-if="isLoading" class="loadingSpinner">
+                        <button class="btn" type="button" disabled>
+                            <span class="spinner-border spinner-border-none" role="status" aria-hidden="true"></span>
+                            Loading...
                         </button>
                     </div>
-                </div>
-        </div>
+                    <div id="video-button" class="justify-content-center mr-5">
+                        <button type="button" class="btn m-1" @click="leaveSession"></button>
+                        <button type="button" class="btn btn-danger mr-1" @click="startRecording">START</button>
+                        <button type="button" class="btn btn-primary mr-1" @click="stopRecording">STOP</button>
+                        <button type="button" class="btn btn-warning mr-1" @click="deleteRecording">DELETE</button>
+                        <button type="button" class="btn btn-success mr-1" @click="saveRecording">SAVE</button>
+                    </div>
+                    <hr>
             <div class="container">
                 <div v-if="videoSource!=''">
                     <button class="board-btn-submit btn-sm mx-2" data-bs-toggle="modal"
@@ -112,6 +104,7 @@ export default {
             contents: '',
             videoId:'',
             videoSource:'',
+            isLoading: false,
         };
     },
     
@@ -406,6 +399,22 @@ body{
 }
 .card{
     display: flex;
-
+    width: auto;
+    height: auto;
+}
+.card-footer{
+    height: 10px;
+}
+.loadingSpinner{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20%;
+    height: 16%;
+    margin-left: -10%;
+    margin-top: -8%;
+    z-index: 1000;
+    background-color: transparent;
+    
 }
 </style>

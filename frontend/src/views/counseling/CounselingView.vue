@@ -63,41 +63,31 @@
     <!--세션 오픈-->
     <div id="session" v-if="session">
       <div class="card mt-4" id="my-camera">
-        <!-- <user-video :stream-manager="mainStreamManager"/> -->
+        <user-video :stream-manager="mainStreamManager"/>
       </div>
-      <div class="card-group">
         <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel" data-interval="false">
-        <div class="carousel-inner">
-          <div class="carousel-item active">
+      <div class="carousel-inner">
+        <div class="carousel-item active">
           <user-video
-            :stream-manager="publisher"
-           @click="updateMainVideoStreamManager(publisher)"/>
-          <div id="mynickname"><h5>{{ this.currentUser.data.nickname }}</h5></div>
-          </div>
-          <div v-for="sub in subscribers" :key="sub.stream.connection.connectionId">
-            <button id = {{sub.stream.connection.connectionId}} @click=clickSub(sub) class="btn">버튼!!</button>
-            <user-video
-              :stream-manager="localSub"
-            />
-              <div id="mynickname"><h5>{{ this.currentUser.data.nickname }}</h5></div>
-          </div>
-            
-            
-
-      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
-      </button>
-      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
-      </button>
-        </div>
-        </div>
+            v-for="sub in subscribers"
+            :key="sub.stream.connection.connectionId"
+            :stream-manager="sub"
+            @click="updateMainVideoStreamManager(sub)"
+          />
+      </div>
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
       </div>
       <input class="btn btn-large btn-danger" type="button" id="buttonLeaveSession" @click="leaveSession" value="상담 종료"/>
     </div>
-  </div>
 </template>
 
 <script>
@@ -125,7 +115,6 @@ export default {
 
   data() {
     return {
-      localSub:{},
       OV: undefined,
       session: undefined,
       mainStreamManager: undefined,
@@ -150,10 +139,7 @@ export default {
 
   methods: {
     ...mapActions(['fetchCurrentUser', 'createReview']),
-    clickSub(sub){
-      console.log(sub)
-      this.locaSub=sub
-    },
+
     onSubmit() {
     this.review = {
       id: this.counselorId,
@@ -482,7 +468,7 @@ html{
 }
 #video-container2{
   width: auto;
-  height: 50%npm;
+  height: auto;
   text-align: center;
   border: 1px solid #A2B5BB;
 }
@@ -498,4 +484,5 @@ html{
   color: #1C3879;
   font-weight: bold;
 }
+
 </style>

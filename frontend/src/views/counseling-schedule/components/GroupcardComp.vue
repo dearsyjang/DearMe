@@ -9,17 +9,15 @@
           <div v-if="re.counselorId== currentUser.data.userId && re.status==`ACCEPTED` && re.groupId != null"  class="card mb-3" id="today-group-card">
           <div class="card position-relative shadow-sm">
             <div class="card-body">
-              <router-link :to="{ name: 'CounselingRequestDocument', params : {counselingId : re.id}}">
               <div class="card-body d-flex align-items-center">
                   <div>
-                    <span class="badge bg-danger rounded-pill mb-2 d-inline-block"> {{ idx }}</span>
-                    <h3 class="blog-title d-block text-dark board-title">상담 번호: {{re.counselingDocumentId}}</h3>
+                    <span class="badge bg-danger rounded-pill mb-2 d-inline-block"> {{ idx+1 }}</span>
+                    <h3 class="blog-title d-block text-dark board-title">그룹 이름<br/>{{re.title}}</h3>
                     <router-link :to="{ name: 'counseling', params : {counselingId : re.id}}">
                       <button id="open-room" class="w-btn w-btn-charge">상담방 개설</button>
                     </router-link>
                   </div>
               </div>
-            </router-link>
             </div>
           </div>
         </div>

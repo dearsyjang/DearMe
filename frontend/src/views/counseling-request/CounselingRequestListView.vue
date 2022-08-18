@@ -77,7 +77,9 @@ export default {
   },
   setup() {},
 
-  mounted() {},
+  mounted() {
+    console.log(this.requests)
+  },
   unmounted() {},
   computed:{
     ...mapGetters(['requests','currentUser']),

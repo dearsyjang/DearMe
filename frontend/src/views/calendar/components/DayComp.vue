@@ -11,7 +11,12 @@
               <h5 class="modal-title" id="exampleModalLabel">텍스트 일기</h5>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            {{this.textDiary}}
+            <h1>{{ this.textDiary.title }}</h1>
+            <p>{{ this.textDiary.contents }}</p>
+            <p>{{ this.textDiary.year }}년 {{ this.textDiary.month }}월 {{ this.textDiary.day}}일</p>
+            <h3 v-if="this.textDiary.sentiment == 'positive'">😊</h3>
+            <h3 v-if="this.textDiary.sentiment == 'negative'">😢</h3>
+            <h3 v-if="this.textDiary.sentiment == 'netural'">😐</h3>
             <button @click="textDiaryDelete()" class="board-btn-submit btn-sm mx-3">삭제</button>
           </div>
         </div>
@@ -32,8 +37,12 @@
       </div>
       <div class="modal-body">
         <div class="player-container">
-          {{this.videoDiary}}
-          
+          <h1>{{ this.textDiary.title }}</h1>
+            <p>{{ this.textDiary.contents }}</p>
+            <p>{{ this.textDiary.year }}년 {{ this.textDiary.month }}월 {{ this.textDiary.day}}일</p>
+            <h3 v-if="this.textDiary.sentiment == 'positive'">😊</h3>
+            <h3 v-if="this.textDiary.sentiment == 'negative'">😢</h3>
+            <h3 v-if="this.textDiary.sentiment == 'netural'">😐</h3>
             <vue3-video-player :src="videoSource"></vue3-video-player>
         </div>
         <button @click="videoDiaryDelete()" class="board-btn-submit btn-sm mx-3">삭제</button>

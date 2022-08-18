@@ -51,11 +51,10 @@ export default {
   },
   setup() {},
   created() {
-    this.fetchCurrentUser()
-    
+    this.fetchCurrentUser()    
   },
   mounted() {
-          console.log(this.currentUser.data)
+      console.log(this.currentUser.data)
       const img = document.getElementById('profile');
       img.src = this.currentUser?.data?.pictureUrl
   },

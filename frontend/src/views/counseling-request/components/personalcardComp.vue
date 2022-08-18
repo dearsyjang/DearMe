@@ -8,13 +8,12 @@
          class="col-6 col-sm-4 col-md-3">
           <div class="card position-relative shadow-sm">
             <div class="card-body">
-              <router-link :to="{ name: 'counselingAcceptView', params : { personalInfo:re }}">
+              <router-link :to="{ name: 'CounselingRequestDocument', params : {counselingId : re.id}}">
               <div class="card-body d-flex align-items-center">
                   <div>
-                    {{ re}}
-                    <span class="badge bg-danger rounded-pill mb-2 d-inline-block"> {{ idx }}</span>
-                    <h3 class="blog-title d-block text-dark board-title">user : {{re.userId}}</h3>
-                    <h4>상담일 : {{re.year}}/{{re.month}}/{{re.day}}</h4>
+                    <span class="badge bg-danger rounded-pill mb-2 d-inline-block"> {{ idx+1 }}</span>
+                    <h3 class="blog-title d-block text-dark board-title">신청자명<br/>{{re.userNickname}}</h3>
+                    <h4>상담일 : {{re.year}}/{{re.month}}/{{re.day}}   {{re.hours}} 시</h4>
                   </div>
               </div>
             </router-link>
@@ -45,6 +44,7 @@ import { mapGetters,mapActions } from 'vuex'
   created() {
     this.fetchCurrentUser()
     this.fetchRequests()
+    console.log(this.request)
 }
 
   }
