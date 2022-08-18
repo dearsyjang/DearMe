@@ -1,7 +1,7 @@
 --> user
 -- 1
 insert into USER (created_at, updated_at, birth, email, gender, id, nick_name, phone, file_name, real_file_name, points, pw, refresh_token, type)
-values (now(), now(), '2021-09-19', 'ltumayan0@google.fr', 'MALE', 'test1', 'test1', '010-4926-4291', 'basic', 'basic.png', 10000, 'test1', 'refresh Token', 'USER');
+values (now(), now(), '2021-09-19', 'ltumayan0@google.fr', 'MALE', 'test1', 'test1', '010-4926-4291', 'pikachu', 'pikachu.png', 10000, 'test1', 'refresh Token', 'USER');
 -- 2
 insert into USER (created_at, updated_at, birth, email, gender, id, nick_name, phone, file_name, real_file_name, points, pw, refresh_token, type)
 values (now(), now(), '2021-08-25', 'sfeaveer1@epa.gov', 'FEMALE', 'test2', 'test2', '010-3908-6081', 'basic', 'basic.png', 20000, 'test2', 'refresh Token', 'USER');
@@ -28,121 +28,61 @@ insert into USER (created_at, updated_at, birth, email, gender, id, nick_name, p
 values (now(), now(), '2022-03-12', 'oloram8@europa.eu', 'FEMALE', 'test9', 'test9', '010-1530-7150', 'basic', 'basic.png', 9000, 'test9', 'refresh Token', 'USER');
 -- 10
 insert into USER (created_at, updated_at, birth, email, gender, id, nick_name, phone, file_name, real_file_name, points, pw, refresh_token, type)
-values (now(), now(), '2022-07-17', 'britzman9@parallels.com', 'MALE', 'test10', 'test10', '010-4427-6321', 'basic', 'basic.png', 1000, 'test10', 'refresh Token', 'USER');
+values (now(), now(), '2021-12-22', 'kpaprotnyt@chicagotribune.com', 'MALE', 'test30', 'test30', '010-3521-2216', 'ggobugi', 'ggobugi.jpeg', 3000, 'test30', 'refresh Token', 'COUNSELOR');
 -- 11
 insert into USER (created_at, updated_at, birth, email, gender, id, nick_name, phone, file_name, real_file_name, points, pw, refresh_token, type)
-values (now(), now(), '2022-01-18', 'wderhama@aboutads.info', 'FEMALE', 'test11', 'test11', '010-5406-0987', 'basic', 'basic.png', 1100, 'test11', 'refresh Token', 'USER');
+values (now(), now(), '2021-08-29', 'gstrangu@biglobe.ne.jp', 'MALE', 'test31', 'test31', '010-6447-2507', 'isanghessi', 'isanghessi.png', 3100, 'test31', 'refresh Token', 'COUNSELOR');
 -- 12
 insert into USER (created_at, updated_at, birth, email, gender, id, nick_name, phone, file_name, real_file_name, points, pw, refresh_token, type)
-values (now(), now(), '2021-12-11', 'ystobbeb@techcrunch.com', 'FEMALE', 'test12', 'test12', '010-1474-8887', 'basic', 'basic.png', 1200, 'test12', 'refresh Token', 'USER');
+values (now(), now(), '2022-07-27', 'cboggesv@ucoz.ru', 'MALE', 'test32', 'test32', '010-9341-7795', 'metamong', 'metamong.jpg', 3200, 'test32', 'refresh Token', 'COUNSELOR');
 -- 13
 insert into USER (created_at, updated_at, birth, email, gender, id, nick_name, phone, file_name, real_file_name, points, pw, refresh_token, type)
-values (now(), now(), '2022-06-25', 'bstuckeyc@slideshare.net', 'MALE', 'test13', 'test13', '010-9417-6357', 'basic', 'basic.png', 1300, 'test13', 'refresh Token', 'USER');
+values (now(), now(), '2022-07-12', 'mcorradow@typepad.com', 'MALE', 'test33', 'test33', '010-6597-1235', 'pairi', 'pairi.jpeg', 3300, 'test33', 'refresh Token', 'COUNSELOR');
 -- 14
 insert into USER (created_at, updated_at, birth, email, gender, id, nick_name, phone, file_name, real_file_name, points, pw, refresh_token, type)
-values (now(), now(), '2022-05-22', 'lformand@amazon.de', 'FEMALE', 'test14', 'test14', '010-5747-2621', 'basic', 'basic.png', 1400, 'test14', 'refresh Token', 'USER');
+values (now(), now(), '2022-06-16', 'vgauchx@utexas.edu', 'FEMALE', 'test34', 'test34', '010-3054-2172', 'basic', 'basic.png', 3400, 'test34', 'refresh Token', 'COUNSELOR');
 -- 15
 insert into USER (created_at, updated_at, birth, email, gender, id, nick_name, phone, file_name, real_file_name, points, pw, refresh_token, type)
-values (now(), now(), '2022-06-08', 'cwenname@macromedia.com', 'MALE', 'test15', 'test15', '010-6400-4942', 'basic', 'basic.png', 1500, 'test15', 'refresh Token', 'USER');
+values (now(), now(), '2022-02-09', 'dpladeny@163.com', 'FEMALE', 'test35', 'test35', '010-2469-8882', 'basic', 'basic.png', 3500, 'test35', 'refresh Token', 'COUNSELOR');
 -- 16
 insert into USER (created_at, updated_at, birth, email, gender, id, nick_name, phone, file_name, real_file_name, points, pw, refresh_token, type)
-values (now(), now(), '2021-10-07', 'sluckettf@bandcamp.com', 'FEMALE', 'test16', 'test16', '010-9594-5704', 'basic', 'basic.png', 1600, 'test16', 'refresh Token', 'USER');
+values (now(), now(), '2021-11-16', 'uretterz@washington.edu', 'FEMALE', 'test36', 'test36', '010-1530-5329', 'basic', 'basic.png', 3600, 'test36', 'refresh Token', 'COUNSELOR');
 -- 17
 insert into USER (created_at, updated_at, birth, email, gender, id, nick_name, phone, file_name, real_file_name, points, pw, refresh_token, type)
-values (now(), now(), '2022-02-25', 'jverrallg@ehow.com', 'MALE', 'test17', 'test17', '010-1462-8539', 'basic', 'basic.png', 1700, 'test17', 'refresh Token', 'USER');
+values (now(), now(), '2022-02-22', 'atrengrove10@istockphoto.com', 'MALE', 'test37', 'test37', '010-9503-3978', 'basic', 'basic.png', 3700, 'test37', 'refresh Token', 'COUNSELOR');
 -- 18
 insert into USER (created_at, updated_at, birth, email, gender, id, nick_name, phone, file_name, real_file_name, points, pw, refresh_token, type)
-values (now(), now(), '2022-03-17', 'egilpinh@skype.com', 'MALE', 'test18', 'test18', '010-3436-8570', 'basic', 'basic.png', 1800, 'test18', 'refresh Token', 'USER');
+values (now(), now(), '2022-07-22', 'mdufore11@diigo.com', 'MALE', 'test38', 'test38', '010-1403-9986', 'basic', 'basic.png', 3800, 'test38', 'refresh Token', 'COUNSELOR');
 -- 19
 insert into USER (created_at, updated_at, birth, email, gender, id, nick_name, phone, file_name, real_file_name, points, pw, refresh_token, type)
-values (now(), now(), '2021-12-20', 'cfassami@theguardian.com', 'MALE', 'test19', 'test19', '010-7350-6436', 'basic', 'basic.png', 1900, 'test19', 'refresh Token', 'USER');
--- 20
-insert into USER (created_at, updated_at, birth, email, gender, id, nick_name, phone, file_name, real_file_name, points, pw, refresh_token, type)
-values (now(), now(), '2021-12-30', 'ckewishj@unesco.org', 'FEMALE', 'test20', 'test20', '010-8345-7483', 'basic', 'basic.png', 2000, 'test20', 'refresh Token', 'USER');
--- 21
-insert into USER (created_at, updated_at, birth, email, gender, id, nick_name, phone, file_name, real_file_name, points, pw, refresh_token, type)
-values (now(), now(), '2021-12-10', 'wcorstorphinek@meetup.com', 'MALE', 'test21', 'test21', '010-7409-4502', 'basic', 'basic.png', 2100, 'test21', 'refresh Token', 'USER');
--- 22
-insert into USER (created_at, updated_at, birth, email, gender, id, nick_name, phone, file_name, real_file_name, points, pw, refresh_token, type)
-values (now(), now(), '2021-11-23', 'druggierl@slate.com', 'MALE', 'test22', 'test22', '010-9448-6786', 'basic', 'basic.png', 2200, 'test22', 'refresh Token', 'USER');
--- 23
-insert into USER (created_at, updated_at, birth, email, gender, id, nick_name, phone, file_name, real_file_name, points, pw, refresh_token, type)
-values (now(), now(), '2021-09-22', 'dbrabbsm@twitpic.com', 'MALE', 'test23', 'test23', '010-7669-6914', 'basic', 'basic.png', 2300, 'test23', 'refresh Token', 'USER');
--- 24
-insert into USER (created_at, updated_at, birth, email, gender, id, nick_name, phone, file_name, real_file_name, points, pw, refresh_token, type)
-values (now(), now(), '2022-03-09', 'kvirginn@oakley.com', 'MALE', 'test24', 'test24', '010-6451-7801', 'basic', 'basic.png', 2400, 'test24', 'refresh Token', 'USER');
--- 25
-insert into USER (created_at, updated_at, birth, email, gender, id, nick_name, phone, file_name, real_file_name, points, pw, refresh_token, type)
-values (now(), now(), '2022-03-25', 'hchaplino@tripod.com', 'MALE', 'test25', 'test25', '010-1618-4461', 'basic', 'basic.png', 2500, 'test25', 'refresh Token', 'USER');
--- 26
-insert into USER (created_at, updated_at, birth, email, gender, id, nick_name, phone, file_name, real_file_name, points, pw, refresh_token, type)
-values (now(), now(), '2022-07-13', 'tracep@1688.com', 'MALE', 'test26', 'test26', '010-4650-2125', 'basic', 'basic.png', 2600, 'test26', 'refresh Token', 'USER');
--- 27
-insert into USER (created_at, updated_at, birth, email, gender, id, nick_name, phone, file_name, real_file_name, points, pw, refresh_token, type)
-values (now(), now(), '2021-10-11', 'tbarlingq@netscape.com', 'FEMALE', 'test27', 'test27', '010-9480-8244', 'basic', 'basic.png', 2700, 'test27', 'refresh Token', 'USER');
--- 28
-insert into USER (created_at, updated_at, birth, email, gender, id, nick_name, phone, file_name, real_file_name, points, pw, refresh_token, type)
-values (now(), now(), '2022-08-03', 'sneillr@slate.com', 'FEMALE', 'test28', 'test28', '010-2269-7038', 'basic', 'basic.png', 2800, 'test28', 'refresh Token', 'USER');
--- 29
-insert into USER (created_at, updated_at, birth, email, gender, id, nick_name, phone, file_name, real_file_name, points, pw, refresh_token, type)
-values (now(), now(), '2022-06-23', 'rdeeleys@exblog.jp', 'FEMALE', 'test29', 'test29', '010-5582-2948', 'basic', 'basic.png', 2900, 'test29', 'refresh Token', 'USER');
--- 30
-insert into USER (created_at, updated_at, birth, email, gender, id, nick_name, phone, file_name, real_file_name, points, pw, refresh_token, type)
-values (now(), now(), '2021-12-22', 'kpaprotnyt@chicagotribune.com', 'MALE', 'test30', 'test30', '010-3521-2216', 'basic', 'basic.png', 3000, 'test30', 'refresh Token', 'COUNSELOR');
--- 31
-insert into USER (created_at, updated_at, birth, email, gender, id, nick_name, phone, file_name, real_file_name, points, pw, refresh_token, type)
-values (now(), now(), '2021-08-29', 'gstrangu@biglobe.ne.jp', 'MALE', 'test31', 'test31', '010-6447-2507', 'basic', 'basic.png', 3100, 'test31', 'refresh Token', 'COUNSELOR');
--- 32
-insert into USER (created_at, updated_at, birth, email, gender, id, nick_name, phone, file_name, real_file_name, points, pw, refresh_token, type)
-values (now(), now(), '2022-07-27', 'cboggesv@ucoz.ru', 'MALE', 'test32', 'test32', '010-9341-7795', 'basic', 'basic.png', 3200, 'test32', 'refresh Token', 'COUNSELOR');
--- 33
-insert into USER (created_at, updated_at, birth, email, gender, id, nick_name, phone, file_name, real_file_name, points, pw, refresh_token, type)
-values (now(), now(), '2022-07-12', 'mcorradow@typepad.com', 'MALE', 'test33', 'test33', '010-6597-1235', 'basic', 'basic.png', 3300, 'test33', 'refresh Token', 'COUNSELOR');
--- 34
-insert into USER (created_at, updated_at, birth, email, gender, id, nick_name, phone, file_name, real_file_name, points, pw, refresh_token, type)
-values (now(), now(), '2022-06-16', 'vgauchx@utexas.edu', 'FEMALE', 'test34', 'test34', '010-3054-2172', 'basic', 'basic.png', 3400, 'test34', 'refresh Token', 'COUNSELOR');
--- 35
-insert into USER (created_at, updated_at, birth, email, gender, id, nick_name, phone, file_name, real_file_name, points, pw, refresh_token, type)
-values (now(), now(), '2022-02-09', 'dpladeny@163.com', 'FEMALE', 'test35', 'test35', '010-2469-8882', 'basic', 'basic.png', 3500, 'test35', 'refresh Token', 'COUNSELOR');
--- 36
-insert into USER (created_at, updated_at, birth, email, gender, id, nick_name, phone, file_name, real_file_name, points, pw, refresh_token, type)
-values (now(), now(), '2021-11-16', 'uretterz@washington.edu', 'FEMALE', 'test36', 'test36', '010-1530-5329', 'basic', 'basic.png', 3600, 'test36', 'refresh Token', 'COUNSELOR');
--- 37
-insert into USER (created_at, updated_at, birth, email, gender, id, nick_name, phone, file_name, real_file_name, points, pw, refresh_token, type)
-values (now(), now(), '2022-02-22', 'atrengrove10@istockphoto.com', 'MALE', 'test37', 'test37', '010-9503-3978', 'basic', 'basic.png', 3700, 'test37', 'refresh Token', 'COUNSELOR');
--- 38
-insert into USER (created_at, updated_at, birth, email, gender, id, nick_name, phone, file_name, real_file_name, points, pw, refresh_token, type)
-values (now(), now(), '2022-07-22', 'mdufore11@diigo.com', 'MALE', 'test38', 'test38', '010-1403-9986', 'basic', 'basic.png', 3800, 'test38', 'refresh Token', 'COUNSELOR');
--- 39
-insert into USER (created_at, updated_at, birth, email, gender, id, nick_name, phone, file_name, real_file_name, points, pw, refresh_token, type)
 values (now(), now(), '2021-10-21', 'agaspar12@mapy.cz', 'MALE', 'test39', 'test39', '010-8520-2486', 'basic', 'basic.png', 3900, 'test39', 'refresh Token', 'COUNSELOR');
--- 40
+-- 20
 insert into USER (created_at, updated_at, birth, email, gender, id, nick_name, phone, file_name, real_file_name, points, pw, refresh_token, type)
 values (now(), now(), '2022-01-30', 'ltomczykowski13@wisc.edu', 'MALE', 'test40', 'test40', '010-5153-6837', 'basic', 'basic.png', 4000, 'test40', 'refresh Token', 'COUNSELOR');
 
 --> counselor_profile
 insert into counselor_profile (counselor_id, created_at, updated_at, introduce, price, review_cnt, review_value)
-values (30, now(), now(), '안녕하세요. 편안하게 찾아주세요.', 1000, 0, 0);
+values (10, now(), now(), '안녕하세요. 편안하게 찾아주세요.', 1000, 0, 0);
 insert into counselor_profile (counselor_id, created_at, updated_at, introduce, price, review_cnt, review_value)
-values (31, now(), now(), '안녕하세요. 편안하게 찾아주세요.', 1000, 6, 3.5);
+values (11, now(), now(), '안녕하세요. 편안하게 찾아주세요.', 1000, 6, 3.5);
 insert into counselor_profile (counselor_id, created_at, updated_at, introduce, price, review_cnt, review_value)
-values (32, now(), now(), '편안한 대화상대가 되어드리겠습니다.', 1500, 1 , 4);
+values (12, now(), now(), '편안한 대화상대가 되어드리겠습니다.', 1500, 1 , 4);
 insert into counselor_profile (counselor_id, created_at, updated_at, introduce, price, review_cnt, review_value)
-values (33, now(), now(), '당신의 이야기를 들려주십시오.', 2000, 0, 0);
+values (13, now(), now(), '당신의 이야기를 들려주십시오.', 2000, 0, 0);
 insert into counselor_profile (counselor_id, created_at, updated_at, introduce, price, review_cnt, review_value)
-values (34, now(), now(), '저는 항상 열려있습니다. 언제든 찾아주세요.', 1000, 0, 0);
+values (14, now(), now(), '저는 항상 열려있습니다. 언제든 찾아주세요.', 1000, 0, 0);
 insert into counselor_profile (counselor_id, created_at, updated_at, introduce, price, review_cnt, review_value)
-values (35, now(), now(), '당신의 친구가 되어드리겠습니다', 3000, 0, 0);
+values (15, now(), now(), '당신의 친구가 되어드리겠습니다', 3000, 0, 0);
 insert into counselor_profile (counselor_id, created_at, updated_at, introduce, price, review_cnt, review_value)
-values (36, now(), now(), '전문적인 상담으로 해답을 드리겠습니다', 2000, 0, 0);
+values (16, now(), now(), '전문적인 상담으로 해답을 드리겠습니다', 2000, 0, 0);
 insert into counselor_profile (counselor_id, created_at, updated_at, introduce, price, review_cnt, review_value)
-values (37, now(), now(), '친절한 상담, 편안한 분위기', 3000, 0, 0);
+values (17, now(), now(), '친절한 상담, 편안한 분위기', 3000, 0, 0);
 insert into counselor_profile (counselor_id, created_at, updated_at, introduce, price, review_cnt, review_value)
-values (38, now(), now(), '경청하는 상담사를 원하신다면 저를 찾아주세요', 2000, 0, 0);
+values (18, now(), now(), '경청하는 상담사를 원하신다면 저를 찾아주세요', 2000, 0, 0);
 insert into counselor_profile (counselor_id, created_at, updated_at, introduce, price, review_cnt, review_value)
-values (39, now(), now(), '고민이 있다면 저를 찾아주세요.', 1000, 0, 0);
+values (19, now(), now(), '고민이 있다면 저를 찾아주세요.', 1000, 0, 0);
 insert into counselor_profile (counselor_id, created_at, updated_at, introduce, price, review_cnt, review_value)
-values (40, now(), now(), '경험에서 나오는 상담을 원하신다면 저를 찾아주세요', 2000, 0, 0);
+values (20, now(), now(), '경험에서 나오는 상담을 원하신다면 저를 찾아주세요', 2000, 0, 0);
 
 --> board
 -- 1
@@ -174,278 +114,278 @@ insert into board (created_at, updated_at, contents, date, hit_cnt, title, id)
 values (now(), now(), '가격 문의요', now(), 0, '상담 가격이 어케됩니까', 6);
 -- 10
 insert into board (created_at, updated_at, contents, date, hit_cnt, title, id)
-values (now(), now(), '매일 사는게 지옥같습니다 ㅠ 취업하면 좀 괜찮아질까요...?', now(), 10, '취업 하면 좀 나아질까요?', 10);
+values (now(), now(), '매일 사는게 지옥같습니다 ㅠ 취업하면 좀 괜찮아질까요...?', now(), 10, '취업 하면 좀 나아질까요?', 1);
 -- 11
 insert into board (created_at, updated_at, contents, date, hit_cnt, title, id)
-values (now(), now(), '점점 취업이 어려워지는거같아요. 나이는 벌써 서른이 훌쩍 넘어버렸는데 신입은 안뽑고 매일매일이 우울합니다...', now(), 0, '나이는 차고 취업문은 좁고', 11);
+values (now(), now(), '점점 취업이 어려워지는거같아요. 나이는 벌써 서른이 훌쩍 넘어버렸는데 신입은 안뽑고 매일매일이 우울합니다...', now(), 0, '나이는 차고 취업문은 좁고', 2);
 -- 12
 insert into board (created_at, updated_at, contents, date, hit_cnt, title, id)
-values (now(), now(), '밖에 나가면 다들 저한테 아직도 취업 못했냐고 비웃는거 같아요 ㅠㅠ 밖에 나가기가 무서워요', now(), 0, '사람이 무서워요', 12);
+values (now(), now(), '밖에 나가면 다들 저한테 아직도 취업 못했냐고 비웃는거 같아요 ㅠㅠ 밖에 나가기가 무서워요', now(), 0, '사람이 무서워요', 3);
 -- 13
 insert into board (created_at, updated_at, contents, date, hit_cnt, title, id)
-values (now(), now(), '이젠 정말 한계인 것 같아요. 더이상 취업준비 못 하겠습니다... 그만두고싶어요...', now(), 0, '할 수 있는게 더는 없습니다...', 13);
+values (now(), now(), '이젠 정말 한계인 것 같아요. 더이상 취업준비 못 하겠습니다... 그만두고싶어요...', now(), 0, '할 수 있는게 더는 없습니다...', 4);
 -- 14
 insert into board (created_at, updated_at, contents, date, hit_cnt, title, id)
-values (now(), now(), '친구는 삼성 취업했다고 자랑하는데 저는 아직도 취준생이고...친구가 너무 짜증납니다.', now(), 0, '친구가 너무 짜증나요', 14);
+values (now(), now(), '친구는 삼성 취업했다고 자랑하는데 저는 아직도 취준생이고...친구가 너무 짜증납니다.', now(), 0, '친구가 너무 짜증나요', 5);
 -- 15
 insert into board (created_at, updated_at, contents, date, hit_cnt, title, id)
-values (now(), now(), '부모님이 빨리 취업하라고 매일 잔소리하시는게 너무 싫어요 ㅠㅠ 저도 하고 싶은데 못 하는 건데 ㅠㅠ', now(), 0, '부모님이 너무 싫어요 ㅠ', 15);
+values (now(), now(), '부모님이 빨리 취업하라고 매일 잔소리하시는게 너무 싫어요 ㅠㅠ 저도 하고 싶은데 못 하는 건데 ㅠㅠ', now(), 0, '부모님이 너무 싫어요 ㅠ', 6);
 -- 16
 insert into board (created_at, updated_at, contents, date, hit_cnt, title, id)
-values (now(), now(), '그동안 너무 힘들었습니다. 이만 내려 놓을까 합니다.', now(), 0, '이만 포기하려합니다...', 16);
+values (now(), now(), '그동안 너무 힘들었습니다. 이만 내려 놓을까 합니다.', now(), 0, '이만 포기하려합니다...', 7);
 -- 17
 insert into board (created_at, updated_at, contents, date, hit_cnt, title, id)
-values (now(), now(), '할 수 있다! 용기를 받고싶어요!!', now(), 0, '용기를 주세요!', 17);
+values (now(), now(), '할 수 있다! 용기를 받고싶어요!!', now(), 0, '용기를 주세요!', 8);
 -- 17
 insert into board (created_at, updated_at, contents, date, hit_cnt, title, id)
-values (now(), now(), '안녕하세요. 혼자 동생 둘을 키우는 22살 취준생입니다. 이제까진 알바만 해서 동생들을 키웠지만 더이상은 힘들거같아요. 그래서 제대로된 직장에 자리잡으려고 취업준비를 시작했는데 너무 힘듭니다... 속마음 털어 놓을 곳이 없어요... 동생들은 저만 보고있고ㅠㅠ', now(), 0, '너무 힘든 상황입니다.', 18);
+values (now(), now(), '안녕하세요. 혼자 동생 둘을 키우는 22살 취준생입니다. 이제까진 알바만 해서 동생들을 키웠지만 더이상은 힘들거같아요. 그래서 제대로된 직장에 자리잡으려고 취업준비를 시작했는데 너무 힘듭니다... 속마음 털어 놓을 곳이 없어요... 동생들은 저만 보고있고ㅠㅠ', now(), 0, '너무 힘든 상황입니다.', 9);
 -- 18
 insert into board (created_at, updated_at, contents, date, hit_cnt, title, id)
-values (now(), now(), '취업 준비를 시작한 이후로 하루도 기분좋게 하루를 마무리 한 적이 없어요 ㅠ ', now(), 0, '상담 받으면 좀 나아질까요?', 19);
+values (now(), now(), '취업 준비를 시작한 이후로 하루도 기분좋게 하루를 마무리 한 적이 없어요 ㅠ ', now(), 0, '상담 받으면 좀 나아질까요?', 9);
 -- 19
 insert into board (created_at, updated_at, contents, date, hit_cnt, title, id)
-values (now(), now(), '면접만 벌써 20번째 탈락입니다... 탈락할때마다 자존감이 너무 떨어집니다 ㅠ...', now(), 0, '저는 안되나봐요..', 20);
+values (now(), now(), '면접만 벌써 20번째 탈락입니다... 탈락할때마다 자존감이 너무 떨어집니다 ㅠ...', now(), 0, '저는 안되나봐요..', 1);
 
 --> career
 -- 1
 insert into career (created_at, updated_at, contents, counselor_id)
-values (now(), now(), '성광중학교 상담사 2년', 30);
+values (now(), now(), '성광중학교 상담사 2년', 10);
 -- 2
 insert into career (created_at, updated_at, contents, counselor_id)
-values (now(), now(), '누리심리상담센터 3년', 30);
+values (now(), now(), '누리심리상담센터 3년', 10);
 -- 3
 insert into career (created_at, updated_at, contents, counselor_id)
-values (now(), now(), '한마음심리상담센터 1년', 30);
+values (now(), now(), '한마음심리상담센터 1년', 10);
 -- 4
 insert into career (created_at, updated_at, contents, counselor_id)
-values (now(), now(), '상서고등학교 상담사 5년', 31);
+values (now(), now(), '상서고등학교 상담사 5년', 11);
 -- 5
 insert into career (created_at, updated_at, contents, counselor_id)
-values (now(), now(), '서울심리상담센터 3년', 31);
+values (now(), now(), '서울심리상담센터 3년', 11);
 -- 6
 insert into career (created_at, updated_at, contents, counselor_id)
-values (now(), now(), '구미심리상담센터 2년', 31);
+values (now(), now(), '구미심리상담센터 2년', 11);
 -- 7
 insert into career (created_at, updated_at, contents, counselor_id)
-values (now(), now(), '대구심리상담센터 3년', 31);
+values (now(), now(), '대구심리상담센터 3년', 11);
 -- 8
 insert into career (created_at, updated_at, contents, counselor_id)
-values (now(), now(), '수원심리상담센터 5년', 32);
+values (now(), now(), '수원심리상담센터 5년', 12);
 -- 9
 insert into career (created_at, updated_at, contents, counselor_id)
-values (now(), now(), '동탄심리상담센터 6년', 33);
+values (now(), now(), '동탄심리상담센터 6년', 13);
 -- 10
 insert into career (created_at, updated_at, contents, counselor_id)
-values (now(), now(), '동서울심리상담센터 4년', 34);
+values (now(), now(), '동서울심리상담센터 4년', 14);
 -- 11
 insert into career (created_at, updated_at, contents, counselor_id)
-values (now(), now(), '온도심리상담센터 5년', 35);
+values (now(), now(), '온도심리상담센터 5년', 15);
 -- 12
 insert into career (created_at, updated_at, contents, counselor_id)
-values (now(), now(), '마음심리상담센터 8년', 36);
+values (now(), now(), '마음심리상담센터 8년', 16);
 -- 13
 insert into career (created_at, updated_at, contents, counselor_id)
-values (now(), now(), '행복심리상담센터 10년', 37);
+values (now(), now(), '행복심리상담센터 10년', 17);
 -- 14
 insert into career (created_at, updated_at, contents, counselor_id)
-values (now(), now(), '영남여성심리상담센터 4년', 38);
+values (now(), now(), '영남여성심리상담센터 4년', 18);
 -- 15
 insert into career (created_at, updated_at, contents, counselor_id)
-values (now(), now(), '대구여성상담센터 5년', 39);
+values (now(), now(), '대구여성상담센터 5년', 19);
 -- 16
 insert into career (created_at, updated_at, contents, counselor_id)
-values (now(), now(), '마음치료상담센터 3년', 40);
+values (now(), now(), '마음치료상담센터 3년', 20);
 -- 17
 insert into career (created_at, updated_at, contents, counselor_id)
-values (now(), now(), '새마음심리상담센터 2년', 40);
+values (now(), now(), '새마음심리상담센터 2년', 20);
 -- 18
 insert into career (created_at, updated_at, contents, counselor_id)
-values (now(), now(), '온누리심리상단센터 3년', 40);
+values (now(), now(), '온누리심리상단센터 3년', 20);
 -- 19
 insert into career (created_at, updated_at, contents, counselor_id)
-values (now(), now(), '구인철심리상담소 1년', 40);
+values (now(), now(), '구인철심리상담소 1년', 20);
 -- 20
 insert into career (created_at, updated_at, contents, counselor_id)
-values (now(), now(), '전인숙심리상담소 2년', 40);
+values (now(), now(), '전인숙심리상담소 2년', 20);
 
 --> category
 -- 1
 insert into category (created_at, updated_at, contents, counselor_id)
-values (now(), now(), '가족', 31);
+values (now(), now(), '가족', 11);
 -- 2
 insert into category (created_at, updated_at, contents, counselor_id)
-values (now(), now(), '직장, 진로', 31);
+values (now(), now(), '직장, 진로', 11);
 -- 3
 insert into category (created_at, updated_at, contents, counselor_id)
-values (now(), now(), '연애, 결혼', 31);
+values (now(), now(), '연애, 결혼', 11);
 -- 4
 insert into category (created_at, updated_at, contents, counselor_id)
-values (now(), now(), '가족', 32);
+values (now(), now(), '가족', 12);
 -- 5
 insert into category (created_at, updated_at, contents, counselor_id)
-values (now(), now(), '직장, 진로', 32);
+values (now(), now(), '직장, 진로', 12);
 -- 6
 insert into category (created_at, updated_at, contents, counselor_id)
-values (now(), now(), '연애, 결혼', 32);
+values (now(), now(), '연애, 결혼', 12);
 -- 7
 insert into category (created_at, updated_at, contents, counselor_id)
-values (now(), now(), '자기이해', 33);
+values (now(), now(), '자기이해', 13);
 -- 8
 insert into category (created_at, updated_at, contents, counselor_id)
-values (now(), now(), '자기이해', 34);
+values (now(), now(), '자기이해', 14);
 -- 9
 insert into category (created_at, updated_at, contents, counselor_id)
-values (now(), now(), '연애,결혼', 35);
+values (now(), now(), '연애,결혼', 15);
 -- 10
 insert into category (created_at, updated_at, contents, counselor_id)
-values (now(), now(), '직장,진로', 36);
+values (now(), now(), '직장,진로', 16);
 -- 11
 insert into category (created_at, updated_at, contents, counselor_id)
-values (now(), now(), '직장,진로', 37);
+values (now(), now(), '직장,진로', 17);
 -- 12
 insert into category (created_at, updated_at, contents, counselor_id)
-values (now(), now(), '가족', 38);
+values (now(), now(), '가족', 18);
 -- 13
 insert into category (created_at, updated_at, contents, counselor_id)
-values (now(), now(), '직장,진로', 39);
+values (now(), now(), '직장,진로', 19);
 -- 14
 insert into category (created_at, updated_at, contents, counselor_id)
-values (now(), now(), '직장, 진로', 40);
+values (now(), now(), '직장, 진로', 20);
 -- 15
 insert into category (created_at, updated_at, contents, counselor_id)
-values (now(), now(), '연애,결혼', 40);
+values (now(), now(), '연애,결혼', 20);
 
 --> certificate
 -- 1
 insert into certificate (created_at, updated_at, contents, counselor_id)
-values (now(), now(), '2급 상담심리사', 30);
+values (now(), now(), '2급 상담심리사', 10);
 -- 2
 insert into certificate (created_at, updated_at, contents, counselor_id)
-values (now(), now(), '1급 전문상담사', 30);
+values (now(), now(), '1급 전문상담사', 10);
 -- 3
 insert into certificate (created_at, updated_at, contents, counselor_id)
-values (now(), now(), '3급 청소년상담사', 30);
+values (now(), now(), '3급 청소년상담사', 10);
 -- 4
 insert into certificate (created_at, updated_at, contents, counselor_id)
-values (now(), now(), '1급 상담심리사', 31);
+values (now(), now(), '1급 상담심리사', 11);
 -- 5
 insert into certificate (created_at, updated_at, contents, counselor_id)
-values (now(), now(), '2급 전문상담사', 31);
+values (now(), now(), '2급 전문상담사', 11);
 -- 6
 insert into certificate (created_at, updated_at, contents, counselor_id)
-values (now(), now(), '1급 청소년 상담사', 31);
+values (now(), now(), '1급 청소년 상담사', 11);
 -- 7
 insert into certificate (created_at, updated_at, contents, counselor_id)
-values (now(), now(), '1급 전문상담사', 32);
+values (now(), now(), '1급 전문상담사', 12);
 -- 8
 insert into certificate (created_at, updated_at, contents, counselor_id)
-values (now(), now(), '2급 전문상담사', 33);
+values (now(), now(), '2급 전문상담사', 13);
 -- 9
 insert into certificate (created_at, updated_at, contents, counselor_id)
-values (now(), now(), '1급 전문상담사', 34);
+values (now(), now(), '1급 전문상담사', 14);
 -- 10
 insert into certificate (created_at, updated_at, contents, counselor_id)
-values (now(), now(), '2급 상담심리사', 35);
+values (now(), now(), '2급 상담심리사', 15);
 -- 11
 insert into certificate (created_at, updated_at, contents, counselor_id)
-values (now(), now(), '2급 상담심리사', 36);
+values (now(), now(), '2급 상담심리사', 16);
 -- 12
 insert into certificate (created_at, updated_at, contents, counselor_id)
-values (now(), now(), '1급 전문상담사', 37);
+values (now(), now(), '1급 전문상담사', 17);
 -- 13
 insert into certificate (created_at, updated_at, contents, counselor_id)
-values (now(), now(), '1급 전문상담사', 38);
+values (now(), now(), '1급 전문상담사', 18);
 -- 14
 insert into certificate (created_at, updated_at, contents, counselor_id)
-values (now(), now(), '2급 상담심리사', 39);
+values (now(), now(), '2급 상담심리사', 19);
 -- 15
 insert into certificate (created_at, updated_at, contents, counselor_id)
-values (now(), now(), '1급 전문상담사', 40);
+values (now(), now(), '1급 전문상담사', 20);
 
 --> comment
 -- 1
 insert into comment (created_at, updated_at, contents, date, boardid, id)
-values (now(), now(), '원래 세상에서 공부가 제일 어려워요ㅠ 저랑 가볍게 얘기 한번 해보실까요?', now(), 1, 31);
+values (now(), now(), '원래 세상에서 공부가 제일 어려워요ㅠ 저랑 가볍게 얘기 한번 해보실까요?', now(), 1, 11);
 -- 2
 insert into comment (created_at, updated_at, contents, date, boardid, id)
-values (now(), now(), '아침마다 기분이 안좋으시군요 ㅠㅠ 일어나자마자 좋아하는 일부터 시작해보는건 어떨까요? ', now(), 2, 31);
+values (now(), now(), '아침마다 기분이 안좋으시군요 ㅠㅠ 일어나자마자 좋아하는 일부터 시작해보는건 어떨까요? ', now(), 2, 11);
 -- 3
 insert into comment (created_at, updated_at, contents, date, boardid, id)
-values (now(), now(), '긍정적인 자극으로 스트레스 해소가 필요해보입니다. 자세한 상담을 원하시면 저와 얘기 해봐요.', now(), 3, 31);
+values (now(), now(), '긍정적인 자극으로 스트레스 해소가 필요해보입니다. 자세한 상담을 원하시면 저와 얘기 해봐요.', now(), 3, 11);
 -- 4
 insert into comment (created_at, updated_at, contents, date, boardid, id)
-values (now(), now(), '많이 힘드시겠군요 ㅠㅠ 하지만 분명 끝은 옵니다! 긍정적으로 생각하는 것이 중요합니다! ', now(), 4, 31);
+values (now(), now(), '많이 힘드시겠군요 ㅠㅠ 하지만 분명 끝은 옵니다! 긍정적으로 생각하는 것이 중요합니다! ', now(), 4, 11);
 -- 5
 insert into comment (created_at, updated_at, contents, date, boardid, id)
-values (now(), now(), 'ㅠㅠ 비교는 본인에게 절대 도움이 되지 않아요! 모든 사람에겐 본인만의 템포가 있습니다!', now(), 5, 31);
+values (now(), now(), 'ㅠㅠ 비교는 본인에게 절대 도움이 되지 않아요! 모든 사람에겐 본인만의 템포가 있습니다!', now(), 5, 11);
 -- 6
 insert into comment (created_at, updated_at, contents, date, boardid, id)
-values (now(), now(), '서류 300번이라니 대단하시네요! 그만큼 회사에서 필요한 스펙을 갖고계시다는 방증 아닐까요? 실력이 충분하신만큼 면접에서 자신감만 갖고 임한다면 좋은 결과 있을것같아요!', now(), 6, 31);
+values (now(), now(), '서류 300번이라니 대단하시네요! 그만큼 회사에서 필요한 스펙을 갖고계시다는 방증 아닐까요? 실력이 충분하신만큼 면접에서 자신감만 갖고 임한다면 좋은 결과 있을것같아요!', now(), 6, 11);
 -- 7
 insert into comment (created_at, updated_at, contents, date, boardid, id)
-values (now(), now(), '많이 외로우시겠군요 ㅠㅠ 저는 항상 열려있으니 언제든 찾아오셔서 대화 나눠요!', now(), 7, 32);
+values (now(), now(), '많이 외로우시겠군요 ㅠㅠ 저는 항상 열려있으니 언제든 찾아오셔서 대화 나눠요!', now(), 7, 12);
 -- 8
 insert into comment (created_at, updated_at, contents, date, boardid, id)
-values (now(), now(), '어떤 문제실까요? 자세한 상담을 원하시면 1:1상담을 신청해주세요!', now(), 8, 32);
+values (now(), now(), '어떤 문제실까요? 자세한 상담을 원하시면 1:1상담을 신청해주세요!', now(), 8, 12);
 -- 9
 insert into comment (created_at, updated_at, contents, date, boardid, id)
-values (now(), now(), '상담사는 답만하는 로봇이 아니에요 ㅠㅠ 최소한의 예의를 지켜주세요', now(), 9, 32);
+values (now(), now(), '상담사는 답만하는 로봇이 아니에요 ㅠㅠ 최소한의 예의를 지켜주세요', now(), 9, 12);
 -- 10
 insert into comment (created_at, updated_at, contents, date, boardid, id)
-values (now(), now(), '과정에서 작은 즐거움을 찾는게 중요합니다! 저랑 상담 해보시면서 같이 찾아보면 좋을 것 같아요!', now(), 10, 32);
+values (now(), now(), '과정에서 작은 즐거움을 찾는게 중요합니다! 저랑 상담 해보시면서 같이 찾아보면 좋을 것 같아요!', now(), 10, 12);
 -- 11
 insert into comment (created_at, updated_at, contents, date, boardid, id)
-values (now(), now(), '나이때문에 걱정이 많으시군요 ㅠㅠ 하지만 나이는 숫자에 불과해요!! ', now(), 11, 33);
+values (now(), now(), '나이때문에 걱정이 많으시군요 ㅠㅠ 하지만 나이는 숫자에 불과해요!! ', now(), 11, 13);
 -- 12
 insert into comment (created_at, updated_at, contents, date, boardid, id)
-values (now(), now(), '대인기피증 초기증상으로 보입니다. 자세한 상담을 통해 미리 예방하는 것이 좋아보여요.', now(), 12, 34);
+values (now(), now(), '대인기피증 초기증상으로 보입니다. 자세한 상담을 통해 미리 예방하는 것이 좋아보여요.', now(), 12, 14);
 -- 13
 insert into comment (created_at, updated_at, contents, date, boardid, id)
-values (now(), now(), '많이 힘드시겠군요 ㅠㅠ 한계를 느끼실 정도면 정말 힘드신 상황이시겠어요. 저랑 한번 대화 나눠보는건 어떠실까요?', now(), 13, 35);
+values (now(), now(), '많이 힘드시겠군요 ㅠㅠ 한계를 느끼실 정도면 정말 힘드신 상황이시겠어요. 저랑 한번 대화 나눠보는건 어떠실까요?', now(), 13, 15);
 -- 14
 insert into comment (created_at, updated_at, contents, date, boardid, id)
-values (now(), now(), '비교는 본인에게 전혀 도움이 안됩니다 ㅠㅠ 어제의 나보다 발전한 오늘의 나를 칭찬해주세요!!', now(), 14, 36);
+values (now(), now(), '비교는 본인에게 전혀 도움이 안됩니다 ㅠㅠ 어제의 나보다 발전한 오늘의 나를 칭찬해주세요!!', now(), 14, 16);
 -- 15
 insert into comment (created_at, updated_at, contents, date, boardid, id)
-values (now(), now(), '부모님께서도 걱정되는 마음에 하시는거 아시죠? ㅠㅠ 부모님과 관계개선을 위한 집단상담프로그램을 진행중인데 관심 있으시면 참여해보시겠어요?', now(), 15, 31);
+values (now(), now(), '부모님께서도 걱정되는 마음에 하시는거 아시죠? ㅠㅠ 부모님과 관계개선을 위한 집단상담프로그램을 진행중인데 관심 있으시면 참여해보시겠어요?', now(), 15, 11);
 -- 16
 insert into comment (created_at, updated_at, contents, date, boardid, id)
-values (now(), now(), '왜 내려놓으시려고 하시나요 ㅠㅠ 자세한 얘기가 궁금합니다 ㅠㅠ 저한테 상담 신청 해주세요!', now(), 16, 38);
+values (now(), now(), '왜 내려놓으시려고 하시나요 ㅠㅠ 자세한 얘기가 궁금합니다 ㅠㅠ 저한테 상담 신청 해주세요!', now(), 16, 18);
 -- 17
 insert into comment (created_at, updated_at, contents, date, boardid, id)
-values (now(), now(), '화이팅입니다!!', now(), 17, 1);
+values (now(), now(), '화이팅입니다!!', now(), 17, 11);
 -- 18
 insert into comment (created_at, updated_at, contents, date, boardid, id)
-values (now(), now(), '아이고 ㅠㅠ 많이 힘든 상황이시겠어요... 동생 두분을 책임지시다보니 어깨가 많이 무거우실겁니다 ㅠㅠ 편안하게 속마음 털어놓을 창구가 필요하시다면 저를 찾아주세요!', now(), 18, 39);
+values (now(), now(), '아이고 ㅠㅠ 많이 힘든 상황이시겠어요... 동생 두분을 책임지시다보니 어깨가 많이 무거우실겁니다 ㅠㅠ 편안하게 속마음 털어놓을 창구가 필요하시다면 저를 찾아주세요!', now(), 18, 19);
 -- 19
 insert into comment (created_at, updated_at, contents, date, boardid, id)
-values (now(), now(), '기분 좋게 하루를 마무리 하고 싶으신거군요! 하루를 정리하면서 긍정적인 상황들을 다시한번 생각해보는 시간을 가지는게 좋답니다! 원하신다면 도와드리겠습니다!!', now(), 19, 40);
+values (now(), now(), '기분 좋게 하루를 마무리 하고 싶으신거군요! 하루를 정리하면서 긍정적인 상황들을 다시한번 생각해보는 시간을 가지는게 좋답니다! 원하신다면 도와드리겠습니다!!', now(), 19, 20);
 -- 20
 insert into comment (created_at, updated_at, contents, date, boardid, id)
-values (now(), now(), '면접을 20번이나 보신건가요?? 이미 세상에서 필요로 하는 인재시네요! 실패는 성공의 어머니! 20번의 경험이 반드시 힘이 될겁니다!', now(), 20, 40);
+values (now(), now(), '면접을 20번이나 보신건가요?? 이미 세상에서 필요로 하는 인재시네요! 실패는 성공의 어머니! 20번의 경험이 반드시 힘이 될겁니다!', now(), 20, 20);
 -- 21
 insert into comment (created_at, updated_at, contents, date, boardid, id)
-values (now(), now(), '공부가 하기 싫을때는 하루를 온전히 휴식을 가져보세요! 불안하시겠지만 도움이 될겁니다!', now(), 1, 40);
+values (now(), now(), '공부가 하기 싫을때는 하루를 온전히 휴식을 가져보세요! 불안하시겠지만 도움이 될겁니다!', now(), 1, 20);
 -- 22
 insert into comment (created_at, updated_at, contents, date, boardid, id)
-values (now(), now(), '아침의 기분은 잠들기전 기분이 결정합니다! 잠들기전에 즐거운 마음으로 잠들어보세요! ', now(), 2, 40);
+values (now(), now(), '아침의 기분은 잠들기전 기분이 결정합니다! 잠들기전에 즐거운 마음으로 잠들어보세요! ', now(), 2, 20);
 -- 23
 insert into comment (created_at, updated_at, contents, date, boardid, id)
-values (now(), now(), '저런 ㅠㅠ 많이 힘드시다면 저랑 대화 나눠봐요 ㅠㅠ', now(), 3, 40);
+values (now(), now(), '저런 ㅠㅠ 많이 힘드시다면 저랑 대화 나눠봐요 ㅠㅠ', now(), 3, 20);
 -- 24
 insert into comment (created_at, updated_at, contents, date, boardid, id)
-values (now(), now(), '끝이 안보인다고 생각하시겠지만 결국 해내실겁니다! 10년이나 준비하셨다니 대단하세요! 그런 끈기라면 무조건 성공하실거에요!', now(), 4, 40);
+values (now(), now(), '끝이 안보인다고 생각하시겠지만 결국 해내실겁니다! 10년이나 준비하셨다니 대단하세요! 그런 끈기라면 무조건 성공하실거에요!', now(), 4, 20);
 -- 25
 insert into comment (created_at, updated_at, contents, date, boardid, id)
-values (now(), now(), '본인에게만 집중하세요!! 남은 신경쓸거 없습니다!', now(), 5, 40);
+values (now(), now(), '본인에게만 집중하세요!! 남은 신경쓸거 없습니다!', now(), 5, 20);
 
 --> group
 -- 1
-insert into dearme.group (contents, price, title, counselor_id)
-values ('가족과 갈등이 있으신분들의 참여를 기다립니다!', 0, '가족과의 갈등', 31);
+insert into group (contents, price, title, counselor_id)
+values ('가족과 갈등이 있으신분들의 참여를 기다립니다!', 0, '가족과의 갈등', 11);
 -- 2
-insert into dearme.group (contents, price, title, counselor_id)
-values ('연인과의 관계에 고민이 있으신분들! 같이 얘기 나눠요!', 0, '연애와 결혼', 32);
+insert into group (contents, price, title, counselor_id)
+values ('연인과의 관계에 고민이 있으신분들! 같이 얘기 나눠요!', 0, '연애와 결혼', 12);
 
 --> group_user
 insert into group_user (group_id, user_id)
@@ -468,116 +408,116 @@ values (2, 6);
 --> counseling
 -- 1
 insert into counseling (day, hours, month, status, token, year,counseling_room_id, counselor_id, group_id, user_id)
-values (16, 8, 8, 'ACCEPTED', null, 2022, null, 31, null, 1);
+values (16, 8, 8, 'ACCEPTED', null, 2022, null, 11, null, 1);
 
 insert into counseling_document (contents, day, hours, is_open, month, year, counseling_id, counselor_id, group_id, user_id)
-values ('우울합니다. 힘들어요. 매일 기분이 안좋습니다.', 16, 8, true, 8, 2022, 1, 31, null, 1);
+values ('우울합니다. 힘들어요. 매일 기분이 안좋습니다.', 16, 8, true, 8, 2022, 1, 11, null, 1);
 -- 2
 insert into counseling (day, hours, month, status, token, year,counseling_room_id, counselor_id, group_id, user_id)
-values (21, 10, 8, 'UNACCEPTED', null, 2022, null, 31, null, 1);
+values (21, 10, 8, 'UNACCEPTED', null, 2022, null, 11, null, 1);
 
 insert into counseling_document (contents, day, hours, is_open, month, year, counseling_id, counselor_id, group_id, user_id)
-values ('서류만 매일 떨어지고 있습니다. 자존감이 너무 낮아진 것 같아요...', 21, 10, true, 8, 2022, 2, 31, null, 1);
+values ('서류만 매일 떨어지고 있습니다. 자존감이 너무 낮아진 것 같아요...', 21, 10, true, 8, 2022, 2, 11, null, 1);
 -- 3
 insert into counseling (day, hours, month, status, token, year,counseling_room_id, counselor_id, group_id, user_id)
-values (20, 12, 8, 'ACCEPTED', null, 2022, null, 32, null, 1);
+values (20, 12, 8, 'ACCEPTED', null, 2022, null, 12, null, 1);
 
 insert into counseling_document (contents, day, hours, is_open, month, year, counseling_id, counselor_id, group_id, user_id)
-values ('사람들이 무섭습니다. 밖으로 나가는게 두려워요.', 20, 12, false, 8, 2022, 3, 32, null, 1);
+values ('사람들이 무섭습니다. 밖으로 나가는게 두려워요.', 20, 12, false, 8, 2022, 3, 12, null, 1);
 -- 4
 insert into counseling (day, hours, month, status, token, year,counseling_room_id, counselor_id, group_id, user_id)
-values (16, 14, 8, 'ACCEPTED', null, 2022, null, 31, 1, 1);
+values (16, 14, 8, 'ACCEPTED', null, 2022, null, 11, 1, 1);
 
 insert into counseling_document (contents, day, hours, is_open, month, year, counseling_id, counselor_id, group_id, user_id)
-values ('부모님이랑 매일 싸우고있어요. 취업좀 빨리하라고 잔소리하시는거 듣는거 너무 힘듭니다.', 16, 14, false, 8, 2022, 4, 31, 1, 1);
+values ('부모님이랑 매일 싸우고있어요. 취업좀 빨리하라고 잔소리하시는거 듣는거 너무 힘듭니다.', 16, 14, false, 8, 2022, 4, 11, 1, 1);
 -- 5
 insert into counseling (day, hours, month, status, token, year,counseling_room_id, counselor_id, group_id, user_id)
-values (20, 16, 8, 'ACCEPTED', null, 2022, null, 32, 2, 1);
+values (20, 16, 8, 'ACCEPTED', null, 2022, null, 12, 2, 1);
 
 insert into counseling_document (contents, day, hours, is_open, month, year, counseling_id, counselor_id, group_id, user_id)
-values ('취준하면서 연애하기 너무 힘듭니다. 여자친구가 매번 보자고할때마다 거절하는게 너무 힘들어요', 20, 16, false, 8, 2022, 5, 32, 2, 1);
+values ('취준하면서 연애하기 너무 힘듭니다. 여자친구가 매번 보자고할때마다 거절하는게 너무 힘들어요', 20, 16, false, 8, 2022, 5, 12, 2, 1);
 -- 6
 insert into counseling (day, hours, month, status, token, year,counseling_room_id, counselor_id, group_id, user_id)
-values (17, 18, 8, 'ACCEPTED', null, 2022, null, 31, null, 2);
+values (17, 18, 8, 'ACCEPTED', null, 2022, null, 11, null, 2);
 
 insert into counseling_document (contents, day, hours, is_open, month, year, counseling_id, counselor_id, group_id, user_id)
-values ('할 수 있는건 다한 것 같은데 도저히 일이 안풀리네요. 그냥 막막하기만 합니다.', 17, 18, false, 8, 2022, 6, 31, null, 2);
+values ('할 수 있는건 다한 것 같은데 도저히 일이 안풀리네요. 그냥 막막하기만 합니다.', 17, 18, false, 8, 2022, 6, 11, null, 2);
 -- 7
 insert into counseling (day, hours, month, status, token, year,counseling_room_id, counselor_id, group_id, user_id)
-values (20, 20, 8, 'ACCEPTED', null, 2022, null, 31, null, 2);
+values (20, 20, 8, 'ACCEPTED', null, 2022, null, 11, null, 2);
 
 insert into counseling_document (contents, day, hours, is_open, month, year, counseling_id, counselor_id, group_id, user_id)
-values ('친구들은 다들 취업했는데 저만 몇년째 취준생이에요.', 20, 20, false, 8, 2022, 7, 31, null, 2);
+values ('친구들은 다들 취업했는데 저만 몇년째 취준생이에요.', 20, 20, false, 8, 2022, 7, 11, null, 2);
 -- 8
 insert into counseling (day, hours, month, status, token, year,counseling_room_id, counselor_id, group_id, user_id)
-values (18, 8, 8, 'ACCEPTED', null, 2022, null, 32, null, 2);
+values (18, 8, 8, 'ACCEPTED', null, 2022, null, 12, null, 2);
 
 insert into counseling_document (contents, day, hours, is_open, month, year, counseling_id, counselor_id, group_id, user_id)
-values ('매번 불합격통보만 들으니 자존감이 너무 떨어집니다. 우울해져서 손에 아무것도 안잡혀요. 어떻게 극복할 수 있을까요? ', 18, 8, false, 8, 2022, 8, 32, null, 2);
+values ('매번 불합격통보만 들으니 자존감이 너무 떨어집니다. 우울해져서 손에 아무것도 안잡혀요. 어떻게 극복할 수 있을까요? ', 18, 8, false, 8, 2022, 8, 12, null, 2);
 -- 9
 insert into counseling (day, hours, month, status, token, year,counseling_room_id, counselor_id, group_id, user_id)
-values (16, 10, 8, 'ACCEPTED', null, 2022, null, 31, 1, 2);
+values (16, 10, 8, 'ACCEPTED', null, 2022, null, 11, 1, 2);
 
 insert into counseling_document (contents, day, hours, is_open, month, year, counseling_id, counselor_id, group_id, user_id)
-values ('아버지가 취업 언제할꺼냐고 매일 잔소리하시는게 너무 듣기 싫어요. 저도 하고싶지만 못하는건데 들을때마다 화가 납니다.', 16, 10, false, 8, 2022, 9, 31, 1, 2);
+values ('아버지가 취업 언제할꺼냐고 매일 잔소리하시는게 너무 듣기 싫어요. 저도 하고싶지만 못하는건데 들을때마다 화가 납니다.', 16, 10, false, 8, 2022, 9, 11, 1, 2);
 -- 10
 insert into counseling (day, hours, month, status, token, year,counseling_room_id, counselor_id, group_id, user_id)
-values (20, 10, 8, 'ACCEPTED', null, 2022, null, 32, 2, 2);
+values (20, 10, 8, 'ACCEPTED', null, 2022, null, 12, 2, 2);
 
 insert into counseling_document (contents, day, hours, is_open, month, year, counseling_id, counselor_id, group_id, user_id)
-values ('여자친구가 제가 취업할때까지 기다려줄까요? 가끔 여자친구 친구들의 남자친구 얘기에 자존감이 너무 떨어져요.', 20, 10, false, 8, 2022, 10, 32, 2, 2);
+values ('여자친구가 제가 취업할때까지 기다려줄까요? 가끔 여자친구 친구들의 남자친구 얘기에 자존감이 너무 떨어져요.', 20, 10, false, 8, 2022, 10, 12, 2, 2);
 -- 11
 insert into counseling (day, hours, month, status, token, year,counseling_room_id, counselor_id, group_id, user_id)
-values (16, 16, 8, 'ACCEPTED', null, 2022, null, 31, 1, 3);
+values (16, 16, 8, 'ACCEPTED', null, 2022, null, 11, 1, 3);
 
 insert into counseling_document (contents, day, hours, is_open, month, year, counseling_id, counselor_id, group_id, user_id)
-values ('저는 개발자가 하고싶은데 아버지는 공무원을 하기를 바라세요. 어떻게 아버지를 설득시킬 수 있을까요', 16, 16, false, 8, 2022, 11, 31, 1, 3);
+values ('저는 개발자가 하고싶은데 아버지는 공무원을 하기를 바라세요. 어떻게 아버지를 설득시킬 수 있을까요', 16, 16, false, 8, 2022, 11, 11, 1, 3);
 -- 12
 insert into counseling (day, hours, month, status, token, year,counseling_room_id, counselor_id, group_id, user_id)
-values (20, 18, 8, 'ACCEPTED', null, 2022, null, 32, 2, 4);
+values (20, 18, 8, 'ACCEPTED', null, 2022, null, 12, 2, 4);
 
 insert into counseling_document (contents, day, hours, is_open, month, year, counseling_id, counselor_id, group_id, user_id)
-values ('취준생인데 남자친구가 결혼하자고 합니다. 저는 결혼은 취업이후에 하고싶거든요. 고민입니다.', 20, 18, false, 8, 2022, 12, 32, 2, 4);
+values ('취준생인데 남자친구가 결혼하자고 합니다. 저는 결혼은 취업이후에 하고싶거든요. 고민입니다.', 20, 18, false, 8, 2022, 12, 12, 2, 4);
 -- 13
 insert into counseling (day, hours, month, status, token, year,counseling_room_id, counselor_id, group_id, user_id)
-values (16, 18, 8, 'ACCEPTED', null, 2022, null, 31, 1, 5);
+values (16, 18, 8, 'ACCEPTED', null, 2022, null, 11, 1, 5);
 
 insert into counseling_document (contents, day, hours, is_open, month, year, counseling_id, counselor_id, group_id, user_id)
-values ('어머니가 교사가 최고라고 사범대를 가라고하세요. 근데 저는 마케터가 꿈이거든요. 어떻게 설득할 수 있을까요?', 16, 18, false, 8, 2022, 13, 31, 1, 5);
+values ('어머니가 교사가 최고라고 사범대를 가라고하세요. 근데 저는 마케터가 꿈이거든요. 어떻게 설득할 수 있을까요?', 16, 18, false, 8, 2022, 13, 11, 1, 5);
 -- 14
 insert into counseling (day, hours, month, status, token, year,counseling_room_id, counselor_id, group_id, user_id)
-values (20, 18, 8, 'ACCEPTED', null, 2022, null, 32, 2, 6);
+values (20, 18, 8, 'ACCEPTED', null, 2022, null, 12, 2, 6);
 
 insert into counseling_document (contents, day, hours, is_open, month, year, counseling_id, counselor_id, group_id, user_id)
-values ('남자친구가 취업하라고 옆에서 너무 짜증나게해요. 헤어질까요?', 20, 18, false, 8, 2022, 14, 32, 2, 6);
+values ('남자친구가 취업하라고 옆에서 너무 짜증나게해요. 헤어질까요?', 20, 18, false, 8, 2022, 14, 12, 2, 6);
 
 --> favorite
 insert into favorite (created_at, updated_at, counselor_user_id, id)
-values (now(), now(), 31, 1);
+values (now(), now(), 11, 1);
 insert into favorite (created_at, updated_at, counselor_user_id, id)
-values (now(), now(), 32, 1);
+values (now(), now(), 12, 1);
 insert into favorite (created_at, updated_at, counselor_user_id, id)
-values (now(), now(), 33, 1);
+values (now(), now(), 13, 1);
 insert into favorite (created_at, updated_at, counselor_user_id, id)
-values (now(), now(), 31, 2);
+values (now(), now(), 11, 2);
 insert into favorite (created_at, updated_at, counselor_user_id, id)
-values (now(), now(), 32, 2);
+values (now(), now(), 12, 2);
 
 --> review
 insert into review (created_at, updated_at, contents, value, counselor_user_id, id)
-values (now(), now(), '감사합니다!', 5, 31, 1);
+values (now(), now(), '감사합니다!', 5, 11, 1);
 insert into review (created_at, updated_at, contents, value, counselor_user_id, id)
-values (now(), now(), '최고의 상담!', 4, 31, 1);
+values (now(), now(), '최고의 상담!', 4, 11, 1);
 insert into review (created_at, updated_at, contents, value, counselor_user_id, id)
-values (now(), now(), '속이 시원해졌어요!', 4, 31, 2);
+values (now(), now(), '속이 시원해졌어요!', 4, 11, 2);
 insert into review (created_at, updated_at, contents, value, counselor_user_id, id)
-values (now(), now(), '친절한 상담 감사해요!', 4, 32, 2);
+values (now(), now(), '친절한 상담 감사해요!', 4, 12, 2);
 insert into review (created_at, updated_at, contents, value, counselor_user_id, id)
-values (now(), now(), '상담 받길 너무 잘 했네요!', 5, 31, 2);
+values (now(), now(), '상담 받길 너무 잘 했네요!', 5, 11, 2);
 insert into review (created_at, updated_at, contents, value, counselor_user_id, id)
-values (now(), now(), '다음엔 좀 더 유익하길', 2, 31, 3);
+values (now(), now(), '다음엔 좀 더 유익하길', 2, 11, 3);
 insert into review (created_at, updated_at, contents, value, counselor_user_id, id)
-values (now(), now(), '여전히 답답해요', 1, 31, 5);
+values (now(), now(), '여전히 답답해요', 1, 11, 5);
 
 --> text_diary
 -- 1
