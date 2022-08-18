@@ -38,7 +38,7 @@ public class UserInfoResponseDto {
                 .phone(user.getPhone())
                 .gender(user.getGender())
                 .type(user.getType())
-                .pictureUrl("https://i7d206.p.ssafy.io/users/api/" + user.getUserId() + "/image")
+                .pictureUrl("https://i7d206.p.ssafy.io/api/users/" + user.getUserId() + "/image")
                 .points(user.getPoints())
                 .build();
     }
@@ -54,7 +54,7 @@ public class UserInfoResponseDto {
                 .gender(counselor.getGender())
                 .type(counselor.getType())
 //                .pictureUrl(counselor.getPicture().getRealFileName())
-                .pictureUrl("https://i7d206.p.ssafy.io/users/api/" + counselor.getUserId() + "/image")
+                .pictureUrl("https://i7d206.p.ssafy.io/api/users/" + counselor.getUserId() + "/image")
                 .points(counselor.getPoints())
                 .counselorProfileInfoDto(CounselorProfileInfoDto.of(counselor.getCounselorProfile()))
                 .build();
