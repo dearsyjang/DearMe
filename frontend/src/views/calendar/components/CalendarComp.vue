@@ -174,7 +174,7 @@ export default {
               if(element.sentiment=='positive'){
                     if(element.percentage>=90)  this.dayInfo[element.day].textEmoji='⭐'
                     else if(element.percentage>=80) this.dayInfo[element.day].textEmoji='🌞'
-                    else if(element.percentage>=70) this.dayInfo[element.day].textEmoji='🌤'
+                    else if(element.percentage>=70) this.dayInfo[element.day].textEmoji=''
                     else if(element.percentage>=60) this.dayInfo[element.day].textEmoji='⛅'
                     else this.dayInfo[element.day].textEmoji='☂'
               }else if(element.sentiment=='negative'){

@@ -20,7 +20,7 @@
         <div class="card-body">
           <div v-for="comment in comments" :key="comment"  class="d-flex row align-items-center">
             <div class="form-group">
-              <p class="text-end">COUNSELOR ID : {{ comment.userId }} | {{ comment.date[0] }}.{{ comment.date[1] }}.{{ comment.date[2] }}</p>
+              <p class="text-end">COUNSELOR ID : {{ comment.userId }} | {{ comment.date? comment.date[0] : ''}}.{{ comment.date? comment.date[1] : '' }}.{{ comment.date? comment.date[2] : '' }}</p>
               <p class="board-detail-context">{{ comment.contents }}</p>
             </div>
           </div>
