@@ -67,10 +67,8 @@ public class CounselingServiceImpl implements CounselingService{
             for(Counseling counseling : counselings){
                 if(counseling.getGroup() == null)
                     counselingInfoResponseDtos.add(CounselingInfoResponseDto.of(counseling));
-            }
-            List<Group> groups = user.getGroups();
-            for(Group group : groups){
-                counselorGroupCounselingsResponseDtos.add(CounselorGroupCounselingsResponseDto.of(group));
+                else
+                    counselorGroupCounselingsResponseDtos.add(CounselorGroupCounselingsResponseDto.of(counseling));
             }
         }
 
