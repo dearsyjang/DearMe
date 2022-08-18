@@ -26,12 +26,12 @@
     <router-link
     :to="{ name: 'counselorProfile', params: {counselorId: counselor.counselorId}}" style="text-decoration:none">
 
-    <div class="card mb-3" id="counselor-item-card" style="max-width: 90%;">
+    <div class="card mb-3" id="counselor-item-card">
       <div class="row" id="counselor-item-row">
-        <div class="counselor-item-pic col-md-16 " style="max-width:50%;">
+        <div class="counselor-item-pic col-md-6" >
           <img src = "@/assets/images/kjm.png" class="counselor-img2"/>
         </div>
-        <div class="card-body col-md-16" id="counselor-item-card-body" style="max-width:50%;" >
+        <div class="card-body col-md-6" id="counselor-item-card-body" >
           <h5 class="card-title" id="counselor-item-card-title">{{counselor.nickName}} 상담사</h5>
           <h5 class="counselor-item-price">1:1 상담 : {{counselor.price}} point</h5>
           <div class="card-text" id="counselor-item-text">

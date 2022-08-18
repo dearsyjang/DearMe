@@ -19,7 +19,7 @@
         <div v-if="counseling.status==`ACCEPTED` && counseling.groupId == null">
           <div class="card position-relative">
             <div class="card-body ">
-              <router-link :to="{ name: 'counseling', params: { counselingId: counseling.id }}">
+              <router-link :to="{ name: 'counseling', params: { counselingId: counseling.id, counselorId:counseling.counselorId}}">
               <div class="d-flex justify-content-around">
                 <div>
                   <h4 class="blog-title d-block text-dark board-title">상담사 : {{ counseling.counselorNickName }}</h4>
@@ -55,7 +55,7 @@
         <div v-if="counseling.status==`ACCEPTED` && counseling.groupId != null">
           <div class="card position-relative">
             <div class="card-body ">
-              <router-link :to="{ name: 'counseling', params: { counselingId: counseling.id }}">
+              <router-link :to="{ name: 'counseling', params: { counselingId: counseling.id, counselorId:counseling.counselorId }}">
               <div class="d-flex justify-content-around">
                 <div>
                   <h4 class="blog-title d-block text-dark board-title">상담사 : {{ counseling.counselorNickName }}</h4>
@@ -101,7 +101,9 @@ export default {
       this.fetchSchedules()
       this.fetchCurrentUser()
       console.log(this.counseling)
-    }
+    },
+    mounted(){
+    },
 }
 </script>
 

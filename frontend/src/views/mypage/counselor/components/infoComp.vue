@@ -18,7 +18,7 @@
           <div class="user-profile me-3">
                 <label for="uploadItemFile">
                     <div class="wrapper-image" >
-                        <img id = "profile" ref="uploadItemImage" width="auto">
+                        <img id = "profile" ref="uploadItemImage" style="width:100%;">
                     </div>      
                 </label>
           </div>
@@ -74,5 +74,4 @@ export default {
 }
 </script>
 <style scoped>
-
 </style>

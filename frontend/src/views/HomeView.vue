@@ -26,7 +26,7 @@
       <router-link :to="{ name:'login' }"><button id="login-button" class="w-btn-login btn-font">LOGIN</button></router-link>
     </div>
     <div>
-      <router-link :to="{ name:'signuptype' }"><button id="signup2-button" class="w-btn-signup btn-font">SIGN IN</button></router-link>
+      <router-link :to="{ name:'signuptype' }"><button id="signup2-button" class="w-btn-signup btn-font">SIGN UP</button></router-link>
     </div>
 
 

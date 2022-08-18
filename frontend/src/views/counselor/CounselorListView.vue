@@ -2,105 +2,117 @@
 <div class="page-content-wrapper py-3 board-bg">
   <div class="shop-pagination pb-3">
     <div class="container">
-      <div class="card">
-        <div class="card-body" style="width: auto;">
-          <div class="d-flex align-items-center justify-content-between" style="width: auto;">
-            <small class="ms-1 board-text-index" style="width: auto;">상담사 리스트</small>
-          <div>
-            <div class="filter-button" id = "filter-btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBottom" aria-controls="offcanvasBottom">
-              <i class="bi bi-funnel-fill"></i>
+      <div class="card ">
+        <div class="card-body p-2">
+          <div class="d-flex align-items-center justify-content-between">
+            <div>
+              <small class="ms-1 board-text-index">상담사 리스트</small>
             </div>
-          </div>
-            <div class="offcanvas offcanvas-bottom" tabindex="-1" id="offcanvasBottom" aria-labelledby="offcanvasBottomLabel">
-              <div class="offcanvas-header">
-                <h5 class="offcanvas-title" id="offcanvasBottomLabel">상담사 필터 설정</h5>
-                <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            <div>
+              <div class="filter-button" id = "filter-btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBottom" aria-controls="offcanvasBottom">
+                <i class="bi bi-funnel-fill"></i>
               </div>
-              <div class="offcanvas-body small">
-                <form @submit.prevent="onSubmit()" >
-                  <div class="filter-title">정렬</div>
-                    <div class="form-check form-check-inline">
-                      <input class="form-check-input" type="radio" id="1" value="true" name="radio1" v-model="filter.reviewScoreUp">
-                      <label class="form-check-label" for="1">
-                        별점 높은 순
-                      </label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                      <input class="form-check-input" type="radio" id="8" value="true" name="radio1" v-model="filter.reviewCntDown">
-                      <label class="form-check-label" for="8">
-                        별점 적은 순
-                      </label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                      <input class="form-check-input" type="radio" id="2" value="true" name="radio1" v-model="filter.reviewCntUp">
-                      <label class="form-check-label" for="2">
-                        리뷰 많은 순
-                      </label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                      <input class="form-check-input" type="radio" id="9" value="true" name="radio1" v-model="filter.reviewCntDown">
-                      <label class="form-check-label" for="9">
-                        리뷰 적은 순
-                      </label>
-                    </div>
+              <div class="offcanvas offcanvas-bottom" tabindex="-1" id="offcanvasBottom" aria-labelledby="offcanvasBottomLabel">
+                <div class="offcanvas-header">
+                  <h5 class="offcanvas-title" id="offcanvasBottomLabel">상담사 필터 설정</h5>
+                  <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                </div>
+                <div class="offcanvas-body small">
+                  <form @submit.prevent="onSubmit()" >
+                    <div class="filter-title">정렬</div>
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" id="1" value="true" name="radio1" v-model="filter.reviewScoreUp">
+                        <label class="form-check-label" for="1">
+                          별점 높은 순
+                        </label>
+                      </div>
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" id="8" value="true" name="radio1" v-model="filter.reviewCntDown">
+                        <label class="form-check-label" for="8">
+                          별점 적은 순
+                        </label>
+                      </div>
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" id="2" value="true" name="radio1" v-model="filter.reviewCntUp">
+                        <label class="form-check-label" for="2">
+                          리뷰 많은 순
+                        </label>
+                      </div>
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" id="9" value="true" name="radio1" v-model="filter.reviewCntDown">
+                        <label class="form-check-label" for="9">
+                          리뷰 적은 순
+                        </label>
+                      </div>
+                        <br>
                       <br>
-                    <br>
-                    <hr>
-                    <div class="filter-title">전문 분야</div>
-                    <div class="form-check form-check-inline">
-                      <input class="form-check-input" type="radio" id="3" value="가족" name="radio2" v-model="filter.category">
-                      <label class="form-check-label" for="3">
-                      가족
-                      </label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                      <input class="form-check-input" type="radio" id="4" value="직장,진로" name="radio2" v-model="filter.category">
-                      <label class="form-check-label" for="4">
-                      직장, 진로
-                      </label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                      <input class="form-check-input" type="radio" id="5" value="연애,결혼" name="radio2" v-model="filter.category">
-                      <label class="form-check-label" for="5">
-                      연애, 결혼
-                      </label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                      <input class="form-check-input" type="radio" id="6" value="자기이해" name="radio2"  v-model="filter.category">
-                      <label class="form-check-label" for="6">
-                      자기 이해
-                      </label>
-                    </div>
+                      <hr>
+                      <div class="filter-title">전문 분야</div>
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" id="3" value="가족" name="radio2" v-model="filter.category">
+                        <label class="form-check-label" for="3">
+                        가족
+                        </label>
+                      </div>
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" id="4" value="직장,진로" name="radio2" v-model="filter.category">
+                        <label class="form-check-label" for="4">
+                        직장, 진로
+                        </label>
+                      </div>
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" id="5" value="연애,결혼" name="radio2" v-model="filter.category">
+                        <label class="form-check-label" for="5">
+                        연애, 결혼
+                        </label>
+                      </div>
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" id="6" value="자기이해" name="radio2"  v-model="filter.category">
+                        <label class="form-check-label" for="6">
+                        자기 이해
+                        </label>
+                      </div>
+                        <br>
                       <br>
-                    <br>
-                    <hr>
-                    <div class="filter-title" >즐겨찾기</div>
+                      <hr>
+                      <div class="filter-title" >즐겨찾기</div>
 
-                    <div class="form-check form-check-inline">
-                      <input class="form-check-input" type="checkbox" id="7" value="true" v-model="filter.favorite">
-                      <label class="form-check-label" for="7">
-                      즐겨찾기
-                      </label>
-                    </div>
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" id="7" value="true" v-model="filter.favorite">
+                        <label class="form-check-label" for="7">
+                        즐겨찾기
+                        </label>
+                      </div>
 
-                    <div class="bottom-btn my-4">
-                    <button @click=resetFilter() type="reset" class="btn" id="reset-btn" >초기화하기</button>
-                    <button type="submit" class="btn" id="apply-btn">적용하기</button>
-                    </div>
-                  </form>
+                      <div class="bottom-btn my-4">
+                      <button @click=resetFilter() type="reset" class="btn" id="reset-btn" >초기화하기</button>
+                      <button type="submit" class="btn" id="apply-btn">적용하기</button>
+                      </div>
+                    </form>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-  <counselor-list-item
-    v-for="(counselor,idx) in counselors.data"
-    :key="idx"
-    :counselor="counselor">
-  </counselor-list-item>
   </div>
+  <div class="top-products-area product-list-wrap">
+    <div class="container">
+      <div class="row g-3">
+        <div v-for="(counselor,idx) in counselors.data"
+        :key="idx"
+        :counselor="counselor" class="col-12">
+        <counselor-list-item
+        v-for="(counselor,idx) in counselors.data"
+        :key="idx"
+        :counselor="counselor">
+      </counselor-list-item>
+        </div>
+      </div>
+    </div>
+    </div>
+    </div>
 </template>
 
 <script>

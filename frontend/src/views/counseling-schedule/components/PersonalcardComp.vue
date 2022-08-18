@@ -6,7 +6,7 @@
         <div v-for="(re,idx) in request"
             :key="idx"
             :re="re">
-          <div v-if="re.counselorId== currentUser.data.userId && re.status==`ACCEPTED`  && re.groupId == null && today==`${re.year}-${re.month}-${re.day}`" class="card mb-3" id="today-personal-card" >
+          <div v-if="re.counselorId== currentUser.data.userId && re.status==`ACCEPTED`  && re.groupId == null" class="card mb-3" id="today-personal-card" >
           <div class="card position-relative shadow-sm">
             <div class="card-body">
               <router-link :to="{ name: 'CounselingRequestDocument', params : {counselingId : re.id}}">
@@ -39,7 +39,6 @@ import { mapGetters,mapActions } from 'vuex'
     name : 'PersonalcardComp',
     data () {
       return {
-       today : this.$route.params.today
     }
     },
     props:{
