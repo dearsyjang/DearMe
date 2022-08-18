@@ -44,7 +44,8 @@
             <user-video
              :stream-manager="publisher"
              @click="updateMainVideoStreamManager(publisher)"/>
-            <div id="mynickname"><h5>{{ this.currentUser.data.nickname }}</h5></div>
+            <div id="mynickname"><h5>{{ this.currentUser.data.nickname }}</h5>
+            </div>
       </div>
 
       <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
@@ -161,7 +162,7 @@ export default {
         let counselingId = this.counselingId
         axios
           .get(
-            `https://i7d206.p.ssafy.io/counseling-rooms/` + counselingId,       
+            `https://i7d206.p.ssafy.io/api/counseling-rooms/` + counselingId,       
              {
               headers: {
                 Authorization : authHeader
@@ -264,7 +265,7 @@ export default {
       return new Promise((resolve, reject) => {
         axios
           .post(
-            `https://i7d206.p.ssafy.io/counseling-rooms`,
+            `https://i7d206.p.ssafy.io/api/counseling-rooms`,
             {
               counselingId : counselingId,
             },           

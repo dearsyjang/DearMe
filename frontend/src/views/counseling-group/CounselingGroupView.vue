@@ -118,7 +118,7 @@ export default {
 
         axios
           .post(
-            `https://i7d206.p.ssafy.io/counseling-rooms/groups`,
+            `https://i7d206.p.ssafy.io/api/counseling-rooms/groups`,
             {
               groupId: groupId
             },       
