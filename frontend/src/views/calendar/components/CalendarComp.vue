@@ -151,7 +151,7 @@ export default {
        }
         axios
           .get(
-            `https://i7d206.p.ssafy.io/text-diaries/year/` + this.year + `/month/` + this.month,
+            `https://i7d206.p.ssafy.io/api/text-diaries/year/` + this.year + `/month/` + this.month,
             {
               headers: {
                 Authorization: authHeader
@@ -199,7 +199,7 @@ export default {
         console.log(authHeader)    
         axios
             .get(
-                `https://i7d206.p.ssafy.io/video-diaries/year/`+this.year + `/month/` + this.month,
+                `https://i7d206.p.ssafy.io/api/video-diaries/year/`+this.year + `/month/` + this.month,
                 {
                   headers: {
                         Authorization : authHeader

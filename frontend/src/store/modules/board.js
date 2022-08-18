@@ -68,7 +68,7 @@ export default {
     createBoard({ commit, getters }, board) {
       console.log(getters.authHeader2)
       axios({
-        url: 'https://i7d206.p.ssafy.io/boards',
+        url: 'https://i7d206.p.ssafy.io/api/boards',
         method: 'post',
         data: {
           'title': board.title,

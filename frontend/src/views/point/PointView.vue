@@ -91,7 +91,7 @@ export default {
         function(rsp) { /* 3. 콜백 함수 정의하기 */
 
             if (rsp.success) {
-            fetch('https://i7d206.p.ssafy.io/users/points', {
+            fetch('https://i7d206.p.ssafy.io/api/users/points', {
                 method: 'PUT',
                 headers: {
                 'Content-Type': 'application/json',

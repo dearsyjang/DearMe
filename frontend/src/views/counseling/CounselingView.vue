@@ -161,7 +161,7 @@ export default {
         let counselingId = this.counselingId
         axios
           .get(
-            `https://i7d206.p.ssafy.io/counseling-rooms/` + counselingId,       
+            `https://i7d206.p.ssafy.io/api/counseling-rooms/` + counselingId,       
              {
               headers: {
                 Authorization : authHeader
@@ -264,7 +264,7 @@ export default {
       return new Promise((resolve, reject) => {
         axios
           .post(
-            `https://i7d206.p.ssafy.io/counseling-rooms`,
+            `https://i7d206.p.ssafy.io/api/counseling-rooms`,
             {
               counselingId : counselingId,
             },           
