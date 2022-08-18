@@ -8,7 +8,7 @@
       <router-link :to="{ name: 'videodiary' }"><button id="videodiary-enter-btn" class="btn">
       <img id="camera-img" src="../../../assets/images/camera.png" alt="camera"></button></router-link>
       </button>
-    <button v-else class="btn"><img id="checkimg" src="../../../assets/images/check.png" alt="check"></button>
+    <button v-else class="btn"><img id="check-img" src="../../../assets/images/check.png" alt="check"></button>
   </div>
   <br>
     <!--달력-->
@@ -374,7 +374,7 @@ section{
   justify-content: center;
   text-align: center;
 }
-#check{
+#check-img{
   width: 40px;
   height: 40px;
   margin: 0;
