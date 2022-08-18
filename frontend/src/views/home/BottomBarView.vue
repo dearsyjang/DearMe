@@ -2,6 +2,7 @@
 <div>
   <div v-if="currentUser!='' && isLoggedIn">
     <div id="bottombar" class="container">
+<<<<<<< HEAD
       <router-link to="/calendar" class="img mx-3"><img id="emotion" src="../../assets/images/emotion.png" alt="emotion"></router-link>
  
         <router-link to="/counseling-schedule/counselor-schedule" class="img mx-3"><img id="schedule" src="../../assets/images/schedule.png" alt="schedule"></router-link>
@@ -19,34 +20,38 @@
       <router-link to="/board" class="img mx-3"><img id="board" src="../../assets/images/board.png" alt="board"></router-link>
       <!-- <div v-if="currentUser.data?.type ==`USER`">
         <router-link to="/calendar" class="img mx-3"><img id="emotion" src="../../assets/images/emotion.png" alt="emotion"></router-link>
+=======
+      <div v-if="currentUser.data?.type ==`USER`">
+        <router-link to="/calendar" class="img mx-3"><img id="emotion" src="@/assets/images/emotion.png" alt="emotion"></router-link>
+>>>>>>> 0333c0d23d779ff2e04662918e872edce4a6a6a8
         <p class="text">감정달력</p>
       </div>
       <div v-if="currentUser.data?.type ==`COUNSELOR`">
-        <router-link to="/counseling-schedule/counselor-schedule" class="img mx-3"><img id="schedule" src="../../assets/images/schedule.png" alt="schedule"></router-link>
+        <router-link to="/counseling-schedule/counselor-schedule" class="img mx-3"><img id="schedule" src="@/assets/images/schedule.png" alt="schedule"></router-link>
         <p class="text">일정달력</p>
       </div>
     <div v-if="currentUser.data?.type ==`USER`">
-      <router-link to="/counseling-schedule/userschedule" class="img mx-3"><img id="calendar" src="../../assets/images/calendar.png" alt="calendar"></router-link>
+      <router-link to="/counseling-schedule/userschedule" class="img mx-3"><img id="calendar" src="@/assets/images/calendar.png" alt="calendar"></router-link>
       <p class="text">상담일정</p>
     </div>
     <div v-if="currentUser.data?.type ==`COUNSELOR`">
-        <router-link to="/counseling-request/list" class="img mx-3"><img id="request" src="../../assets/images/request.png" alt="request"></router-link>
+        <router-link to="/counseling-request/list" class="img mx-3"><img id="request" src="@/assets/images/request.png" alt="request"></router-link>
         <p class="text">대기상담</p>
       </div>
     <div v-if="currentUser.data?.type ==`USER`">
-      <router-link to="/mypage/user" class="img mx-3"><img id="home" src="../../assets/images/home.png" alt="home"></router-link>
+      <router-link to="/mypage/user" class="img mx-3"><img id="home" src="@/assets/images/home.png" alt="home"></router-link>
       <p class="text">마이페이지</p>
     </div>
     <div v-if="currentUser.data?.type ==`COUNSELOR`">
-      <router-link to="/mypage/counselor" class="img mx-3"><img id="home" src="../../assets/images/home.png" alt="home"></router-link>
+      <router-link to="/mypage/counselor" class="img mx-3"><img id="home" src="@/assets/images/home.png" alt="home"></router-link>
       <p class="text">마이페이지</p>
     </div>
     <div>
-      <router-link to="/counselors/counselorList" class="img mx-3"><img id="counselor" src="../../assets/images/counselor.png" alt="counselor"></router-link>
+      <router-link to="/counselors/counselorList" class="img mx-3"><img id="counselor" src="@/assets/images/counselor.png" alt="counselor"></router-link>
     <p class="text">상담사조회</p>
     </div>
     <div>
-      <router-link to="/board" class="img mx-3"><img id="board" src="../../assets/images/board.png" alt="board"></router-link>
+      <router-link to="/board" class="img mx-3"><img id="board" src="@/assets/images/board.png" alt="board"></router-link>
       <p class="text">상담게시판</p>
     </div> -->
   </div>

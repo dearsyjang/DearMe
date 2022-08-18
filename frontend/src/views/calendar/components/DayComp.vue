@@ -20,7 +20,7 @@
 
     <div v-if="videoDiaryId!=undefined">
       <button class="btn" data-bs-toggle="modal"
-            data-bs-target="#videoDiaryView"><img id="video-diary-img" src="../../../assets/images/video-diary.png" alt="video-diary"></button>
+            data-bs-target="#videoDiaryView"><img id="video-diary-img" src="@/assets/images/video-diary.png" alt="video-diary"></button>
       </div>
  
 <div class="modal fade" id="videoDiaryView" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

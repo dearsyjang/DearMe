@@ -18,13 +18,20 @@
 </div>
     <br>
     <br>
-    <h3>오늘도 수고했어요</h3>
-    <h3>오늘 당신의 하루를 들려주세요 😊</h3>
-    <br>
+    <h5>오늘도 수고했어요</h5>
+    <h5>오늘 당신의 하루를 들려주세요 😊</h5>
+    <br><br>
 
-    
+    <div class="home-btn">
     <router-link :to="{ name:'login' }"><button id="login-button" class="w-btn-login w-100">LOGIN</button></router-link>
     <router-link :to="{ name:'signuptype' }"><button id="signup2-button" class="w-btn-signup w-100">SIGN IN</button></router-link>
+    </div>
+    <hr>
+    <hr>
+    <hr>
+    <hr>
+    <hr>
+    <hr>
 </div>
 
 </template>
@@ -46,7 +53,7 @@ export default {
 }
 body {
   background-color: #F9F7F7;
-  overflow: hidden;
+  /* overflow: hidden; */
   height: 100%;
 }
 .w-btn-login {
@@ -68,7 +75,13 @@ body {
     color: #E9E5DC;
     margin-bottom: 10px;
 }
+.home-btn{
+  width:20%;
+  justify-content: center;
+  margin : auto;
+  margin-bottom:500px;
 
+}
 .w-btn-signup {
     /* position: relative; */
     border: none;
@@ -88,7 +101,12 @@ body {
     color: #E9E5DC;
     margin-bottom: 10px;
 }
+.carousel {
+  max-width: 30%;
+  justify-content: center;
+  margin:auto
 
+}
 /* .carousel-item{
   width: auto;
   height:auto%;
