@@ -42,6 +42,7 @@ public class CounselingInfoResponseDto {
         return CounselingInfoResponseDto.builder()
                 .id(entity.getId())
                 .userId(entity.getUser().getUserId())
+                .userNickname(entity.getUser().getNickName())
                 .counselorId(entity.getCounselor().getUserId())
                 .counselorNickName(entity.getCounselor().getNickName())
                 .year(entity.getYear())
