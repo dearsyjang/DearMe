@@ -1,39 +1,40 @@
 <template>
 <div id="home">
-    <br>
-    <br>
-    <br>
-    <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
-  <div class="carousel-inner">
-    <div class="carousel-item active">
-      <img src="../assets/images/main.png" id="main" class="d-block w-100" alt="main">
+<div class="page-content-wrapper py-3 board-bg">
+  <div class="shop-pagination pb-3 my-3">
+    <div class="container">
+      <div id="carouselExampleSlidesOnly" class="carousel slide img-container" data-bs-ride="carousel">
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img src="@/assets/images/main.png" id="main" class="d-block W-100" alt="main">
+          </div>
+          <div class="carousel-item">
+            <img src="@/assets/images/main2.png" id="main2" class="d-block W-100" alt="main2">
+          </div>
+          <div class="carousel-item">
+            <img src="@/assets/images/main3.png" id="main3" class="d-block W-100" alt="main3">
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="carousel-item">
-      <img src="../assets/images/main2.png" id="main2" class="d-block w-100" alt="main2">
+    <div class="container my-5">
+      <p class="home-font">오늘도 수고했어요</p>
+      <p >오늘 당신의 하루를 들려주세요 😊</p>
     </div>
-    <div class="carousel-item">
-      <img src="../assets/images/main3.png" id="main3" class="d-block w-100" alt="main3">
+    <div class="container">
+    <div>
+      <router-link :to="{ name:'login' }"><button id="login-button" class="w-btn-login btn-font">LOGIN</button></router-link>
     </div>
-  </div>
-</div>
-    <br>
-    <br>
-    <h5>오늘도 수고했어요</h5>
-    <h5>오늘 당신의 하루를 들려주세요 😊</h5>
-    <br><br>
+    <div>
+      <router-link :to="{ name:'signuptype' }"><button id="signup2-button" class="w-btn-signup btn-font">SIGN IN</button></router-link>
+    </div>
 
-    <div class="home-btn">
-    <router-link :to="{ name:'login' }"><button id="login-button" class="w-btn-login w-100">LOGIN</button></router-link>
-    <router-link :to="{ name:'signuptype' }"><button id="signup2-button" class="w-btn-signup w-100">SIGN IN</button></router-link>
-    </div>
-    <hr>
-    <hr>
-    <hr>
-    <hr>
-    <hr>
-    <hr>
-</div>
 
+
+    </div>
+    </div>
+</div>
+</div>
 </template>
 
 <script>
@@ -43,6 +44,15 @@ export default {
 </script>
 
 <style scoped>
+p {
+  font-size:  3.0vh;
+}
+.btn-font {
+  font-size: 2.0vh;
+}
+.img-container {
+  width: 80%;
+}
 #home{
   width: auto;
   height: 720px;
@@ -59,8 +69,10 @@ body {
 .w-btn-login {
     /* position: relative; */
     border: none;
-    min-width: 170px;
-    min-height: 50px;
+    width: 60%;
+    /* min-width: 170px; */
+    /* min-height: 50px; */
+    height: 6.0vh;
     background: linear-gradient(
         90deg,
         #AF7AB3 0%,
@@ -75,18 +87,13 @@ body {
     color: #E9E5DC;
     margin-bottom: 10px;
 }
-.home-btn{
-  width:20%;
-  justify-content: center;
-  margin : auto;
-  margin-bottom:500px;
-
-}
 .w-btn-signup {
     /* position: relative; */
     border: none;
-    min-width: 170px;
-    min-height: 50px;
+    width: 60%;
+    /* min-width: 170px; */
+    /* min-height: 50px; */
+    height: 6.0vh;
     background: linear-gradient(
         90deg,
         #AF7AB3 0%,
@@ -102,10 +109,10 @@ body {
     margin-bottom: 10px;
 }
 .carousel {
-  max-width: 30%;
   justify-content: center;
-  margin:auto
-
+  margin:auto;
+  width: 70%;
+  height: 30%;
 }
 /* .carousel-item{
   width: auto;
