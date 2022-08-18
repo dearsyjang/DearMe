@@ -16,26 +16,36 @@
 
         <div id="session" v-show="joined">
             <h1 v-text="sessionId"></h1>
-            <div class="container mb-5 mt-5" id="video-diary">
-                <div id="publisher" class="justify-content-center ml-4"></div>
-            </div>
-            <div class="container" id="video-diary-button">
-                <div id="video-button">
-                    <button type="button" class="btn" @click="leaveSession"></button>
-                    <button type="button" class="btn" @click="startRecording">
-                    <h1><i class="bi bi-circle-fill"></i></h1>
-                    </button>
-                    <button type="button" class="btn" @click="stopRecording">
-                    <h1><i class="bi bi-square-fill"></i></h1>
-                    </button>
-                    <button type="button" class="btn" @click="deleteRecording">
-                    <h1><i class="bi bi-trash-fill"></i></h1>
-                    </button>
-                    <button type="button" class="btn" @click="saveRecording">
-                    <h1><i class="bi bi-download"></i></h1>
-                    </button>
+            <div class="card border-success mb-3" style="width: auto; height: auto;">
+                <div class="card-footer">
+                    <h1>{{ title }}</h1>
+                    <hr>
+                    <h3>주의 사항</h3>
+                    <br>
+                    <h4>영상 일기는 최단 10초에서 최장 1분까지 촬영가능합니다.</h4>
                 </div>
-
+                    <div class="card-body text-success">
+                    <div id="publisher" class="justify-content-center ml-4"></div>
+                </div>
+                <div class="card-footer">
+                    <div id="video-button">
+                        <button type="button" class="btn" @click="leaveSession"></button>
+                        <button type="button" class="btn" @click="startRecording">
+                        <h1><i class="bi bi-circle-fill"></i></h1>
+                        </button>
+                        <button type="button" class="btn" @click="stopRecording">
+                        <h1><i class="bi bi-square-fill"></i></h1>
+                        </button>
+                        <button type="button" class="btn" @click="deleteRecording">
+                        <h1><i class="bi bi-trash-fill"></i></h1>
+                        </button>
+                        <button type="button" class="btn" @click="saveRecording">
+                        <h1><i class="bi bi-download"></i></h1>
+                        </button>
+                    </div>
+                </div>
+        </div>
+            <div class="container">
                 <div v-if="videoSource!=''">
                     <button class="board-btn-submit btn-sm mx-2" data-bs-toggle="modal"
                         data-bs-target="#videoDiaryView">영상 다시보기</button>
@@ -253,7 +263,7 @@ export default {
                     this.record_status = false;
                     console.log(response);
                     console.log("stop record", this.recordingId);
-                    this.videoSource="https://i7d206.p.ssafy.io:4443/api/openvidu/recordings/" + this.recordingId + "/" + this.recordingId + ".mp4"
+                    this.videoSource="https://i7d206.p.ssafy.io:4443/openvidu/recordings/" + this.recordingId + "/" + this.recordingId + ".mp4"
                 
                 })
                 .catch(error => {

@@ -8,19 +8,22 @@ export default {
   state: {
     requests: [],
     request: {},
-    open:''
+    open:'',
+    isaccept: false
   },
   getters: {
     requests: state => state.requests,
     request: state => state.request,
-    
+    isaccept: state => state.isaccept
+
    // open: state => state.open
-    
+
 
   },
   mutations: {
     SET_REQUESTS: (state, requests) => state.requests = requests,
     SET_REQUEST: (state, request) => state.request = request,
+    SET_IS_ACCEPT: (state, isaccept) => state.isaccept = isaccept
     //SET_OPEN: (state, open) => state.open = open,
   },
   actions: {
@@ -97,12 +100,12 @@ export default {
 
           console.error(err)
           console.error(err.response.data)
-         
+
         })
     },
 
     updateRequest({ commit, getters }, change ) {
-      
+
       axios({
         url: drf.counselingRequest.requestUpdate(),
         method: 'put',
@@ -118,17 +121,43 @@ export default {
           alert('상담 신청이 수락되었습니다.')
           router.push({
             name: 'CounselingRequestList',
-        
+
           })
         })
         .catch((err) => {
-        
+
           console.error(err)
           console.error(err.response.data)
-         
+
         })
     },
+    counselingAccept ({ commit, getters }, content ) {
 
+      axios({
+        url: drf.counselingRequest.requestList(),
+        method: 'put',
+        data: content,
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': getters.authHeader2
+          }
+      })
+        .then(res => {
+          console.log(res.data)
+          commit('SET_IS_ACCEPT', res.data)
+          alert('상담 신청이 수락되었습니다.')
+          router.push({
+            name: 'mypageCounselor',
+
+          })
+        })
+        .catch((err) => {
+
+          console.error(err)
+          console.error(err.response.data)
+
+        })
+      }
     // openRequest({ state, commit, getters }, requestId) {
 
     //   axios({
@@ -158,7 +187,7 @@ export default {
     //   commit('SET_LIKE', liked)
 
     // },
-    
+
   }
 
 

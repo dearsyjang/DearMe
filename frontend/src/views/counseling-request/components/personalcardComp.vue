@@ -1,27 +1,32 @@
 <template>
-<div class="blog-wrapper direction-rtl">
+<div class="page-content-wrapper">
+  <div class="blog-wrapper direction-rtl">
     <div class="container">
-        <div v-for="(re, idx) in request" :key="idx" :re="re" class="col-6 col-sm-4 col-md-3">
+      <div class="row g-3">
+        <div v-for="(re,idx) in request"
+        :key="idx"
+         class="col-6 col-sm-4 col-md-3">
           <div class="card position-relative shadow-sm">
-            <div class="card-body ">
-              <!-- <router-link :to="{ name: 'counseling', params: { counselingId: counseling.id, counselorId:counseling.counselorId}}"> -->
-              <div class="d-flex align-items-center">
-                <div>
-                  <span class="badge bg-danger rounded-pill mb-2 d-inline-block"> {{ idx }}</span>
-                  <h3 class="blog-title d-block text-dark board-title">user : {{re.userId}}</h3>
-                  <h4>상담일 : {{re.year}}/{{re.month}}/{{re.day}}</h4>
-                </div>
-                <div >
-                  <button class="w-btn w-btn-charge" >상담방 입장</button>
-                </div>
+            <div class="card-body">
+              <router-link :to="{ name: 'counselingAcceptView', params : { personalInfo:re }}">
+              <div class="card-body d-flex align-items-center">
+                  <div>
+                    {{ re}}
+                    <span class="badge bg-danger rounded-pill mb-2 d-inline-block"> {{ idx }}</span>
+                    <h3 class="blog-title d-block text-dark board-title">user : {{re.userId}}</h3>
+                    <h4>상담일 : {{re.year}}/{{re.month}}/{{re.day}}</h4>
+                  </div>
               </div>
-              <!-- </router-link> -->
+            </router-link>
             </div>
           </div>
         </div>
       </div>
     </div>
+  </div>
+</div>
 </template>
+
 
 <script>
 import { mapGetters,mapActions } from 'vuex'
@@ -46,6 +51,7 @@ import { mapGetters,mapActions } from 'vuex'
 
 </script>
 
+
 <style>
 a:link {
   text-decoration: none;
@@ -60,7 +66,6 @@ p {
   margin:auto;
   text-decoration: none;
 }
-
 
 .personal-request-watch-btn{
   float: right;
