@@ -34,7 +34,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 #CommentCreateView input{
   width: auto;
   margin: 0;
@@ -44,5 +44,9 @@ export default {
 
 .comment-create-button{
   align-self: flex-end;
+}
+
+form{
+  width: auto;
 }
 </style>

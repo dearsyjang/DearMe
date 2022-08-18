@@ -6,10 +6,8 @@
         <div class="card-body p-2">
           <div class="d-flex align-items-center justify-content-between">
             <small class="ms-1 board-text-index">댓글 목록</small>
-            <div v-if="isCounselor === true">
-            <button class="board-btn-submit btn-sm mx-2" data-bs-toggle="modal"
-            data-bs-target="#commentCreate">등록</button>
-            </div>
+                <button class="board-btn-submit btn-sm mx-2" data-bs-toggle="modal"
+                data-bs-target="#commentCreate">등록</button>
           </div>
         </div>
       </div>
@@ -30,8 +28,9 @@
   </div>
 <div>
 </div>
-<div class="modal fade" id="commentCreate" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
+<div class="container">
+  <div class="modal fade" id="commentCreate" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">댓글 등록하기</h5>
@@ -43,6 +42,7 @@
       </div>
     </div>
   </div>
+</div>
 </div>
 </div>
 </template>
@@ -85,7 +85,5 @@ export default {
   }
 }
 </script>
-<style>
-
-
+<style scoped>
 </style>
