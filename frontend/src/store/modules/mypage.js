@@ -6,14 +6,17 @@ export default {
   state: {
     myBoards: [],
     myId : {},
+    myreviews: []
   },
   getters: {
     myboards: state => state.myboards,
     myid: state => state.myId,
+    myreviews: state => state.myreviews
   },
   mutations: {
     SET_MY_BOARDS: (state, myboards) => state.myboards = myboards,
-    SET_MY_ID: (state, myId) => state.myId = myId
+    SET_MY_ID: (state, myId) => state.myId = myId,
+    SET_MY_REVEIWS: (state, myreviews) => state.myreviews = myreviews,
   },
   actions: {
     // 나의 게시글 패치
@@ -40,5 +43,18 @@ export default {
       })
       .catch(err => console.error(err.response))
     },
-  }
+  },
+  fetchReveiw({ commit, getters }) {
+    axios({
+      url: drf.mypage.getReveiw(),
+      method: 'get',
+      headers: getters.authHeader,
+    })
+    .then(res => {
+      console.log(res.data.data)
+      console.log(res.data)
+      commit('SET_MY_REVEIWS', res.data.data)
+    })
+    .catch(err => console.error(err.response))
+  },
 }
