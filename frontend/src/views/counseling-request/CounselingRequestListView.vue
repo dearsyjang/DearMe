@@ -6,15 +6,14 @@
         <div class="card">
           <div class="card-body p-2">
             <div class="d-flex align-items-center justify-content-between">
-              <small class="ms-1 board-text-index ">수락 대기 중인 상담</small>
+              <small class="ms-1 board-text-index ">1 : 1 수락 대기 중인 상담</small>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <div class="top-products-area product-list-wrap">
+    <div class="blog-wrapper direction-rtl">
       <div class="container">
-        <h2 class="mx-2">1 : 1 상담</h2>
           <div>
             <personal-card-comp v-for="(request,idx) in requests.data" :key="idx" :request="request"></personal-card-comp>
           </div>
@@ -37,22 +36,29 @@
         </div>
       </div> -->
     </div>
-    <div class="top-products-area product-list-wrap">
-      <div class="container">
-        <div  class="card mb-2">
-          <div class="card-body d-flex align-items-center">
-            <div class="user-info">
-                <h2>그룹 상담</h2>
-                <div>
-                  <group-card-comp v-for="(request,idx) in requests.data" :key="idx" :request="request"></group-card-comp>
-                </div>
-              </div>
-            </div>
+    <div class="page-content-wrapper py-3 board-bg">
+  <div class="shop-pagination pb-3">
+    <div class="container">
+      <div class="card">
+        <div class="card-body p-2">
+          <div class="d-flex align-items-center justify-content-between">
+            <small class="ms-1 board-text-index ">그룹 상담 일정</small>
+          </div>
         </div>
       </div>
     </div>
   </div>
+  <div class="blog-wrapper direction-rtl">
+    <div class="container">
+      <div>
+        <group-card-comp v-for="(request,idx) in requests.data" :key="idx" :request="request"></group-card-comp>
+      </div>
+          </div>
+      </div>
+    </div>
+  </div>
 </template>
+
 <script>
 import personalCardComp from '@/views/counseling-request/components/personalcardComp.vue'
 import groupCardComp from '@/views/counseling-request/components/groupcardComp.vue'
@@ -89,7 +95,8 @@ export default {
 }
 </script>
 
-<style>
+
+<style scoped>
 
 
 .counseling-request-list-title{

@@ -2,7 +2,7 @@
 <section>
   <br>
   <div id="calendar-btn" class="container">
-    <button v-if="dayTextDiary" id="textdiary-btn" class="btn" data-bs-toggle="modal" data-bs-target="#textDiaryView"><img id="pencil-img" src="../../../assets/images/pencil.png" alt="pencil"></button>
+    <button v-if="dayTextDiary" id="textdiary-btn" class="btn" data-bs-toggle="modal" data-bs-target="#textDiaryView"><img id="pencil-img" src="@/assets/images/pencil.png" alt="pencil"></button>
       <button v-else class="btn"><img id="check-img" src="@/assets/images/check.png" alt="check"></button>
       <button v-if="dayVideoDiary" class="btn" id="textdiary-btn"  data-bs-toggle="modal" data-bs-target="#videoDiaryView">
       <router-link :to="{ name: 'videodiary' }"><button id="videodiary-enter-btn" class="btn">
@@ -383,4 +383,9 @@ section{
 #h5{
   text-align: center;
 }
+
+.btn{
+  border: none;
+}
 </style>
+

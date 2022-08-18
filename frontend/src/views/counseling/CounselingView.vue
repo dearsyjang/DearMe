@@ -63,14 +63,8 @@
     <!--세션 오픈-->
     <div id="session" v-if="session">
       <div class="card mt-4" id="my-camera">
-        <user-video :stream-manager="mainStreamManager"/>
+        <!-- <user-video :stream-manager="mainStreamManager"/> -->
       </div>
-      <user-video
-          v-for="sub in subscribers"
-          :key="sub.stream.connection.connectionId"
-          :stream-manager="sub"
-          @click="updateMainVideoStreamManager(sub)"
-        />
       <div class="card-group">
         <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel" data-interval="false">
         <div class="carousel-inner">
@@ -82,8 +76,11 @@
           </div>
           <div class="carousel-item">
             <user-video
-             :stream-manager="publisher"
-             @click="updateMainVideoStreamManager(publisher)"/>
+              v-for="sub in subscribers"
+              :key="sub.stream.connection.connectionId"
+              :stream-manager="sub"
+              @click="updateMainVideoStreamManager(sub)"
+            />
             <div id="mynickname"><h5>{{ this.currentUser.data.nickname }}</h5></div>
       </div>
 
@@ -481,7 +478,7 @@ html{
 }
 #video-container2{
   width: auto;
-  height: auto;
+  height: 50%npm;
   text-align: center;
   border: 1px solid #A2B5BB;
 }
