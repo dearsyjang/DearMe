@@ -12,6 +12,9 @@ public class CounselorGroupCounselingsResponseDto {
     private Long userId;
     private Long counselorId;
     private String counselorNickName;
+    private Integer month;
+    private Integer day;
+    private Integer hours;
     private Long counselingDocumentId;
     private Long groupId;
     private Status status;
@@ -23,6 +26,9 @@ public class CounselorGroupCounselingsResponseDto {
                 .userId(entity.getUser().getUserId())
                 .counselorId(entity.getCounselor().getUserId())
                 .counselorNickName(entity.getCounselor().getNickName())
+                .month(entity.getMonth())
+                .day(entity.getDay())
+                .hours(entity.getHours())
                 .counselingDocumentId(entity.getCounselingDocument().getId())
                 .groupId(entity.getGroup().getId())
                 .status(entity.getStatus())

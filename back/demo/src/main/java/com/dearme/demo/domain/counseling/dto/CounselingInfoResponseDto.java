@@ -12,6 +12,7 @@ import lombok.Data;
 public class CounselingInfoResponseDto {
     private Long id;
     private Long userId;
+    private String userNickname;
     private Long counselorId;
     private String counselorNickName;
     private Integer year;
@@ -28,6 +29,7 @@ public class CounselingInfoResponseDto {
             return CounselingInfoResponseDto.builder()
                     .id(entity.getId())
                     .userId(entity.getUser().getUserId())
+                    .userNickname(entity.getUser().getNickName())
                     .groupId(entity.getGroup().getId())
                     .year(entity.getYear())
                     .month(entity.getMonth())
