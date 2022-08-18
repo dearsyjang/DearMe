@@ -60,7 +60,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 #bottombar {
     position: fixed;
     bottom: 0px;
