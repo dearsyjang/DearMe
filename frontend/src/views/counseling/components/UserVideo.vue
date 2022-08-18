@@ -26,7 +26,7 @@ export default {
 	},
 
 	create() {
-		let access_token = localStorage.getItem('token')
+		let access_token = sessionStorage.getItem('token')
 		let config = {
 			headers: {
 				Authorization: access_token

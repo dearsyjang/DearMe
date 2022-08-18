@@ -53,7 +53,7 @@ export default {
     }
   },
   created() {
-    window.localStorage.clear()
+    // window.sessionStorage.clear()
     // this.login()
   },
   mounted() {},

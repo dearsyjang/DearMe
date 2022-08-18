@@ -2,8 +2,10 @@
 <div>
   <div v-if="currentUser!='' && isLoggedIn">
     <div id="bottombar" class="container">
+      
       <div v-if="currentUser.data?.type ==`USER`">
         <router-link to="/calendar" class="img mx-3"><img id="emotion" src="@/assets/images/emotion.png" alt="emotion"></router-link>
+
         <p class="text">감정달력</p>
       </div>
       <div v-if="currentUser.data?.type ==`COUNSELOR`">
