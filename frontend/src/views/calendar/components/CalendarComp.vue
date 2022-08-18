@@ -3,7 +3,7 @@
   <br>
   <div id="calendar-btn" class="container">
     <button v-if="dayTextDiary" id="textdiary-btn" class="btn" data-bs-toggle="modal" data-bs-target="#textDiaryView"><img id="pencil-img" src="../../../assets/images/pencil.png" alt="pencil"></button>
-      <button v-else class="btn"><img id="check" src="../../../assets/images/check.png" alt="check"></button>
+      <button v-else class="btn"><img id="check-img" src="../../../assets/images/check.png" alt="check"></button>
       <button v-if="dayVideoDiary" class="btn" id="textdiary-btn"  data-bs-toggle="modal" data-bs-target="#videoDiaryView">
       <router-link :to="{ name: 'videodiary' }"><button id="videodiary-enter-btn" class="btn">
       <img id="camera-img" src="../../../assets/images/camera.png" alt="camera"></button></router-link>
@@ -46,8 +46,9 @@
               'has-text-primary': day === today && month === currentMonth && year === currentYear && idx <32
               }">
                     {{ day }}
-                    <h5>{{this.dayInfo[day].textEmoji}}</h5>
-                    <h>{{this.dayInfo[day].videoEmoji}}</h>
+                    <h5 v-if="videoDiaryId == null">{{this.dayInfo[day].textEmoji}}</h5>
+                    <br>
+                    <h5 v-if="videoDiaryId != null">{{this.dayInfo[day].videoEmoji}}</h5>
                     <br>
                   </router-link>
                 </div>
@@ -76,7 +77,6 @@
                 <button type="submit" class="btn" id="textDiary-form-submit-button">저장</button>
               </form>
             </div>
-
           </div>
         </div>
       </div>
@@ -220,19 +220,19 @@ export default {
               this.dayInfo[element.day].videoDiaryPercentage = element.percentage
               this.dayInfo[element.day].videoEmoji=''
               if(element.sentiment=='positive'){
-                    if(element.percentage>=90)  this.dayInfo[element.day].videoEmoji=''
-                    else if(element.percentage>=80) this.dayInfo[element.day].videoEmoji=''
-                    else if(element.percentage>=70) this.dayInfo[element.day].videoEmoji=''
-                    else if(element.percentage>=60) this.dayInfo[element.day].videoEmoji=''
-                    else this.dayInfo[element.day].videoEmoji=''
+                    if(element.percentage>=90)  this.dayInfo[element.day].textEmoji='⭐'
+                    else if(element.percentage>=80) this.dayInfo[element.day].textEmoji='🌞'
+                    else if(element.percentage>=70) this.dayInfo[element.day].textEmoji=''
+                    else if(element.percentage>=60) this.dayInfo[element.day].textEmoji='⛅'
+                    else this.dayInfo[element.day].textEmoji='☂'
               }else if(element.sentiment=='negative'){
-                    if(element.percentage>=90)  this.dayInfo[element.day].videoEmoji=''
-                    else if(element.percentage>=80) this.dayInfo[element.day].videoEmoji=''
-                    else if(element.percentage>=70) this.dayInfo[element.day].videoEmoji=''
-                    else if(element.percentage>=60) this.dayInfo[element.day].videoEmoji=''
-                    else this.dayInfo[element.day].videoEmoji=''
+                    if(element.percentage>=90)  this.dayInfo[element.day].textEmoji='🌪'
+                    else if(element.percentage>=80) this.dayInfo[element.day].textEmoji='💧'
+                    else if(element.percentage>=70) this.dayInfo[element.day].textEmoji='🌧'
+                    else if(element.percentage>=60) this.dayInfo[element.day].textEmoji='🌦'
+                    else this.dayInfo[element.day].textEmoji='☔'
               }else{
-                    this.dayInfo[element.day].videoEmoji=''
+                    this.dayInfo[element.day].textEmoji='❔'
               }
             });
         })
