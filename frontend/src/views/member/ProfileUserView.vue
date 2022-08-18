@@ -145,7 +145,7 @@ import drf from '@/api/drf'
       const authHeader = this.authHeader2
         axios({
             method:'put', 
-            url: "https://i7d206.p.ssafy.io/users/image",
+            url: "https://i7d206.p.ssafy.io/api/users/image",
             headers: {
               'Content-Type': 'multipart/form-data',
               Authorization : authHeader,

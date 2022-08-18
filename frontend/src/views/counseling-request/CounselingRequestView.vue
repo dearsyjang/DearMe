@@ -247,7 +247,9 @@ import { mapGetters,mapActions } from 'vuex'
       // this.createRequest(this.formData)
       this.date2 = `${this.year2}-${this.month2}-${this.day2} ${this.selectHour[0]}:00`,
       this.selectHour2= 'T'+this.selectHour[0]+':00.000Z',
-      this.id=this.currentUser.data.userId,
+
+      this.id=this.$route.params.counselorId
+
       this.date3 = new Date(this.date2)
       let hour4 = this.date3.getHours()
       this.newRequest={

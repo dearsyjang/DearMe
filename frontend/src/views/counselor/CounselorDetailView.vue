@@ -64,9 +64,8 @@
         </div>
         <div id="counselor-bottombar" class="container">
           <div>
-            <router-link to="/counseling-request"  >
-              <button v-if="currentUser.data.type==`USER`" class="one-on-one-request-btn">1:1 상담 신청하기</button>
-            </router-link>
+             <router-link :to="{name: 'CounselingRequest', params: {counselorId: counselor.data.userId}}"><button v-if="currentUser.data.type==`USER`" class="one-on-one-request-btn">1:1 상담 신청하기</button></router-link>
+              
           </div>
         </div>
       </div>
@@ -222,6 +221,9 @@
       this.check()
 
 
+      },
+      mounted(){
+        console.log(this.counselor.data)
       },
  }
 </script>
