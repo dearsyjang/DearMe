@@ -275,6 +275,7 @@ export default {
                     }),
                 })
                 .then(response => {
+                    this.videoSource= ''
                     console.log('delete 성공!!')
                     console.log(response)
                 })

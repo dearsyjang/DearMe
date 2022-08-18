@@ -7,7 +7,7 @@ import router from '@/router'
 export default {
   state: {
     // 회원가입때 생성된 토큰을 로컬스토리지에서 조회
-    token: localStorage.getItem('token') || '',
+    token: sessionStorage.getItem('token') || '',
     // 로그인된 사용자
     currentUser: {},
     profile: {},
@@ -38,17 +38,18 @@ export default {
     SET_CERTIFICATES: (state, certificate) => state.certificate = certificate
   },
   actions: {
+    
     // 회원가입
     saveToken({ commit }, token) {
       commit('SET_TOKEN', token)
       // 회원가입시 받은 토큰을 로컬스토리지에 추가
-      localStorage.setItem('token', token)
+      sessionStorage.setItem('token', token)
     },
     // 로그아웃
     removeToken({ commit }) {
       // 현재 사용자 비움
       commit('SET_TOKEN', '')
-      localStorage.setItem('token', '')
+      sessionStorage.setItem('token', '')
       
 
     },
