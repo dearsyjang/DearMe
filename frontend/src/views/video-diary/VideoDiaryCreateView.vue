@@ -16,7 +16,7 @@
 
         <div id="session" v-show="joined">
             <h1 v-text="sessionId"></h1>
-            <div class="card border-success mb-3" style="width: auto; height: auto;">
+            <div class="card mb-3" style="width: auto; height: auto;">
                 <div class="card-footer">
                     <h1>{{ title }}</h1>
                     <hr>
@@ -240,6 +240,7 @@ export default {
                     console.log('start_record', response.data.data.recording.id);
                     this.recordingId = response.data.data.recording.id;
                     this.record_status = true;
+                    alert('영상 일기 녹화가 시작되었습니다 😀');
                 })
                 .catch(error => {
                     console.error('start_record error', error)
@@ -264,7 +265,7 @@ export default {
                     console.log(response);
                     console.log("stop record", this.recordingId);
                     this.videoSource="https://i7d206.p.ssafy.io:4443/openvidu/recordings/" + this.recordingId + "/" + this.recordingId + ".mp4"
-                
+                    alert('영상 일기 녹화가 완료되었습니다😘');
                 })
                 .catch(error => {
                     console.error(error)
@@ -402,5 +403,9 @@ body{
 }
 #video-diary{
     margin:0 auto; 
+}
+.card{
+    display: flex;
+
 }
 </style>
