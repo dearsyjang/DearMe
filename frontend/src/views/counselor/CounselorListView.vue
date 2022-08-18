@@ -3,9 +3,9 @@
   <div class="shop-pagination pb-3">
     <div class="container">
       <div class="card">
-        <div class="card-body p-2">
-          <div class="d-flex align-items-center justify-content-between">
-            <small class="ms-1 board-text-index ">상담사 리스트</small>
+        <div class="card-body" style="width: auto;">
+          <div class="d-flex align-items-center justify-content-between" style="width: auto;">
+            <small class="ms-1 board-text-index" style="width: auto;">상담사 리스트</small>
           <div>
             <div class="filter-button" id = "filter-btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBottom" aria-controls="offcanvasBottom">
               <i class="bi bi-funnel-fill"></i>

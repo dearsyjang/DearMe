@@ -1,5 +1,5 @@
 // const HOST = 'http://localhost:8080/api/'
-const HOST = "https://i7d206.p.ssafy.io"
+const HOST = "https://i7d206.p.ssafy.io/api"
 const MEMBER = '/users'
 const BOARD ='/boards'
 const COMMENT ='/comments'
