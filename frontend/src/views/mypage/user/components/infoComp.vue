@@ -28,7 +28,7 @@
               <span class="badge bg-warning ms-2 rounded-pill">{{ currentUser?.data?.type }}</span>
             </div>
             <div class="d-flex align-items-center">
-              <p class="mb-0 me-4 board-mypoint board-text-bold">잔여 포인트 : {{ currentUser?.data?.points }} pt</p>
+              <p id="point-number" style="font-size: 0.8em" class="mb-0 me-4 board-mypoint board-text-bold">잔여 포인트 : {{ currentUser?.data?.points }} pt</p>
               <router-link :to="{ name: 'PointView'}">
               <button class="w-btn w-btn-charge" type="button">충전하기</button>
               </router-link>
@@ -96,6 +96,10 @@ export default {
     transition: 0.3s;
     color: #E8E5DC;
     font-size:14px
+}
+
+.point-number{
+  font-size: 5px
 }
 
 .w-btn-charge:hover {

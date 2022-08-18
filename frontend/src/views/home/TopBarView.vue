@@ -1,5 +1,5 @@
 <template>
-  <div id="topbar">
+  <div id="topbar" v-if="isLoggedIn">
     <!--상단바-->
     <div class="header-demo-bg shadow-sm">
       <div class="container">
@@ -50,7 +50,7 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex'
+import { mapActions } from 'vuex'
 
 export default {
   name: 'TopBar',
@@ -65,16 +65,14 @@ export default {
   mounted() {},
   unmounted() {},
   methods: {
-    ...mapActions(['logout']),
+    ...mapActions(['logout', 'isLoggedIn']),
     // 로그아웃 버튼 누르면 로그아웃 실행
     logOUT() {
       this.logout()
     }
   },
   computed: {
-    // 로그인 여부 확인
-    ...mapGetters(['currentUser'])
-  }
+  },
 }
 </script>
 
