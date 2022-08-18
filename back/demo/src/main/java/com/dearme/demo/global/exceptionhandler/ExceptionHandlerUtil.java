@@ -160,4 +160,9 @@ public class ExceptionHandlerUtil {
         return ResponseEntity.badRequest().body(CommonResponse.getErrorResponse(e.getMessage()));
     }
 
+    @ExceptionHandler(AlreadyExistCounselorDocumentException.class)
+    ResponseEntity<CommonResponse> handleAlreadyExistCounselorDocumentException(AlreadyExistCounselorDocumentException e){
+        return ResponseEntity.badRequest().body(CommonResponse.getErrorResponse(e.getMessage()));
+    }
+
 }
