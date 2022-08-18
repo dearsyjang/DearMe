@@ -10,7 +10,7 @@
             <input class="form-control" type="text" v-model="credentials.id" placeholder="아이디">
           </div>
           <div class="form-group position-relative">
-            <input class="form-control" type="text" v-model="credentials.pw" placeholder="비밀번호">
+            <input class="form-control" type="password" v-model="credentials.pw" placeholder="비밀번호">
           </div>
           <button @click="LogIn()" class="w-btn-login w-100" type="button">LOGIN</button>
       </div>
