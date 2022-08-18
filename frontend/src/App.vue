@@ -36,9 +36,8 @@ import "bulma/css/bulma.css"
   background-color: #F9F7F7;
 }
 
-html, body{
+body{
   width: 100%;
-  height: 100%;
   margin: 0;
   padding: 0;
   background-color: #F9F7F7;
