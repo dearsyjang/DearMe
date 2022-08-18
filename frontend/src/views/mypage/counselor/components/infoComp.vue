@@ -16,11 +16,11 @@
       <div class="card user-info-card mb-3">
         <div class="card-body d-flex align-items-center">
           <div class="user-profile me-3">
-            <img src="@/assets/images/emotion.png" alt="">
-            <i class="bi bi-pencil"></i>
-            <form action="#">
-              <input class="form-control" type="file">
-            </form>
+                <label for="uploadItemFile">
+                    <div class="wrapper-image" >
+                        <img id = "profile" ref="uploadItemImage" width="auto">
+                    </div>      
+                </label>
           </div>
           <div class="user-info">
             <div class="d-flex align-items-center">
@@ -42,6 +42,7 @@
 </template>
 <script>
 import { mapActions, mapGetters } from 'vuex';
+
 export default {
   components: {},
   data() {
@@ -54,10 +55,15 @@ export default {
     this.fetchCurrentUser()
   },
   mounted() {
+    this.getImage();
   },
   unmounted() {},
   methods: {
     ...mapActions(['fetchCurrentUser']),
+        getImage () {
+      const img = document.getElementById('profile');
+      img.src = this.currentUser.data.pictureUrl
+    },
     // 회원 정보 수정 매서드 받아와서 패치하고 출력
   },
   computed:{
