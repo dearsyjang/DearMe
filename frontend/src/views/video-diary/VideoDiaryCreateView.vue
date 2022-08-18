@@ -169,7 +169,7 @@ export default {
                 return new Promise((resolve, reject) => {
                     axios
                         .get(
-                            `https://i7d206.p.ssafy.io/recording/get-token`,
+                            `https://i7d206.p.ssafy.io/api/recording/get-token`,
                             {
                                headers: {
                                     Authorization : authHeader
@@ -196,7 +196,7 @@ export default {
             removeUser() {
                 axios({
                     method:'post', 
-                    url: "http://localhost:5000/recording-java/remove-user",
+                    url: "http://localhost:5000/api/recording-java/remove-user",
                     data: {session_id: this.sessionId, token: token},  
                 })
                 .then(response => {
@@ -214,7 +214,7 @@ export default {
               console.log(session.sessionId)               
                 axios({
                     method:'post', 
-                    url: "https://i7d206.p.ssafy.io/recording/start",
+                    url: "https://i7d206.p.ssafy.io/api/recording/start",
                     headers: {
                         Authorization : authHeader
                     },
@@ -241,7 +241,7 @@ export default {
                 console.log(authHeader)    
                 axios({
                     method:'post', 
-                    url: "https://i7d206.p.ssafy.io/recording/stop",
+                    url: "https://i7d206.p.ssafy.io/api/recording/stop",
                     headers: {
                             Authorization : authHeader
                         } ,
@@ -253,7 +253,7 @@ export default {
                     this.record_status = false;
                     console.log(response);
                     console.log("stop record", this.recordingId);
-                    this.videoSource="https://i7d206.p.ssafy.io:4443/openvidu/recordings/" + this.recordingId + "/" + this.recordingId + ".mp4"
+                    this.videoSource="https://i7d206.p.ssafy.io:4443/api/openvidu/recordings/" + this.recordingId + "/" + this.recordingId + ".mp4"
                 
                 })
                 .catch(error => {
@@ -266,7 +266,7 @@ export default {
                 console.log(authHeader)    
                 axios({
                     method: 'delete',
-                    url: "https://i7d206.p.ssafy.io/recording/delete",
+                    url: "https://i7d206.p.ssafy.io/api/recording/delete",
                     headers: {
                         Authorization : authHeader
                     },
@@ -286,7 +286,7 @@ export default {
                 console.log(authHeader)    
                 axios({
                     method: 'post',
-                    url: "https://i7d206.p.ssafy.io/video-diaries",
+                    url: "https://i7d206.p.ssafy.io/api/video-diaries",
                     headers: {
                         Authorization : authHeader
                     },
@@ -312,7 +312,7 @@ export default {
                 console.log(authHeader)    
                 axios({
                     method: 'put',
-                    url: "https://i7d206.p.ssafy.io/video-diaries/" + this.videoId,
+                    url: "https://i7d206.p.ssafy.io/api/video-diaries/" + this.videoId,
                     headers: {
                         Authorization : authHeader
                     },
