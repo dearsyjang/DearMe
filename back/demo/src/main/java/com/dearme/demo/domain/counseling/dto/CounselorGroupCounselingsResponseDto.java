@@ -19,6 +19,7 @@ public class CounselorGroupCounselingsResponseDto {
     private Long groupId;
     private Status status;
     private String token;
+    private String title;
 
     public static CounselorGroupCounselingsResponseDto of(Counseling entity){
         return CounselorGroupCounselingsResponseDto.builder()
@@ -33,6 +34,7 @@ public class CounselorGroupCounselingsResponseDto {
                 .groupId(entity.getGroup().getId())
                 .status(entity.getStatus())
                 .token(entity.getToken())
+                .title(entity.getGroup().getTitle())
                 .build();
     }
 }
