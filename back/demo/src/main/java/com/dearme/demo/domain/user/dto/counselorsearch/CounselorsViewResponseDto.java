@@ -30,7 +30,7 @@ public class CounselorsViewResponseDto {
         return CounselorsViewResponseDto.builder().
                 counselorId(counselor.getUserId())
                 .nickName(counselor.getNickName())
-                .pictureUrl(counselor.getPicture().getFileName())
+                .pictureUrl("https://i7d206.p.ssafy.io/users/" + counselor.getUserId() + "/image")
                 .price(counselor.getCounselorProfile().getPrice())
                 .reviewCnt(counselor.getCounselorProfile().getReviewCnt())
                 .categories(toCategoryInfoDto(counselor.getCounselorProfile().getCategories()))
