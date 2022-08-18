@@ -19,6 +19,12 @@ public class CounselingDocumentController {
 
     private final CounselingDocumentServiceImpl counselingDocumentService;
 
+    @GetMapping("/{counselingDocumentId}")
+    public ResponseEntity<CommonResponse> getCounselingDocument(HttpServletRequest request, @PathVariable("counselingDocumentId") Long counselingDocumentId){
+        String id = (String) request.getAttribute("id");
+        return new ResponseEntity<>(CommonResponse.getSuccessResponse(counselingDocumentService.getCounselingDocument(id, counselingDocumentId)), HttpStatus.OK);
+    }
+
     @PostMapping
     public ResponseEntity<CommonResponse> postCounselingDocuments(HttpServletRequest request, @RequestBody @Validated PostCounselingDocumentRequestDto dto){
         String id = (String) request.getAttribute("id");

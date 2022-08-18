@@ -1,6 +1,7 @@
 package com.dearme.demo.domain.counselingdocument.service;
 
 import com.dearme.demo.domain.counseling.service.CounselingServiceImpl;
+import com.dearme.demo.domain.counselingdocument.dto.CounselingDocumentInfoResponseDto;
 import com.dearme.demo.domain.counselingdocument.dto.PostCounselingDocumentRequestDto;
 import com.dearme.demo.domain.counselingdocument.dto.PostCounselingDocumentResponseDto;
 import com.dearme.demo.domain.counselingdocument.dto.PostGroupCounselingDocumentDto;
@@ -92,5 +93,16 @@ public class CounselingDocumentServiceImpl implements CounselingDocumentService{
             throw new NoExistDocumentException();
         });
         counselingDocumentRepository.deleteCounselingDocumentByUser_IdAndId(id, counselingDocumentId);
+    }
+
+    @Override
+    public CounselingDocumentInfoResponseDto getCounselingDocument(String id, Long counselingDocumentId) {
+        CounselingDocument counselingDocument = counselingDocumentRepository.findById(counselingDocumentId).orElseThrow(() -> {
+            throw new NoExistDocumentException();
+        });
+        if(counselingDocument.getUser().getId().equals(id) || counselingDocument.getCounselor().getId().equals(id)){
+            return CounselingDocumentInfoResponseDto.of(counselingDocument);
+        }
+        throw new NoExistDocumentException();
     }
 }
