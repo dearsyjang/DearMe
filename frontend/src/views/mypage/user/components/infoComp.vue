@@ -54,17 +54,16 @@ export default {
     this.fetchCurrentUser()
     
   },
-  mounted() {
-    this.getImage()
-    console.log(this.currentUser.data.pictureUrl)
+  async mounted() {
+    await this.getImage()
   },
   unmounted() {},
   methods: {
     ...mapActions(['fetchCurrentUser']),
     getImage () {
-      console.log(this.currentUser)
+      console.log(this.currentUser.data)
       const img = document.getElementById('profile');
-      img.src = this.currentUser.data.pictureUrl
+      img.src = this.currentUser?.data?.pictureUrl
     },
     // 회원 정보 수정 매서드 받아와서 패치하고 출력
   },

@@ -47,6 +47,7 @@
               }">
                     {{ day }}
                     <h5>{{this.dayInfo[day].textEmoji}}</h5>
+                    <br/>
                     <h>{{this.dayInfo[day].videoEmoji}}</h>
                     <br>
                   </router-link>
