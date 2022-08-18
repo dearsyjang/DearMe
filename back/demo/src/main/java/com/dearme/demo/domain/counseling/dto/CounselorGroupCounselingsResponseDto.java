@@ -10,6 +10,7 @@ import lombok.Data;
 public class CounselorGroupCounselingsResponseDto {
     private Long id;
     private Long userId;
+    private String userNickName;
     private Long counselorId;
     private String counselorNickName;
     private Integer month;
@@ -25,6 +26,7 @@ public class CounselorGroupCounselingsResponseDto {
         return CounselorGroupCounselingsResponseDto.builder()
                 .id(entity.getId())
                 .userId(entity.getUser().getUserId())
+                .userNickName(entity.getUser().getNickName())
                 .counselorId(entity.getCounselor().getUserId())
                 .counselorNickName(entity.getCounselor().getNickName())
                 .month(entity.getMonth())
