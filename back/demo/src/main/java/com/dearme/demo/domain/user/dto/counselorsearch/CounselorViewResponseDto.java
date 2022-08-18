@@ -44,7 +44,7 @@ public class CounselorViewResponseDto {
         return CounselorViewResponseDto.builder()
                 .userId(entity.getUserId())
                 .nickName(entity.getNickName())
-                .pictureUrl("https://i7d206.p.ssafy.io/users/" + entity.getUserId() + "/image")
+                .pictureUrl("https://i7d206.p.ssafy.io/api/users/" + entity.getUserId() + "/image")
                 .value(value)
                 .reviewCnt(entity.getCounselorProfile().getReviewCnt())
                 .price(entity.getCounselorProfile().getPrice())
