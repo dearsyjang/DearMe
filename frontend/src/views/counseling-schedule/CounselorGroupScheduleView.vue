@@ -5,7 +5,7 @@
       <hr>
       <br>
       <h2 id="userschedule-group">1:1 상담</h2>
-      <div v-for="(counseling, idx) in counselings.data.groupCounselings" :key="idx" :counseling="counseling">
+      <div v-for="(counseling, idx) in counselings?.data.groupCounselings" :key="idx" :counseling="counseling">
         <div class="card" style="width: 18rem; height: 8rem;">
           {{ counseling }}
           <h5 class="card-title">{{ counseling.groupId }}</h5>
@@ -13,7 +13,7 @@
         </div>
       </div>
       <h2 id="userschedule-group">그룹 상담</h2>
-      <div v-for="(counseling, idx) in counselings.data.counselings" :key="idx" :counseling="counseling">
+      <div v-for="(counseling, idx) in counselings?.data.counselings" :key="idx" :counseling="counseling">
         <div v-if="counseling.groupId != null" class="card" style="width: 18rem; height: 8rem;">
           <h5 class="card-title">상담일: {{ counseling.year }}. {{ counseling.month }}. {{ counseling.day }}</h5>
           <h5 class="card-title">상담사: {{ counseling.counselorNickName }}</h5>
@@ -35,7 +35,7 @@ export default {
     name:'CounselorGro',
     data() {
       return {
-        groupId: this.$route.params.groupId,
+        groupId: '',
       }
     },
     computed: {
@@ -46,6 +46,7 @@ export default {
     },
     created() {
       this.fetchSchedules()
+      this.groupId=this.$route.params.groupId
     }
 }
 </script>

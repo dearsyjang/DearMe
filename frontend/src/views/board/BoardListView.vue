@@ -98,6 +98,7 @@ export default {
 
 
 <style>
+
 .board-list-title {
   font-weight: xx-large;
 }

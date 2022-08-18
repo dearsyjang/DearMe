@@ -25,33 +25,22 @@
 
     <!--사이드바-->
     <div class="offcanvas offcanvas-start" id="affanOffcanvas" data-bs-scroll="true" tabindex="-1"
-    aria-labelledby="affanOffcanvsLabel">
+    aria-labelledby="affanOffcanvsLabel"  >
       <button class="btn-close btn-close-black text-reset" type="button" data-bs-dismiss="offcanvas"
         aria-label="Close"></button>
 
-      <div class="offcanvas-body p-0">
+      <div class="offcanvas-body p-0" >
         <div class="sidenav-wrapper">
           <!-- Sidenav Nav -->
           <ul class="sidenav-nav ps-0">
             <br>
-            <li><router-link to="/calendar" class="mx-3" style="text-decoration:none"><i class="bi bi-calendar-heart"></i>감정 달력</router-link></li>
-            <li><router-link to="/member/Profile" class="mx-3" style="text-decoration:none"><i class="bi bi-eyeglasses"></i>회원정보수정</router-link></li>
-            <li><router-link to="/board" class="mx-3" style="text-decoration:none"><i class="bi bi-clipboard"></i>상담 게시판</router-link></li>
-            <li><router-link to="/counselors/counselorList" class="mx-3" style="text-decoration:none"><i class="bi bi-people"></i>상담사 조회</router-link></li>
-            <li><router-link to="/mypage" class="mx-3" style="text-decoration:none"><i class="bi bi-house"></i>마이 페이지</router-link></li>
-            <li><router-link to="/mypage" class="mx-3" style="text-decoration:none"><i class="bi bi-cash-coin"></i>포인트 충전</router-link></li>
-            <li><router-link to="/member/Profile" class="mx-3" style="text-decoration:none"><i class="bi bi-eyeglasses"></i>회원정보수정</router-link></li>
+            <li><a href="/counselors/counselorList" class="mx-3" style="text-decoration:none"><i class="bi bi-people"></i>상담사 조회</a></li>
+            <li><a href="/board" class="mx-3" style="text-decoration:none"><i class="bi bi-clipboard"></i>상담 게시판</a></li>
+            <li><a href="/point" class="mx-3" style="text-decoration:none"><i class="bi bi-cash-coin"></i>포인트 충전</a></li>
+            <li><a href="/member/Profile" class="mx-3" style="text-decoration:none"><i class="bi bi-eyeglasses"></i>회원정보수정</a></li>
             <hr>
             <li>
-              <!-- <div class="night-mode-nav">
-                <i class="bi bi-moon"></i> Night Mode
-                <div class="form-check form-switch">
-                  <input class="form-check-input form-check-success" id="darkSwitch" type="checkbox">
-                </div>
-              </div> -->
-            </li>
-            <li>
-              <a @click="logOUT()"><i class="bi bi-box-arrow-right" fill="#red"></i> Logout</a>
+              <a href="/member/login" @click="logOUT()"><i class="bi bi-box-arrow-right"></i> Logout</a>
             </li>
           </ul>
         </div>
@@ -90,4 +79,11 @@ export default {
 </script>
 
 <style>
+.offcanvas-body{
+  position: relative;
+  z-index: 10;
+}
+li{
+  color: #112D4E;
+}
 </style>

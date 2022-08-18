@@ -16,10 +16,14 @@
     </div>
     <div v-if="currentUser.data?.type ==`COUNSELOR`">
         <router-link to="/counseling-request/list" class="img mx-3"><img id="request" src="../../assets/images/request.png" alt="request"></router-link>
-        <p class="text">상담신청</p>
+        <p class="text">대기상담</p>
       </div>
-    <div>
+    <div v-if="currentUser.data?.type ==`USER`">
       <router-link to="/mypage/user" class="img mx-3"><img id="home" src="../../assets/images/home.png" alt="home"></router-link>
+      <p class="text">마이페이지</p>
+    </div>
+    <div v-if="currentUser.data?.type ==`COUNSELOR`">
+      <router-link to="/mypage/counselor" class="img mx-3"><img id="home" src="../../assets/images/home.png" alt="home"></router-link>
       <p class="text">마이페이지</p>
     </div>
     <div>
@@ -68,7 +72,8 @@ export default {
     padding: 0;
     max-width: 100%;
     overflow-x: hidden;
-    z-index: 1; /* 맨 위로 올리기 position 썼을 때만 가능 */
+    /* z-index: 1;
+    맨 위로 올리기 position 썼을 때만 가능 */
 }
 
 #bottombar > div {
@@ -128,8 +133,42 @@ export default {
   object-fit: cover;
   margin-bottom: 0.4em;
 }
-
-.text {
-  font-size: 0.8em;
+.w-btn-check {
+    /* position: relative; */
+    border: none;
+    min-width: 70px;
+    min-height: 20px;
+    background: linear-gradient(
+        90deg,
+        #5b5792bd 0%,
+        #5b5792bb 100%
+    );
+    border-radius: 10px;
+    color: darkslategray;
+    cursor: pointer;
+    /* box-shadow: 12px 12px 24px #5a554747; */
+    font-weight: 700;
+    transition: 0.3s;
+    color: #E9E5DC;
+    margin-left: 8px;
+    font-size: 13px;
+}
+.w-btn-signup {
+    /* position: relative; */
+    border: none;
+    min-width: 170px;
+    min-height: 50px;
+    background: linear-gradient(
+        90deg,
+        #5B5792 0%,
+        #5B5792 100%
+    );
+    border-radius: 1000px;
+    color: darkslategray;
+    cursor: pointer;
+    box-shadow: 12px 12px 24px #5a554747;
+    font-weight: 700;
+    transition: 0.3s;
+    color: #E9E5DC
 }
 </style>

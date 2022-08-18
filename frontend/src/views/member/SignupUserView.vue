@@ -35,18 +35,24 @@
                   </div>
                   <div class="form-group">
                       <select class="form-select" id="defaultSelect" v-model="credentials.gender" >
-                        <option selected>성별</option>
+                        <option selected disabled>성별</option>
                         <option value="MALE">남성</option>
                         <option value="FEMALE">여성</option>
                       </select>
                   </div>
                   <div class="form-group">
-                    <input class="form-control" type="email" v-model="credentials.email" placeholder="이메일">
+                    <input class="form-control" type="email" v-model="credentials.email" placeholder="이메일">    
+                  </div>
+                  <div class="form-group">
+                    <input class="form-control" type="phone" v-model="credentials.phone" placeholder="전화번호">
+                  </div>
+                  <div class="form-group">
+                    <input class="form-control" type="phone" v-model="credentials.phone" placeholder="전화번호">
                   </div>
                   <div class="form-group row d-flex justify-content-center">
-                    <input class="form-control col-sm-3" id="signup-birth" type="text" name="yy" placeholder="년(4자)">
-                    <input class="form-control col-sm-3" id="signup-birth" type="text" name="mm" placeholder="월(2자)">
-                    <input class="form-control col-sm-3" id="signup-birth" type="text" name="dd" placeholder="일(2자)">
+                    <input class="form-control col-sm-3" id="signup-birth" type="text" name="yy" v-model = "credentials.year" placeholder="년(4자)">
+                    <input class="form-control col-sm-3" id="signup-birth" type="text" name="mm" v-model = "credentials.month" placeholder="월(2자)">
+                    <input class="form-control col-sm-3" id="signup-birth" type="text" name="dd" v-model = "credentials.day" placeholder="일(2자)">
                   </div>
                   <button @click="signUp()" class="w-btn-signup w-100" type="submit">회원가입</button>
               </div>
@@ -69,16 +75,23 @@ export default {
   data() {
     return {
       isCounselor: false,
+      birthInput: {
+        yy: '',
+        mm: '',
+        dd: ''
+      },
       credentials: {
         id: '',
         pw: '',
         type: this.$route.params.type,
         nickName: '',
-        birth: '2022/02/02',
+        year:'',
+        month: '',
+        day:'',
         gender: '',
         email: '',
         picture: '',
-        phone: '01090596456'
+        phone: ''
       },
       months: [
         1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12
@@ -103,7 +116,7 @@ export default {
       formData.append('pw', this.credentials.pw)
       formData.append('type', this.credentials.type)
       formData.append('nickName', this.credentials.nickName)
-      formData.append('birth', this.credentials.birth)
+      formData.append('birth', this.credentials.year + "/" + this.credentials.month + "/" + this.credentials.day)
       formData.append('gender', this.credentials.gender)
       formData.append('email', this.credentials.email)
       formData.append('phone', this.credentials.phone)

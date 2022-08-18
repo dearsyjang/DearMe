@@ -1,5 +1,8 @@
 <template>
 <div id="home">
+    <br>
+    <br>
+    <br>
     <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
   <div class="carousel-inner">
     <div class="carousel-item active">
@@ -13,9 +16,15 @@
     </div>
   </div>
 </div>
-    <router-link :to="{ name:'login' }"><button id="login-button" class="btn">로그인</button></router-link>
-    <router-link :to="{ name:'signupuser' }"><button id="signup2-button" class="btn">일반 회원가입</button></router-link>
-    <router-link :to="{ name:'signupcounselor' }"><button id="signup2-button" class="btn">상담사 회원가입</button></router-link>
+    <br>
+    <br>
+    <h3>오늘도 수고했어요</h3>
+    <h3>오늘 당신의 하루를 들려주세요 😊</h3>
+    <br>
+
+    
+    <router-link :to="{ name:'login' }"><button id="login-button" class="w-btn-login w-100">LOGIN</button></router-link>
+    <router-link :to="{ name:'signuptype' }"><button id="signup2-button" class="w-btn-signup w-100">SIGN IN</button></router-link>
 </div>
 
 </template>
@@ -28,74 +37,56 @@ export default {
 
 <style scoped>
 #home{
-  width: 100%;
-  height: 100%;
+  width: auto;
+  height: 720px;
   background-color: #F9F7F7;
+  justify-content: center;
+  align-content: center;
+  text-align: center;
 }
-#signup-button {
-  background-color: #A7BBC7;
-  width: 100%;
-  height: auto;
-  color: white;
-  border-width: 0px;
-  border-radius: 5px;
-  margin-bottom: 20px;
-}
-
-#signup2-button {
-  background-color: #91C483;
-  width: 100%;
-  height: auto;
-  color: white;
-  border-width: 0px;
-  border-radius: 5px;
-  margin-bottom: 20px;
-}
-
-/* #login-button {
-  background-color: #FF6464;
-  width: 100%;
-  height: auto;
-  color: white;
-  border-width: 0px;
-  border-radius: 5px;
-  margin-bottom: 20px;
-} */
-
-#login-button {
-  background: #b621fe;
-  border: none;
-  z-index: 1;
-}
-#login-button:after {
-  position: absolute;
-  content: "";
-  width: 0;
+body {
+  background-color: #F9F7F7;
+  overflow: hidden;
   height: 100%;
-  top: 0;
-  right: 0;
-  z-index: -1;
-  background-color: #663dff;
-  border-radius: 5px;
-   box-shadow:inset 2px 2px 2px 0px rgba(255,255,255,.5),
-   7px 7px 20px 0px rgba(0,0,0,.1),
-   4px 4px 5px 0px rgba(0,0,0,.1);
-  transition: all 0.3s ease;
 }
-#login-button:hover {
-  color: #ffff;
-}
-#login-button:hover:after {
-  left: 0;
-  width: 100%;
-}
-#login-button:active {
-  top: 2px;
+.w-btn-login {
+    /* position: relative; */
+    border: none;
+    min-width: 170px;
+    min-height: 50px;
+    background: linear-gradient(
+        90deg,
+        #AF7AB3 0%,
+        #AF7AB3 100%
+    );
+    border-radius: 1000px;
+    color: darkslategray;
+    cursor: pointer;
+    box-shadow: 12px 12px 24px #5a554747;
+    font-weight: 700;
+    transition: 0.3s;
+    color: #E9E5DC;
+    margin-bottom: 10px;
 }
 
-.carousel-inner{
-  width:auto;
-  height:auto;
+.w-btn-signup {
+    /* position: relative; */
+    border: none;
+    min-width: 170px;
+    min-height: 50px;
+    background: linear-gradient(
+        90deg,
+        #AF7AB3 0%,
+        #5B5792 100%
+    );
+    border-radius: 1000px;
+    color: darkslategray;
+    cursor: pointer;
+    box-shadow: 12px 12px 24px #5a554747;
+    font-weight: 700;
+    transition: 0.3s;
+    color: #E9E5DC;
+    margin-bottom: 10px;
 }
 
 /* .carousel-item{

@@ -34,19 +34,22 @@
                     <button class="w-btn-check" @click="nicknameCheck()">중복확인</button>
                   </div>
                   <div class="form-group">
-                      <select class="form-select" id="defaultSelect" v-model="credentials.gender">
-                        <option selected>성별</option>
+                      <select class="form-select" id="defaultSelect" v-model="credentials.gender" >
+                        <option selected disabled>성별</option>
                         <option value="MALE">남성</option>
                         <option value="FEMALE">여성</option>
                       </select>
+                  </div>
+                   <div class="form-group">
+                    <input class="form-control" type="text" v-model="credentials.phone" placeholder="전화번호">
                   </div>
                   <div class="form-group">
                     <input class="form-control" type="email" v-model="credentials.email" placeholder="이메일">
                   </div>
                   <div class="form-group row d-flex justify-content-center">
-                    <input class="form-control col-sm-3" id="signup-birth" type="text" name="yy" placeholder="년(4자)">
-                    <input class="form-control col-sm-3" id="signup-birth" type="text" name="mm" placeholder="월(2자)">
-                    <input class="form-control col-sm-3" id="signup-birth" type="text" name="dd" placeholder="일(2자)">
+                    <input class="form-control col-sm-3" id="signup-birth" type="text" name = "yy" v-model="credentials.year" placeholder="년(4자)">
+                    <input class="form-control col-sm-3" id="signup-birth" type="text" name = "mm"  v-model="credentials.month" placeholder="월(2자)">
+                    <input class="form-control col-sm-3" id="signup-birth" type="text" name = "dd" v-model="credentials.day" placeholder="일(2자)">
                   </div>
                   <div class="form-group">
                     <form id="formElem" enctype="multipart/form-data">
@@ -66,6 +69,64 @@
                         </div>  
                     </form>
                   </div>
+
+
+                  <br><hr><br>
+                  <h3 class="counselor-info-set">상담 정보를 입력해주세요</h3>
+                  <br><br>
+                  <div class="su-filter-title" id="category-select" >
+                    <p style="text-align:center">전문 분야를 선택해주세요</p>
+                   
+                    <div class="ctrg-inside">
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" id="3" value="가족" name="radio2" v-model="credentials.counselorProfile.categories[0].contents">
+                      <label class="form-check-label" for="3">
+                      가족
+                      </label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" id="4" value="직장,진로" name="radio2" v-model="credentials.counselorProfile.categories[0].contents">
+                      <label class="form-check-label" for="4">
+                      직장, 진로
+                      </label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" id="5" value="연애,결혼" name="radio2" v-model="credentials.counselorProfile.categories[0].contents" >
+                      <label class="form-check-label" for="5">
+                      연애, 결혼
+                      </label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" id="6" value="자기이해" name="radio2" v-model="credentials.counselorProfile.categories[0].contents">
+                      <label class="form-check-label" for="6">
+                      자기 이해
+                      </label>
+                    </div>
+                  </div>
+                  </div>
+                  
+                  <br><br><br>
+                  <p style="text-align:center">추가 정보를 입력해주세요</p>
+                   <div class="form-group">
+                    <div class="info-text">주요 약력을 입력해주세요</div>
+                    <input class="form-control" type="text" v-model="credentials.counselorProfile.careers[0].contents" placeholder="약력">
+                  </div>
+                   <div class="form-group">
+                    <div class="info-text">주요 자격증을 입력해주세요</div>
+                    <input class="form-control" type="text" v-model="credentials.counselorProfile.certificates[0].contents" placeholder="자격증">
+                  </div>
+                   <div class="form-group">
+                    <div class="info-text">상담가격   </div>
+                    <input class="form-control" type="text" v-model="credentials.counselorProfile.price" placeholder="가격">
+                    <p>*회원가입 시 상담가격은 1000point부터 시작합니다</p>
+                  </div>
+                  <div class="form-group" >
+                    <div class="info-text">자기소개를 입력해주세요</div>
+                    <input class="form-control" id="self-intro" type="text" v-model="credentials.counselorProfile.introduce" placeholder="">
+                  </div>
+
+
+
                   <button @click="signUp()" class="w-btn-signup w-100" type="submit">회원가입</button>
               </div>
             </div>
@@ -90,24 +151,39 @@ export default {
         pw: '',
         type: this.$route.params.type,
         nickName: '',
-        birth: '2022/02/02',
+        year:'',
+        month: '',
+        day:'',
         gender: '',
+        phone: '',
         email: '',
         picture: '',
-        counselorProfile: `{"introduce" : "introduce my self",
-              "price" : 100,
-                "careers" : [
-                    { "contents" : "contents1" },
-                    { "contents" : "contents1" },
-                    { "contents" : "contents1" },
-                    { "contents" : "contents1" }
+        counselorProfile: {introduce : "",
+              price : 1000,
+                careers : [
+                    { contents : "" },
                   ],
-                  "certificates" : [
-                    { "contents" : "contents1" }
+                  certificates : [
+                    { contents : "" }
                   ],
-                  "categories" : [
-                    { "contents" : "contents1" }
-                  ]}  `
+                  categories : [
+                    { contents : "" }
+                  ]}  
+
+        // counselorProfile: `{"introduce" : "introduce my self",
+        //       "price" : 100,
+        //         "careers" : [
+        //             { "contents" : "contents1" },
+        //             { "contents" : "contents1" },
+        //             { "contents" : "contents1" },
+        //             { "contents" : "contents1" }
+        //           ],
+        //           "certificates" : [
+        //             { "contents" : "contents1" }
+        //           ],
+        //           "categories" : [
+        //             { 'contents" : "contents1" }
+        //           ]}  `
 
 
       },
@@ -150,11 +226,22 @@ export default {
       formData.append('pw', this.credentials.pw)
       formData.append('type', this.credentials.type)
       formData.append('nickName', this.credentials.nickName)
-      formData.append('birth', this.credentials.birth)
+      formData.append('birth', this.credentials.year + "/" + this.credentials.month + "/" + this.credentials.day)
       formData.append('gender', this.credentials.gender)
-      formData.append('phone', '01032153214')
+      formData.append('phone', this.credentials.phone)
       formData.append('email', this.credentials.email)
-      formData.append('counselorProfile', this.credentials.counselorProfile)
+       let counselorProfiles=`{"introduce" : "` + this.credentials.counselorProfile.introduce+ `",
+          "price" : `+this.credentials.counselorProfile.price+`,
+            "careers" : [
+                { "contents" : "`+this.credentials.counselorProfile.careers+`" }
+              ],
+              "certificates" : [
+                { "contents" : "`+this.credentials.counselorProfile.certificates+`" }
+              ],
+              "categories" : [
+                { "contents" : "`+this.credentials.counselorProfile.categories+`" }
+      ]}  `
+      formData.append('counselorProfile', counselorProfiles)
       formData.append('picture', document.getElementById('formElem')[0].files[0]);
       this.signup(formData)
       // console.log(formData.getAll('id'))
@@ -209,5 +296,45 @@ export default {
 }
 </script>
 <style >
+.list input {
+  display: none;
+}
 
+.form-check-label{
+  border : 2px solid #7f7cb2db ;
+  border-radius : 20px;
+  padding: 7px;
+  width: 100px;
+  margin-top: 10%;
+  text-align: center;
+  justify-content: center;
+  margin-left: 35%;
+
+}
+.form-check-input{
+  display: none;
+}
+.counselor-info-set{
+  margin:auto;
+  text-align:center;
+  padding:20px;
+}
+
+.form-check :checked ~ label {
+  -webkit-text-fill-color: white;
+  background-color: #7f7cb2db;
+}
+
+#signup-birth{
+  width:31%;
+ 
+}
+
+#self-intro{
+  height:200px;
+}
+
+.info-text{
+  margin-bottom:3px
+}
 </style>

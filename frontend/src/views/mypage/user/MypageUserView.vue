@@ -1,9 +1,9 @@
 <template>
   <div class="mypage">
     <info-comp id="info"></info-comp>
-    <my-board-comp id="myboard"></my-board-comp>
+     <my-board-comp id="myboard"></my-board-comp>
     <my-group-comp id="mygroup"></my-group-comp>
-    <my-favorite-comp id="myfavorite"></my-favorite-comp>
+     <my-favorite-comp id="myfavorite"></my-favorite-comp>
   </div>
 </template>
 <script>

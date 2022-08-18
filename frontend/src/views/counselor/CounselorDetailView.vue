@@ -114,7 +114,7 @@
       }
     },
     computed : {
-      ...mapGetters(['counselor','currentUser', 'favorite','groups','favorite']),
+      ...mapGetters(['counselings','counselor','currentUser', 'favorite','groups','favorite']),
       infos() {
       return this.$store.state.infos
 
@@ -331,7 +331,7 @@ font-weight: bold;
   height: 40px;
 }
 .badge-pu {
-  background-color: #595892;
+  background-color: #E7F2FF;
 }
 
 .top-products-area {
@@ -341,7 +341,6 @@ font-weight: bold;
     position: relative;
     padding: 15px 30px;
     /* border-radius: 15px; */
-    font-family: "paybooc-Light", sans-serif;
     /* box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2); */
     text-decoration: none;
     font-weight: 600;
@@ -350,11 +349,11 @@ font-weight: bold;
 }
 
 .w-btn-yellow-outline:hover {
-    background-color: #EFCC70;
+    background-color: #E7F2FF;
     color: #6e6e6e;
 }
 .w-btn-yellow-outline {
-    border: 3px solid #EFCC70;
+    border: 3px solid #cde0f6;
     color: #6e6e6e;
 }
 
