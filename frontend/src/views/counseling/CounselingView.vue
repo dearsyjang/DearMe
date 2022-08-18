@@ -16,6 +16,7 @@
                       <router-link :to="{ name:'counselorSchedule' }"><button v-if="currentUser.data.type==`COUNSELOR`" id="cancel-button" class="btn btn-mg">돌아가기</button></router-link>
                   </div>
                 </div>
+                
               </div>
             </div>
           </div>
