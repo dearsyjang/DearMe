@@ -9,7 +9,7 @@
           <!-- Logo Wrapper -->
           <div class="logo-wrapper">
             <a href="page-home.html">
-              <img id="logoimg" src="../../assets/images/logo.png" alt="logo">
+              <img id="logoimg" src="@/assets/images/logo.png" alt="logo">
             </a>
           </div>
           <!-- Navbar Toggler -->

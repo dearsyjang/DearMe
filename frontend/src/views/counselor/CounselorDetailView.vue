@@ -21,7 +21,7 @@
           <div class="card user-info-card mb-3">
             <div class="card-body d-flex align-items-center">
               <div class="user-profile me-3">
-                <img src="@/assets/images/강지명.png" alt="">
+                <img src="@/assets/images/kjm.png" alt="">
               </div>
               <div class="user-info">
                 <div class="d-flex align-items-center">

@@ -6,13 +6,13 @@
     <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
   <div class="carousel-inner">
     <div class="carousel-item active">
-      <img src="../assets/images/main.png" id="main" class="d-block w-100" alt="main">
+      <img src="@/assets/images/main.png" id="main" class="d-block w-100" alt="main">
     </div>
     <div class="carousel-item">
-      <img src="../assets/images/main2.png" id="main2" class="d-block w-100" alt="main2">
+      <img src="@/assets/images/main2.png" id="main2" class="d-block w-100" alt="main2">
     </div>
     <div class="carousel-item">
-      <img src="../assets/images/main3.png" id="main3" class="d-block w-100" alt="main3">
+      <img src="@/assets/images/main3.png" id="main3" class="d-block w-100" alt="main3">
     </div>
   </div>
 </div>
@@ -23,8 +23,8 @@
     <br>
 
     
-    <router-link :to="{ name:'login' }"><button id="login-button" class="w-btn-login w-100">LOGIN</button></router-link>
-    <router-link :to="{ name:'signuptype' }"><button id="signup2-button" class="w-btn-signup w-100">SIGN IN</button></router-link>
+    <router-link :to="{ name:'login' }"><button id="login-button" class="w-btn-login">LOGIN</button></router-link>
+    <router-link :to="{ name:'signuptype' }"><button id="signup2-button" class="w-btn-signup">SIGN UP</button></router-link>
 </div>
 
 </template>

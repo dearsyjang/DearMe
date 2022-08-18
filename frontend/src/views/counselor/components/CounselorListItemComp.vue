@@ -29,7 +29,7 @@
     <div class="card mb-3" id="counselor-item-card" style="max-width: 90%;">
       <div class="row" id="counselor-item-row">
         <div class="counselor-item-pic col-md-16 " style="max-width:50%;">
-          <img src = "@/assets/images/강지명.png" class="counselor-img2"/>
+          <img src = "@/assets/images/kjm.png" class="counselor-img2"/>
         </div>
         <div class="card-body col-md-16" id="counselor-item-card-body" style="max-width:50%;" >
           <h5 class="card-title" id="counselor-item-card-title">{{counselor.nickName}} 상담사</h5>
