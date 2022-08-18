@@ -10,7 +10,7 @@
                 <input type="text" id="videodiary-title" v-model="title">
                 <br>
                 <br>
-                <button class="btn"><h3>🧡💛💚💙💜</h3></button>
+                <button class="btn"><h3>:orange_heart::yellow_heart::green_heart::blue_heart::purple_heart:</h3></button>
             </form>
         </div>
 
@@ -70,8 +70,8 @@
 
 </template>
 
-     
 
+ 
 <script>
 import axios from 'axios';
 import { OpenVidu } from 'openvidu-browser';
@@ -104,25 +104,25 @@ export default {
             videoSource:'',
         };
     },
-    
+
     computed: {
         ...mapGetters(['authHeader2'])
     },
 
     // 오늘 날짜
     mounted () {
-        this.timer = setInterval(() => {    
-        this.setNowTimes()  
+        this.timer = setInterval(() => {
+        this.setNowTimes()
         },1000)
     },
 
 
     methods: {
-        setNowTimes () {  
-            let myDate = new Date()  
-            let yy = String(myDate.getFullYear())  
-            let mm = myDate.getMonth() + 1  
-            let dd = String(myDate.getDate() < 10 ? '0' + myDate.getDate() : myDate.getDate())  
+        setNowTimes () {
+            let myDate = new Date()
+            let yy = String(myDate.getFullYear())
+            let mm = myDate.getMonth() + 1
+            let dd = String(myDate.getDate() < 10 ? '0' + myDate.getDate() : myDate.getDate())
             this.nowDate = yy + '년 ' + mm + '월 ' + dd + '일 '
         },
 
@@ -140,7 +140,7 @@ export default {
                 .then(() => {
                     this.joined = true;
                     // 비디오 사이즈 조절
-                    var resolution_data = (window.innerWidth * 0.8) + "x" + (window.innerWidth * 0.8);  
+                    var resolution_data = (window.innerWidth * 0.8) + "x" + (window.innerWidth * 0.8);
                     var publisher = OV.initPublisher("publisher", { resolution: resolution_data});
                     session.publish(publisher);
                 })
@@ -161,19 +161,19 @@ export default {
                 }
                 this.joined = false;
             },
-            
+
             getToken(mySessionId) {
                 // return this.createSession(mySessionId).then((sessionId) => this.createToken(sessionId));
                 const authHeader = this.authHeader2
-                console.log(authHeader)    
+                console.log(authHeader)
                 return new Promise((resolve, reject) => {
                     axios
                         .get(
-                            `https://i7d206.p.ssafy.io/api/recording/get-token`,
+                            https://i7d206.p.ssafy.io/api/recording/get-token,
                             {
                                headers: {
                                     Authorization : authHeader
-                                }  
+                                }
                             }
                         )
 
@@ -196,12 +196,12 @@ export default {
             removeUser() {
                 axios({
                     method:'post', 
-                    url: "http://localhost:5000/api/recording-java/remove-user",
-                    data: {session_id: this.sessionId, token: token},  
+                    url: "http://localhost:5000/recording-java/api/remove-user",
+                    data: {session_id: this.sessionId, token: token},
                 })
                 .then(response => {
                     console.warn("remove", this.sessionId);
-                    console.log("remove response", response);      
+                    console.log("remove response", response);
                 })
                 .catch(error => {
                     console.log('remove 에러', error);
@@ -210,8 +210,8 @@ export default {
 
             startRecording() {
               const authHeader = this.authHeader2
-              console.log(authHeader)       
-              console.log(session.sessionId)               
+              console.log(authHeader)
+              console.log(session.sessionId)
                 axios({
                     method:'post', 
                     url: "https://i7d206.p.ssafy.io/api/recording/start",
@@ -238,7 +238,7 @@ export default {
 
             stopRecording(){
                 const authHeader = this.authHeader2
-                console.log(authHeader)    
+                console.log(authHeader)
                 axios({
                     method:'post', 
                     url: "https://i7d206.p.ssafy.io/api/recording/stop",
@@ -247,14 +247,14 @@ export default {
                         } ,
                     data: ({ 
                         recording: this.recordingId
-                    }),   
+                    }),
                   })
                 .then(response => {
                     this.record_status = false;
                     console.log(response);
                     console.log("stop record", this.recordingId);
                     this.videoSource="https://i7d206.p.ssafy.io:4443/api/openvidu/recordings/" + this.recordingId + "/" + this.recordingId + ".mp4"
-                
+
                 })
                 .catch(error => {
                     console.error(error)
@@ -263,7 +263,7 @@ export default {
 
             deleteRecording(){
                 const authHeader = this.authHeader2
-                console.log(authHeader)    
+                console.log(authHeader)
                 axios({
                     method: 'delete',
                     url: "https://i7d206.p.ssafy.io/api/recording/delete",
@@ -283,7 +283,7 @@ export default {
 
         saveRecording() {
                 const authHeader = this.authHeader2
-                console.log(authHeader)    
+                console.log(authHeader)
                 axios({
                     method: 'post',
                     url: "https://i7d206.p.ssafy.io/api/video-diaries",
@@ -292,7 +292,7 @@ export default {
                     },
                     data: ({
                         realFileName: this.recordingId,
-                        title: this.title                        
+                        title: this.title
                     }),
                 })
                 .then (response => {
@@ -304,12 +304,12 @@ export default {
                 })
                 .catch((error) => { // 말을 해야 저장 가능!
                     if (error.response.status === 500) {
-                        alert('괜찮아요! 편하게 이야기를 들려주세요😊')
+                        alert('괜찮아요! 편하게 이야기를 들려주세요:blush:')
                     } 
                 });
             },updateText(){
                 const authHeader = this.authHeader2
-                console.log(authHeader)    
+                console.log(authHeader)
                 axios({
                     method: 'put',
                     url: "https://i7d206.p.ssafy.io/api/video-diaries/" + this.videoId,
@@ -319,7 +319,7 @@ export default {
                     data: ({
                         title: this.title,
                         contents: this.contents,
-                        sentiment: this.sentiment                      
+                        sentiment: this.sentiment
                     }),
                 })
                 .then (response => {
@@ -332,6 +332,7 @@ export default {
         }
     }
 </script>
+
 
 <style scoped>
 div{
