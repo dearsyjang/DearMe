@@ -74,15 +74,15 @@
            @click="updateMainVideoStreamManager(publisher)"/>
           <div id="mynickname"><h5>{{ this.currentUser.data.nickname }}</h5></div>
           </div>
-          <div class="carousel-item">
+          <div v-for="sub in subscribers" :key="sub.stream.connection.connectionId">
+            <button id = {{sub.stream.connection.connectionId}} @click=clickSub(sub) class="btn">버튼!!</button>
             <user-video
-              v-for="sub in subscribers"
-              :key="sub.stream.connection.connectionId"
-              :stream-manager="sub"
-              @click="updateMainVideoStreamManager(sub)"
+              :stream-manager="localSub"
             />
-            <div id="mynickname"><h5>{{ this.currentUser.data.nickname }}</h5></div>
-      </div>
+              <div id="mynickname"><h5>{{ this.currentUser.data.nickname }}</h5></div>
+          </div>
+            
+            
 
       <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -125,6 +125,7 @@ export default {
 
   data() {
     return {
+      localSub:{},
       OV: undefined,
       session: undefined,
       mainStreamManager: undefined,
@@ -149,7 +150,10 @@ export default {
 
   methods: {
     ...mapActions(['fetchCurrentUser', 'createReview']),
-
+    clickSub(sub){
+      console.log(sub)
+      this.locaSub=sub
+    },
     onSubmit() {
     this.review = {
       id: this.counselorId,
