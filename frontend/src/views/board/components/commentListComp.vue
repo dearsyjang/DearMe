@@ -18,7 +18,7 @@
         <div class="card-body">
           <div v-for="comment in comments" :key="comment"  class="d-flex row align-items-center">
             <div class="form-group">
-              <p class="text-end">COUNSELOR ID : {{ comment.userId }} | {{ comment.date[0] }}.{{ comment.date[1] }}.{{ comment.date[2] }}</p>
+              <p class="text-end">COUNSELOR ID : {{ comment.userId }} | {{ comment.date? comment.date[0] : ''}}.{{ comment.date? comment.date[1] : '' }}.{{ comment.date? comment.date[2] : '' }}</p>
               <p class="board-detail-context">{{ comment.contents }}</p>
             </div>
           </div>
@@ -28,10 +28,10 @@
   </div>
 <div>
 </div>
-<div class="container">
+<div>
   <div class="modal fade" id="commentCreate" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-sm" role="document">
-    <div class="modal-content">
+    <div class="modal-content sm-3">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">댓글 등록하기</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -86,4 +86,13 @@ export default {
 }
 </script>
 <style scoped>
+.modal-dialog.modal-fullsize {
+  width: auto;
+  height: 100%;
+  margin: 0;
+  padding: 0;}
+.modal-content.modal-fullsize {
+  height: auto;
+  min-height: 100%;
+  border-radius: 0;}
 </style>

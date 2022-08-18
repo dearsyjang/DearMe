@@ -21,7 +21,7 @@
                <router-link :to="{ name: 'boardDetail', params: {boardId: board.id }}">
                <h3 class="card-title">{{ board.title }}</h3>
                </router-link>
-              <p class="card-text text-end ">{{ board.date[0]}}.{{ board.date[1] }}.{{ board.date[2] }}</p>
+              <p class="card-text text-end ">{{ board.date ? board.date[0] : '' }}.{{ board.date ? board.date[1] : '' }}.{{ board.date ? board.date[2] : '' }}</p>
               <!-- <router-link :to="{ name: 'boardDetail', params: {boardId: board.id }}">
                 <a class="board-btn-detail btn-sm" href="#">
                   게시글 자세히 보기

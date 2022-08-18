@@ -10,10 +10,11 @@
         <div class="col-md-4" style="text-decoration: none">
           <div class="personal-request-index" style="text-decoration: none"> {{idx}}</div>
           <p>상담 번호: {{re.counselingDocumentId}}</p>
-          
           <p>상담사:{{re.counselorNickName}}</p>
-        
           <p>상담일 : {{re.year}}/{{re.month}}/{{re.day}}</p>
+          <router-link :to="{ name: 'counseling', params : {counselingId : re.id}}">
+          <button id="open-room">상담방 개설</button>
+          </router-link>
         </div>
       </div>
       </router-link>
