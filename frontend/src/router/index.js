@@ -18,6 +18,7 @@ import counselingGroup from './counselingGroup.js'
 import counselingSchedule from './counselingSchedule.js'
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
+  mode: 'history',
   routes: [
     ...home,
     ...member,

@@ -3,7 +3,7 @@ import drf from '@/api/drf'
 
 export default ({
   state: {
-    token: localStorage.getItem('token') || '',
+    token: sessionStorage.getItem('token') || '',
     currentUser: {},
     type: "",
   },
