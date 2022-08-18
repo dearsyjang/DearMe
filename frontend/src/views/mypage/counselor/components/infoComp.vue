@@ -66,9 +66,6 @@ export default {
   methods: {
     ...mapActions(['fetchCurrentUser']),
         getImage () {
-      const img = document.getElementById('profile');
-      console.log(this.currentUser.data)
-      img.src = this.currentUser.data.pictureUrl
     },
     // 회원 정보 수정 매서드 받아와서 패치하고 출력
   },

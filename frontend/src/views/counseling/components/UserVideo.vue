@@ -33,7 +33,7 @@ export default {
 			}
 		}
 		axios
-			.get('https://i7d206.p.ssafy.io./users', config)
+			.get('https://i7d206.p.ssafy.io/api/users', config)
 			.then(response => {
 				console.log(response)
 				let nickName = response.data.data.nickName
