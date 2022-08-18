@@ -44,7 +44,8 @@
             <user-video
              :stream-manager="publisher"
              @click="updateMainVideoStreamManager(publisher)"/>
-            <div id="mynickname"><h5>{{ this.currentUser.data.nickname }}</h5></div>
+            <div id="mynickname"><h5>{{ this.currentUser.data.nickname }}</h5>
+            </div>
       </div>
 
       <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">

@@ -7,7 +7,7 @@
         <div v-if="re.counselorId== currentUser.data.userId && re.status==`UNACCEPTED` && re.groupId != null " >
           <div class="card position-relative shadow-sm">
             <div class="card-body">
-              <router-link :to="{ name: 'CounselingRequestDocument', params : {counselingId : re.id}}">
+              <!-- <router-link :to="{ name: 'CounselingRequestDocument', params : {counselingId : re.id}}"> -->
               <div class="card-body d-flex align-items-center">
                   <div>
                     <span class="badge bg-danger rounded-pill mb-2 d-inline-block"> {{ idx }}</span>
@@ -16,7 +16,7 @@
                     <h4>상담일 : {{re.year}}/{{re.month}}/{{re.day}}</h4>
                   </div>
               </div>
-            </router-link>
+            <!-- </router-link> -->
             </div>
           </div>
           </div>
