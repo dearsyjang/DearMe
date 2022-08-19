@@ -41,7 +41,9 @@
                 name: 'calendarDay',
                 query: {
                   textDiaryId: this.dayInfo[day].textDiaryId,
-                  videoDiaryId: this.dayInfo[day].videoDiaryId},
+                  videoDiaryId: this.dayInfo[day].videoDiaryId,
+                  realFileName: this.dayInfo[day].realFileName
+                },
               }" :class="{ 'has-text-grey-light': idx === 0 && day >= lastMonthStart || dates.length - 1 === idx && nextMonthStart > day,
               'has-text-primary': day === today && month === currentMonth && year === currentYear && idx <32
               }">
@@ -217,6 +219,7 @@ export default {
               }
               this.dayInfo[element.day].videoDiaryId = element.id
               this.dayInfo[element.day].videoDiarySentiment = element.sentiment
+              this.dayInfo[element.day].realFileName = element.realFileName 
               this.dayInfo[element.day].videoDiaryPercentage = element.percentage
               this.dayInfo[element.day].videoEmoji=''
               if(element.sentiment=='positive'){

@@ -63,6 +63,7 @@ export default {
       videoSource:'',
       textDiaryId:'',
       videoDiaryId:'',
+      realFileName: this.realFileName
     };
   },
   mounted() {
@@ -76,7 +77,7 @@ export default {
         this.videoDiaryId=this.$route.query.videoDiaryId
         if(this.videoDiaryId!=undefined){
           this.getVideoDiary(this.$route.query.videoDiaryId)
-          this.videoSource=" https://i7d206.p.ssafy.io:4443/openvidu/api/openvidu/recordings/" + this.videoDiary.realFileName + "/" + this.videoDiary.realFileName + ".mp4"
+          this.videoSource="https://i7d206.p.ssafy.io:4443/recordings/" + this.$route.query.realFileName + "/" + this.$route.query.realFileName + ".mp4"
         }
         //this.getVideoDiary()
   },

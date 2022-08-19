@@ -258,6 +258,7 @@ export default {
                     console.log(response);
                     console.log("stop record", this.recordingId);
                     this.videoSource="https://i7d206.p.ssafy.io:4443/recordings/" + this.recordingId + "/" + this.recordingId + ".mp4"
+                    console.log(this.videoSource)
                     alert('영상 일기 녹화가 완료되었습니다😘');
                 })
                 .catch(error => {
