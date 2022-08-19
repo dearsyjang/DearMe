@@ -91,8 +91,8 @@ public class CounselingServiceImpl implements CounselingService{
         if(dto.getStatus().equals(Status.REJECT)){
             counselingRepository.delete(target);
         }else if (dto.getStatus().equals(Status.ACCEPTED)){
-            //createTimeScheduler(target);
-            //createDayScheduler(target);
+            createTimeScheduler(target);
+            createDayScheduler(target);
             target.updateCounseling(dto.getStatus());
             counselingRepository.save(target);
         }else{
