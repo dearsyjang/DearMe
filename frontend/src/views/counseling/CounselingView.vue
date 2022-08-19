@@ -67,11 +67,11 @@
       </div>
         <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel" data-interval="false">
       <div class="carousel-inner">
-        <div class="carousel-item active">
-          <user-video
+        <user-video
           :stream-manager="publisher"
           @click="updateMainVideoStreamManager(publisher)"
         />
+        <div class="carousel-item active">
         <user-video
           v-for="sub in subscribers"
           :key="sub.stream.connection.connectionId"
