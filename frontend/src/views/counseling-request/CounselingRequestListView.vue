@@ -13,9 +13,31 @@
       </div>
     </div>
     <div class="blog-wrapper direction-rtl">
+    <div class="container">
+        <div v-for="(re, idx) in request" :key="idx" :re="re" class="col-6 col-sm-4 col-md-3">
+          <div class="card position-relative shadow-sm">
+            <div class="card-body ">
+              <!-- <router-link :to="{ name: 'counseling', params: { counselingId: counseling.id, counselorId:counseling.counselorId}}"> -->
+              <div class="d-flex align-items-center">
+                <div>
+                  <span class="badge bg-danger rounded-pill mb-2 d-inline-block"> {{ idx }}</span>
+                  <h3 class="blog-title d-block text-dark board-title">user : {{re.userId}}</h3>
+                  <h4>상담일 : {{re.year}}/{{re.month}}/{{re.day}}</h4>
+                </div>
+                <div >
+                  <button class="w-btn w-btn-charge" >상담방 입장</button>
+                </div>
+              </div>
+              <!-- </router-link> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="blog-wrapper direction-rtl">
       <div class="container">
           <div>
-            <personal-card-comp v-for="(request,idx) in requests.data" :key="idx" :request="request"></personal-card-comp>
+            <personal-card-comp v-for="(request,idx) in requests.data" :key="idx" :request="request" class="col-6 col-sm-4 col-md-3"></personal-card-comp>
           </div>
       </div>
     </div>

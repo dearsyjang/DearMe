@@ -257,7 +257,7 @@ export default {
                     this.record_status = false;
                     console.log(response);
                     console.log("stop record", this.recordingId);
-                    this.videoSource="https://i7d206.p.ssafy.io:4443/openvidu/recordings/" + this.recordingId + "/" + this.recordingId + ".mp4"
+                    this.videoSource="https://i7d206.p.ssafy.io:4443/recordings/" + this.recordingId + "/" + this.recordingId + ".mp4"
                     alert('영상 일기 녹화가 완료되었습니다😘');
                 })
                 .catch(error => {
@@ -396,25 +396,5 @@ body{
 }
 #video-diary{
     margin:0 auto; 
-}
-.card{
-    display: flex;
-    width: auto;
-    height: auto;
-}
-.card-footer{
-    height: 10px;
-}
-.loadingSpinner{
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 20%;
-    height: 16%;
-    margin-left: -10%;
-    margin-top: -8%;
-    z-index: 1000;
-    background-color: transparent;
-    
 }
 </style>

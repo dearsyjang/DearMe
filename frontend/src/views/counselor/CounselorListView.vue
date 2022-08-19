@@ -182,7 +182,7 @@
 
 
 
-<style>
+<style scoped>
 
 /* @import './assets/css/counselor-list.css'; */
 
