@@ -19,9 +19,8 @@
               <!-- <router-link :to="{ name: 'boardDetail', params: {boardId: board.id }}"> -->
                 <div class="d-flex justify-content-between">
                   <div>
-                    {{this.$route.params.userId}}
-                    {{this.$route.params.status}}
-
+                    <h2>상담 번호 : {{ this.credentials.id }}</h2>
+                    <h4>회원 ID : {{ this.userID }}</h4>
                     <!-- <h2 class="card-title">{{personalInfo.userId}}</h2> -->
                   </div>
                   <div>
@@ -37,9 +36,11 @@
                  <div class="my-3">
                    상담 신청 내용
                  </div>
+                 <router-link :to="{name:'findCalendar', params: {USERID: this.userID}}" >
                  <div class="text-end">
                    <button class="w-btn-diary">감정달력</button>
                  </div>
+                 </router-link>
             </div>
           </div>
         </div>
@@ -54,16 +55,15 @@ export default {
   data() {
     return {
       credentials : {
-        id : '',
-        status: ''
+        id : this.$route.params.id,
+        status: 'UNACCEPTED'
       },
-      request: {}
+      userID: this.$route.params.userid
+
     }
   },
   setup() {},
   created() {
-    this.request = this.$route.params.personalInfo
-    console.log(this.$route.params.personalInfo)
   },
   mounted() {},
   unmounted() {},
@@ -71,7 +71,7 @@ export default {
     ...mapActions(['counselingAccept', 'requests','currentUser']),
     isAccept() {
       const data = {
-        id: this.currentUser.data.id,
+        id: this.credentials.id,
         status: 'ACCEPTED'
       }
       this.counselingAccept(data)
@@ -79,23 +79,15 @@ export default {
     },
     isReject() {
       const data = {
-        id: this.currentUser.data.id,
+        id: this.credentials.id,
         status: 'REJECT'
       }
       this.counselingAccept(data)
       console.log(data)
     },
-    onsubmit() {
-      const data = {
-        id: this.currentUser.data.id,
-        status: this.credentials.status
-      }
-      this.counselingAccept(data)
-      console.log(data)
-    }
   },
   computed: {
-    ...mapGetters(['fetchRequests', 'fetchCurrentUser']),
+    ...mapGetters([ 'fetchCurrentUser']),
   }
 }
 </script>

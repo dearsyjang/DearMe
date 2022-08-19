@@ -14,7 +14,7 @@
     </div>
     <div class="blog-wrapper direction-rtl">
     <div class="container">
-        <div v-for="(re, idx) in request" :key="idx" :re="re" class="col-6 col-sm-4 col-md-3">
+        <div v-for="(re, idx) in request" :key="idx" :re="re">
           <div class="card position-relative">
             <div class="card-body">
               <!-- <router-link :to="{ name: 'counseling', params: { counselingId: counseling.id, counselorId:counseling.counselorId}}"> -->
@@ -57,16 +57,16 @@
     </div>
     <div class="page-content-wrapper py-3 board-bg">
   <div class="shop-pagination pb-3">
-    <div class="container">
-      <div class="card">
-        <div class="card-body p-2">
-          <div class="d-flex align-items-center justify-content-between">
-            <small class="ms-1 board-text-index ">그룹 상담 일정</small>
+      <div class="container">
+        <div class="card">
+          <div class="card-body p-2">
+            <div class="d-flex align-items-center justify-content-between">
+              <small class="ms-1 board-text-index ">그룹 수락 대기 중인 상담</small>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
   <div class="blog-wrapper direction-rtl">
     <div class="container">
       <div>
