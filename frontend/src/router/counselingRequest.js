@@ -3,6 +3,7 @@ import CounselingRequestDocumentView from "@/views/counseling-request/Counseling
 import CounselingRequestView from "@/views/counseling-request/CounselingRequestView.vue";
 import CounselingTimeComp from "@/views/counseling-request/components/counselingTimeComp.vue";
 import counselingAcceptView from "@/views/counseling-request/counselingAcceptView.vue";
+import findCalendar from "@/views/counseling-request/CalendarView.vue"
 export default [
   {
     path: "/counseling-request/list",
@@ -28,6 +29,11 @@ export default [
     path: "/counseling-request/accept",
     name: "counselingAcceptView",
     component: counselingAcceptView
+  },
+  {
+    path: "/counseling-request/accept/diary",
+    name: "findCalendar",
+    component: findCalendar
   },
 
 ];
