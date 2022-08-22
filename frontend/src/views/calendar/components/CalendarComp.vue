@@ -61,22 +61,22 @@
 
       </table>
 
-      <div class="modal fade" id="textDiaryView" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
+      <div class="modal-custom modal fade" style="width: auto;" id="textDiaryView" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" style="width: auto;" role="document">
+          <div class="modal-content"  style="width: auto;">
+            <div class="modal-header" style="width: auto;">
               <h5 class="modal-title" id="exampleModalLabel">텍스트 일기</h5>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
 
-            <div class="container">
-              <form @submit.prevent="textDiarySave()" class="textDiary-form">
+            <div class="modal-body" style="max-width: auto;">
+              <form style="width: auto; margin: auto;" @submit.prevent="textDiarySave()" class="textDiary-form">
                 <p>일기 제목을 입력하시오. (50자 이내)</p>
                 <input v-model="data.title" type="text" placeholder="제목을 입력하시오" maxlength="50">
                 <p class="mt-5">일기 내용을 입력하시오.</p>
-                <p>(후에 추가 수정은 불가합니다.)</p>
-                <textarea v-model="data.contents" placeholder="일기 내용을 입력하시오"></textarea> <br>
-                <button type="submit" class="btn" id="textDiary-form-submit-button">저장</button>
+                <p>(추후 수정은 불가하니 유의해주시기 바랍니다.)</p>
+                <textarea style="width: auto; margin: auto;" v-model="data.contents" rows="15" cols="40" type="text" placeholder="일기 내용을 입력하시오."></textarea>
+                <button type="submit" class="board-btn-submit btn-sm mx-3">저장</button>
               </form>
             </div>
           </div>
@@ -174,19 +174,19 @@ export default {
               this.dayInfo[element.day].textDiaryPercentage = element.percentage
               this.dayInfo[element.day].textEmoji=''
               if(element.sentiment=='positive'){
-                    if(element.percentage>=90)  this.dayInfo[element.day].textEmoji='⭐'
+                    if(element.percentage>=90)  this.dayInfo[element.day].textEmoji='🌈'
                     else if(element.percentage>=80) this.dayInfo[element.day].textEmoji='🌞'
-                    else if(element.percentage>=70) this.dayInfo[element.day].textEmoji=''
+                    else if(element.percentage>=70) this.dayInfo[element.day].textEmoji='🌤'
                     else if(element.percentage>=60) this.dayInfo[element.day].textEmoji='⛅'
-                    else this.dayInfo[element.day].textEmoji='☂'
+                    else this.dayInfo[element.day].textEmoji='🌥'
               }else if(element.sentiment=='negative'){
-                    if(element.percentage>=90)  this.dayInfo[element.day].textEmoji='🌪'
-                    else if(element.percentage>=80) this.dayInfo[element.day].textEmoji='💧'
-                    else if(element.percentage>=70) this.dayInfo[element.day].textEmoji='🌧'
-                    else if(element.percentage>=60) this.dayInfo[element.day].textEmoji='🌦'
-                    else this.dayInfo[element.day].textEmoji='☔'
+                    if(element.percentage>=90)  this.dayInfo[element.day].textEmoji='🌦'
+                    else if(element.percentage>=80) this.dayInfo[element.day].textEmoji='🌧'
+                    else if(element.percentage>=70) this.dayInfo[element.day].textEmoji='⛈'
+                    else if(element.percentage>=60) this.dayInfo[element.day].textEmoji='🌩'
+                    else this.dayInfo[element.day].textEmoji='🌪'
               }else{
-                    this.dayInfo[element.day].textEmoji='❔'
+                    this.dayInfo[element.day].textEmoji='☁'
               }
             });
             this.getVideoDiaries();
