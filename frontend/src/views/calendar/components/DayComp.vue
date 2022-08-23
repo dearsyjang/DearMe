@@ -98,7 +98,7 @@ export default {
     },
     // 영상 일기 삭제
     videoDiaryDelete() {
-      this.deleteTextDiary(this.videoDiaryId)
+      this.deleteVideoDiary(this.videoDiaryId)
     },
    getTextDiary(textDiaryPk) {
        this.fetchTextDiary(textDiaryPk)

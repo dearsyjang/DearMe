@@ -3,12 +3,12 @@
   <div class="blog-wrapper direction-rtl">
     <div class="container">
       <div class="row g-3">
-        <div v-for="board in boards" :key="board" class="col-6 col-sm-4 col-md-3">
+        <div v-for="board in boards" :key="board" class="col-6 col-sm-4 col-md-2">
           <div class="card position-relative shadow-sm">
             <div class="card-body">
               <router-link :to="{ name: 'boardDetail', params: {boardId: board.id }}">
               <span class="badge bg-danger rounded-pill mb-2 d-inline-block"><i class="bi bi-hand-thumbs-up-fill"></i> {{ board.hitCnt}}</span>
-              <h4 class="blog-title d-block text-dark board-title">{{ board.title }}</h4>
+              <h5 class="blog-title d-block text-dark board-title">{{ board.title }}</h5>
               </router-link>
             </div>
           </div>

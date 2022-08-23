@@ -16,7 +16,7 @@
       <div class="container">
         <div v-for="(counseling, idx) in counselings.data.counselings" :key="idx" :counseling="counseling" class="card mb-2">
           <div v-if="counseling.status==`ACCEPTED` && counseling.groupId == null">
-            <div class="card-body d-flex align-items-center">
+            <div class="card-body d-flex align-items-stretch">
               <div class="user-info">
                 <div class="d-flex align-items-center">
                   <div>
@@ -28,7 +28,7 @@
                 </div>
                 <div class="d-flex align-items-center">
                   <div>
-                    <p class="mb-0 me-4 board-mypoint board-text-bold">상담일: {{ counseling.year }}. {{ counseling.month }}. {{ counseling.day }}</p>
+                    <p class="m-0 me-4 board-mypoint board-text-bold">상담일: {{ counseling.year }}. {{ counseling.month }}. {{ counseling.day }}</p>
                   </div>
                   <div class="mx-5">
                     <router-link :to="{ name: 'counseling', params: { counselingId: counseling.id }}">

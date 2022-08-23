@@ -3638,6 +3638,8 @@ a.affan-element-item i {
 
 /* :: Card */
 .card {
+  border: 0;
+  border-radius: 6px;
 }
 
 .card-img,
