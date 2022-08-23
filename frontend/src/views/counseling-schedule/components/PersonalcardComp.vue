@@ -6,8 +6,8 @@
         <div v-for="(re,idx) in request"
             :key="idx"
             :re="re">
-                    <div v-if="re.counselorId== currentUser.data.userId && re.status==`ACCEPTED`  && re.groupId == null " class="card mb-3" id="today-personal-card" >
-          <div class="card position-relative shadow-sm">
+                    <div v-if="re.counselorId== currentUser.data.userId && re.status==`ACCEPTED`  && re.groupId == null " class="card" id="today-personal-card" >
+          <div class="card position-relative">
             <div class="card-body">
               <div class="card-body d-flex align-items-center">
                   <div>
@@ -61,8 +61,6 @@ import { mapGetters,mapActions } from 'vuex'
 </script>
 
 <style>
-
-
 .personal-today-cards{
   max-width:90%;
   margin:auto;
