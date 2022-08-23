@@ -99,6 +99,8 @@
     </div>
   </div>
  </div>
+  </div>
+ </div>
 </template>
 
 <script>
@@ -463,6 +465,13 @@ html{
   color: white;
   margin: 0;
 }
+#review-button{
+  background-color: #B1D7B4;
+  color: white;
+  margin-top: 20px;
+  margin-right: 15px;
+}
+
 #review-button{
   background-color: #B1D7B4;
   color: white;
