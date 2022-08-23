@@ -27,17 +27,20 @@
     :to="{ name: 'counselorProfile', params: {counselorId: counselor.counselorId}}" style="text-decoration:none">
 
     <div class="card mb-3" id="counselor-item-card">
-      <div class="row" id="counselor-item-row">
+      <!--왜 카드를 이렇게...-->
+      <div id="container">
+        <div class="row" id="counselor-item-row">
         <div class="counselor-item-pic col-md-6" >
           <img src = "@/assets/images/kjm.png" class="counselor-img2"/>
         </div>
-        <div class="card-body col-md-6" id="counselor-item-card-body" >
+        <div class="card-body" id="counselor-item-card-body" >
           <h5 class="card-title" id="counselor-item-card-title">{{counselor.nickName}} 상담사</h5>
           <h5 class="counselor-item-price">1:1 상담 : {{counselor.price}} point</h5>
           <div class="card-text" id="counselor-item-text">
             <p class="text-muted">&#11088; {{counselor.value}} ({{counselor.reviewCnt}})</p>
             </div>
         </div>
+      </div>
       </div>
     </div>
 
@@ -73,7 +76,7 @@ import {  mapActions, mapGetters } from 'vuex';
 
 </script>
 
-<style>
+<style scoped>
 #counselor-item-card{
   margin:auto
 }

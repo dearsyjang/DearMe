@@ -36,7 +36,6 @@
               </div>
               <div v-else>
                 <div>
-
                   <router-link :to="{
                 name: 'calendarDay',
                 query: {

@@ -8,15 +8,16 @@
               <div class="popup-body">
                 <div class="body-content">
                   <div class="body-contentbox">
-                    <h3> 상담방에 입장하시겠습니까? </h3>
+                    <h3 v-if="isdone == false"> 상담방에 입장하시겠습니까? </h3>
+                    <h3 v-if="isdone == true"> 오늘 상담 어떠셨나요? </h3>
                     <div id="popup-btn">
-                      <button v-if="currentUser.data.type==`USER`" id="enter-button" class="btn btn-mg" @click="joinSession()">상담방 입장</button>
-                      <button v-if="currentUser.data.type==`COUNSELOR`" id="enter-button" class="btn btn-mg" @click="createSession()">상담방 개설</button>
-                      <router-link :to="{ name:'userSchedule' }"><button v-if="currentUser.data.type==`USER`" id="cancel-button" class="btn btn-mg">돌아가기</button></router-link>
-                      <router-link :to="{ name:'counselorSchedule' }"><button v-if="currentUser.data.type==`COUNSELOR`" id="cancel-button" class="btn btn-mg">돌아가기</button></router-link>
+                      <button v-if="currentUser.data.type==`USER` && isdone == false" id="enter-button" class="btn btn-mg" @click="joinSession()">상담방 입장</button>
+                      <button v-if="currentUser.data.type==`COUNSELOR` && isdone == false" id="enter-button" class="btn btn-mg" @click="createSession()">상담방 개설</button>
+                      <router-link :to="{ name:'userSchedule' }"><button v-if="currentUser.data.type==`USER` && isdone == false" id="cancel-button" class="btn btn-mg">돌아가기</button></router-link>
+                      <router-link :to="{ name:'counselorSchedule' }"><button v-if="currentUser.data.type==`COUNSELOR` && isdone == false" id="cancel-button" class="btn btn-mg">돌아가기</button></router-link>
                   </div>
                   <div v-if="isdone === true">
-                        <button class="board-btn-submit btn-sm mx-2" data-bs-toggle="modal" data-bs-target="#commentCreate">등록</button>
+                        <button class="btn btn-mg" id="review-button" data-bs-toggle="modal" data-bs-target="#commentCreate">리뷰 등록</button>
                   </div> 
                 </div>
               </div>
@@ -27,6 +28,8 @@
     </div>
   </div>
 
+
+  <!--리뷰 모달-->
   <div class="modal fade" id="commentCreate" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -64,34 +67,36 @@
     <div id="session" v-if="session">
       <div class="card mt-4" id="my-camera">
         <user-video :stream-manager="mainStreamManager"/>
-      </div>
-        <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel" data-interval="false">
-      <div class="carousel-inner">
         <user-video
           :stream-manager="publisher"
           @click="updateMainVideoStreamManager(publisher)"
         />
-        <div class="carousel-item active">
-        <user-video
-          v-for="sub in subscribers"
-          :key="sub.stream.connection.connectionId"
-          :stream-manager="sub"
-          @click="updateMainVideoStreamManager(sub)"
-        />
       </div>
-  </div>
-  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Previous</span>
-  </button>
-  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Next</span>
-  </button>
-</div>
+      <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel" data-interval="false">
+        <div class="carousel-inner">
+        <div class="carousel-item active">
+          <user-video
+            v-for="sub in subscribers"
+            :key="sub.stream.connection.connectionId"
+            :stream-manager="sub"
+            @click="updateMainVideoStreamManager(sub)"
+          />
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+          <div>
+        </div>
       </div>
       <input class="btn btn-large btn-danger" type="button" id="buttonLeaveSession" @click="leaveSession" value="상담 종료"/>
     </div>
+  </div>
+ </div>
 </template>
 
 <script>
@@ -456,6 +461,13 @@ html{
   color: white;
   margin: 0;
 }
+#review-button{
+  background-color: #B1D7B4;
+  color: white;
+  margin-top: 20px;
+  margin-right: 15px;
+}
+
 #video-button{
   text-align: center;
 }

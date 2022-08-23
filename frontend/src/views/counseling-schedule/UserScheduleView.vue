@@ -12,11 +12,12 @@
         </div>
       </div>
     </div>
+
+    <!--카드 밑에 줄이 자꾸 생겨서 border 다 뺏습니다-->
     <div class="top-products-area product-list-wrap">
       <div class="container">
         <div v-for="(counseling, idx) in counselings.data.counselings" :key="idx" :counseling="counseling" class="card mb-2">
-          <div v-if="counseling.status==`ACCEPTED` && counseling.groupId == null">
-            <div class="card-body d-flex align-items-stretch">
+            <div v-if="counseling.status==`ACCEPTED` && counseling.groupId == null" class="card-body d-flex align-items-stretch">
               <div class="user-info">
                 <div class="d-flex align-items-center">
                   <div>
@@ -37,7 +38,6 @@
                   </div>
                 </div>
               </div>
-            </div>
           </div>
         </div>
       </div>
@@ -58,8 +58,7 @@
   <div class="top-products-area product-list-wrap">
     <div class="container">
       <div v-for="(counseling, idx) in counselings.data.counselings" :key="idx" :counseling="counseling" class="card mb-2">
-        <div v-if="counseling.status==`ACCEPTED` && counseling.groupId != null">
-          <div class="card-body d-flex align-items-center">
+          <div v-if="counseling.status==`ACCEPTED` && counseling.groupId != null" class="card-body d-flex align-items-center">
             <div class="user-info">
               <div class="d-flex align-items-center">
                 <div>
@@ -78,7 +77,6 @@
                   <button class="w-btn w-btn-charge" >상담방 입장</button>
                   </router-link>
                 </div>
-              </div>
             </div>
           </div>
         </div>
