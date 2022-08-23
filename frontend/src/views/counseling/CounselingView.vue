@@ -66,22 +66,24 @@
     <!--세션 오픈-->
     <div id="session" v-if="session">
       <div class="card mt-4" id="my-camera">
-        <user-video :stream-manager="mainStreamManager"/>
-        <user-video
-          :stream-manager="publisher"
-          @click="updateMainVideoStreamManager(publisher)"
-        />
+        <user-video :stream-manager="mainStreamManager"/>        
       </div>
-      <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel" data-interval="false">
+      <div id="carouselExampleControls" class="carousel slide" data-interval="false">
         <div class="carousel-inner">
         <div class="carousel-item active">
           <user-video
+          :stream-manager="publisher"
+          @click="updateMainVideoStreamManager(publisher)"
+          />
+        </div>
+        <div>
+          <user-video class="carousel-item"
             v-for="sub in subscribers"
             :key="sub.stream.connection.connectionId"
             :stream-manager="sub"
             @click="updateMainVideoStreamManager(sub)"
           />
-      </div>
+        </div>
       <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
         <span class="visually-hidden">Previous</span>
