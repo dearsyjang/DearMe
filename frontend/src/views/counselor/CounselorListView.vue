@@ -184,7 +184,7 @@
 
 
 
-<style scoped>
+<style>
 
 /* @import './assets/css/counselor-list.css'; */
 
