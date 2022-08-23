@@ -1,5 +1,6 @@
 <template>
   <div id="topbar" v-if="isLoggedIn">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
     <!--상단바-->
     <div class="header-demo-bg shadow-sm">
       <div class="container">

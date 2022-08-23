@@ -3,7 +3,7 @@
   <div class="shop-pagination pb-3">
     <div class="container">
       <div class="card ">
-        <div class="card-body p-2">
+        <div class="card-body m-2">
           <div class="d-flex align-items-center justify-content-between">
             <small class="ms-1 board-text-index">수락 대기 중인 상담</small>
           </div>
