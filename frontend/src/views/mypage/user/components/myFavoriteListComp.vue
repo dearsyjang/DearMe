@@ -3,7 +3,7 @@
   <div class="blog-wrapper direction-rtl">
     <div class="container">
       <div class="row g-3">
-        <div class="col-6 col-sm-4 col-md-3">
+        <div class="col-4 col-sm-4 col-md-3">
           <div v-for="favorite in myFavorite" :key="favorite" class="card position-relative shadow-sm">
             <div class="card-body">
               <router-link :to="{ name: 'counselorProfile', params: {counselorId: favorite.counselorId }}">

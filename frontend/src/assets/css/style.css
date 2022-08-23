@@ -3638,8 +3638,6 @@ a.affan-element-item i {
 
 /* :: Card */
 .card {
-  border: 0 !important;
-  border-radius: 6px;
 }
 
 .card-img,
@@ -3697,7 +3695,7 @@ a.affan-element-item i {
 }
 
 .card-round {
-  border-radius: 50rem;
+  border-radius: 50rem !important;
 }
 
 /* Chat */

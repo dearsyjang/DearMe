@@ -2,25 +2,22 @@
 <div id="daycomp"> 
     <div class="custom-container">
         <div v-if="this.textDiaryId!=undefined" id="diary-btn">
-        <button class="btn mb-3" data-bs-toggle="modal" data-bs-target="#textDiaryView"><img id="text-diary-img" src="@/assets/images/text-diary.png" alt="text-diary"></button>
+        <button class="btn mb-3" data-bs-toggle="modal" data-bs-target="#textDiaryView"><img id="text-diary-img" src="../../../assets/images/text-diary.png" alt="text-diary"></button>
 
-    <div class="modal-custom modal fade" id="textDiaryView" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" style="width: auto;" role="document">
-          <div class="modal-content" style="width: auto;">
-            <div class="modal-header" style="width: auto;">
+    <div class="modal fade" id="textDiaryView" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
               <h5 class="modal-title" id="exampleModalLabel">텍스트 일기</h5>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <br>
             <h1>{{ this.textDiary.title }}</h1>
-            <span class="m-3">{{ this.textDiary.contents }}</span>
+            <p>{{ this.textDiary.contents }}</p>
             <p>{{ this.textDiary.year }}년 {{ this.textDiary.month }}월 {{ this.textDiary.day}}일</p>
             <h3 v-if="this.textDiary.sentiment == 'positive'">😊</h3>
             <h3 v-if="this.textDiary.sentiment == 'negative'">😢</h3>
-            <h3 v-if="this.textDiary.sentiment == 'neutral'">😐</h3>
-            <br>
+            <h3 v-if="this.textDiary.sentiment == 'netural'">😐</h3>
             <button @click="textDiaryDelete()" class="board-btn-submit btn-sm mx-3">삭제</button>
-            <br>
           </div>
         </div>
     </div>
@@ -31,27 +28,25 @@
             data-bs-target="#videoDiaryView"><img id="video-diary-img" src="@/assets/images/video-diary.png" alt="video-diary"></button>
       </div>
  
-<div class="modal-custom modal fade" id="videoDiaryView" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" style="width: auto;" role="document">
-    <div class="modal-content" style="width: auto;">
-      <div class="modal-header" style="width: auto;">
+<div class="modal fade" id="videoDiaryView" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">영상 일기</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-          <br>
-          <h1>{{ this.videoDiary.title }}</h1>
-          <p>{{ this.videoDiary.contents }}</p>
-          <p>{{ this.videoDiary.year }}년 {{ this.textDiary.month }}월 {{ this.textDiary.day}}일</p>
-          <h3 v-if="this.videoDiary.sentiment == 'positive'">😊</h3>
-          <h3 v-if="this.videoDiary.sentiment == 'negative'">😢</h3>
-          <h3 v-if="this.videoDiary.sentiment == 'neutral'">😐</h3>
-          <br>
-          <div>
+      <div class="modal-body">
+        <div class="player-container">
+          <h1>{{ this.textDiary.title }}</h1>
+            <p>{{ this.textDiary.contents }}</p>
+            <p>{{ this.textDiary.year }}년 {{ this.textDiary.month }}월 {{ this.textDiary.day}}일</p>
+            <h3 v-if="this.textDiary.sentiment == 'positive'">😊</h3>
+            <h3 v-if="this.textDiary.sentiment == 'negative'">😢</h3>
+            <h3 v-if="this.textDiary.sentiment == 'netural'">😐</h3>
             <vue3-video-player :src="videoSource"></vue3-video-player>
-          </div>
-          <br>
-          <button @click="videoDiaryDelete()" class="board-btn-submit btn-sm mx-3">삭제</button>
-          <br>
+        </div>
+        <button @click="videoDiaryDelete()" class="board-btn-submit btn-sm mx-3">삭제</button>
+      </div>
     </div>
   </div>
 </div>
@@ -98,7 +93,7 @@ export default {
     },
     // 영상 일기 삭제
     videoDiaryDelete() {
-      this.deleteVideoDiary(this.videoDiaryId)
+      this.deleteTextDiary(this.videoDiaryId)
     },
    getTextDiary(textDiaryPk) {
        this.fetchTextDiary(textDiaryPk)

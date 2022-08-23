@@ -25,9 +25,8 @@
 
     <router-link
     :to="{ name: 'counselorProfile', params: {counselorId: counselor.counselorId}}" style="text-decoration:none">
-
     <div class="card mb-3" id="counselor-item-card">
-      <!--왜 카드를 이렇게.....-->
+      <!--왜 카드를 이렇게...-->
       <div id="container">
         <div class="row" id="counselor-item-row">
         <div class="counselor-item-pic col-md-6" >
@@ -76,7 +75,7 @@ import {  mapActions, mapGetters } from 'vuex';
 
 </script>
 
-<style scoped>
+<style>
 #counselor-item-card{
   margin:auto
 }

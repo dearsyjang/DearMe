@@ -52,6 +52,10 @@ export default {
 </script>
 
 <style scoped>
+@import url('https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap');
+* {
+  font-family: 'Gowun Dodum', sans-serif;
+}
 hr {
   width: 100%;
 }

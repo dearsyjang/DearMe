@@ -22,34 +22,42 @@
                     <br>
                     <h4>영상 일기는 최단 10초에서 최장 1분까지 촬영가능합니다.</h4>
                     <hr>
-                    <div id="publisher"></div>
-                    <div id="video-button" class="justify-content-center">
-                        <button type="button" class="btn btn-danger m-1" @click="startRecording">START</button>
-                        <button type="button" class="btn btn-primary m-1" @click="stopRecording">STOP</button>
-                        <button type="button" class="btn btn-warning m-1" @click="deleteRecording">DELETE</button>
-                        <button type="button" class="btn btn-success m-1" @click="saveRecording">SAVE</button>
-                        <button type="button" class="btn btn-secondary m-1" @click="leaveSession">BACK</button>
-                        <button v-if="videoSource!=''" class="btn btn-info m-1" data-bs-toggle="modal"
-                        data-bs-target="#videoDiaryView">REPLAY</button>
+                    <div id="publisher" class="justify-content-center ml-4"></div>
+                    <div v-if="isLoading" class="loadingSpinner">
+                        <button class="btn" type="button" disabled>
+                            <span class="spinner-border spinner-border-none" role="status" aria-hidden="true"></span>
+                            Loading...
+                        </button>
+                    </div>
+                    <div id="video-button" class="justify-content-center mr-5">
+                        <button type="button" class="btn m-1" @click="leaveSession"></button>
+                        <button type="button" class="btn btn-danger mr-1" @click="startRecording">START</button>
+                        <button type="button" class="btn btn-primary mr-1" @click="stopRecording">STOP</button>
+                        <button type="button" class="btn btn-warning mr-1" @click="deleteRecording">DELETE</button>
+                        <button type="button" class="btn btn-success mr-1" @click="saveRecording">SAVE</button>
                     </div>
                     <hr>
+            <div class="container">
                 <div v-if="videoSource!=''">
-                  <div class="modal-custom modal fade" id="videoDiaryView" style="width: auto;" tabindex="-1" aria-labelledby="exampleModalLabel"
+                    <button class="board-btn-submit btn-sm mx-2" data-bs-toggle="modal"
+                        data-bs-target="#videoDiaryView">영상 다시보기</button>
+                  <div class="modal fade" id="videoDiaryView" tabindex="-1" aria-labelledby="exampleModalLabel"
                     aria-hidden="true">
-                    <div class="modal-dialog" style="width: auto;" role="document">
-                        <div class="modal-content" style="width: auto;">
-                            <div class="modal-header" style="width: auto;">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
                                 <h5 class="modal-title" id="exampleModalLabel">영상 일기</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
                                     aria-label="Close"></button>
                             </div>
-                            <div class="modal-body" style="max-width: auto;">
+                            <div class="modal-body">
                                 <div class="player-container">
                                     <vue3-video-player :src="videoSource"></vue3-video-player>
                                 </div>
                             </div>
                         </div>
                     </div>
+                </div>
                 </div>
             </div>
             <div class="player-container" v-if="this.isTextOn">
@@ -385,13 +393,9 @@ body{
   text-align: center;
 }
 #publisher{
-    margin:0 auto;
-    justify-content: center;
-    align-content: center;
-    text-align: center;
+    margin:0 auto; 
 }
 #video-diary{
     margin:0 auto; 
 }
-
 </style>

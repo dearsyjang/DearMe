@@ -5,8 +5,6 @@
       <div class="card ">
         <div class="card-body p-2">
           <div class="d-flex align-items-center justify-content-between">
-            <!--카드들이 다 왜 이래...?!-->
-            <!--페이지네이션...?!-->
             <div>
               <small class="ms-1 board-text-index">상담사 리스트</small>
             </div>
@@ -132,7 +130,7 @@
           reviewScoreDown: false,
           reviewCntDown: false,
           category: '',
-          favorite: false,
+          favorite: false
         },
       }
     },

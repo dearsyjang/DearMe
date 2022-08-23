@@ -12,32 +12,25 @@
         </div>
       </div>
     </div>
-
-    <!--카드 밑에 줄이 자꾸 생겨서 border 다 뺏습니다-->
-    <div class="top-products-area product-list-wrap">
-      <div class="container">
-        <div v-for="(counseling, idx) in counselings.data.counselings" :key="idx" :counseling="counseling" class="card mb-2">
-            <div v-if="counseling.status==`ACCEPTED` && counseling.groupId == null" class="card-body d-flex align-items-stretch">
-              <div class="user-info">
-                <div class="d-flex align-items-center">
-                  <div>
-                    <h5 class="mb-1 board-text-bold">상담사 : {{ counseling.counselorNickName }}</h5>
-                  </div>
-                  <div class="mx-2">
-                    <span class="badge bg-warning ms-2 rounded-pill">1 : 1</span>
-                  </div>
+    <!-- <div class="page-content-wrapper py-3"> -->
+  <div class="blog-wrapper direction-rtl">
+    <div class="container">
+        <div v-for="(counseling, idx) in counselings.data.counselings" :key="idx" :counseling="counseling">
+        <div v-if="counseling.status==`ACCEPTED` && counseling.groupId == null">
+          <div class="card position-relative">
+            <div class="card-body ">
+              <router-link :to="{ name: 'counseling', params: { counselingId: counseling.id, counselorId:counseling.counselorId}}">
+              <div class="d-flex justify-content-around">
+                <div>
+                  <h4 class="blog-title d-block text-dark board-title">상담사 : {{ counseling.counselorNickName }}</h4>
+                  <p>상담일: {{ counseling.year }}. {{ counseling.month }}. {{ counseling.day }}</p>
                 </div>
-                <div class="d-flex align-items-center">
-                  <div>
-                    <p class="m-0 me-4 board-mypoint board-text-bold">상담일: {{ counseling.year }}. {{ counseling.month }}. {{ counseling.day }}</p>
-                  </div>
-                  <div class="mx-5">
-                    <router-link :to="{ name: 'counseling', params: { counselingId: counseling.id }}">
-                    <button class="w-btn w-btn-charge" >상담방 입장</button>
-                    </router-link>
-                  </div>
+                <div >
+                  <button class="w-btn w-btn-charge" >상담방 입장</button>
                 </div>
               </div>
+              </router-link>
+            </div>
           </div>
         </div>
       </div>
@@ -55,58 +48,34 @@
       </div>
     </div>
   </div>
-  <div class="top-products-area product-list-wrap">
+  <!-- <div class="page-content-wrapper py-3"> -->
+  <div class="blog-wrapper direction-rtl">
     <div class="container">
-      <div v-for="(counseling, idx) in counselings.data.counselings" :key="idx" :counseling="counseling" class="card mb-2">
-          <div v-if="counseling.status==`ACCEPTED` && counseling.groupId != null" class="card-body d-flex align-items-center">
-            <div class="user-info">
-              <div class="d-flex align-items-center">
+        <div v-for="(counseling, idx) in counselings.data.counselings" :key="idx" :counseling="counseling" >
+        <div v-if="counseling.status==`ACCEPTED` && counseling.groupId != null">
+          <div class="card position-relative">
+            <div class="card-body ">
+              <router-link :to="{ name: 'counseling', params: { counselingId: counseling.id, counselorId:counseling.counselorId }}">
+              <div class="d-flex justify-content-around">
                 <div>
-                  <h5 class="mb-1 board-text-bold">상담사 : {{ counseling.counselorNickName }}</h5>
+                  <h4 class="blog-title d-block text-dark board-title">상담사 : {{ counseling.counselorNickName }}</h4>
+                  <p>상담일: {{ counseling.year }}. {{ counseling.month }}. {{ counseling.day }}</p>
                 </div>
-                <div class="mx-2">
-                  <span class="badge bg-warning ms-2 rounded-pill">GROUP</span>
+                <div >
+                  <button class="w-btn w-btn-charge" >상담방 입장</button>
                 </div>
               </div>
-              <div class="d-flex align-items-center">
-                <div>
-                  <p class="mb-0 me-4 board-mypoint board-text-bold">상담일: {{ counseling.year }}. {{ counseling.month }}. {{ counseling.day }}</p>
-                </div>
-                <div class="mx-5">
-                  <router-link :to="{ name: 'counseling', params: { counselingId: counseling.id }}">
-                  <button class="w-btn w-btn-charge" >상담방 입장</button>
-                  </router-link>
-                </div>
+              </router-link>
             </div>
           </div>
-        </div>
+          </div>
       </div>
     </div>
   </div>
 </div>
 </div>
-    <!-- <div v-if="currentUser.data.type==`USER`">
-      <h1 id="userschedule-title">상담 일정</h1>
-      <hr>
-      <br>
-      <h2 id="userschedule-personal">1:1 상담</h2>
-      <div v-for="(counseling, idx) in counselings.data.counselings" :key="idx" :counseling="counseling">
-        <div v-if="counseling.status==`ACCEPTED` && counseling.groupId == null" class="card" style="width: 18rem; height: 10rem;" id="user-personal-card">
-          <div class="personal-request-index" style="text-decoration: none">{{idx}}</div>
-          <h5 class="personal-card-title">상담일: {{ counseling.year }}. {{ counseling.month }}. {{ counseling.day }}</h5>
-          <h5 class="personal-card-title">상담사: {{ counseling.counselorNickName }}</h5>
-          <router-link :to="{ name: 'counseling', params: { counselingId: counseling.id }}"><button  class="btn" id="user-enter-button">상담방 입장</button></router-link>
-        </div>
-      </div>
-      <h2 id="userschedule-group">그룹 상담</h2>
-      <div v-for="(counseling, idx) in counselings.data.counselings" :key="idx" :counseling="counseling">
-        <div v-if="counseling.status==`ACCEPTED` && counseling.groupId != null" class="card" style="width: 18rem; height: 8rem;">
-          <h5 class="card-title">상담일: {{ counseling.year }}. {{ counseling.month }}. {{ counseling.day }}</h5>
-          <h5 class="card-title">상담사: {{ counseling.counselorNickName }}</h5>
-          <router-link :to="{ name: 'counseling', params: { counselingId: counseling.id }}"><button  class="btn" id="enter-button">상담방 입장</button></router-link>
-      </div>
-    </div>
-  </div> -->
+</div>
+
 
 </template>
 
@@ -132,7 +101,9 @@ export default {
       this.fetchSchedules()
       this.fetchCurrentUser()
       console.log(this.counseling)
-    }
+    },
+    mounted(){
+    },
 }
 </script>
 
