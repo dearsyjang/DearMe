@@ -173,5 +173,3 @@ section{
   height:1000px;
 }
 </style>
-
-
