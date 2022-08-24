@@ -8,7 +8,7 @@
       <router-link :to="{ name: 'videodiary' }"><button id="videodiary-enter-btn" class="btn">
       <img id="camera-img" src="@/assets/images/camera.png" alt="camera"></button></router-link>
       </button>
-    <button v-else class="btn"><img id="check-img" src="@/assets/images/check.png" alt="check"></button>
+      <button v-else class="btn"><img id="check-img" src="@/assets/images/check.png" alt="check"></button>
   </div>
   <br>
     <!--달력-->
@@ -67,7 +67,6 @@
               <h5 class="modal-title" id="exampleModalLabel">텍스트 일기</h5>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-
             <div class="modal-body" style="max-width: auto;">
               <form style="width: auto; margin: auto;" @submit.prevent="textDiarySave()" class="textDiary-form">
                 <p>일기 제목을 입력하시오. (50자 이내)</p>
@@ -222,19 +221,19 @@ export default {
               this.dayInfo[element.day].videoDiaryPercentage = element.percentage
               this.dayInfo[element.day].videoEmoji=''
               if(element.sentiment=='positive'){
-                    if(element.percentage>=90)  this.dayInfo[element.day].textEmoji='⭐'
+                    if(element.percentage>=90)  this.dayInfo[element.day].textEmoji='🌈'
                     else if(element.percentage>=80) this.dayInfo[element.day].textEmoji='🌞'
-                    else if(element.percentage>=70) this.dayInfo[element.day].textEmoji=''
+                    else if(element.percentage>=70) this.dayInfo[element.day].textEmoji='🌤'
                     else if(element.percentage>=60) this.dayInfo[element.day].textEmoji='⛅'
-                    else this.dayInfo[element.day].textEmoji='☂'
+                    else this.dayInfo[element.day].textEmoji='🌥'
               }else if(element.sentiment=='negative'){
-                    if(element.percentage>=90)  this.dayInfo[element.day].textEmoji='🌪'
-                    else if(element.percentage>=80) this.dayInfo[element.day].textEmoji='💧'
-                    else if(element.percentage>=70) this.dayInfo[element.day].textEmoji='🌧'
-                    else if(element.percentage>=60) this.dayInfo[element.day].textEmoji='🌦'
-                    else this.dayInfo[element.day].textEmoji='☔'
+                    if(element.percentage>=90)  this.dayInfo[element.day].textEmoji='🌦'
+                    else if(element.percentage>=80) this.dayInfo[element.day].textEmoji='🌧'
+                    else if(element.percentage>=70) this.dayInfo[element.day].textEmoji='⛈'
+                    else if(element.percentage>=60) this.dayInfo[element.day].textEmoji='🌩'
+                    else this.dayInfo[element.day].textEmoji='🌪'
               }else{
-                    this.dayInfo[element.day].textEmoji='❔'
+                    this.dayInfo[element.day].textEmoji='☁'
               }
             });
         })

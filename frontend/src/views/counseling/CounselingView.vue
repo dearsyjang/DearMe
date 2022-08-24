@@ -151,11 +151,11 @@ export default {
   methods: {
     ...mapActions(['fetchCurrentUser', 'createReview']),
 
-    onSubmit() {
+     onSubmit() {
     this.review = {
-      id: this.counselorId,
+      id: this.counselingId,
       contents: this.review.contents,
-      value: this.value
+      value: this.review.value
     }
     this.createReview(this.review)
     console.log(this.review.id)
