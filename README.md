@@ -80,7 +80,7 @@
 - **Jenkins 2.346.2**
 - **Nginx 1.23.1**
 - **MariaDB 10.8.3**
-- **Openvidu 2.22.0
+- **Openvidu 2.22.0**
 
 ## 설치
 
@@ -91,7 +91,7 @@
 1. 백엔드를 실행합니다.
 
 ```java
-run application
+
 ```
 
 **[ FRONT-END ]**
