@@ -121,39 +121,172 @@ npm run serve
 **[ FRONT-END ]**
 
 ```
-📁frontend
-  ├── 📁public
-  ├── 📁src
-  │ ├─ 📁api # Axios 데이터 통신
-  │   └─ 📄drf.js
-  │ ├─ 📁assets
-  │ │ 📁css
-  │ └─ 📁images
-  │ ├─ 📁router
-  │ ├─ 📁store
-  │ ├─ 📁views
-  │ ├─ 📄App.vue
-  │ └─ 📄main.js
-  ├─ 📄.gitignore
-  ├─ 📄.babel.config.js
-  ├─ 📄.jsconfig.json
-  ├─ 📄package-lock.json
-  ├─ 📄package.json
-  └─ 📄vue.config.js
+📁 frontend
+├── 📁public
+├── 📁src
+│ ├── 📁api
+│   └── 📄drf.js
+│ ├── 📁assets
+│   ├── 📁css
+│   └── 📁images
+│ ├── 📁router
+│   ├──📄board.js
+│   ├──📄calendar.js
+│   ├──📄counseling.js
+│   ├──📄counselingGroup.js
+│   ├──📄counselingRequest.js
+│   ├──📄counselingSchedule.js
+│   ├──📄counselor.js
+│   ├──📄group.js
+│   ├──📄home.js
+│   ├──📄index.js
+│   ├──📄member.js
+│   ├──📄mypage.js
+│   ├──📄point.js
+│   ├──📄textDiary.js
+│   └──📄videoDiary.js
+│ ├── 📁store
+│   ├── 📁modules
+│     ├──📄board.js
+│     ├──📄bottombar.js
+│     ├──📄counselingRequest.js
+│     ├──📄counselingSchedule.js
+│     ├──📄counselors.js
+│     ├──📄group.js
+│     ├──📄home.js
+│     ├──📄member.js
+│     ├──📄mypage.js
+│     ├──📄textDiary.js
+│     └──📄videoDiary.js
+│   └──📄index.js
+│ ├── 📁views
+│   ├── 📁board
+│   ├── 📁calendar
+│   ├── 📁counseling-group
+│   ├── 📁counseling-request
+│   ├── 📁counseling
+│   ├── 📁counselor
+│   ├── 📁group
+│   ├── 📁home
+│   ├── 📁member
+│   ├── 📁mypage
+│   ├── 📁point
+│   ├── 📁text-diary
+│   ├── 📁video-diary
+│   └── 📄HomeView.vue
+│ ├──📄App.vue
+│ └──📄main.js
+├──📄babel.config.js
+├──📄jsconfig.json
+├──📄package-lock.json
+├──📄package.json
+└──📄vue.config.js
 ```
+
 
 
 **[ BACK-END ]**
 
 ```
-└── 📁back
-  ├── 📁demo
-  │ ├── 📁.mvn
-  └─  ├─ 📁src
-      ├─ 📄.gitignore
-      ├─ 📄
-      ├─ 📄
-      ├─ 📄
-      ├─ 📄
-      └─ 📄
+📁 Back
+└── 📁demo
+│ ├── 📁.mvn/wrapper
+│ ├── 📁src/main
+│   ├── 📁java/com/dearme/demo
+│     ├── 📁domain
+│       ├── 📁base/entity
+│       ├── 📁board
+│         ├── 📁controller
+│         ├── 📁dto
+│         ├── 📁entity
+│         ├── 📁exception
+│         ├── 📁repository
+│         └── 📁service
+│       ├── 📁counseling
+│         ├── 📁controller
+│         ├── 📁dto
+│         ├── 📁entity
+│         ├── 📁exception
+│         ├── 📁repository
+│         └── 📁service
+│       ├── 📁counselingdocument
+│         ├── 📁controller
+│         ├── 📁dto
+│         ├── 📁entity
+│         ├── 📁exception
+│         ├── 📁repository
+│         └── 📁service
+│       ├── 📁counselingroom
+│         ├── 📁controller
+│         ├── 📁dto
+│         ├── 📁entity
+│         ├── 📁exception
+│         ├── 📁repository
+│         └── 📁service
+│       ├── 📁favorite
+│         ├── 📁controller
+│         ├── 📁dto
+│         ├── 📁entity
+│         ├── 📁exception
+│         ├── 📁repository
+│         └── 📁service
+│       ├── 📁group
+│         ├── 📁controller
+│         ├── 📁dto
+│         ├── 📁entity
+│         ├── 📁exception
+│         ├── 📁repository
+│         └── 📁service
+│       ├── 📁recordingroom
+│         ├── 📁controller
+│         ├── 📁dto
+│         ├── 📁entity
+│         ├── 📁exception
+│         ├── 📁repository
+│         └── 📁service
+│       ├── 📁review
+│         ├── 📁controller
+│         ├── 📁dto
+│         ├── 📁entity
+│         ├── 📁exception
+│         ├── 📁repository
+│         └── 📁service
+│       ├── 📁textdiary
+│         ├── 📁controller
+│         ├── 📁dto
+│         ├── 📁entity
+│         ├── 📁exception
+│         ├── 📁repository
+│         └── 📁service
+│       ├── 📁user
+│         ├── 📁controller
+│         ├── 📁dto
+│         ├── 📁entity
+│         ├── 📁exception
+│         ├── 📁repository
+│         └── 📁service
+│       ├── 📁videodiary
+│         ├── 📁controller
+│         ├── 📁dto
+│         ├── 📁entity
+│         ├── 📁exception
+│         ├── 📁repository
+│         └── 📁service
+│     ├── 📁global
+│       ├── 📁common
+│       ├── 📁config
+│       ├── 📁converter
+│       ├── 📁exceptionhandler
+│       ├── 📁qtype
+│       ├── 📁scheduler
+│       └── 📁util/jwt
+│     ├── 📄DemoApplication.java
+│   └── 📁resources
+│ ├── 📄DockerFile
+│ ├── 📄deploy.sh
+│ ├── 📄docker-compose.blue.yml
+│ ├── 📄docker-compose.green.yml
+│ ├── 📄mvnw
+│ ├── 📄mvnw.cmd
+│  └──  📄pom.xml
 ```
