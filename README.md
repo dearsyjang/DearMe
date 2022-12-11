@@ -288,5 +288,5 @@ npm run serve
 │ ├── 📄docker-compose.green.yml
 │ ├── 📄mvnw
 │ ├── 📄mvnw.cmd
-│  └──  📄pom.xml
+│ └──  📄pom.xml
 ```
