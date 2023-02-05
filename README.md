@@ -33,9 +33,9 @@
 
 ## 팀원 소개
 
-|   이름   |     [정윤해](https://github.com/JEONGYOONHAE)         |     [이기종](https://github.com/LeeKiJong)     |     [이상민](https://github.com/Sangmeeeee)     |     [강지명](https://github.com/rainbow77777)     |     [장수영](https://github.com/dearsyjang)     |     [최지상](https://github.com/)     |
-| :------------: | :----------: | :----------: | :----------: | :----------: | :----------: | :----------: |
-|  포지션  |                 Team Leader<br/>Front-end                 |         Back-end        |            Back-end<br/>        | Front-end| Front-end | Front-end |
+|   이름   |     [정윤해](https://github.com/JEONGYOONHAE)         |     [이기종](https://github.com/LeeKiJong)     |     [이상민](https://github.com/Sangmeeeee)     |     [강지명](https://github.com/rainbow77777)     |     [장수영](https://github.com/dearsyjang)     |
+| :------------: | :----------: | :----------: | :----------: | :----------: | :----------: |
+|  포지션  |                 Team Leader<br/>Front-end                 |         Back-end        |            Back-end<br/>        | Front-end | Front-end |
 
 
 ## 설치
