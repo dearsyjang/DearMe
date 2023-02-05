@@ -107,7 +107,7 @@ npm run serve
 
 - **Vue3**
 - **JavaScript**
-- **Noe.js 16.16.0**
+- **Node.js 16.16.0**
 - **HTML, CSS**
 - **BootStrap 5.2.0**
 - **Openvidu 2.22.0**
