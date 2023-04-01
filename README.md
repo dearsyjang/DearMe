@@ -93,22 +93,20 @@ npm run serve
 
 ### 💛 감정 달력 : 영상 일기, 텍스트 일기, 감정 분석, 감정 날씨
 - 영상일기 & STT & 감정분석
-<img width="400" height="900" src="https://user-images.githubusercontent.com/97591083/229303279-237a9cc7-f809-4e66-8a8b-30cbc38e39f6.jpg>
+<img width="200" height="450" src="https://user-images.githubusercontent.com/97591083/229303279-237a9cc7-f809-4e66-8a8b-30cbc38e39f6.jpg">
 
 - 텍스트 일기 & 감정분석
 <div>
-<img width="400" height="900" src="https://user-images.githubusercontent.com/97591083/229303349-7daca3e3-9274-493b-b6c1-253165b5e0f1.jpg">
-<img width="400" height="900" src="https://user-images.githubusercontent.com/97591083/229303378-5bcff4f7-edeb-45be-8e9e-c3164e1cbaee.jpg">
+<img width="200" height="450" src="https://user-images.githubusercontent.com/97591083/229303349-7daca3e3-9274-493b-b6c1-253165b5e0f1.jpg">
+<img width="200" height="450" src="https://user-images.githubusercontent.com/97591083/229303378-5bcff4f7-edeb-45be-8e9e-c3164e1cbaee.jpg">
 </div>
 
 - 감정 날씨 달력
 <div>
-<img width="400" height="900" src="https://user-images.githubusercontent.com/97591083/229302651-fed2008f-5407-42ab-a97c-101847268c27.jpg">
-<img width="400" height="900" src="https://user-images.githubusercontent.com/97591083/229302759-28b30225-3f47-479c-88a2-fd6252a20bf9.jpg">
-</div>
-<div>
-<img width="400" height="900" src="https://user-images.githubusercontent.com/97591083/229302830-b779dd5b-2659-4037-8408-f0879b2cb816.jpg">
-<img width="400" height="900" src="https://user-images.githubusercontent.com/97591083/229302866-37f58d3a-6334-48f6-871a-068be1804c62.jpg">
+<img width="200" height="450" src="https://user-images.githubusercontent.com/97591083/229302651-fed2008f-5407-42ab-a97c-101847268c27.jpg">
+<img width="200" height="450" src="https://user-images.githubusercontent.com/97591083/229302759-28b30225-3f47-479c-88a2-fd6252a20bf9.jpg">
+<img width="200" height="450" src="https://user-images.githubusercontent.com/97591083/229302830-b779dd5b-2659-4037-8408-f0879b2cb816.jpg">
+<img width="200" height="450" src="https://user-images.githubusercontent.com/97591083/229302866-37f58d3a-6334-48f6-871a-068be1804c62.jpg">
 </div>
 ### 💜 상담사 조회
 ### 💛 상담 신청
