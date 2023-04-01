@@ -124,7 +124,7 @@ npm run serve
 ### 💜 상담 게시판
 <img width="200" height="450" src="https://user-images.githubusercontent.com/97591083/229304454-e00aab36-c5d6-4e03-909f-7f826f2630bc.jpg">
 
-### 💛 카카오 페이 포인트 충전
+### 💛 포인트 충전 (카카오페이)
 
 ### 💜 마이페이지
 <img width="200" height="450" src="https://user-images.githubusercontent.com/97591083/229304498-58e0f4fa-65ec-4000-a2bd-d1d15b1c7712.jpg">
