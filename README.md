@@ -88,6 +88,12 @@ npm run serve
 
 ### 💛 홈
 ### 💜 회원 가입 및 로그인
+<div>
+<img width="200" height="450" src="https://user-images.githubusercontent.com/97591083/229303927-38c62721-77bc-49e6-a9a4-dfd8366dfd69.jpg">
+<img width="200" height="450" src="https://user-images.githubusercontent.com/97591083/229303954-2e86b475-ffbe-4687-89ac-ea7342fab413.jpg">
+<img width="200" height="450" src="https://user-images.githubusercontent.com/97591083/229304365-885197f2-0884-4db9-9d75-ba5179c48993.jpg">
+<img width="200" height="450" src="https://user-images.githubusercontent.com/97591083/229304399-cacd1e06-d1f4-431c-8f82-a0f4f870de84.jpg">
+</div>
 
 ### 💛 영상 일기
 <img width="200" height="450" src="https://user-images.githubusercontent.com/97591083/229303279-237a9cc7-f809-4e66-8a8b-30cbc38e39f6.jpg">
@@ -107,11 +113,21 @@ npm run serve
 </div>
 
 ### 💜 상담사 조회
+
 ### 💛 상담 신청
-### 💜 화상 상담
-### 💛 상담 게시판
-### 💜 카카오 페이 포인트 충전
-### 💛 마이페이지
+
+### 💜 상담 일정
+<img width="200" height="450" src="https://user-images.githubusercontent.com/97591083/229303843-3e384696-d24d-48d4-9caa-2d78c0aaba55.jpg">
+
+### 💛 화상 상담
+
+### 💜 상담 게시판
+<img width="200" height="450" src="https://user-images.githubusercontent.com/97591083/229304454-e00aab36-c5d6-4e03-909f-7f826f2630bc.jpg">
+
+### 💛 카카오 페이 포인트 충전
+
+### 💜 마이페이지
+<img width="200" height="450" src="https://user-images.githubusercontent.com/97591083/229304498-58e0f4fa-65ec-4000-a2bd-d1d15b1c7712.jpg">
 
 ## 시스템 아키텍처
 <img width="800" src="img_source/Untitled.png">
