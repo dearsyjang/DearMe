@@ -87,6 +87,8 @@ npm run serve
 | 마이페이지  | 상담사<br/>취업준비생                      | - [취업준비생] 프로필 사진, 포인트, 작성한 게시글, 그룹 상담방 <br/> - [상담사] 프로필 사진, 포인트, 리뷰, 오늘 상담일정 |
 
 ### 💛 홈
+<img width="200" height="450" src="https://user-images.githubusercontent.com/97591083/229305549-107a1e4d-1916-4339-aa28-fe81474c65d4.gif">
+
 ### 💜 회원 가입 및 로그인
 <div>
 <img width="200" height="450" src="https://user-images.githubusercontent.com/97591083/229303927-38c62721-77bc-49e6-a9a4-dfd8366dfd69.jpg">
@@ -99,6 +101,7 @@ npm run serve
 <img width="200" height="450" src="https://user-images.githubusercontent.com/97591083/229303279-237a9cc7-f809-4e66-8a8b-30cbc38e39f6.jpg">
 
 ### 💜 텍스트 일기
+<img width="200" height="450" src="https://user-images.githubusercontent.com/97591083/229305375-1d03cd41-b252-43ee-9dba-038a06dc8972.gif">
 <div>
 <img width="200" height="450" src="https://user-images.githubusercontent.com/97591083/229303349-7daca3e3-9274-493b-b6c1-253165b5e0f1.jpg">
 <img width="200" height="450" src="https://user-images.githubusercontent.com/97591083/229303378-5bcff4f7-edeb-45be-8e9e-c3164e1cbaee.jpg">
@@ -111,10 +114,6 @@ npm run serve
 <img width="200" height="450" src="https://user-images.githubusercontent.com/97591083/229302830-b779dd5b-2659-4037-8408-f0879b2cb816.jpg">
 <img width="200" height="450" src="https://user-images.githubusercontent.com/97591083/229302866-37f58d3a-6334-48f6-871a-068be1804c62.jpg">
 </div>
-
-### 💜 상담사 조회
-
-### 💛 상담 신청
 
 ### 💜 상담 일정
 <img width="200" height="450" src="https://user-images.githubusercontent.com/97591083/229303843-3e384696-d24d-48d4-9caa-2d78c0aaba55.jpg">
