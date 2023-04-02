@@ -114,14 +114,19 @@ npm run serve
 <img width="200" height="450" src="https://user-images.githubusercontent.com/97591083/229302830-b779dd5b-2659-4037-8408-f0879b2cb816.jpg">
 <img width="200" height="450" src="https://user-images.githubusercontent.com/97591083/229302866-37f58d3a-6334-48f6-871a-068be1804c62.jpg">
 </div>
+<img width="200" height="450" src="https://user-images.githubusercontent.com/97591083/229357564-7e3dbe9a-9570-40ab-870e-a9236316115c.gif">
 
 ### 💜 상담 일정
 <img width="200" height="450" src="https://user-images.githubusercontent.com/97591083/229303843-3e384696-d24d-48d4-9caa-2d78c0aaba55.jpg">
 
 ### 💛 화상 상담
+<img width="200" height="450" src="https://user-images.githubusercontent.com/97591083/229358318-5b5f7381-6f61-4fca-8da3-03c8f6814980.gif">
 
 ### 💜 상담 게시판
+<div>
 <img width="200" height="450" src="https://user-images.githubusercontent.com/97591083/229304454-e00aab36-c5d6-4e03-909f-7f826f2630bc.jpg">
+<img width="200" height="450" src="https://user-images.githubusercontent.com/97591083/229357774-bae39372-2ff7-4fe0-9aa1-19335ec37db5.jpg">
+</div>
 
 ### 💛 포인트 충전 (카카오페이)
 
