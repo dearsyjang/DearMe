@@ -99,7 +99,7 @@ npm run serve
 
 ### 💛 영상 일기
 <div>
-<img width="200" height="450" src="https://user-images.githubusercontent.com/97591083/229358748-9e9aa4de-0820-4820-97ec-7bb3c402e5dd.gif>
+<img width="200" height="450" src="https://user-images.githubusercontent.com/97591083/229358748-9e9aa4de-0820-4820-97ec-7bb3c402e5dd.gif">
 <img width="200" height="450" src="https://user-images.githubusercontent.com/97591083/229303279-237a9cc7-f809-4e66-8a8b-30cbc38e39f6.jpg">
 </div>                                                                                                                                         
 
