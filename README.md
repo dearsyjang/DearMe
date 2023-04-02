@@ -132,6 +132,7 @@ npm run serve
 </div>
 
 ### 💛 포인트 충전 (카카오페이)
+<img width="200" height="450" src="https://user-images.githubusercontent.com/97591083/229362109-9f941c5c-c192-44c0-8aaa-d2c49845db03.gif">
 
 ### 💜 마이페이지
 <img width="200" height="450" src="https://user-images.githubusercontent.com/97591083/229304498-58e0f4fa-65ec-4000-a2bd-d1d15b1c7712.jpg">
