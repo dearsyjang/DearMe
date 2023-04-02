@@ -33,7 +33,7 @@
 
 ## 팀원 소개
 
-|   이름   |     [정윤해](https://github.com/JEONGYOONHAE)         |     [이기종](https://github.com/LeeKiJong)     |     [이상민](https://github.com/Sangmeeeee)     |     [강지명](https://github.com/rainbow77777)     |     [장수영](https://github.com/dearsyjang)     |
+|   이름   |     [정윤해]         |     [이기종]     |     [이상민]     |     [강지명]     |     [장수영]     |
 | :------------: | :----------: | :----------: | :----------: | :----------: | :----------: |
 |  포지션  |                 Team Leader<br/>Front-end                 |         Back-end        |            Back-end<br/>        | Front-end | Front-end |
 
@@ -98,7 +98,10 @@ npm run serve
 </div>
 
 ### 💛 영상 일기
+<div>
+<img width="200" height="450" src="https://user-images.githubusercontent.com/97591083/229358748-9e9aa4de-0820-4820-97ec-7bb3c402e5dd.gif>
 <img width="200" height="450" src="https://user-images.githubusercontent.com/97591083/229303279-237a9cc7-f809-4e66-8a8b-30cbc38e39f6.jpg">
+</div>                                                                                                                                         
 
 ### 💜 텍스트 일기
 <img width="200" height="450" src="https://user-images.githubusercontent.com/97591083/229305375-1d03cd41-b252-43ee-9dba-038a06dc8972.gif">
