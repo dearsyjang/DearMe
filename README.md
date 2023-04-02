@@ -35,7 +35,7 @@
 
 |   이름   |     정윤해         |     이기종     |     이상민     |     강지명     |     장수영     |
 | :------------: | :----------: | :----------: | :----------: | :----------: | :----------: |
-|  포지션  |                 Team Leader<br/>Front-end                 |         Back-end        |            Back-end<br/>        | Front-end | Front-end |
+|  포지션  |                 Front-end                 |         Back-end        |            Back-end<br/>        | Front-end | Front-end |
 
 
 ## 설치
