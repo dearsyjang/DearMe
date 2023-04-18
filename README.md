@@ -329,11 +329,11 @@ npm run serve
 │       └── 📁util/jwt
 │     ├── 📄DemoApplication.java
 │   └── 📁resources
-│ ├── 📄DockerFile
-│ ├── 📄deploy.sh
-│ ├── 📄docker-compose.blue.yml
-│ ├── 📄docker-compose.green.yml
-│ ├── 📄mvnw
-│ ├── 📄mvnw.cmd
-│ └──  📄pom.xml
+├── 📄DockerFile
+├── 📄deploy.sh
+├── 📄docker-compose.blue.yml
+├── 📄docker-compose.green.yml
+├── 📄mvnw
+├── 📄mvnw.cmd
+└──  📄pom.xml
 ```
